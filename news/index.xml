@@ -6,8 +6,35 @@
     <description>Recent content in News on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 23 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 16 Mar 2017 10:30:02 +0000</lastBuildDate>
     <atom:link href="http://codeinthehole.com/news/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://codeinthehole.com/news/hugo/</link>
+      <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/hugo/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;ve migrated this site to &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; so I can host it on Github
+pages.&lt;/p&gt;
+
+&lt;p&gt;Hugo is a fast and well thought-out static site generator, written in Golang.
+It&amp;rsquo;s easy to learn - the trickiest part is understanding the difference
+between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.&lt;/p&gt;
+
+&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/plasticboy/vim-markdown&#34;&gt;vim-markdown&lt;/a&gt;
+provides good support for authoring Hugo posts since it supports
+syntax-highlighting for:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Github-style &amp;ldquo;fenced&amp;rdquo; code blocks and&lt;/li&gt;
+&lt;li&gt;JSON or TOML front-matter.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The only frustration is having to use git submodules to keep the &amp;ldquo;public&amp;rdquo; folder of
+HTML files in a separate repo.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Octopus Energy</title>

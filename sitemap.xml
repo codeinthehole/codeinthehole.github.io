@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codeinthehole.com/news/hugo/</loc>
+    <lastmod>2017-03-16T10:30:02+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/news/octopus-energy/</loc>
     <lastmod>2015-11-23T00:00:00+00:00</lastmod>
   </url>
@@ -493,7 +498,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2015-11-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-16T10:30:02+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -552,6 +557,12 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/tags/hugo/</loc>
+    <lastmod>2017-03-16T10:30:02+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tags/javascript/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -583,7 +594,7 @@
   
   <url>
     <loc>http://codeinthehole.com/news/</loc>
-    <lastmod>2015-11-23T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-16T10:30:02+00:00</lastmod>
     <priority>0</priority>
   </url>
   
