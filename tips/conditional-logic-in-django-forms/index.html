@@ -1,0 +1,222 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Conditional logic in Django forms - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Radio buttons can be tamed">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Conditional logic in Django forms</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Saturday, 1 June 2013</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Saturday, 1 June 2013</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="the-problem">The problem</h3>
+
+<p>It&rsquo;s common for UX professionals to design forms like the following:</p>
+
+<p><img src="/images/screenshots/radio-form-wire.png" alt="image" /></p>
+
+<p>where radio buttons are employed to split the form into sections, each
+of which can have it&rsquo;s own fields which are only mandatory if the parent
+radio button is checked. Thus the validation logic is conditional on the
+submitted form data.</p>
+
+<p>Such requirements are slightly tricky to capture in Django as they tread
+slightly outside the normal path of form validation. Specifically:</p>
+
+<ul>
+<li>It&rsquo;s not documented how to render radio buttons separately. The
+default behaviour is to render an unordered list. The <a href="https://docs.djangoproject.com/en/dev/ref/forms/widgets/#radioselect">guidance on
+fine-grained template
+control</a>
+only covers looping over the choices.</li>
+<li>It&rsquo;s not obvious how to change the validation properties of a form
+field dynamically, depending on the submitted data.</li>
+</ul>
+
+<h3 id="a-solution">A solution</h3>
+
+<p>Start with this form class:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">forms</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">ScheduleForm</span><span style="color: #f8f8f2">(forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Form):</span>
+    <span style="color: #f8f8f2">NOW,</span> <span style="color: #f8f8f2">LATER</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;now&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;later&#39;</span>
+    <span style="color: #f8f8f2">SCHEDULE_CHOICES</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span>
+        <span style="color: #f8f8f2">(NOW,</span> <span style="color: #e6db74">&#39;Send immediately&#39;</span><span style="color: #f8f8f2">),</span>
+        <span style="color: #f8f8f2">(LATER,</span> <span style="color: #e6db74">&#39;Send later&#39;</span><span style="color: #f8f8f2">),</span>
+    <span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">schedule</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ChoiceField(</span>
+        <span style="color: #f8f8f2">choices</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">SCHEDULE_CHOICES,</span> <span style="color: #f8f8f2">widget</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RadioSelect)</span>
+    <span style="color: #f8f8f2">send_date</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DateTimeField(</span>
+        <span style="color: #f8f8f2">label</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">required</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
+</pre></div>
+
+<p>Note the <code>send_date</code> field has <code>required=False</code> as it is only mandatory
+if the &lsquo;Send later&rsquo; radio button is selected. For simplicity, we are are
+only using a single datetime field for the send date rather than the
+split-widget field of the wire.</p>
+
+<p>We can render this as follows:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">form</span> <span style="color: #a6e22e">action</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;.&quot;</span> <span style="color: #a6e22e">method</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;post&#39;</span><span style="color: #f8f8f2">&gt;</span>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h3</span><span style="color: #f8f8f2">&gt;</span>Send schedule<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h3</span><span style="color: #f8f8f2">&gt;</span>
+    {{ form.schedule.errors }}
+
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;span4&quot;</span><span style="color: #f8f8f2">&gt;</span>
+        {{ form.schedule.0 }}<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">br</span><span style="color: #f8f8f2">/&gt;</span>
+        <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">span</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;help-text&quot;</span><span style="color: #f8f8f2">&gt;</span>(Once you&#39;ve checked out)<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">span</span><span style="color: #f8f8f2">&gt;</span>
+    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">div</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;span4&quot;</span><span style="color: #f8f8f2">&gt;</span>
+        {{ form.schedule.1 }}<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">br</span><span style="color: #f8f8f2">/&gt;</span>
+        {{ form.send_date }}
+        {{ form.send_date.errors }}
+    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">div</span><span style="color: #f8f8f2">&gt;</span>
+
+    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">button</span> <span style="color: #a6e22e">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;submit&quot;</span><span style="color: #f8f8f2">&gt;</span>Save<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">button</span><span style="color: #f8f8f2">&gt;</span>
+<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">form</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>Observe that:</p>
+
+<ul>
+<li>the radio buttons are rendered individually individually by
+referring to the index of each option (this works in Django 1.4+).</li>
+<li>we don&rsquo;t render the errors for the <code>schedule</code> next to one particular
+radio button, but above the container elements.</li>
+</ul>
+
+<p>Next we add conditional validation to the form class:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">forms</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">ScheduleForm</span><span style="color: #f8f8f2">(forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Form):</span>
+    <span style="color: #f8f8f2">NOW,</span> <span style="color: #f8f8f2">LATER</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;now&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;later&#39;</span>
+    <span style="color: #f8f8f2">SCHEDULE_CHOICES</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span>
+        <span style="color: #f8f8f2">(NOW,</span> <span style="color: #e6db74">&#39;Send immediately&#39;</span><span style="color: #f8f8f2">),</span>
+        <span style="color: #f8f8f2">(LATER,</span> <span style="color: #e6db74">&#39;Send later&#39;</span><span style="color: #f8f8f2">),</span>
+    <span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">schedule</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ChoiceField(</span>
+        <span style="color: #f8f8f2">choices</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">SCHEDULE_CHOICES,</span> <span style="color: #f8f8f2">widget</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">RadioSelect)</span>
+    <span style="color: #f8f8f2">send_date</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">forms</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DateTimeField(</span>
+        <span style="color: #f8f8f2">label</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">required</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">data</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs):</span>
+        <span style="color: #f8f8f2">super(ScheduleForm,</span> <span style="color: #f8f8f2">self)</span><span style="color: #f92672">.</span><span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(data,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs)</span>
+
+        <span style="color: #75715e"># If &#39;later&#39; is chosen, set send_date as required</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data</span> <span style="color: #f92672">and</span> <span style="color: #f8f8f2">data</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(</span><span style="color: #e6db74">&#39;schedule&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">None)</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">LATER:</span>
+            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">fields[</span><span style="color: #e6db74">&#39;send_date&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">required</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">True</span>
+</pre></div>
+
+<p>Here, we override <code>__init__</code> and inspect the raw submitted data so that
+we can set <code>required=True</code> on the <code>send_date</code> field appropriately. This
+is the conventional way of adding conditional logic to form validation,
+although it&rsquo;s more commmon to use an additional argument to <code>__init__</code>
+to determine the field adjustments.</p>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>This solution is not perfect. It&rsquo;s a little odd to use the raw form data
+to change validation rules. However, I&rsquo;m not aware of a cleaner
+alternative.</p>
+
+<p>Related links:</p>
+
+<ul>
+<li><a href="http://www.slideshare.net/pydanny/advanced-django-forms-usage">Advanced Django Form
+Usage</a> -
+A decent overview of various issues around forms from
+DjangoCon 2011.</li>
+</ul>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/pypi-readme-badges/">PyPI README badges</a><br/>
+            
+            
+                Next: <a href="/tips/a-deferred-logging-file-handler-for-django/">A deferred logging file handler for Django</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

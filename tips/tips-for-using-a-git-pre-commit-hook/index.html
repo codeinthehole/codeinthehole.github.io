@@ -1,0 +1,189 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Tips for using a git pre-commit hook - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Yet another git tips article">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Tips for using a git pre-commit hook</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 5 March 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Monday, 5 March 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>Here&rsquo;s a few tips for using a <a href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git pre-commit
+hook</a>.</p>
+
+<h3 id="keep-your-hook-script-in-source-control">Keep your hook script in source control</h3>
+
+<p>Commit your hook script (say <code>pre-commit.sh</code>) at the root of your
+project and include the installation instructions in your
+README/documentation to encourage all developers use it.</p>
+
+<p>Installation is nothing more than:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>ln -s ../../pre-commit.sh .git/hooks/pre-commit
+</pre></div>
+
+<p>Then everyone benefits from running the same set of tests before
+committing and updates are picked up automatically.</p>
+
+<h3 id="stash-unstaged-changes-before-running-tests">Stash unstaged changes before running tests</h3>
+
+<p>Ensure that code that isn&rsquo;t part of the prospective commit isn&rsquo;t tested
+within your pre-commit script. This is missed by many sample pre-commit
+scripts but is easily acheived with <code>git stash</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># pre-commit.sh</span>
+git stash -q --keep-index
+
+<span style="color: #75715e"># Test prospective commit</span>
+...
+
+git stash pop -q
+</pre></div>
+
+<p>The <code>-q</code> flags specify quiet mode.</p>
+
+<h3 id="run-your-test-suite-before-each-commit">Run your test suite before each commit</h3>
+
+<p>Obviously.</p>
+
+<p>It&rsquo;s best to have a script (say <code>run_tests.sh</code>) that encapsulates the
+standard arguments to your test runner so your pre-commit script doesn&rsquo;t
+fall out of date. Something like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># pre-commit.sh</span>
+git stash -q --keep-index
+./run_tests.sh
+<span style="color: #f8f8f2">RESULT</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$?</span>
+git stash pop -q
+<span style="color: #f92672">[</span> <span style="color: #f8f8f2">$RESULT</span> -ne <span style="color: #ae81ff">0</span> <span style="color: #f92672">]</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
+<span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">0</span>
+</pre></div>
+
+<p>where a sample <code>run_tests.sh</code> implementation for a Django project may
+look like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># run_tests.sh</span>
+<span style="color: #f92672">./</span><span style="color: #f8f8f2">manage</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">py</span> <span style="color: #f8f8f2">test</span> <span style="color: #f92672">--</span><span style="color: #f8f8f2">settings</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">settings_test</span> <span style="color: #f92672">-</span><span style="color: #f8f8f2">v</span> <span style="color: #ae81ff">2</span>
+</pre></div>
+
+<h3 id="skip-the-pre-commit-hook-sometimes">Skip the pre-commit hook sometimes</h3>
+
+<p>Be aware of the <code>--no-verify</code> option to <code>git commit</code>. This bypasses the
+pre-commit hook when committing, which is useful if you have just
+manually run your test suite and don&rsquo;t need to see it run again when
+committing.</p>
+
+<p>I use git aliases to make this easy:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.bash_aliases</span>
+<span style="color: #f8f8f2">alias</span> <span style="color: #f8f8f2">gc</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;git commit&#39;</span>
+<span style="color: #f8f8f2">alias</span> <span style="color: #f8f8f2">gcv</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;git commit --no-verify&#39;</span>
+</pre></div>
+
+<h3 id="search-yo-code-for-debugging-code">Search yo.. code for debugging code</h3>
+
+<p>At some point, someone will try and commit a file containing</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>import pdb<span style="color: #f8f8f2">;</span> pdb.set_trace<span style="color: #f92672">()</span>
+</pre></div>
+
+<p>or some other debugging code. This can be easily avoided using the
+<code>pre-commit.sh</code> file to grep the staged codebase and abort the commit if
+forbidden strings are found.</p>
+
+<p>Here&rsquo;s an example that looks for <code>console.log</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">FILES_PATTERN</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;\.(js|coffee)(\..+)?$&#39;</span>
+<span style="color: #f8f8f2">FORBIDDEN</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;console.log&#39;</span>
+git diff --cached --name-only <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\</span>
+    grep -E <span style="color: #f8f8f2">$FILES_PATTERN</span> <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\</span>
+    <span style="color: #f8f8f2">GREP_COLOR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n <span style="color: #f8f8f2">$FORBIDDEN</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&#39;COMMIT REJECTED Found &quot;$FORBIDDEN&quot; references. Please remove them before commiting&#39;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
+</pre></div>
+
+<p>It&rsquo;s straightforward to extend this code block to search for other
+terms.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/git">git</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/talks/confoo-2012-presentations/">Confoo 2012 presentations</a><br/>
+            
+            
+                Next: <a href="/tips/how-to-sync-pycon-videos-to-your-iphone/">How to sync PyCon videos to your iPhone</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

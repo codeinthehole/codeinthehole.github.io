@@ -1,0 +1,158 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>The most important command-line tip - incremental history searching with .inputrc - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Big productivity boost from using readline">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">The most important command-line tip - incremental history searching with .inputrc</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Tuesday, 3 February 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Tuesday, 3 February 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Getting www.commandlinefu.com off the ground has renewed my interest in
+Bash, UNIX and all things command-line. Powerful one-liners are things
+of beauty and are worth collecting; however what I consider to be the
+most influential command-line tip I know covers four:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #e6db74">&quot;\e[A&quot;</span>: history-search-backward
+<span style="color: #e6db74">&quot;\e[B&quot;</span>: history-search-forward
+<span style="color: #e6db74">&quot;\e[C&quot;</span>: forward-char
+<span style="color: #e6db74">&quot;\e[D&quot;</span>: backward-char
+</pre></div>
+
+<p>These lines need to be placed in your <code>~/.inputrc</code> file, the start-up
+script for the Readline utility used by Bash (as well as several other
+applications) and others). The important commands here are the first
+two, which bind your up and down cursor keys to incrementally search
+your history. (The second two ensure that left and right continue to
+work correctly).</p>
+
+<p>This is <em>incredibly useful</em> for retrieving commands you&rsquo;ve used
+previously and makes a huge difference to your productivity. For
+instance, to find a previous SSH command from a few days ago, simply
+type &ldquo;ss&rdquo; and press up a few times. This will allow you to browse
+through all your previous ssh… commands until you find the right one -
+you never need to use more than 4 or 5 keystrokes to retrieve any
+previous command. If your cycling through too many commands to find the
+right one, type in a few more characters to refine the search.</p>
+
+<p>As indicated above, this functionality is available in all applications
+that use Readline including MySQL, Python, IRB (interactive Ruby shell)
+and others. Once you&rsquo;re used to this feature, it&rsquo;s hard to live without
+- the first thing I do once I&rsquo;ve been set up as a user on a new server
+is update my .inputrc file to contain these settings. The one place
+where I sorely wish this functionality existed is the Firebug Javascript
+commandline in Firefox (a ticket already exists requesting a similar
+feature).</p>
+
+<p>Another way of searching your history is to use CTRL+R, which
+essentially performs a full-text search on your history (keep pressing
+CTRL+R to cycle through results). In this case, searching for &ldquo;ssh&rdquo; will
+locate all commands that feature this string anywhere in the command.
+Although this is actually a more powerful feature than the incremental
+history search described above, I don&rsquo;t often use it as: (a) the
+incremental search generally lets me jump to the desired command in
+fewer key-presses and (b) I find &ldquo;ssh&rdquo;, CTRL+R, CTRL+R slightly awkward
+to type and less intuitive than &ldquo;ssh&rdquo;, UP, UP. Horses for courses really
+- you could probably be just as efficient with either one.</p>
+
+<p>» Hat-tip to the place where I first learnt this: <a href="http://www.ukuug.org/events/linux2003/papers/bash_tips/">Power Shell
+Usage</a> by Simon
+Myers</p>
+
+<p>One extra thing: this functionality can be neatly complimented by some
+choice history settings in your <code>~/.bashrc</code> file:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HISTSIZE</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1000000</span>
+<span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">HISTFILESIZE</span><span style="color: #f92672">=</span><span style="color: #ae81ff">1000000000</span>
+</pre></div>
+
+<p>These simply set your history to be very large so that you have a huge
+bank of commands to search.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/commandlinefu">commandlinefu</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/projects/current-pet-project-command-line-fu/">Current pet project: Command-Line-Fu</a><br/>
+            
+            
+                Next: <a href="/tips/using-a-phing-filter-to-flush-browser-caches/">Using a Phing filter to flush browser caches</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

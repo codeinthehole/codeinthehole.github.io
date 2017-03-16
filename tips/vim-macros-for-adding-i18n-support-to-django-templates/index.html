@@ -1,0 +1,165 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Vim macros for adding i18n support to Django templates - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using macros to automate the boring stuff">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Vim macros for adding i18n support to Django templates</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 6 July 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Friday, 6 July 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>You want to add i18n support to an existing project. One part of this is
+modifying all templates to use the <code>{% trans &quot;...&quot; %}</code> block around all
+hard-coded strings.</p>
+
+<p>When you have a lot of templates, this gets pretty tedious.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Use Vim macros!</p>
+
+<h4 id="macro-1-convert-tag-text">Macro 1 - Convert tag text</h4>
+
+<p>To convert</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>Welcome to my site<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>to</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>{% trans &quot;Welcome to my site&quot; %}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>use the macro</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>vitc{% trans <span style="color: #e6db74">&quot;&quot;</span> %}<span style="color: #f8f8f2">&lt;</span>ESC<span style="color: #f8f8f2">&gt;</span><span style="color: #ae81ff">4</span>hp
+</pre></div>
+
+<p>which breaks down as:</p>
+
+<ul>
+<li><code>vit</code> - select content inside the tag;</li>
+<li><code>c{% trans &quot;&quot; %}</code> - change tag content to be <code>{% trans &quot;&quot; %}</code> while
+saving the original tag content to the anonymous register;</li>
+<li><code>&lt;ESC&gt;4hp</code> - move the cursor to the first speech mark and paste the
+original tag contents. Note that <code>&lt;ESC&gt;</code> is one key-stroke, not
+five.</li>
+</ul>
+
+<p>To record the macro, locate the cursor over a tag that you want to
+convert then start recording by pressing <code>q</code> twice (to record the macro
+to the named register <code>q</code>). Then type the characters detailed above and
+press <code>q</code> again to stop recording.</p>
+
+<p>To apply the macro, again locate the cursor over a tag, or the text it
+contains, and type <code>@q</code>. This will save you a lot of key-strokes.</p>
+
+<h4 id="macro-2-convert-selected-text">Macro 2 - Convert selected text</h4>
+
+<p>To convert</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>See this image: <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">img</span> <span style="color: #a6e22e">src</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/images/1.jpg&quot;</span> <span style="color: #f8f8f2">/&gt;</span> <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>to</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>{% trans &quot;See this image:&quot; %} <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">img</span> <span style="color: #a6e22e">src</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/images/1.jpg&quot;</span> <span style="color: #f8f8f2">/&gt;</span> <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>enter visual mode and select the text to convert (eg &ldquo;See this image:&ldquo;)
+then use the macro</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">c</span>{% trans <span style="color: #e6db74">&quot;&quot;</span> %}<span style="color: #f8f8f2">&lt;</span>ESC<span style="color: #f8f8f2">&gt;</span><span style="color: #ae81ff">4</span>hp
+</pre></div>
+
+<p>which is the same as the one above but without the tag text selection.</p>
+
+<p>To summarise: Vim&rsquo;s macros are great - learn how to use them.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/vim">vim</a>, <a href="/tags/django">django</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/a-data-migration-for-every-django-project/">A data migration for every Django project</a><br/>
+            
+            
+                Next: <a href="/tips/use-models-for-uploads/">Use models for uploads</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

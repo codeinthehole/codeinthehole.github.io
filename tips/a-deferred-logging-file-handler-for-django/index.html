@@ -1,0 +1,223 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>A deferred logging file handler for Django - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using a setting to control where file logs go">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">A deferred logging file handler for Django</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 12 June 2013</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Wednesday, 12 June 2013</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>At Tangent we handle environment-specific configuration of Django
+projects using <a href="http://justcramer.com/2011/01/13/settings-in-django/">the method outlined by David
+Cramer</a>. This
+involves distinguishing between core settings (which we keep in
+<code>core/default.py</code>) and environment specific settings (eg
+<code>core/stage.py</code>, <code>core/test.py</code>). The standard <code>settings.py</code> module
+imports all defaults and then uses a enviromental shell variable to
+determine which environment settings module to import.</p>
+
+<h3 id="a-problem">A problem</h3>
+
+<p>One tricky issue with this arrangement is logging to file. Ideally, we
+want to define a single <code>LOGGING</code> dict in the default settings but have
+file logging use an environment-specific folder. For example, logging to
+file in the test environment goes to <code>/var/log/project/test/</code> while
+stage goes to a file in <code>/var/log/project/stage</code>.</p>
+
+<h3 id="one-solution">One solution</h3>
+
+<p>This can be solved by using a string template for the <code>filename</code>
+argument to each <code>FileHandler</code> in the <code>LOGGING</code> setting:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># conf/default.py</span>
+
+<span style="color: #f8f8f2">LOGGING</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #e6db74">&#39;version&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #f92672">...</span>
+    <span style="color: #e6db74">&#39;handlers&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;error_file&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #e6db74">&#39;level&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;INFO&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;class&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;logging.FileHandler&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;filename&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;{log_root}errors.log&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;formatter&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;verbose&#39;</span>
+        <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #e6db74">&#39;loggers&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;django.request&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #e6db74">&#39;handlers&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;error_file&#39;</span><span style="color: #f8f8f2">],</span>
+            <span style="color: #e6db74">&#39;level&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;ERROR&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;propagate&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">False,</span>
+        <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>then importing the default <code>LOGGING</code> dict into your environment-specific
+settings and formatting each filename with the correct path:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># conf/test.py</span>
+
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">conf.default</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">LOGGING</span>
+
+<span style="color: #f8f8f2">LOG_ROOT</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;/var/log/project/test/&#39;</span>
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">handler</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">LOGGING[</span><span style="color: #e6db74">&#39;handlers&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">values():</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">handler[</span><span style="color: #e6db74">&#39;class&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;logging.FileHandler&#39;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">handler[</span><span style="color: #e6db74">&#39;filename&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">handler[</span><span style="color: #e6db74">&#39;filename&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">format(log_root</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">LOG_ROOT)</span>
+</pre></div>
+
+<p>This works but is rather clunky. For instance, the default <code>LOGGING</code>
+setting (without an environmental override) will lead to an error .</p>
+
+<h3 id="another-solution">Another solution</h3>
+
+<p>Another, possibly more elegant, solution is to use a specialisd logging
+handler that defers evaluation of the filepath until it tries to log a
+record.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">logging</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">FileHandler</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">BaseFileHandler</span>
+<span style="color: #f92672">import</span> <span style="color: #f8f8f2">os</span>
+
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">DeferredFileHandler</span><span style="color: #f8f8f2">(BaseFileHandler):</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">filename,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">filename</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">filename</span>
+        <span style="color: #f8f8f2">kwargs[</span><span style="color: #e6db74">&#39;delay&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">True</span>
+        <span style="color: #f8f8f2">BaseFileHandler</span><span style="color: #f92672">.</span><span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #e6db74">&quot;/dev/null&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">_open</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #75715e"># We import settings here to avoid a circular reference as this module</span>
+        <span style="color: #75715e"># will be imported when settings.py is executed.</span>
+        <span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.conf</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">settings</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">baseFilename</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">join(settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">LOG_ROOT,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">filename)</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">BaseFileHandler</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_open(self)</span>
+</pre></div>
+
+<p>Now, all we need to do is use the new handler in our <code>LOGGING</code> dict:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># conf/default.py</span>
+
+<span style="color: #f8f8f2">LOGGING</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #e6db74">&#39;version&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #f92672">...</span>
+    <span style="color: #e6db74">&#39;handlers&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;error_file&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #e6db74">&#39;level&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;INFO&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;class&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;deferred_filelogger.DeferredFilehandler&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;filename&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;errors.log&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;formatter&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;verbose&#39;</span>
+        <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">},</span>
+    <span style="color: #e6db74">&#39;loggers&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #e6db74">&#39;django.request&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #e6db74">&#39;handlers&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;error_file&#39;</span><span style="color: #f8f8f2">],</span>
+            <span style="color: #e6db74">&#39;level&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;ERROR&#39;</span><span style="color: #f8f8f2">,</span>
+            <span style="color: #e6db74">&#39;propagate&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">False,</span>
+        <span style="color: #f8f8f2">},</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>and specify a <code>LOG_ROOT</code> setting for each environment:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># conf/test.py</span>
+
+<span style="color: #f8f8f2">LOG_ROOT</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;/var/log/project/test/&#39;</span>
+</pre></div>
+
+<p>Such a logger is part of
+<a href="https://github.com/tangentlabs/django-oscar/blob/master/oscar/core/logging/handlers.py">django-oscar</a>,
+but I&rsquo;ve packaged it up separately so it can be used in non-Oscar
+projects. The package is called
+<a href="https://github.com/codeinthehole/django-deferred-filelogger">django-deferred-filelogger</a>
+and can be installed from PyPI using:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pip install django-deferred-filelogger
+</pre></div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/conditional-logic-in-django-forms/">Conditional logic in Django forms</a><br/>
+            
+            
+                Next: <a href="/projects/purl-uri-templates-and-generated-tests/">purl, URI templates and generated tests</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

@@ -1,0 +1,134 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Coloured output while doing TDD with Django and Fabric - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Providing simple coloured feedback">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Coloured output while doing TDD with Django and Fabric</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 20 April 2011</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Wednesday, 20 April 2011</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>I&rsquo;m a big fan of using PHPUnit with console colours turned on (using the
+<code>--colors</code> option). Eg:</p>
+
+<p><img src="/images/screenshots/phpunit.jpg" alt="image" /></p>
+
+<p>It helps gets into the natural &ldquo;red, green, refactor&rdquo; rhythm.</p>
+
+<p>I&rsquo;m currently totally immersed in Django, and greatly miss the lack of
+colour support within the &ldquo;test&rdquo; management command. A simple workaround
+for this is to use Fabric with a few modified color commands. Your
+fabric file should include the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">fabric.colors</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">_wrap_with</span>
+
+<span style="color: #f8f8f2">green_bg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">_wrap_with(</span><span style="color: #e6db74">&#39;42&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #f8f8f2">red_bg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">_wrap_with(</span><span style="color: #e6db74">&#39;41&#39;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #75715e"># Set the list of apps to test</span>
+<span style="color: #f8f8f2">env</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">test_apps</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;app1 app2&quot;</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test</span><span style="color: #f8f8f2">():</span>
+    <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">settings(warn_only</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True):</span>
+        <span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;./manage.py test %(test_apps)s --settings=settings_test -v 2 --failfast&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">env,</span> <span style="color: #f8f8f2">capture</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">result</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">failed:</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">red_bg(</span><span style="color: #e6db74">&quot;Some tests failed&quot;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #66d9ef">print</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">green_bg(</span><span style="color: #e6db74">&quot;All tests passed - have a banana!&quot;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>You can choose your own success and failure messages.</p>
+
+<p>Now we have lovely colours while doing TDD in Django:</p>
+
+<p><img src="/images/screenshots/fab.jpg" alt="image" /></p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/python">python</a>, <a href="/tags/testing">testing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/projects/domain-model-mapper-a-php-data-mapper-implementation/">Domain-model-mapper - A PHP Data Mapper implementation</a><br/>
+            
+            
+                Next: <a href="/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/">Multi-scp: copying a file to all hosts in your SSH config</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

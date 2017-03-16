@@ -1,0 +1,170 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>How to sync a MySQL table between two remote databases. - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Trickier than you might think">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">How to sync a MySQL table between two remote databases.</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 3 September 2010</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Friday, 3 September 2010</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Definitely tricker than you might think.</p>
+
+<p>Seems like it should be trivial using <code>SELECT ... INTO OUTFILE</code> and
+<code>LOAD DATA INFILE ...</code> to make the transfer via dumping the table into a
+temporary file. However, <code>SELECT ... INTO OUTFILE</code> creates a file on the
+remote server rather than locally. This prevents the use of
+<code>LOAD DATA INFILE</code> for the second step as the file being loaded has to
+be local or on the destination server.</p>
+
+<p>Following the <a href="http://dev.mysql.com/doc/refman/5.0/en/select.html">guidance in the
+docs</a>, you can
+create local dump of a table by using the <code>--execute</code> option to output
+the results of a <code>SELECT ...</code> statement into a local file.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mysql -D database_name -e <span style="color: #e6db74">&quot;SELECT ... &quot;</span> &gt; /path/to/file.txt
+</pre></div>
+
+<p>This works but has two downsides:</p>
+
+<ol>
+<li>First, running a shell command forces you to step outside the MySQL
+adapter of your progamming language which means it is a new place
+where the database credentials need to be passed. Shelling out
+commands always feels like you&rsquo;ve failed.</li>
+<li>Further, as far as I can tell, you can&rsquo;t control the field separator
+or line endings using this technique (in the same way as you can
+with <code>SELECT ... INTO OUTFILE ...</code>) and so the file includes an
+unwanted line with the field names and tab-separates the fields.</li>
+</ol>
+
+<p>It&rsquo;s worth noting the <code>mysqldump</code> isn&rsquo;t much help here, as the <code>--tab</code>
+option that allows CSV output to be generated only works with a local
+database connection.</p>
+
+<p>Now that we&rsquo;ve got our data locally, we load it into the remote database
+using <code>LOAD DATA INFILE</code> and make use of the <code>LOCAL</code> keyword which lets
+us use a local data file:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mysql -h x.x.x.x -u user -D database_name --password<span style="color: #f92672">=</span>... -e <span style="color: #ae81ff">\</span>
+<span style="color: #e6db74">&quot;LOAD DATA LOCAL INFILE &#39;/path/to/file.txt&#39; \</span>
+<span style="color: #e6db74">REPLACE INTO TABLE table_name \</span>
+<span style="color: #e6db74">IGNORE 1 LINES&quot;</span>
+</pre></div>
+
+<p>Of course, you may want to truncate the table first if you want a clean
+sync. As this operations locks the destination table, it often makes
+sense to load the data into a temporary copy of the table, and then
+perform a <code>RENAME TABLE</code> operation to swap in the new table.</p>
+
+<p>Here&rsquo;s a quick and dirty PHP implementation:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?php</span>
+<span style="color: #f8f8f2">$tableName</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;some_table&#39;</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">$sql</span> <span style="color: #f92672">=</span>
+   <span style="color: #e6db74">&quot;SELECT * </span>
+<span style="color: #e6db74">    FROM $tableName&quot;</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">$pathToCsv</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;/tmp/some-file.csv&#39;</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">$command</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sprintf(</span><span style="color: #e6db74">&quot;mysql -h %s -u %s  --password=%s -D %s -e &#39;%s&#39; &gt; %s&quot;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #e6db74">&#39;10.0.0.2&#39;</span><span style="color: #f8f8f2">,</span> 
+    <span style="color: #e6db74">&#39;db-user&#39;</span><span style="color: #f8f8f2">,</span> 
+    <span style="color: #e6db74">&#39;db-password&#39;</span><span style="color: #f8f8f2">,</span> 
+    <span style="color: #e6db74">&#39;database_name&#39;</span><span style="color: #f8f8f2">,</span> 
+    <span style="color: #f8f8f2">$sql,</span> 
+    <span style="color: #f8f8f2">$pathToCsv);</span>
+<span style="color: #f8f8f2">exec($command);</span>
+
+<span style="color: #f8f8f2">$sql</span> <span style="color: #f92672">=</span>
+   <span style="color: #e6db74">&quot;LOAD DATA LOCAL INFILE &#39;$pathToCsv&#39;</span>
+<span style="color: #e6db74">    REPLACE INTO TABLE `$tableName`</span>
+<span style="color: #e6db74">    CHARACTER SET &#39;utf8&#39;</span>
+<span style="color: #e6db74">    IGNORE 1 LINES&quot;</span><span style="color: #f8f8f2">;</span>
+<span style="color: #f8f8f2">$db</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">execute</span><span style="color: #f8f8f2">($sql);</span> <span style="color: #75715e">// Using your favourite database adapter</span>
+</pre></div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/mysql">mysql</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/phing-trick-for-avoiding-deploying-debug-code/">Phing trick for avoiding deploying debug code</a><br/>
+            
+            
+                Next: <a href="/tips/mysqldump-with-wildcard-table-matching/">mysqldump with wildcard table matching</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

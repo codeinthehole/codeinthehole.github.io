@@ -1,0 +1,195 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Converting Github issues into pull requests - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A better workflow using Hub">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Converting Github issues into pull requests</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 4 March 2013</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Monday, 4 March 2013</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>Using the <a href="http://defunkt.io/hub/">Hub</a> library, it&rsquo;s possible to
+convert Github issues into pull requests. This gives rise to a useful
+Github workflow which this article describes.</p>
+
+<p>This is nothing new; it&rsquo;s been <a href="http://www.topbug.net/blog/2012/03/25/attach-a-pull-request-to-an-existing-github-issue/">written about
+before</a>.
+However, this is something I do all the time whilst developing
+<a href="https://github.com/tangentlabs/django-oscar">Oscar</a> and I&rsquo;m fed up with
+explaining it. This article is a reference I can point people at.</p>
+
+<h3 id="workflow">Workflow</h3>
+
+<h4 id="discuss">Discuss</h4>
+
+<p>Discuss an idea for a new feature on the project mailing list. Agree on
+what needs to be done.</p>
+
+<h4 id="specify">Specify</h4>
+
+<p>Create a Github issue for the feature.</p>
+
+<p>It&rsquo;s often useful to write the ticket as a brief functional spec,
+documenting the requirements as user stories. Github&rsquo;s <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">support for
+checkboxes in
+markdown</a>
+is useful here:</p>
+
+<h4 id="work">Work</h4>
+
+<p>Create a feature branch to work on this issue:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">(</span>master<span style="color: #f92672">)</span> $ git checkout -b issue/472/django1.5
+</pre></div>
+
+<p>I find it helpful to include the issue number in the branch name but
+that might not be to your taste.</p>
+
+<p>Work and commit onto your branch as normal.</p>
+
+<h4 id="review">Review</h4>
+
+<p>Now push to the remote:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">(</span>issue/472/django1.5<span style="color: #f92672">)</span> $ git push -u origin issue/472/django1.5
+</pre></div>
+
+<p>and attach your commits to the original issue, thereby converting it
+into a pull request.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">(</span>issue/472/django1.5<span style="color: #f92672">)</span> $ hub pull-request -i <span style="color: #ae81ff">472</span> -h tangentlabs:issue/472/django1.5
+</pre></div>
+
+<p>where <code>tangentlabs</code> is the Github username of the owner of the <code>origin</code>
+remote.</p>
+
+<p>Note the issue branch was pushed to the <code>origin</code> remote rather than a
+fork. This is convenient as it lets other developers add commits to the
+pull request.</p>
+
+<h4 id="iterate">Iterate</h4>
+
+<p>The pull request can now be code-reviewed and further commits added.
+This process continues until the issue is resolved and can be merged
+into <code>master</code>.</p>
+
+<h3 id="notes">Notes</h3>
+
+<p>Hub&rsquo;s <code>pull-request</code> command is useful yet relatively unknown. The <code>-i</code>
+flag indicates the Github issue number while <code>-h</code> specifies the source
+branch for the pull request. Here&rsquo;s the relevant help snippet:</p>
+
+<pre><code>git pull-request [-f] [TITLE|-i ISSUE|ISSUE-URL] [-b BASE] [-h HEAD]
+       Opens a pull request on GitHub for the project that the &quot;origin&quot;
+       remote points to. The default head of the pull  request  is  the
+       current  branch.  Both  base and head of the pull request can be
+       explicitly given in one  of  the  following  formats:  &quot;branch&quot;,
+       &quot;owner:branch&quot;,  &quot;owner/repo:branch&quot;.  This  command  will abort
+       operation if it detects that the current topic branch has  local
+       commits  that  are  not yet pushed to its upstream branch on the
+       remote. To skip this check, use -f.
+
+       If TITLE is omitted, a text editor will open in which title  and
+       body  of  the  pull request can be entered in the same manner as
+       git commit message.
+
+       If instead of normal TITLE an issue number is given with -i, the
+       pull  request  will  be  attached  to  an existing GitHub issue.
+       Alternatively, instead of title you can paste a full URL  to  an
+       issue on GitHub.
+</code></pre>
+
+<p>Without this command, you would end up creating a separate pull-request
+and issue for the same piece of work.</p>
+
+<p>You can see this workflow in action via <a href="https://github.com/tangentlabs/django-oscar/pulls">Oscar&rsquo;s pull
+requests</a>.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/git">git</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/altering-postgres-table-columns-with-south/">Altering Postgres table columns with South</a><br/>
+            
+            
+                Next: <a href="/tips/how-to-install-pil-on-64-bit-ubuntu-1204/">How to install PIL on 64-bit Ubuntu 12.04</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

@@ -1,0 +1,178 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Prefer data migrations to initial data - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="South provides a better way">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Prefer data migrations to initial data</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Saturday, 25 February 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Saturday, 25 February 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>Django provides several mechanisms for <a href="https://docs.djangoproject.com/en/dev/howto/initial-data/">loading initial data for
+models</a>, such
+as leveraging JSON fixtures or files of raw SQL - James Bennett offers a
+<a href="http://www.b-list.org/weblog/2007/nov/21/install-time/">good overview</a>.</p>
+
+<p>Each documented method involves initialising data as part of the syncdb
+event, either by loading a fixture file or by hooking into the syncdb
+signal. However, there is a serious pitfall with these techniques, as
+described in the <a href="https://docs.djangoproject.com/en/dev/howto/initial-data/#automatically-loading-initial-data-fixtures">Django
+docs</a>:</p>
+
+<blockquote>
+<p>This is extremely convenient, but be careful: remember that the data
+will be refreshed every time you run syncdb. So don&rsquo;t use
+initial_data for data you&rsquo;ll want to edit.</p>
+</blockquote>
+
+<p>Storing data in a database that you don&rsquo;t want to edit seems like an
+anti-pattern to me. If it never changes, a database probably isn&rsquo;t the
+right place to store it.</p>
+
+<p>That aside, there are certainly times when you want to seed a new
+database with data that can be edited. In these circumstances, the
+documented methods fall down as you can accidentally clobber live data
+if you run syncdb again.</p>
+
+<p>You might argue that you should only run syncdb once but in my
+experience, it is useful to run syncdb as part of your deployment script
+so that any newly added apps have their tables created automatically.</p>
+
+<h3 id="south-data-migrations">South data migrations</h3>
+
+<p>A better way to provide initial data is to use the database migration
+library <a href="http://south.aeracode.org/docs/index.html">South</a> to create
+<a href="http://south.aeracode.org/docs/tutorial/part3.html">data migrations</a>.
+The advantages are:</p>
+
+<ul>
+<li>Data migrations will only run once and so they won&rsquo;t clobber any
+data.</li>
+<li>They will run automatically in all environments - no manual
+deployment steps required.</li>
+</ul>
+
+<p>The only disadvantage is that you need to use South, which most sensible
+Django projects already do.</p>
+
+<h3 id="simple-example">Simple example</h3>
+
+<p>Create a blank data migration:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>./manage.py datamigration myapp mymigrationname
+</pre></div>
+
+<p>then implement the <code>forward</code> method to create the appropriate initial
+data:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">forwards</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">orm):</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">name</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Foo&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Bar&#39;</span><span style="color: #f8f8f2">):</span>
+        <span style="color: #f8f8f2">orm</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Frob</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create(name</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">name)</span>
+</pre></div>
+
+<p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked
+example</a> in South&rsquo;s
+docs for further details on writing data migrations.</p>
+
+<h3 id="using-fixture-files">Using fixture files</h3>
+
+<p>It&rsquo;s possible to use JSON fixture files with data migrations, by
+utilising the <code>call_command</code> function.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">forwards</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">orm):</span>
+    <span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.core.management</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">call_command</span>
+    <span style="color: #f8f8f2">call_command(</span><span style="color: #e6db74">&#39;loaddata&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;countries.json&#39;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>I had thought this was very useful feature as you can use the <code>dumpdata</code>
+command to produce your initial fixtures, and you will have them
+available to be used by unit tests.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/deployment">deployment</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/a-fabric-function-for-git-tagging/">A Fabric function for git tagging</a><br/>
+            
+            
+                Next: <a href="/tips/testing-https-handling-in-django/">Testing HTTPS handling in Django</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

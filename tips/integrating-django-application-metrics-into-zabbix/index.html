@@ -1,0 +1,191 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Integrating Django application metrics into Zabbix - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A simple how-to for feeding Django metrics into Zabbix">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Integrating Django application metrics into Zabbix</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 22 October 2014</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Wednesday, 22 October 2014</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>At <a href="http://www.tangentsnowball.com">Tangent</a>, we use
+<a href="http://www.zabbix.com/">Zabbix</a> for monitoring and alerting. This is a
+note-to-self on how to configure application monitoring.</p>
+
+<h3 id="management-command">Management command</h3>
+
+<p>You need a script that prints out a value to STDOUT. A simple management
+command suffices:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.core.management.base</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">BaseCommand,</span> <span style="color: #f8f8f2">CommandError</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Command</span><span style="color: #f8f8f2">(BaseCommand):</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">options):</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">args:</span>
+            <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">usage()</span>
+            <span style="color: #66d9ef">return</span>
+        <span style="color: #f8f8f2">method_name</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;fetch_%s&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">args[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">]</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f92672">not</span> <span style="color: #f8f8f2">hasattr(self,</span> <span style="color: #f8f8f2">method_name):</span>
+            <span style="color: #66d9ef">raise</span> <span style="color: #f8f8f2">CommandError(</span><span style="color: #e6db74">&quot;No method found with name &#39;%s&#39;&quot;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">method_name)</span>
+        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">getattr(self,</span> <span style="color: #f8f8f2">method_name)(</span><span style="color: #f92672">*</span><span style="color: #f8f8f2">args[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">:])</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">usage</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f8f8f2">fetchers</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[m</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">m</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">dir(self)</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">m</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">startswith(</span><span style="color: #e6db74">&#39;fetch&#39;</span><span style="color: #f8f8f2">)]</span>
+        <span style="color: #f8f8f2">descriptions</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[]</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">fetcher</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">fetchers:</span>
+            <span style="color: #f8f8f2">method</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">getattr(self,</span> <span style="color: #f8f8f2">fetcher)</span>
+            <span style="color: #f8f8f2">docstring</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">method</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">__doc__</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">strip()</span> <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">method</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">__doc__</span> <span style="color: #66d9ef">else</span> <span style="color: #e6db74">&quot;&lt;no description&gt;&quot;</span>
+            <span style="color: #f8f8f2">descriptions</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">append(</span><span style="color: #e6db74">&quot; - %s : %s&quot;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">(</span>
+                <span style="color: #f8f8f2">fetcher</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">&quot;_&quot;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">],</span> <span style="color: #f8f8f2">docstring))</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&quot;Available fetchers:</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">%s&quot;</span> <span style="color: #f92672">%</span> <span style="color: #e6db74">&quot;</span><span style="color: #ae81ff">\n</span><span style="color: #e6db74">&quot;</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">join(descriptions)</span>
+</pre></div>
+
+<p>This uses dynamic dispatch to call &ldquo;fetcher&rdquo; methods with name
+<code>fetch_%s</code> where the first argument defines the format variable. Eg, a
+method:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fetch_num_users</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #e6db74">&quot;&quot;&quot;</span>
+<span style="color: #e6db74">    Fetch number of users</span>
+<span style="color: #e6db74">    &quot;&quot;&quot;</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">User</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">all()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">count()</span>
+</pre></div>
+
+<p>is called via:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ ./manage.py application_metric num_users
+</pre></div>
+
+<p>Without arguments, a list of fetchers is shown:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ ./manage.py application_metric
+Available fetchers:
+ - num_users : Fetch number of users
+</pre></div>
+
+<p>It&rsquo;s trivial to add more <code>fetch_*</code> methods to emit additional metrics.</p>
+
+<h3 id="zabbix-plugin">Zabbix plugin</h3>
+
+<p>Hook this up to Zabbix by first creating a plugin script which calls the
+management command, passing on an arg:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ cat /etc/zabbix/plugins/application
+<span style="color: #75715e">#!/bin/bash</span>
+
+<span style="color: #f8f8f2">source</span> /path/to/virtualenv/bin/activate <span style="color: #f92672">&amp;&amp;</span> /path/to/project/manage.py application_metric <span style="color: #f8f8f2">$1</span>
+</pre></div>
+
+<p>then create the Zabbix &ldquo;UserParameter&rdquo; declaration which calls the
+plugin script:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ cat /etc/zabbix/zabbix_agentd.conf.d/application.conf
+<span style="color: #f8f8f2">UserParameter</span><span style="color: #f92672">=</span>application<span style="color: #f92672">[</span>*<span style="color: #f92672">]</span>,/etc/zabbix/plugins/application <span style="color: #f8f8f2">$1</span>
+</pre></div>
+
+<p>The <code>application[*]</code> syntax means that you can configure various &ldquo;Items&rdquo;
+in Zabbix like <code>application[num_orders]</code> and <code>application[num_users]</code>
+and the bracketed string will get passed all the way through to the
+management command.</p>
+
+<p>Now restart Zabbix to pick up the new conf file:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ /etc/init.d/zabbix-agent restart
+</pre></div>
+
+<h3 id="zabbix-dashboard">Zabbix dashboard</h3>
+
+<p>In the Zabbix web dashboard add new &ldquo;Items&rdquo; that use this new
+&ldquo;UserParameter&rdquo;. Add a new &ldquo;Item&rdquo; by navigating through
+<code>Configuration &gt; Hosts &gt; Items &gt; Create item</code>. In the resulting form,
+set the &ldquo;Key&rdquo; to, say, <code>application[num_users]</code> to pass <code>num_users</code> as
+the first argument through to the management command.</p>
+
+<p>And that&rsquo;s it: this metric will now be collected by Zabbix and can be
+used for graphing and alerting.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/monitoring">monitoring</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/linking-to-github/">Linking to Github</a><br/>
+            
+            
+                Next: <a href="/tips/bootstrapped-virtualenvs/">Bootstrapped virtualenvs</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

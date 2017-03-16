@@ -1,0 +1,197 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>How to install PostGIS and GeoDjango on Ubuntu - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Another note-to-self">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">How to install PostGIS and GeoDjango on Ubuntu</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 4 October 2013</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Friday, 4 October 2013</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>Despite its <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/">extensive
+documentation</a>,
+getting GeoDjango installed and configured can be a pain. Here are my
+notes for future reference:</p>
+
+<h3 id="installation-on-ubuntu-12-04">Installation on Ubuntu 12.04</h3>
+
+<p>First, ensure your system locale is UTF8 as PostgreSQL uses it to
+determine its default encoding during installation:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">LANGUAGE</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;en_US.UTF-8&quot;</span>
+$ <span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">LANG</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;en_US.UTF-8&quot;</span>
+$ <span style="color: #f8f8f2">export</span> <span style="color: #f8f8f2">LC_ALL</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;en_US.UTF-8&quot;</span>
+</pre></div>
+
+<p>Now install dependencies:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo apt-get update
+$ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis 
+</pre></div>
+
+<p>PostgreSQL should now be installed and running with UTF8 encodings.
+Verify this with:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo -u postgres psql -l    
+                                     List of databases
+       Name       <span style="color: #f8f8f2">|</span>  Owner   <span style="color: #f8f8f2">|</span> Encoding <span style="color: #f8f8f2">|</span>   Collate   <span style="color: #f8f8f2">|</span>    Ctype    <span style="color: #f8f8f2">|</span>
+------------------+----------+----------+-------------+-------------+-...
+ postgres         <span style="color: #f8f8f2">|</span> postgres <span style="color: #f8f8f2">|</span> UTF8     <span style="color: #f8f8f2">|</span> en_US.UTF-8 <span style="color: #f8f8f2">|</span> en_US.UTF-8 <span style="color: #f8f8f2">|</span>
+ template0        <span style="color: #f8f8f2">|</span> postgres <span style="color: #f8f8f2">|</span> UTF8     <span style="color: #f8f8f2">|</span> en_US.UTF-8 <span style="color: #f8f8f2">|</span> en_US.UTF-8 <span style="color: #f8f8f2">|</span>
+                  <span style="color: #f8f8f2">|</span>          <span style="color: #f8f8f2">|</span>          <span style="color: #f8f8f2">|</span>             <span style="color: #f8f8f2">|</span>             <span style="color: #f8f8f2">|</span>
+ template1        <span style="color: #f8f8f2">|</span> postgres <span style="color: #f8f8f2">|</span> UTF8     <span style="color: #f8f8f2">|</span> en_US.UTF-8 <span style="color: #f8f8f2">|</span> en_US.UTF-8 <span style="color: #f8f8f2">|</span>
+                  <span style="color: #f8f8f2">|</span>          <span style="color: #f8f8f2">|</span>          <span style="color: #f8f8f2">|</span>             <span style="color: #f8f8f2">|</span>             <span style="color: #f8f8f2">|</span>
+</pre></div>
+
+<p>Now create a spatial database. The above commands will have installed
+PostGIS 1.5.3 hence, <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/#creating-a-spatial-database-template-for-earlier-versions">according to Django&rsquo;s
+docs</a>,
+we need to download and install a shell script that executes the
+appropriate commands:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ wget https://docs.djangoproject.com/en/dev/_downloads/create_template_postgis-1.5.sh
+$ chmod +x create_template_postgis-1.5.sh
+</pre></div>
+
+<p>and run it as a privileged user:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo -u postgres ./create_template_postgis-1.5.sh
+</pre></div>
+
+<p>If this is successful, a deluge of SQL output will echo to the console.
+This is normal. PostGIS is now correctly installed and we have a
+template database we can use to create a database for our GeoDjango
+project.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo -u postgres psql
+psql <span style="color: #f92672">(</span><span style="color: #ae81ff">9</span>.1.9<span style="color: #f92672">)</span>
+Type <span style="color: #e6db74">&quot;help&quot;</span> <span style="color: #66d9ef">for</span> help.
+
+<span style="color: #f8f8f2">postgres</span><span style="color: #f92672">=</span><span style="color: #75715e"># CREATE ROLE sample_role WITH PASSWORD &#39;sample_password&#39; LOGIN;</span>
+CREATE ROLE
+<span style="color: #f8f8f2">postgres</span><span style="color: #f92672">=</span><span style="color: #75715e"># CREATE DATABASE sample_db OWNER sample_role TEMPLATE template_postgis;</span>
+CREATE DATABASE
+</pre></div>
+
+<p>This is the tricky bit over: you can now <code>pip install psycopg2</code> and
+you&rsquo;re basically done. Remember to use the PostGIS database engine in
+your <code>DATABASES</code> setting:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">DATABASES</span> <span style="color: #f92672">=</span> <span style="color: #f92672">{</span>
+    <span style="color: #e6db74">&#39;default&#39;</span>: <span style="color: #f92672">{</span>
+        <span style="color: #e6db74">&#39;ENGINE&#39;</span>: <span style="color: #e6db74">&#39;django.contrib.gis.db.backends.postgis&#39;</span>,
+        ...
+    <span style="color: #f92672">}</span>,
+<span style="color: #f92672">}</span>
+</pre></div>
+
+<h4 id="common-errors">Common errors</h4>
+
+<p>If your system locale is not UTF8 when attempting to create a spatial
+database, you&rsquo;ll see something like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo -u postgres ./create_template_postgis-debian.sh
+createdb: database creation failed: ERROR: encoding UTF8 does not match locale en_US
+DETAIL:  The chosen LC_CTYPE setting requires encoding LATIN1 
+FATAL:  database <span style="color: #e6db74">&quot;template_postgis&quot;</span> does not exist
+</pre></div>
+
+<p>If PostgreSQL is not installed when trying to install psycopg2, you see
+something that ends with this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>warning: manifest_maker: standard file <span style="color: #e6db74">&#39;-c&#39;</span> not found
+
+Error: pg_config executable not found.
+
+Please add the directory containing pg_config to the PATH
+or specify the full executable path with the option:
+
+    python setup.py build_ext --pg-config /path/to/pg_config build ...
+
+or with the pg_config option in <span style="color: #e6db74">&#39;setup.cfg&#39;</span>.
+</pre></div>
+
+<p>I&rsquo;ll add more error symptoms when I see them in the wild.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/enhancing-your-git-commit-editor/">Enhancing your git commit editor</a><br/>
+            
+            
+                Next: <a href="/tips/command-line-tips-for-effective-release-announcements/">Command-line tips for effective release announcements</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

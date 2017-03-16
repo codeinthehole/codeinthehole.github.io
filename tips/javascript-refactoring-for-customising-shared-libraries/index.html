@@ -1,0 +1,175 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Javascript refactoring for customising shared libraries - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Structuring a javascript file for repeating use and customisation">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Javascript refactoring for customising shared libraries</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Tuesday, 13 October 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Tuesday, 13 October 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>One difficulty working with a shared in-house framework is it is
+difficult to maintain a common javascript file that is valid across
+multiple applications. This is currently an issue we face at Tangent,
+where we run a generic e-commerce platform which we customise to the
+needs of each client. Most of these e-commerce applications have a
+javascript-rich checkout page whose functionality differs in small yet
+significant ways such as the required and optional fields within a
+delivery address, or the range of delivery options available. Ideally,
+you would have a single javascript file to work for all these checkouts,
+but these differences make such a file impracticle due to the changes in
+DOM structure and business logic between applications.</p>
+
+<p>For instance, one problem that arose recently was a requirement to
+remove the javascript messaging from within certain parts of the
+checkout for one appliation. The shared checkout.js file features a
+method which reloads the order totals within the page after a new
+delivery option has been chosen and displays a message to notify the
+user:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// [checkout.js]</span>
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">shop</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">checkout</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">reloadOrderTotals</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #75715e">// Do the reloading...</span>
+            <span style="color: #a6e22e">shop</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">display</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">notify</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Order totals recalculating...&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>Unfortunately, another client required the same functionality to reload
+the order totals but without the notification call. One option would
+have been to create a local version of the checkout.js file and remove
+the offending line, but this would have created a larger maintenance
+overhead going forward due to the large amount of duplicate code.</p>
+
+<p>A neater option would have been to dynamically override the
+shop.checkout.reloadOrderTotals method in an application-specific file:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// [application.js]</span>
+<span style="color: #a6e22e">shop</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">checkout</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">reloadOrderTotals</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #75715e">// Reload order totals but without a notification call</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>However, again this leads to most of the the body of the
+<code>shop.checkout.reloadOrderTotals</code> method being duplicated just to remove
+one line.</p>
+
+<p>Instead, drawing inspiration from the excellent Working with Legacy Code
+by Michael Flowers, a neater solution is to perform a dynamic-language
+version of the Extract method refactoring to isolate the functionality
+that we wanted to override into it&rsquo;s own method. Hence, we alter
+checkout.js to split the reloading and notification functionality into
+two methods:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// [checkout.js]</span>
+<span style="color: #66d9ef">var</span> <span style="color: #a6e22e">shop</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #a6e22e">checkout</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #a6e22e">reloadOrderTotals</span><span style="color: #f92672">:</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">()</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #75715e">// Do the reloading...</span>
+            <span style="color: #a6e22e">shop</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">checkout</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">displayOrderTotalNotification</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Order totals recalculating...&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">},</span>
+        <span style="color: #a6e22e">displayOrderTotalNotification</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">message</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #a6e22e">shop</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">display</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">notify</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">message</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span> 
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>Now in the local project javascript file, we can null out the messaging
+behaviour:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">// [application.js]</span>
+<span style="color: #a6e22e">shop</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">checkout</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">displayOrderTotalNotification</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(){}</span>
+</pre></div>
+
+<p>This neat trick allows us to customise our core javascript functionality
+in a way that does not lead to code duplication. The only thing required
+to make this work is to ensure that the shared checkout file is loaded
+before the application-specific one.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/javascript">javascript</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tidbits/a-pseudo-code-job-advert-and-its-discontents/">A pseudo-code job advert and its discontents</a><br/>
+            
+            
+                Next: <a href="/tips/return-false-with-prudence/">Return false with prudence</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

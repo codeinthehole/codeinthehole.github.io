@@ -1,0 +1,156 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Testing HTTPS handling in Django - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Spoofing a HTTPS request using the Django test client">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Testing HTTPS handling in Django</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 1 March 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 1 March 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>You want to test how your application handles HTTPS requests.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Use the following to simulate a HTTPS request using the Django test
+client:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.test.client</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Client</span>
+
+<span style="color: #f8f8f2">client</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Client()</span>
+<span style="color: #f8f8f2">response</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(url,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;wsgi.url_scheme&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #e6db74">&#39;https&#39;</span><span style="color: #f8f8f2">})</span>
+</pre></div>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>The standard way to test for a HTTPS request is using the <code>is_secure</code>
+method of the <code>django.http.HttpRequest</code> class<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> and its subclasses. As
+of Django 1.3, the implementation of this method checks whether an
+environmental variable <code>HTTPS</code> is equal to &ldquo;on&rdquo;:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># django/http/__init__.py</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">HttpRequest</span><span style="color: #f8f8f2">(object):</span>
+    <span style="color: #f92672">...</span> 
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">is_secure</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">environ</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(</span><span style="color: #e6db74">&#39;HTTPS&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;on&#39;</span>
+</pre></div>
+
+<p>However, Django&rsquo;s test client uses the
+<code>django.core.handlers.wsgi.WSGIRequest</code> class for requests. This class
+provides an alternative implementation:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># django/core/handlers/wsgi.py</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">WSGIRequest</span><span style="color: #f8f8f2">(http</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">HttpRequest):</span>
+    <span style="color: #f92672">...</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">is_secure</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&#39;wsgi.url_scheme&#39;</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">environ</span> \
+            <span style="color: #f92672">and</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">environ[</span><span style="color: #e6db74">&#39;wsgi.url_scheme&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;https&#39;</span>
+</pre></div>
+
+<p>Hence why need to pass the <code>wsgi.url_scheme</code> keyword arg when making the
+request.</p>
+
+<p>Note that the unpacked dictionary syntax is required as it&rsquo;s the only
+way of specifying a keyword arg that includes a dot.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1">See <a href="https://docs.djangoproject.com/en/dev/ref/request-response/">https://docs.djangoproject.com/en/dev/ref/request-response/</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/testing">testing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/prefer-data-migrations-to-initial-data/">Prefer data migrations to initial data</a><br/>
+            
+            
+                Next: <a href="/talks/confoo-2012-presentations/">Confoo 2012 presentations</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

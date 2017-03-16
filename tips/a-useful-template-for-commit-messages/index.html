@@ -1,0 +1,125 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>A useful template for commit messages - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A simple heuristic for preferring the imperative mood">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">A useful template for commit messages</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 2 October 2015</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Friday, 2 October 2015</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Here&rsquo;s a useful heuristic for writing better commit messages. Set your
+commit message template to:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span># If applied, this commit will...
+
+# Explain why this change is being made
+
+# Provide links to any relevant tickets, articles or other resources
+</pre></div>
+
+<p>and you&rsquo;ll be guided into writing concise commit subjects in the
+imperative mood - a good practice. See rule 5 of Chris Beam&rsquo;s <a href="http://chris.beams.io/posts/git-commit/">&ldquo;How to
+write a commit message&rdquo;</a> for
+the inspiration of this tip and more reasoning on the use of the
+imperative mood.</p>
+
+<p>To do this in Git, save the above content in a file (eg
+<code>~/.git_commit_msg.txt</code>) and run:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git config --global commit.template ~/.git_commit_msg.txt
+</pre></div>
+
+<p>Here&rsquo;s what this looks like in practice:</p>
+
+<p><img src="/images/git-commit-snap.png" width="800px" /></p>
+
+<p>Try it - it&rsquo;s genuinely useful.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/git">git</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/copying-postgres-output-into-a-spreadsheet/">Copying Postgres output into a spreadsheet</a><br/>
+            
+            
+                Next: <a href="/news/octopus-energy/">Octopus Energy</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

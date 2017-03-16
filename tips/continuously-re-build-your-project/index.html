@@ -1,0 +1,225 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Continuously rebuild your project - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using CI to avoid pain for new team members">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Continuously rebuild your project</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 18 June 2014</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Wednesday, 18 June 2014</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>New developers joining a project will often find that the project won&rsquo;t
+build cleanly on their machine, and hours of time will be sunk into
+setting up the project so work can start. This is sad and expensive for
+all concerned.</p>
+
+<p>This is a particular menace in agencies (or anywhere with lots of small
+projects) where a large team of developers need to jump between
+projects. Tools like <a href="http://www.vagrantup.com">Vagrant</a> and
+<a href="http://www.docker.com/">Docker</a> can help but aren&rsquo;t the panacea they
+first seem to be<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
+
+<p>Counter this by using continuous integration to build your project from
+scratch. Then any changes that break the build process (such as database
+schema changes not applying correctly) will be spotted early. New team
+members will be dishing out high-fives when their development
+environment is built and primed with sample data sixty seconds after
+cloning the repo.</p>
+
+<h3 id="tips">Tips</h3>
+
+<p>It should be trivial to get a project working locally. At
+<a href="http://www.tangentsnowball.com/">Tangent</a>, projects use a <code>makefile</code>
+for common tasks. Setting up a working version of the project is as
+simple as:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ make 
+</pre></div>
+
+<p>It&rsquo;s helpful if you can template new projects to embed good practices
+like this. We frequently use Django and maintain a <a href="https://github.com/tangentlabs/tangent-django-boilerplate/">boilerplate Django
+project</a> for
+this purpose. It includes a
+<a href="https://github.com/tangentlabs/tangent-django-boilerplate/blob/master/makefile">makefile</a>
+along these lines:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Build a working version of the project</span>
+<span style="color: #a6e22e">build</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">clean</span> <span style="color: #f8f8f2">virtualenv</span> <span style="color: #f8f8f2">database</span>
+
+<span style="color: #75715e"># Delete all temporary or untracked files</span>
+<span style="color: #a6e22e">clean</span><span style="color: #f92672">:</span> 
+    -find . -type f -name <span style="color: #e6db74">&quot;*.pyc&quot;</span> -delete
+    -rm -rf www/public/media/*
+
+<span style="color: #75715e"># Update the virtualenv</span>
+<span style="color: #a6e22e">virtualenv</span><span style="color: #f92672">:</span> 
+    pip install -r www/deploy/requirements.txt
+
+<span style="color: #75715e"># Create a database populated with data</span>
+<span style="color: #a6e22e">database</span><span style="color: #f92672">:</span> 
+    python www/manage.py reset_db --router<span style="color: #f92672">=</span>default --noinput
+    python www/manage.py syncdb --noinput
+    python www/manage.py migrate
+<span style="color: #75715e">    # Load any project fixtures to pre-populate the initial database</span>
+    python www/manage.py loaddata fixtures/*.json
+
+<span style="color: #a6e22e">test</span><span style="color: #f92672">:</span>
+    <span style="color: #f8f8f2">cd</span> www <span style="color: #f92672">&amp;&amp;</span> py.test
+
+<span style="color: #a6e22e">ci</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">test</span> <span style="color: #f8f8f2">database</span>
+</pre></div>
+
+<p>Witness the <code>ci</code> target which runs the test suite <em>and</em> builds the
+database, effectively smoke-testing that the migrations apply correctly
+and the fixtures load (which is where we&rsquo;ve historically had pain).</p>
+
+<p>We use <a href="https://travis-ci.com/">Travis</a> for CI and our template
+<code>.travis.yml</code> looks a little like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">language</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">python</span>
+
+<span style="color: #ae81ff">python</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #f8f8f2">-</span> <span style="color: #e6db74">&#39;2.7&#39;</span>
+
+<span style="color: #ae81ff">install</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">make virtualenv</span>
+
+<span style="color: #75715e"># Use the same database as used in production</span>
+<span style="color: #ae81ff">before_script</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">psql -c &#39;CREATE ROLE test_role login createdb superuser;&#39; -U postgres</span>
+  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">psql -c &#39;CREATE DATABASE test_db OWNER test_role;&#39; -U postgres</span>
+
+<span style="color: #ae81ff">script</span><span style="color: #f8f8f2">:</span>
+  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">make ci</span>
+</pre></div>
+
+<p>which means that, <em>by default</em>, all new projects will be built from
+scratch as part of continuous integration. You should do this.</p>
+
+<h3 id="django-specific-issues">Django-specific issues</h3>
+
+<p>For the record, here&rsquo;s some of the build issues we&rsquo;ve encountered in
+Django projects (both internal and external) Most stem from South
+migrations, which worked fine when applied piecemeal by the incumbent
+team but fail when run on a blank database. For instance:</p>
+
+<ul>
+<li>Migrations fail to apply as there are dependencies between
+migrations which haven&rsquo;t been captured. This is easily solved by
+employing South&rsquo;s support for dependent migrations (eg adding
+<code>depends_on</code> to the relevant migration class).</li>
+<li>Migrations fail as they import models directly rather than using the
+reconstituted models that South provides. This is a beginner mistake
+really but still quite common. Fortunately, it&rsquo;s trivial to fix.</li>
+<li>Migrations import and call functions that are no longer defined (but
+did exist when the migration was originally written).</li>
+<li>Migrations create instances of models from <em>other</em> apps where
+South&rsquo;s serialised version is out of sync with the database schema.
+This can be tricky to fix as you can get circular dependencies
+between migrations. Often you&rsquo;ll need to rewrite migrations to
+create models in the migrations of their own apps.</li>
+</ul>
+
+<p><a href="https://twitter.com/andrewingram">Andrew Ingram</a> has written up an
+excellent summary of <a href="http://andrewingram.net/2012/dec/common-pitfalls-django-south/#check-your-migrations-run-from-scratch">common South
+pitfalls</a>.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><p>For instance, it&rsquo;s not trivial to share folders with a Docker
+container on OSX. See
+<a href="https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293">https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293</a></p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/using-the-silver-searcher-with-vim/">Using the silver searcher with Vim</a><br/>
+            
+            
+                Next: <a href="/tips/linking-to-github/">Linking to Github</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

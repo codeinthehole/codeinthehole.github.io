@@ -1,0 +1,141 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Using the silver searcher with Vim - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Lightning-fast :grep searching in Vim">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Using the silver searcher with Vim</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Tuesday, 17 June 2014</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Tuesday, 17 June 2014</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h1 id="here-is-my-title">Here is my title</h1>
+
+<p>If you&rsquo;re not doing this already, then you should use the <a href="http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/">Silver
+Searcher</a>
+within Vim for rapid, convenient file searching. In a nutshell, <code>ag</code>
+offers similar functionality to <code>ack</code> but with much better performance.</p>
+
+<p>It&rsquo;s easily installed - on OSX, run:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ brew install the_silver_searcher
+</pre></div>
+
+<p>Urge Vim to use it for <code>:grep</code> commands by adding the following to
+<code>~/.vimrc</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">if</span> executable<span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;ag&#39;</span><span style="color: #f8f8f2">)</span> 
+<span style="color: #75715e">    &quot; Note we extract the column as well as the file and line number</span>
+    <span style="color: #66d9ef">set</span> <span style="color: #f8f8f2">grepprg=</span>ag\ <span style="color: #f8f8f2">--</span>nogroup\ <span style="color: #f8f8f2">--</span>nocolor\ <span style="color: #f8f8f2">--</span>column
+    <span style="color: #66d9ef">set</span> <span style="color: #f8f8f2">grepformat=</span>%<span style="color: #66d9ef">f</span>:%<span style="color: #66d9ef">l</span>:%<span style="color: #66d9ef">c</span>%<span style="color: #66d9ef">m</span>
+<span style="color: #66d9ef">endif</span>
+</pre></div>
+
+<p><code>:grep</code> searches are now lightning-fast and respectful of your
+<code>~/.gitignore</code> patterns. It&rsquo;s genuinely impressive.</p>
+
+<p>Improve your efficiency further by remapping the keys for jumping
+through search matches (stored in the &ldquo;quickfix&rdquo; list):</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>nmap <span style="color: #f8f8f2">&lt;</span><span style="color: #66d9ef">silent</span><span style="color: #f8f8f2">&gt;</span> <span style="color: #f8f8f2">&lt;</span>RIGHT<span style="color: #f8f8f2">&gt;</span> :cnext<span style="color: #f8f8f2">&lt;</span>CR<span style="color: #f8f8f2">&gt;</span>
+nmap <span style="color: #f8f8f2">&lt;</span><span style="color: #66d9ef">silent</span><span style="color: #f8f8f2">&gt;</span> <span style="color: #f8f8f2">&lt;</span>LEFT<span style="color: #f8f8f2">&gt;</span> :cprev<span style="color: #f8f8f2">&lt;</span>CR<span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>I&rsquo;m using the cursor keys since I normally have them disabled.</p>
+
+<p>See also:</p>
+
+<ul>
+<li><p><a href="http://robots.thoughtbot.com/faster-grepping-in-vim">Faster Grepping in Vim</a> by Dan
+Croak - this shows how to use the Silver searcher with the <a href="https://github.com/kien/ctrlp.vim">CtrlP</a> plugin.</p></li>
+
+<li><p>The Vim plugin <a href="https://github.com/rking/ag.vim">ag.vim</a>.</p></li>
+</ul>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/vim">vim</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/projects/the-road-to-oscar-10/">The road to Oscar 1.0</a><br/>
+            
+            
+                Next: <a href="/tips/continuously-re-build-your-project/">Continuously rebuild your project</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

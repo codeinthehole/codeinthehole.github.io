@@ -1,0 +1,195 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>How to install PIL on 64-bit Ubuntu 12.04 - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Because I have to look this up every time">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">How to install PIL on 64-bit Ubuntu 12.04</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 18 April 2013</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 18 April 2013</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>With pip already installed, install the required development packages:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
+</pre></div>
+
+<p>and symlink the three image libraries into <code>/usr/lib</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ sudo ln -s /usr/lib/<span style="color: #e6db74">`</span>uname -i<span style="color: #e6db74">`</span>-linux-gnu/libfreetype.so /usr/lib/
+$ sudo ln -s /usr/lib/<span style="color: #e6db74">`</span>uname -i<span style="color: #e6db74">`</span>-linux-gnu/libjpeg.so /usr/lib/
+$ sudo ln -s /usr/lib/<span style="color: #e6db74">`</span>uname -i<span style="color: #e6db74">`</span>-linux-gnu/libz.so /usr/lib/
+</pre></div>
+
+<p>PIL should now install with support for JPEGs, PNGs and FreeType, as
+indicated by the compilation output:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>--------------------------------------------------------------------
+PIL <span style="color: #ae81ff">1</span>.1.7 SETUP SUMMARY
+--------------------------------------------------------------------
+version       <span style="color: #ae81ff">1</span>.1.7
+platform      linux2 <span style="color: #ae81ff">2</span>.7.3 <span style="color: #f92672">(</span>default, Apr <span style="color: #ae81ff">20</span> <span style="color: #ae81ff">2012</span>, <span style="color: #ae81ff">22</span>:39:59<span style="color: #f92672">)</span>
+              <span style="color: #f92672">[</span>GCC <span style="color: #ae81ff">4</span>.6.3<span style="color: #f92672">]</span>
+--------------------------------------------------------------------
+*** TKINTER support not available
+--- JPEG support available
+--- ZLIB <span style="color: #f92672">(</span>PNG/ZIP<span style="color: #f92672">)</span> support available
+--- FREETYPE2 support available
+*** LITTLECMS support not available
+--------------------------------------------------------------------
+</pre></div>
+
+<h3 id="common-problems">Common problems</h3>
+
+<h4 id="missing-image-libraries">Missing image libraries</h4>
+
+<p>If the image libraries are not installed and available in <code>/usr/lib</code>,
+you&rsquo;ll see something like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>--------------------------------------------------------------------
+PIL <span style="color: #ae81ff">1</span>.1.7 SETUP SUMMARY
+--------------------------------------------------------------------
+version       <span style="color: #ae81ff">1</span>.1.7
+platform      linux2 <span style="color: #ae81ff">2</span>.7.3 <span style="color: #f92672">(</span>default, Apr <span style="color: #ae81ff">20</span> <span style="color: #ae81ff">2012</span>, <span style="color: #ae81ff">22</span>:39:59<span style="color: #f92672">)</span>
+              <span style="color: #f92672">[</span>GCC <span style="color: #ae81ff">4</span>.6.3<span style="color: #f92672">]</span>
+--------------------------------------------------------------------
+*** TKINTER support not available
+*** JPEG support not available
+*** ZLIB <span style="color: #f92672">(</span>PNG/ZIP<span style="color: #f92672">)</span> support not available
+*** FREETYPE2 support not available
+*** LITTLECMS support not available
+--------------------------------------------------------------------
+To add a missing option, make sure you have the required
+library, and <span style="color: #f8f8f2">set</span> the corresponding ROOT variable in the
+setup.py script.
+</pre></div>
+
+<h4 id="missing-python-headers">Missing python headers</h4>
+
+<p>Without <code>python-dev</code>, you&rsquo;ll see something that ends with the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>...
+
+running build_ext
+
+building <span style="color: #e6db74">&#39;_imaging&#39;</span> extension
+
+creating build/temp.linux-x86_64-2.7
+
+creating build/temp.linux-x86_64-2.7/libImaging
+
+gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -IlibImaging -I/usr/include -I/usr/local/include -I/usr/include/python2.7 -c _imaging.c -o build/temp.linux-x86_64-2.7/_imaging.o
+
+_imaging.c:75:20: fatal error: Python.h: No such file or directory
+
+compilation terminated.
+
+error: <span style="color: #f8f8f2">command</span> <span style="color: #e6db74">&#39;gcc&#39;</span> failed with <span style="color: #f8f8f2">exit</span> status <span style="color: #ae81ff">1</span>
+</pre></div>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>Yes, this has been written about before. This is just my note-to-self
+that I can refer others to - I also wanted to include the common error
+messages that people will search for.</p>
+
+<ul>
+<li><a href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">Installing PIL in a virtualenv on Ubuntu 12.04 Precise
+Pangolin</a></li>
+<li><a href="http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/">Install PIL with JPEG support on Ubuntu Oneric
+64bit</a></li>
+<li><a href="http://www.saltycrane.com/blog/2010/10/how-install-pil-ubuntu/">How to install PIL on
+Ubuntu</a></li>
+</ul>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/python">python</a>, <a href="/tags/pil">pil</a>, <a href="/tags/ubuntu">ubuntu</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/converting-github-issues-into-pull-requests/">Converting Github issues into pull requests</a><br/>
+            
+            
+                Next: <a href="/tips/disable-database-access-when-writing-unit-tests-in-django/">Disable database access when writing unit tests in Django</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

@@ -1,0 +1,150 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Creating large XML files with PHP - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using PHP&#39;s DomDocument to create large XML files">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Creating large XML files with PHP</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 31 October 2008</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Friday, 31 October 2008</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>When creating large XML files with PHP, there are some important
+considerations to bear in mind with regards to scalability. There are
+several libraries available for writing XML files of small to
+intermediate size (such as DOMDocument), but when dealing with very
+large files (eg. &gt; 500Mb, or several million elements), these
+libraries are no longer useful as the size of the file then can create
+is memory-bound.</p>
+
+<p>For example, DOMDocument stores the XML tree in memory while it is being
+built - you then flush it out to file after all elements have been
+created:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?php</span>
+<span style="color: #f8f8f2">$dom</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">DOMDocument</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;1.0&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">($i</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">$i</span><span style="color: #f92672">&lt;=</span><span style="color: #ae81ff">10000</span><span style="color: #f8f8f2">;</span> <span style="color: #f92672">++</span><span style="color: #f8f8f2">$i)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">$root</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$dom</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">createElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;message&#39;</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">$dom</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">($root);</span>
+    <span style="color: #f8f8f2">$content</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$dom</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">createElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;content&#39;</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">$root</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">($content)</span>
+    <span style="color: #f8f8f2">$content</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">appendChild</span><span style="color: #f8f8f2">($dom</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">createTextNode</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Example content&#39;</span><span style="color: #f8f8f2">));</span>
+<span style="color: #f8f8f2">}</span>
+<span style="color: #75715e">// Flush XML from memory to file in one go</span>
+<span style="color: #f8f8f2">file_put_contents(</span><span style="color: #e6db74">&#39;example.xml&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$dom</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">saveXML</span><span style="color: #f8f8f2">());</span>
+</pre></div>
+
+<p>However, this doesn&rsquo;t scale once your feed size starts exceeding the
+available memory (teaking memory settings in php.ini is only a
+short-term fix). A good solution to this is to use the XMLWriter library
+as this provides the ability to periodically flush the XML in memory out
+to file. By doing so, you reclaim the memory so you can keep building
+the XML tree without exceeding memory limitations.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?php</span>
+<span style="color: #f8f8f2">$xmlWriter</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">XMLWriter</span><span style="color: #f8f8f2">();</span>
+<span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">openMemory</span><span style="color: #f8f8f2">();</span>
+<span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">startDocument</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;1.0&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;UTF-8&#39;</span><span style="color: #f8f8f2">);</span>
+<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">($i</span><span style="color: #f92672">=</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">;</span> <span style="color: #f8f8f2">$i</span><span style="color: #f92672">&lt;=</span><span style="color: #ae81ff">10000000</span><span style="color: #f8f8f2">;</span> <span style="color: #f92672">++</span><span style="color: #f8f8f2">$i)</span> <span style="color: #f8f8f2">{</span>
+    <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">startElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;message&#39;</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">writeElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;content&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Example content&#39;</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">endElement</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #75715e">// Flush XML in memory to file every 1000 iterations</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">$i</span><span style="color: #f92672">%</span><span style="color: #ae81ff">1000</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">file_put_contents(</span><span style="color: #e6db74">&#39;example.xml&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">flush</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">),</span> <span style="color: #a6e22e">FILE_APPEND</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
+<span style="color: #75715e">// Final flush to make sure we haven&#39;t missed anything</span>
+<span style="color: #f8f8f2">file_put_contents(</span><span style="color: #e6db74">&#39;example.xml&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">flush</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">true</span><span style="color: #f8f8f2">),</span> <span style="color: #a6e22e">FILE_APPEND</span><span style="color: #f8f8f2">);</span>
+</pre></div>
+
+<p>Here we flush the XML in memory to file every 1000 iterations. This
+ensures that memory usage is capped and opens up the possiblity of
+creating very large XML files.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/php">PHP</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/monitoring-mysql/">Monitoring MySQL</a><br/>
+            
+            
+                Next: <a href="/tips/date-conditional-redirects-with-mod_rewrite/">Date conditional redirects with mod_rewrite</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

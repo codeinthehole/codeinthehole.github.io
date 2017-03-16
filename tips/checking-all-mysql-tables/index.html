@@ -1,0 +1,142 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Checking all MySQL tables - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using the commandline to build a string of CHECK commands">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Checking all MySQL tables</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 23 November 2008</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Sunday, 23 November 2008</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>It&rsquo;s well known that MyISAM tables are prone to corruption and need to
+be regularly checked and repaired. Moreover, in a production
+environment, it can be beneficial to run a daily check of all tables and
+mail news of any errors to an appropriate developer/DBA.</p>
+
+<p>There are two options for checking MySQL tables. The most effective
+method is to run the <a href="http://dev.mysql.com/doc/refman/5.0/en/myisamchk.html">myisamchk
+utility</a> directly
+on the index files (<code>.MYI</code>) of the tables in question (some simple shell
+expansion makes this easy):</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>myisamchk --silent --fast /path/to/datadir/*/*.MYI
+</pre></div>
+
+<p>However, this proses a problem in that you must ensure that no other
+programs are accessing the tables while they are being checked. Hence
+they must be locked, or better still, the MySQL daemon stopped before
+running any checks. Perversely, if this is not done, the act of checking
+the tables can corrupt them.</p>
+
+<p>Another option is to use the <code>CHECK TABLE</code> syntax in SQL (which does not
+pose a risk of corruption). There are various scripts (written in PHP
+and bash) posted on the <code>CHECK TABLE</code> <a href="http://dev.mysql.com/doc/refman/5.0/en/check-table.html">manual
+page</a> but this
+operation can be done easily through a single line:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color: #e6db74">&quot;SHOW TABLES&quot;</span> <span style="color: #ae81ff">\</span>
+<span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;{print &quot;CHECK TABLE &quot;$1&quot;;&quot;}&#39;</span> <span style="color: #ae81ff">\</span>
+<span style="color: #f8f8f2">|</span> mysql -p&lt;password&gt; -D&lt;database&gt;
+</pre></div>
+
+<p>This dynamically creates a list of <code>CHECK TABLE ...</code> commands which is
+piped into MySQL for execution.</p>
+
+<p>For checking a selection of tables rather than all, use the LIKE
+operator when selecting the tables to check:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color: #e6db74">&quot;SHOW TABLES LIKE &#39;User%&#39;&quot;</span> <span style="color: #ae81ff">\</span>
+<span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;NR != 1 {print &quot;CHECK TABLE &quot;$1&quot;;&quot;}&#39;</span> <span style="color: #ae81ff">\</span>
+<span style="color: #f8f8f2">|</span> mysql -p&lt;password&gt; -D&lt;database&gt;
+</pre></div>
+
+<p>This only checks the tables that start &lsquo;User&rsquo;. Note that the awk program
+has an extra clause to ensure that the first line of MySQL output is
+skipped.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/commandlinefu">commandlinefu</a>, <a href="/tags/mysql">mysql</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/javascript-cookie-objects-using-prototype-and-json/">Javascript cookie objects using Prototype and JSON</a><br/>
+            
+            
+                Next: <a href="/books/high-performance-web-sites-by-steve-souders/">High Performance Web Sites by Steve Souders</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

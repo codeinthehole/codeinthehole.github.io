@@ -1,0 +1,162 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Avoiding clashing Django migrations - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A simple Travis test to avoid frustration">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Avoiding clashing Django migrations</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Saturday, 31 January 2015</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Saturday, 31 January 2015</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Managing South migrations on a multi-developer Django project can be
+painful. Developers working on separate branches will often create
+migrations for the same app with the same migration number<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. When
+merged into master, these clashing migrations can cause deployment
+hiccups as South will complain if migrations are applied out of order.</p>
+
+<p>There are various techniques available for dealing with this<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>, but
+what we do at <a href="http://justyoyo.com/">Yoyo</a> is test for such clashes as
+part of our Travis continuous integration.</p>
+
+<p>This is done by calling a <code>makefile</code> target from <code>.travis.yml</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># .travis.yml</span>
+
+<span style="color: #ae81ff">language</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">python</span>
+
+<span style="color: #ae81ff">python</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">2.7</span>
+
+<span style="color: #ae81ff">install</span><span style="color: #f8f8f2">:</span>
+    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">make virtualenv</span>
+
+<span style="color: #ae81ff">script</span>
+    <span style="color: #ae81ff">- make test</span>
+    <span style="color: #ae81ff">- make migration_test</span>
+</pre></div>
+
+<p>where the <code>migration_test</code> target is:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># makefile</span>
+
+<span style="color: #f8f8f2">MIGRATION_CLASHES</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>shell find . -type f -name <span style="color: #e6db74">&quot;*.py&quot;</span> <span style="color: #f8f8f2">|</span> grep -o <span style="color: #e6db74">&quot;.*/migrations/[0-9]\+&quot;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color: #66d9ef">)</span>
+<span style="color: #a6e22e">migration_test</span><span style="color: #f92672">:</span>
+    <span style="color: #f92672">[</span> -n <span style="color: #66d9ef">$(</span>MIGRATION_CLASHES<span style="color: #66d9ef">)</span> <span style="color: #f92672">]</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span> <span style="color: #f92672">||</span> <span style="color: #f8f8f2">true</span>
+</pre></div>
+
+<p>Here the <code>$(shell ...)</code> call extracts the app name and migration number
+from all migration files then uses <code>awk</code> to look for clashes. If any are
+found, the Travis build will fail and the console output should reveal
+which apps have clashes.</p>
+
+<p>This works best if you only allow fast-forward commits into master
+(something we do at <a href="http://justyoyo.com/">Yoyo</a>). Doing this forces you
+to merge master back into your pull request branch and allows Travis to
+catch migration clashes before it is merged. Then any conflicts can be
+resolved by renumbering or recreating any migrations not yet merged to
+master.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><p>I&rsquo;m only talking about Django versions less than 1.7 - I&rsquo;m not
+sure if this is still an issue in more modern Django versions.</p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+
+<li id="fn:2"><p>As noted by the <a href="http://south.readthedocs.org/en/latest/tutorial/part5.html">South
+docs</a>,
+you can run the migrations with the <code>--merge</code> option although this
+generally means a manual intervention in your deployment process
+which isn&rsquo;t ideal.</p>
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/testing">testing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/bootstrapped-virtualenvs/">Bootstrapped virtualenvs</a><br/>
+            
+            
+                Next: <a href="/tips/backing-up-database-rows-in-postgres-before-deleting-them/">Backing up Postgres database rows before deleting them</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

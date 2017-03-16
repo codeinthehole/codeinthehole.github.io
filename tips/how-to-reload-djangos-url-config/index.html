@@ -1,0 +1,157 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>How to reload Django&#39;s URL config - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A rare sighting of the &#39;reload&#39; function in the wild">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">How to reload Django&#39;s URL config</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 21 March 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Wednesday, 21 March 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>For some reason, you need to reload your Django URL config.</p>
+
+<p>Normally, the root URL config will be imported and stored in memory when
+your server process starts up. Occasionally though, you may want to
+reload it. This can be the case if your URL configuration changes
+depending on certain parameters.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>You can reload the URL config using the following snippet:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">sys</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.conf</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">settings</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">reload_urlconf</span><span style="color: #f8f8f2">(urlconf</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None):</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">urlconf</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
+        <span style="color: #f8f8f2">urlconf</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">urlconf</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules:</span>
+        <span style="color: #f8f8f2">reload(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules[urlconf])</span>
+</pre></div>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>This was a problem I needed to solve while testing the checkout process
+for <a href="https://github.com/tangentlabs/django-oscar">django-oscar</a>. Oscar
+uses a setting flag to optionally add decorators to certain URLs, and
+hence I needed to patch the setting and reload the URLs as part of the
+set-up for a test.</p>
+
+<p>This was achieved in the following way, where the setting
+<code>OSCAR_ALLOW_ANON_CHECKOUT</code> is set to <code>True</code> and the URL config is
+reloaded.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">sys</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.conf</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">settings</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.utils.importlib</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">import_module</span>
+
+<span style="color: #f92672">...</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">EnabledAnonymousCheckoutViewsTests</span><span style="color: #f8f8f2">(ClientTestCase,</span> <span style="color: #f8f8f2">CheckoutMixin):</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">reload_urlconf</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules:</span>
+            <span style="color: #f8f8f2">reload(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules[settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF])</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">import_module(settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_shipping_address_requires_session_email_address</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">patch_settings(OSCAR_ALLOW_ANON_CHECKOUT</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True):</span>
+            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">reload_urlconf()</span>
+            <span style="color: #f8f8f2">response</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(reverse(</span><span style="color: #e6db74">&#39;checkout:shipping-address&#39;</span><span style="color: #f8f8f2">))</span>
+            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertIsRedirect(response)</span>
+</pre></div>
+
+<p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
+me when working on this problem today.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/testing">testing</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/validating-international-postcodes-in-django/">Validating international postcodes in Django</a><br/>
+            
+            
+                Next: <a href="/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/">csvfilter - a Python command-line tool for manipulating CSV data</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

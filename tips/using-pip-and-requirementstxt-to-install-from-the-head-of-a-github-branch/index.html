@@ -1,0 +1,158 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Using pip and requirements.txt to install from the HEAD of a Github branch - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Always get the latest version">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Using pip and requirements.txt to install from the HEAD of a Github branch</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Saturday, 20 August 2011</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Saturday, 20 August 2011</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>The python package installer pip can be used to install directly from
+Github, like so:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg<span style="color: #f92672">=</span>django-oscar
+</pre></div>
+
+<p>This will install from the HEAD of the master branch. However, when you
+use <code>pip freeze</code> to export your dependencies (usually to a
+<code>requirements.txt</code> file), pip will fix the reference to a specific
+commit by including its ID within the URL:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pip freeze <span style="color: #f8f8f2">|</span> grep oscar
+-e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg<span style="color: #f92672">=</span>django_oscar-dev
+</pre></div>
+
+<p>Hence running <code>pip install -r requirements.txt</code> will not pick any
+commits after d636b803 until <code>requirements.txt</code> is updated.</p>
+
+<p>This isn&rsquo;t always the desired behaviour; in some circumstances, you
+would prefer for <code>pip install -r requirements.txt</code> to always install the
+latest version from Github.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Simply delete the commit ID from URL - that is, change:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>-e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg<span style="color: #f92672">=</span>django-oscar
+</pre></div>
+
+<p>to</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>-e git://github.com/tangentlabs/django-oscar.git#egg<span style="color: #f92672">=</span>django-oscar
+</pre></div>
+
+<p>This can be done by hand once you&rsquo;ve used</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>pip freeze &gt; requirements.txt
+</pre></div>
+
+<p>to create your requirements file, or by using sed:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pip freeze <span style="color: #f8f8f2">|</span> sed <span style="color: #e6db74">&#39;s/@[a-z0-9]\+//&#39;</span> &gt; requirements.txt
+</pre></div>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>The text between <code>@</code> and <code>#</code> in the github URL specifies the commit to
+install from. Rather than a commit ID, a branch or tag name can be used
+also. Hence:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>pip install -e git://github.com/tangentlabs/django-oscar.git@0.1#egg<span style="color: #f92672">=</span>django-oscar
+</pre></div>
+
+<p>will install the <code>0.1</code> tag, while:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>pip install -e git://github.com/tangentlabs/django-oscar.git@releases/0.1#egg<span style="color: #f92672">=</span>django-oscar
+</pre></div>
+
+<p>will install from the HEAD of the <code>releases/0.1</code> branch.</p>
+
+<p>For further information, consult the <a href="http://www.pip-installer.org/en/latest/requirements.html#the-requirements-file-format">requirements file format
+documentation</a>.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/console-logging-to-stdout-in-django/">Console logging to STDOUT in Django</a><br/>
+            
+            
+                Next: <a href="/tips/how-to-set-up-mysql-for-python-on-ubuntu/">How to set-up MySQL for Python on Ubuntu</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

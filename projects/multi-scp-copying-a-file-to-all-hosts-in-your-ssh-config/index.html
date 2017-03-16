@@ -1,0 +1,131 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Multi-scp: copying a file to all hosts in your SSH config - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using node.js to copy a file to multiple remote hosts">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Multi-scp: copying a file to all hosts in your SSH config</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 22 May 2011</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Sunday, 22 May 2011</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>I am totally reliant on my bash aliases and readline configuration. When
+working on a new server, the first thing I do is copy over my local Bash
+(<code>~/.bashrc</code>) and Readline (<code>~/.inputrc</code>) configuration files.</p>
+
+<p>One mildly annoying issue is when you update a config file, it&rsquo;s a pain
+to copy it onto all your remote hosts. To scratch this itch, I wrote a
+simple node.js executable for copying a file to all the defined hosts in
+your <code>~/.ssh/config</code> file</p>
+
+<p>Usage is trivial:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ multi-scp ~/.bashrc
+Starting sync of <span style="color: #e6db74">&#39;~/.bashrc&#39;</span> to all hosts in /home/david/.ssh/config
+-&gt; Copying to mars
+-&gt; Copying to venus
+-&gt; Copying to jupiter
+&lt;- Successful copy to mars
+&lt;- Successful copy to venus
+&lt;- Successful copy to jupiter
+</pre></div>
+
+<p>Using node.js seems an odd choice as this could trivially be done in
+another scripting language. However, I wanted to use node as:</p>
+
+<ul>
+<li>it allows the copy operation to run asynchronously in a child
+process with a callback to handle completion and error;</li>
+<li>it&rsquo;s fashionable.</li>
+</ul>
+
+<p>The <a href="https://github.com/codeinthehole/node-multi-scp">code is on Github</a>
+as usual.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/node.js">node.js</a>
+                <br/>
+            
+            
+                Filed in: <a href="/projects/">Projects</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/coloured-output-while-doing-tdd-with-django-and-fabric/">Coloured output while doing TDD with Django and Fabric</a><br/>
+            
+            
+                Next: <a href="/tips/running-django-cronjobs-within-a-virtualenv/">Running django cronjobs within a virtualenv</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

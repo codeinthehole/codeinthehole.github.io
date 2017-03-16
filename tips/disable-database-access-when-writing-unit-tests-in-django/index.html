@@ -1,0 +1,137 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Disable database access when writing unit tests in Django - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A decorator for the testing puritan">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Disable database access when writing unit tests in Django</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 22 April 2013</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Monday, 22 April 2013</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Consider this curio:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">mock</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.utils.functional</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">curry</span>
+
+<span style="color: #f8f8f2">no_database</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curry(</span>
+    <span style="color: #f8f8f2">mock</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">patch,</span> <span style="color: #e6db74">&#39;django.db.backends.util.CursorWrapper&#39;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #f8f8f2">Mock(side_effect</span><span style="color: #f92672">=</span><span style="color: #a6e22e">RuntimeError</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Using the database is not permitted&quot;</span><span style="color: #f8f8f2">)))</span>
+</pre></div>
+
+<p>This snippet creates a decorator that can wrap a test case or method and
+raises an exception if the database is accessed. This can be useful if
+you&rsquo;re a puritan about <em>true</em> unit tests.</p>
+
+<p>Use by wrapping a <code>TestCase</code> subclass:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.test</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">TestCase</span>
+
+<span style="color: #a6e22e">@no_database</span><span style="color: #f8f8f2">()</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">UnitTestCase</span><span style="color: #f8f8f2">(TestCase):</span>
+    <span style="color: #f92672">...</span>
+</pre></div>
+
+<p>or method:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.test</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">TestCase</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">UnitTestCase</span><span style="color: #f8f8f2">(TestCase):</span>
+
+    <span style="color: #a6e22e">@no_database</span><span style="color: #f8f8f2">()</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f92672">...</span>
+</pre></div>
+
+<p>This snippet is a reformulation of one from Carl Meyer&rsquo;s excellent
+<a href="http://pyvideo.org/video/699/testing-and-django">&lsquo;Testing and Django&rsquo;</a>
+(about 24 minutes in).</p>
+
+<p>Challenge: create a similar decorator that prevents all file-system
+access in a test method.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/testing">testing</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/how-to-install-pil-on-64-bit-ubuntu-1204/">How to install PIL on 64-bit Ubuntu 12.04</a><br/>
+            
+            
+                Next: <a href="/tips/a-useful-git-post-checkout-hook-for-python-repos/">A useful Git post-checkout hook for Python repos</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

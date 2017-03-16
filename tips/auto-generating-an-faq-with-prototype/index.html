@@ -1,0 +1,155 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Auto-generating an FAQ with Prototype - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A lazy way of generating an FAQ">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Auto-generating an FAQ with Prototype</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 25 May 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Monday, 25 May 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Have just been writing an FAQ page for commandlinefu.com. Documenting is
+always tiresome, but FAQs particularly so when hand-coding the HTML
+links between each question and the summary table at the top of the
+page.</p>
+
+<p>Javascript to the rescue: I cobbled together a quick Prototype script
+which automatically generates the FAQ summary links by parsing the DOM
+for the appropriate links:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">document.</span><span style="color: #a6e22e">observe</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;dom:loaded&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(){</span>
+    <span style="color: #a6e22e">$$</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;a.question&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">each</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">ele</span><span style="color: #f8f8f2">){</span>
+        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">id</span> <span style="color: #f92672">=</span> <span style="color: #a6e22e">ele</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">innerHTML</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">unescapeHTML</span><span style="color: #f8f8f2">().</span><span style="color: #a6e22e">gsub</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">/[^\w- ]/</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">gsub</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">/[\s-]+/</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;-&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">toLowerCase</span><span style="color: #f8f8f2">();</span>
+        <span style="color: #a6e22e">ele</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">writeAttribute</span><span style="color: #f8f8f2">({</span><span style="color: #a6e22e">id</span><span style="color: #f92672">:</span> <span style="color: #a6e22e">id</span><span style="color: #f8f8f2">});</span>
+        <span style="color: #66d9ef">var</span> <span style="color: #a6e22e">link</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">Element</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;a&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span><span style="color: #a6e22e">href</span><span style="color: #f92672">:</span> <span style="color: #e6db74">&#39;#&#39;</span><span style="color: #f92672">+</span><span style="color: #a6e22e">id</span><span style="color: #f8f8f2">})</span>
+            <span style="color: #f8f8f2">.</span><span style="color: #a6e22e">update</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">ele</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">innerHTML</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #f8f8f2">.</span><span style="color: #a6e22e">observe</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;click&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">function</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">event</span><span style="color: #f8f8f2">){</span>
+                <span style="color: #a6e22e">event</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">stop</span><span style="color: #f8f8f2">();</span>
+                <span style="color: #a6e22e">Effect</span><span style="color: #f8f8f2">.</span><span style="color: #a6e22e">ScrollTo</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">ele</span><span style="color: #f8f8f2">);</span> 
+            <span style="color: #f8f8f2">});</span>
+        <span style="color: #a6e22e">$</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;questions&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">(</span><span style="color: #66d9ef">new</span> <span style="color: #a6e22e">Element</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;li&#39;</span><span style="color: #f8f8f2">).</span><span style="color: #a6e22e">insert</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">link</span><span style="color: #f8f8f2">));</span>
+    <span style="color: #f8f8f2">});</span>
+<span style="color: #f8f8f2">});</span>
+</pre></div>
+
+<p>Now, all I have to do is write my FAQ ensuring the questions live in
+anchor tags with the class &ldquo;question&rdquo; and there is an empty list tag at
+the top of the page to house the summary block.</p>
+
+<p>Here&rsquo;s two snapshots the relevant section of the DOM before and after
+the dom:loaded event has fired. Before:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;</span><span style="color: #a6e22e">ul</span> <span style="color: #a6e22e">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;questions&quot;</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #960050; background-color: #1e0010">/ul&gt;</span>
+<span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dl</span><span style="color: #f92672">&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dt</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #a6e22e">a</span> <span style="color: #66d9ef">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;question&quot;</span><span style="color: #f92672">&gt;</span><span style="color: #a6e22e">What</span> <span style="color: #a6e22e">is</span> <span style="color: #66d9ef">this</span> <span style="color: #a6e22e">site</span><span style="color: #f92672">?&lt;</span><span style="color: #960050; background-color: #1e0010">/a&gt;&lt;/dt&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dd</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">...</span><span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/dd&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dt</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #a6e22e">a</span> <span style="color: #66d9ef">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;question&quot;</span><span style="color: #f92672">&gt;</span><span style="color: #a6e22e">Who</span> <span style="color: #a6e22e">created</span> <span style="color: #66d9ef">this</span> <span style="color: #a6e22e">site</span><span style="color: #f92672">?&lt;</span><span style="color: #960050; background-color: #1e0010">/a&gt;&lt;/dt&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dd</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">...</span><span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/dd&gt;</span>
+<span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/dl&gt;</span>
+</pre></div>
+
+<p>and after:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;</span><span style="color: #a6e22e">ul</span> <span style="color: #a6e22e">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;questions&quot;</span><span style="color: #f92672">&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">li</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #a6e22e">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;#what-is-this-site&quot;</span><span style="color: #f92672">&gt;</span><span style="color: #a6e22e">What</span> <span style="color: #a6e22e">is</span> <span style="color: #66d9ef">this</span> <span style="color: #a6e22e">site</span><span style="color: #f92672">?&lt;</span><span style="color: #960050; background-color: #1e0010">/a&gt;&lt;/li&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">li</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #a6e22e">a</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;#who-created-this-site&quot;</span><span style="color: #f92672">&gt;</span><span style="color: #a6e22e">Who</span> <span style="color: #a6e22e">created</span> <span style="color: #66d9ef">this</span> <span style="color: #a6e22e">site</span><span style="color: #f92672">?&lt;</span><span style="color: #960050; background-color: #1e0010">/a&gt;&lt;/li&gt;</span>
+<span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/ul&gt;</span>
+<span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dl</span><span style="color: #f92672">&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dt</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #a6e22e">a</span> <span style="color: #66d9ef">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;question&quot;</span> <span style="color: #a6e22e">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;what-is-this-site&quot;</span><span style="color: #f92672">&gt;</span><span style="color: #a6e22e">What</span> <span style="color: #a6e22e">is</span> <span style="color: #66d9ef">this</span> <span style="color: #a6e22e">site</span><span style="color: #f92672">?&lt;</span><span style="color: #960050; background-color: #1e0010">/a&gt;&lt;/dt&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dd</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">...</span><span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/dd&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dt</span><span style="color: #f92672">&gt;&lt;</span><span style="color: #a6e22e">a</span> <span style="color: #66d9ef">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;question&quot;</span> <span style="color: #a6e22e">id</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;who-created-this-site&quot;</span><span style="color: #f92672">&gt;</span><span style="color: #a6e22e">Who</span> <span style="color: #a6e22e">created</span> <span style="color: #66d9ef">this</span> <span style="color: #a6e22e">site</span><span style="color: #f92672">?&lt;</span><span style="color: #960050; background-color: #1e0010">/a&gt;&lt;/dt&gt;</span>
+    <span style="color: #f92672">&lt;</span><span style="color: #a6e22e">dd</span><span style="color: #f92672">&gt;</span><span style="color: #f8f8f2">...</span><span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/dd&gt;</span>
+<span style="color: #f92672">&lt;</span><span style="color: #960050; background-color: #1e0010">/dl&gt;</span>
+</pre></div>
+
+<p>As you can see, the javascript simply extracts the relevant content from
+the questions and inserts the appropriate identities and links into the
+DOM to form the quick-links. Using the <code>Effect.ScrollTo</code> function also
+gives a pleasant user experience.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/javascript">javascript</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/inspecting-javascript-objects/">Inspecting Javascript objects</a><br/>
+            
+            
+                Next: <a href="/tips/deploying-cron-jobs-using-phing/">Deploying cron jobs using Phing</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

@@ -1,0 +1,193 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>How to set-up MySQL for Python on Ubuntu - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="This doesn&#39;t stick in my head">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">How to set-up MySQL for Python on Ubuntu</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 5 January 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 5 January 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>This is just for my own reference as I always forget the dependencies
+for setting up MySQL on a new machine.</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>Starting with a vanilla Lucid install<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>, install pip and upgrade to
+the latest version:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>apt-get install python-pip
+pip install -U pip
+</pre></div>
+
+<p>Next, install the required development packages:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>apt-get install python-dev libmysqlclient-dev
+</pre></div>
+
+<p>then</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>pip install MySQL-python
+</pre></div>
+
+<p>should complete successfully.</p>
+
+<h3 id="symptoms-of-missing-headers">Symptoms of missing headers</h3>
+
+<p>Without <code>libmysqlclient-dev</code>, you&rsquo;ll see something like this:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>Downloading/unpacking MySQL-python
+Running setup.py egg_info <span style="color: #66d9ef">for</span> package MySQL-python
+    sh: mysql_config: not found
+    Traceback <span style="color: #f92672">(</span>most recent call last<span style="color: #f92672">)</span>:
+    File <span style="color: #e6db74">&quot;&lt;string&gt;&quot;</span>, line <span style="color: #ae81ff">14</span>, in &lt;module&gt;
+    File <span style="color: #e6db74">&quot;/home/vagrant/build/MySQL-python/setup.py&quot;</span>, line <span style="color: #ae81ff">15</span>, in &lt;module&gt;
+        metadata, <span style="color: #f8f8f2">options</span> <span style="color: #f92672">=</span> get_config<span style="color: #f92672">()</span>
+    File <span style="color: #e6db74">&quot;setup_posix.py&quot;</span>, line <span style="color: #ae81ff">43</span>, in get_config
+        <span style="color: #f8f8f2">libs</span> <span style="color: #f92672">=</span> mysql_config<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;libs_r&quot;</span><span style="color: #f92672">)</span>
+    File <span style="color: #e6db74">&quot;setup_posix.py&quot;</span>, line <span style="color: #ae81ff">24</span>, in mysql_config
+        raise EnvironmentError<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;%s not found&quot;</span> % <span style="color: #f92672">(</span>mysql_config.path,<span style="color: #f92672">))</span>
+    EnvironmentError: mysql_config not found
+    Complete output from <span style="color: #f8f8f2">command</span> python setup.py egg_info:
+    sh: mysql_config: not found
+
+Traceback <span style="color: #f92672">(</span>most recent call last<span style="color: #f92672">)</span>:
+
+File <span style="color: #e6db74">&quot;&lt;string&gt;&quot;</span>, line <span style="color: #ae81ff">14</span>, in &lt;module&gt;
+
+File <span style="color: #e6db74">&quot;/home/vagrant/build/MySQL-python/setup.py&quot;</span>, line <span style="color: #ae81ff">15</span>, in &lt;module&gt;
+
+    metadata, <span style="color: #f8f8f2">options</span> <span style="color: #f92672">=</span> get_config<span style="color: #f92672">()</span>
+
+File <span style="color: #e6db74">&quot;setup_posix.py&quot;</span>, line <span style="color: #ae81ff">43</span>, in get_config
+
+    <span style="color: #f8f8f2">libs</span> <span style="color: #f92672">=</span> mysql_config<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;libs_r&quot;</span><span style="color: #f92672">)</span>
+
+File <span style="color: #e6db74">&quot;setup_posix.py&quot;</span>, line <span style="color: #ae81ff">24</span>, in mysql_config
+
+    raise EnvironmentError<span style="color: #f92672">(</span><span style="color: #e6db74">&quot;%s not found&quot;</span> % <span style="color: #f92672">(</span>mysql_config.path,<span style="color: #f92672">))</span>
+
+EnvironmentError: mysql_config not found
+</pre></div>
+
+<p>Without <code>python-dev</code>, you&rsquo;ll see something that ends with the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>...
+
+    _mysql.c:2620: error: expected <span style="color: #e6db74">&#39;=&#39;</span>, <span style="color: #e6db74">&#39;,&#39;</span>, <span style="color: #e6db74">&#39;;&#39;</span>, <span style="color: #e6db74">&#39;asm&#39;</span> or <span style="color: #e6db74">&#39;__attribute__&#39;</span> before <span style="color: #e6db74">&#39;_mysql_ResultObject_Type&#39;</span>
+
+_mysql.c:2706: error: expected <span style="color: #e6db74">&#39;=&#39;</span>, <span style="color: #e6db74">&#39;,&#39;</span>, <span style="color: #e6db74">&#39;;&#39;</span>, <span style="color: #e6db74">&#39;asm&#39;</span> or <span style="color: #e6db74">&#39;__attribute__&#39;</span> before <span style="color: #e6db74">&#39;_mysql_methods&#39;</span>
+
+_mysql.c:2778: error: expected <span style="color: #e6db74">&#39;=&#39;</span>, <span style="color: #e6db74">&#39;,&#39;</span>, <span style="color: #e6db74">&#39;;&#39;</span>, <span style="color: #e6db74">&#39;asm&#39;</span> or <span style="color: #e6db74">&#39;__attribute__&#39;</span> before <span style="color: #e6db74">&#39;*&#39;</span> token
+
+_mysql.c:2810: warning: <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">type</span> defaults to <span style="color: #e6db74">&#39;int&#39;</span>
+
+_mysql.c: In <span style="color: #66d9ef">function</span> <span style="color: #e6db74">&#39;DL_EXPORT&#39;</span>:
+
+_mysql.c:2810: error: expected declaration specifiers before <span style="color: #e6db74">&#39;init_mysql&#39;</span>
+
+_mysql.c:2888: error: expected <span style="color: #e6db74">&#39;{&#39;</span> at end of input
+
+error: <span style="color: #f8f8f2">command</span> <span style="color: #e6db74">&#39;gcc&#39;</span> failed with <span style="color: #f8f8f2">exit</span> status <span style="color: #ae81ff">1</span>
+
+----------------------------------------
+Command /usr/bin/python -c <span style="color: #e6db74">&quot;import setuptools;__file__=&#39;/home/vagrant/build/MySQL-python/setup.py&#39;;exec(compile(open(__file__).read().replace(&#39;\r\n&#39;, &#39;\n&#39;), __file__, &#39;exec&#39;))&quot;</span> install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code <span style="color: #ae81ff">1</span>
+Storing <span style="color: #f8f8f2">complete</span> log in /home/vagrant/.pip/pip.log
+</pre></div>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><p>Tested using the Lucid32 Vagrant box:
+<a href="http://files.vagrantup.com/lucid32.box">http://files.vagrantup.com/lucid32.box</a></p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/python">python</a>, <a href="/tags/mysql">mysql</a>, <a href="/tags/ubuntu">ubuntu</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/">Using pip and requirements.txt to install from the HEAD of a Github branch</a><br/>
+            
+            
+                Next: <a href="/news/rewriting-codeintheholecom/">Rewriting codeinthehole.com</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

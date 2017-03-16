@@ -1,0 +1,224 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Deploying to a shared hosting environment using Phing - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using Phing&#39;s FtpDeployTask to good effect">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Deploying to a shared hosting environment using Phing</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 4 January 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Sunday, 4 January 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Deploying applications to shared hosting environments can be a pain when
+no SSH access is provided. Consequently, it&rsquo;s hard to avoid using FTP to
+deploy files from your development environment to a production server.
+In such trying circumstances, it&rsquo;s easy to form self-destructive habits
+like using drag-and-drop FTP deployment - a very bad thing. Much better
+is to write an automated deployment script so that you can build to
+production in one clean step, a key tenet of <a href="http://www.joelonsoftware.com/articles/fog0000000043.html">The Joel
+Test</a> for
+writing better code (highly recommended). Get deployment right at the
+start and making major changes to your application becomes trivial
+rather than a complete nightmare.</p>
+
+<p><a href="http://phing.info/">Phing</a> is great for deploying PHP applications.
+It&rsquo;s well documented, easy to use and extend, and works well with other
+libraries such as PHPunit. Although it&rsquo;s not inthe current docs for
+version 2.3.x there is a useful FTP task (<code>FtpDeployTask.php</code>) in Phing
+2.3.3 that can be used to create a simple build script for deploying to
+shared hosting environments using FTP. Syntax and usage are trivial
+given a glance through the source code
+(<code>/usr/share/php/phing/tasks/ext/FtpDeployTask.php</code> on Ubuntu systems).</p>
+
+<p>Here&rsquo;s a simple build.xml deployment script for a CodeIgniter project
+that uses the FtpDeploy task:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span style="color: #f92672">&lt;project</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;Shared hosting deployment&quot;</span> <span style="color: #a6e22e">default=</span><span style="color: #e6db74">&quot;deploy-application-files&quot;</span> <span style="color: #a6e22e">basedir=</span><span style="color: #e6db74">&quot;.&quot;</span><span style="color: #f92672">&gt;</span>
+
+    <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.host&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;ftp.example.com&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.port&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;21&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.username&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;user&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.password&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;password&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.dir&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;/public_html/&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.mode&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;ascii&quot;</span> <span style="color: #f92672">/&gt;</span>
+
+    <span style="color: #75715e">&lt;!-- FILESETS --&gt;</span>
+    <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">dir=</span><span style="color: #e6db74">&quot;.&quot;</span> <span style="color: #a6e22e">id=</span><span style="color: #e6db74">&quot;files.images&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;images/**/*&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;favicon.ico&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/fileset&gt;</span>
+    <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">dir=</span><span style="color: #e6db74">&quot;.&quot;</span> <span style="color: #a6e22e">id=</span><span style="color: #e6db74">&quot;files.application&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;system/application/**/*&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;css/*&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;js/*&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/fileset&gt;</span>
+    <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">dir=</span><span style="color: #e6db74">&quot;.&quot;</span> <span style="color: #a6e22e">id=</span><span style="color: #e6db74">&quot;files.system&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;system/**/*&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;exclude</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;system/application/**/*&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;index.php&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;robots.txt&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;.htaccess&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/fileset&gt;</span>
+
+    <span style="color: #75715e">&lt;!-- DEPLOYMENT TARGETS --&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;echo</span> <span style="color: #a6e22e">message=</span><span style="color: #e6db74">&quot;Copying fileset &#39;${deploy.fileset.refid}&#39; to ${ftp.host} in ${ftp.mode} mode&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;ftpdeploy</span> 
+            <span style="color: #a6e22e">host=</span><span style="color: #e6db74">&quot;${ftp.host}&quot;</span> 
+            <span style="color: #a6e22e">port=</span><span style="color: #e6db74">&quot;${ftp.port}&quot;</span> 
+            <span style="color: #a6e22e">username=</span><span style="color: #e6db74">&quot;${ftp.username}&quot;</span> 
+            <span style="color: #a6e22e">password=</span><span style="color: #e6db74">&quot;${ftp.password}&quot;</span>
+            <span style="color: #a6e22e">dir=</span><span style="color: #e6db74">&quot;${ftp.dir}&quot;</span> 
+            <span style="color: #a6e22e">mode=</span><span style="color: #e6db74">&quot;${ftp.mode}&quot;</span><span style="color: #f92672">&gt;</span>
+            <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">refid=</span><span style="color: #e6db74">&quot;${deploy.fileset.refid}&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;/ftpdeploy&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy-images&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;echo</span> <span style="color: #a6e22e">msg=</span><span style="color: #e6db74">&quot;Deploying image files&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;phingcall</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;deploy&quot;</span><span style="color: #f92672">&gt;</span>
+            <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy.fileset.refid&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;files.images&quot;</span> <span style="color: #f92672">/&gt;</span>
+            <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;ftp.mode&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;binary&quot;</span> <span style="color: #a6e22e">override=</span><span style="color: #e6db74">&quot;true&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;/phingcall&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy-application-files&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;echo</span> <span style="color: #a6e22e">msg=</span><span style="color: #e6db74">&quot;Deploying application files&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;phingcall</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;deploy&quot;</span><span style="color: #f92672">&gt;</span>
+            <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy.fileset.refid&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;files.application&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;/phingcall&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy-system-files&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;echo</span> <span style="color: #a6e22e">msg=</span><span style="color: #e6db74">&quot;Deploying system files&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;phingcall</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;deploy&quot;</span><span style="color: #f92672">&gt;</span>
+            <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy.fileset.refid&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;files.system&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;/phingcall&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy-all&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;phingcall</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;deploy-images&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;phingcall</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;deploy-application-files&quot;</span> <span style="color: #f92672">/&gt;</span>
+        <span style="color: #f92672">&lt;phingcall</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;deploy-system-files&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+<span style="color: #f92672">&lt;/project&gt;</span>
+</pre></div>
+
+<p>As we&rsquo;re forced into using clumsy, out-dated FTP (rather than the
+wonderful rsync) to copy the files onto the production server, each
+deployment overwrites existing files with the selected fileset and this
+can be quite time-consuming for large filesets as it often moves across
+a load of files that haven&rsquo;t changed. Using FTP, this is tricky to avoid
+and probably not worth the effort. Instead, there are four separate
+deployment targets that only move specific subsets of the total
+application fileset over to the production environment (split according
+to the standard CodeIgniter directory structure) - most of the time we
+only want to move the &ldquo;files.application&rdquo; fileset across. These targets
+make use of the extremely useful &ldquo;phingcall&rdquo; target which allows a
+parameterised &ldquo;deploy&rdquo; target to be created which takes a fileset id as
+an argument.</p>
+
+<p>With the above build.xml in the root of your project, deploying to
+production is now as simple as:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">cd</span> /path/to/application/ <span style="color: #f92672">&amp;&amp;</span> phing deploy-all
+</pre></div>
+
+<p>although most of the time the following suffices:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">cd</span> /path/to/application/ <span style="color: #f92672">&amp;&amp;</span> phing
+</pre></div>
+
+<p>Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp
+which can be trivially installed in the usual manner:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>sudo pear install Net_FTP
+</pre></div>
+
+<p>Of course, this script is overly simplistic and only works well with a
+single developer. However, it would be easy to extend to team
+development by integrating with SVN so that the latest revision (or
+designated tag/branch) is checked out into a temporary directory before
+being copied over to the production server.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/deployment">deployment</a>, <a href="/tags/phing">phing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/monitoring-mysql-with-ganglia-and-gmetric/">Monitoring MySQL with Ganglia and gmetric</a><br/>
+            
+            
+                Next: <a href="/tips/phing-task-to-update-twitter-status/">Phing task to update Twitter status</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

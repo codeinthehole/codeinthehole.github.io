@@ -1,0 +1,249 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>purl - immutable URL objects for Python - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="An immutable URL class designed for easy inspection and manipulation">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">purl - immutable URL objects for Python</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 19 April 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 19 April 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>Working with URLs in Python feels clunky when it should be pleasant. In
+<a href="http://docs.python.org/library/urlparse.html">urlparse</a> and
+<a href="http://docs.python.org/library/urllib.html">urllib</a>, the standard
+library has all the functionality you need, but the code you have to
+write is often cumbersome and unclear.</p>
+
+<p>For instance, here&rsquo;s a typical test method that makes an assertion about
+a query parameter:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">urlparse</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_url_has_correct_query_parameter</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #f8f8f2">url</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">get_url_from_somewhere()</span>
+    <span style="color: #f8f8f2">parse_result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">urlparse</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">parseurl(url)</span>
+    <span style="color: #f8f8f2">query_params</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">urlparse</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">parse_qs(parse_result</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query)</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertEqual(</span><span style="color: #e6db74">&#39;testing&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">query_params[</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">][</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
+</pre></div>
+
+<p>Not terrible, but could be more concise. I would prefer something like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">somelibrary</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">URL</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_url_has_correct_query_parameter</span><span style="color: #f8f8f2">(self):</span>
+    <span style="color: #f8f8f2">url</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">from_string(get_url_from_somewhere())</span>
+    <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertEqual(</span><span style="color: #e6db74">&#39;testing&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">url</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">))</span>
+</pre></div>
+
+<p>Further, when working with webservices, you often need to build URLs
+programmatically but it just isn&rsquo;t easy enough in python. You often end
+up using string formatting:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">urllib</span>
+
+<span style="color: #f8f8f2">URL_TEMPLATE</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;https://github.com/%s?w=%s&#39;</span> 
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">get_github_url</span><span style="color: #f8f8f2">(username):</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">URL_TEMPLATE</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">(urllib</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">quote(username),</span> <span style="color: #e6db74">&#39;0&#39;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>A preferable API might look something like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">somelibrary</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">URL</span>
+
+<span style="color: #f8f8f2">BASE_URL</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">from_string(</span><span style="color: #e6db74">&#39;https://github.com/&#39;</span><span style="color: #f8f8f2">)</span> 
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">get_github_url</span><span style="color: #f8f8f2">(username):</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">BASE_URL</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segment(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">username)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;w&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>This is a toy example, the problem is much worse when building more
+complicated URLs.</p>
+
+<h3 id="purl">purl</h3>
+
+<div class="admonition warning">
+    Warning - the code examples below are from version 0.2 of purl - please
+    consult the <a href="https://github.com/codeinthehole/purl">Github documentation</a> for the latest
+    reference.
+</div>
+
+<p>So I wrote a utility class to scratch this itch. It&rsquo;s a simple immutable
+<code>URL</code> class that uses jQuery-style overloading of the attribute methods
+to be both accessors and mutators.</p>
+
+<p>Install with:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">pip</span> <span style="color: #f8f8f2">install</span> <span style="color: #f8f8f2">purl</span>
+</pre></div>
+
+<p>Construct URL instances as follows:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">purl</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">URL</span>
+
+<span style="color: #75715e"># Explicit constructor</span>
+<span style="color: #f8f8f2">u</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL(scheme</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;https&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">host</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;www.google.com&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">path</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;/search&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">query</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;q=testing&#39;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #75715e"># Use factory class-method</span>
+<span style="color: #f8f8f2">u</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">from_string(</span><span style="color: #e6db74">&#39;https://www.google.com/search?q=testing&#39;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #75715e"># Chain mutator methods (which each return a new instance)</span>
+<span style="color: #f8f8f2">u</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scheme(</span><span style="color: #e6db74">&#39;https&#39;</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">host(</span><span style="color: #e6db74">&#39;www.google.com&#39;</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path(</span><span style="color: #e6db74">&#39;search&#39;</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;testing&#39;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #75715e"># Combine to suit your use-case</span>
+<span style="color: #f8f8f2">u</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">from_string(</span><span style="color: #e6db74">&#39;https://www.google.com&#39;</span><span style="color: #f8f8f2">)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path(</span><span style="color: #e6db74">&#39;search&#39;</span><span style="color: #f8f8f2">)</span> \
+                                             <span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;testing&#39;</span><span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>There&rsquo;s a full range of inspection methods:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Simple attributes</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scheme()</span>      <span style="color: #75715e"># &#39;https&#39;</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">host()</span>        <span style="color: #75715e"># &#39;www.google.com&#39; </span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">domain()</span>      <span style="color: #75715e"># &#39;www.google.com&#39; - alias of host</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">port()</span>        <span style="color: #75715e"># None (only returns something if explicitly set)</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path()</span>        <span style="color: #75715e"># &#39;/search&#39;</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query()</span>       <span style="color: #75715e"># &#39;q=testing&#39;</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">fragment()</span>    <span style="color: #75715e"># &#39;&#39;</span>
+
+<span style="color: #75715e"># Convenience methods for inspecing path, query and host</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segment(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>                   <span style="color: #75715e"># &#39;search&#39;</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segments()</span>                   <span style="color: #75715e"># (&#39;search&#39;,)</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">)</span>                  <span style="color: #75715e"># &#39;testing&#39;</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">as_list</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>    <span style="color: #75715e"># [&#39;testing&#39;]</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_param(</span><span style="color: #e6db74">&#39;lang&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">default</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;GB&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e"># &#39;GB&#39;</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">query_params()</span>                    <span style="color: #75715e"># {&#39;q&#39;: &#39;testing&#39;}</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">has_query_param(</span><span style="color: #e6db74">&#39;q&#39;</span><span style="color: #f8f8f2">)</span>              <span style="color: #75715e"># True</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">subdomains()</span>                       <span style="color: #75715e"># [&#39;www&#39;, &#39;google&#39;, &#39;com&#39;]</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">subdomain(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span>                       <span style="color: #75715e"># &#39;www&#39;</span>
+</pre></div>
+
+<p>Each accessor method is overloaded to be a mutator method too, similar
+to the jQuery API. Since the URL class is immutable, any mutation will
+return a new URL instance.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">u</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">from_string(</span><span style="color: #e6db74">&#39;https://github.com/codeinthehole&#39;</span><span style="color: #f8f8f2">)</span>
+
+<span style="color: #75715e"># Access</span>
+<span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segment(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e"># returns &#39;codeinthehole&#39;</span>
+
+<span style="color: #75715e"># Mutate (creates a new instance)</span>
+<span style="color: #f8f8f2">new_url</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segment(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;tangentlabs&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #75715e"># returns new URL object</span>
+</pre></div>
+
+<p>Here&rsquo;s a fancier example of building a URL:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">u</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">URL()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">scheme(</span><span style="color: #e6db74">&#39;https&#39;</span><span style="color: #f8f8f2">)</span>\
+         <span style="color: #f92672">.</span><span style="color: #f8f8f2">host(</span><span style="color: #e6db74">&#39;github.com&#39;</span><span style="color: #f8f8f2">)</span><span style="color: #960050; background-color: #1e0010">`</span>\
+         <span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segment(</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;codeinthehole&#39;</span><span style="color: #f8f8f2">)</span>\
+         <span style="color: #f92672">.</span><span style="color: #f8f8f2">path_segment(</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;purl&#39;</span><span style="color: #f8f8f2">)</span>\
+<span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">u</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">as_string()</span>
+
+<span style="color: #75715e"># returns &#39;https://github.com/codeinthehole/purl&#39;</span>
+</pre></div>
+
+<p><a href="https://github.com/codeinthehole/purl">Source and further details on
+Github</a>.</p>
+
+<h3 id="alternatives">Alternatives</h3>
+
+<p>There are a couple of URL classes already for python - however neither
+had the exact API I was looking for.</p>
+
+<ul>
+<li><a href="http://www.egenix.com/products/python/mxBase/mxURL/">mxURL</a> - Part
+of the &lsquo;eGenix.com mx Base Distribution&rsquo;, this has quite a
+comprehensie API. It comes bundles with other utility modules with
+the &lsquo;egenix-mx-base&rsquo; package.</li>
+<li><a href="https://github.com/zacharyvoase/urlobject/">URLObject</a> - There&rsquo;s
+nothing wrong with this implementation - it&rsquo;s very similar to my one
+above. The API&rsquo;s not quite to my tastes but that&rsquo;s purely subjective
+thing.</li>
+</ul>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>There is a <a href="http://www.reddit.com/r/Python/comments/sjkab/purl_an_immutable_url_class/">discussion of this
+post</a>
+on <a href="http://www.reddit.com/r/Python/">/r/Python</a>.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/projects/">Projects</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/embedding-html-in-django-messages/">Embedding HTML in Django messages</a><br/>
+            
+            
+                Next: <a href="/tips/django-nginx-wsgi-and-encoded-slashes/">Django, Nginx, WSGI and encoded slashes</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

@@ -1,0 +1,338 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Phing task to create an Unfuddle message - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Sending messages">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Phing task to create an Unfuddle message</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 11 January 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Sunday, 11 January 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Another day, another new Phing task; again integrating with project
+management software - this time the excellent
+<a href="http://unfuddle.com/">Unfuddle</a>.</p>
+
+<p>I&rsquo;ve been playing with Unfuddle for a few days now and it&rsquo;s very
+impressive. You get SVN and git hosting as well as superb issue
+tracking. It also supports simple project messages (which are displayed
+on the project dashboard) and so-called notebooks which are essentially
+project wikis that can be used to house documentation and manuals. One
+great feature of integrated project management software is the ability
+to merge news from a variety of sources (SVN commits, changes in ticket
+status, changes to notebooks) onto a single page that provides a
+snapshot of the latest activity on a project. Unfuddle does this on each
+project dashboard, where the latest messages are displayed along side
+news of the latest SVN and issue activity. The task detailed below
+provides a means for Phing to automatically add information to this
+dashboard page by creating a new message.</p>
+
+<p>This extension is very similar to my previous Phing task (for updating a
+Twitter status), making use of the <a href="http://uk2.php.net/curl">cURL
+library</a> to POST XML to Unfuddle. In this case
+though, the Unfuddle API for creating a message offers a few extra
+options such as categorising your messages. The task supports the
+following attributes:</p>
+
+<p>Unfuddle Name   Message   Description                                           Default   Required</p>
+
+<hr />
+
+<p>subdomain       String    Subdomain of Unfuddle account<br />
+                            (eg. &lsquo;example&rsquo; from <a href="http://example.unfuddle.com">http://example.unfuddle.com</a>).   n/a       Yes
+  projectid       Integer   Project id (eg. 123<br />
+                            from <a href="http://example.unfuddle.com/projects/123/">http://example.unfuddle.com/projects/123/</a>).    n/a       Yes
+  username        String    Username.                                             n/a       Yes
+  password        String    Password.                                             n/a       Yes
+  title           String    Message title.                                        n/a       Yes
+  body            String    Message body.                                         &ldquo;        No
+  categoryid      Integer   The category id of the message.                       &ldquo;        No
+  categoryids     String    A comma-separated list of category ids (eg. 1,2,3).   &ldquo;        No
+  checkreturn     Boolean   Whether to check the return code of the request,<br />
+                            throws a BuildException the update files.             false     No</p>
+
+<p>The only thing to note here is that you can choose whether you specify a
+single category id or a collection - it wouldn&rsquo;t make sense to specify
+both these attributes.</p>
+
+<p>An example build.xml using this task would be:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
+<span style="color: #f92672">&lt;project</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;Example Unfuddle update&quot;</span> <span style="color: #a6e22e">basedir=</span><span style="color: #e6db74">&quot;.&quot;</span> <span style="color: #a6e22e">default=</span><span style="color: #e6db74">&quot;message&quot;</span><span style="color: #f92672">&gt;</span>
+    <span style="color: #f92672">&lt;tstamp&gt;</span>
+        <span style="color: #f92672">&lt;format</span> <span style="color: #a6e22e">property=</span><span style="color: #e6db74">&quot;build.time&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;%Y-%m-%d %H:%I&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/tstamp&gt;</span>
+    <span style="color: #f92672">&lt;taskdef</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;unfuddlemessage&quot;</span> <span style="color: #a6e22e">classname=</span><span style="color: #e6db74">&quot;phing.tasks.my.UnfuddleMessageTask&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;message&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;unfuddlemessage</span> 
+            <span style="color: #a6e22e">subdomain=</span><span style="color: #e6db74">&quot;example&quot;</span> 
+            <span style="color: #a6e22e">projectid=</span><span style="color: #e6db74">&quot;12345&quot;</span> 
+            <span style="color: #a6e22e">username=</span><span style="color: #e6db74">&quot;exampleuser&quot;</span> 
+            <span style="color: #a6e22e">password=</span><span style="color: #e6db74">&quot;password&quot;</span> 
+            <span style="color: #a6e22e">title=</span><span style="color: #e6db74">&quot;Deploying to live site at ${build.time}&quot;</span> 
+            <span style="color: #a6e22e">body=</span><span style="color: #e6db74">&quot;&quot;</span> 
+            <span style="color: #a6e22e">categoryid=</span><span style="color: #e6db74">&quot;4&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+<span style="color: #f92672">&lt;/project&gt;</span>
+</pre></div>
+
+<p>This simply creates a new Unfuddle message with the time of the last
+build. This is an overly simplified example - see my previous post for a
+sample parameterised deployment target that would allow a dynamic
+message to be created by different targets within the deployment file.</p>
+
+<p>The source code for TwitterUpdateTask.php is as follows (with docblocks
+stripped out for brevity):</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?php</span>
+<span style="color: #66d9ef">require_once</span> <span style="color: #e6db74">&quot;phing/Task.php&quot;</span><span style="color: #f8f8f2">;</span>
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">UnfuddleMessageTask</span> <span style="color: #66d9ef">extends</span> <span style="color: #a6e22e">Task</span> 
+<span style="color: #f8f8f2">{</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">URL_TEMPLATE_UPDATE</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;http://%s.unfuddle.com/api/v1/projects/%d/messages&#39;</span><span style="color: #f8f8f2">;</span> 
+
+    <span style="color: #75715e">// Twitter response codes </span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_OK</span>                  <span style="color: #f92672">=</span> <span style="color: #ae81ff">200</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_CREATED</span>             <span style="color: #f92672">=</span> <span style="color: #ae81ff">201</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_BAD_REQUEST</span>         <span style="color: #f92672">=</span> <span style="color: #ae81ff">400</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_BAD_CREDENTIALS</span>     <span style="color: #f92672">=</span> <span style="color: #ae81ff">401</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_BAD_URL</span>             <span style="color: #f92672">=</span> <span style="color: #ae81ff">404</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_METHOD_NOT_ALLOWED</span>  <span style="color: #f92672">=</span> <span style="color: #ae81ff">405</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_SERVER_ERROR</span>        <span style="color: #f92672">=</span> <span style="color: #ae81ff">500</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_BAD_GATEWAY</span>         <span style="color: #f92672">=</span> <span style="color: #ae81ff">502</span><span style="color: #f8f8f2">;</span>
+    <span style="color: #66d9ef">const</span> <span style="color: #66d9ef">HTTP_RESPONSE_SERVICE_UNAVAILABLE</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">503</span><span style="color: #f8f8f2">;</span>
+
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">static</span> <span style="color: #f8f8f2">$responseMessages</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">array</span><span style="color: #f8f8f2">(</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_BAD_REQUEST</span>         <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;Bad request - you may have exceeded the rate limit&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_BAD_CREDENTIALS</span>     <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;Your username and password did not authenticate&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_BAD_URL</span>             <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;The Unfuddle URL is invalid&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_METHOD_NOT_ALLOWED</span>  <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;The specified HTTP verb is not allowed&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_SERVER_ERROR</span>        <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;There is a problem with the Unfuddle server&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_BAD_GATEWAY</span>         <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;Unfuddle is either down or being upgraded&#39;</span><span style="color: #f8f8f2">,</span>
+        <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_SERVICE_UNAVAILABLE</span> <span style="color: #f92672">=&gt;</span> <span style="color: #e6db74">&#39;Unfuddle servers are refusing request&#39;</span><span style="color: #f8f8f2">,</span>
+    <span style="color: #f8f8f2">);</span>
+
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$subdomain;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$projectId;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$username;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$password;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$title;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$body;</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$categoryIds;</span>  
+    <span style="color: #66d9ef">private</span> <span style="color: #f8f8f2">$checkReturn</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">false</span><span style="color: #f8f8f2">;</span>
+
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setSubdomain</span><span style="color: #f8f8f2">($subdomain)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">subdomain</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$subdomain;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setProjectId</span><span style="color: #f8f8f2">($projectId)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">projectId</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">int</span><span style="color: #f8f8f2">)$projectId;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setUsername</span><span style="color: #f8f8f2">($username)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">username</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$username;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setPassword</span><span style="color: #f8f8f2">($password)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">password</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$password;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setTitle</span><span style="color: #f8f8f2">($title)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">title</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$title;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setBody</span><span style="color: #f8f8f2">($body)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">body</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">$body;</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setCategoryId</span><span style="color: #f8f8f2">($categoryId)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">categoryIds</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">array</span><span style="color: #f8f8f2">((</span><span style="color: #a6e22e">int</span><span style="color: #f8f8f2">)$categoryId);</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setCategoryIds</span><span style="color: #f8f8f2">($categoryIdList)</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">categoryIds</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">explode(</span><span style="color: #e6db74">&quot;,&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$categoryIdList);</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">setCheckReturn</span><span style="color: #f8f8f2">($checkReturn)</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">checkReturn</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span><span style="color: #a6e22e">boolean</span><span style="color: #f8f8f2">)$checkReturn;</span>
+    <span style="color: #f8f8f2">}</span>
+
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">init</span><span style="color: #f8f8f2">()</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">extension_loaded(</span><span style="color: #e6db74">&#39;curl&#39;</span><span style="color: #f8f8f2">))</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Cannot update Unfuddle&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;The cURL extension is not installed&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">public</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">main</span><span style="color: #f8f8f2">()</span> 
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">validateProperties</span><span style="color: #f8f8f2">();</span>
+
+        <span style="color: #f8f8f2">$curlHandle</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curl_init();</span>
+        <span style="color: #f8f8f2">curl_setopt($curlHandle,</span> <span style="color: #a6e22e">CURLOPT_URL</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">getUpdateUrl</span><span style="color: #f8f8f2">());</span>
+        <span style="color: #f8f8f2">curl_setopt($curlHandle,</span> <span style="color: #a6e22e">CURLOPT_USERPWD</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;$this-&gt;username:$this-&gt;password&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">curl_setopt($curlHandle,</span> <span style="color: #a6e22e">CURLOPT_RETURNTRANSFER</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">curl_setopt($curlHandle,</span> <span style="color: #a6e22e">CURLOPT_HTTPHEADER</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">array</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Accept: application/xml&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Content-type: application/xml&#39;</span><span style="color: #f8f8f2">));</span>
+        <span style="color: #f8f8f2">curl_setopt($curlHandle,</span> <span style="color: #a6e22e">CURLOPT_POST</span><span style="color: #f8f8f2">,</span> <span style="color: #66d9ef">true</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">curl_setopt($curlHandle,</span> <span style="color: #a6e22e">CURLOPT_POSTFIELDS</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">getRequestBodyXml</span><span style="color: #f8f8f2">());</span>
+        <span style="color: #f8f8f2">$responseData</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curl_exec($curlHandle);</span>
+        <span style="color: #f8f8f2">$responseCode</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curl_getinfo($curlHandle,</span> <span style="color: #a6e22e">CURLINFO_HTTP_CODE</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">$errorCode</span>    <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curl_errno($curlHandle);</span>
+        <span style="color: #f8f8f2">$errorMessage</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curl_error($curlHandle);</span>
+        <span style="color: #f8f8f2">curl_close($curlHandle);</span>
+
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #ae81ff">0</span> <span style="color: #f92672">!=</span> <span style="color: #f8f8f2">$errorCode)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;cURL error ($errorCode): $errorMessage&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">handleResponseCode</span><span style="color: #f8f8f2">((</span><span style="color: #a6e22e">int</span><span style="color: #f8f8f2">)$responseCode);</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">validateProperties</span><span style="color: #f8f8f2">()</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">subdomain</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;You must specify a subdomain&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">projectId</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;You must specify a project id&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">username</span> <span style="color: #f92672">||</span> <span style="color: #f92672">!</span><span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">password</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;You must specify an Unfuddle username and password&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #f92672">!</span><span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">title</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;You must specify a message title&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getUpdateUrl</span><span style="color: #f8f8f2">()</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">sprintf(</span><span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">URL_TEMPLATE_UPDATE</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">subdomain</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">projectId</span><span style="color: #f8f8f2">);</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">getRequestBodyXml</span><span style="color: #f8f8f2">()</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #f8f8f2">$xmlWriter</span> <span style="color: #f92672">=</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">XMLWriter</span><span style="color: #f8f8f2">();</span>
+        <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">openMemory</span><span style="color: #f8f8f2">();</span>
+        <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">startElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;message&#39;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">writeElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;title&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">title</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">writeElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;body&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">body</span><span style="color: #f8f8f2">);</span>
+
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">categoryIds</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">startElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;categories&#39;</span><span style="color: #f8f8f2">);</span>
+            <span style="color: #66d9ef">foreach</span> <span style="color: #f8f8f2">($this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">categoryIds</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">$categoryId)</span> <span style="color: #f8f8f2">{</span>
+                <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">startElement</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;category&#39;</span><span style="color: #f8f8f2">);</span>
+                <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">writeAttribute</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;id&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&quot;$categoryId&quot;</span><span style="color: #f8f8f2">);</span>
+                <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">endElement</span><span style="color: #f8f8f2">();</span>
+            <span style="color: #f8f8f2">}</span>
+            <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">endElement</span><span style="color: #f8f8f2">();</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">endElement</span><span style="color: #f8f8f2">();</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">$xmlWriter</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">flush</span><span style="color: #f8f8f2">();</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">handleResponseCode</span><span style="color: #f8f8f2">($code)</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">($code</span> <span style="color: #f92672">==</span> <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #a6e22e">HTTP_RESPONSE_CREATED</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;New Unfuddle message posted: &#39;$this-&gt;title&#39;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">Project</span><span style="color: #f92672">::</span><span style="color: #a6e22e">MSG_INFO</span><span style="color: #f8f8f2">);</span>
+            <span style="color: #66d9ef">return</span><span style="color: #f8f8f2">;</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(array_key_exists($code,</span> <span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">$responseMessages))</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">handleFailedUpdate</span><span style="color: #f8f8f2">(</span><span style="color: #a6e22e">self</span><span style="color: #f92672">::</span><span style="color: #f8f8f2">$responseMessages[$code]);</span>
+        <span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">else</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">handleFailedUpdate</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Unrecognised HTTP response code &#39;$code&#39; from Unfuddle&quot;</span><span style="color: #f8f8f2">);</span>
+        <span style="color: #f8f8f2">}</span>
+    <span style="color: #f8f8f2">}</span>
+    <span style="color: #66d9ef">private</span> <span style="color: #66d9ef">function</span> <span style="color: #a6e22e">handleFailedUpdate</span><span style="color: #f8f8f2">($failureMessage)</span>
+    <span style="color: #f8f8f2">{</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">(</span><span style="color: #66d9ef">true</span> <span style="color: #f92672">===</span> <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">checkReturn</span><span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">{</span>
+            <span style="color: #66d9ef">throw</span> <span style="color: #66d9ef">new</span> <span style="color: #a6e22e">BuildException</span><span style="color: #f8f8f2">($failureMessage);</span>
+        <span style="color: #f8f8f2">}</span>
+        <span style="color: #f8f8f2">$this</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">log</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;New Unfuddle message unsuccessful: $failureMessage&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #a6e22e">Project</span><span style="color: #f92672">::</span><span style="color: #a6e22e">MSG_WARN</span><span style="color: #f8f8f2">);</span>   
+    <span style="color: #f8f8f2">}</span>
+<span style="color: #f8f8f2">}</span>
+</pre></div>
+
+<p>The fully documented source and associated example build.xml file are
+available to download: <a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMessageTask.zip
+(2.6kb)</a></p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/phing">phing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/phing-task-to-update-twitter-status/">Phing task to update Twitter status</a><br/>
+            
+            
+                Next: <a href="/projects/current-pet-project-command-line-fu/">Current pet project: Command-Line-Fu</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

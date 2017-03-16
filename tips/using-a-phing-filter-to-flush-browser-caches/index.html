@@ -1,0 +1,168 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Using a Phing filter to flush browser caches - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using a filterchain to set a cache-busting query parameter">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Using a Phing filter to flush browser caches</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 15 March 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Sunday, 15 March 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>A quick <a href="http://phing.info/trac/">Phing</a> tip that&rsquo;s made my life easier
+when deploying new versions of
+<a href="http://www.commandlinefu.com/">commandlinefu.com</a>.</p>
+
+<p>One of the <a href="http://stevesouders.com/hpws/rule-expires.php">key performance
+recommendations</a> from
+Steve Souders&rsquo; excellent &ldquo;High Performance Websites&rdquo; is to use Expires
+HTTP headers to set far-future expiration dates for your site components
+(such as images, Javascript files and CSS stylesheets). This way,
+browsers can cache the files between requests giving a performance boost
+to your site. Assuming you&rsquo;re using Apache for serving, the following
+settings can be used to set these headers for all Javascript and CSS
+files (there are a few alternative ways of achieving the same result):</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;FilesMatch</span> <span style="color: #960050; background-color: #1e0010">&quot;\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$&quot;</span><span style="color: #f92672">&gt;</span>
+    Header set Expires &quot;Thu, 15 Apr 2010 20:00:00 GMT&quot;
+<span style="color: #f92672">&lt;/FilesMatch&gt;</span>
+</pre></div>
+
+<p>The main issue to be aware of using this technique is that, when your
+components change, you need to ensure your visitors are forced to
+download the latest version rather than using the one cached by their
+browser. The only way to ensure this happens is to use a different URL
+for the assets in question. One option might be to rename the files
+themselves but a more convenient alternative is to include a query
+string as part of the request URL (eg
+<code>&lt;script src=&quot;/js/behaviour.js?2009-03-15&quot; type=&quot;text/javascript&quot; /&gt;</code>).
+Then changing the query string component is sufficient to force browsers
+to make a full request for the new component.</p>
+
+<p>This works well but is an easy-to-forget overhead for deployment.
+However, this substitution can be automated by making use of the Filters
+that Phing provides. Doing so is trivial: simply insert a tokenised
+string as the query string after your asset URLs. That is:</p>
+
+<p><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css?~~CACHEBUSTER~~&quot; type=&quot;text/css&quot; /&gt;</code>
+where the <code>~~</code> delimiter indicates the token. Then include something
+like the following snippet in your Phing deployment script.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;tstamp&gt;</span>
+    <span style="color: #f92672">&lt;format</span> <span style="color: #a6e22e">property=</span><span style="color: #e6db74">&quot;build.datetimestring&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;%Y-%m-%d-%H-%M&quot;</span> <span style="color: #f92672">/&gt;</span>
+<span style="color: #f92672">&lt;/tstamp&gt;</span>
+...
+<span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;create-temp-build&quot;</span> <span style="color: #a6e22e">description=</span><span style="color: #e6db74">&quot;Creates a temporary copy of the source files&quot;</span><span style="color: #f92672">&gt;</span>    
+    <span style="color: #f92672">&lt;echo</span> <span style="color: #a6e22e">msg=</span><span style="color: #e6db74">&quot;Copying deployment files into temporary directory&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;copy</span> <span style="color: #a6e22e">todir=</span><span style="color: #e6db74">&quot;${dev.folder.temp}&quot;</span><span style="color: #f92672">&gt;</span>
+        <span style="color: #f92672">&lt;filterchain&gt;</span>
+            <span style="color: #f92672">&lt;replacetokens</span> <span style="color: #a6e22e">begintoken=</span><span style="color: #e6db74">&quot;~~&quot;</span> <span style="color: #a6e22e">endtoken=</span><span style="color: #e6db74">&quot;~~&quot;</span><span style="color: #f92672">&gt;</span>
+                <span style="color: #f92672">&lt;token</span> <span style="color: #a6e22e">key=</span><span style="color: #e6db74">&quot;CACHEBUSTER&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;${build.datetimestring}&quot;</span> <span style="color: #f92672">/&gt;</span>
+            <span style="color: #f92672">&lt;/replacetokens&gt;</span>
+        <span style="color: #f92672">&lt;/filterchain&gt;</span>
+        <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">refid=</span><span style="color: #e6db74">&quot;deployment-files&quot;</span> <span style="color: #f92672">/&gt;</span>
+    <span style="color: #f92672">&lt;/copy&gt;</span>
+<span style="color: #f92672">&lt;/target&gt;</span>
+</pre></div>
+
+<p>The filterchain component of the copy task parses the given fileset for
+matching tokens that match and replaces them with the given value. In
+this example, I&rsquo;m using timestamps as the replacements as these will
+ensure a different query string on each deployment. Doing so ensures
+that the deployed HTML includes the lines:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">link</span> <span style="color: #a6e22e">rel</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;stylesheet&quot;</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/css/styles.css?2008-03-15-21-51&quot;</span> <span style="color: #a6e22e">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;text/css&quot;</span> <span style="color: #f8f8f2">/&gt;</span>
+<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">script</span> <span style="color: #a6e22e">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;text/javascript&quot;</span> <span style="color: #a6e22e">src</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/js/site-behaviour.js?2008-03-15-21-51&quot;</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<p>which then ensure that all subsequent visitors download the latest
+versions of the CSS and javascript files. The above target is taken from
+a deployment script I use which creates a temporary snapshot of the
+codebase that I want to deploy, but the basic principle of using the
+replacetokens filter is easily transferable to any deployment script.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/phing">phing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/">The most important command-line tip - incremental history searching with .inputrc</a><br/>
+            
+            
+                Next: <a href="/tidbits/ingenious-use-of-an-anonymous-function/">Ingenious use of an anonymous function</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

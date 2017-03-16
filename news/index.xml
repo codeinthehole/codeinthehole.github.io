@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>News on David Winterbottom</title>
+    <link>http://codeinthehole.com/news/index.xml</link>
+    <description>Recent content in News on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://codeinthehole.com/news/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Octopus Energy</title>
+      <link>http://codeinthehole.com/news/octopus-energy/</link>
+      <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/octopus-energy/</guid>
+      <description>&lt;p&gt;Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first
+day at Octopus Energy.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology,
+especially automation and cloud computing, Octopus Energy is going to
+radically change how people consume and pay for energy in the UK. We&amp;rsquo;re
+going to be both cheaper and massively better at customer service than
+the much-maligned incumbents.&lt;/p&gt;
+
+&lt;p&gt;Right now, &lt;a href=&#34;http://tech.octopus.energy/news/2015/11/23/tech-jobs.html&#34;&gt;we&amp;rsquo;re looking to build a superb tech team&lt;/a&gt;. Get in
+touch if you&amp;rsquo;re looking for a challenge and would like to play a
+formative part in a company that&amp;rsquo;s genuinely making the world a better
+place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>commandlinefu.com is in new hands</title>
+      <link>http://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</link>
+      <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</guid>
+      <description>&lt;p&gt;For the record, I no longer maintain
+&lt;a href=&#34;http://www.commandlinefu.com/&#34;&gt;commandlinefu.com&lt;/a&gt;. I&amp;rsquo;ve handed over the
+baton to notable Bay Area celebrity, Jon Hendren
+(&lt;a href=&#34;https://twitter.com/fart&#34;&gt;@fart&lt;/a&gt;). This is a good thing for the site
+and its users as I have been unable to do much maintenance in recent
+times. I look forward to seeing how the site evolves.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rewriting codeinthehole.com</title>
+      <link>http://codeinthehole.com/news/rewriting-codeintheholecom/</link>
+      <pubDate>Fri, 06 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
+      <description>
+
+&lt;p&gt;I rewrote this blog recently with the following aims:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;to make it as easy as possible to create a new article, using
+&lt;a href=&#34;http://docutils.sourceforge.net/rst.html&#34;&gt;reStructuredText&lt;/a&gt; (RST);&lt;/li&gt;
+&lt;li&gt;to clean up and simplify the design, focussing on the readability of
+articles that include code snippets.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I knew that there were various static blogs out there, with many
+supporting RST, but I still fancied the challenge of crafting something
+specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if
+you want to learn about wheels.&lt;/p&gt;
+
+&lt;p&gt;This article is a short summary.&lt;/p&gt;
+
+&lt;h3 id=&#34;technology&#34;&gt;Technology&lt;/h3&gt;
+
+&lt;p&gt;Django, Fabric and pygments - the &lt;a href=&#34;http://github.com/codeinthehole/codeinthehole.com&#34;&gt;source is on
+github&lt;/a&gt;. I intend to
+pull out the generic blogging code into a separate library,
+reStructuredBlog, at some point, hence the &amp;ldquo;rsb&amp;rdquo; acronym used in the
+codebase.&lt;/p&gt;
+
+&lt;h3 id=&#34;writing-a-post&#34;&gt;Writing a post&lt;/h3&gt;
+
+&lt;p&gt;My ideal for writing a blog post is:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Use vim to create a &lt;code&gt;.rst&lt;/code&gt; file for the article;&lt;/li&gt;
+&lt;li&gt;Preview the article locally;&lt;/li&gt;
+&lt;li&gt;Publish to the remote server&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;This translates to:&lt;/p&gt;
+
+&lt;h4 id=&#34;write&#34;&gt;Write&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;vim posts/my-new-article.rst 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;preview&#34;&gt;Preview&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;./manage.py rsb_article posts/my-new-article.rst
+./manage.py runserver
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This converts the RST file into a instance of &lt;code&gt;rsb.models.Article&lt;/code&gt;,
+plucking out the title, subtitle and any tags in the process.&lt;/p&gt;
+
+&lt;p&gt;Rinse and repeat the write and preview steps until happy.&lt;/p&gt;
+
+&lt;h4 id=&#34;publish&#34;&gt;Publish&lt;/h4&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;fab prod publish posts/0036-my-new-article.rst
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This copies the RST file up to the remote server and re-runs the
+&lt;code&gt;rsb_article&lt;/code&gt; management command to create the article in the production
+database.&lt;/p&gt;
+
+&lt;h3 id=&#34;design&#34;&gt;Design&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9781119998952.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I recently read the excellent &amp;ldquo;Design for Hackers&amp;rdquo; by David Kadavy. Duly
+inspired, I attempted to rework the design to be clean and pleasing on
+the eye. The color scheme is deliberately kept simple; the fonts used
+are Verdana, &lt;a href=&#34;http://www.google.com/webfonts/specimen/Droid+Serif&#34;&gt;Droid
+Serif&lt;/a&gt; and
+&lt;a href=&#34;http://www.google.com/webfonts/specimen/Inconsolata&#34;&gt;Inconsolata&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I was also influenced by the clean look of the personal sites of &lt;a href=&#34;http://stevelosh.com/&#34;&gt;Steve
+Losh&lt;/a&gt;, &lt;a href=&#34;http://zachholman.com/&#34;&gt;Zach Holman&lt;/a&gt; and
+&lt;a href=&#34;http://lucumr.pocoo.org/&#34;&gt;Armin Ronacher&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;overall&#34;&gt;Overall&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;m pleased that:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The site isn&amp;rsquo;t painfully ugly like the old;&lt;/li&gt;
+&lt;li&gt;I can write articles easily and using my favourite tools (vim +
+RST);&lt;/li&gt;
+&lt;li&gt;I can write articles on the tube on the way home;&lt;/li&gt;
+&lt;li&gt;Github is now my backup of both code and content. For instance, you
+can &lt;a href=&#34;https://raw.github.com/codeinthehole/codeinthehole.com/master/www/posts/0038-restructured-blog.rst&#34;&gt;view the source of this
+article&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Since I switched to Disqus for comments, I decided to drop all the old
+ones (not that were that many), since I wasn&amp;rsquo;t sure it was possible to
+migrate Apologies to the comment authors.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

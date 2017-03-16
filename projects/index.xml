@@ -1,0 +1,1212 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projects on David Winterbottom</title>
+    <link>http://codeinthehole.com/projects/index.xml</link>
+    <description>Recent content in Projects on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 May 2014 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://codeinthehole.com/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The road to Oscar 1.0</title>
+      <link>http://codeinthehole.com/projects/the-road-to-oscar-10/</link>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/the-road-to-oscar-10/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/oscar.png&#34; class=&#34;noborder align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Oscar 0.7 was &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/releases/v0.7.html&#34;&gt;released this
+week&lt;/a&gt;,
+a comparatively minor house-keeping release that allowed us to reduce
+our pull-request and issue backlogs. We have a plan for Oscar through
+2014 and this article outlines the roadmap.&lt;/p&gt;
+
+&lt;h3 id=&#34;v1-0&#34;&gt;v1.0&lt;/h3&gt;
+
+&lt;p&gt;We&amp;rsquo;re aiming to be v1.0 before the end of the year&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Oscar has been
+beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to
+commit to the backward compatibility responsibilities associated with
+coming out of beta.&lt;/p&gt;
+
+&lt;p&gt;Plus, this will help &lt;a href=&#34;http://www.tangentsnowball.com/&#34;&gt;Tangent Snowball&lt;/a&gt;
+(who sponsor Oscar&amp;rsquo;s development) promote Oscar to blue-chip or
+&amp;ldquo;enterprise&amp;rdquo; clients, who feel nervous enough using open-source
+e-commerce software, let alone &lt;em&gt;beta&lt;/em&gt; open-source software.&lt;/p&gt;
+
+&lt;p&gt;There isn&amp;rsquo;t a lot to do before this milestone. Oscar&amp;rsquo;s philosophy is to
+keep the core package lean and flexible, hence we don&amp;rsquo;t have a large
+shopping list of features we want to add. Rather, there are a few areas
+that need careful review to ensure they are flexible enough. Also, there
+are a few topics that we want to research thoroughly in case they have
+design implications.&lt;/p&gt;
+
+&lt;p&gt;These are detailed here:&lt;/p&gt;
+
+&lt;h4 id=&#34;product-dashboard&#34;&gt;Product dashboard&lt;/h4&gt;
+
+&lt;p&gt;The current version uses a one-size-fits-all approach which is now
+stretched to breaking point trying to handle a wide range of scenarios.
+In particular, it&amp;rsquo;s not easy to administer group and variant products
+using the current implementation&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;A new, carefully considered version will be built that provides separate
+views and forms for the different work-flows. The new implementation
+will be simpler than the current, provide a superior user experience and
+be easier to customise and extend.&lt;/p&gt;
+
+&lt;p&gt;This piece of work is scheduled to be looked at by Tangent&amp;rsquo;s UX team
+shortly and should land in master over the summer.&lt;/p&gt;
+
+&lt;h4 id=&#34;multi-tenancy&#34;&gt;Multi-tenancy&lt;/h4&gt;
+
+&lt;p&gt;We&amp;rsquo;re aiming to provide better support for multi-tenanted sites where a
+single dashboard is used to manage a product catalogue that can be used
+across several sites. Several people on the mailing list have requested
+this, and Tangent have a forthcoming project that will require a form of
+this.&lt;/p&gt;
+
+&lt;p&gt;This poses some tricky design questions around how products, categories
+and offers are linked to sites. It&amp;rsquo;s tempting to slap a new many-to-many
+relationship onto every core model that links them to sites, but this
+may not be the right approach as it will add extra joins to SQL queries.
+Some careful research is required: we don&amp;rsquo;t want to impair performance
+for the many to satisfy the requirements of the few.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll be talking to several people at DjangoCon EU 2014 about how
+Tangent can partner with other Oscar implementors to first design the
+appropriate handling, and later drive forward an implementation.&lt;/p&gt;
+
+&lt;h4 id=&#34;faceted-browsing-everywhere&#34;&gt;Faceted browsing everywhere&lt;/h4&gt;
+
+&lt;p&gt;Oscar uses &lt;a href=&#34;http://haystacksearch.org/&#34;&gt;Haystack&lt;/a&gt; for search (with a
+preference for &lt;a href=&#34;https://lucene.apache.org/solr/&#34;&gt;Solr&lt;/a&gt;) and has some
+&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/apps/search/facets.py&#34;&gt;custom
+helpers&lt;/a&gt;
+to make working with facets easier. Facets are great for customers
+whenever they&amp;rsquo;re browsing a list of products and it&amp;rsquo;s desirable to allow
+faceting on all product browsing views. This would require using the
+search back-end to drive all browsing views.&lt;/p&gt;
+
+&lt;p&gt;Some &lt;a href=&#34;https://groups.google.com/forum/?fromgroups#!topicsearchin/django-oscar/haystack%7Csort:date%7Cspell:true/django-oscar/7cykIQSS7lw&#34;&gt;initial
+work&lt;/a&gt;
+has been done on this already. We intend to review and merge this into
+master soon.&lt;/p&gt;
+
+&lt;h4 id=&#34;research-topics&#34;&gt;Research topics&lt;/h4&gt;
+
+&lt;p&gt;Some things to look into:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Oscar ships with a set of translation message files but doesn&amp;rsquo;t
+currently provide built-in support for translating model content
+into multiple languages. There are &lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation/&#34;&gt;various Django
+libraries&lt;/a&gt;
+that address this issue already. We need to research the best
+approach (or approaches) and document how to use them with Oscar.&lt;/li&gt;
+&lt;li&gt;Since Oscar is just a set of apps, it works with all existing
+&lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation://www.djangopackages.com/grids/g/cms/&#34;&gt;Django CMS
+packages&lt;/a&gt;.
+However, more research is required to find the right way to
+integrate content management. With its &amp;ldquo;promotions&amp;rdquo; app, Oscar
+already provides some limited forms of merchandising but it might be
+better to drop this app and provide better hooks for CMS packages to
+manage all content. We&amp;rsquo;ll see.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;thanks&#34;&gt;Thanks&lt;/h3&gt;
+
+&lt;p&gt;As ever, we&amp;rsquo;re hugely grateful to the work of the community: submitting
+pull requests, adding translations, reporting bugs.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;d like to get involved, please see our &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/internals/contributing/index.html&#34;&gt;contributing
+guidelines&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;We&amp;rsquo;re using &lt;a href=&#34;http://semver.org/&#34;&gt;semantic versioning&lt;/a&gt;.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+
+&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;This is driven in part by the fact that Tangent haven&amp;rsquo;t had to
+build a large-scale clothing site yet.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>purl, URI templates and generated tests</title>
+      <link>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;TLDR&lt;/em&gt;: Parameterised tests are a useful testing technique. Both Nose
+and py.test support them.&lt;/p&gt;
+
+&lt;h3 id=&#34;uri-templates-in-purl&#34;&gt;URI templates in purl&lt;/h3&gt;
+
+&lt;p&gt;The newly released &lt;a href=&#34;https://github.com/codeinthehole/purl&#34;&gt;purl 0.8&lt;/a&gt; (a
+URL library of mine) supports URI templates as per &lt;a href=&#34;http://tools.ietf.org/html/rfc6570&#34;&gt;RFC
+6570&lt;/a&gt;. These allow new URL instances
+to be created by passing bindings to a template instance.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tpl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Template(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.google.com{path}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tpl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;expand({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]})&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;as_string()&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.google.com/a/b/c&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Alternatively, you can expand template strings directly:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;expand(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{?list*}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]})&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/a/b/c&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There&amp;rsquo;s a plethora of ways template URLs can be used - see the
+&lt;a href=&#34;http://tools.ietf.org/html/rfc6570&#34;&gt;RFC&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+    Note, there&#39;s 
+    &lt;a href=&#34;https://github.com/uri-templates/uritemplate-py&#34;&gt;already a Python library that provides this functionality&lt;/a&gt;. I
+    decided not to use that one with purl as I thought I could do better.
+    Plus, it looked like fun and I wanted to learn more about Python&#39;s
+    support for parameterised tests.
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;parameterised-tests&#34;&gt;Parameterised tests&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;d like to draw your attention to parameterised, or generated, tests
+which were used to drive development of this feature.&lt;/p&gt;
+
+&lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
+
+&lt;p&gt;The RFC includes a range of example templates, bindings and expected
+outputs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/rfc6570.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These are excellent material for driving a series of parametric tests
+since each example comprises the inputs and expected output for a test.
+The natural way to test such examples is using parameterised tests.&lt;/p&gt;
+
+&lt;h4 id=&#34;phpunit&#34;&gt;PHPUnit&lt;/h4&gt;
+
+&lt;p&gt;PHP&amp;rsquo;s dominant testing libary,
+&lt;a href=&#34;http://phpunit.de/manual/current/en/index.html&#34;&gt;PHPUnit&lt;/a&gt;, support &lt;a href=&#34;http://phpunit.de/manual/current/en/writing-tests-for-phpunit.html#writing-tests-for-phpunit.data-providers&#34;&gt;data
+providers&lt;/a&gt;
+that can used to solve this problem (in a slightly clunky way).&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a Python port of this functionality in &lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/test/decorators.py#L4-L27&#34;&gt;django-oscar&amp;rsquo;s testing
+utilities&lt;/a&gt;
+(and many other places no doubt) however there&amp;rsquo;s better way to write
+parameterised tests in Python.&lt;/p&gt;
+
+&lt;h4 id=&#34;nose&#34;&gt;Nose&lt;/h4&gt;
+
+&lt;p&gt;I used &lt;a href=&#34;http://nose.readthedocs.org/en/latest/writing_tests.html#test-generators&#34;&gt;Nose&amp;rsquo;s test
+generators&lt;/a&gt;
+to drive TDD on purl.&lt;/p&gt;
+
+&lt;p&gt;These allow tests to be generated by &lt;code&gt;yield&lt;/code&gt;ing a tuple
+&lt;code&gt;(test_fn, *test_args)&lt;/code&gt; for each dataset. Here, &lt;code&gt;test_fn&lt;/code&gt; is a callable
+that takes arguments &lt;code&gt;test_args&lt;/code&gt; and should raise an &lt;code&gt;AssertionError&lt;/code&gt; if
+the test fails.&lt;/p&gt;
+
+&lt;p&gt;Consider the above snippet from section 3.2.2 of the RFC: tests for this
+section can be constructed as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;nose.tools&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;eq_&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;level1_vars&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Tuples of (template, bindings, expected URI)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;test_data&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{var}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;level1_vars,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;level1_vars,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;assert_expansion&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;eq_(purl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;expand(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields),&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected)&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_expansion&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;():&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;test_data:&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;assert_expansion,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which executes each example as a single test:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ nosetests tests/expansion_tests.py
+tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{var}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
+tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
+
+----------------------------------------------------------------------
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+
+OK
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;
+    I have verbose output turned on by default since my &lt;code&gt;~/nose.cfg&lt;/code&gt; file
+    contains the line &lt;code&gt;verbosity=2&lt;/code&gt;.
+&lt;/div&gt;
+
+&lt;p&gt;Here we construct a simple assertion function using the &lt;code&gt;eq_&lt;/code&gt; equality
+check from Nose&amp;rsquo;s test tools.&lt;/p&gt;
+
+&lt;p&gt;The default verbose output is a little too verbose for my tastes. It can
+be cleaned up by providing a &lt;code&gt;description&lt;/code&gt; attribute on the yielded
+callable:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_expansion&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;():&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;test_data:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;assert_expansion&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;description&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s expands to %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;assert_expansion,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ nosetests tests/expansion_tests.py
+&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to value ... ok
+&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to Hello%20World%21 ... ok
+
+----------------------------------------------------------------------
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+
+OK
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Much nicer.&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+    Updating the description suffers from a known bug where 
+    &lt;a href=&#34;https://code.google.com/p/python-nose/issues/detail?id=244&#34;&gt;failure reports always use the last description assigned to callable&lt;/a&gt;.
+    There are a few work-arounds detailed in the bug comments but none play
+    nicely with Nose&#39;s multiprocess plugin.
+&lt;/div&gt;
+
+&lt;h4 id=&#34;py-test&#34;&gt;py.test&lt;/h4&gt;
+
+&lt;p&gt;In researching this post, I discovered
+&lt;a href=&#34;http://pytest.org/latest/&#34;&gt;py.test&lt;/a&gt; supports a &lt;a href=&#34;http://pytest.org/latest/example/parametrize.html&#34;&gt;rich array of
+functionality&lt;/a&gt; for
+creating parameterised or generated tests.&lt;/p&gt;
+
+&lt;p&gt;Using py.test&amp;rsquo;s &lt;code&gt;@pytest.mark.parameterize&lt;/code&gt;
+&lt;a href=&#34;http://pytest.org/latest/parametrize.html#pytest-mark-parametrize&#34;&gt;decorator&lt;/a&gt;,
+we can rewrite the above example as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;pytest&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;@pytest.mark.parametrize&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;((&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;template&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;fields&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;expected&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;data)&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_expand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;assert&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expand(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt;  &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;with verbose output:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ py.test -v tests/pytest_tests.py
+platform darwin -- Python &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
+collected &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; items
+
+tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields0-value&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
+tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields1-Hello%20World%21&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I have a feeling I will be switching to py.test shortly.&lt;/p&gt;
+
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;Test generators are a useful addition to your testing toolkit.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a couple of things to be aware of when using Nose&amp;rsquo;s generated
+tests:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It&amp;rsquo;s not possible to run just one of the examples from the
+commandline.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s tempting to create the assertion function inline within the
+&lt;code&gt;test_*&lt;/code&gt; function. However this doesn&amp;rsquo;t work if you run your tests
+across multiple processes using Nose&amp;rsquo;s &lt;code&gt;--processes&lt;/code&gt; option.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a few examples of using this functionality:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&#34;https://github.com/codeinthehole/purl/blob/master/tests/expansion_tests.py&#34;&gt;expanded version of the above example from the Purl
+library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/tests/unit/payment/bankcard_tests.py#L26-52&#34;&gt;A set of tests from
+django-oscar&lt;/a&gt;
+for testing validation of the Luhn algorithm.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Related articles:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://swordstyle.com/func_test_tutorial/part_one/extra_generative_tests.html&#34;&gt;Introduction to Functional Web Testing with Twill and
+Selenium&lt;/a&gt; -
+Using test generators to drive functional tests.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://achinghead.com/nosetests-generators-descriptions.html&#34;&gt;Nosetests, Generators and
+Descriptions&lt;/a&gt; -
+A detailed description of the bug with using a custom description
+for Nose&amp;rsquo;s generated tests.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Cacheback - asynchronous cache refreshing for Django</title>
+      <link>http://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</link>
+      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</guid>
+      <description>
+
+&lt;p&gt;Inspired by &lt;a href=&#34;http://jacobian.org/&#34;&gt;Jacob Kaplan-Moss&lt;/a&gt;&amp;rsquo;s excellent talk
+&amp;ldquo;&lt;a href=&#34;http://www.oscon.com/oscon2012/public/schedule/detail/24030&#34;&gt;Django doesn&amp;rsquo;t scale&lt;/a&gt;&amp;rdquo; at
+this year&amp;rsquo;s OSCon, I&amp;rsquo;ve put together a Django package for re-populating
+caches asynchronously.&lt;/p&gt;
+
+&lt;p&gt;It provides a simple API for wrapping expensive read operations that
+caches results and uses &lt;a href=&#34;http://celeryproject.org/&#34;&gt;Celery&lt;/a&gt; to
+repopulate items when they become stale. It can be used as a decorator
+for simple cases but provides an extensible class for more fine-grained
+control. It also provides helper classes for working with querysets.&lt;/p&gt;
+
+&lt;p&gt;The package is MIT-licensed, published to
+&lt;a href=&#34;http://pypi.python.org/pypi/django-cacheback&#34;&gt;PyPI&lt;/a&gt; and the source is
+available on
+&lt;a href=&#34;https://github.com/codeinthehole/django-cacheback&#34;&gt;Github&lt;/a&gt;. It&amp;rsquo;s best
+explained with an &amp;hellip;&lt;/p&gt;
+
+&lt;h3 id=&#34;example&#34;&gt;Example&lt;/h3&gt;
+
+&lt;p&gt;Consider a view that renders a user&amp;rsquo;s tweets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.shortcuts&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.twitter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(request,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render(request,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets.html&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets(username)})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This works fine but the &lt;code&gt;fetch_tweets&lt;/code&gt; function involves a HTTP
+round-trip and is slow. Enter caching.&lt;/p&gt;
+
+&lt;h4 id=&#34;basic-caching&#34;&gt;Basic caching&lt;/h4&gt;
+
+&lt;p&gt;Performance can be improved using Django&amp;rsquo;s &lt;a href=&#34;https://docs.djangoproject.com/en/dev/topics/cache/?from=olddocs#the-low-level-cache-api&#34;&gt;low-level cache
+API&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.shortcuts&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.cache&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.twitter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(request,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render(request,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets.html&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_cached_tweets(username)})&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch_cached_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(username):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(username)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;None:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets(username)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;set(username,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;60&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now tweets are cached for 15 minutes after they are first fetched, using
+the twitter username as a key. This is obviously a performance
+improvement but the shortcomings of this approach are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;For a cache miss, the tweets are fetched synchronously, blocking
+code execution and leading to a slow response time.&lt;/li&gt;
+&lt;li&gt;This in turn exposes exposes the view to a &amp;lsquo;&lt;a href=&#34;http://en.wikipedia.org/wiki/Cache_stampede&#34;&gt;cache
+stampede&lt;/a&gt;&amp;rsquo; where
+multiple expensive reads run simultaneously when the cached item
+expires. Under heavy load, this can bring your site down.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&#34;procrastinate-instead&#34;&gt;Procrastinate instead&lt;/h4&gt;
+
+&lt;p&gt;For most applications, it&amp;rsquo;s not actually essential that the cache is
+refreshed immediately - it&amp;rsquo;s acceptable to return stale results and
+update the cache asynchronously (so-called &lt;a href=&#34;http://en.wikipedia.org/wiki/Eventual_consistency&#34;&gt;&amp;lsquo;Eventual
+Consistency&amp;rsquo;&lt;/a&gt;). This
+is desirable as it means all reads are fast and prevents cache
+stampedes.&lt;/p&gt;
+
+&lt;h4 id=&#34;using-celery&#34;&gt;Using Celery&lt;/h4&gt;
+
+&lt;p&gt;Consider an alternative implementation that uses a Celery task to
+repopulate the cache.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;datetime&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.shortcuts&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.cache&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.tasks&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;update_tweets&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(request,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render(request,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets.html&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_cached_tweets(username)})&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch_cached_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(username,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;lifetime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;60&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;item&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(username)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;item&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;None:&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Scenario 1: Cache miss - return empty result set and trigger a refresh&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;update_tweets&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;delay(username,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;lifetime)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;None&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expiry&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;item&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expiry&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;now():&lt;/span&gt;
+            &lt;span style=&#34;color: #75715e&#34;&gt;# Scenario 2: Cached item is stale - return it but trigger a refresh&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;update_tweets&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;delay(username,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;lifetime)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where the &lt;code&gt;myproject.tasks.update_tweets&lt;/code&gt; task is implemented as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;datetime&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;celery&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;task&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.cache&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.twitter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;@task&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;update_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(username,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;ttl):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;tweets&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets(username)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;now&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;datetime&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;now()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;set(username,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(tweets,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;now&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;ttl),&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2592000&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Some things to note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Items are stored in the cache as tuples &lt;code&gt;(data, expiry_timestamp)&lt;/code&gt;
+using Memcache&amp;rsquo;s maximum expiry setting (2592000 seconds). By using
+this value, we are effectively bypassing memcache&amp;rsquo;s replacement
+policy in favour of our own.&lt;/li&gt;
+&lt;li&gt;As the comments indicate, there are two replacements scenarios to
+consider:
+
+&lt;ol&gt;
+&lt;li&gt;Cache miss. In this case, we don&amp;rsquo;t have any data (stale or
+otherwise) to return. In the example above, we trigger an
+asynchronous refresh and return an empty result set. In other
+scenarios, it may make sense to perform a synchronous refresh.&lt;/li&gt;
+&lt;li&gt;Cache hit but with stale data. Here we return the stale data but
+trigger a Celery task to refresh the cached item.&lt;/li&gt;
+&lt;/ol&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;This pattern of re-populating the cache asynchronously works well.
+Indeed it is the basic of the Cacheback package.&lt;/p&gt;
+
+&lt;h4 id=&#34;using-cacheback&#34;&gt;Using Cacheback&lt;/h4&gt;
+
+&lt;p&gt;Here&amp;rsquo;s the same functionality implemented using the &lt;code&gt;cacheback&lt;/code&gt;
+function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.shortcuts&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.cache&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.twitter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cacheback.decorators&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cacheback&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(request,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_cached_tweets&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cacheback(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;60&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_on_miss&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;False)(fetch_tweets)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render(request,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets.html&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_cached_tweets(username)})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;cacheback&lt;/code&gt; function provides a wrapper function for the
+&lt;code&gt;fetch_tweets&lt;/code&gt; function. When called, the wrapper will generate a cache
+key based on the module path of the wrapped function and the passed args
+and kwargs. It then checks the cache and if there isn&amp;rsquo;t a valid result
+it will serialise the function and its args so it can be executed
+asynchronously by a Celery task.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;cacheback&lt;/code&gt; function can also be used as a decorator:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cacheback.decorators&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cacheback&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;@cacheback&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;60&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(username):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or for more fine-grained control: using a subclass of
+&lt;code&gt;cacheback.base.Job&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.shortcuts&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.cache&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cache&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.twitter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cacheback.base&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Job&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;show_tweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(request,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;render(request,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets.html&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tweets&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;FetchTweets()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(username)})&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;FetchTweets&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(Job):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;expiry&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;60&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username):&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetch_tweets(username)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;While only the &lt;code&gt;fetch&lt;/code&gt; method must be implemented, the &lt;code&gt;cacheback.Job&lt;/code&gt;
+class provides several other overridable methods that provide
+fine-grained control of the caching process.&lt;/p&gt;
+
+&lt;h3 id=&#34;interested&#34;&gt;Interested?&lt;/h3&gt;
+
+&lt;p&gt;Check-out the
+&lt;a href=&#34;http://django-cacheback.readthedocs.org/en/latest/&#34;&gt;documentation&lt;/a&gt; for
+more information. Comments and feedback welcome.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>purl - immutable URL objects for Python</title>
+      <link>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</link>
+      <pubDate>Thu, 19 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</guid>
+      <description>
+
+&lt;p&gt;Working with URLs in Python feels clunky when it should be pleasant. In
+&lt;a href=&#34;http://docs.python.org/library/urlparse.html&#34;&gt;urlparse&lt;/a&gt; and
+&lt;a href=&#34;http://docs.python.org/library/urllib.html&#34;&gt;urllib&lt;/a&gt;, the standard
+library has all the functionality you need, but the code you have to
+write is often cumbersome and unclear.&lt;/p&gt;
+
+&lt;p&gt;For instance, here&amp;rsquo;s a typical test method that makes an assertion about
+a query parameter:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlparse&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_url_has_correct_query_parameter&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;get_url_from_somewhere()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;parse_result&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlparse&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;parseurl(url)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;query_params&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlparse&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;parse_qs(parse_result&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertEqual(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;testing&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;query_params[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;][&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Not terrible, but could be more concise. I would prefer something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;somelibrary&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_url_has_correct_query_parameter&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;from_string(get_url_from_somewhere())&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertEqual(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;testing&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Further, when working with webservices, you often need to build URLs
+programmatically but it just isn&amp;rsquo;t easy enough in python. You often end
+up using string formatting:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urllib&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;URL_TEMPLATE&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https://github.com/%s?w=%s&amp;#39;&lt;/span&gt; 
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;get_github_url&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(username):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL_TEMPLATE&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(urllib&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;quote(username),&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A preferable API might look something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;somelibrary&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;BASE_URL&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;from_string(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https://github.com/&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; 
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;get_github_url&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(username):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;BASE_URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segment(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is a toy example, the problem is much worse when building more
+complicated URLs.&lt;/p&gt;
+
+&lt;h3 id=&#34;purl&#34;&gt;purl&lt;/h3&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+    Warning - the code examples below are from version 0.2 of purl - please
+    consult the &lt;a href=&#34;https://github.com/codeinthehole/purl&#34;&gt;Github documentation&lt;/a&gt; for the latest
+    reference.
+&lt;/div&gt;
+
+&lt;p&gt;So I wrote a utility class to scratch this itch. It&amp;rsquo;s a simple immutable
+&lt;code&gt;URL&lt;/code&gt; class that uses jQuery-style overloading of the attribute methods
+to be both accessors and mutators.&lt;/p&gt;
+
+&lt;p&gt;Install with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;pip&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;install&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Construct URL instances as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Explicit constructor&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL(scheme&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;host&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;www.google.com&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/search&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;query&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q=testing&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Use factory class-method&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;from_string(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https://www.google.com/search?q=testing&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Chain mutator methods (which each return a new instance)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scheme(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;host(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;www.google.com&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;search&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;testing&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Combine to suit your use-case&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;from_string(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https://www.google.com&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;search&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; \
+                                             &lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;testing&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There&amp;rsquo;s a full range of inspection methods:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Simple attributes&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scheme()&lt;/span&gt;      &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;https&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;host()&lt;/span&gt;        &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;www.google.com&amp;#39; &lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;domain()&lt;/span&gt;      &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;www.google.com&amp;#39; - alias of host&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;port()&lt;/span&gt;        &lt;span style=&#34;color: #75715e&#34;&gt;# None (only returns something if explicitly set)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path()&lt;/span&gt;        &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;/search&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query()&lt;/span&gt;       &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;q=testing&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;fragment()&lt;/span&gt;    &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Convenience methods for inspecing path, query and host&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segment(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;                   &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;search&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segments()&lt;/span&gt;                   &lt;span style=&#34;color: #75715e&#34;&gt;# (&amp;#39;search&amp;#39;,)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;                  &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;testing&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;as_list&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True)&lt;/span&gt;    &lt;span style=&#34;color: #75715e&#34;&gt;# [&amp;#39;testing&amp;#39;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;lang&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;default&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;GB&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;GB&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;query_params()&lt;/span&gt;                    &lt;span style=&#34;color: #75715e&#34;&gt;# {&amp;#39;q&amp;#39;: &amp;#39;testing&amp;#39;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;has_query_param(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;              &lt;span style=&#34;color: #75715e&#34;&gt;# True&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;subdomains()&lt;/span&gt;                       &lt;span style=&#34;color: #75715e&#34;&gt;# [&amp;#39;www&amp;#39;, &amp;#39;google&amp;#39;, &amp;#39;com&amp;#39;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;subdomain(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;                       &lt;span style=&#34;color: #75715e&#34;&gt;# &amp;#39;www&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Each accessor method is overloaded to be a mutator method too, similar
+to the jQuery API. Since the URL class is immutable, any mutation will
+return a new URL instance.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;from_string(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https://github.com/codeinthehole&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Access&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segment(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# returns &amp;#39;codeinthehole&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Mutate (creates a new instance)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;new_url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segment(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;tangentlabs&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;# returns new URL object&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a fancier example of building a URL:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;URL()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;scheme(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;\
+         &lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;host(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;github.com&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;`&lt;/span&gt;\
+         &lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segment(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;codeinthehole&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;\
+         &lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path_segment(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;purl&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;\
+&lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;as_string()&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# returns &amp;#39;https://github.com/codeinthehole/purl&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://github.com/codeinthehole/purl&#34;&gt;Source and further details on
+Github&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;alternatives&#34;&gt;Alternatives&lt;/h3&gt;
+
+&lt;p&gt;There are a couple of URL classes already for python - however neither
+had the exact API I was looking for.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.egenix.com/products/python/mxBase/mxURL/&#34;&gt;mxURL&lt;/a&gt; - Part
+of the &amp;lsquo;eGenix.com mx Base Distribution&amp;rsquo;, this has quite a
+comprehensie API. It comes bundles with other utility modules with
+the &amp;lsquo;egenix-mx-base&amp;rsquo; package.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/zacharyvoase/urlobject/&#34;&gt;URLObject&lt;/a&gt; - There&amp;rsquo;s
+nothing wrong with this implementation - it&amp;rsquo;s very similar to my one
+above. The API&amp;rsquo;s not quite to my tastes but that&amp;rsquo;s purely subjective
+thing.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;There is a &lt;a href=&#34;http://www.reddit.com/r/Python/comments/sjkab/purl_an_immutable_url_class/&#34;&gt;discussion of this
+post&lt;/a&gt;
+on &lt;a href=&#34;http://www.reddit.com/r/Python/&#34;&gt;/r/Python&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>csvfilter - a Python command-line tool for manipulating CSV data</title>
+      <link>http://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</link>
+      <pubDate>Sun, 01 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You want a unix-like tool for manipulating CSV data from the
+command-line.&lt;/p&gt;
+
+&lt;p&gt;The standard tools &lt;code&gt;cut&lt;/code&gt; and &lt;code&gt;awk&lt;/code&gt; aren&amp;rsquo;t always suitable as they don&amp;rsquo;t
+handle quoting and escaping which are common in CSVs.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;Use the CSV manipulation function &lt;code&gt;csvfilter&lt;/code&gt;, a simple Python library
+I&amp;rsquo;ve put together.&lt;/p&gt;
+
+&lt;p&gt;Install with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pip install csvfilter
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Sample usage:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Pluck columns 2, 5 and 6&lt;/span&gt;
+cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;,5,6 &amp;gt; out.csv
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Pluck all columns except 4&lt;/span&gt;
+cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt; -i &amp;gt; out.csv
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Skip header row&lt;/span&gt;
+cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &amp;gt; out.csv
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Work with pipe-separated data&lt;/span&gt;
+cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;,3 --delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;|&amp;quot;&lt;/span&gt; &amp;gt; out.csv
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The above examples show &lt;code&gt;csvfilter&lt;/code&gt; processing &lt;code&gt;sys.STDIN&lt;/code&gt; but it can
+also act directly on a file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;,5,6 in.csv  &amp;gt; out.csv
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Help:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ csvfilter --help
+Usage: csvfilter &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+
+Options:
+-h, --help            show this &lt;span style=&#34;color: #f8f8f2&#34;&gt;help&lt;/span&gt; message and &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt;
+-f FIELDS, --fields&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;FIELDS
+                        Specify which fields to pluck
+-s SKIP, --skip&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;SKIP  Number of rows to skip
+-d DELIMITER, --delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;DELIMITER
+                        Delimiter of incoming CSV data
+-i, --inverse         Invert the filter - ie drop the selected fields
+--out-delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;OUT_DELIMITER
+                        Delimiter to use &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; output
+--out-quotechar&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;OUT_QUOTECHAR
+                        Quote character to use &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; output
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There is also a simple python API that allows you to add validators to
+determine which rows are filtered out:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;csvfilter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Processor&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;contains_cheese&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(row):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;cheese&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;row&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;processor&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Processor(fields&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;processor&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;add_validator(contains_cheese)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;generator&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;processor&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;process(sys&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;stdin)&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cheesy_row&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;generator:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;do_something(cheesy_row)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s possible to do basic CSV manipulation from the command-line using
+&lt;code&gt;cut&lt;/code&gt; or &lt;code&gt;awk&lt;/code&gt; - for example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;,&amp;quot;&lt;/span&gt; -f &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;,1,2 &amp;gt; out.csv
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or :&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;,&amp;quot;} {print $1,$2,$3}&amp;#39;&lt;/span&gt; &amp;gt; out.csv
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However neither &lt;code&gt;cut&lt;/code&gt; or &lt;code&gt;awk&lt;/code&gt; make it easy to handle CSVs with escaped
+characters - hence the motivation for this tool.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not the first to write such a utility - there are several others out
+there (although none had quite the API I was looking for):&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://bitbucket.org/neilb/csvfix/src&#34;&gt;csvfix&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://pypi.python.org/pypi/dropcols&#34;&gt;dropcols&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/onyxfish/csvkit&#34;&gt;csvkit&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://github.com/codeinthehole/csvfilter&#34;&gt;Source available on Github&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing unittest-xml: testing XML in Python</title>
+      <link>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</link>
+      <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
+      <description>
+
+&lt;p&gt;For some reason, I keep finding myself writing unit tests that need to
+make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged
+up my custom assertion methods as a PyPi module: &lt;code&gt;unittest-xml&lt;/code&gt;. There&amp;rsquo;s
+a small chance it may be useful to others.&lt;/p&gt;
+
+&lt;h3 id=&#34;sample-usage&#34;&gt;Sample Usage&lt;/h3&gt;
+
+&lt;p&gt;Enable the additional assert methods using a mixin:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;unittest&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;xmltest&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;XMLAssertions&lt;/span&gt;
+
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;SampleTestCase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(unittest&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;TestCase,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;XMLAssertions):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now suppose that the expected XML from some SUT&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; ?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;Response&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;CardTxn&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;authcode&amp;gt;&lt;/span&gt;060642&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/authcode&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;card_scheme&amp;gt;&lt;/span&gt;Switch&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/card_scheme&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;issuer&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;country=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;UK&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;HSBC&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/issuer&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/CardTxn&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;reference&amp;gt;&lt;/span&gt;3000000088888888&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/reference&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;merchantreference&amp;gt;&lt;/span&gt;1000001&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/merchantreference&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;mode&amp;gt;&lt;/span&gt;LIVE&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/mode&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;reason&amp;gt;&lt;/span&gt;ACCEPTED&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/reason&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;status&amp;gt;&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/status&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;time&amp;gt;&lt;/span&gt;1071567305&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/time&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/Response&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then you can make assertions about the document using 3 additional
+assertions methods.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertXPathNodeCount(RESPONSE,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;CardTxn/authcode&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertXPathNodeText(RESPONSE,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;LIVE&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;mode&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertXPathNodeAttributes(RESPONSE,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;country&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;UK&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;CardTxn/issuer&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The first argument to each method is the XML string, the second is the
+expected value, while the third is the XPath query.&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;The standard way:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pip install unittest-xml
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;Note, the implementation uses
+&lt;a href=&#34;http://docs.python.org/library/xml.etree.elementtree.html&#34;&gt;ElementTree&lt;/a&gt;
+and so only &lt;a href=&#34;http://effbot.org/zone/element-xpath.htm&#34;&gt;a subset of the XPath
+specification&lt;/a&gt; is implemented.
+However the above three assertion methods are sufficient for most
+scenarios.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/codeinthehole/unittest-xml&#34;&gt;code is on Github&lt;/a&gt;,
+as usual.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;System under test
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Multi-scp: copying a file to all hosts in your SSH config</title>
+      <link>http://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</link>
+      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</guid>
+      <description>&lt;p&gt;I am totally reliant on my bash aliases and readline configuration. When
+working on a new server, the first thing I do is copy over my local Bash
+(&lt;code&gt;~/.bashrc&lt;/code&gt;) and Readline (&lt;code&gt;~/.inputrc&lt;/code&gt;) configuration files.&lt;/p&gt;
+
+&lt;p&gt;One mildly annoying issue is when you update a config file, it&amp;rsquo;s a pain
+to copy it onto all your remote hosts. To scratch this itch, I wrote a
+simple node.js executable for copying a file to all the defined hosts in
+your &lt;code&gt;~/.ssh/config&lt;/code&gt; file&lt;/p&gt;
+
+&lt;p&gt;Usage is trivial:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ multi-scp ~/.bashrc
+Starting sync of &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;~/.bashrc&amp;#39;&lt;/span&gt; to all hosts in /home/david/.ssh/config
+-&amp;gt; Copying to mars
+-&amp;gt; Copying to venus
+-&amp;gt; Copying to jupiter
+&amp;lt;- Successful copy to mars
+&amp;lt;- Successful copy to venus
+&amp;lt;- Successful copy to jupiter
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Using node.js seems an odd choice as this could trivially be done in
+another scripting language. However, I wanted to use node as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;it allows the copy operation to run asynchronously in a child
+process with a callback to handle completion and error;&lt;/li&gt;
+&lt;li&gt;it&amp;rsquo;s fashionable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/codeinthehole/node-multi-scp&#34;&gt;code is on Github&lt;/a&gt;
+as usual.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Domain-model-mapper - A PHP Data Mapper implementation</title>
+      <link>http://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</link>
+      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
+      <description>&lt;p&gt;At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve
+seen attention drawn to the &lt;a href=&#34;http://martinfowler.com/eaaCatalog/dataMapper.html&#34;&gt;Data Mapper design
+pattern&lt;/a&gt;. This is an
+elegant pattern that splits the responsibilities of business logic and
+persistence. In the words of pattern supremo Martin Fowler:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The Data Mapper is a layer of software that separates the in-memory
+objects from the database. Its responsibility is to transfer data
+between the two and also to isolate them from each other. With Data
+Mapper the in-memory objects needn&amp;rsquo;t know even that there&amp;rsquo;s a database
+present; they need no SQL interface code, and certainly no knowledge
+of the database schema&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This is a cleaner separation of concerns than that found in the
+ubiquitous Active Record pattern which, while a useful construct,
+conflates business logic with persistence. This can make a big
+difference in terms of testability as using a Data Mapper decouples the
+database from your domain models, making it easy to write unit tests.
+This has been something I&amp;rsquo;ve found slightly difficult with Django where
+the emphasis is more on writing integration tests that use fixtures to
+set up the test environmentl; writing unit tests without using a
+database is hard when foreign key constraints are involved.&lt;/p&gt;
+
+&lt;p&gt;Anyhow, it&amp;rsquo;s a favourite pattern of mine and I&amp;rsquo;ve recently pushed to
+Github a small library for PHP 5.3 which provides data mapper
+functionality. The extended details are in the
+&lt;a href=&#34;https://github.com/codeinthehole/domain-model-mapper&#34;&gt;README&lt;/a&gt; but the
+essential idea is: Create your domain models as subclasses of
+BaseDomainModel. This superclass provides methods for identifying a
+model, loading a model with data and implements a set of magic methods
+to allow easy access to field values. You can create a collection object
+too using ModelCollection as your superclass. This is useful if you want
+to implement methods that act on a collection of models, such as
+getTotalPrice() or similar. Create a corresponding mapper object as a
+subclass of Mapper. This class provides the usual persistence methods
+such as save(), insert(), update(), delete() as well as some helper
+methods to make writing &amp;ldquo;finder&amp;rdquo; methods easier. Sample usage is as
+follows. First set up your classes to model your domain.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;// Create model class&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Person&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;\DMM\BaseDomainModel&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;__construct&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;// Specify field(s) that identify a model&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;parent&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__construct&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;person_id&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+
+        &lt;span style=&#34;color: #75715e&#34;&gt;// Optionally specify field names&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__setFieldNames&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;first_name&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;trim(sprintf(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s %s&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;first_name&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;last_name&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;// Create model collection class&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;PersonCollection&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;\DMM\ModelCollection&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;getTotalAge&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;array_sum($this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pluckField&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;// Create mapper class&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;PersonMapper&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;\DMM\Mapper&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$tableName&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;people&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$tablePrimaryKey&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;person_id&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$modelClass&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Person&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;protected&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$modelCollectionClass&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;PersonCollection&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;__construct&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;PDO&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$pdo)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;parent&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__construct&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($pdo,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;tableName&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;tablePrimaryKey&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;findByAge&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($age)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$sql&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;
+            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;SELECT * &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            FROM `{&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;tableName&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;}`&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            WHERE age = :age&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$bindings&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$age&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;fetchCollection&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($sql,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$bindings);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;These can then used as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;// Create a new model&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$person&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Person&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$person&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;first_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Alan&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$person&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;last_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Smith&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$person&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;age&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;56&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;// or&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$otherPerson&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Person&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$otherPerson&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__load&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;first_name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Barry&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;last_name&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Smith&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;age&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;34&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$mapper&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;PersonMapper&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($pdo);&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$mapper&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;save&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($person);&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$person&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;person_id&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// 1&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;// Load a collection&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$twentyYearOlds&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$mapper&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;findByAge&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Unit testing is now trivial as you can simply instantiate your model and
+use the &lt;code&gt;__load&lt;/code&gt; method to populate it with data for testing.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$model&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Person&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$model&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;first_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;  terry&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$model&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;last_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;jones     &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;assertSame&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;terry jones&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$model&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getName&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;());&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Relationships between models are not a feature of the package at the
+moment. The best way to handle this is to use a &amp;ldquo;repository&amp;rdquo; object
+which composes several mappers.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/codeinthehole/domain-model-mapper&#34;&gt;code is on
+github&lt;/a&gt; if you are
+interested.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>nurl - an immutable URL object for node.js</title>
+      <link>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of &lt;a href=&#34;http://c2.com/cgi/wiki?ValueObject&#34;&gt;Value Objects&lt;/a&gt; -
+some of the most useful classes I&amp;rsquo;ve ever written have been lightweight
+wrappers around strings.&lt;/p&gt;
+
+&lt;p&gt;For my first contribution to the &lt;a href=&#34;http://nodejs.org/&#34;&gt;node.js&lt;/a&gt;
+ecosystem, I&amp;rsquo;ve published a simple, immutable URL object to the Node
+package manager (npm) directory. It provides a light-weight, immutable
+URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and
+&amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various
+extension methods that make working with URLs easy.&lt;/p&gt;
+
+&lt;p&gt;Source and detailed docs available at
+&lt;a href=&#34;http://github.com/codeinthehole/nurl&#34;&gt;http://github.com/codeinthehole/nurl&lt;/a&gt; -but here&amp;rsquo;s some sample usage for
+dynamically building a URL:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;nurl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;nurl&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;baseUrl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;nurl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Url&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setProtocol&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+                              &lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setHostname&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;api.example.com&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+                              &lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setPathname&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;search&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;searchUrl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;baseUrl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setPathSegment&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;my search term&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;searchUrl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;toString&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// =&amp;gt; &amp;#39;http://api.example.com/search/my%20search%20term&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All components of a URL are exposed as read-only properties as well as
+through getter functions.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;nurl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;parse&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.example.com/path/to/somewhere?q=node.js&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getSubdomains&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// [&amp;#39;www&amp;#39;, &amp;#39;example&amp;#39;, &amp;#39;com&amp;#39;]&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getPathSegment&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// &amp;#39;path&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getQueryParam&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// &amp;#39;node.js&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getQueryParam&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;p&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;a default value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// &amp;#39;a default value&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All very simple but potentially quite useful thanks to the ubiquity of
+the humble URL.&lt;/p&gt;
+
+&lt;p&gt;Writing this module introduced me to some of the excellent software
+already available for node.js. Firstly, the package management system
+&lt;a href=&#34;http://github.com/isaacs/npm&#34;&gt;npm&lt;/a&gt; is brilliantly simple to get started
+with, and to publish modules for all to use. Secondly, I&amp;rsquo;m a huge fan of
+the &lt;a href=&#34;http://vowsjs.org/&#34;&gt;Vows BDD package&lt;/a&gt;. Writing tests in javascript
+offers some cunning possibilities such as dynamically building
+test-suites at run-time - this is great for this package as I can create
+a fixture object of URL strings and their decomposition into components,
+then build the context dynamically.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/vows.png&#34; alt=&#34;Screenshot of vows in action&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All feedback, forks and pull requests gratefully accepted.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Current pet project: Command-Line-Fu</title>
+      <link>http://codeinthehole.com/projects/current-pet-project-command-line-fu/</link>
+      <pubDate>Thu, 22 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/current-pet-project-command-line-fu/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/tomboy-commands-small.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;re anything like me, you spend a lot of time at the UNIX
+command-line manipulating the filesystem, configuring Linux, playing
+with services and so forth. As any UNIX user knows, tremendous power can
+be wielded through judicious function selection, piping and output
+redirection. It&amp;rsquo;s often quite staggering what can be achieved in a
+single line given a rudimentary knowledge of sed, grep, awk, cut…&lt;/p&gt;
+
+&lt;p&gt;Indeed, when I stumble upon a line of particular elegance or usefulness,
+I generally log them to a &lt;a href=&#34;http://projects.gnome.org/tomboy/&#34;&gt;Tomboy
+note&lt;/a&gt; (fired up in a flash using
+&lt;a href=&#34;http://do.davebsd.com/&#34;&gt;Gnome-do&lt;/a&gt;). This has proved extremely useful as
+I am often returning to the list to recall how to, say, rsync a fileset
+with an exclude list - it&amp;rsquo;s generally faster than Googling or going to
+the man pages. As time has progressed though, this small repository has
+grown into a sizable collection and finding a particular command quickly
+is now a problem. Motivated by this problem and taking inspiration from
+my daily reading (&lt;a href=&#34;http://news.ycombinator.com/&#34;&gt;Hacker News&lt;/a&gt;,
+&lt;a href=&#34;http://www.reddit.com/r/programming/&#34;&gt;Programming Reddit&lt;/a&gt; and &lt;a href=&#34;http://stackoverflow.com/&#34;&gt;Stack
+Overflow&lt;/a&gt;), I&amp;rsquo;m in the process of putting
+together a lightweight web-app for cataloguing and ranking notable UNIX
+one liners.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/clf-small.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The basic idea is for users to be able to store their useful one liners
+on the site for (a) retrieval in the future and (b) sharing with others
+who undoubtedly will need to save the same problem. Once created, these
+commands are parsed for the functions used and any relevant tags to
+provide good navigational props. The individual commands also be
+discussed and commented on. Further, users can vote on each others
+commands allowing simple leaderboards to be constructed. After a few
+months, it will be interesting to see what the top 10 most useful awk
+commands are.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s only been a week (working piecemeal after dinner) but the site&amp;rsquo;s
+nearly ready for a beta release. It&amp;rsquo;s constructed using a combination of
+CodeIgniter and Zend Framework, making use of the fast and lightweight
+nature of CodeIgniter coupled with the extensive range of components
+that ZF provides. The site&amp;rsquo;s called &lt;a href=&#34;http://www.commandlinefu.com&#34;&gt;http://www.commandlinefu.com&lt;/a&gt; and
+should be live in about a week assuming I find some spare time over the
+weekend. Watch this space.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Tutorial: the complex Ginzburg-Landau equation</title>
+      <link>http://codeinthehole.com/projects/ginzburg-landau-tutorial/</link>
+      <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/ginzburg-landau-tutorial/</guid>
+      <description>&lt;p&gt;I wrote a &lt;a href=&#34;http://codeinthehole.com/tutorial/index.html&#34;&gt;tutorial on the complex Ginzburg-Landau equation&lt;/a&gt; as a
+set of simple HTML pages.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

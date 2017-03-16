@@ -1,0 +1,1142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>David Winterbottom</title>
+    <link>http://codeinthehole.com/index.xml</link>
+    <description>Recent content on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 23 Nov 2015 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Octopus Energy</title>
+      <link>http://codeinthehole.com/news/octopus-energy/</link>
+      <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/octopus-energy/</guid>
+      <description>&lt;p&gt;Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first
+day at Octopus Energy.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology,
+especially automation and cloud computing, Octopus Energy is going to
+radically change how people consume and pay for energy in the UK. We&amp;rsquo;re
+going to be both cheaper and massively better at customer service than
+the much-maligned incumbents.&lt;/p&gt;
+
+&lt;p&gt;Right now, &lt;a href=&#34;http://tech.octopus.energy/news/2015/11/23/tech-jobs.html&#34;&gt;we&amp;rsquo;re looking to build a superb tech team&lt;/a&gt;. Get in
+touch if you&amp;rsquo;re looking for a challenge and would like to play a
+formative part in a company that&amp;rsquo;s genuinely making the world a better
+place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A useful template for commit messages</title>
+      <link>http://codeinthehole.com/tips/a-useful-template-for-commit-messages/</link>
+      <pubDate>Fri, 02 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
+      <description>&lt;p&gt;Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your
+commit message template to:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;# If applied, this commit will...
+
+# Explain why this change is being made
+
+# Provide links to any relevant tickets, articles or other resources
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and you&amp;rsquo;ll be guided into writing concise commit subjects in the
+imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &lt;a href=&#34;http://chris.beams.io/posts/git-commit/&#34;&gt;&amp;ldquo;How to
+write a commit message&amp;rdquo;&lt;/a&gt; for
+the inspiration of this tip and more reasoning on the use of the
+imperative mood.&lt;/p&gt;
+
+&lt;p&gt;To do this in Git, save the above content in a file (eg
+&lt;code&gt;~/.git_commit_msg.txt&lt;/code&gt;) and run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git config --global commit.template ~/.git_commit_msg.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&amp;rsquo;s what this looks like in practice:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/git-commit-snap.png&#34; width=&#34;800px&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Try it - it&amp;rsquo;s genuinely useful.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Copying Postgres output into a spreadsheet</title>
+      <link>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</link>
+      <pubDate>Wed, 02 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
+      <description>&lt;p&gt;I often need to grab information from a Postgres database and paste it
+into a spreadsheet for sharing with others. Google Sheets needs the
+pasted data to be tab-separated in order to be correctly split into
+columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to
+configure psql&amp;rsquo;s output to get it.&lt;/p&gt;
+
+&lt;p&gt;At a psql prompt, switch to unaligned output&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and set the field separator to a tab character:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\f&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then the output from subsequent &lt;code&gt;SELECT ...&lt;/code&gt; statements can be cleanly
+pasted into your Google Doc.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An SSH tip for modern AWS patrons</title>
+      <link>http://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</link>
+      <pubDate>Sat, 02 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</guid>
+      <description>
+
+&lt;p&gt;Cloud computing and immutable infrastructure deployments have changed
+the way I use SSH. I miss the days when I could run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh app1-prod
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to jump onto a machine and investigate an issue. This would work as,
+back in the days of yore, your web servers didn&amp;rsquo;t change IP address
+several times a week so I could create a helpful alias in
+&lt;code&gt;~/.ssh/config&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host app1-prod
+    User example_user
+    HostName 74.207.251.29
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This circumvented the labour-intensive act of typing in the remote
+username and IP address when SSHing around town.&lt;/p&gt;
+
+&lt;p&gt;I can no longer do this as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Immutable infrastructure deployments mean EC2 instances are replaced
+for every update so the IP addresses keep changing. Life is too
+short to keep updating &lt;code&gt;~/.ssh/config&lt;/code&gt; with their details.&lt;/li&gt;
+&lt;li&gt;Plus, aside from your load balancers, servers should be unreachable
+from the outside world. Now all access is via a bastion machine: the
+only machine in the VPC that exposes its SSH port to the network
+your laptop is using.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are both good things.&lt;/p&gt;
+
+&lt;h3 id=&#34;aren-t-you-supposed-to-stop-using-ssh-with-aws&#34;&gt;Aren&amp;rsquo;t you supposed to stop using SSH with AWS?&lt;/h3&gt;
+
+&lt;p&gt;Yeah, &lt;a href=&#34;https://wblinks.com/notes/aws-tips-i-wish-id-known-before-i-started/&#34;&gt;that&amp;rsquo;s been recommended
+before&lt;/a&gt;
+and seems a good idea.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not there yet though. There&amp;rsquo;s still occasions where I want to SSH
+onto a machine and run diagnostics. For instance, as part of a &lt;a href=&#34;http://martinfowler.com/bliki/CanaryRelease.html&#34;&gt;canary
+release&lt;/a&gt; I often SSH
+onto one of the new machines and check for smoke before replacing the
+entire auto-scale group with the new AMI. (I&amp;rsquo;m happy to accept this is
+an regrettable practice and I need to raise my automation game.)&lt;/p&gt;
+
+&lt;p&gt;In such circumstances, I want to be able to run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh ip-10-5-8-179.eu-west-1.compute.internal
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;jumping straight onto an AWS EC2 instance using only its internal DNS
+name, plucked from the AWS console or a &lt;code&gt;boto&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;h3 id=&#34;proxycommand-and-a-wildcard-ssh-alias&#34;&gt;ProxyCommand and a wildcard SSH alias&lt;/h3&gt;
+
+&lt;p&gt;Add an alias to &lt;code&gt;~/.ssh/config&lt;/code&gt; for your bastion server. Something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host bastion-prod
+    User example_user
+    Hostname bastion.example.com
+    IdentityFile ~/.ssh/bastion-prod.key
+    LogLevel Quiet
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then you can route SSH traffic through the bastion server using
+&lt;code&gt;ProxyCommand&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host *.compute.internal
+    User ubuntu
+    IdentityFile ~/.ssh/aws-prod.key
+    ProxyCommand ssh bastion-prod -W %h:%p
+    StrictHostKeyChecking no
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and that&amp;rsquo;s sufficient for commands like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh ip-10-5-8-179.eu-west-1.compute.internal
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to work.&lt;/p&gt;
+
+&lt;p&gt;Note, disabling &lt;code&gt;StrictHostKeyChecking&lt;/code&gt; suppresses the confirmation
+prompt when connecting to a new host for the first time. I&amp;rsquo;m ignorant of
+whether this is a dreadful security misstep.&lt;/p&gt;
+
+&lt;p&gt;Some vaguely related articles:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://edgeofsanity.net/article/2012/10/15/ssh-leap-frog.html&#34;&gt;Using a ProxyCommand to Leap Frog Your
+Bastions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A &lt;a href=&#34;https://github.com/gianlucaborello/aws-ssh-config&#34;&gt;Github repo&lt;/a&gt;
+for dynamically building &lt;code&gt;~/.ssh/config&lt;/code&gt; using boto.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.ryanparman.com/2014/01/29/easily-ssh-into-amazon-ec2-instances-using-the-name-tag/&#34;&gt;Easily SSH into Amazon EC2 instances using the Name
+tag&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>commandlinefu.com is in new hands</title>
+      <link>http://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</link>
+      <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</guid>
+      <description>&lt;p&gt;For the record, I no longer maintain
+&lt;a href=&#34;http://www.commandlinefu.com/&#34;&gt;commandlinefu.com&lt;/a&gt;. I&amp;rsquo;ve handed over the
+baton to notable Bay Area celebrity, Jon Hendren
+(&lt;a href=&#34;https://twitter.com/fart&#34;&gt;@fart&lt;/a&gt;). This is a good thing for the site
+and its users as I have been unable to do much maintenance in recent
+times. I look forward to seeing how the site evolves.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backing up Postgres database rows before deleting them</title>
+      <link>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</link>
+      <pubDate>Thu, 19 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hmmm, this delete statement is taking longer than I thought it
+would&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you ever have to manually run a SQL delete statement in &lt;code&gt;psql&lt;/code&gt;, you
+can back-up the rows you&amp;rsquo;re about to delete:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;copy&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;id&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/backup.csv&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore
+them with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;copy&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/backup.csv&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Moderately useful.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Avoiding clashing Django migrations</title>
+      <link>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</link>
+      <pubDate>Sat, 31 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</guid>
+      <description>&lt;p&gt;Managing South migrations on a multi-developer Django project can be
+painful. Developers working on separate branches will often create
+migrations for the same app with the same migration number&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. When
+merged into master, these clashing migrations can cause deployment
+hiccups as South will complain if migrations are applied out of order.&lt;/p&gt;
+
+&lt;p&gt;There are various techniques available for dealing with this&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, but
+what we do at &lt;a href=&#34;http://justyoyo.com/&#34;&gt;Yoyo&lt;/a&gt; is test for such clashes as
+part of our Travis continuous integration.&lt;/p&gt;
+
+&lt;p&gt;This is done by calling a &lt;code&gt;makefile&lt;/code&gt; target from &lt;code&gt;.travis.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# .travis.yml&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;language&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2.7&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;install&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make virtualenv&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;script&lt;/span&gt;
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;- make test&lt;/span&gt;
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;- make migration_test&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where the &lt;code&gt;migration_test&lt;/code&gt; target is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# makefile&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;MIGRATION_CLASHES&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;shell find . -type f -name &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep -o &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.*/migrations/[0-9]\+&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq -c &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$$1 &amp;gt; 1 {print $$0}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;migration_test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -n &lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;MIGRATION_CLASHES&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here the &lt;code&gt;$(shell ...)&lt;/code&gt; call extracts the app name and migration number
+from all migration files then uses &lt;code&gt;awk&lt;/code&gt; to look for clashes. If any are
+found, the Travis build will fail and the console output should reveal
+which apps have clashes.&lt;/p&gt;
+
+&lt;p&gt;This works best if you only allow fast-forward commits into master
+(something we do at &lt;a href=&#34;http://justyoyo.com/&#34;&gt;Yoyo&lt;/a&gt;). Doing this forces you
+to merge master back into your pull request branch and allows Travis to
+catch migration clashes before it is merged. Then any conflicts can be
+resolved by renumbering or recreating any migrations not yet merged to
+master.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I&amp;rsquo;m only talking about Django versions less than 1.7 - I&amp;rsquo;m not
+sure if this is still an issue in more modern Django versions.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+
+&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;As noted by the &lt;a href=&#34;http://south.readthedocs.org/en/latest/tutorial/part5.html&#34;&gt;South
+docs&lt;/a&gt;,
+you can run the migrations with the &lt;code&gt;--merge&lt;/code&gt; option although this
+generally means a manual intervention in your deployment process
+which isn&amp;rsquo;t ideal.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Bootstrapped virtualenvs</title>
+      <link>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</link>
+      <pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
+      <description>&lt;p&gt;The excellent
+&lt;a href=&#34;https://bitbucket.org/dhellmann/virtualenvwrapper..&#34;&gt;virtualenvwrapper&lt;/a&gt;
+supports a &lt;code&gt;postmkvirtualenv&lt;/code&gt; script to bootstrap your virtual
+environments. Here&amp;rsquo;s a useful implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/usr/bin/env bash&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Grab project name from virtualenv name&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;NAME&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;basename &lt;span style=&#34;color: #f8f8f2&#34;&gt;$VIRTUAL_ENV&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Set terminal title on postactivate&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;title &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$NAME&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$VIRTUAL_ENV&lt;/span&gt;/bin/postactivate
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Change directory to root of project on postactivate. We assume the&lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# mkvirtualenv is being run from the root of the project. This line &lt;/span&gt;
+&lt;span style=&#34;color: #75715e&#34;&gt;# will need to edited later if not.&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;cd &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$PWD&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt;&amp;gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$VIRTUAL_ENV&lt;/span&gt;/bin/postactivate
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Run postactivate now to get the title set&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$VIRTUAL_ENV&lt;/span&gt;/bin/postactivate
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This ensures that a new virtualenv has a &lt;code&gt;postactivate&lt;/code&gt; script which:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Sets the terminal title to that of the virtualenv&lt;/li&gt;
+&lt;li&gt;Changes directory to the root of the project&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;By convention, such a script lives in &lt;code&gt;~/.virtualenvs/postmkvirtualenv&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Note that the &lt;code&gt;title&lt;/code&gt; function is defined in my &lt;code&gt;~/.bashrc&lt;/code&gt; as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; title&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; -ne &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;\033]0;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;\007&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As someone who develops in iTerm and Terminal, automatically setting the
+tab titles is a useful navigation aid.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/terminal-titles.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;There are more &lt;a href=&#34;http://virtualenvwrapper.readthedocs.org/en/latest/tips.html&#34;&gt;tips and
+tricks&lt;/a&gt;
+available in the virtualenvwrapper docs.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Integrating Django application metrics into Zabbix</title>
+      <link>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
+      <description>
+
+&lt;p&gt;At &lt;a href=&#34;http://www.tangentsnowball.com&#34;&gt;Tangent&lt;/a&gt;, we use
+&lt;a href=&#34;http://www.zabbix.com/&#34;&gt;Zabbix&lt;/a&gt; for monitoring and alerting. This is a
+note-to-self on how to configure application monitoring.&lt;/p&gt;
+
+&lt;h3 id=&#34;management-command&#34;&gt;Management command&lt;/h3&gt;
+
+&lt;p&gt;You need a script that prints out a value to STDOUT. A simple management
+command suffices:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.management.base&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseCommand,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CommandError&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Command&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(BaseCommand):&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;options):&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;args:&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;usage()&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;fetch_%s&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;args[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;hasattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name):&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CommandError(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;No method found with name &amp;#39;%s&amp;#39;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;getattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name)(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:])&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;usage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetchers&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[m&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;dir(self)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;startswith(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;fetch&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)]&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;descriptions&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetchers:&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;getattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;docstring&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__doc__&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;strip()&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__doc__&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;no description&amp;gt;&amp;quot;&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;descriptions&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;append(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; - %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;split(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;docstring))&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Available fetchers:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;%s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;join(descriptions)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This uses dynamic dispatch to call &amp;ldquo;fetcher&amp;rdquo; methods with name
+&lt;code&gt;fetch_%s&lt;/code&gt; where the first argument defines the format variable. Eg, a
+method:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch_num_users&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;    Fetch number of users&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;objects&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;all()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;count()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;is called via:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py application_metric num_users
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Without arguments, a list of fetchers is shown:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py application_metric
+Available fetchers:
+ - num_users : Fetch number of users
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It&amp;rsquo;s trivial to add more &lt;code&gt;fetch_*&lt;/code&gt; methods to emit additional metrics.&lt;/p&gt;
+
+&lt;h3 id=&#34;zabbix-plugin&#34;&gt;Zabbix plugin&lt;/h3&gt;
+
+&lt;p&gt;Hook this up to Zabbix by first creating a plugin script which calls the
+management command, passing on an arg:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/zabbix/plugins/application
+&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; /path/to/virtualenv/bin/activate &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /path/to/project/manage.py application_metric &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then create the Zabbix &amp;ldquo;UserParameter&amp;rdquo; declaration which calls the
+plugin script:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/zabbix/zabbix_agentd.conf.d/application.conf
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;UserParameter&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;application&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;*&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;,/etc/zabbix/plugins/application &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;application[*]&lt;/code&gt; syntax means that you can configure various &amp;ldquo;Items&amp;rdquo;
+in Zabbix like &lt;code&gt;application[num_orders]&lt;/code&gt; and &lt;code&gt;application[num_users]&lt;/code&gt;
+and the bracketed string will get passed all the way through to the
+management command.&lt;/p&gt;
+
+&lt;p&gt;Now restart Zabbix to pick up the new conf file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ /etc/init.d/zabbix-agent restart
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;zabbix-dashboard&#34;&gt;Zabbix dashboard&lt;/h3&gt;
+
+&lt;p&gt;In the Zabbix web dashboard add new &amp;ldquo;Items&amp;rdquo; that use this new
+&amp;ldquo;UserParameter&amp;rdquo;. Add a new &amp;ldquo;Item&amp;rdquo; by navigating through
+&lt;code&gt;Configuration &amp;gt; Hosts &amp;gt; Items &amp;gt; Create item&lt;/code&gt;. In the resulting form,
+set the &amp;ldquo;Key&amp;rdquo; to, say, &lt;code&gt;application[num_users]&lt;/code&gt; to pass &lt;code&gt;num_users&lt;/code&gt; as
+the first argument through to the management command.&lt;/p&gt;
+
+&lt;p&gt;And that&amp;rsquo;s it: this metric will now be collected by Zabbix and can be
+used for graphing and alerting.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Linking to Github</title>
+      <link>http://codeinthehole.com/tips/linking-to-github/</link>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/linking-to-github/</guid>
+      <description>&lt;p&gt;It was rightly &lt;a href=&#34;http://andrew.yurisich.com/work/2014/07/16/dont-link-that-line-number/&#34;&gt;pointed out
+yesterday&lt;/a&gt;
+that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without
+explicitly specifying the commit hash in the URL. On this theme,
+consider this git command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git browse -u -- commit/&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This emits the Github URL to the &lt;code&gt;HEAD&lt;/code&gt; commit on the current branch,
+specifying the commit hash in the URL. Note that the &lt;code&gt;browse&lt;/code&gt; subcommand
+is provided by the excellent &lt;a href=&#34;https://hub.github.com/&#34;&gt;hub&lt;/a&gt; library.&lt;/p&gt;
+
+&lt;p&gt;Pasting links to commits is common, both for mailing list posts and
+within discussion on Github itself. Getting the correct URL quickly is
+useful.&lt;/p&gt;
+
+&lt;p&gt;We can streamline further using an alias:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.gitconfig&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;alias&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -u -- commit/&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;so we can run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git url
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to get the expanded &lt;code&gt;HEAD&lt;/code&gt; URL. Even better, we can parameterise:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.gitconfig&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;alias&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;!f() { sha=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse &lt;span style=&#34;color: #e6db74&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;HEAD&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;; hub browse -u -- commit/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$sha&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;; }; f&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;so we can now specify a commit:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git url
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
+
+$ git url head
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
+
+$ git url head^
+https://github.com/tangentlabs/django-oscar/commit/f49d055befc90897c030e0447a98d512cca4265b
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Several times a day, I run one of the above, piping the output into the
+clipboard for easy pasting:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git url &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.bashrc&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;alias&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;clipboard&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;pbcopy&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;# osx clipboard&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a few more useful git aliases based on the &lt;code&gt;browse&lt;/code&gt; subcommand:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.gitconfig&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;alias&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;commits&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- commits
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;issues&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- issues
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;wiki&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- wiki
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- settings
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Continuously rebuild your project</title>
+      <link>http://codeinthehole.com/tips/continuously-re-build-your-project/</link>
+      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/continuously-re-build-your-project/</guid>
+      <description>
+
+&lt;p&gt;New developers joining a project will often find that the project won&amp;rsquo;t
+build cleanly on their machine, and hours of time will be sunk into
+setting up the project so work can start. This is sad and expensive for
+all concerned.&lt;/p&gt;
+
+&lt;p&gt;This is a particular menace in agencies (or anywhere with lots of small
+projects) where a large team of developers need to jump between
+projects. Tools like &lt;a href=&#34;http://www.vagrantup.com&#34;&gt;Vagrant&lt;/a&gt; and
+&lt;a href=&#34;http://www.docker.com/&#34;&gt;Docker&lt;/a&gt; can help but aren&amp;rsquo;t the panacea they
+first seem to be&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;Counter this by using continuous integration to build your project from
+scratch. Then any changes that break the build process (such as database
+schema changes not applying correctly) will be spotted early. New team
+members will be dishing out high-fives when their development
+environment is built and primed with sample data sixty seconds after
+cloning the repo.&lt;/p&gt;
+
+&lt;h3 id=&#34;tips&#34;&gt;Tips&lt;/h3&gt;
+
+&lt;p&gt;It should be trivial to get a project working locally. At
+&lt;a href=&#34;http://www.tangentsnowball.com/&#34;&gt;Tangent&lt;/a&gt;, projects use a &lt;code&gt;makefile&lt;/code&gt;
+for common tasks. Setting up a working version of the project is as
+simple as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ make 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It&amp;rsquo;s helpful if you can template new projects to embed good practices
+like this. We frequently use Django and maintain a &lt;a href=&#34;https://github.com/tangentlabs/tangent-django-boilerplate/&#34;&gt;boilerplate Django
+project&lt;/a&gt; for
+this purpose. It includes a
+&lt;a href=&#34;https://github.com/tangentlabs/tangent-django-boilerplate/blob/master/makefile&#34;&gt;makefile&lt;/a&gt;
+along these lines:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Build a working version of the project&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;build&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;clean&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;virtualenv&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;database&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Delete all temporary or untracked files&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;clean&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; 
+    -find . -type f -name &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*.pyc&amp;quot;&lt;/span&gt; -delete
+    -rm -rf www/public/media/*
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Update the virtualenv&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;virtualenv&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; 
+    pip install -r www/deploy/requirements.txt
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Create a database populated with data&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;database&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; 
+    python www/manage.py reset_db --router&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;default --noinput
+    python www/manage.py syncdb --noinput
+    python www/manage.py migrate
+&lt;span style=&#34;color: #75715e&#34;&gt;    # Load any project fixtures to pre-populate the initial database&lt;/span&gt;
+    python www/manage.py loaddata fixtures/*.json
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cd&lt;/span&gt; www &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; py.test
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;ci&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;database&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Witness the &lt;code&gt;ci&lt;/code&gt; target which runs the test suite &lt;em&gt;and&lt;/em&gt; builds the
+database, effectively smoke-testing that the migrations apply correctly
+and the fixtures load (which is where we&amp;rsquo;ve historically had pain).&lt;/p&gt;
+
+&lt;p&gt;We use &lt;a href=&#34;https://travis-ci.com/&#34;&gt;Travis&lt;/a&gt; for CI and our template
+&lt;code&gt;.travis.yml&lt;/code&gt; looks a little like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;language&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;2.7&amp;#39;&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;install&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make virtualenv&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Use the same database as used in production&lt;/span&gt;
+&lt;span style=&#34;color: #ae81ff&#34;&gt;before_script&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;psql -c &amp;#39;CREATE ROLE test_role login createdb superuser;&amp;#39; -U postgres&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;psql -c &amp;#39;CREATE DATABASE test_db OWNER test_role;&amp;#39; -U postgres&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;script&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make ci&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which means that, &lt;em&gt;by default&lt;/em&gt;, all new projects will be built from
+scratch as part of continuous integration. You should do this.&lt;/p&gt;
+
+&lt;h3 id=&#34;django-specific-issues&#34;&gt;Django-specific issues&lt;/h3&gt;
+
+&lt;p&gt;For the record, here&amp;rsquo;s some of the build issues we&amp;rsquo;ve encountered in
+Django projects (both internal and external) Most stem from South
+migrations, which worked fine when applied piecemeal by the incumbent
+team but fail when run on a blank database. For instance:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Migrations fail to apply as there are dependencies between
+migrations which haven&amp;rsquo;t been captured. This is easily solved by
+employing South&amp;rsquo;s support for dependent migrations (eg adding
+&lt;code&gt;depends_on&lt;/code&gt; to the relevant migration class).&lt;/li&gt;
+&lt;li&gt;Migrations fail as they import models directly rather than using the
+reconstituted models that South provides. This is a beginner mistake
+really but still quite common. Fortunately, it&amp;rsquo;s trivial to fix.&lt;/li&gt;
+&lt;li&gt;Migrations import and call functions that are no longer defined (but
+did exist when the migration was originally written).&lt;/li&gt;
+&lt;li&gt;Migrations create instances of models from &lt;em&gt;other&lt;/em&gt; apps where
+South&amp;rsquo;s serialised version is out of sync with the database schema.
+This can be tricky to fix as you can get circular dependencies
+between migrations. Often you&amp;rsquo;ll need to rewrite migrations to
+create models in the migrations of their own apps.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://twitter.com/andrewingram&#34;&gt;Andrew Ingram&lt;/a&gt; has written up an
+excellent summary of &lt;a href=&#34;http://andrewingram.net/2012/dec/common-pitfalls-django-south/#check-your-migrations-run-from-scratch&#34;&gt;common South
+pitfalls&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;For instance, it&amp;rsquo;s not trivial to share folders with a Docker
+container on OSX. See
+&lt;a href=&#34;https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293&#34;&gt;https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293&lt;/a&gt;&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using the silver searcher with Vim</title>
+      <link>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</link>
+      <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
+      <description>
+
+&lt;h1 id=&#34;here-is-my-title&#34;&gt;Here is my title&lt;/h1&gt;
+
+&lt;p&gt;If you&amp;rsquo;re not doing this already, then you should use the &lt;a href=&#34;http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/&#34;&gt;Silver
+Searcher&lt;/a&gt;
+within Vim for rapid, convenient file searching. In a nutshell, &lt;code&gt;ag&lt;/code&gt;
+offers similar functionality to &lt;code&gt;ack&lt;/code&gt; but with much better performance.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s easily installed - on OSX, run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install the_silver_searcher
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Urge Vim to use it for &lt;code&gt;:grep&lt;/code&gt; commands by adding the following to
+&lt;code&gt;~/.vimrc&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; executable&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ag&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; 
+&lt;span style=&#34;color: #75715e&#34;&gt;    &amp;quot; Note we extract the column as well as the file and line number&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;grepprg=&lt;/span&gt;ag\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;nogroup\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;nocolor\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;column
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;grepformat=&lt;/span&gt;%&lt;span style=&#34;color: #66d9ef&#34;&gt;f&lt;/span&gt;:%&lt;span style=&#34;color: #66d9ef&#34;&gt;l&lt;/span&gt;:%&lt;span style=&#34;color: #66d9ef&#34;&gt;c&lt;/span&gt;%&lt;span style=&#34;color: #66d9ef&#34;&gt;m&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;endif&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;code&gt;:grep&lt;/code&gt; searches are now lightning-fast and respectful of your
+&lt;code&gt;~/.gitignore&lt;/code&gt; patterns. It&amp;rsquo;s genuinely impressive.&lt;/p&gt;
+
+&lt;p&gt;Improve your efficiency further by remapping the keys for jumping
+through search matches (stored in the &amp;ldquo;quickfix&amp;rdquo; list):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;nmap &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;silent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;RIGHT&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; :cnext&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;CR&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
+nmap &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;silent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;LEFT&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; :cprev&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;CR&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I&amp;rsquo;m using the cursor keys since I normally have them disabled.&lt;/p&gt;
+
+&lt;p&gt;See also:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://robots.thoughtbot.com/faster-grepping-in-vim&#34;&gt;Faster Grepping in Vim&lt;/a&gt; by Dan
+Croak - this shows how to use the Silver searcher with the &lt;a href=&#34;https://github.com/kien/ctrlp.vim&#34;&gt;CtrlP&lt;/a&gt; plugin.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/rking/ag.vim&#34;&gt;ag.vim&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The road to Oscar 1.0</title>
+      <link>http://codeinthehole.com/projects/the-road-to-oscar-10/</link>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/the-road-to-oscar-10/</guid>
+      <description>
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/oscar.png&#34; class=&#34;noborder align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Oscar 0.7 was &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/releases/v0.7.html&#34;&gt;released this
+week&lt;/a&gt;,
+a comparatively minor house-keeping release that allowed us to reduce
+our pull-request and issue backlogs. We have a plan for Oscar through
+2014 and this article outlines the roadmap.&lt;/p&gt;
+
+&lt;h3 id=&#34;v1-0&#34;&gt;v1.0&lt;/h3&gt;
+
+&lt;p&gt;We&amp;rsquo;re aiming to be v1.0 before the end of the year&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Oscar has been
+beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to
+commit to the backward compatibility responsibilities associated with
+coming out of beta.&lt;/p&gt;
+
+&lt;p&gt;Plus, this will help &lt;a href=&#34;http://www.tangentsnowball.com/&#34;&gt;Tangent Snowball&lt;/a&gt;
+(who sponsor Oscar&amp;rsquo;s development) promote Oscar to blue-chip or
+&amp;ldquo;enterprise&amp;rdquo; clients, who feel nervous enough using open-source
+e-commerce software, let alone &lt;em&gt;beta&lt;/em&gt; open-source software.&lt;/p&gt;
+
+&lt;p&gt;There isn&amp;rsquo;t a lot to do before this milestone. Oscar&amp;rsquo;s philosophy is to
+keep the core package lean and flexible, hence we don&amp;rsquo;t have a large
+shopping list of features we want to add. Rather, there are a few areas
+that need careful review to ensure they are flexible enough. Also, there
+are a few topics that we want to research thoroughly in case they have
+design implications.&lt;/p&gt;
+
+&lt;p&gt;These are detailed here:&lt;/p&gt;
+
+&lt;h4 id=&#34;product-dashboard&#34;&gt;Product dashboard&lt;/h4&gt;
+
+&lt;p&gt;The current version uses a one-size-fits-all approach which is now
+stretched to breaking point trying to handle a wide range of scenarios.
+In particular, it&amp;rsquo;s not easy to administer group and variant products
+using the current implementation&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;A new, carefully considered version will be built that provides separate
+views and forms for the different work-flows. The new implementation
+will be simpler than the current, provide a superior user experience and
+be easier to customise and extend.&lt;/p&gt;
+
+&lt;p&gt;This piece of work is scheduled to be looked at by Tangent&amp;rsquo;s UX team
+shortly and should land in master over the summer.&lt;/p&gt;
+
+&lt;h4 id=&#34;multi-tenancy&#34;&gt;Multi-tenancy&lt;/h4&gt;
+
+&lt;p&gt;We&amp;rsquo;re aiming to provide better support for multi-tenanted sites where a
+single dashboard is used to manage a product catalogue that can be used
+across several sites. Several people on the mailing list have requested
+this, and Tangent have a forthcoming project that will require a form of
+this.&lt;/p&gt;
+
+&lt;p&gt;This poses some tricky design questions around how products, categories
+and offers are linked to sites. It&amp;rsquo;s tempting to slap a new many-to-many
+relationship onto every core model that links them to sites, but this
+may not be the right approach as it will add extra joins to SQL queries.
+Some careful research is required: we don&amp;rsquo;t want to impair performance
+for the many to satisfy the requirements of the few.&lt;/p&gt;
+
+&lt;p&gt;We&amp;rsquo;ll be talking to several people at DjangoCon EU 2014 about how
+Tangent can partner with other Oscar implementors to first design the
+appropriate handling, and later drive forward an implementation.&lt;/p&gt;
+
+&lt;h4 id=&#34;faceted-browsing-everywhere&#34;&gt;Faceted browsing everywhere&lt;/h4&gt;
+
+&lt;p&gt;Oscar uses &lt;a href=&#34;http://haystacksearch.org/&#34;&gt;Haystack&lt;/a&gt; for search (with a
+preference for &lt;a href=&#34;https://lucene.apache.org/solr/&#34;&gt;Solr&lt;/a&gt;) and has some
+&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/apps/search/facets.py&#34;&gt;custom
+helpers&lt;/a&gt;
+to make working with facets easier. Facets are great for customers
+whenever they&amp;rsquo;re browsing a list of products and it&amp;rsquo;s desirable to allow
+faceting on all product browsing views. This would require using the
+search back-end to drive all browsing views.&lt;/p&gt;
+
+&lt;p&gt;Some &lt;a href=&#34;https://groups.google.com/forum/?fromgroups#!topicsearchin/django-oscar/haystack%7Csort:date%7Cspell:true/django-oscar/7cykIQSS7lw&#34;&gt;initial
+work&lt;/a&gt;
+has been done on this already. We intend to review and merge this into
+master soon.&lt;/p&gt;
+
+&lt;h4 id=&#34;research-topics&#34;&gt;Research topics&lt;/h4&gt;
+
+&lt;p&gt;Some things to look into:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Oscar ships with a set of translation message files but doesn&amp;rsquo;t
+currently provide built-in support for translating model content
+into multiple languages. There are &lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation/&#34;&gt;various Django
+libraries&lt;/a&gt;
+that address this issue already. We need to research the best
+approach (or approaches) and document how to use them with Oscar.&lt;/li&gt;
+&lt;li&gt;Since Oscar is just a set of apps, it works with all existing
+&lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation://www.djangopackages.com/grids/g/cms/&#34;&gt;Django CMS
+packages&lt;/a&gt;.
+However, more research is required to find the right way to
+integrate content management. With its &amp;ldquo;promotions&amp;rdquo; app, Oscar
+already provides some limited forms of merchandising but it might be
+better to drop this app and provide better hooks for CMS packages to
+manage all content. We&amp;rsquo;ll see.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&#34;thanks&#34;&gt;Thanks&lt;/h3&gt;
+
+&lt;p&gt;As ever, we&amp;rsquo;re hugely grateful to the work of the community: submitting
+pull requests, adding translations, reporting bugs.&lt;/p&gt;
+
+&lt;p&gt;If you&amp;rsquo;d like to get involved, please see our &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/internals/contributing/index.html&#34;&gt;contributing
+guidelines&lt;/a&gt;.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;We&amp;rsquo;re using &lt;a href=&#34;http://semver.org/&#34;&gt;semantic versioning&lt;/a&gt;.
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+
+&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;This is driven in part by the fact that Tangent haven&amp;rsquo;t had to
+build a large-scale clothing site yet.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Command-line tips for effective release announcements</title>
+      <link>http://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</link>
+      <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
+      <description>
+
+&lt;p&gt;We finally &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/releases/v0.6.html&#34;&gt;released Oscar
+0.6&lt;/a&gt;
+last week. The process brought home the importance of writing your
+release notes as you go rather than at the end. It&amp;rsquo;s a real pain to
+extract the key changes from 1200 commits spread over the last 8 months.
+Lesson learnt.&lt;/p&gt;
+
+&lt;p&gt;This article is largely a note-to-self in case I have to repeat the
+process. However, if you do find yourself in a similar position, here
+are a few command-line tricks for analysing your git history.&lt;/p&gt;
+
+&lt;h3 id=&#34;analysing-codebase-changes-since-a-tag&#34;&gt;Analysing codebase changes since a tag&lt;/h3&gt;
+
+&lt;p&gt;Basics: browse commits since the last tagged release&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;--name-status&lt;/code&gt; option for &lt;code&gt;git diff&lt;/code&gt; is useful for analysing
+codebase changes between two commits. For instance, you can view changes
+to a particular directory:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 oscar/apps/address
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which can be useful if thousands of files have changed and you want to
+review each package individually.&lt;/p&gt;
+
+&lt;p&gt;Extensions include finding deleted files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^D&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or all new migration files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^A.*migrations/[0-9]&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which is important for projects like Oscar which ship with database
+migrations.&lt;/p&gt;
+
+&lt;h3 id=&#34;determine-changes-template-block-names&#34;&gt;Determine changes template block names&lt;/h3&gt;
+
+&lt;p&gt;Since Oscar allows customisation of templates and overriding template
+blocks, we try and document any changes to template block names. The
+process here is more involved and requires two temporary files generated
+with this command:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+    awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This writes out each pairs of filename and template block name:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;oscar/templates/oscar/403.html title
+oscar/templates/oscar/403.html error_heading
+oscar/templates/oscar/403.html error_message
+oscar/templates/oscar/404.html title
+oscar/templates/oscar/404.html error_heading
+oscar/templates/oscar/404.html error_message
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;To compare the template blocks from each release, we create two
+temporary files and analyse the diff:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git checkout &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5
+$ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+    awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt; &amp;gt;
+    /tmp/templates-0.5.txt
+$ git checkout &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.6
+$ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+    awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt; &amp;gt;
+    /tmp/templates-0.6.txt
+$ vimdiff /tmp/templates-0.&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;5&lt;/span&gt;,6&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I imagine there&amp;rsquo;s a better way to do this but I couldn&amp;rsquo;t find one.&lt;/p&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;
+    This is a Django specific technique, but the general approach is quite
+    useful for analysing changes between two codebases.
+&lt;/div&gt;
+
+&lt;h3 id=&#34;updating-an-authors-files&#34;&gt;Updating an &lt;code&gt;AUTHORS&lt;/code&gt; files&lt;/h3&gt;
+
+&lt;p&gt;Oscar&amp;rsquo;s &lt;code&gt;AUTHORS&lt;/code&gt; file contains all contributors with 15 or more commits
+in the master branch. We generate this file automatically.&lt;/p&gt;
+
+&lt;p&gt;You can sort authors by number of commits:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog -sn master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; head
+  &lt;span style=&#34;color: #ae81ff&#34;&gt;2992&lt;/span&gt;  David Winterbottom
+   &lt;span style=&#34;color: #ae81ff&#34;&gt;355&lt;/span&gt;  Maik Hoepfel
+   &lt;span style=&#34;color: #ae81ff&#34;&gt;167&lt;/span&gt;  Sebastian Vetter
+   &lt;span style=&#34;color: #ae81ff&#34;&gt;166&lt;/span&gt;  Jon Price
+   &lt;span style=&#34;color: #ae81ff&#34;&gt;120&lt;/span&gt;  Andrew Ingram
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;73&lt;/span&gt;  Asia Biega
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;65&lt;/span&gt;  Oliver Randell
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;49&lt;/span&gt;  Eleni Lixourioti
+  ...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and extend this to find authors with more than a certain number of
+commits&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;THRESHOLD&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;
+$ git shortlog -sn master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$1 &amp;gt;= $THRESHOLD {$1=&amp;quot;&amp;quot;;print $0}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -f2-
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note, &lt;code&gt;git shortlog&lt;/code&gt; uses a &lt;code&gt;.mailmap&lt;/code&gt; file to aggregate commmits from
+the same committer where their name or email were different in the
+commit history.&lt;/p&gt;
+
+&lt;p&gt;Using this command, we can create a new &lt;code&gt;AUTHORS&lt;/code&gt; file containing all
+contributors with greater than 15 commits on the master branch:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog -ns master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$1 &amp;gt;= $THRESHOLD {$1=&amp;quot;&amp;quot;;print $0}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+    cut -d&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -f2- &amp;gt; AUTHORS
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;notifying-contributors&#34;&gt;Notifying contributors&lt;/h3&gt;
+
+&lt;p&gt;If you have a patch accepted into a project, it&amp;rsquo;s useful to know when a
+formal release has been cut that includes said patch. Before then, you
+might be linking your project to a fork and maintaining a work-around
+within your codebase.&lt;/p&gt;
+
+&lt;p&gt;As the project maintainer, you might assume that such people are already
+subscribed to your project mailing list, or following your project
+Twitter stream. However, there&amp;rsquo;s a more thorough way to notify
+contributors that their patch is in a release: you can email them.&lt;/p&gt;
+
+&lt;p&gt;To do this, extract the email addresses of committers whose patches are
+in the new release:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and CC these addresses in your mailing list release announcement.&lt;/p&gt;
+
+&lt;p&gt;Even better, you can only grab the addresses of &lt;em&gt;new&lt;/em&gt; contributors to
+the project, where the release is the first to contain one of their
+commits. We do this by extracting two lists of email addresses and
+employing the lovely but neglected &lt;code&gt;comm&lt;/code&gt; command to pluck the email
+addresses that only exist in the latest release:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ comm -13 &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+    &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note the first input is all contributors up to release 0.5, while the
+second is contibutors to the 0.6 release only.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;comm&lt;/code&gt; is an extremely useful command for selecting lines common between
+two files, or exclusive to one. The &lt;code&gt;-13&lt;/code&gt; options indicate to exclude
+lines exclusive to the first file (&lt;code&gt;-1&lt;/code&gt;) and lines common to both
+(&lt;code&gt;-3&lt;/code&gt;).&lt;/p&gt;
+
+&lt;h3 id=&#34;summarising-changes&#34;&gt;Summarising changes&lt;/h3&gt;
+
+&lt;p&gt;If your release isn&amp;rsquo;t large, your release notes could include a summary
+of the contained commits; this is useful for minor point releases. You
+can use &lt;code&gt;git shortlog&lt;/code&gt; to do this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --no-merges
+David Winterbottom &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;661&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
+      Add defaults to the counts on the product summary dashboard page
+      Tidy up urls.py and settings.py
+      Use mirrors when pip installing the demo site
+      Install django-oscar-stores
+      Add link to stores page in footer
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can even use &lt;code&gt;--format&lt;/code&gt; to provide links to Github commits:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.3.4..0.4 --no-merges --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&amp;quot;&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This won&amp;rsquo;t always be appropriate if your release if there are thousands
+of commits.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to install PostGIS and GeoDjango on Ubuntu</title>
+      <link>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</link>
+      <pubDate>Fri, 04 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;Despite its &lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/&#34;&gt;extensive
+documentation&lt;/a&gt;,
+getting GeoDjango installed and configured can be a pain. Here are my
+notes for future reference:&lt;/p&gt;
+
+&lt;h3 id=&#34;installation-on-ubuntu-12-04&#34;&gt;Installation on Ubuntu 12.04&lt;/h3&gt;
+
+&lt;p&gt;First, ensure your system locale is UTF8 as PostgreSQL uses it to
+determine its default encoding during installation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LANGUAGE&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
+$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LANG&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
+$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LC_ALL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now install dependencies:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get update
+$ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;PostgreSQL should now be installed and running with UTF8 encodings.
+Verify this with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres psql -l    
+                                     List of databases
+       Name       &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;  Owner   &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Encoding &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;   Collate   &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    Ctype    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+------------------+----------+----------+-------------+-------------+-...
+ postgres         &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; postgres &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; UTF8     &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+ template0        &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; postgres &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; UTF8     &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+ template1        &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; postgres &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; UTF8     &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now create a spatial database. The above commands will have installed
+PostGIS 1.5.3 hence, &lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/#creating-a-spatial-database-template-for-earlier-versions&#34;&gt;according to Django&amp;rsquo;s
+docs&lt;/a&gt;,
+we need to download and install a shell script that executes the
+appropriate commands:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ wget https://docs.djangoproject.com/en/dev/_downloads/create_template_postgis-1.5.sh
+$ chmod +x create_template_postgis-1.5.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and run it as a privileged user:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres ./create_template_postgis-1.5.sh
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If this is successful, a deluge of SQL output will echo to the console.
+This is normal. PostGIS is now correctly installed and we have a
+template database we can use to create a database for our GeoDjango
+project.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres psql
+psql &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.1.9&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+Type &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;help&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; help.
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# CREATE ROLE sample_role WITH PASSWORD &amp;#39;sample_password&amp;#39; LOGIN;&lt;/span&gt;
+CREATE ROLE
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# CREATE DATABASE sample_db OWNER sample_role TEMPLATE template_postgis;&lt;/span&gt;
+CREATE DATABASE
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is the tricky bit over: you can now &lt;code&gt;pip install psycopg2&lt;/code&gt; and
+you&amp;rsquo;re basically done. Remember to use the PostGIS database engine in
+your &lt;code&gt;DATABASES&lt;/code&gt; setting:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;DATABASES&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;default&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ENGINE&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;django.contrib.gis.db.backends.postgis&amp;#39;&lt;/span&gt;,
+        ...
+    &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;,
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;common-errors&#34;&gt;Common errors&lt;/h4&gt;
+
+&lt;p&gt;If your system locale is not UTF8 when attempting to create a spatial
+database, you&amp;rsquo;ll see something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres ./create_template_postgis-debian.sh
+createdb: database creation failed: ERROR: encoding UTF8 does not match locale en_US
+DETAIL:  The chosen LC_CTYPE setting requires encoding LATIN1 
+FATAL:  database &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;template_postgis&amp;quot;&lt;/span&gt; does not exist
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If PostgreSQL is not installed when trying to install psycopg2, you see
+something that ends with this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;warning: manifest_maker: standard file &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;-c&amp;#39;&lt;/span&gt; not found
+
+Error: pg_config executable not found.
+
+Please add the directory containing pg_config to the PATH
+or specify the full executable path with the option:
+
+    python setup.py build_ext --pg-config /path/to/pg_config build ...
+
+or with the pg_config option in &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;setup.cfg&amp;#39;&lt;/span&gt;.
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I&amp;rsquo;ll add more error symptoms when I see them in the wild.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,160 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Validating international postcodes in Django - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using dynamic imports to leverage Django&#39;s localflavor">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Validating international postcodes in Django</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Tuesday, 13 March 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Tuesday, 13 March 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>You want to validate a post/zip-code when you only know the country at
+runtime.</p>
+
+<h3 id="solution">Solution</h3>
+
+<p>Use this snippet to dynamically fetch a validation method from Django&rsquo;s
+suite of &ldquo;localflavor&rdquo; form fields using the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+3166-1</a> two character
+country code.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">get_postcode_validator</span><span style="color: #f8f8f2">(country_code):</span>
+    <span style="color: #75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">country_code</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;GB&#39;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">country_code</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;UK&#39;</span>
+    <span style="color: #f8f8f2">module_path</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;django.contrib.localflavor.%s&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">country_code</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">lower()</span>
+    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">module</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">__import__(module_path,</span> <span style="color: #f8f8f2">fromlist</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;forms&#39;</span><span style="color: #f8f8f2">])</span>
+    <span style="color: #66d9ef">except</span> <span style="color: #a6e22e">ImportError</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #75715e"># No forms module for this country</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x:</span> <span style="color: #f8f8f2">x</span>
+
+    <span style="color: #f8f8f2">fieldname_variants</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;%sPostcodeField&#39;</span><span style="color: #f8f8f2">,</span>
+                          <span style="color: #e6db74">&#39;%sPostCodeField&#39;</span><span style="color: #f8f8f2">,</span>
+                          <span style="color: #e6db74">&#39;%sPostalCodeField&#39;</span><span style="color: #f8f8f2">,</span>
+                          <span style="color: #e6db74">&#39;%sZipCodeField&#39;</span><span style="color: #f8f8f2">,]</span>
+    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">variant</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">fieldname_variants:</span>
+        <span style="color: #f8f8f2">fieldname</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">variant</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">country_code</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">upper()</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">hasattr(module</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">forms,</span> <span style="color: #f8f8f2">fieldname):</span>
+            <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">getattr(module</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">forms,</span> <span style="color: #f8f8f2">fieldname)()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">clean</span> 
+    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x:</span> <span style="color: #f8f8f2">x</span>
+</pre></div>
+
+<p>As these validators are from forms, they will raise
+<code>django.forms.ValidationError</code> if the passed postcode is invalid. Hence
+your client code should look something like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.forms</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">ValidationError</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">is_postcode_valid</span><span style="color: #f8f8f2">(postcode,</span> <span style="color: #f8f8f2">country_code):</span>
+    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">get_postcode_validator(country_code)(postcode)</span>
+    <span style="color: #66d9ef">except</span> <span style="color: #f8f8f2">ValidationError:</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">False</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">True</span>
+</pre></div>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>As you can see, this is a touch messy as:</p>
+
+<ul>
+<li>Django 1.3 uses the incorrect code for the UK (it should be &lsquo;GB&rsquo;)</li>
+<li>There are a variety of different class names used for the
+appropriate field. We simply iterate over the possibilities and test
+to see if the class exists in the forms module.</li>
+</ul>
+
+<p>This code is used within an internal Tangent geocoding webservice.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/how-to-sync-pycon-videos-to-your-iphone/">How to sync PyCon videos to your iPhone</a><br/>
+            
+            
+                Next: <a href="/tips/how-to-reload-djangos-url-config/">How to reload Django&#39;s URL config</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

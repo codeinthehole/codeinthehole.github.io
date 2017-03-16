@@ -1,0 +1,320 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Use models for uploads - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using models for audit and clarity">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Use models for uploads</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 19 July 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 19 July 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>All Django developers will deal with file uploads at some point. I
+contend that it&rsquo;s a good practice to use models to capture the upload
+metadata and to track processing status. This article explains how and
+why.</p>
+
+<h3 id="an-e-commerce-example">An e-commerce example</h3>
+
+<p>Suppose your e-commerce application allows admins to upload CSV files to
+update product stock levels (a common requirement). A typical file may
+comprise a SKU and a stock level:</p>
+
+<pre><code>9781231231999,0
+9781231231999,4
+9781231231999,2
+...
+</code></pre>
+
+<p><a href="https://docs.djangoproject.com/en/dev/topics/http/file-uploads/?from=olddocs">Django&rsquo;s
+docs</a>
+detail a common pattern for dealing with file uploads such as this. The
+steps are generally:</p>
+
+<ol>
+<li>Validate the form submission;</li>
+<li>Write upload data to permanent storage;</li>
+<li>Process the file;</li>
+<li>Delete the file (optional)</li>
+</ol>
+
+<p>For example:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_upload</span><span style="color: #f8f8f2">(request):</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">method</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;POST&#39;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">UploadFileForm(request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">POST,</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">FILES)</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">form</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">is_valid():</span>
+            <span style="color: #f8f8f2">handle_uploaded_file(request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">FILES[</span><span style="color: #e6db74">&#39;file&#39;</span><span style="color: #f8f8f2">])</span>
+            <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">HttpResponseRedirect(</span><span style="color: #e6db74">&#39;/success/url/&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">UploadFileForm()</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render_to_response(</span><span style="color: #e6db74">&#39;upload.html&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;form&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">form})</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_uploaded_file</span><span style="color: #f8f8f2">(f):</span>
+    <span style="color: #f8f8f2">filepath</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;/tmp/somefile.txt&#39;</span>
+    <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">open(filepath,</span> <span style="color: #e6db74">&#39;wb+&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">dest:</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">chunk</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">f</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">chunks():</span>
+            <span style="color: #f8f8f2">dest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">write(chunk)</span>
+    <span style="color: #f8f8f2">process_file(filepath)</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">process_file</span><span style="color: #f8f8f2">(filepath):</span>
+    <span style="color: #f92672">...</span>
+</pre></div>
+
+<p>This works fine.</p>
+
+<p>However, it&rsquo;s often desirable to collect audit information about which
+files have been processed, how long processing took and who uploaded
+them. Of course, this can be addressed by logging but a more elegant
+solution to use a simple audit model as well. Consider an alternative
+implementation of <code>handle_uploaded_file</code>:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_uploaded_file</span><span style="color: #f8f8f2">(user,</span> <span style="color: #f8f8f2">f):</span>
+    <span style="color: #f8f8f2">filepath</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;/tmp/somefile.txt&#39;</span>
+    <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">open(filepath,</span> <span style="color: #e6db74">&#39;wb+&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">dest:</span>
+        <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">chunk</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">f</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">chunks():</span>
+            <span style="color: #f8f8f2">dest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">write(chunk)</span>
+    <span style="color: #f8f8f2">upload</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">StockUpload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create(</span>
+        <span style="color: #f8f8f2">filepath</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">filepath,</span>
+        <span style="color: #f8f8f2">uploaded_by</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">user</span>
+    <span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">process()</span>
+</pre></div>
+
+<p>where we&rsquo;re now passing the logged-in user too.</p>
+
+<p>The model definition for <code>StockUpload</code> may look like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">datetime</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.db</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">models</span>
+<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.utils.translation</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">ugettext_lazy</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">_</span>
+
+<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">StockUpload</span><span style="color: #f8f8f2">(models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Model):</span>
+    <span style="color: #f8f8f2">filepath</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">CharField(max_length</span><span style="color: #f92672">=</span><span style="color: #ae81ff">255</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #75715e"># Upload audit information</span>
+    <span style="color: #f8f8f2">uploaded_by</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ForeignKey(</span><span style="color: #e6db74">&#39;auth.User&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">date_uploaded</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DateTimeField(auto_now_add</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+
+    <span style="color: #75715e"># Processing audit information</span>
+    <span style="color: #f8f8f2">PENDING,</span> <span style="color: #f8f8f2">PROCESSED,</span> <span style="color: #f8f8f2">FAILED</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;Pending&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Processed&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Failed&#39;</span>
+    <span style="color: #f8f8f2">STATUSES</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">(</span>
+        <span style="color: #f8f8f2">(PENDING,</span> <span style="color: #f8f8f2">_(PENDING)),</span>
+        <span style="color: #f8f8f2">(PROCESSED,</span> <span style="color: #f8f8f2">_(PROCESSED)),</span>
+        <span style="color: #f8f8f2">(FAILED,</span> <span style="color: #f8f8f2">_(FAILED)),</span>
+    <span style="color: #f8f8f2">)</span>
+    <span style="color: #f8f8f2">status</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">CharField(max_length</span><span style="color: #f92672">=</span><span style="color: #ae81ff">64</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">choices</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">STATUSES,</span> <span style="color: #f8f8f2">default</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">PENDING)</span>
+    <span style="color: #f8f8f2">processing_description</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">TextField(blank</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True,</span> <span style="color: #f8f8f2">null</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+    <span style="color: #f8f8f2">num_records</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">PositiveIntegerField()</span>
+    <span style="color: #f8f8f2">date_start_processing</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DateTimeField(null</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+    <span style="color: #f8f8f2">date_end_processing</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DateTimeField(null</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">process</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">date_start_processing</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">now()</span>
+        <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #75715e"># process upload data, </span>
+            <span style="color: #f92672">...</span>
+        <span style="color: #66d9ef">except</span> <span style="color: #a6e22e">Exception</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">e:</span>
+            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_mark_failed(unicode(e))</span>
+        <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">_mark_processed(num_records)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">_mark_processed</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">num_records,</span> <span style="color: #f8f8f2">description</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">status</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">PROCESSED</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">date_end_processing</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">now()</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">num_records</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">num_records</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">processing_description</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">description</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">save()</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">_mark_failed</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">description):</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">status</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">FAILED</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">processing_description</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">description</span>
+        <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">save()</span>
+
+    <span style="color: #a6e22e">@property</span>
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">filename</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">path</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">basename(self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">filename)</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">was_processing_successful</span><span style="color: #f8f8f2">(self):</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">status</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">PROCESSED</span>
+</pre></div>
+
+<p>You can go further and push the file creation into a manager method so
+the filepath generation is removed from the view:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_uploaded_file</span><span style="color: #f8f8f2">(f):</span>
+    <span style="color: #f8f8f2">upload</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">StockUpload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create_from_stream(user,</span> <span style="color: #f8f8f2">f)</span>
+    <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">process()</span>
+</pre></div>
+
+<p>where <code>create_from_stream</code> could be implemented as:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">class</span> <span style="color: #a6e22e">StockUploadManager</span><span style="color: #f8f8f2">(models</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Manager):</span>
+
+    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">create_from_stream</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">user,</span> <span style="color: #f8f8f2">f):</span>
+        <span style="color: #f8f8f2">filepath</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">generate_filename()</span>
+        <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">open(filepath,</span> <span style="color: #e6db74">&#39;wb+&#39;</span><span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">as</span> <span style="color: #f8f8f2">dest:</span>
+            <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">chunk</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">f</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">chunks():</span>
+                <span style="color: #f8f8f2">dest</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">write(chunk)</span>
+        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create(</span>
+            <span style="color: #f8f8f2">filepath</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">filepath,</span>
+            <span style="color: #f8f8f2">uploaded_by</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">user</span>
+        <span style="color: #f8f8f2">)</span>
+</pre></div>
+
+<p>and, if processing takes a while, push the work into Celery:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@task</span><span style="color: #f8f8f2">()</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">process_upload</span><span style="color: #f8f8f2">(upload_id):</span>
+    <span style="color: #f8f8f2">upload</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">StockUpload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(id</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">upload_id)</span>
+    <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">process()</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_uploaded_file</span><span style="color: #f8f8f2">(user,</span> <span style="color: #f8f8f2">f):</span>
+    <span style="color: #f8f8f2">upload</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">StockUpload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create_from_stream(user,</span> <span style="color: #f8f8f2">f)</span>
+    <span style="color: #f8f8f2">process_upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">delay(upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">id)</span>
+</pre></div>
+
+<p>Here&rsquo;s a more complete implementation that uses a library of mine,
+<a href="https://github.com/codeinthehole/django-async-messages/">django-async-messages</a>,
+to send a message back to the user who uploaded the file:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># tasks.py</span>
+
+<span style="color: #a6e22e">@task</span><span style="color: #f8f8f2">()</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">process_upload</span><span style="color: #f8f8f2">(upload_id):</span>
+    <span style="color: #f8f8f2">upload</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">StockUpload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(id</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">upload_id)</span>
+    <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">process()</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">was_processing_successful():</span>
+        <span style="color: #f8f8f2">message_user(</span>
+            <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">uploaded_by,</span> 
+            <span style="color: #e6db74">&quot;Your upload %s was processed successfully, %d records imported&quot;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">(</span>
+                <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">filename,</span>
+                <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">num_records))</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">message_user(</span>
+            <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">uploaded_by,</span> 
+            <span style="color: #e6db74">&quot;Your upload %s could not be processed, error message: %s&quot;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">(</span>
+                <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">filename,</span>
+                <span style="color: #f8f8f2">upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">processing_description,))</span>
+
+<span style="color: #75715e"># views.py</span>
+
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">handle_upload</span><span style="color: #f8f8f2">(request):</span>
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">method</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;POST&#39;</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">UploadFileForm(request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">POST,</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">FILES)</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">form</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">is_valid():</span>
+            <span style="color: #f8f8f2">upload</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">StockUpload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create_from_stream(</span>
+                <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">user,</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">FILES[</span><span style="color: #e6db74">&#39;file&#39;</span><span style="color: #f8f8f2">])</span>
+            <span style="color: #f8f8f2">process_upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">delay(upload</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">id)</span>
+            <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">HttpResponseRedirect(</span><span style="color: #e6db74">&#39;/success/url/&#39;</span><span style="color: #f8f8f2">)</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #f8f8f2">form</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">UploadFileForm()</span>
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render_to_response(</span>
+        <span style="color: #e6db74">&#39;upload.html&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;form&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">form},</span> 
+        <span style="color: #f8f8f2">context_instance</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">RequestContext(request))</span>
+</pre></div>
+
+<h3 id="discussion">Discussion</h3>
+
+<p>The advantages of using a model are:</p>
+
+<ul>
+<li>It keeps your view simple - all processing logic is extracted away.</li>
+<li>The file processing logic is re-usable. You could use a management
+command to process files specified at the commandline.</li>
+<li>It&rsquo;s easy to defer processing to a Celery worker.</li>
+<li>You can gather metrics on processing speed and keep audit
+information on who is uploading what.</li>
+<li>You can write a simple <code>ListView</code> to show the audit information of
+uploaded files to admins.</li>
+</ul>
+
+<p>The above is just a toy example - there are lots of variations that can
+be used. For instance, you may not want to keep the processing logic on
+the model itself, it may make sense to have a separate function for
+this. However the general notion of using a model to represent an
+uploaded file and to track its state is a useful one.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/vim-macros-for-adding-i18n-support-to-django-templates/">Vim macros for adding i18n support to Django templates</a><br/>
+            
+            
+                Next: <a href="/projects/cacheback-asynchronous-cache-refreshing-for-django/">Cacheback - asynchronous cache refreshing for Django</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

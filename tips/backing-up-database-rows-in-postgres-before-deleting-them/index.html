@@ -1,0 +1,116 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Backing up Postgres database rows before deleting them - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Quick tip on avoiding accidental data loss">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Backing up Postgres database rows before deleting them</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 19 March 2015</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 19 March 2015</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <blockquote>
+<p>Hmmm, this delete statement is taking longer than I thought it
+would&hellip;</p>
+</blockquote>
+
+<p>If you ever have to manually run a SQL delete statement in <code>psql</code>, you
+can back-up the rows you&rsquo;re about to delete:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #960050; background-color: #1e0010">\</span><span style="color: #66d9ef">copy</span> <span style="color: #f8f8f2">(</span> <span style="color: #66d9ef">select</span> <span style="color: #f92672">*</span> <span style="color: #66d9ef">from</span> <span style="color: #960050; background-color: #1e0010">$</span><span style="color: #66d9ef">table</span> <span style="color: #66d9ef">where</span> <span style="color: #f8f8f2">id</span> <span style="color: #66d9ef">in</span> <span style="color: #f8f8f2">(</span> <span style="color: #ae81ff">...</span> <span style="color: #f8f8f2">)</span> <span style="color: #f8f8f2">)</span> <span style="color: #66d9ef">to</span> <span style="color: #e6db74">&#39;/tmp/backup.csv&#39;</span>
+</pre></div>
+
+<p>and, if you&rsquo;ve got your filter clause wrong (we&rsquo;ve all done it), restore
+them with:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #960050; background-color: #1e0010">\</span><span style="color: #66d9ef">copy</span> <span style="color: #960050; background-color: #1e0010">$</span><span style="color: #66d9ef">table</span> <span style="color: #66d9ef">from</span> <span style="color: #e6db74">&#39;/tmp/backup.csv&#39;</span>
+</pre></div>
+
+<p>Moderately useful.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/postgres">postgres</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/avoiding-clashing-django-migrations/">Avoiding clashing Django migrations</a><br/>
+            
+            
+                Next: <a href="/news/commandlinefucom-is-in-new-hands/">commandlinefu.com is in new hands</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

@@ -1,0 +1,206 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>A Fabric function for git tagging - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using Fabric with git-flow">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">A Fabric function for git tagging</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 9 February 2012</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Thursday, 9 February 2012</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>Listed below is a <a href="http://docs.fabfile.org/en/1.3.4/index.html">Fabric</a>
+function for determining the appropriate git reference to deploy during
+a deployment. It works well with projects run using the
+<a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a>
+development model.</p>
+
+<h3 id="set-up">Set-up</h3>
+
+<p>Assume there is a test environment where:</p>
+
+<ul>
+<li>the QA team to assess release candidates</li>
+<li>developers to run integration tests</li>
+<li>developers can deploy &lsquo;debug&rsquo; builds from a specific (untagged)
+commit</li>
+</ul>
+
+<p>There will also be stage and production environments.</p>
+
+<h3 id="fabric-function">Fabric function</h3>
+
+<p>The following function can be used as part of Fabric build script. It&rsquo;s
+purpose is to determine the git reference to deploy from.</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">determine_refspec_to_deploy_from</span><span style="color: #f8f8f2">(is_test</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
+    <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git fetch --tags&#39;</span><span style="color: #f8f8f2">)</span>
+
+    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">is_test:</span>
+        <span style="color: #f8f8f2">create_tag</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">prompt(</span><span style="color: #e6db74">&#39;Tag this release? [y/N] &#39;</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">create_tag</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">lower()</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;y&#39;</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">notify(</span><span style="color: #e6db74">&quot;Showing latest tags for reference&quot;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git tag | sort -V | tail -5&#39;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #f8f8f2">refspec</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">prompt(</span><span style="color: #e6db74">&#39;Tag name [in format x.x.x]? &#39;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git tag %(ref)s -m &quot;Tagging version %(ref)s in fabfile&quot;&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">{</span>
+                <span style="color: #e6db74">&#39;ref&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">refspec})</span>
+            <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git push --tags&#39;</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+            <span style="color: #f8f8f2">use_commit</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">prompt(</span><span style="color: #e6db74">&#39;Build from a specific commit? [y/N] &#39;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">use_commit</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">lower()</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;y&#39;</span><span style="color: #f8f8f2">:</span>
+                <span style="color: #f8f8f2">refspec</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">prompt(</span><span style="color: #e6db74">&#39;Choose commit to build from: &#39;</span><span style="color: #f8f8f2">)</span>
+            <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+                <span style="color: #f8f8f2">branch</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git branch | grep &quot;^*&quot; | cut -d&quot; &quot; -f2&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">capture</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span>
+                <span style="color: #f8f8f2">refspec</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git describe %s&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">branch,</span> <span style="color: #f8f8f2">capture</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">strip()</span>
+    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
+        <span style="color: #75715e"># An existing tag must be specified</span>
+        <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git tag | sort -V | tail -5&#39;</span><span style="color: #f8f8f2">)</span>
+        <span style="color: #f8f8f2">refspec</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">prompt(red(</span><span style="color: #e6db74">&#39;Choose tag to build from: &#39;</span><span style="color: #f8f8f2">))</span>
+
+        <span style="color: #75715e"># Check this is valid</span>
+        <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;git tag | grep &quot;%s&quot;&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">refspec)</span>
+
+    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">refspec</span>
+</pre></div>
+
+<h3 id="building-to-test">Building to test</h3>
+
+<p>When building to test, the script allows you to:</p>
+
+<ol>
+<li>Tag a release. This is for creating release candidates for the QA
+team.</li>
+<li>Build without tagging. In this case, we generate a build name using
+<code>git describe</code>. This is for developers who want to update the test
+build to run integration tests.</li>
+<li>Build from a specific commit. This is mainly used to dig yourself
+out of circular reference hell: when your test build emits spurious
+error messages that can&rsquo;t be re-created locally. A simple bisection
+approach works well here, building from specific commits to find the
+commit that broke the build.</li>
+</ol>
+
+<p>You can build to test from any branch which is often the case with
+git-flow, where your next release candidate could come from <code>develop</code> or
+a release branch <code>releases/1.4</code>.</p>
+
+<h3 id="building-to-stage-and-production">Building to stage and production</h3>
+
+<p>Nothing fancy - builds to stage and production must use an existing tag
+to ensure they go through the QA process.</p>
+
+<h3 id="interesting-bits">Interesting bits</h3>
+
+<h4 id="keeping-everyone-in-sync">Keeping everyone in sync</h4>
+
+<p>The script fetches tags at the start and, if a new one is created,
+pushes it back to the remote. This ensures that all users have access to
+the tagged releases.</p>
+
+<h4 id="what-s-the-next-tag">What&rsquo;s the next tag?</h4>
+
+<p>This snippet shows the latest 5 tags, making it easy to determine the
+next tag to use:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>git tag <span style="color: #f8f8f2">|</span> sort -V <span style="color: #f8f8f2">|</span> tail -5 
+</pre></div>
+
+<h4 id="constructing-a-build-name">Constructing a build name</h4>
+
+<p>For builds to test that aren&rsquo;t tagged, it&rsquo;s still useful to give them a
+build number that indicates what the latest tagged release was. This can
+be done with <code>git describe</code>, which will output something like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">0</span>.1.3-149-g1a48a5a
+</pre></div>
+
+<p>which indicates that the build came from the 149th commit after tag
+<code>0.1.3</code>.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/git">git</a>, <a href="/tags/fabric">fabric</a>, <a href="/tags/python">python</a>, <a href="/tags/deployment">deployment</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/">Solving MySQL connection problems caused by a dead name server</a><br/>
+            
+            
+                Next: <a href="/tips/prefer-data-migrations-to-initial-data/">Prefer data migrations to initial data</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

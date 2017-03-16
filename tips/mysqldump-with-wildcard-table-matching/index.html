@@ -1,0 +1,119 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>mysqldump with wildcard table matching - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using the fu to enhance mysqldump">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">mysqldump with wildcard table matching</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 5 November 2010</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Friday, 5 November 2010</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Ever wanted to use <code>mysqldump</code> to dump tables that match a wildcard
+pattern? I have. It&rsquo;s not currently supported as an option but can be
+achieved with a little bash magic. Here&rsquo;s how:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/bin/bash</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> <span style="color: #f8f8f2">$#</span> -lt <span style="color: #ae81ff">2</span> <span style="color: #f92672">]</span>
+<span style="color: #66d9ef">then</span>
+    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;Usage: `basename </span><span style="color: #f8f8f2">$0</span><span style="color: #e6db74">` database wildcardpattern&quot;</span>
+    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;Eg: `basename </span><span style="color: #f8f8f2">$0</span><span style="color: #e6db74">` mydatabase App_%&quot;</span>
+    <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
+<span style="color: #66d9ef">fi</span>
+<span style="color: #f8f8f2">database</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+<span style="color: #f8f8f2">pattern</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$2</span>
+mysqldump <span style="color: #f8f8f2">$database</span> <span style="color: #e6db74">`</span>mysql -ND <span style="color: #f8f8f2">$database</span> -e <span style="color: #e6db74">&quot;SHOW TABLES LIKE &#39;</span><span style="color: #f8f8f2">$pattern</span><span style="color: #e6db74">&#39;&quot;</span> <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;{printf $1&quot; &quot;}&#39;`</span>
+</pre></div>
+
+<p>This uses a simple SQL query to extract all the table names that match
+the pattern and concatenate them in the format that mysqldump expects.
+Note that you&rsquo;ll need your <code>~/.my.cnf</code> set up correctly to allow the
+connections to MySQL to happen without a authentication prompt.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/mysql">mysql</a>, <a href="/tags/commandlinefu">commandlinefu</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/how-to-sync-a-mysql-table-between-two-remote-databases/">How to sync a MySQL table between two remote databases.</a><br/>
+            
+            
+                Next: <a href="/projects/nurl-an-immutable-url-object-for-nodejs/">nurl - an immutable URL object for node.js</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

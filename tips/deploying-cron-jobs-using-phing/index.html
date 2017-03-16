@@ -1,0 +1,215 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+
+        
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+        <link rel="stylesheet" href="/css/styles.css" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        <title>Deploying cron jobs using Phing - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A phing pattern for deploying cron scripts">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Deploying cron jobs using Phing</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 31 May 2009</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            on <time class="published" datetime="">Sunday, 31 May 2009</time>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Deploying applications that depend on cron-jobs can be a pain. However,
+Phing can be used to make such deployments easy - here&rsquo;s how&hellip;</p>
+
+<p>Consider an application folder structure as follows:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>/builds
+    /development
+    /test
+    /stage
+/src
+    /cron.d
+        appname-__BUILD__-order-processing
+    /scripts
+        /order-processing
+            handle-ready-to-ship-orders.php
+            handle-cancellations.php
+            ...
+    /public
+    /classes
+        ...
+</pre></div>
+
+<p>All development work takes place within the <code>/src</code> folder while the
+<code>/builds/*</code> folders are used as targets in deployment. This system
+allows multiple builds to happily co-exist on the same server and the
+whole application infrastructure to be moved between servers easily as
+the structure in source control mirrors that of the server.</p>
+
+<p>In this example e-commerce app, we have a number of scripts (in
+<code>/src/scripts</code>) that handle order-processing which need to be called
+periodically by the cron daemon. A naive approach in deployment would be
+to export the codebase to an appropriate build folder but then edit the
+server&rsquo;s crontab by hand and add the appropriate lines to run these
+scripts.</p>
+
+<p>This isn&rsquo;t such a great idea though as it relies on that most unreliable
+facility, human memory, to ensure the build is fully deployed - this
+creates an unnecessary overhead which is bound to lead to mistakes.
+Furthermore, the overhead acts as a deterrent for using asynchronous
+jobs within an application, limiting the app in terms of what it can do.
+As far as I am aware, there is no easy way to automatically update a
+user&rsquo;s crontab automatically.</p>
+
+<p>A much better way is to create a number of scripts which specify the
+cron tasks and are deployed to the /etc/cron.d folder. In the above
+example, these are stored in /src/cron.d and would look something like:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null <span style="color: #ae81ff">2</span>&gt;&gt; /var/log/cron.errors.log
+<span style="color: #ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null <span style="color: #ae81ff">2</span>&gt;&gt; /var/log/cron.errors.log
+</pre></div>
+
+<p>(Note that, for some reason, a blank line is required at the end of this
+file in order for the script to be run by cron.) Here, the <code>__BUILD__</code>
+is a tokenised parameter which will be replaced during deployment to
+configure the path to the appropriate script - a phing trick I&rsquo;ve
+described previously.</p>
+
+<p>One further complication is that if both the dev, test and stage builds
+are running on the same server, then the scripts deployed to
+<code>/etc/cron.d</code> could clobber each other as they have the same name within
+each build. This can be neatly side-stepped using the Phing&rsquo;s glob
+mapper to replace the <code>__BUILD__</code> component of the file to be the
+appropriate build name (similar to how the paths are configured within
+the file itself).</p>
+
+<p>This is probably best illustrated with a sample phing script which takes
+the build name (eg &ldquo;development&rdquo;) as a parameter:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;xml</span> <span style="color: #a6e22e">version=</span><span style="color: #e6db74">&quot;1.0&quot;</span> <span style="color: #a6e22e">encoding=</span><span style="color: #e6db74">&quot;UTF-8&quot;</span><span style="color: #960050; background-color: #1e0010">?</span><span style="color: #f92672">&gt;</span>
+<span style="color: #f92672">&lt;project&gt;</span>
+    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;deploy&quot;</span><span style="color: #f92672">&gt;</span>
+        ...
+        <span style="color: #f92672">&lt;delete&gt;</span>
+            <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">dir=</span><span style="color: #e6db74">&quot;/etc/cron.d/&quot;</span><span style="color: #f92672">&gt;</span>
+                <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;appname-${build.name}-*&quot;</span> <span style="color: #f92672">/&gt;</span>
+            <span style="color: #f92672">&lt;/fileset&gt;</span>
+        <span style="color: #f92672">&lt;/delete&gt;</span>
+        <span style="color: #f92672">&lt;copy</span> <span style="color: #a6e22e">todir=</span><span style="color: #e6db74">&quot;/etc/cron.d/&quot;</span><span style="color: #f92672">&gt;</span> 
+            <span style="color: #f92672">&lt;filterchain&gt;</span>
+                <span style="color: #f92672">&lt;replacetokens</span> <span style="color: #a6e22e">begintoken=</span><span style="color: #e6db74">&quot;__&quot;</span> <span style="color: #a6e22e">endtoken=</span><span style="color: #e6db74">&quot;__&quot;</span><span style="color: #f92672">&gt;</span>
+                    <span style="color: #f92672">&lt;token</span> <span style="color: #a6e22e">key=</span><span style="color: #e6db74">&quot;BUILD&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;${build.name}&quot;</span> <span style="color: #f92672">/&gt;</span>
+                <span style="color: #f92672">&lt;/replacetokens&gt;</span>
+            <span style="color: #f92672">&lt;/filterchain&gt;</span>
+            <span style="color: #f92672">&lt;mapper</span> <span style="color: #a6e22e">type=</span><span style="color: #e6db74">&quot;glob&quot;</span> <span style="color: #a6e22e">from=</span><span style="color: #e6db74">&quot;appname-__BUILD__-*&quot;</span> <span style="color: #a6e22e">to=</span><span style="color: #e6db74">&quot;appname-${build.name}-*&quot;</span> <span style="color: #f92672">/&gt;</span>
+            <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">dir=</span><span style="color: #e6db74">&quot;${path.to.build}/cron.d&quot;</span><span style="color: #f92672">&gt;</span>
+                <span style="color: #f92672">&lt;include</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;appname-__BUILD__-*&quot;</span> <span style="color: #f92672">/&gt;</span>
+            <span style="color: #f92672">&lt;/fileset&gt;</span>
+        <span style="color: #f92672">&lt;/copy&gt;</span>
+    <span style="color: #f92672">&lt;/target&gt;</span>
+<span style="color: #f92672">&lt;/project&gt;</span>
+</pre></div>
+
+<p>The illustrated snippet does two things:</p>
+
+<p>Deletes any previous scripts for this build from <code>/etc/cron.d</code> (this is
+why we namespace the files with &ldquo;appname&rdquo; to prevent accidentally
+removing a system file). Copies the new scripts into <code>/etc/cron.d</code> while
+replacing the token <code>__BUILD__</code> with the build name in both the file
+contents and file names. After separate deployments for dev and stage,
+we should find the following:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>/etc
+    /cron.d
+        appname-development-order-processing
+        appname-stage-order-processing
+        ...
+</pre></div>
+
+<p>where, for instance, the contents of
+<code>/etc/cron.d/appname-development-order-processing</code> would be:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-ready-to-ship-orders.php
+* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-cancellations.php
+...
+</pre></div>
+
+<p>Having automatic and reliable deployment of cron-jobs in place is quite
+liberating. Suddenly, lots of application processing can be done
+asynchronously without worrying about the overhead of maintaining the
+appropriate crontabs by hand.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/phing">phing</a>, <a href="/tags/deployment">deployment</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">Tips</a>
+            
+            </p>
+            <p>
+            
+                Previous: <a href="/tips/auto-generating-an-faq-with-prototype/">Auto-generating an FAQ with Prototype</a><br/>
+            
+            
+                Next: <a href="/tidbits/a-pseudo-code-job-advert-and-its-discontents/">A pseudo-code job advert and its discontents</a>
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+
