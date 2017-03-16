@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Aws on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/aws/index.xml</link>
+    <description>Recent content in Aws on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/aws/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>An SSH tip for modern AWS patrons</title>
+      <link>http://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</link>
+      <pubDate>Sat, 02 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</guid>
+      <description>
+
+&lt;p&gt;Cloud computing and immutable infrastructure deployments have changed
+the way I use SSH. I miss the days when I could run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh app1-prod
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to jump onto a machine and investigate an issue. This would work as,
+back in the days of yore, your web servers didn&amp;rsquo;t change IP address
+several times a week so I could create a helpful alias in
+&lt;code&gt;~/.ssh/config&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host app1-prod
+    User example_user
+    HostName 74.207.251.29
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This circumvented the labour-intensive act of typing in the remote
+username and IP address when SSHing around town.&lt;/p&gt;
+
+&lt;p&gt;I can no longer do this as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Immutable infrastructure deployments mean EC2 instances are replaced
+for every update so the IP addresses keep changing. Life is too
+short to keep updating &lt;code&gt;~/.ssh/config&lt;/code&gt; with their details.&lt;/li&gt;
+&lt;li&gt;Plus, aside from your load balancers, servers should be unreachable
+from the outside world. Now all access is via a bastion machine: the
+only machine in the VPC that exposes its SSH port to the network
+your laptop is using.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These are both good things.&lt;/p&gt;
+
+&lt;h3 id=&#34;aren-t-you-supposed-to-stop-using-ssh-with-aws&#34;&gt;Aren&amp;rsquo;t you supposed to stop using SSH with AWS?&lt;/h3&gt;
+
+&lt;p&gt;Yeah, &lt;a href=&#34;https://wblinks.com/notes/aws-tips-i-wish-id-known-before-i-started/&#34;&gt;that&amp;rsquo;s been recommended
+before&lt;/a&gt;
+and seems a good idea.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m not there yet though. There&amp;rsquo;s still occasions where I want to SSH
+onto a machine and run diagnostics. For instance, as part of a &lt;a href=&#34;http://martinfowler.com/bliki/CanaryRelease.html&#34;&gt;canary
+release&lt;/a&gt; I often SSH
+onto one of the new machines and check for smoke before replacing the
+entire auto-scale group with the new AMI. (I&amp;rsquo;m happy to accept this is
+an regrettable practice and I need to raise my automation game.)&lt;/p&gt;
+
+&lt;p&gt;In such circumstances, I want to be able to run:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh ip-10-5-8-179.eu-west-1.compute.internal
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;jumping straight onto an AWS EC2 instance using only its internal DNS
+name, plucked from the AWS console or a &lt;code&gt;boto&lt;/code&gt; command.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s how.&lt;/p&gt;
+
+&lt;h3 id=&#34;proxycommand-and-a-wildcard-ssh-alias&#34;&gt;ProxyCommand and a wildcard SSH alias&lt;/h3&gt;
+
+&lt;p&gt;Add an alias to &lt;code&gt;~/.ssh/config&lt;/code&gt; for your bastion server. Something like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host bastion-prod
+    User example_user
+    Hostname bastion.example.com
+    IdentityFile ~/.ssh/bastion-prod.key
+    LogLevel Quiet
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then you can route SSH traffic through the bastion server using
+&lt;code&gt;ProxyCommand&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Host *.compute.internal
+    User ubuntu
+    IdentityFile ~/.ssh/aws-prod.key
+    ProxyCommand ssh bastion-prod -W %h:%p
+    StrictHostKeyChecking no
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;and that&amp;rsquo;s sufficient for commands like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh ip-10-5-8-179.eu-west-1.compute.internal
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to work.&lt;/p&gt;
+
+&lt;p&gt;Note, disabling &lt;code&gt;StrictHostKeyChecking&lt;/code&gt; suppresses the confirmation
+prompt when connecting to a new host for the first time. I&amp;rsquo;m ignorant of
+whether this is a dreadful security misstep.&lt;/p&gt;
+
+&lt;p&gt;Some vaguely related articles:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://edgeofsanity.net/article/2012/10/15/ssh-leap-frog.html&#34;&gt;Using a ProxyCommand to Leap Frog Your
+Bastions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;A &lt;a href=&#34;https://github.com/gianlucaborello/aws-ssh-config&#34;&gt;Github repo&lt;/a&gt;
+for dynamically building &lt;code&gt;~/.ssh/config&lt;/code&gt; using boto.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://blog.ryanparman.com/2014/01/29/easily-ssh-into-amazon-ec2-instances-using-the-name-tag/&#34;&gt;Easily SSH into Amazon EC2 instances using the Name
+tag&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

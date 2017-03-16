@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Books on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/books/index.xml</link>
+    <description>Recent content in Books on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/books/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>High Performance Web Sites by Steve Souders</title>
+      <link>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</link>
+      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9780596529307.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;High Performance Web Sites (HPWS) is essentially a book-length
+exposition of the &lt;a href=&#34;http://developer.yahoo.com/yslow/&#34;&gt;YSlow extension to
+Firebug&lt;/a&gt; augmented with case studies
+of popular US websites. YSlow itself links to some &lt;a href=&#34;http://developer.yahoo.com/performance/rules.html&#34;&gt;explanation
+paragraphs&lt;/a&gt; regarding
+the various guidelines that are used to grade the performance of a
+website. However, even for those familiar with this documentation, HPWS
+is still an excellent resource on how the performance of a web app can
+be tuned.&lt;/p&gt;
+
+&lt;p&gt;Chapter by chapter, HPWS introduces a new guideline and expounds the
+underlying rationale, giving illustrations of the HTTP requests with and
+without the suggested improvement. For instance, the use of far-future
+Expires HTTP headers is an easy-win recommendation that prevents
+unnecessary requests once a browser&amp;rsquo;s cache has been primed. This is
+something I&amp;rsquo;ve used on several sites previously, employing the following
+Apache directives to add Expires headers to the HTTP:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;IfModule&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;mod_expires.c&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresActive&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;on&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/jpg “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; years”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/jpeg “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; years”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/gif “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; years”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; text/css “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; days”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/js “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; days”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresDefault&lt;/span&gt; ”access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; days”
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/IfModule&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Additional areas where I found out something new include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The performance hit that using @import directives within CSS files
+has.&lt;/li&gt;
+&lt;li&gt;How the &amp;ldquo;Cache control&amp;rdquo; and &amp;ldquo;Etags&amp;rdquo; HTTP headers are often
+interpreted together by browsers to determine whether to make a
+request.&lt;/li&gt;
+&lt;li&gt;How the choice of domains to use for serving content must be
+balanced against the extra DNS look-up costs that each new domain
+incurs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Many of the performance guidelines can be adhered to easily, by making a
+few adjustments to the Apache configuration of your site; However, some
+performance-enhancing measures come at a cost to the development process
+(such as keeping all javascript in one large, minified file). Such costs
+can be mitigated by having a careful one-step build process that handles
+the conversion of easy-to-use development files to more
+performance-savvy production files. Nevertheless, in many cases, one has
+to decide where the balance between performance and inconvenience in
+development lies.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s quite a short book at 137 pages, but definitely a worthwhile
+addition to any company library.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

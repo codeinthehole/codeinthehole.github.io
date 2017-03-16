@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Testing on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/testing/index.xml</link>
+    <description>Recent content in Testing on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Avoiding clashing Django migrations</title>
+      <link>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</link>
+      <pubDate>Sat, 31 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</guid>
+      <description>&lt;p&gt;Managing South migrations on a multi-developer Django project can be
+painful. Developers working on separate branches will often create
+migrations for the same app with the same migration number&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. When
+merged into master, these clashing migrations can cause deployment
+hiccups as South will complain if migrations are applied out of order.&lt;/p&gt;
+
+&lt;p&gt;There are various techniques available for dealing with this&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, but
+what we do at &lt;a href=&#34;http://justyoyo.com/&#34;&gt;Yoyo&lt;/a&gt; is test for such clashes as
+part of our Travis continuous integration.&lt;/p&gt;
+
+&lt;p&gt;This is done by calling a &lt;code&gt;makefile&lt;/code&gt; target from &lt;code&gt;.travis.yml&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# .travis.yml&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;language&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2.7&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;install&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make virtualenv&lt;/span&gt;
+
+&lt;span style=&#34;color: #ae81ff&#34;&gt;script&lt;/span&gt;
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;- make test&lt;/span&gt;
+    &lt;span style=&#34;color: #ae81ff&#34;&gt;- make migration_test&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where the &lt;code&gt;migration_test&lt;/code&gt; target is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# makefile&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;MIGRATION_CLASHES&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;shell find . -type f -name &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep -o &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.*/migrations/[0-9]\+&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq -c &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$$1 &amp;gt; 1 {print $$0}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #a6e22e&#34;&gt;migration_test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -n &lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;MIGRATION_CLASHES&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;true&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here the &lt;code&gt;$(shell ...)&lt;/code&gt; call extracts the app name and migration number
+from all migration files then uses &lt;code&gt;awk&lt;/code&gt; to look for clashes. If any are
+found, the Travis build will fail and the console output should reveal
+which apps have clashes.&lt;/p&gt;
+
+&lt;p&gt;This works best if you only allow fast-forward commits into master
+(something we do at &lt;a href=&#34;http://justyoyo.com/&#34;&gt;Yoyo&lt;/a&gt;). Doing this forces you
+to merge master back into your pull request branch and allows Travis to
+catch migration clashes before it is merged. Then any conflicts can be
+resolved by renumbering or recreating any migrations not yet merged to
+master.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I&amp;rsquo;m only talking about Django versions less than 1.7 - I&amp;rsquo;m not
+sure if this is still an issue in more modern Django versions.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+
+&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;As noted by the &lt;a href=&#34;http://south.readthedocs.org/en/latest/tutorial/part5.html&#34;&gt;South
+docs&lt;/a&gt;,
+you can run the migrations with the &lt;code&gt;--merge&lt;/code&gt; option although this
+generally means a manual intervention in your deployment process
+which isn&amp;rsquo;t ideal.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>purl, URI templates and generated tests</title>
+      <link>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
+      <description>
+
+&lt;p&gt;&lt;em&gt;TLDR&lt;/em&gt;: Parameterised tests are a useful testing technique. Both Nose
+and py.test support them.&lt;/p&gt;
+
+&lt;h3 id=&#34;uri-templates-in-purl&#34;&gt;URI templates in purl&lt;/h3&gt;
+
+&lt;p&gt;The newly released &lt;a href=&#34;https://github.com/codeinthehole/purl&#34;&gt;purl 0.8&lt;/a&gt; (a
+URL library of mine) supports URI templates as per &lt;a href=&#34;http://tools.ietf.org/html/rfc6570&#34;&gt;RFC
+6570&lt;/a&gt;. These allow new URL instances
+to be created by passing bindings to a template instance.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tpl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Template(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.google.com{path}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;tpl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;expand({&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;path&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]})&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;as_string()&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.google.com/a/b/c&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Alternatively, you can expand template strings directly:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;expand(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{?list*}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;list&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;a&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;b&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;c&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]})&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/a/b/c&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There&amp;rsquo;s a plethora of ways template URLs can be used - see the
+&lt;a href=&#34;http://tools.ietf.org/html/rfc6570&#34;&gt;RFC&lt;/a&gt; for details.&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+    Note, there&#39;s 
+    &lt;a href=&#34;https://github.com/uri-templates/uritemplate-py&#34;&gt;already a Python library that provides this functionality&lt;/a&gt;. I
+    decided not to use that one with purl as I thought I could do better.
+    Plus, it looked like fun and I wanted to learn more about Python&#39;s
+    support for parameterised tests.
+
+&lt;/div&gt;
+
+&lt;h3 id=&#34;parameterised-tests&#34;&gt;Parameterised tests&lt;/h3&gt;
+
+&lt;p&gt;I&amp;rsquo;d like to draw your attention to parameterised, or generated, tests
+which were used to drive development of this feature.&lt;/p&gt;
+
+&lt;h4 id=&#34;example&#34;&gt;Example&lt;/h4&gt;
+
+&lt;p&gt;The RFC includes a range of example templates, bindings and expected
+outputs:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/rfc6570.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;These are excellent material for driving a series of parametric tests
+since each example comprises the inputs and expected output for a test.
+The natural way to test such examples is using parameterised tests.&lt;/p&gt;
+
+&lt;h4 id=&#34;phpunit&#34;&gt;PHPUnit&lt;/h4&gt;
+
+&lt;p&gt;PHP&amp;rsquo;s dominant testing libary,
+&lt;a href=&#34;http://phpunit.de/manual/current/en/index.html&#34;&gt;PHPUnit&lt;/a&gt;, support &lt;a href=&#34;http://phpunit.de/manual/current/en/writing-tests-for-phpunit.html#writing-tests-for-phpunit.data-providers&#34;&gt;data
+providers&lt;/a&gt;
+that can used to solve this problem (in a slightly clunky way).&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a Python port of this functionality in &lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/test/decorators.py#L4-L27&#34;&gt;django-oscar&amp;rsquo;s testing
+utilities&lt;/a&gt;
+(and many other places no doubt) however there&amp;rsquo;s better way to write
+parameterised tests in Python.&lt;/p&gt;
+
+&lt;h4 id=&#34;nose&#34;&gt;Nose&lt;/h4&gt;
+
+&lt;p&gt;I used &lt;a href=&#34;http://nose.readthedocs.org/en/latest/writing_tests.html#test-generators&#34;&gt;Nose&amp;rsquo;s test
+generators&lt;/a&gt;
+to drive TDD on purl.&lt;/p&gt;
+
+&lt;p&gt;These allow tests to be generated by &lt;code&gt;yield&lt;/code&gt;ing a tuple
+&lt;code&gt;(test_fn, *test_args)&lt;/code&gt; for each dataset. Here, &lt;code&gt;test_fn&lt;/code&gt; is a callable
+that takes arguments &lt;code&gt;test_args&lt;/code&gt; and should raise an &lt;code&gt;AssertionError&lt;/code&gt; if
+the test fails.&lt;/p&gt;
+
+&lt;p&gt;Consider the above snippet from section 3.2.2 of the RFC: tests for this
+section can be constructed as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;purl&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;nose.tools&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;eq_&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;level1_vars&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Tuples of (template, bindings, expected URI)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;test_data&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{var}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;level1_vars,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;level1_vars,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;assert_expansion&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;eq_(purl&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;expand(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields),&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected)&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_expansion&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;():&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;test_data:&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;assert_expansion,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which executes each example as a single test:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ nosetests tests/expansion_tests.py
+tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{var}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
+tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
+
+----------------------------------------------------------------------
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+
+OK
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;
+    I have verbose output turned on by default since my &lt;code&gt;~/nose.cfg&lt;/code&gt; file
+    contains the line &lt;code&gt;verbosity=2&lt;/code&gt;.
+&lt;/div&gt;
+
+&lt;p&gt;Here we construct a simple assertion function using the &lt;code&gt;eq_&lt;/code&gt; equality
+check from Nose&amp;rsquo;s test tools.&lt;/p&gt;
+
+&lt;p&gt;The default verbose output is a little too verbose for my tastes. It can
+be cleaned up by providing a &lt;code&gt;description&lt;/code&gt; attribute on the yielded
+callable:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_expansion&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;():&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;test_data:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;assert_expansion&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;description&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s expands to %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;yield&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;assert_expansion,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which looks like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ nosetests tests/expansion_tests.py
+&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to value ... ok
+&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to Hello%20World%21 ... ok
+
+----------------------------------------------------------------------
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+
+OK
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Much nicer.&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+    Updating the description suffers from a known bug where 
+    &lt;a href=&#34;https://code.google.com/p/python-nose/issues/detail?id=244&#34;&gt;failure reports always use the last description assigned to callable&lt;/a&gt;.
+    There are a few work-arounds detailed in the bug comments but none play
+    nicely with Nose&#39;s multiprocess plugin.
+&lt;/div&gt;
+
+&lt;h4 id=&#34;py-test&#34;&gt;py.test&lt;/h4&gt;
+
+&lt;p&gt;In researching this post, I discovered
+&lt;a href=&#34;http://pytest.org/latest/&#34;&gt;py.test&lt;/a&gt; supports a &lt;a href=&#34;http://pytest.org/latest/example/parametrize.html&#34;&gt;rich array of
+functionality&lt;/a&gt; for
+creating parameterised or generated tests.&lt;/p&gt;
+
+&lt;p&gt;Using py.test&amp;rsquo;s &lt;code&gt;@pytest.mark.parameterize&lt;/code&gt;
+&lt;a href=&#34;http://pytest.org/latest/parametrize.html#pytest-mark-parametrize&#34;&gt;decorator&lt;/a&gt;,
+we can rewrite the above example as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;pytest&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;@pytest.mark.parametrize&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;((&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;template&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;fields&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;expected&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;data)&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_expand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;assert&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;expand(template,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fields)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt;  &lt;span style=&#34;color: #f8f8f2&#34;&gt;expected&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;with verbose output:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ py.test -v tests/pytest_tests.py
+platform darwin -- Python &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
+collected &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; items
+
+tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields0-value&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
+tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields1-Hello%20World%21&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I have a feeling I will be switching to py.test shortly.&lt;/p&gt;
+
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;Test generators are a useful addition to your testing toolkit.&lt;/p&gt;
+
+&lt;p&gt;There&amp;rsquo;s a couple of things to be aware of when using Nose&amp;rsquo;s generated
+tests:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;It&amp;rsquo;s not possible to run just one of the examples from the
+commandline.&lt;/li&gt;
+&lt;li&gt;It&amp;rsquo;s tempting to create the assertion function inline within the
+&lt;code&gt;test_*&lt;/code&gt; function. However this doesn&amp;rsquo;t work if you run your tests
+across multiple processes using Nose&amp;rsquo;s &lt;code&gt;--processes&lt;/code&gt; option.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a few examples of using this functionality:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&#34;https://github.com/codeinthehole/purl/blob/master/tests/expansion_tests.py&#34;&gt;expanded version of the above example from the Purl
+library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/tests/unit/payment/bankcard_tests.py#L26-52&#34;&gt;A set of tests from
+django-oscar&lt;/a&gt;
+for testing validation of the Luhn algorithm.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Related articles:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://swordstyle.com/func_test_tutorial/part_one/extra_generative_tests.html&#34;&gt;Introduction to Functional Web Testing with Twill and
+Selenium&lt;/a&gt; -
+Using test generators to drive functional tests.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://achinghead.com/nosetests-generators-descriptions.html&#34;&gt;Nosetests, Generators and
+Descriptions&lt;/a&gt; -
+A detailed description of the bug with using a custom description
+for Nose&amp;rsquo;s generated tests.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Disable database access when writing unit tests in Django</title>
+      <link>http://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</link>
+      <pubDate>Mon, 22 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</guid>
+      <description>&lt;p&gt;Consider this curio:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;mock&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.utils.functional&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curry&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;no_database&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curry(&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;mock&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;patch,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;django.db.backends.util.CursorWrapper&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;Mock(side_effect&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;RuntimeError&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Using the database is not permitted&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This snippet creates a decorator that can wrap a test case or method and
+raises an exception if the database is accessed. This can be useful if
+you&amp;rsquo;re a puritan about &lt;em&gt;true&lt;/em&gt; unit tests.&lt;/p&gt;
+
+&lt;p&gt;Use by wrapping a &lt;code&gt;TestCase&lt;/code&gt; subclass:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.test&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;TestCase&lt;/span&gt;
+
+&lt;span style=&#34;color: #a6e22e&#34;&gt;@no_database&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;UnitTestCase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(TestCase):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or method:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.test&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;TestCase&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;UnitTestCase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(TestCase):&lt;/span&gt;
+
+    &lt;span style=&#34;color: #a6e22e&#34;&gt;@no_database&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_something&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This snippet is a reformulation of one from Carl Meyer&amp;rsquo;s excellent
+&lt;a href=&#34;http://pyvideo.org/video/699/testing-and-django&#34;&gt;&amp;lsquo;Testing and Django&amp;rsquo;&lt;/a&gt;
+(about 24 minutes in).&lt;/p&gt;
+
+&lt;p&gt;Challenge: create a similar decorator that prevents all file-system
+access in a test method.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Prefer WebTest to Django&#39;s test client for functional tests</title>
+      <link>http://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</link>
+      <pubDate>Sun, 09 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</guid>
+      <description>
+
+&lt;p&gt;Since watching Carl Meyer&amp;rsquo;s superb &amp;lsquo;&lt;a href=&#34;http://pyvideo.org/video/699/testing-and-django&#34;&gt;Testing and
+Django&lt;/a&gt;&amp;rsquo; talk, I&amp;rsquo;ve
+been using Ian Bicking&amp;rsquo;s
+&lt;a href=&#34;http://webtest.pythonpaste.org/en/latest/index.html&#34;&gt;WebTest&lt;/a&gt; library
+for functional tests, via
+&lt;a href=&#34;http://pypi.python.org/pypi/django-webtest&#34;&gt;django-webtest&lt;/a&gt;. I&amp;rsquo;ve been
+really impressed and I&amp;rsquo;d like to stress one of Carl&amp;rsquo;s points - that
+using WebTest for functional tests is superior to using the Django
+client.&lt;/p&gt;
+
+&lt;h3 id=&#34;why&#34;&gt;Why?&lt;/h3&gt;
+
+&lt;p&gt;Several reasons - here&amp;rsquo;s a few:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;WebTest allows you to model a user&amp;rsquo;s experience much more closely as
+it is smart about mark-up. Instead of hand-crafting GET and POST
+requests, you can use the WebTest API to follow links and submit
+forms - this is what users actually do. As a result, your tests
+accurately capture user stories.&lt;/li&gt;
+&lt;li&gt;A corollary to the last point is that writing functional tests with
+WebTest is both easier and quicker than using Django&amp;rsquo;s test client.
+It&amp;rsquo;s much simpler to fill in forms that construct complicated arrays
+of POST data - this is particularly noticable with formsets.&lt;/li&gt;
+&lt;li&gt;The WebTest response object supports &lt;a href=&#34;http://webtest.pythonpaste.org/en/latest/index.html#parsing-the-body&#34;&gt;several ways of parsing the
+response
+HTML&lt;/a&gt;,
+making it easy to make complicated assertions about the response.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Watch from 29:48 in Carl&amp;rsquo;s talk for further details.&lt;/p&gt;
+
+&lt;h3 id=&#34;example-functional-test&#34;&gt;Example functional test&lt;/h3&gt;
+
+&lt;p&gt;Consider this story from a functional spec:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;A staff member can upload a CSV to create new credit allocations for
+customers.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a WebTest for this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django_webtest&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;WebTest&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.urlresolvers&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;reverse&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.contrib.auth.models&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django_dynamic_fixture&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;G&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject.credits&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;api&lt;/span&gt;
+
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;TestAnAdmin&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(WebTest):&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;setUp&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;staff&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;G(User,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;is_staff&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;customer&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;G(User,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;username&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;10000&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;is_staff&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;False)&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_can_upload_a_csv_to_create_allocations&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;app&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(reverse(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;credits-index&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;),&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;staff)&lt;/span&gt;
+
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Specify the file content to upload and submit the form&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;form&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;index&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;forms[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;upload_form&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# CSV content should be: username, credits, start_date, end_date&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;content&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;10000,250,2012-01-01,2013-01-01&amp;quot;&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;form[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;file&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;credits.csv&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;content&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;form&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;submit()&lt;/span&gt;
+
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Check that an allocation has been created&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertEqual(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;250&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;balance(customer))&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertEqual(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;api&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;allocations(customer)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;count())&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As you can see, using WebTest allows the story to be captured in a
+simple and readable test. This is based on a real functional test from a
+current project of mine. Writing the above test took about 2 minutes.&lt;/p&gt;
+
+&lt;h4 id=&#34;other-useful-testing-libraries&#34;&gt;Other useful testing libraries&lt;/h4&gt;
+
+&lt;p&gt;The example test uses
+&lt;a href=&#34;http://paulocheque.github.com/django-dynamic-fixture/&#34;&gt;django_dynamic_fixture&lt;/a&gt;
+to create users, specifying only the attributes relevant to the test.&lt;/p&gt;
+
+&lt;p&gt;Note also the mildly unusual naming convention of the example TestCase
+and method are because I use
+&lt;a href=&#34;https://github.com/jbalogh/django-nose&#34;&gt;django_nose&lt;/a&gt; with the &amp;lsquo;spec&amp;rsquo;
+plugin from the
+&lt;a href=&#34;http://darcs.idyll.org/~t/projects/pinocchio/doc/&#34;&gt;pinocchio&lt;/a&gt; library.
+This causes the nose output to read like the stories from your
+functional spec:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py &lt;span style=&#34;color: #f8f8f2&#34;&gt;test&lt;/span&gt; tests/functional/eshop/credits_tests.py
+
+nosetests --verbosity &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; tests/functional/eshop/credits_tests.py --with-spec -x -s
+
+An admin
+- can upload a csv to create allocations
+
+----------------------------------------------------------------------
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.269s
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is a useful way of running functional tests. It also pushes you
+towards splitting your tests suites into more carefully named,
+tightly-focussed test cases - rather than bundling disparate tests into
+the same test case.&lt;/p&gt;
+
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+
+&lt;p&gt;Use WebTest for your functional tests - you won&amp;rsquo;t regret it.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to reload Django&#39;s URL config</title>
+      <link>http://codeinthehole.com/tips/how-to-reload-djangos-url-config/</link>
+      <pubDate>Wed, 21 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-reload-djangos-url-config/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;For some reason, you need to reload your Django URL config.&lt;/p&gt;
+
+&lt;p&gt;Normally, the root URL config will be imported and stored in memory when
+your server process starts up. Occasionally though, you may want to
+reload it. This can be the case if your URL configuration changes
+depending on certain parameters.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;You can reload the URL config using the following snippet:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sys&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.conf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;reload_urlconf&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(urlconf&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;None):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlconf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;is&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;None:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlconf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;ROOT_URLCONF&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlconf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sys&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;modules:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;reload(sys&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;modules[urlconf])&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;This was a problem I needed to solve while testing the checkout process
+for &lt;a href=&#34;https://github.com/tangentlabs/django-oscar&#34;&gt;django-oscar&lt;/a&gt;. Oscar
+uses a setting flag to optionally add decorators to certain URLs, and
+hence I needed to patch the setting and reload the URLs as part of the
+set-up for a test.&lt;/p&gt;
+
+&lt;p&gt;This was achieved in the following way, where the setting
+&lt;code&gt;OSCAR_ALLOW_ANON_CHECKOUT&lt;/code&gt; is set to &lt;code&gt;True&lt;/code&gt; and the URL config is
+reloaded.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sys&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.conf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.utils.importlib&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;import_module&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;EnabledAnonymousCheckoutViewsTests&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(ClientTestCase,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CheckoutMixin):&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;reload_urlconf&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;ROOT_URLCONF&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sys&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;modules:&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;reload(sys&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;modules[settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;ROOT_URLCONF])&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;import_module(settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;ROOT_URLCONF)&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test_shipping_address_requires_session_email_address&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;patch_settings(OSCAR_ALLOW_ANON_CHECKOUT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True):&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;reload_urlconf()&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;response&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(reverse(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;checkout:shipping-address&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertIsRedirect(response)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There&amp;rsquo;s probably a better way of doing this, but it wasn&amp;rsquo;t apparent to
+me when working on this problem today.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing HTTPS handling in Django</title>
+      <link>http://codeinthehole.com/tips/testing-https-handling-in-django/</link>
+      <pubDate>Thu, 01 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/testing-https-handling-in-django/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You want to test how your application handles HTTPS requests.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;Use the following to simulate a HTTPS request using the Django test
+client:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.test.client&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Client&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;client&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Client()&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;response&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;client&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(url,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;wsgi.url_scheme&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;})&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;The standard way to test for a HTTPS request is using the &lt;code&gt;is_secure&lt;/code&gt;
+method of the &lt;code&gt;django.http.HttpRequest&lt;/code&gt; class&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; and its subclasses. As
+of Django 1.3, the implementation of this method checks whether an
+environmental variable &lt;code&gt;HTTPS&lt;/code&gt; is equal to &amp;ldquo;on&amp;rdquo;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# django/http/__init__.py&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;HttpRequest&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(object):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt; 
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;is_secure&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;os&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;environ&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;HTTPS&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;on&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, Django&amp;rsquo;s test client uses the
+&lt;code&gt;django.core.handlers.wsgi.WSGIRequest&lt;/code&gt; class for requests. This class
+provides an alternative implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# django/core/handlers/wsgi.py&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;WSGIRequest&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(http&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;HttpRequest):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;is_secure&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;wsgi.url_scheme&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;environ&lt;/span&gt; \
+            &lt;span style=&#34;color: #f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;wsgi.url_scheme&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;https&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Hence why need to pass the &lt;code&gt;wsgi.url_scheme&lt;/code&gt; keyword arg when making the
+request.&lt;/p&gt;
+
+&lt;p&gt;Note that the unpacked dictionary syntax is required as it&amp;rsquo;s the only
+way of specifying a keyword arg that includes a dot.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;See &lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/request-response/&#34;&gt;https://docs.djangoproject.com/en/dev/ref/request-response/&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Introducing unittest-xml: testing XML in Python</title>
+      <link>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</link>
+      <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
+      <description>
+
+&lt;p&gt;For some reason, I keep finding myself writing unit tests that need to
+make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged
+up my custom assertion methods as a PyPi module: &lt;code&gt;unittest-xml&lt;/code&gt;. There&amp;rsquo;s
+a small chance it may be useful to others.&lt;/p&gt;
+
+&lt;h3 id=&#34;sample-usage&#34;&gt;Sample Usage&lt;/h3&gt;
+
+&lt;p&gt;Enable the additional assert methods using a mixin:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;unittest&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;xmltest&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;XMLAssertions&lt;/span&gt;
+
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;SampleTestCase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(unittest&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;TestCase,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;XMLAssertions):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now suppose that the expected XML from some SUT&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot; ?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;Response&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;CardTxn&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;authcode&amp;gt;&lt;/span&gt;060642&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/authcode&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;card_scheme&amp;gt;&lt;/span&gt;Switch&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/card_scheme&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;issuer&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;country=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;UK&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;HSBC&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/issuer&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/CardTxn&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;reference&amp;gt;&lt;/span&gt;3000000088888888&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/reference&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;merchantreference&amp;gt;&lt;/span&gt;1000001&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/merchantreference&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;mode&amp;gt;&lt;/span&gt;LIVE&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/mode&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;reason&amp;gt;&lt;/span&gt;ACCEPTED&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/reason&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;status&amp;gt;&lt;/span&gt;1&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/status&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;time&amp;gt;&lt;/span&gt;1071567305&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/time&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/Response&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then you can make assertions about the document using 3 additional
+assertions methods.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertXPathNodeCount(RESPONSE,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;CardTxn/authcode&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertXPathNodeText(RESPONSE,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;LIVE&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;mode&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;assertXPathNodeAttributes(RESPONSE,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;country&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;UK&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;CardTxn/issuer&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The first argument to each method is the XML string, the second is the
+expected value, while the third is the XPath query.&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;The standard way:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pip install unittest-xml
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;Note, the implementation uses
+&lt;a href=&#34;http://docs.python.org/library/xml.etree.elementtree.html&#34;&gt;ElementTree&lt;/a&gt;
+and so only &lt;a href=&#34;http://effbot.org/zone/element-xpath.htm&#34;&gt;a subset of the XPath
+specification&lt;/a&gt; is implemented.
+However the above three assertion methods are sufficient for most
+scenarios.&lt;/p&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/codeinthehole/unittest-xml&#34;&gt;code is on Github&lt;/a&gt;,
+as usual.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;System under test
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Coloured output while doing TDD with Django and Fabric</title>
+      <link>http://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</link>
+      <pubDate>Wed, 20 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</guid>
+      <description>&lt;p&gt;I&amp;rsquo;m a big fan of using PHPUnit with console colours turned on (using the
+&lt;code&gt;--colors&lt;/code&gt; option). Eg:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/phpunit.jpg&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It helps gets into the natural &amp;ldquo;red, green, refactor&amp;rdquo; rhythm.&lt;/p&gt;
+
+&lt;p&gt;I&amp;rsquo;m currently totally immersed in Django, and greatly miss the lack of
+colour support within the &amp;ldquo;test&amp;rdquo; management command. A simple workaround
+for this is to use Fabric with a few modified color commands. Your
+fabric file should include the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fabric.colors&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;_wrap_with&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;green_bg&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;_wrap_with(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;42&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;red_bg&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;_wrap_with(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;41&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Set the list of apps to test&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;env&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;test_apps&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;app1 app2&amp;quot;&lt;/span&gt;
+
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;test&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;():&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;with&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings(warn_only&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True):&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;result&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;./manage.py test %(test_apps)s --settings=settings_test -v 2 --failfast&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;env,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;capture&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;False)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;result&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;failed:&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;red_bg(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Some tests failed&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;green_bg(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;All tests passed - have a banana!&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can choose your own success and failure messages.&lt;/p&gt;
+
+&lt;p&gt;Now we have lovely colours while doing TDD in Django:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/fab.jpg&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

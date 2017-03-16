@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fabric on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/fabric/index.xml</link>
+    <description>Recent content in Fabric on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/fabric/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A Fabric function for git tagging</title>
+      <link>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
+      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
+      <description>
+
+&lt;p&gt;Listed below is a &lt;a href=&#34;http://docs.fabfile.org/en/1.3.4/index.html&#34;&gt;Fabric&lt;/a&gt;
+function for determining the appropriate git reference to deploy during
+a deployment. It works well with projects run using the
+&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;git-flow&lt;/a&gt;
+development model.&lt;/p&gt;
+
+&lt;h3 id=&#34;set-up&#34;&gt;Set-up&lt;/h3&gt;
+
+&lt;p&gt;Assume there is a test environment where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the QA team to assess release candidates&lt;/li&gt;
+&lt;li&gt;developers to run integration tests&lt;/li&gt;
+&lt;li&gt;developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged)
+commit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There will also be stage and production environments.&lt;/p&gt;
+
+&lt;h3 id=&#34;fabric-function&#34;&gt;Fabric function&lt;/h3&gt;
+
+&lt;p&gt;The following function can be used as part of Fabric build script. It&amp;rsquo;s
+purpose is to determine the git reference to deploy from.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;determine_refspec_to_deploy_from&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(is_test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;False)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git fetch --tags&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;is_test:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;create_tag&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Tag this release? [y/N] &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;create_tag&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;lower()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;notify(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Showing latest tags for reference&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag | sort -V | tail -5&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Tag name [in format x.x.x]? &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag %(ref)s -m &amp;quot;Tagging version %(ref)s in fabfile&amp;quot;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+                &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ref&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec})&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git push --tags&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;use_commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Build from a specific commit? [y/N] &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;use_commit&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;lower()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Choose commit to build from: &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;branch&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git branch | grep &amp;quot;^*&amp;quot; | cut -d&amp;quot; &amp;quot; -f2&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;capture&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True)&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git describe %s&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;branch,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;capture&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;strip()&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# An existing tag must be specified&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag | sort -V | tail -5&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(red(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Choose tag to build from: &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Check this is valid&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag | grep &amp;quot;%s&amp;quot;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec)&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;building-to-test&#34;&gt;Building to test&lt;/h3&gt;
+
+&lt;p&gt;When building to test, the script allows you to:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Tag a release. This is for creating release candidates for the QA
+team.&lt;/li&gt;
+&lt;li&gt;Build without tagging. In this case, we generate a build name using
+&lt;code&gt;git describe&lt;/code&gt;. This is for developers who want to update the test
+build to run integration tests.&lt;/li&gt;
+&lt;li&gt;Build from a specific commit. This is mainly used to dig yourself
+out of circular reference hell: when your test build emits spurious
+error messages that can&amp;rsquo;t be re-created locally. A simple bisection
+approach works well here, building from specific commits to find the
+commit that broke the build.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can build to test from any branch which is often the case with
+git-flow, where your next release candidate could come from &lt;code&gt;develop&lt;/code&gt; or
+a release branch &lt;code&gt;releases/1.4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;building-to-stage-and-production&#34;&gt;Building to stage and production&lt;/h3&gt;
+
+&lt;p&gt;Nothing fancy - builds to stage and production must use an existing tag
+to ensure they go through the QA process.&lt;/p&gt;
+
+&lt;h3 id=&#34;interesting-bits&#34;&gt;Interesting bits&lt;/h3&gt;
+
+&lt;h4 id=&#34;keeping-everyone-in-sync&#34;&gt;Keeping everyone in sync&lt;/h4&gt;
+
+&lt;p&gt;The script fetches tags at the start and, if a new one is created,
+pushes it back to the remote. This ensures that all users have access to
+the tagged releases.&lt;/p&gt;
+
+&lt;h4 id=&#34;what-s-the-next-tag&#34;&gt;What&amp;rsquo;s the next tag?&lt;/h4&gt;
+
+&lt;p&gt;This snippet shows the latest 5 tags, making it easy to determine the
+next tag to use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;git tag &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort -V &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; tail -5 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;constructing-a-build-name&#34;&gt;Constructing a build name&lt;/h4&gt;
+
+&lt;p&gt;For builds to test that aren&amp;rsquo;t tagged, it&amp;rsquo;s still useful to give them a
+build number that indicates what the latest tagged release was. This can
+be done with &lt;code&gt;git describe&lt;/code&gt;, which will output something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.1.3-149-g1a48a5a
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which indicates that the build came from the 149th commit after tag
+&lt;code&gt;0.1.3&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

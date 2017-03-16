@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recruitment on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/recruitment/index.xml</link>
+    <description>Recent content in Recruitment on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/recruitment/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>A pseudo-code job advert and its discontents</title>
+      <link>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</link>
+      <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
+      <description>&lt;p&gt;Based on the success of a highly tongue-in-cheek ad for a project
+manager, we recently experimented with a similar approach for finding
+developers: a job ad written in PHP. Now I appreciate this is deeply
+lame, but the results of the campaign were quite surprising - more of
+which in a minute. First, hold your nose and parse the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;TangentLabs&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;HoxtonWebCompany&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;implements&lt;/span&gt; 
+    &lt;span style=&#34;color: #a6e22e&#34;&gt;InnovativeWebsites&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;WorldBeatingApplications&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;IngeniousECommerce&lt;/span&gt; 
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;vacancyForBrilliantDevelopers&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$benefits&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Smartest web agency in London&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$drawbacks&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$sampleProjects&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.borders.co.uk&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.labour.co.uk&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.sap.com/education&amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;offerJob&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Developer&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$you)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;hasTheSkills&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($you)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;hasWowFactor&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($you));&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;hasTheSkills&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($developer)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;    
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$desiredSkills&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Object-oriented PHP 5&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Advanced MySQL&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Flex/AS3&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt; 
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;count(array_intersect($developer&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;skills&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$desiredSkills))&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)$developer&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;loveForCoding&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;30&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;hasWowFactor&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($developer)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($developer&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;instanceof&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;creativeThinker&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;sizeof($developer&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;brain&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;floatval(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;strpad&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;property_exists($developer,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hungerForNewTechnologies&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$you&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Developer&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;TangentLabs&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;offerJob&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($you))&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Party&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It&amp;rsquo;s actually quite a fun challenge to write a decent job ad in PHP,
+conveying both the requirements and writing PHP code that isn&amp;rsquo;t
+hilariously convoluted. I&amp;rsquo;d tried to do the same in Bash later on when
+we were hiring a sys-admin, but gave up after 5 minutes.&lt;/p&gt;
+
+&lt;p&gt;As you would expect with such a self-consciously smug job advert like
+this, torrents of abuse came tumbling down? Salutations along the lines
+of &amp;ldquo;You pretentious Shoreditch wankers&amp;hellip;&amp;rdquo; and so forth. However, what
+was a little unexpected were emails along the lines of:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Hi, I really like your job ad - the best I&amp;rsquo;ve seen for ages. I live in
+California though and don&amp;rsquo;t actually want to apply for a job.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;How strange? Who can be bothered to type up a complimentary cover letter
+for a job they don&amp;rsquo;t even want to apply for - most genuine applicants
+can&amp;rsquo;t be bothered to get the spelling and grammar right in their opening
+salvos.&lt;/p&gt;
+
+&lt;p&gt;Another consequence is that most applicant&amp;rsquo;s responses are also written
+in PHP pseudocode, which become a bit tiresome after the twentieth
+implementation of &lt;code&gt;Developer&lt;/code&gt; - we were asking for it though.&lt;/p&gt;
+
+&lt;p&gt;Strangely though, the clinching factor for several candidates was the
+following comment, left at the end of the ad:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;// If you have questions, just ask, and if you’re a recruitment consultant don’t even 
+// think about emailing – our board won’t let us use you, even though you may have our 
+// literal exact perfect candidate just waiting for an interview. Sorry.
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There&amp;rsquo;s nothing like the mutual hatred of recruitment consultants to
+bring people together.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

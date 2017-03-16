@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Bash on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/bash/index.xml</link>
+    <description>Recent content in Bash on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Following log files with tail -f</title>
+      <link>http://codeinthehole.com/tips/following-log-files-with-tail-f/</link>
+      <pubDate>Wed, 22 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/following-log-files-with-tail-f/</guid>
+      <description>&lt;p&gt;UNIX is a majestic onion of discovery. Every day a new layer of
+understanding can be peeled away to give some new pungent goodness.
+Today&amp;rsquo;s was the &amp;lsquo;follow&amp;rsquo; option of the tail command.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s commonplace to use tail for viewing the recent entries to a log
+file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;tail /var/log/apache2/error.log
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Much more useful is set the &amp;lsquo;follow&amp;rsquo; option so that, rather than echoing
+to STDOUT and returning control to the prompt - tail continues to watch
+the file in question and echos additional lines to the terminal. This
+can be very useful during development - I often leave a terminal open
+watching the error logs while I develop - so that I can quickly pounce
+on any errors that pop up.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;tail -f my-app-error.log
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Return control to the command prompt using CTRL+C (or run as a
+background process using &amp;amp;). This can be quite useful for monitoring the
+error logs of production sites where echoing error messages and warnings
+to the screen would be unacceptable.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Latex on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/latex/index.xml</link>
+    <description>Recent content in Latex on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Writing a Thesis in LaTeX</title>
+      <link>http://codeinthehole.com/guides/writing-a-thesis-in-latex/</link>
+      <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/guides/writing-a-thesis-in-latex/</guid>
+      <description>
+
+&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
+
+&lt;p&gt;This article is a guide to constructing a decent parent file for a
+thesis or dissertation compiled in Latex. The specific details
+implemented here, and included in the example files, are those set out
+by the guidelines for submission to the University of Nottingham, but
+can be easily amended to suit any sensible requirements.&lt;/p&gt;
+
+&lt;p&gt;Considerable attention has been paid to presenting the final document as
+a PDF file, which keeps the file size manageable (compared to postscript)
+and allows groovy add-ons such as hyperlinks and back-referencing.
+However, several hacks are required to attain good functionality from
+your PDF file and these can give the latex code a mysterious (and messy)
+appearance in places. While I highly recommend the inclusion of the
+PDF-related commands, they are not strictly necessary and can be ignored
+- especially if you are new to Latex.&lt;/p&gt;
+
+&lt;div class=&#34;admonition warning&#34;&gt;
+    I wrote this article after finishing my PhD in 2005. I haven&#39;t
+    done any Latex since and am thus very rusty. Ultimately, these days
+    I&#39;m unlikely to be able to answer many questions on this topic.
+    Sorry about that.
+&lt;/div&gt;
+
+&lt;h3 id=&#34;note-for-windows-users&#34;&gt;Note for Windows users&lt;/h3&gt;
+
+&lt;p&gt;The code outlined below was designed and implemented on the unix system
+at Nottingham. For those of you unfortunate enough to be running a
+Windows box, a number of problems may arise when using the below code:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;First off, not all the packages used will be present and will need
+to be installed. Probably the easiest way to do this is to google
+the package name with the extension &lt;code&gt;.sty&lt;/code&gt; and save this file in the
+&lt;code&gt;C:\VTEX\l2e\\&lt;/code&gt; directory of your machine. Note that for the &lt;code&gt;natbib&lt;/code&gt;
+package, you will also need to download the relevant &lt;code&gt;.bst&lt;/code&gt; file,
+which in this case is &lt;code&gt;unsrtnat.bst&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Also, many of the packages that are installed locally may need
+updating. For instance, the computers I have tested on both have old
+versions of the &lt;code&gt;geometry&lt;/code&gt; and &lt;code&gt;caption&lt;/code&gt; packages, which cause Latex
+to return errors. To resolve these problems, either download the
+latest versions, or remove the &lt;code&gt;includefoot&lt;/code&gt; option from the
+&lt;code&gt;geometry&lt;/code&gt; package and set the bottom margin to 1.4in.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Also, the code for compiling to PDF does not work so well in Windows,
+and so it is recommended that Windows users use the template without PDF
+code.&lt;/p&gt;
+
+&lt;h3 id=&#34;requirements&#34;&gt;Requirements&lt;/h3&gt;
+
+&lt;p&gt;The guidelines for theses to be submitted to the University of
+Nottingham specify that:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;the document should be presented on single-sided a4 paper and
+typeset in a double-spaced size 10-12 font;&lt;/li&gt;
+&lt;li&gt;the left-hand margin should be at least 1.5 inches (4cm) to allow
+for binding;&lt;/li&gt;
+&lt;li&gt;the other three margins should be at least 1 inch (2.5cm).&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Other settings such as the way chapter headings are formatted, and
+whether headers are included, are not specified and are up to the user.
+In this case, we&amp;rsquo;ll install headers and tinker with the chapter
+formatting.&lt;/p&gt;
+
+&lt;h3 id=&#34;template-files&#34;&gt;Template files&lt;/h3&gt;
+
+&lt;p&gt;Here are the template files which this page explains:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://codeinthehole.com/downloads/thesis_without_pdfcode.tex&#34;&gt;thesis_without_pdfcode.tex&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://codeinthehole.com/downloads/thesis_with_pdfcode.tex&#34;&gt;thesis_with_pdfcode.tex&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The appearance of both these files on the printed page will be
+identical; however after compilation into PDF (see the section below)
+and opening in Adobe Acrobat (or a similar PDF reader), the advantages
+that come with the PDF format will be apparent.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://codeinthehole.com/downloads/thesis_without_pdfcode.pdf&#34;&gt;thesis_without_pdfcode.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://codeinthehole.com/downloads/thesis_with_pdfcode.pdf&#34;&gt;thesis_with_pdfcode.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The rest of this page is devoted to explaining the code in these files.&lt;/p&gt;
+
+&lt;h3 id=&#34;document-structure&#34;&gt;Document structure&lt;/h3&gt;
+
+&lt;p&gt;The document begins in a standard and entirely self-explanatory manner.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\documentclass&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[11pt,a4paper]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;report&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;preamble-essential-packages&#34;&gt;Preamble: essential packages&lt;/h4&gt;
+
+&lt;p&gt;Next, the essential packages are loaded:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;amsmath, amssymb, amsthm&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% AMS packages&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;graphicx,color&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;           &lt;span style=&#34;color: #75715e&#34;&gt;% Packages for graphics and color&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[left=1.5in, right=1in, top=1in, bottom=1in, includefoot, headheight=13.6pt]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;geometry&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackge&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[T1]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;fontenc&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;               &lt;span style=&#34;color: #75715e&#34;&gt;% Ensure correct font encoding&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where the &lt;code&gt;geometry&lt;/code&gt; package has been loaded to allow the margins to be
+set in a neat and consistent way. The non-obvious option &lt;code&gt;includefoot&lt;/code&gt;
+ensures that the footer (which only contains the pagenumber) is included
+in the page and is thus 1 inch above the bottom of the page. Note that
+this option is only available in recent versions of the package: if
+you&amp;rsquo;re using an old version and can&amp;rsquo;t/won&amp;rsquo;t upgrade, then remove the
+offending option and extend the bottom margin to 1.4in.
+&lt;code&gt;headheight=13.6pt&lt;/code&gt; is included due to to ensure compatibility with the
+&lt;code&gt;fancyhdr&lt;/code&gt; package (and is not required if you don&amp;rsquo;t use the &lt;code&gt;fancyhdr&lt;/code&gt;
+package). Also quite essential is the &lt;code&gt;natbib&lt;/code&gt; package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\includepackage&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[square, comma, numbers, sort&amp;amp;compress]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;natbib&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where the various options ensure that references appear in the document
+as:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&amp;hellip;boiled dog can do maths claims experimenter [10,12,15-18].&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Alternative referencing styles are easily implemented, see the natbib
+help file for more details. In fact, to use the &lt;code&gt;natbib&lt;/code&gt; package, you&amp;rsquo;ll
+have to read at least a few lines of the help file so you understand the
+difference between &lt;code&gt;\citet&lt;/code&gt; and &lt;code&gt;\citep&lt;/code&gt;, and I insist you do that now.&lt;/p&gt;
+
+&lt;h4 id=&#34;preamble-custom-captions-optional&#34;&gt;Preamble: custom captions (optional)&lt;/h4&gt;
+
+&lt;p&gt;We now set the figure captions to be elegant and dignified:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[hang, small, bf, margin=20pt, tableposition=top]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;caption&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\setlength&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\abovecaptionskip&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;0pt&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that early versions of this package don&amp;rsquo;t support the &lt;code&gt;margin=&lt;/code&gt; and
+&lt;code&gt;tableposition=&lt;/code&gt; options; in this case, these trimmings will have to be
+ignored.&lt;/p&gt;
+
+&lt;h4 id=&#34;preamble-custom-fonts-optional&#34;&gt;Preamble: custom fonts (optional)&lt;/h4&gt;
+
+&lt;p&gt;You can also choose an alternative font for both the text and the
+mathematical characters. This can be acheived by:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;mathpazo&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Aside from &lt;code&gt;mathpazo&lt;/code&gt;, there are several other fonts available, such as
+&lt;code&gt;chancery&lt;/code&gt;, &lt;code&gt;palatino&lt;/code&gt; and &lt;code&gt;times&lt;/code&gt; (all loaded in the same way).&lt;/p&gt;
+
+&lt;h4 id=&#34;preamble-fancy-headers-optional&#34;&gt;Preamble: fancy headers (optional)&lt;/h4&gt;
+
+&lt;p&gt;Feeling a little devil-may-care? If so, you&amp;rsquo;ll probably want to install
+some elegant headers along each page. This is easily acheived through
+the &lt;code&gt;fancyhdr&lt;/code&gt; package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;fancyhdr&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\pagestyle&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;fancy&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\rhead&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\lhead&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\nouppercase&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\textsc&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\leftmark&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}}}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\renewcommand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\headrulewidth&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;0pt&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\makeatletter&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\renewcommand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\chaptermark&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;[1]&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\markboth&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\textsc&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\@&lt;/span&gt;chapapp&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\ \thechapter&lt;/span&gt;:&lt;span style=&#34;color: #66d9ef&#34;&gt;\ &lt;/span&gt;#1&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{}}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\makeatother&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The final complicated-looking three lines simply ensure that the
+headings for appendices are formatted correctly. (Without these lines,
+what should read &amp;ldquo;Appendix A&amp;rdquo; is set as &amp;ldquo;Chapter A&amp;rdquo;.)&lt;/p&gt;
+
+&lt;h4 id=&#34;preamble-customised-chapter-section-headings-optional&#34;&gt;Preamble: customised chapter/section headings (optional)&lt;/h4&gt;
+
+&lt;p&gt;We now make use of several customisation options that are bundled with
+the sectsty package.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;sectsty&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\chapterfont&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\large\sc\centering&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\chaptertitlefont&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\centering&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\subsubsectionfont&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\centering&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;These alter the appearance of the first page of each chapter to have a
+centred title, with the word &amp;ldquo;chapter&amp;rdquo; set in small capitals immediately
+above. Feel free to employ your own individual and highly refined tastes
+here in choosing your own chapter/section settings.&lt;/p&gt;
+
+&lt;h4 id=&#34;preamble-pdf-options-optional&#34;&gt;Preamble: pdf options (optional)&lt;/h4&gt;
+
+&lt;p&gt;If you want to publish your thesis on the internet, or even just to
+email it to someone, then you&amp;rsquo;ll want to store it in the ubiquitous PDF
+format. Doing so offers some neat facilities, such as hyperlinking,
+which are implemented by the &lt;code&gt;hyperref&lt;/code&gt; package:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[ps2pdf=true,colorlinks]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;hyperref&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\usepackage&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[figure,table]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;hypcap&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Correct a problem with hyperref&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\hypersetup&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    bookmarksnumbered,
+    pdfstartview=&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;FitH&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;,
+    citecolor=&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;black&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;,
+    linkcolor=&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;black&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;,
+    urlcolor=&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;black&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;,
+    pdfpagemode=&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;UseOutlines&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There are various other options you can pass to your favourite PDF
+reader via the &lt;code&gt;\hypersetup&lt;/code&gt; command, such as &lt;code&gt;pdftitle&lt;/code&gt;, &lt;code&gt;pdfauthor&lt;/code&gt;
+and &lt;code&gt;pdfsubject&lt;/code&gt;; however, they&amp;rsquo;re not really essential. Note that the
+hyperlink colours have all been set to black for consistent printing.
+Should you want to distribute your thesis over the web, then it would be
+advisable to set these colours to red or something similarly vibrant and
+exciting.&lt;/p&gt;
+
+&lt;p&gt;Things get a little messy now as a hack is required to ensure the
+hyperlinks actually jump to the right place.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\makeatletter&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\newcommand\org&lt;/span&gt;@hypertarget&lt;span style=&#34;color: #f8f8f2&#34;&gt;{}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\let\org&lt;/span&gt;@hypertarget&lt;span style=&#34;color: #66d9ef&#34;&gt;\hypertarget&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\renewcommand\hypertarget&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[2]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;%&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\Hy&lt;/span&gt;@raisedlink&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\org&lt;/span&gt;@hypertarget&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;#1&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{}}&lt;/span&gt;#2&lt;span style=&#34;color: #75715e&#34;&gt;%&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\makeatother&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;No need to worry about this code, let&amp;rsquo;s just move straight on.&lt;/p&gt;
+
+&lt;h4 id=&#34;preamble-page-layout&#34;&gt;Preamble: page layout&lt;/h4&gt;
+
+&lt;p&gt;We now set various parameters to alter the general page layout:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\parindent&lt;/span&gt; 0pt
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\parskip&lt;/span&gt; 1ex
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\renewcommand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\baselinestretch&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;1.33&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The first two of these commands alter the paragraph formatting so that
+new paragraphs are not indented but separated from the previous one by a
+small amount of whitespace; the third sets the line spacing. The
+sharp-eyed among you will notice the discrepancy between our chosen
+line-spacing and that dictated by the university guidelines. However, no
+matter how poor your eyesight is, you&amp;rsquo;ll quickly appreciate that true
+double line-spacing (set with &lt;code&gt;\renewcommand(\baselinestretch}{2}&lt;/code&gt;)
+looks rubbish. In addition, Nottingham University are perfectly happy to
+accept theses set with the above line-spacing, which is more pleasing to
+the eye.&lt;/p&gt;
+
+&lt;p&gt;Some final settings:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\numberwithin&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;equation&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;section&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;       &lt;span style=&#34;color: #75715e&#34;&gt;% Tinker with equation numbering&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\renewcommand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\bibname&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;References&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;    &lt;span style=&#34;color: #75715e&#34;&gt;% Alter appearance of table of contents slightly&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\renewcommand&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\contentsname&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;Contents&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\pagenumbering&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;roman&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;                  &lt;span style=&#34;color: #75715e&#34;&gt;% Sets the pagenumbering to Roman nunerals to begin with&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\bibliographystyle&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;unsrtnat&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;           &lt;span style=&#34;color: #75715e&#34;&gt;% Sets bibliography style file (see natbib literature)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Set which chapters to include when Latex is next run. The advantage of
+this method is that all your cross-references are remembered and Latex
+does not spit out loads of warnings.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\includeonly&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;chapter1,chapter2,chapter3,conclusions,appendices&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;main-matter&#34;&gt;Main matter&lt;/h4&gt;
+
+&lt;p&gt;We now begin the document in earnest and define a suitable title:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\begin&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\title&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\huge&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\textbf&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Collected studies in&lt;span style=&#34;color: #66d9ef&#34;&gt;\\&lt;/span&gt;pseudoscience&lt;span style=&#34;color: #f8f8f2&#34;&gt;}}&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[1.2cm]&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\Large&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Nathan P. Utah, MMath.&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[1.2cm]&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\Large&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Thesis submitted to The University of Nottingham &lt;span style=&#34;color: #66d9ef&#34;&gt;\\&lt;/span&gt;
+for the degree of Doctor of Philosophy&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\\&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[1cm]&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\Large&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;November 2005&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\author&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\date&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\pdfbookmark&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[0]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Titlepage&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;title&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Sets a PDF bookmark for the title page&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\maketitle&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;followed by a dedication:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\newpage&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\vspace*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;8cm&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\pdfbookmark&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[0]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Dedication&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;dedication&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Sets a PDF bookmark for the dedication&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\begin&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;center&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\large&lt;/span&gt; Dedicated to the steel workers of America
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;center&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We now construct an abstract:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\newpage&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\pdfbookmark&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[0]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Abstract&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;abstract&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Sets a PDF bookmark for the abstract&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\chapter*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Abstract&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\textsc&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;The celebrated number&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; -17 was discovered in Manchester in 1989 ...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;some acknowledgements:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\pdfbookmark&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[0]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Acknowledgements&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;acknowledgements&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Sets a PDF bookmark for the acknowledements&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\chapter*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Acknowledgements&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+I would like to thank Rambo, my pet fishfinger...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and a contents page:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\pdfbookmark&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;[0]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;Contents&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;contents&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Sets a PDF bookmark for the contents page&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\tableofcontents&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now, we alter the pagenumbering to arabic and point to the relevant
+chapter files:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\newpage&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\pagenumbering&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;arabic&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\include&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;chapter1&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\include&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;chapter2&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\include&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;chapter3&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+...
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\include&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;conclusions&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\include&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;appendices&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All your chapter files should be included here; to save time when
+editing, use the &lt;code&gt;\includeonly&lt;/code&gt; command to specify which chapters to
+compile.&lt;/p&gt;
+
+&lt;p&gt;Finally, we make sure there is a link to the references section in the
+table of contents and reference the correct bibiography file (which in
+this case is called &lt;code&gt;bibliography.bib&lt;/code&gt;).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;\phantomsection&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;% Ensures that a PDF bookmark is set here&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\addcontentsline&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;toc&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;chapter&lt;span style=&#34;color: #f8f8f2&#34;&gt;}{&lt;/span&gt;References&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\bibliography&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;bibliography&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;\end&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;document&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And there we have it: a complete thesis parent file that not only looks
+good on the printed page, but is fully functional and hyperlinked in PDF
+format.&lt;/p&gt;
+
+&lt;h4 id=&#34;compiling-to-pdf&#34;&gt;Compiling to PDF&lt;/h4&gt;
+
+&lt;p&gt;Whether you&amp;rsquo;ve included all the red PDF commands or not, you can convert
+your TEX file to PDF by running (in unix):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ latex thesis_with_pdfcode.tex
+$ dvips thesis_with_pdfcode.dvi
+$ ps2pdf -sPAPERSIZE&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;a4 thesis_with_pdfcode.ps
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The additional argument to &lt;code&gt;ps2pdf&lt;/code&gt; is required as the default paper
+size is US Letter. Note that you will probably need to bibtex your
+thesis file before running latex for the final time.&lt;/p&gt;
+
+&lt;p&gt;For Windows, first open a command window by going &lt;code&gt;Start-&amp;gt;Run&lt;/code&gt; and
+entering &lt;code&gt;cmd&lt;/code&gt;. Provided MiKTeX and GhostScript are correctly installed
+then the necessary commands are:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&amp;gt; latex thesis_with_pdfcode.tex
+&amp;gt; dvips thesis_with_pdfcode.dvi
+&amp;gt; ps2pdf.bat -sPAPERSIZE#a4 thesis_with_pdfcode.ps thesis_with_pdfcode.pdf
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The syntax for &lt;code&gt;ps2pdf&lt;/code&gt; is slightly different in Windows compared to
+Unix - and note that the output pdf filename MUST be specified, else the
+ps file is overwritten and corrupted.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

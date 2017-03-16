@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pil on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/pil/index.xml</link>
+    <description>Recent content in Pil on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/pil/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>How to install PIL on 64-bit Ubuntu 12.04</title>
+      <link>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</link>
+      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;With pip already installed, install the required development packages:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and symlink the three image libraries into &lt;code&gt;/usr/lib&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;uname -i&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;-linux-gnu/libfreetype.so /usr/lib/
+$ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;uname -i&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;-linux-gnu/libjpeg.so /usr/lib/
+$ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;uname -i&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;-linux-gnu/libz.so /usr/lib/
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;PIL should now install with support for JPEGs, PNGs and FreeType, as
+indicated by the compilation output:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
+PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
+--------------------------------------------------------------------
+version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
+platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+--------------------------------------------------------------------
+*** TKINTER support not available
+--- JPEG support available
+--- ZLIB &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;PNG/ZIP&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; support available
+--- FREETYPE2 support available
+*** LITTLECMS support not available
+--------------------------------------------------------------------
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;common-problems&#34;&gt;Common problems&lt;/h3&gt;
+
+&lt;h4 id=&#34;missing-image-libraries&#34;&gt;Missing image libraries&lt;/h4&gt;
+
+&lt;p&gt;If the image libraries are not installed and available in &lt;code&gt;/usr/lib&lt;/code&gt;,
+you&amp;rsquo;ll see something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
+PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
+--------------------------------------------------------------------
+version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
+platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+--------------------------------------------------------------------
+*** TKINTER support not available
+*** JPEG support not available
+*** ZLIB &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;PNG/ZIP&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; support not available
+*** FREETYPE2 support not available
+*** LITTLECMS support not available
+--------------------------------------------------------------------
+To add a missing option, make sure you have the required
+library, and &lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; the corresponding ROOT variable in the
+setup.py script.
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;missing-python-headers&#34;&gt;Missing python headers&lt;/h4&gt;
+
+&lt;p&gt;Without &lt;code&gt;python-dev&lt;/code&gt;, you&amp;rsquo;ll see something that ends with the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;...
+
+running build_ext
+
+building &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;_imaging&amp;#39;&lt;/span&gt; extension
+
+creating build/temp.linux-x86_64-2.7
+
+creating build/temp.linux-x86_64-2.7/libImaging
+
+gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -IlibImaging -I/usr/include -I/usr/local/include -I/usr/include/python2.7 -c _imaging.c -o build/temp.linux-x86_64-2.7/_imaging.o
+
+_imaging.c:75:20: fatal error: Python.h: No such file or directory
+
+compilation terminated.
+
+error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;Yes, this has been written about before. This is just my note-to-self
+that I can refer others to - I also wanted to include the common error
+messages that people will search for.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/&#34;&gt;Installing PIL in a virtualenv on Ubuntu 12.04 Precise
+Pangolin&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/&#34;&gt;Install PIL with JPEG support on Ubuntu Oneric
+64bit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://www.saltycrane.com/blog/2010/10/how-install-pil-ubuntu/&#34;&gt;How to install PIL on
+Ubuntu&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

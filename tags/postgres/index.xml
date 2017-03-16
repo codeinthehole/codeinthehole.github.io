@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Postgres on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/postgres/index.xml</link>
+    <description>Recent content in Postgres on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Copying Postgres output into a spreadsheet</title>
+      <link>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</link>
+      <pubDate>Wed, 02 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
+      <description>&lt;p&gt;I often need to grab information from a Postgres database and paste it
+into a spreadsheet for sharing with others. Google Sheets needs the
+pasted data to be tab-separated in order to be correctly split into
+columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to
+configure psql&amp;rsquo;s output to get it.&lt;/p&gt;
+
+&lt;p&gt;At a psql prompt, switch to unaligned output&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\a&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and set the field separator to a tab character:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\f&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then the output from subsequent &lt;code&gt;SELECT ...&lt;/code&gt; statements can be cleanly
+pasted into your Google Doc.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Backing up Postgres database rows before deleting them</title>
+      <link>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</link>
+      <pubDate>Thu, 19 Mar 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
+      <description>&lt;blockquote&gt;
+&lt;p&gt;Hmmm, this delete statement is taking longer than I thought it
+would&amp;hellip;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;If you ever have to manually run a SQL delete statement in &lt;code&gt;psql&lt;/code&gt;, you
+can back-up the rows you&amp;rsquo;re about to delete:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;copy&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;id&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/backup.csv&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore
+them with:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;copy&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/backup.csv&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Moderately useful.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dumping and restoring a PostGIS database</title>
+      <link>http://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</link>
+      <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</guid>
+      <description>
+
+&lt;p&gt;I wasted at least twenty minutes getting this to work. These are my
+notes.&lt;/p&gt;
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You are using a PostGIS database and want to take a backup copy from
+production and restore it in a different environment. One complication
+is that each environment connects to its database with its own user.&lt;/p&gt;
+
+&lt;p&gt;This is a common scenario if you are using
+&lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/gis/&#34;&gt;GeoDjango&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;Suppose your production database is called &amp;ldquo;myproject_prod&amp;rdquo; which you
+connect to with user &amp;ldquo;myproject_prod_role&amp;rdquo; and you want to replace
+your existing stage database &amp;ldquo;myproject_stage&amp;rdquo; that you connect to with
+user &amp;ldquo;myproject_stage_role&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;First, dump your production database:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ pg_dump --no-acl --no-owner &lt;span style=&#34;color: #f8f8f2&#34;&gt;$DATABASE&lt;/span&gt; &amp;gt; dump.sql
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;access control is ignored (&lt;code&gt;--no-acl&lt;/code&gt;) as your production database
+may have additional users that you&amp;rsquo;re not interested in;&lt;/li&gt;
+&lt;li&gt;ownership is ignored (&lt;code&gt;--no-owner&lt;/code&gt;) as you will be restoring as a
+different user.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Now, copy the SQL file across to the appropriate server and create the
+destination database from a PostGIS template with the appropriate owner:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=#&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DATABASE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject_stage;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=#&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DATABASE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject_stage&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;TEMPLATE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template_postgis&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;OWNER&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject_role_stage;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and restore the database using the stage user:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ psql --host&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;127&lt;/span&gt;.0.0.1 --username&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;myproject_role_stage myproject_stage &amp;lt; dump.sql
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Be warned: this command will generated a lot of warnings (which can be
+ignored). This happens as &lt;code&gt;pg_dump&lt;/code&gt; generates SQL relative to the
+&amp;lsquo;template0&amp;rsquo; database (not &amp;lsquo;template_postgis&amp;rsquo; which would be more
+helpful in this situation). Thus, the dumped SQL file contains the
+definitions of PostGIS types which have already been defined when we
+created the database from &amp;ldquo;template_postgis&amp;rdquo;.&lt;/p&gt;
+
+&lt;div class=&#34;admonition note&#34;&gt;
+    The host is specified in the restore operation (&lt;code&gt;--host=127.0.0.1&lt;/code&gt;) so
+    as to trigger the correct authentication rules from &lt;code&gt;pg_hba.conf&lt;/code&gt;. I
+    usually forget this and am confused about why I can&#39;t authenticate. You
+    might not need this if your authentication config is different.
+&lt;/div&gt;
+
+&lt;p&gt;Related reading:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://postgis.17.x6.nabble.com/Backup-and-Restore-of-a-PostGis-database-td3565498.html&#34;&gt;Backup and Restore of a PostGis
+database&lt;/a&gt; -
+a relevant thread from the PostGIS mailing list.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Altering Postgres table columns with South</title>
+      <link>http://codeinthehole.com/tips/altering-postgres-table-columns-with-south/</link>
+      <pubDate>Tue, 19 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/altering-postgres-table-columns-with-south/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You&amp;rsquo;re using Postgres with Django.&lt;/p&gt;
+
+&lt;p&gt;You change a field type of one of your models, generate an &lt;code&gt;--auto&lt;/code&gt;
+South migration and attempt to run it. However, South chokes on the new
+migration complaining that the data in the column cannot be cast to the
+new type.&lt;/p&gt;
+
+&lt;p&gt;For instance, I recently changed a &lt;code&gt;CharField&lt;/code&gt; to a &lt;code&gt;TimeField&lt;/code&gt; but the
+corresponding migration lead to:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Running migrations for stores:
+- Migrating forwards to 0009_auto__chg_field_openingperiod_start__chg_field_openingperiod_end.
+&amp;gt; stores:0008_auto__del_unique_store_slug
+&amp;gt; stores:0009_auto__chg_field_openingperiod_start__chg_field_openingperiod_end
+FATAL ERROR - The following SQL query failed: ALTER TABLE &amp;quot;stores_openingperiod&amp;quot; ALTER COLUMN &amp;quot;start&amp;quot; TYPE time, ALTER COLUMN &amp;quot;start&amp;quot; DROP NOT NULL, ALTER COLUMN &amp;quot;start&amp;quot; DROP DEFAULT;
+The error was: column &amp;quot;start&amp;quot; cannot be cast to type time without time zone
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Postgres did not know how to convert my text data to times.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;Write the &lt;code&gt;ALTER TABLE&lt;/code&gt; SQL by hand, making use of the &lt;code&gt;USING&lt;/code&gt; clause to
+specify how to compute the new value from the old.&lt;/p&gt;
+
+&lt;p&gt;For the above example, the correct SQL to use is:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;TABLE&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;stores_openingperiod&amp;quot;&lt;/span&gt; 
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;COLUMN&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;end&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DEFAULT&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;COLUMN&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;end&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;NOT&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;NULL&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;ALTER&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;COLUMN&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;end&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;TYPE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;time&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;USING&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;to_timestamp(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;end&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;HHam&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to modify the migration file to execute raw SQL with
+&lt;code&gt;db.execute&lt;/code&gt; instead of using &lt;code&gt;db.alter_table&lt;/code&gt; to generate the SQL. So
+we change:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;alter_column(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;stores_openingperiod&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;end&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;gf(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;django.db.models.fields.TimeField&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)(null&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True))&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;db&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;execute(&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ALTER TABLE &amp;quot;stores_openingperiod&amp;quot; &amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ALTER COLUMN &amp;quot;end&amp;quot; DROP DEFAULT, &amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ALTER COLUMN &amp;quot;end&amp;quot; DROP NOT NULL, &amp;#39;&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ALTER COLUMN &amp;quot;end&amp;quot; TYPE time USING to_timestamp(&amp;quot;end&amp;quot;, &lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;HHam&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;)&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and all is well.&lt;/p&gt;
+
+&lt;p&gt;A similar technique can be used wherever Postgres refuses to run a
+migration due to casting issues. See the &lt;a href=&#34;http://www.postgresql.org/docs/9.1/static/sql-altertable.html&#34;&gt;Postgres
+documentation&lt;/a&gt;
+for more examples of the &lt;code&gt;USING&lt;/code&gt; clause.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Configuring logging for Postgres.app</title>
+      <link>http://codeinthehole.com/tips/configuring-logging-for-postgresapp/</link>
+      <pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You&amp;rsquo;re using &lt;a href=&#34;http://postgresapp.com/&#34;&gt;Postgres.app&lt;/a&gt; on a Mac for local
+development but are getting SQL errors from your application. You&amp;rsquo;re
+seeing an error message:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;ERROR:  current transaction is aborted, commands ignored &lt;span style=&#34;color: #66d9ef&#34;&gt;until&lt;/span&gt; end of
+transaction block
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t very useful: you want to know which query is generating the
+error.&lt;/p&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;Turn on Postgres&amp;rsquo; logging and watch the log files when the error is
+generated.&lt;/p&gt;
+
+&lt;p&gt;This is done by editing
+&lt;code&gt;~/Library/Application Support/Postgres/var/postgresql.conf&lt;/code&gt; and
+setting:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;logging_collector = on
+log_directory = &#39;pg_log&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;then restarting Postgres to pick up the new settings. You can then watch
+the log files to find out which queries are failing:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ tail -f ~/Library/Application&lt;span style=&#34;color: #ae81ff&#34;&gt;\ &lt;/span&gt;Support/Postgres/var/pg_log/*
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;By default, Postgres.app does not have logging enabled which makes local
+debugging difficult.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

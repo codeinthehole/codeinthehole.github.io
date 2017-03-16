@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Node.Js on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/node.js/index.xml</link>
+    <description>Recent content in Node.Js on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Multi-scp: copying a file to all hosts in your SSH config</title>
+      <link>http://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</link>
+      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</guid>
+      <description>&lt;p&gt;I am totally reliant on my bash aliases and readline configuration. When
+working on a new server, the first thing I do is copy over my local Bash
+(&lt;code&gt;~/.bashrc&lt;/code&gt;) and Readline (&lt;code&gt;~/.inputrc&lt;/code&gt;) configuration files.&lt;/p&gt;
+
+&lt;p&gt;One mildly annoying issue is when you update a config file, it&amp;rsquo;s a pain
+to copy it onto all your remote hosts. To scratch this itch, I wrote a
+simple node.js executable for copying a file to all the defined hosts in
+your &lt;code&gt;~/.ssh/config&lt;/code&gt; file&lt;/p&gt;
+
+&lt;p&gt;Usage is trivial:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ multi-scp ~/.bashrc
+Starting sync of &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;~/.bashrc&amp;#39;&lt;/span&gt; to all hosts in /home/david/.ssh/config
+-&amp;gt; Copying to mars
+-&amp;gt; Copying to venus
+-&amp;gt; Copying to jupiter
+&amp;lt;- Successful copy to mars
+&amp;lt;- Successful copy to venus
+&amp;lt;- Successful copy to jupiter
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Using node.js seems an odd choice as this could trivially be done in
+another scripting language. However, I wanted to use node as:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;it allows the copy operation to run asynchronously in a child
+process with a callback to handle completion and error;&lt;/li&gt;
+&lt;li&gt;it&amp;rsquo;s fashionable.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;a href=&#34;https://github.com/codeinthehole/node-multi-scp&#34;&gt;code is on Github&lt;/a&gt;
+as usual.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

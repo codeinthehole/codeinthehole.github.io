@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Ganglia on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/ganglia/index.xml</link>
+    <description>Recent content in Ganglia on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/ganglia/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Monitoring MySQL with Ganglia and gmetric</title>
+      <link>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
+      <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9780596102357.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Following some server monitoring advice from the excellent &amp;lsquo;Building
+Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting
+with &lt;a href=&#34;http://ganglia.info/&#34;&gt;Ganglia&lt;/a&gt; on a cluster of servers at Tangent
+Labs. It has proved to be deeply impressive and has given us a great
+tool for keeping an eye on how our servers are performing, as well as
+providing an invaluable diagnostic tool should things go wrong.&lt;/p&gt;
+
+&lt;p&gt;In essence, Ganglia is a distributed monitoring application that allows
+statistics on a cluster of servers to be aggregated in a single place.
+Moreover, an excellent web front-end is also provided to view charts of
+the statistics being collected. You can view a &lt;a href=&#34;http://monitor.millennium.berkeley.edu/&#34;&gt;live demo of the Ganglia
+monitoring application for the UC Berkeley Millennium
+Project&lt;/a&gt; which shows exactly
+what Ganglia can provide.&lt;/p&gt;
+
+&lt;p&gt;Out of the box, Ganglia collects basic server stats on load, memory,
+CPU, network and disk. However, what makes it great is that it can be
+easily extended to collect statistics on anything that you can measure
+from the command line. There is a &lt;a href=&#34;http://ganglia.sourceforge.net/gmetric/&#34;&gt;repository of user-contributed
+scripts&lt;/a&gt; although it&amp;rsquo;s not that
+extensive. In this post, I detail a script that can used to feed
+statistics about MySQL into Ganglia for monitoring - something important
+to any LAMP-stack application.&lt;/p&gt;
+
+&lt;p&gt;A few technical details first: Ganglia utilises three utilities to run
+each with a distinct responsibility:&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;gmond&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;A daemon responsible for collecting monitoring stats and sharing
+them using XML over TCP. The gmond daemon runs on all nodes that you
+want to monitor.&lt;/p&gt;&lt;/dd&gt;
+&lt;dt&gt;gmetad&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;A daemon responsible for collecting and storing data from other
+gmetad and gmomd services. This only needs to be running on a
+single, central node.&lt;/p&gt;&lt;/dd&gt;
+&lt;dt&gt;gmetric&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;A command-line application used for using Ganglia to monitor custom
+metrics.&lt;/p&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;All very simple really - see the
+&lt;a href=&#34;http://ganglia.wiki.sourceforge.net/ganglia_documents&#34;&gt;docs&lt;/a&gt; for the
+nitty gritty. Ok, enough intro -here&amp;rsquo;s my script for MySQL:&lt;/p&gt;
+
+&lt;p&gt;» &lt;a href=&#34;http://codeinthehole.com/downloads/gmetric-mysql.sh&#34;&gt;gmetric-mysql.sh (3.1kb)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s written in Bash and uses a temporary file to read the MySQL stats
+into before parsing and submitting to gmetric. This is done as many of
+the MySQL stats of interest are cumulative counts rather than rates (eg
+SELECTs per second) which are generally of more interest. Hence, the
+script estimates the rate of change by dividing the value delta by the
+timestamp delta.&lt;/p&gt;
+
+&lt;p&gt;To use this script, simply copy it into a convenient location, ensure it
+is executable and add the following line to your crontab.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As soon as this is done, your Ganglia web front-end should start
+plotting the new metrics.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/ganglia-snapshot.jpeg&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

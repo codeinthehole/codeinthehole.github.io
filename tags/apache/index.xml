@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Apache on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/apache/index.xml</link>
+    <description>Recent content in Apache on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/apache/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Django, Nginx, WSGI and encoded slashes</title>
+      <link>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You are serving a Django application using Nginx to proxy to an Apache
+server running mod_wsgi and you want to allow slashes in your URL
+keywords.&lt;/p&gt;
+
+&lt;p&gt;For example, you may want to edit some attribute of the page at URL &lt;code&gt;/&lt;/code&gt;;
+hence, you want to use a URL regex of the form:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;url(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and use the URL &lt;code&gt;/edit/page/%2F/&lt;/code&gt; to edit this page, where the third
+path segment is URL-encoded.&lt;/p&gt;
+
+&lt;p&gt;This works fine in local development using Django&amp;rsquo;s &lt;code&gt;runserver&lt;/code&gt; but not
+when Nginx/Apache are involved. Both services will &amp;lsquo;process&amp;rsquo; the
+incoming request in a way that collapses repeating slashes. Django sees
+the above request path as &lt;code&gt;/edit/path&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;solution&#34;&gt;Solution&lt;/h4&gt;
+
+&lt;p&gt;First, in order to get django to encode slashes, you need to pass an
+empty string to the &lt;code&gt;urlencode&lt;/code&gt; template filter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;edit&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;page&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;urlencode:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next ensure Nginx&amp;rsquo;s &lt;code&gt;proxy_pass&lt;/code&gt; configuration is transmitting the URL
+in &amp;lsquo;unprocessed form&amp;rsquo; by omitting the path on the proxied server
+argmenent. That is, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;proxy_pass&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;http://localhost:80&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;instead of:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;proxy_pass&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;http://localhost:80/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The only different between these two examples is the trailing slash. See
+the &lt;a href=&#34;http://wiki.nginx.org/HttpProxyModule&#34;&gt;nginx documentation for
+proxy_pass&lt;/a&gt; for more details on
+what &amp;lsquo;unprocessed&amp;rsquo; means.&lt;/p&gt;
+
+&lt;p&gt;Next, alter your Apache config to include the &lt;code&gt;AllowEncodedSlashes&lt;/code&gt;
+directive to ensure Apache recognises encoded slashes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;VirtualHost&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;\*&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;AllowEncodedSlashes&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;On&lt;/span&gt;
+    ...
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/VirtualHost&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally modify your WSGI script to ensure Django gets the slashes in its
+&lt;code&gt;PATH_INFO&lt;/code&gt; environmental variable which it uses for resolving the URL
+to a view function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ... other WSGI stuff: setting up path, virtualenv etc&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;os&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;DJANGO_SETTINGS_MODULE&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;settings&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.handlers.wsgi&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;_application&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;core&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;handlers&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;wsgi&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WSGIHandler()&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urllib&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;application&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(environ,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;start_response):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;PATH_INFO&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urllib&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;unquote(environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;REQUEST_URI&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;split(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;_application(environ,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;start_response)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The key change is using the &lt;code&gt;REQUEST_URI&lt;/code&gt; variable to set &lt;code&gt;PATH_INFO&lt;/code&gt;.
+We pluck the path component from &lt;code&gt;REQUEST_URI&lt;/code&gt; and use &lt;code&gt;urllib.unquote&lt;/code&gt;
+to ensure encoded slashes are decoded.&lt;/p&gt;
+
+&lt;h4 id=&#34;discussion&#34;&gt;Discussion&lt;/h4&gt;
+
+&lt;p&gt;The &lt;code&gt;PATH_INFO&lt;/code&gt; variable is decoded by mod_wsgi, effectively collapsing
+repeated slashes. The &lt;code&gt;REQUEST_URI&lt;/code&gt; is the raw request and so it&amp;rsquo;s
+possible to use it to ensure encoded slashes make it through to Django.&lt;/p&gt;
+
+&lt;h4 id=&#34;further-reading&#34;&gt;Further reading&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This &lt;a href=&#34;http://stackoverflow.com/questions/3040659/how-can-i-receive-percent-encoded-slashes-with-django-on-app-engine&#34;&gt;StackOverflow
+answer&lt;/a&gt;
+describes a similar technique to solve this problem for Google App
+Engine.&lt;/li&gt;
+&lt;li&gt;A &lt;a href=&#34;https://groups.google.com/forum/?fromgroups#!topic/django-users/31oV1WhuAZ4&#34;&gt;Google Groups
+discussion&lt;/a&gt;
+of the issue.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>High Performance Web Sites by Steve Souders</title>
+      <link>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</link>
+      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9780596529307.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;High Performance Web Sites (HPWS) is essentially a book-length
+exposition of the &lt;a href=&#34;http://developer.yahoo.com/yslow/&#34;&gt;YSlow extension to
+Firebug&lt;/a&gt; augmented with case studies
+of popular US websites. YSlow itself links to some &lt;a href=&#34;http://developer.yahoo.com/performance/rules.html&#34;&gt;explanation
+paragraphs&lt;/a&gt; regarding
+the various guidelines that are used to grade the performance of a
+website. However, even for those familiar with this documentation, HPWS
+is still an excellent resource on how the performance of a web app can
+be tuned.&lt;/p&gt;
+
+&lt;p&gt;Chapter by chapter, HPWS introduces a new guideline and expounds the
+underlying rationale, giving illustrations of the HTTP requests with and
+without the suggested improvement. For instance, the use of far-future
+Expires HTTP headers is an easy-win recommendation that prevents
+unnecessary requests once a browser&amp;rsquo;s cache has been primed. This is
+something I&amp;rsquo;ve used on several sites previously, employing the following
+Apache directives to add Expires headers to the HTTP:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;IfModule&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;mod_expires.c&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresActive&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;on&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/jpg “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; years”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/jpeg “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; years”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/gif “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; years”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; text/css “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; days”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresByType&lt;/span&gt; image/js “access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; days”
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;ExpiresDefault&lt;/span&gt; ”access plus &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; days”
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/IfModule&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Additional areas where I found out something new include:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;The performance hit that using @import directives within CSS files
+has.&lt;/li&gt;
+&lt;li&gt;How the &amp;ldquo;Cache control&amp;rdquo; and &amp;ldquo;Etags&amp;rdquo; HTTP headers are often
+interpreted together by browsers to determine whether to make a
+request.&lt;/li&gt;
+&lt;li&gt;How the choice of domains to use for serving content must be
+balanced against the extra DNS look-up costs that each new domain
+incurs.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Many of the performance guidelines can be adhered to easily, by making a
+few adjustments to the Apache configuration of your site; However, some
+performance-enhancing measures come at a cost to the development process
+(such as keeping all javascript in one large, minified file). Such costs
+can be mitigated by having a careful one-step build process that handles
+the conversion of easy-to-use development files to more
+performance-savvy production files. Nevertheless, in many cases, one has
+to decide where the balance between performance and inconvenience in
+development lies.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s quite a short book at 137 pages, but definitely a worthwhile
+addition to any company library.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Date conditional redirects with mod_rewrite</title>
+      <link>http://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</link>
+      <pubDate>Fri, 07 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</guid>
+      <description>&lt;p&gt;The Apache module mod_rewite is capable of some very cool stuff. One
+neat trick is to use the time and date variables to control redirects
+and URL rewriting. This is useful if you have a URL that you don&amp;rsquo;t want
+to be exposed to the world until a certain date has passed - this could
+be the case with special offers and competitions which have a one-off
+static page that isn&amp;rsquo;t to be revealed until a specified date.&lt;/p&gt;
+
+&lt;p&gt;For example, the following directives specify that a temporary 302
+redirect should be issued for all requests to the URL &lt;code&gt;/special_offer&lt;/code&gt;
+before a certain date has passed:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;RewriteCond&lt;/span&gt; %{TIME} &amp;lt;20081031000000 
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;RewriteCond&lt;/span&gt; %{REQUEST_URI} &lt;span style=&#34;color: #e6db74&#34;&gt;/special_offer.&lt;/span&gt;*
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;RewriteRule&lt;/span&gt; (.*) &lt;span style=&#34;color: #e6db74&#34;&gt;/offers&lt;/span&gt; [L,R=302,QSA]
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This means that the &lt;code&gt;/special_offer&lt;/code&gt; page can be prepared and deployed
+beforehand and apache will handle the transfer once the publish date has
+passed. There&amp;rsquo;s a whole load of other nifty things that can be done in a
+similar vein such as returning different style sheets depending on the
+time of day.&lt;/p&gt;
+
+&lt;p&gt;Digressing briefly, debugging Apache directives can be quite tricky when
+you&amp;rsquo;re playing around trying to get something to work. I find the
+easiest thing to do is to redirect to a URL which contains the variable
+being tested against. For example:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;RewriteEngine&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;On&lt;/span&gt; 
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;RewriteCond&lt;/span&gt; %{REQUEST_URI} &lt;span style=&#34;color: #e6db74&#34;&gt;/debug&lt;/span&gt; 
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;RewriteRule&lt;/span&gt; (.*) &lt;span style=&#34;color: #e6db74&#34;&gt;/debug/&lt;/span&gt;?%{TIME}&amp;amp;%{TIME_DAY} [L,R=302]
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you can see what the values of &lt;code&gt;%{TIME}&lt;/code&gt; and &lt;code&gt;%{TIME_DAY}&lt;/code&gt; are from
+the URL you&amp;rsquo;ve been redirected to. There are almost certainly better
+ways of doing this but this way is quick and it works.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

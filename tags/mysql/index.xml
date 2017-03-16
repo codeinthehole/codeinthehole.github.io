@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mysql on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/mysql/index.xml</link>
+    <description>Recent content in Mysql on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Solving MySQL connection problems caused by a dead name server</title>
+      <link>http://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</link>
+      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</guid>
+      <description>
+
+&lt;p&gt;A client site went down today. This is what happened and how it was
+fixed.&lt;/p&gt;
+
+&lt;h3 id=&#34;symptoms&#34;&gt;Symptoms&lt;/h3&gt;
+
+&lt;p&gt;The immediate symptom is that your application servers can&amp;rsquo;t connect to
+your database servers. Attempted connections get an error message:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The relevant MySQL process list reveals a long list of attempted
+connections in state &lt;code&gt;login&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;root@server-db1:~ $ mysqladmin processlist
++-----+----------------------+--------------------+----+---------+------+-------+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Id  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; User                 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Host               &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; db &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Command &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Time &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; State &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
++-----+----------------------+--------------------+----+---------+------+-------+
+...
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;261&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43381 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;262&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43396 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;263&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43420 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;264&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43429 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;265&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.4:55297  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Your site is probably down as no request can connect to the database -
+people are starting to get upset.&lt;/p&gt;
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;When a client connects to MySQL, the newly spawned thread attempts to
+resolve the host name (see &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.0/en/dns.html&#34;&gt;MySQL&amp;rsquo;s documentation on
+DNS&lt;/a&gt;). This problem is
+caused by the first name server in &lt;code&gt;/etc/resolv.conf&lt;/code&gt; being down,
+causing the DNS request to time-out. Hence, every connection to MySQL
+sits for a minute waiting for the timeout to occur. Within a few
+seconds, no client will be able to connect.&lt;/p&gt;
+
+&lt;p&gt;You can verify this using the &lt;code&gt;dig&lt;/code&gt; command to exercise the name servers
+in &lt;code&gt;/etc/resolv.conf&lt;/code&gt;. Here&amp;rsquo;s the broken one (you&amp;rsquo;ll have to wait for
+the time-out):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;dig @180.179.39.80 www.google.com
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG &lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.7.0-P1 &amp;lt;&amp;lt;&amp;gt;&amp;gt; @180.179.39.80 www.google.com
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; server found&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; global options: +cmd
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; connection timed out&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; no servers could be reached
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;A working name server would return something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;dig @180.179.39.81 www.google.com
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG &lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.7.0-P1 &amp;lt;&amp;lt;&amp;gt;&amp;gt; @180.179.39.81 www.google.com
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; server found&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; global options: +cmd
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; Got answer:
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; -&amp;gt;&amp;gt;HEADER&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;lt;&amp;lt;- opco&lt;/span&gt;de: QUERY, status: NOERROR, id: &lt;span style=&#34;color: #ae81ff&#34;&gt;14538&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; flags: qr rd ra&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; QUERY: &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;, ANSWER: &lt;span style=&#34;color: #ae81ff&#34;&gt;6&lt;/span&gt;, AUTHORITY: &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;, ADDITIONAL: &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; QUESTION SECTION:
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;www.google.com.googleINA
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; ANSWER SECTION:
+www.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;427763&lt;/span&gt;  IN  CNAME   www.l.google.com.
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.116
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.112
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.113
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.114
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.115
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; AUTHORITY SECTION:
+google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/span&gt;  IN  NS      ns2.google.com.
+google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/span&gt;  IN  NS      ns3.google.com.
+google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/span&gt;  IN  NS      ns4.google.com.
+google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/span&gt;  IN  NS      ns1.google.com.
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; ADDITIONAL SECTION:
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.32.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.34.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.36.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.38.10
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; Query time: &lt;span style=&#34;color: #ae81ff&#34;&gt;13&lt;/span&gt; msec
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; SERVER: &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;.179.39.81#53&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;.179.39.81&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; WHEN: Thu Feb  &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;16&lt;/span&gt;:18:38 &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; MSG SIZE  rcvd: &lt;span style=&#34;color: #ae81ff&#34;&gt;268&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
+
+&lt;p&gt;The root solution is to fix the name server, but sometimes that isn&amp;rsquo;t in
+your control.&lt;/p&gt;
+
+&lt;p&gt;You can work around the borked name server by restarting MySQL with the
+&lt;code&gt;--skip-name-resolve&lt;/code&gt; option. This prevents MySQL trying to resolve the
+host name for each thread, bypassing the name server problem.&lt;/p&gt;
+
+&lt;p&gt;Alternatively, you can remove the broken DNS server from your
+&lt;code&gt;/etc/resolv.conf&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
+
+&lt;p&gt;Note that running MySQL with &lt;code&gt;--skip-name-resolve&lt;/code&gt; means you can&amp;rsquo;t use
+hostnames in your privileges table. Thus, you may have to reconfigure
+your client users to get your site back up. You can verify this by using
+the following SQL to inspect your configured users and hosts:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;mysql&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;SELECT&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;host&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;FROM&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;mysql.&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;user&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check to see if the &lt;code&gt;host&lt;/code&gt; column uses domain names.&lt;/p&gt;
+
+&lt;h3 id=&#34;credits&#34;&gt;Credits&lt;/h3&gt;
+
+&lt;p&gt;Thanks to Tangent&amp;rsquo;s operations team
+&lt;a href=&#34;https://twitter.com/#!/timbobsteve&#34;&gt;@timbobsteve&lt;/a&gt; and
+&lt;a href=&#34;https://twitter.com/#!/kuramanga&#34;&gt;@kuramanga&lt;/a&gt; for their help in
+debugging and fixing this.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to set-up MySQL for Python on Ubuntu</title>
+      <link>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</link>
+      <pubDate>Thu, 05 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
+      <description>
+
+&lt;p&gt;This is just for my own reference as I always forget the dependencies
+for setting up MySQL on a new machine.&lt;/p&gt;
+
+&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
+
+&lt;p&gt;Starting with a vanilla Lucid install&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, install pip and upgrade to
+the latest version:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;apt-get install python-pip
+pip install -U pip
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next, install the required development packages:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;apt-get install python-dev libmysqlclient-dev
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pip install MySQL-python
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;should complete successfully.&lt;/p&gt;
+
+&lt;h3 id=&#34;symptoms-of-missing-headers&#34;&gt;Symptoms of missing headers&lt;/h3&gt;
+
+&lt;p&gt;Without &lt;code&gt;libmysqlclient-dev&lt;/code&gt;, you&amp;rsquo;ll see something like this:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Downloading/unpacking MySQL-python
+Running setup.py egg_info &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; package MySQL-python
+    sh: mysql_config: not found
+    Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
+        metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
+        raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
+    EnvironmentError: mysql_config not found
+    Complete output from &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; python setup.py egg_info:
+    sh: mysql_config: not found
+
+Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
+
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
+
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
+
+    metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
+
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
+
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
+
+    raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
+
+EnvironmentError: mysql_config not found
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Without &lt;code&gt;python-dev&lt;/code&gt;, you&amp;rsquo;ll see something that ends with the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;...
+
+    _mysql.c:2620: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;asm&amp;#39;&lt;/span&gt; or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;__attribute__&amp;#39;&lt;/span&gt; before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;_mysql_ResultObject_Type&amp;#39;&lt;/span&gt;
+
+_mysql.c:2706: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;asm&amp;#39;&lt;/span&gt; or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;__attribute__&amp;#39;&lt;/span&gt; before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;_mysql_methods&amp;#39;&lt;/span&gt;
+
+_mysql.c:2778: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;asm&amp;#39;&lt;/span&gt; or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;__attribute__&amp;#39;&lt;/span&gt; before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt; token
+
+_mysql.c:2810: warning: &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;type&lt;/span&gt; defaults to &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;int&amp;#39;&lt;/span&gt;
+
+_mysql.c: In &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;DL_EXPORT&amp;#39;&lt;/span&gt;:
+
+_mysql.c:2810: error: expected declaration specifiers before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;init_mysql&amp;#39;&lt;/span&gt;
+
+_mysql.c:2888: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{&amp;#39;&lt;/span&gt; at end of input
+
+error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+
+----------------------------------------
+Command /usr/bin/python -c &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;import setuptools;__file__=&amp;#39;/home/vagrant/build/MySQL-python/setup.py&amp;#39;;exec(compile(open(__file__).read().replace(&amp;#39;\r\n&amp;#39;, &amp;#39;\n&amp;#39;), __file__, &amp;#39;exec&amp;#39;))&amp;quot;&lt;/span&gt; install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+Storing &lt;span style=&#34;color: #f8f8f2&#34;&gt;complete&lt;/span&gt; log in /home/vagrant/.pip/pip.log
+&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;Tested using the Lucid32 Vagrant box:
+&lt;a href=&#34;http://files.vagrantup.com/lucid32.box&#34;&gt;http://files.vagrantup.com/lucid32.box&lt;/a&gt;&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>mysqldump with wildcard table matching</title>
+      <link>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</link>
+      <pubDate>Fri, 05 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
+      <description>&lt;p&gt;Ever wanted to use &lt;code&gt;mysqldump&lt;/code&gt; to dump tables that match a wildcard
+pattern? I have. It&amp;rsquo;s not currently supported as an option but can be
+achieved with a little bash magic. Here&amp;rsquo;s how:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$#&lt;/span&gt; -lt &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Usage: `basename &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$0&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;` database wildcardpattern&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Eg: `basename &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$0&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;` mydatabase App_%&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;database&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;pattern&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
+mysqldump &lt;span style=&#34;color: #f8f8f2&#34;&gt;$database&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;mysql -ND &lt;span style=&#34;color: #f8f8f2&#34;&gt;$database&lt;/span&gt; -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;SHOW TABLES LIKE &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$pattern&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{printf $1&amp;quot; &amp;quot;}&amp;#39;`&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This uses a simple SQL query to extract all the table names that match
+the pattern and concatenate them in the format that mysqldump expects.
+Note that you&amp;rsquo;ll need your &lt;code&gt;~/.my.cnf&lt;/code&gt; set up correctly to allow the
+connections to MySQL to happen without a authentication prompt.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>How to sync a MySQL table between two remote databases.</title>
+      <link>http://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</link>
+      <pubDate>Fri, 03 Sep 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</guid>
+      <description>&lt;p&gt;Definitely tricker than you might think.&lt;/p&gt;
+
+&lt;p&gt;Seems like it should be trivial using &lt;code&gt;SELECT ... INTO OUTFILE&lt;/code&gt; and
+&lt;code&gt;LOAD DATA INFILE ...&lt;/code&gt; to make the transfer via dumping the table into a
+temporary file. However, &lt;code&gt;SELECT ... INTO OUTFILE&lt;/code&gt; creates a file on the
+remote server rather than locally. This prevents the use of
+&lt;code&gt;LOAD DATA INFILE&lt;/code&gt; for the second step as the file being loaded has to
+be local or on the destination server.&lt;/p&gt;
+
+&lt;p&gt;Following the &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.0/en/select.html&#34;&gt;guidance in the
+docs&lt;/a&gt;, you can
+create local dump of a table by using the &lt;code&gt;--execute&lt;/code&gt; option to output
+the results of a &lt;code&gt;SELECT ...&lt;/code&gt; statement into a local file.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mysql -D database_name -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;SELECT ... &amp;quot;&lt;/span&gt; &amp;gt; /path/to/file.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This works but has two downsides:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;First, running a shell command forces you to step outside the MySQL
+adapter of your progamming language which means it is a new place
+where the database credentials need to be passed. Shelling out
+commands always feels like you&amp;rsquo;ve failed.&lt;/li&gt;
+&lt;li&gt;Further, as far as I can tell, you can&amp;rsquo;t control the field separator
+or line endings using this technique (in the same way as you can
+with &lt;code&gt;SELECT ... INTO OUTFILE ...&lt;/code&gt;) and so the file includes an
+unwanted line with the field names and tab-separates the fields.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;It&amp;rsquo;s worth noting the &lt;code&gt;mysqldump&lt;/code&gt; isn&amp;rsquo;t much help here, as the &lt;code&gt;--tab&lt;/code&gt;
+option that allows CSV output to be generated only works with a local
+database connection.&lt;/p&gt;
+
+&lt;p&gt;Now that we&amp;rsquo;ve got our data locally, we load it into the remote database
+using &lt;code&gt;LOAD DATA INFILE&lt;/code&gt; and make use of the &lt;code&gt;LOCAL&lt;/code&gt; keyword which lets
+us use a local data file:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mysql -h x.x.x.x -u user -D database_name --password&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;... -e &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;LOAD DATA LOCAL INFILE &amp;#39;/path/to/file.txt&amp;#39; \&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;REPLACE INTO TABLE table_name \&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;IGNORE 1 LINES&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, you may want to truncate the table first if you want a clean
+sync. As this operations locks the destination table, it often makes
+sense to load the data into a temporary copy of the table, and then
+perform a &lt;code&gt;RENAME TABLE&lt;/code&gt; operation to swap in the new table.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a quick and dirty PHP implementation:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$tableName&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;some_table&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$sql&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;
+   &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;SELECT * &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;    FROM $tableName&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$pathToCsv&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/some-file.csv&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$command&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sprintf(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;mysql -h %s -u %s  --password=%s -D %s -e &amp;#39;%s&amp;#39; &amp;gt; %s&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;10.0.0.2&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;db-user&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;db-password&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;database_name&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; 
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$sql,&lt;/span&gt; 
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;$pathToCsv);&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;exec($command);&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$sql&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;
+   &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;LOAD DATA LOCAL INFILE &amp;#39;$pathToCsv&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;    REPLACE INTO TABLE `$tableName`&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;    CHARACTER SET &amp;#39;utf8&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;    IGNORE 1 LINES&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;$db&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;execute&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($sql);&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// Using your favourite database adapter&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Monitoring MySQL with Ganglia and gmetric</title>
+      <link>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
+      <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
+      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9780596102357.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Following some server monitoring advice from the excellent &amp;lsquo;Building
+Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting
+with &lt;a href=&#34;http://ganglia.info/&#34;&gt;Ganglia&lt;/a&gt; on a cluster of servers at Tangent
+Labs. It has proved to be deeply impressive and has given us a great
+tool for keeping an eye on how our servers are performing, as well as
+providing an invaluable diagnostic tool should things go wrong.&lt;/p&gt;
+
+&lt;p&gt;In essence, Ganglia is a distributed monitoring application that allows
+statistics on a cluster of servers to be aggregated in a single place.
+Moreover, an excellent web front-end is also provided to view charts of
+the statistics being collected. You can view a &lt;a href=&#34;http://monitor.millennium.berkeley.edu/&#34;&gt;live demo of the Ganglia
+monitoring application for the UC Berkeley Millennium
+Project&lt;/a&gt; which shows exactly
+what Ganglia can provide.&lt;/p&gt;
+
+&lt;p&gt;Out of the box, Ganglia collects basic server stats on load, memory,
+CPU, network and disk. However, what makes it great is that it can be
+easily extended to collect statistics on anything that you can measure
+from the command line. There is a &lt;a href=&#34;http://ganglia.sourceforge.net/gmetric/&#34;&gt;repository of user-contributed
+scripts&lt;/a&gt; although it&amp;rsquo;s not that
+extensive. In this post, I detail a script that can used to feed
+statistics about MySQL into Ganglia for monitoring - something important
+to any LAMP-stack application.&lt;/p&gt;
+
+&lt;p&gt;A few technical details first: Ganglia utilises three utilities to run
+each with a distinct responsibility:&lt;/p&gt;
+
+&lt;dl&gt;
+&lt;dt&gt;gmond&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;A daemon responsible for collecting monitoring stats and sharing
+them using XML over TCP. The gmond daemon runs on all nodes that you
+want to monitor.&lt;/p&gt;&lt;/dd&gt;
+&lt;dt&gt;gmetad&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;A daemon responsible for collecting and storing data from other
+gmetad and gmomd services. This only needs to be running on a
+single, central node.&lt;/p&gt;&lt;/dd&gt;
+&lt;dt&gt;gmetric&lt;/dt&gt;
+&lt;dd&gt;&lt;p&gt;A command-line application used for using Ganglia to monitor custom
+metrics.&lt;/p&gt;&lt;/dd&gt;
+&lt;/dl&gt;
+
+&lt;p&gt;All very simple really - see the
+&lt;a href=&#34;http://ganglia.wiki.sourceforge.net/ganglia_documents&#34;&gt;docs&lt;/a&gt; for the
+nitty gritty. Ok, enough intro -here&amp;rsquo;s my script for MySQL:&lt;/p&gt;
+
+&lt;p&gt;» &lt;a href=&#34;http://codeinthehole.com/downloads/gmetric-mysql.sh&#34;&gt;gmetric-mysql.sh (3.1kb)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s written in Bash and uses a temporary file to read the MySQL stats
+into before parsing and submitting to gmetric. This is done as many of
+the MySQL stats of interest are cumulative counts rather than rates (eg
+SELECTs per second) which are generally of more interest. Hence, the
+script estimates the rate of change by dividing the value delta by the
+timestamp delta.&lt;/p&gt;
+
+&lt;p&gt;To use this script, simply copy it into a convenient location, ensure it
+is executable and add the following line to your crontab.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As soon as this is done, your Ganglia web front-end should start
+plotting the new metrics.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/ganglia-snapshot.jpeg&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Checking all MySQL tables</title>
+      <link>http://codeinthehole.com/tips/checking-all-mysql-tables/</link>
+      <pubDate>Sun, 23 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/checking-all-mysql-tables/</guid>
+      <description>&lt;p&gt;It&amp;rsquo;s well known that MyISAM tables are prone to corruption and need to
+be regularly checked and repaired. Moreover, in a production
+environment, it can be beneficial to run a daily check of all tables and
+mail news of any errors to an appropriate developer/DBA.&lt;/p&gt;
+
+&lt;p&gt;There are two options for checking MySQL tables. The most effective
+method is to run the &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.0/en/myisamchk.html&#34;&gt;myisamchk
+utility&lt;/a&gt; directly
+on the index files (&lt;code&gt;.MYI&lt;/code&gt;) of the tables in question (some simple shell
+expansion makes this easy):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;myisamchk --silent --fast /path/to/datadir/*/*.MYI
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, this proses a problem in that you must ensure that no other
+programs are accessing the tables while they are being checked. Hence
+they must be locked, or better still, the MySQL daemon stopped before
+running any checks. Perversely, if this is not done, the act of checking
+the tables can corrupt them.&lt;/p&gt;
+
+&lt;p&gt;Another option is to use the &lt;code&gt;CHECK TABLE&lt;/code&gt; syntax in SQL (which does not
+pose a risk of corruption). There are various scripts (written in PHP
+and bash) posted on the &lt;code&gt;CHECK TABLE&lt;/code&gt; &lt;a href=&#34;http://dev.mysql.com/doc/refman/5.0/en/check-table.html&#34;&gt;manual
+page&lt;/a&gt; but this
+operation can be done easily through a single line:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mysql -p&amp;lt;password&amp;gt; -D&amp;lt;database&amp;gt; -B -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;SHOW TABLES&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{print &amp;quot;CHECK TABLE &amp;quot;$1&amp;quot;;&amp;quot;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; mysql -p&amp;lt;password&amp;gt; -D&amp;lt;database&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This dynamically creates a list of &lt;code&gt;CHECK TABLE ...&lt;/code&gt; commands which is
+piped into MySQL for execution.&lt;/p&gt;
+
+&lt;p&gt;For checking a selection of tables rather than all, use the LIKE
+operator when selecting the tables to check:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;mysql -p&amp;lt;password&amp;gt; -D&amp;lt;database&amp;gt; -B -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;SHOW TABLES LIKE &amp;#39;User%&amp;#39;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;NR != 1 {print &amp;quot;CHECK TABLE &amp;quot;$1&amp;quot;;&amp;quot;}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; mysql -p&amp;lt;password&amp;gt; -D&amp;lt;database&amp;gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This only checks the tables that start &amp;lsquo;User&amp;rsquo;. Note that the awk program
+has an extra clause to ensure that the first line of MySQL output is
+skipped.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Monitoring MySQL</title>
+      <link>http://codeinthehole.com/tips/monitoring-mysql/</link>
+      <pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/monitoring-mysql/</guid>
+      <description>&lt;p&gt;Just a quick tip on monitoring the queries that mysql is handling on a
+production site. You can use the mysqladmin tool to return a list of the
+processes currently being handled. Combining this with the UNIX watch
+command allows a real-time monitoring of what&amp;rsquo;s going on.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;watch -n &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; mysqladmin processlist
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The &lt;code&gt;-n 1&lt;/code&gt; specifies that mysqladmin executes every second. Depending on
+your set-up, you may need to specify a mysql user and password:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;watch -n &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; mysqladmin --user&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&amp;lt;user&amp;gt; --password&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&amp;lt;password&amp;gt; processlist
+&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nginx on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/nginx/index.xml</link>
+    <description>Recent content in Nginx on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Django, Nginx, WSGI and encoded slashes</title>
+      <link>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
+      <description>
+
+&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
+
+&lt;p&gt;You are serving a Django application using Nginx to proxy to an Apache
+server running mod_wsgi and you want to allow slashes in your URL
+keywords.&lt;/p&gt;
+
+&lt;p&gt;For example, you may want to edit some attribute of the page at URL &lt;code&gt;/&lt;/code&gt;;
+hence, you want to use a URL regex of the form:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;url(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;and use the URL &lt;code&gt;/edit/page/%2F/&lt;/code&gt; to edit this page, where the third
+path segment is URL-encoded.&lt;/p&gt;
+
+&lt;p&gt;This works fine in local development using Django&amp;rsquo;s &lt;code&gt;runserver&lt;/code&gt; but not
+when Nginx/Apache are involved. Both services will &amp;lsquo;process&amp;rsquo; the
+incoming request in a way that collapses repeating slashes. Django sees
+the above request path as &lt;code&gt;/edit/path&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h4 id=&#34;solution&#34;&gt;Solution&lt;/h4&gt;
+
+&lt;p&gt;First, in order to get django to encode slashes, you need to pass an
+empty string to the &lt;code&gt;urlencode&lt;/code&gt; template filter.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;edit&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;page&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;|&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;urlencode:&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Next ensure Nginx&amp;rsquo;s &lt;code&gt;proxy_pass&lt;/code&gt; configuration is transmitting the URL
+in &amp;lsquo;unprocessed form&amp;rsquo; by omitting the path on the proxied server
+argmenent. That is, use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;proxy_pass&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;http://localhost:80&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;instead of:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;proxy_pass&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;http://localhost:80/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The only different between these two examples is the trailing slash. See
+the &lt;a href=&#34;http://wiki.nginx.org/HttpProxyModule&#34;&gt;nginx documentation for
+proxy_pass&lt;/a&gt; for more details on
+what &amp;lsquo;unprocessed&amp;rsquo; means.&lt;/p&gt;
+
+&lt;p&gt;Next, alter your Apache config to include the &lt;code&gt;AllowEncodedSlashes&lt;/code&gt;
+directive to ensure Apache recognises encoded slashes:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;VirtualHost&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;\*&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    ...
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;AllowEncodedSlashes&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;On&lt;/span&gt;
+    ...
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/VirtualHost&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Finally modify your WSGI script to ensure Django gets the slashes in its
+&lt;code&gt;PATH_INFO&lt;/code&gt; environmental variable which it uses for resolving the URL
+to a view function:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ... other WSGI stuff: setting up path, virtualenv etc&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;os&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;DJANGO_SETTINGS_MODULE&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;settings&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.handlers.wsgi&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;_application&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;core&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;handlers&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;wsgi&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;WSGIHandler()&lt;/span&gt;
+
+&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urllib&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;application&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(environ,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;start_response):&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;PATH_INFO&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urllib&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;unquote(environ[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;REQUEST_URI&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;split(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;?&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;_application(environ,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;start_response)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The key change is using the &lt;code&gt;REQUEST_URI&lt;/code&gt; variable to set &lt;code&gt;PATH_INFO&lt;/code&gt;.
+We pluck the path component from &lt;code&gt;REQUEST_URI&lt;/code&gt; and use &lt;code&gt;urllib.unquote&lt;/code&gt;
+to ensure encoded slashes are decoded.&lt;/p&gt;
+
+&lt;h4 id=&#34;discussion&#34;&gt;Discussion&lt;/h4&gt;
+
+&lt;p&gt;The &lt;code&gt;PATH_INFO&lt;/code&gt; variable is decoded by mod_wsgi, effectively collapsing
+repeated slashes. The &lt;code&gt;REQUEST_URI&lt;/code&gt; is the raw request and so it&amp;rsquo;s
+possible to use it to ensure encoded slashes make it through to Django.&lt;/p&gt;
+
+&lt;h4 id=&#34;further-reading&#34;&gt;Further reading&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;This &lt;a href=&#34;http://stackoverflow.com/questions/3040659/how-can-i-receive-percent-encoded-slashes-with-django-on-app-engine&#34;&gt;StackOverflow
+answer&lt;/a&gt;
+describes a similar technique to solve this problem for Google App
+Engine.&lt;/li&gt;
+&lt;li&gt;A &lt;a href=&#34;https://groups.google.com/forum/?fromgroups#!topic/django-users/31oV1WhuAZ4&#34;&gt;Google Groups
+discussion&lt;/a&gt;
+of the issue.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

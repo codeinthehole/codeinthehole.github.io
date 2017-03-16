@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Deployment on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/deployment/index.xml</link>
+    <description>Recent content in Deployment on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/deployment/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Prefer data migrations to initial data</title>
+      <link>http://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</link>
+      <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
+      <description>
+
+&lt;p&gt;Django provides several mechanisms for &lt;a href=&#34;https://docs.djangoproject.com/en/dev/howto/initial-data/&#34;&gt;loading initial data for
+models&lt;/a&gt;, such
+as leveraging JSON fixtures or files of raw SQL - James Bennett offers a
+&lt;a href=&#34;http://www.b-list.org/weblog/2007/nov/21/install-time/&#34;&gt;good overview&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;Each documented method involves initialising data as part of the syncdb
+event, either by loading a fixture file or by hooking into the syncdb
+signal. However, there is a serious pitfall with these techniques, as
+described in the &lt;a href=&#34;https://docs.djangoproject.com/en/dev/howto/initial-data/#automatically-loading-initial-data-fixtures&#34;&gt;Django
+docs&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;This is extremely convenient, but be careful: remember that the data
+will be refreshed every time you run syncdb. So don&amp;rsquo;t use
+initial_data for data you&amp;rsquo;ll want to edit.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Storing data in a database that you don&amp;rsquo;t want to edit seems like an
+anti-pattern to me. If it never changes, a database probably isn&amp;rsquo;t the
+right place to store it.&lt;/p&gt;
+
+&lt;p&gt;That aside, there are certainly times when you want to seed a new
+database with data that can be edited. In these circumstances, the
+documented methods fall down as you can accidentally clobber live data
+if you run syncdb again.&lt;/p&gt;
+
+&lt;p&gt;You might argue that you should only run syncdb once but in my
+experience, it is useful to run syncdb as part of your deployment script
+so that any newly added apps have their tables created automatically.&lt;/p&gt;
+
+&lt;h3 id=&#34;south-data-migrations&#34;&gt;South data migrations&lt;/h3&gt;
+
+&lt;p&gt;A better way to provide initial data is to use the database migration
+library &lt;a href=&#34;http://south.aeracode.org/docs/index.html&#34;&gt;South&lt;/a&gt; to create
+&lt;a href=&#34;http://south.aeracode.org/docs/tutorial/part3.html&#34;&gt;data migrations&lt;/a&gt;.
+The advantages are:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Data migrations will only run once and so they won&amp;rsquo;t clobber any
+data.&lt;/li&gt;
+&lt;li&gt;They will run automatically in all environments - no manual
+deployment steps required.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The only disadvantage is that you need to use South, which most sensible
+Django projects already do.&lt;/p&gt;
+
+&lt;h3 id=&#34;simple-example&#34;&gt;Simple example&lt;/h3&gt;
+
+&lt;p&gt;Create a blank data migration:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;./manage.py datamigration myapp mymigrationname
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then implement the &lt;code&gt;forward&lt;/code&gt; method to create the appropriate initial
+data:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;forwards&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;orm):&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Foo&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Bar&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;):&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;orm&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;Frob&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;objects&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;create(name&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;name)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;See the &lt;a href=&#34;http://south.aeracode.org/docs/tutorial/part3.html&#34;&gt;worked
+example&lt;/a&gt; in South&amp;rsquo;s
+docs for further details on writing data migrations.&lt;/p&gt;
+
+&lt;h3 id=&#34;using-fixture-files&#34;&gt;Using fixture files&lt;/h3&gt;
+
+&lt;p&gt;It&amp;rsquo;s possible to use JSON fixture files with data migrations, by
+utilising the &lt;code&gt;call_command&lt;/code&gt; function.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;forwards&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;orm):&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.management&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;call_command&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;call_command(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;loaddata&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;countries.json&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;I had thought this was very useful feature as you can use the &lt;code&gt;dumpdata&lt;/code&gt;
+command to produce your initial fixtures, and you will have them
+available to be used by unit tests.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>A Fabric function for git tagging</title>
+      <link>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
+      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
+      <description>
+
+&lt;p&gt;Listed below is a &lt;a href=&#34;http://docs.fabfile.org/en/1.3.4/index.html&#34;&gt;Fabric&lt;/a&gt;
+function for determining the appropriate git reference to deploy during
+a deployment. It works well with projects run using the
+&lt;a href=&#34;http://nvie.com/posts/a-successful-git-branching-model/&#34;&gt;git-flow&lt;/a&gt;
+development model.&lt;/p&gt;
+
+&lt;h3 id=&#34;set-up&#34;&gt;Set-up&lt;/h3&gt;
+
+&lt;p&gt;Assume there is a test environment where:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;the QA team to assess release candidates&lt;/li&gt;
+&lt;li&gt;developers to run integration tests&lt;/li&gt;
+&lt;li&gt;developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged)
+commit&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There will also be stage and production environments.&lt;/p&gt;
+
+&lt;h3 id=&#34;fabric-function&#34;&gt;Fabric function&lt;/h3&gt;
+
+&lt;p&gt;The following function can be used as part of Fabric build script. It&amp;rsquo;s
+purpose is to determine the git reference to deploy from.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;determine_refspec_to_deploy_from&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(is_test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;False)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git fetch --tags&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;is_test:&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;create_tag&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Tag this release? [y/N] &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;create_tag&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;lower()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;notify(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Showing latest tags for reference&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag | sort -V | tail -5&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Tag name [in format x.x.x]? &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag %(ref)s -m &amp;quot;Tagging version %(ref)s in fabfile&amp;quot;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+                &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ref&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec})&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git push --tags&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;use_commit&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Build from a specific commit? [y/N] &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;use_commit&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;lower()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;y&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Choose commit to build from: &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;branch&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git branch | grep &amp;quot;^*&amp;quot; | cut -d&amp;quot; &amp;quot; -f2&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;capture&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True)&lt;/span&gt;
+                &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git describe %s&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;branch,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;capture&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;True)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;strip()&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# An existing tag must be specified&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag | sort -V | tail -5&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;prompt(red(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Choose tag to build from: &amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt;
+
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Check this is valid&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;local(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;git tag | grep &amp;quot;%s&amp;quot;&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec)&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;refspec&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&#34;building-to-test&#34;&gt;Building to test&lt;/h3&gt;
+
+&lt;p&gt;When building to test, the script allows you to:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;Tag a release. This is for creating release candidates for the QA
+team.&lt;/li&gt;
+&lt;li&gt;Build without tagging. In this case, we generate a build name using
+&lt;code&gt;git describe&lt;/code&gt;. This is for developers who want to update the test
+build to run integration tests.&lt;/li&gt;
+&lt;li&gt;Build from a specific commit. This is mainly used to dig yourself
+out of circular reference hell: when your test build emits spurious
+error messages that can&amp;rsquo;t be re-created locally. A simple bisection
+approach works well here, building from specific commits to find the
+commit that broke the build.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You can build to test from any branch which is often the case with
+git-flow, where your next release candidate could come from &lt;code&gt;develop&lt;/code&gt; or
+a release branch &lt;code&gt;releases/1.4&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h3 id=&#34;building-to-stage-and-production&#34;&gt;Building to stage and production&lt;/h3&gt;
+
+&lt;p&gt;Nothing fancy - builds to stage and production must use an existing tag
+to ensure they go through the QA process.&lt;/p&gt;
+
+&lt;h3 id=&#34;interesting-bits&#34;&gt;Interesting bits&lt;/h3&gt;
+
+&lt;h4 id=&#34;keeping-everyone-in-sync&#34;&gt;Keeping everyone in sync&lt;/h4&gt;
+
+&lt;p&gt;The script fetches tags at the start and, if a new one is created,
+pushes it back to the remote. This ensures that all users have access to
+the tagged releases.&lt;/p&gt;
+
+&lt;h4 id=&#34;what-s-the-next-tag&#34;&gt;What&amp;rsquo;s the next tag?&lt;/h4&gt;
+
+&lt;p&gt;This snippet shows the latest 5 tags, making it easy to determine the
+next tag to use:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;git tag &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort -V &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; tail -5 
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&#34;constructing-a-build-name&#34;&gt;Constructing a build name&lt;/h4&gt;
+
+&lt;p&gt;For builds to test that aren&amp;rsquo;t tagged, it&amp;rsquo;s still useful to give them a
+build number that indicates what the latest tagged release was. This can
+be done with &lt;code&gt;git describe&lt;/code&gt;, which will output something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.1.3-149-g1a48a5a
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which indicates that the build came from the 149th commit after tag
+&lt;code&gt;0.1.3&lt;/code&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploying cron jobs using Phing</title>
+      <link>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</link>
+      <pubDate>Sun, 31 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
+      <description>&lt;p&gt;Deploying applications that depend on cron-jobs can be a pain. However,
+Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;&lt;/p&gt;
+
+&lt;p&gt;Consider an application folder structure as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/builds
+    /development
+    /test
+    /stage
+/src
+    /cron.d
+        appname-__BUILD__-order-processing
+    /scripts
+        /order-processing
+            handle-ready-to-ship-orders.php
+            handle-cancellations.php
+            ...
+    /public
+    /classes
+        ...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All development work takes place within the &lt;code&gt;/src&lt;/code&gt; folder while the
+&lt;code&gt;/builds/*&lt;/code&gt; folders are used as targets in deployment. This system
+allows multiple builds to happily co-exist on the same server and the
+whole application infrastructure to be moved between servers easily as
+the structure in source control mirrors that of the server.&lt;/p&gt;
+
+&lt;p&gt;In this example e-commerce app, we have a number of scripts (in
+&lt;code&gt;/src/scripts&lt;/code&gt;) that handle order-processing which need to be called
+periodically by the cron daemon. A naive approach in deployment would be
+to export the codebase to an appropriate build folder but then edit the
+server&amp;rsquo;s crontab by hand and add the appropriate lines to run these
+scripts.&lt;/p&gt;
+
+&lt;p&gt;This isn&amp;rsquo;t such a great idea though as it relies on that most unreliable
+facility, human memory, to ensure the build is fully deployed - this
+creates an unnecessary overhead which is bound to lead to mistakes.
+Furthermore, the overhead acts as a deterrent for using asynchronous
+jobs within an application, limiting the app in terms of what it can do.
+As far as I am aware, there is no easy way to automatically update a
+user&amp;rsquo;s crontab automatically.&lt;/p&gt;
+
+&lt;p&gt;A much better way is to create a number of scripts which specify the
+cron tasks and are deployed to the /etc/cron.d folder. In the above
+example, these are stored in /src/cron.d and would look something like:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt; * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&amp;gt; /var/log/cron.errors.log
+&lt;span style=&#34;color: #ae81ff&#34;&gt;35&lt;/span&gt; * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&amp;gt; /var/log/cron.errors.log
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;(Note that, for some reason, a blank line is required at the end of this
+file in order for the script to be run by cron.) Here, the &lt;code&gt;__BUILD__&lt;/code&gt;
+is a tokenised parameter which will be replaced during deployment to
+configure the path to the appropriate script - a phing trick I&amp;rsquo;ve
+described previously.&lt;/p&gt;
+
+&lt;p&gt;One further complication is that if both the dev, test and stage builds
+are running on the same server, then the scripts deployed to
+&lt;code&gt;/etc/cron.d&lt;/code&gt; could clobber each other as they have the same name within
+each build. This can be neatly side-stepped using the Phing&amp;rsquo;s glob
+mapper to replace the &lt;code&gt;__BUILD__&lt;/code&gt; component of the file to be the
+appropriate build name (similar to how the paths are configured within
+the file itself).&lt;/p&gt;
+
+&lt;p&gt;This is probably best illustrated with a sample phing script which takes
+the build name (eg &amp;ldquo;development&amp;rdquo;) as a parameter:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;xml&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;version=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;1.0&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;encoding=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;UTF-8&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;?&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;project&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        ...
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;delete&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/etc/cron.d/&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;appname-${build.name}-*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/fileset&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/delete&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;copy&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;todir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/etc/cron.d/&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; 
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;filterchain&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;replacetokens&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;begintoken=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;__&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;endtoken=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;__&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+                    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;token&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;key=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;BUILD&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${build.name}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/replacetokens&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/filterchain&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;mapper&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;type=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;glob&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;from=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;appname-__BUILD__-*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;to=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;appname-${build.name}-*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${path.to.build}/cron.d&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+                &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;appname-__BUILD__-*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/fileset&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/copy&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The illustrated snippet does two things:&lt;/p&gt;
+
+&lt;p&gt;Deletes any previous scripts for this build from &lt;code&gt;/etc/cron.d&lt;/code&gt; (this is
+why we namespace the files with &amp;ldquo;appname&amp;rdquo; to prevent accidentally
+removing a system file). Copies the new scripts into &lt;code&gt;/etc/cron.d&lt;/code&gt; while
+replacing the token &lt;code&gt;__BUILD__&lt;/code&gt; with the build name in both the file
+contents and file names. After separate deployments for dev and stage,
+we should find the following:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/etc
+    /cron.d
+        appname-development-order-processing
+        appname-stage-order-processing
+        ...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where, for instance, the contents of
+&lt;code&gt;/etc/cron.d/appname-development-order-processing&lt;/code&gt; would be:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-ready-to-ship-orders.php
+* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-cancellations.php
+...
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Having automatic and reliable deployment of cron-jobs in place is quite
+liberating. Suddenly, lots of application processing can be done
+asynchronously without worrying about the overhead of maintaining the
+appropriate crontabs by hand.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Phing task to update Twitter status</title>
+      <link>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</link>
+      <pubDate>Sat, 10 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</guid>
+      <description>&lt;p&gt;At Tangent Labs, we&amp;rsquo;re currently experimenting with integrating Twitter
+into our project workflow to provide a latest activity feed in a easily
+digestible format (for both developers and non-technical people). For a
+pilot project, we&amp;rsquo;ve created a Twitter account and added an SVN
+post-commit hook script that updates Twitter with the latest commit
+information (commit message, affected files, author). We&amp;rsquo;re going to
+integrate our bug-tracking software shortly too but that&amp;rsquo;s not the
+subject of this post.&lt;/p&gt;
+
+&lt;p&gt;Instead, I&amp;rsquo;m going to detail a custom Phing task I&amp;rsquo;ve written that
+updates the project Twitter account. This allows notices of builds (to
+test, stage and production) to be integrated into a single feed. One of
+the great things about Twitter is its API and the range of applications
+already written to interact with it. My current favourite client is
+Gwibber, which (amongst other things) displays a small pop-up whenever
+the account gets a new update. Having this running while working on the
+project is great for staying informed with the latest activity, be it
+new commits, opened tickets or deployments.&lt;/p&gt;
+
+&lt;p&gt;The task I&amp;rsquo;ve written is TwitterUpdateTask.php and should be copied into
+your &lt;code&gt;$PATH_TO_PHING/ext/my/&lt;/code&gt; folder (create it if it doesn&amp;rsquo;t exist
+already). Mirroring the format of the Phing docs, this task has the
+following attributes:&lt;/p&gt;
+
+&lt;p&gt;Name          Type      Description                                Default   Required&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;username      String    Twitter username                           n/a       Yes
+  password      String    Twitter password                           n/a       Yes
+  message       String    Update message                             n/a       Yes
+  checkreturn   Boolean   Whether to check the request return code   false     No&lt;/p&gt;
+
+&lt;p&gt;A simple example build.xml file using this task is as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; ?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Simple Twitter update&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;basedir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;default=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tweet&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;tstamp&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;format&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;property=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;build.time&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%Y-%m-%d %H:%I&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/tstamp&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;taskdef&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;twitterupdate&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;classname=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;phing.tasks.my.TwitterUpdateTask&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tweet&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;twitterupdate&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;username=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;example&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;password=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;mypassword&amp;quot;&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;message=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Build at ${build.time}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This simply updates the Twitter status with the time of the last build.
+A more useful means of using this task is to parameterise the Twitter
+target to take a specified message so that it can be called from
+different deployment targets:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; ?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Example Twitter update&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;basedir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;default=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-to-test&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;tstamp&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;format&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;property=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;build.time&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;pattern=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%Y-%m-%d %H:%I&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/tstamp&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;taskdef&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;twitterupdate&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;classname=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;phing.tasks.my.TwitterUpdateTask&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tweet&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;twitterupdate&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;username=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;dave_test&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;password=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;eggnog&amp;quot;&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;message=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${twitter.status}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-to-test&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tweet&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; 
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;twitter.status&amp;quot;&lt;/span&gt; 
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Deploying to test: ${build.time}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/phingcall&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-to-stage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tweet&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; 
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;twitter.status&amp;quot;&lt;/span&gt; 
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Deploying to stage: ${build.time}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/phingcall&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-to-production&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;tweet&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; 
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;twitter.status&amp;quot;&lt;/span&gt; 
+                &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Deploying to production: ${build.time}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/phingcall&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;There are lots of extensions from this idea such as updating Twitter
+with continuous integration results, failed builds, code coverage
+metrics.&lt;/p&gt;
+
+&lt;p&gt;The source code for TwitterUpdateTask.php is as follows (with docblocks
+stripped out for brevity):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;require_once&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;phing/Task.php&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;TwitterUpdateTask&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Task&lt;/span&gt; 
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;URL_TEMPLATE_UPDATE&lt;/span&gt;    &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://twitter.com/statuses/update.xml?status=%s&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; 
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;MAXIMUM_MESSAGE_LENGTH&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;140&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #75715e&#34;&gt;// Twitter response codes &lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_SUCCESS&lt;/span&gt;             &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;200&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_NOT_MODIFIED&lt;/span&gt;        &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;304&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_BAD_REQUEST&lt;/span&gt;         &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;400&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_BAD_CREDENTIALS&lt;/span&gt;     &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;401&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_FORBIDDEN&lt;/span&gt;           &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;403&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_BAD_URL&lt;/span&gt;             &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;404&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_SERVER_ERROR&lt;/span&gt;        &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;500&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_BAD_GATEWAY&lt;/span&gt;         &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;502&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;HTTP_RESPONSE_SERVICE_UNAVAILABLE&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;503&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$responseMessages&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_NOT_MODIFIED&lt;/span&gt;        &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Status hasn\&amp;#39;t changed since last update&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_BAD_REQUEST&lt;/span&gt;         &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Bad request - you may have exceeded the rate limit&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_BAD_CREDENTIALS&lt;/span&gt;     &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Your username and password did not authenticate&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_FORBIDDEN&lt;/span&gt;           &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Forbidden request - Twitter are refusing to honour the request&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_BAD_URL&lt;/span&gt;             &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;The Twitter URL is invalid&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_SERVER_ERROR&lt;/span&gt;        &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;There is a problem with the Twitter server&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_BAD_GATEWAY&lt;/span&gt;         &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Twitter is either down or being upgraded&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+        &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_SERVICE_UNAVAILABLE&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Twitter servers are overloaded and refusing request&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$username;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$password;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$message;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$checkReturn&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;false&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;setUsername&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($username)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;username&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$username;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;setPassword&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($password)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;password&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$password;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;setMessage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($message)&lt;/span&gt; 
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;message&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;trim($message);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;   
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;setCheckReturn&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($checkReturn)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;checkReturn&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;boolean&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)$checkReturn;&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;init&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; 
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;extension_loaded(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;curl&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;BuildException&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Cannot update Twitter&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;The cURL extension is not installed&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;main&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; 
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;validateProperties&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt;       
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$curlHandle&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_init();&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_setopt($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLOPT_POST&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_setopt($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLOPT_POSTFIELDS&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;());&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_setopt($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLOPT_URL&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getUpdateUrl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;());&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_setopt($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLOPT_USERPWD&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;$this-&amp;gt;username:$this-&amp;gt;password&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_setopt($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLOPT_RETURNTRANSFER&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_setopt($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLOPT_HTTPHEADER&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Expect:&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$twitterData&lt;/span&gt;  &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_exec($curlHandle);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$responseCode&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_getinfo($curlHandle,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;CURLINFO_HTTP_CODE&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$errorCode&lt;/span&gt;    &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_errno($curlHandle);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$errorMessage&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_error($curlHandle);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;curl_close($curlHandle);&lt;/span&gt;       
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$errorCode)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;BuildException&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;cURL error ($errorCode): $errorMessage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;handleTwitterResponseCode&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;((&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)$responseCode);&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;validateProperties&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;username&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;password&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;BuildException&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;You must specify a Twitter username and password&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;!&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;BuildException&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;You must specify a message&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;elseif&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(strlen($this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;MAXIMUM_MESSAGE_LENGTH&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;message&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;substr($this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;MAXIMUM_MESSAGE_LENGTH&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Message is greater than the maximum message length - truncating...&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Project&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;MSG_WARN&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;    
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;getUpdateUrl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;sprintf(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;URL_TEMPLATE_UPDATE&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getEncodedMessage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;());&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;   
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;getEncodedMessage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;urlencode(stripslashes(urldecode($this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;message&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)));&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;  
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;handleTwitterResponseCode&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($code)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($code&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;HTTP_RESPONSE_SUCCESS&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Twitter status updated to: &amp;#39;$this-&amp;gt;message&amp;#39;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Project&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;MSG_INFO&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(array_key_exists($code,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$responseMessages))&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;handleFailedUpdate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$responseMessages[$code]);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;handleFailedUpdate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Unrecognised HTTP response code &amp;#39;$code&amp;#39; from Twitter&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;   
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;handleFailedUpdate&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($failureMessage)&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;checkReturn&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
+            &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;BuildException&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($failureMessage);&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$this&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;log&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Update unsuccessful: $failureMessage&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Project&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;MSG_WARN&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;   
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The fully documented source and associated example build.xml file are
+available to download:&lt;/p&gt;
+
+&lt;p&gt;» &lt;a href=&#34;http://codeinthehole.com/downloads/TwitterUpdateTask.zip&#34;&gt;TwitterUpdateTask.zip
+(2.6kb)&lt;/a&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Deploying to a shared hosting environment using Phing</title>
+      <link>http://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</link>
+      <pubDate>Sun, 04 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</guid>
+      <description>&lt;p&gt;Deploying applications to shared hosting environments can be a pain when
+no SSH access is provided. Consequently, it&amp;rsquo;s hard to avoid using FTP to
+deploy files from your development environment to a production server.
+In such trying circumstances, it&amp;rsquo;s easy to form self-destructive habits
+like using drag-and-drop FTP deployment - a very bad thing. Much better
+is to write an automated deployment script so that you can build to
+production in one clean step, a key tenet of &lt;a href=&#34;http://www.joelonsoftware.com/articles/fog0000000043.html&#34;&gt;The Joel
+Test&lt;/a&gt; for
+writing better code (highly recommended). Get deployment right at the
+start and making major changes to your application becomes trivial
+rather than a complete nightmare.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;http://phing.info/&#34;&gt;Phing&lt;/a&gt; is great for deploying PHP applications.
+It&amp;rsquo;s well documented, easy to use and extend, and works well with other
+libraries such as PHPunit. Although it&amp;rsquo;s not inthe current docs for
+version 2.3.x there is a useful FTP task (&lt;code&gt;FtpDeployTask.php&lt;/code&gt;) in Phing
+2.3.3 that can be used to create a simple build script for deploying to
+shared hosting environments using FTP. Syntax and usage are trivial
+given a glance through the source code
+(&lt;code&gt;/usr/share/php/phing/tasks/ext/FtpDeployTask.php&lt;/code&gt; on Ubuntu systems).&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a simple build.xml deployment script for a CodeIgniter project
+that uses the FtpDeploy task:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?xml version=&amp;quot;1.0&amp;quot; ?&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;project&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Shared hosting deployment&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;default=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-application-files&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;basedir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.host&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.example.com&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.port&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;21&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.username&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.password&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;password&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.dir&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/public_html/&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.mode&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ascii&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;!-- FILESETS --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;files.images&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;images/**/*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;favicon.ico&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/fileset&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;files.application&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;system/application/**/*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;css/*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;js/*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/fileset&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;dir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;id=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;files.system&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;system/**/*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;exclude&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;system/application/**/*&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;index.php&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;robots.txt&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;include&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.htaccess&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/fileset&amp;gt;&lt;/span&gt;
+
+    &lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;!-- DEPLOYMENT TARGETS --&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;echo&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;message=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Copying fileset &amp;#39;${deploy.fileset.refid}&amp;#39; to ${ftp.host} in ${ftp.mode} mode&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;ftpdeploy&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;host=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${ftp.host}&amp;quot;&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;port=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${ftp.port}&amp;quot;&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;username=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${ftp.username}&amp;quot;&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;password=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${ftp.password}&amp;quot;&lt;/span&gt;
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;dir=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${ftp.dir}&amp;quot;&lt;/span&gt; 
+            &lt;span style=&#34;color: #a6e22e&#34;&gt;mode=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${ftp.mode}&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;fileset&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;refid=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;${deploy.fileset.refid}&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/ftpdeploy&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-images&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;echo&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;msg=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Deploying image files&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy.fileset.refid&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;files.images&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;ftp.mode&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;binary&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;override=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;true&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/phingcall&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-application-files&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;echo&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;msg=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Deploying application files&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy.fileset.refid&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;files.application&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/phingcall&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-system-files&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;echo&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;msg=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Deploying system files&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+            &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;property&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy.fileset.refid&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;value=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;files.system&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/phingcall&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;target&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;name=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-all&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-images&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-application-files&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+        &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;phingcall&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;target=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;deploy-system-files&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;/&amp;gt;&lt;/span&gt;
+    &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;As we&amp;rsquo;re forced into using clumsy, out-dated FTP (rather than the
+wonderful rsync) to copy the files onto the production server, each
+deployment overwrites existing files with the selected fileset and this
+can be quite time-consuming for large filesets as it often moves across
+a load of files that haven&amp;rsquo;t changed. Using FTP, this is tricky to avoid
+and probably not worth the effort. Instead, there are four separate
+deployment targets that only move specific subsets of the total
+application fileset over to the production environment (split according
+to the standard CodeIgniter directory structure) - most of the time we
+only want to move the &amp;ldquo;files.application&amp;rdquo; fileset across. These targets
+make use of the extremely useful &amp;ldquo;phingcall&amp;rdquo; target which allows a
+parameterised &amp;ldquo;deploy&amp;rdquo; target to be created which takes a fileset id as
+an argument.&lt;/p&gt;
+
+&lt;p&gt;With the above build.xml in the root of your project, deploying to
+production is now as simple as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;cd&lt;/span&gt; /path/to/application/ &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; phing deploy-all
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;although most of the time the following suffices:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;cd&lt;/span&gt; /path/to/application/ &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; phing
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp
+which can be trivially installed in the usual manner:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;sudo pear install Net_FTP
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Of course, this script is overly simplistic and only works well with a
+single developer. However, it would be easy to extend to team
+development by integrating with SVN so that the latest revision (or
+designated tag/branch) is checked out into a temporary directory before
+being copied over to the production server.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
