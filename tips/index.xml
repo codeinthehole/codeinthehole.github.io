@@ -794,7 +794,7 @@ commits&lt;/p&gt;
 $ git shortlog -sn master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$1 &amp;gt;= $THRESHOLD {$1=&amp;quot;&amp;quot;;print $0}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -f2-
 &lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Note, &lt;code&gt;git shortlog&lt;/code&gt; uses a &lt;code&gt;.mailmap&lt;/code&gt; file to aggregate commmits from
+&lt;p&gt;Note, &lt;code&gt;git shortlog&lt;/code&gt; uses a &lt;code&gt;.mailmap&lt;/code&gt; file to aggregate commits from
 the same committer where their name or email were different in the
 commit history.&lt;/p&gt;
 

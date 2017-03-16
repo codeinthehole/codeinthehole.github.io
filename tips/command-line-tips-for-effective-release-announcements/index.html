@@ -164,7 +164,7 @@ commits</p>
 $ git shortlog -sn master <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;$1 &gt;= $THRESHOLD {$1=&quot;&quot;;print $0}&#39;</span> <span style="color: #f8f8f2">|</span> cut -d<span style="color: #e6db74">&quot; &quot;</span> -f2-
 </pre></div>
 
-<p>Note, <code>git shortlog</code> uses a <code>.mailmap</code> file to aggregate commmits from
+<p>Note, <code>git shortlog</code> uses a <code>.mailmap</code> file to aggregate commits from
 the same committer where their name or email were different in the
 commit history.</p>
 
