@@ -61,10 +61,10 @@
 
         <div id="article_content" class="entry-content">
             <p>I&rsquo;ve migrated this site to <a href="https://gohugo.io/">Hugo</a> so I can host it on Github
-pages.</p>
+pages<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
 
 <p>Hugo is a fast and well thought-out static site generator, written in Golang.
-It&rsquo;s easy to learn - the trickiest part is understanding the difference
+It&rsquo;s easy to learn and has some neat features<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup> - the trickiest part is understanding the difference
 between various ways pages are organised: &ldquo;sections&rdquo;, &ldquo;types&rdquo;, &ldquo;taxonomies&rdquo; etc.</p>
 
 <p>The Vim plugin <a href="https://github.com/plasticboy/vim-markdown">vim-markdown</a>
@@ -76,8 +76,22 @@ syntax-highlighting for:</p>
 <li>JSON or TOML front-matter.</li>
 </ul>
 
-<p>The only frustration is having to use git submodules to keep the &ldquo;public&rdquo; folder of
+<p>Both things that Hugo supports.</p>
+
+<p>Downside: you have to use git submodules to keep the <code>public</code> folder of
 HTML files in a separate repo.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><p>Which lets you do neat things like link to the revision history of an
+  article &ndash; see below.</p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">Like footnotes in markdown (thanks to the <a href="https://github.com/russross/blackfriday#extensions">blackfriday</a> library).
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
         </div>
 
