@@ -6,8 +6,94 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 02 Oct 2015 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Mar 2017 15:25:05 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Reorganising a Consul key-value store</title>
+      <link>http://codeinthehole.com/tips/migrate-consul-key-value-store/</link>
+      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
+      <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
+    A/
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+    C 
+    D
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;but you now realise you should have namespaced everything within &lt;code&gt;WEBSERVER/&lt;/code&gt; (or
+something like that):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
+    WEBSERVER/
+        A/
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+        C
+        D
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then this Bash script will help you migrate:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -e  &lt;span style=&#34;color: #75715e&#34;&gt;# Exit on error&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store&lt;/span&gt;
+keys_and_values&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# Recursively fetch all values from Consul but exclude:&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# (a) those that end in / (as these are folders)&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;#     to).&lt;/span&gt;
+    curl -s &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/?recurse&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        .[] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        select(&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | endswith(&amp;quot;/&amp;quot;) | not) and &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | startswith(&amp;quot;WEBSERVER&amp;quot;) | not)&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        ) | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        [.Key, &amp;quot; &amp;quot;, .Value] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        add&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key b64value
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Consul&amp;#39;s REST API returns values base64-encoded so we decode here.&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$b64value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; base64 -d&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Set a new value in Consul&amp;#39;s KV store&lt;/span&gt;
+set_key&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
+    curl -s -X PUT -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt; /dev/null
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+migrate_to_webserver_namespace&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    keys_and_values &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key value
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+        set_key &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;WEBSERVER/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt; 
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+migrate_to_webserver_namespace
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This script uses &lt;a href=&#34;https://www.consul.io/docs/agent/http/kv.html&#34;&gt;Consul&amp;rsquo;s REST API&lt;/a&gt; and filters the results using
+&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;&lt;code&gt;jq&lt;/code&gt;&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. It&amp;rsquo;s easily
+adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I can never remember jq&amp;rsquo;s &lt;code&gt;select&lt;/code&gt; syntax so this post is intended largely
+  as a personal reference on how to do this.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>A useful template for commit messages</title>
@@ -1083,138 +1169,6 @@ created the database from &amp;ldquo;template_postgis&amp;rdquo;.&lt;/p&gt;
 database&lt;/a&gt; -
 a relevant thread from the PostGIS mailing list.&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A deferred logging file handler for Django</title>
-      <link>http://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</link>
-      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</guid>
-      <description>
-
-&lt;p&gt;At Tangent we handle environment-specific configuration of Django
-projects using &lt;a href=&#34;http://justcramer.com/2011/01/13/settings-in-django/&#34;&gt;the method outlined by David
-Cramer&lt;/a&gt;. This
-involves distinguishing between core settings (which we keep in
-&lt;code&gt;core/default.py&lt;/code&gt;) and environment specific settings (eg
-&lt;code&gt;core/stage.py&lt;/code&gt;, &lt;code&gt;core/test.py&lt;/code&gt;). The standard &lt;code&gt;settings.py&lt;/code&gt; module
-imports all defaults and then uses a enviromental shell variable to
-determine which environment settings module to import.&lt;/p&gt;
-
-&lt;h3 id=&#34;a-problem&#34;&gt;A problem&lt;/h3&gt;
-
-&lt;p&gt;One tricky issue with this arrangement is logging to file. Ideally, we
-want to define a single &lt;code&gt;LOGGING&lt;/code&gt; dict in the default settings but have
-file logging use an environment-specific folder. For example, logging to
-file in the test environment goes to &lt;code&gt;/var/log/project/test/&lt;/code&gt; while
-stage goes to a file in &lt;code&gt;/var/log/project/stage&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;one-solution&#34;&gt;One solution&lt;/h3&gt;
-
-&lt;p&gt;This can be solved by using a string template for the &lt;code&gt;filename&lt;/code&gt;
-argument to each &lt;code&gt;FileHandler&lt;/code&gt; in the &lt;code&gt;LOGGING&lt;/code&gt; setting:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# conf/default.py&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;LOGGING&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;version&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;handlers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;error_file&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;level&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;INFO&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;logging.FileHandler&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{log_root}errors.log&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;formatter&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;verbose&amp;#39;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;loggers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;django.request&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;handlers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;error_file&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;level&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ERROR&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;propagate&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;False,&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then importing the default &lt;code&gt;LOGGING&lt;/code&gt; dict into your environment-specific
-settings and formatting each filename with the correct path:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# conf/test.py&lt;/span&gt;
-
-&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;conf.default&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LOGGING&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;LOG_ROOT&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/var/log/project/test/&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LOGGING[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;handlers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;values():&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;logging.FileHandler&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;handler[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;format(log_root&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;LOG_ROOT)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This works but is rather clunky. For instance, the default &lt;code&gt;LOGGING&lt;/code&gt;
-setting (without an environmental override) will lead to an error .&lt;/p&gt;
-
-&lt;h3 id=&#34;another-solution&#34;&gt;Another solution&lt;/h3&gt;
-
-&lt;p&gt;Another, possibly more elegant, solution is to use a specialisd logging
-handler that defers evaluation of the filepath until it tries to log a
-record.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;logging&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;FileHandler&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;as&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseFileHandler&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;os&lt;/span&gt;
-
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;DeferredFileHandler&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(BaseFileHandler):&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;filename,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs):&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;filename&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;filename&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;delay&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;True&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseFileHandler&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/dev/null&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs)&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_open&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;# We import settings here to avoid a circular reference as this module&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;# will be imported when settings.py is executed.&lt;/span&gt;
-        &lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.conf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;baseFilename&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;os&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;path&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;join(settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;LOG_ROOT,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;filename)&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseFileHandler&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;_open(self)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now, all we need to do is use the new handler in our &lt;code&gt;LOGGING&lt;/code&gt; dict:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# conf/default.py&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;LOGGING&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;version&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color: #f92672&#34;&gt;...&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;handlers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;error_file&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;level&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;INFO&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;class&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;deferred_filelogger.DeferredFilehandler&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;filename&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;errors.log&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;formatter&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;verbose&amp;#39;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;loggers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;django.request&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;handlers&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;error_file&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;level&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ERROR&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-            &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;propagate&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;False,&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;},&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and specify a &lt;code&gt;LOG_ROOT&lt;/code&gt; setting for each environment:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# conf/test.py&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;LOG_ROOT&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/var/log/project/test/&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Such a logger is part of
-&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/core/logging/handlers.py&#34;&gt;django-oscar&lt;/a&gt;,
-but I&amp;rsquo;ve packaged it up separately so it can be used in non-Oscar
-projects. The package is called
-&lt;a href=&#34;https://github.com/codeinthehole/django-deferred-filelogger&#34;&gt;django-deferred-filelogger&lt;/a&gt;
-and can be installed from PyPI using:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ pip install django-deferred-filelogger
-&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

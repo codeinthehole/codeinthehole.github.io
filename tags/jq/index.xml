@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Jq on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/jq/index.xml</link>
+    <description>Recent content in Jq on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <atom:link href="http://codeinthehole.com/tags/jq/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Reorganising a Consul key-value store</title>
+      <link>http://codeinthehole.com/tips/migrate-consul-key-value-store/</link>
+      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
+      <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
+    A/
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+    C 
+    D
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;but you now realise you should have namespaced everything within &lt;code&gt;WEBSERVER/&lt;/code&gt; (or
+something like that):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
+    WEBSERVER/
+        A/
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+        C
+        D
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then this Bash script will help you migrate:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -e  &lt;span style=&#34;color: #75715e&#34;&gt;# Exit on error&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store&lt;/span&gt;
+keys_and_values&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# Recursively fetch all values from Consul but exclude:&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# (a) those that end in / (as these are folders)&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;#     to).&lt;/span&gt;
+    curl -s &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/?recurse&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        .[] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        select(&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | endswith(&amp;quot;/&amp;quot;) | not) and &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | startswith(&amp;quot;WEBSERVER&amp;quot;) | not)&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        ) | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        [.Key, &amp;quot; &amp;quot;, .Value] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        add&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key b64value
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Consul&amp;#39;s REST API returns values base64-encoded so we decode here.&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$b64value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; base64 -d&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Set a new value in Consul&amp;#39;s KV store&lt;/span&gt;
+set_key&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
+    curl -s -X PUT -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt; /dev/null
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+migrate_to_webserver_namespace&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    keys_and_values &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key value
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+        set_key &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;WEBSERVER/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt; 
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+migrate_to_webserver_namespace
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This script uses &lt;a href=&#34;https://www.consul.io/docs/agent/http/kv.html&#34;&gt;Consul&amp;rsquo;s REST API&lt;/a&gt; and filters the results using
+&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;&lt;code&gt;jq&lt;/code&gt;&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. It&amp;rsquo;s easily
+adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I can never remember jq&amp;rsquo;s &lt;code&gt;select&lt;/code&gt; syntax so this post is intended largely
+  as a personal reference on how to do this.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

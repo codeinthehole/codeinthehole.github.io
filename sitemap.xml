@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codeinthehole.com/tips/migrate-consul-key-value-store/</loc>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/lists/lies/</loc>
     <lastmod>2017-03-21T11:54:01+00:00</lastmod>
   </url>
@@ -469,7 +474,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/bash/</loc>
-    <lastmod>2008-10-22T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -502,8 +507,14 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/tags/consul/</loc>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2017-03-21T11:54:01+00:00</lastmod>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -570,6 +581,12 @@
   <url>
     <loc>http://codeinthehole.com/tags/javascript/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://codeinthehole.com/tags/jq/</loc>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -718,7 +735,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2015-10-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -6,8 +6,94 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 21 Mar 2017 11:54:01 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Mar 2017 15:25:05 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Reorganising a Consul key-value store</title>
+      <link>http://codeinthehole.com/tips/migrate-consul-key-value-store/</link>
+      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
+      <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
+    A/
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+    C 
+    D
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;but you now realise you should have namespaced everything within &lt;code&gt;WEBSERVER/&lt;/code&gt; (or
+something like that):&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
+    WEBSERVER/
+        A/
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+        C
+        D
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;then this Bash script will help you migrate:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -e  &lt;span style=&#34;color: #75715e&#34;&gt;# Exit on error&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store&lt;/span&gt;
+keys_and_values&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# Recursively fetch all values from Consul but exclude:&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# (a) those that end in / (as these are folders)&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;# (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating&lt;/span&gt;
+    &lt;span style=&#34;color: #75715e&#34;&gt;#     to).&lt;/span&gt;
+    curl -s &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/?recurse&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        .[] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        select(&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | endswith(&amp;quot;/&amp;quot;) | not) and &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | startswith(&amp;quot;WEBSERVER&amp;quot;) | not)&lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        ) | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        [.Key, &amp;quot; &amp;quot;, .Value] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;        add&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key b64value
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+        &lt;span style=&#34;color: #75715e&#34;&gt;# Consul&amp;#39;s REST API returns values base64-encoded so we decode here.&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$b64value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; base64 -d&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+&lt;span style=&#34;color: #75715e&#34;&gt;# Set a new value in Consul&amp;#39;s KV store&lt;/span&gt;
+set_key&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
+    curl -s -X PUT -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt; /dev/null
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+migrate_to_webserver_namespace&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
+    keys_and_values &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key value
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
+        set_key &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;WEBSERVER/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt; 
+&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
+
+migrate_to_webserver_namespace
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This script uses &lt;a href=&#34;https://www.consul.io/docs/agent/http/kv.html&#34;&gt;Consul&amp;rsquo;s REST API&lt;/a&gt; and filters the results using
+&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;&lt;code&gt;jq&lt;/code&gt;&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. It&amp;rsquo;s easily
+adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I can never remember jq&amp;rsquo;s &lt;code&gt;select&lt;/code&gt; syntax so this post is intended largely
+  as a personal reference on how to do this.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Lies you&#39;re told on a software project</title>
@@ -790,137 +876,6 @@ Croak - this shows how to use the Silver searcher with the &lt;a href=&#34;https
 
 &lt;li&gt;&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/rking/ag.vim&#34;&gt;ag.vim&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>The road to Oscar 1.0</title>
-      <link>http://codeinthehole.com/projects/the-road-to-oscar-10/</link>
-      <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/projects/the-road-to-oscar-10/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/oscar.png&#34; class=&#34;noborder align-right&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Oscar 0.7 was &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/releases/v0.7.html&#34;&gt;released this
-week&lt;/a&gt;,
-a comparatively minor house-keeping release that allowed us to reduce
-our pull-request and issue backlogs. We have a plan for Oscar through
-2014 and this article outlines the roadmap.&lt;/p&gt;
-
-&lt;h3 id=&#34;v1-0&#34;&gt;v1.0&lt;/h3&gt;
-
-&lt;p&gt;We&amp;rsquo;re aiming to be v1.0 before the end of the year&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Oscar has been
-beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to
-commit to the backward compatibility responsibilities associated with
-coming out of beta.&lt;/p&gt;
-
-&lt;p&gt;Plus, this will help &lt;a href=&#34;http://www.tangentsnowball.com/&#34;&gt;Tangent Snowball&lt;/a&gt;
-(who sponsor Oscar&amp;rsquo;s development) promote Oscar to blue-chip or
-&amp;ldquo;enterprise&amp;rdquo; clients, who feel nervous enough using open-source
-e-commerce software, let alone &lt;em&gt;beta&lt;/em&gt; open-source software.&lt;/p&gt;
-
-&lt;p&gt;There isn&amp;rsquo;t a lot to do before this milestone. Oscar&amp;rsquo;s philosophy is to
-keep the core package lean and flexible, hence we don&amp;rsquo;t have a large
-shopping list of features we want to add. Rather, there are a few areas
-that need careful review to ensure they are flexible enough. Also, there
-are a few topics that we want to research thoroughly in case they have
-design implications.&lt;/p&gt;
-
-&lt;p&gt;These are detailed here:&lt;/p&gt;
-
-&lt;h4 id=&#34;product-dashboard&#34;&gt;Product dashboard&lt;/h4&gt;
-
-&lt;p&gt;The current version uses a one-size-fits-all approach which is now
-stretched to breaking point trying to handle a wide range of scenarios.
-In particular, it&amp;rsquo;s not easy to administer group and variant products
-using the current implementation&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;A new, carefully considered version will be built that provides separate
-views and forms for the different work-flows. The new implementation
-will be simpler than the current, provide a superior user experience and
-be easier to customise and extend.&lt;/p&gt;
-
-&lt;p&gt;This piece of work is scheduled to be looked at by Tangent&amp;rsquo;s UX team
-shortly and should land in master over the summer.&lt;/p&gt;
-
-&lt;h4 id=&#34;multi-tenancy&#34;&gt;Multi-tenancy&lt;/h4&gt;
-
-&lt;p&gt;We&amp;rsquo;re aiming to provide better support for multi-tenanted sites where a
-single dashboard is used to manage a product catalogue that can be used
-across several sites. Several people on the mailing list have requested
-this, and Tangent have a forthcoming project that will require a form of
-this.&lt;/p&gt;
-
-&lt;p&gt;This poses some tricky design questions around how products, categories
-and offers are linked to sites. It&amp;rsquo;s tempting to slap a new many-to-many
-relationship onto every core model that links them to sites, but this
-may not be the right approach as it will add extra joins to SQL queries.
-Some careful research is required: we don&amp;rsquo;t want to impair performance
-for the many to satisfy the requirements of the few.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll be talking to several people at DjangoCon EU 2014 about how
-Tangent can partner with other Oscar implementors to first design the
-appropriate handling, and later drive forward an implementation.&lt;/p&gt;
-
-&lt;h4 id=&#34;faceted-browsing-everywhere&#34;&gt;Faceted browsing everywhere&lt;/h4&gt;
-
-&lt;p&gt;Oscar uses &lt;a href=&#34;http://haystacksearch.org/&#34;&gt;Haystack&lt;/a&gt; for search (with a
-preference for &lt;a href=&#34;https://lucene.apache.org/solr/&#34;&gt;Solr&lt;/a&gt;) and has some
-&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/apps/search/facets.py&#34;&gt;custom
-helpers&lt;/a&gt;
-to make working with facets easier. Facets are great for customers
-whenever they&amp;rsquo;re browsing a list of products and it&amp;rsquo;s desirable to allow
-faceting on all product browsing views. This would require using the
-search back-end to drive all browsing views.&lt;/p&gt;
-
-&lt;p&gt;Some &lt;a href=&#34;https://groups.google.com/forum/?fromgroups#!topicsearchin/django-oscar/haystack%7Csort:date%7Cspell:true/django-oscar/7cykIQSS7lw&#34;&gt;initial
-work&lt;/a&gt;
-has been done on this already. We intend to review and merge this into
-master soon.&lt;/p&gt;
-
-&lt;h4 id=&#34;research-topics&#34;&gt;Research topics&lt;/h4&gt;
-
-&lt;p&gt;Some things to look into:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Oscar ships with a set of translation message files but doesn&amp;rsquo;t
-currently provide built-in support for translating model content
-into multiple languages. There are &lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation/&#34;&gt;various Django
-libraries&lt;/a&gt;
-that address this issue already. We need to research the best
-approach (or approaches) and document how to use them with Oscar.&lt;/li&gt;
-&lt;li&gt;Since Oscar is just a set of apps, it works with all existing
-&lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation://www.djangopackages.com/grids/g/cms/&#34;&gt;Django CMS
-packages&lt;/a&gt;.
-However, more research is required to find the right way to
-integrate content management. With its &amp;ldquo;promotions&amp;rdquo; app, Oscar
-already provides some limited forms of merchandising but it might be
-better to drop this app and provide better hooks for CMS packages to
-manage all content. We&amp;rsquo;ll see.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;thanks&#34;&gt;Thanks&lt;/h3&gt;
-
-&lt;p&gt;As ever, we&amp;rsquo;re hugely grateful to the work of the community: submitting
-pull requests, adding translations, reporting bugs.&lt;/p&gt;
-
-&lt;p&gt;If you&amp;rsquo;d like to get involved, please see our &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/internals/contributing/index.html&#34;&gt;contributing
-guidelines&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;We&amp;rsquo;re using &lt;a href=&#34;http://semver.org/&#34;&gt;semantic versioning&lt;/a&gt;.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-
-&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;This is driven in part by the fact that Tangent haven&amp;rsquo;t had to
-build a large-scale clothing site yet.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     

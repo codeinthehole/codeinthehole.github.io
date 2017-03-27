@@ -1,0 +1,185 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-3494213-5', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1490626973" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Reorganising a Consul key-value store - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="This is really just a reference on how to combine JQ&#39;s select filters">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="logo">
+        <h4><a href="/" title="David Winterbottom">David Winterbottom</a></h4>
+        <h5><a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/code/">code</a> |
+            <a href="/about/">about</a></h5>
+    </div>
+</header>
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Reorganising a Consul key-value store</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 27 March 2017</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Monday, 27 March 2017</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>If your Consul key-value store is structured as:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>/
+    A/
+        <span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span>
+        <span style="color: #f8f8f2">Z</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2</span>
+        <span style="color: #f8f8f2">Y</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span>
+    C 
+    D
+</pre></div>
+
+<p>but you now realise you should have namespaced everything within <code>WEBSERVER/</code> (or
+something like that):</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>/
+    WEBSERVER/
+        A/
+            <span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span>
+            <span style="color: #f8f8f2">Z</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2</span>
+            <span style="color: #f8f8f2">Y</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span>
+        C
+        D
+</pre></div>
+
+<p>then this Bash script will help you migrate:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/bin/bash</span>
+
+<span style="color: #f8f8f2">set</span> -e  <span style="color: #75715e"># Exit on error</span>
+
+<span style="color: #75715e"># Emit &quot;key value&quot; lines for all keys in Consul&#39;s KV store</span>
+keys_and_values<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #75715e"># Recursively fetch all values from Consul but exclude:</span>
+    <span style="color: #75715e"># (a) those that end in / (as these are folders)</span>
+    <span style="color: #75715e"># (b) those that start with WEBSERVER/ (as that&#39;s where we are migrating</span>
+    <span style="color: #75715e">#     to).</span>
+    curl -s <span style="color: #e6db74">&quot;localhost/v1/kv/?recurse&quot;</span> <span style="color: #f8f8f2">|</span> jq -r <span style="color: #e6db74">&#39;</span>
+<span style="color: #e6db74">        .[] | </span>
+<span style="color: #e6db74">        select(</span>
+<span style="color: #e6db74">            (.Key | endswith(&quot;/&quot;) | not) and </span>
+<span style="color: #e6db74">            (.Key | startswith(&quot;WEBSERVER&quot;) | not)</span>
+<span style="color: #e6db74">        ) | </span>
+<span style="color: #e6db74">        [.Key, &quot; &quot;, .Value] | </span>
+<span style="color: #e6db74">        add&#39;</span> <span style="color: #f8f8f2">|</span> <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">read</span> key b64value
+    <span style="color: #66d9ef">do</span>
+        <span style="color: #75715e"># Consul&#39;s REST API returns values base64-encoded so we decode here.</span>
+        <span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$key</span> <span style="color: #e6db74">`</span><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$b64value</span><span style="color: #e6db74">&quot;</span> <span style="color: #f8f8f2">|</span> base64 -d<span style="color: #e6db74">`</span>
+    <span style="color: #66d9ef">done</span>
+<span style="color: #f92672">}</span>
+
+<span style="color: #75715e"># Set a new value in Consul&#39;s KV store</span>
+set_key<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    <span style="color: #f8f8f2">key</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
+    <span style="color: #f8f8f2">value</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$2</span>
+    curl -s -X PUT -d <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$value</span><span style="color: #e6db74">&quot;</span> <span style="color: #e6db74">&quot;localhost/v1/kv/</span><span style="color: #f8f8f2">$key</span><span style="color: #e6db74">&quot;</span> &gt; /dev/null
+<span style="color: #f92672">}</span>
+
+migrate_to_webserver_namespace<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
+    keys_and_values <span style="color: #f8f8f2">|</span> <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">read</span> key value
+    <span style="color: #66d9ef">do</span>
+        set_key <span style="color: #e6db74">&quot;WEBSERVER/</span><span style="color: #f8f8f2">$key</span><span style="color: #e6db74">&quot;</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$value</span><span style="color: #e6db74">&quot;</span>
+    <span style="color: #66d9ef">done</span> 
+<span style="color: #f92672">}</span>
+
+migrate_to_webserver_namespace
+</pre></div>
+
+<p>This script uses <a href="https://www.consul.io/docs/agent/http/kv.html">Consul&rsquo;s REST API</a> and filters the results using
+<a href="https://stedolan.github.io/jq/"><code>jq</code></a><sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. It&rsquo;s easily
+adapted to migrate key-value pairs between different namespaces.</p>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:1"><p>I can never remember jq&rsquo;s <code>select</code> syntax so this post is intended largely
+  as a personal reference on how to do this.</p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            
+                Tagged with:
+                
+                 <a href="/tags/consul">consul</a>, <a href="/tags/bash">bash</a>, <a href="/tags/jq">jq</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a><br/>
+            
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/migrate-consul-key-value-store.md">Revision history</a>
+            </p>
+            <p>
+            
+                Previous: <a href="/lists/lies/">Lies you&#39;re told on a software project</a><br/>
+            
+            
+            </p>
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+
