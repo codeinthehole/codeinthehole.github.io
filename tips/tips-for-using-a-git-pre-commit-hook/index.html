@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491863208" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -93,12 +93,16 @@ committing and updates are picked up automatically.</p>
 within your pre-commit script. This is missed by many sample pre-commit
 scripts but is easily acheived with <code>git stash</code>:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># pre-commit.sh</span>
-git stash -q --keep-index
+<span style="color: #f8f8f2">STASH_NAME</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;pre-commit-</span><span style="color: #66d9ef">$(</span>date +%s<span style="color: #66d9ef">)</span><span style="color: #e6db74">&quot;</span>
+git stash save -q --keep-index <span style="color: #f8f8f2">$STASH_NAME</span>
 
 <span style="color: #75715e"># Test prospective commit</span>
 ...
 
-git stash pop -q
+<span style="color: #f8f8f2">STASHES</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>git stash list<span style="color: #66d9ef">)</span>
+<span style="color: #66d9ef">if</span> <span style="color: #f92672">[[</span> <span style="color: #f8f8f2">$STASHES</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$STASH_NAME</span><span style="color: #e6db74">&quot;</span> <span style="color: #f92672">]]</span><span style="color: #f8f8f2">;</span> <span style="color: #66d9ef">then</span>
+  git stash pop -q
+<span style="color: #66d9ef">fi</span>
 </pre></div>
 
 <p>The <code>-q</code> flags specify quiet mode.</p>

@@ -891,12 +891,16 @@ committing and updates are picked up automatically.&lt;/p&gt;
 within your pre-commit script. This is missed by many sample pre-commit
 scripts but is easily acheived with &lt;code&gt;git stash&lt;/code&gt;:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# pre-commit.sh&lt;/span&gt;
-git stash -q --keep-index
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;STASH_NAME&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;pre-commit-&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;date +%s&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
+git stash save -q --keep-index &lt;span style=&#34;color: #f8f8f2&#34;&gt;$STASH_NAME&lt;/span&gt;
 
 &lt;span style=&#34;color: #75715e&#34;&gt;# Test prospective commit&lt;/span&gt;
 ...
 
-git stash pop -q
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;STASHES&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git stash list&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;[[&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$STASHES&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$STASH_NAME&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
+  git stash pop -q
+&lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The &lt;code&gt;-q&lt;/code&gt; flags specify quiet mode.&lt;/p&gt;
