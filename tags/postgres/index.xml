@@ -105,7 +105,7 @@ destination database from a PostGIS template with the appropriate owner:&lt;/p&g
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and restore the database using the stage user:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ psql --host&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;127&lt;/span&gt;.0.0.1 --username&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;myproject_role_stage myproject_stage &amp;lt; dump.sql
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ psql --host&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;127.0.0.1 --username&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;myproject_role_stage myproject_stage &amp;lt; dump.sql
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Be warned: this command will generated a lot of warnings (which can be

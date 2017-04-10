@@ -6,8 +6,21 @@
     <description>Recent content in News on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Mar 2017 10:30:02 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/news/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Podcast.__init__ on Oscar</title>
+      <link>http://codeinthehole.com/news/podcast-init/</link>
+      <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/news/podcast-init/</guid>
+      <description>&lt;p&gt;I was interviewed, along with &lt;a href=&#34;https://www.mvantellingen.nl/&#34;&gt;Michael van Tellingen&lt;/a&gt;, on the
+&amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.&lt;/p&gt;
+
+&lt;script class=&#34;podigee-podcast-player&#34; src=&#34;//cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js&#34; data-configuration=&#34;https://www.podcastinit.com?podigee_player=288&#34;&gt;&lt;/script&gt;
+</description>
+    </item>
     
     <item>
       <title>Hugo</title>

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1490647287" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -115,8 +115,8 @@ git stash -q --keep-index
 ./run_tests.sh
 <span style="color: #f8f8f2">RESULT</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$?</span>
 git stash pop -q
-<span style="color: #f92672">[</span> <span style="color: #f8f8f2">$RESULT</span> -ne <span style="color: #ae81ff">0</span> <span style="color: #f92672">]</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
-<span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">0</span>
+<span style="color: #f92672">[</span> <span style="color: #f8f8f2">$RESULT</span> -ne <span style="color: #ae81ff">0</span> <span style="color: #f92672">]</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> 1
+<span style="color: #f8f8f2">exit</span> 0
 </pre></div>
 
 <p>where a sample <code>run_tests.sh</code> implementation for a Django project may
@@ -153,7 +153,7 @@ forbidden strings are found.</p>
 <span style="color: #f8f8f2">FORBIDDEN</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;console.log&#39;</span>
 git diff --cached --name-only <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\</span>
     grep -E <span style="color: #f8f8f2">$FILES_PATTERN</span> <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\</span>
-    <span style="color: #f8f8f2">GREP_COLOR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n <span style="color: #f8f8f2">$FORBIDDEN</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&#39;COMMIT REJECTED Found &quot;$FORBIDDEN&quot; references. Please remove them before commiting&#39;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span>
+    <span style="color: #f8f8f2">GREP_COLOR</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n <span style="color: #f8f8f2">$FORBIDDEN</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&#39;COMMIT REJECTED Found &quot;$FORBIDDEN&quot; references. Please remove them before commiting&#39;</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> 1
 </pre></div>
 
 <p>It&rsquo;s straightforward to extend this code block to search for other
@@ -164,6 +164,10 @@ terms.</p>
         <div id="article_meta">
             <span class="hr">----</span>
             <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/git-pre-commit-tips.md">Suggest an improvement</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/git-pre-commit-tips.md">previous changes</a>)<br/>
+
             
                 Tagged with:
                 
@@ -171,10 +175,10 @@ terms.</p>
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a><br/>
+                Filed in: <a href="/tips/">tips</a>
             
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/git-pre-commit-tips.md">Revision history</a>
             </p>
+
             <p>
             
                 Previous: <a href="/talks/confoo-2012-presentations/">Confoo 2012 presentations</a><br/>
@@ -183,6 +187,7 @@ terms.</p>
                 Next: <a href="/tips/how-to-sync-pycon-videos-to-your-iphone/">How to sync PyCon videos to your iPhone</a>
             
             </p>
+
             <p>
             Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.

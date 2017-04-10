@@ -9,6 +9,19 @@
     <atom:link href="http://codeinthehole.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Podcast.__init__ on Oscar</title>
+      <link>http://codeinthehole.com/news/podcast-init/</link>
+      <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/news/podcast-init/</guid>
+      <description>&lt;p&gt;I was interviewed, along with &lt;a href=&#34;https://www.mvantellingen.nl/&#34;&gt;Michael van Tellingen&lt;/a&gt;, on the
+&amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.&lt;/p&gt;
+
+&lt;script class=&#34;podigee-podcast-player&#34; src=&#34;//cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js&#34; data-configuration=&#34;https://www.podcastinit.com?podigee_player=288&#34;&gt;&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Bootstrapped virtualenvs</title>
       <link>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</link>
       <pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate>
@@ -119,7 +132,7 @@ This is normal. PostGIS is now correctly installed and we have a
 template database we can use to create a database for our GeoDjango
 project.&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres psql
-psql &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.1.9&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+psql &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;9.1.9&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
 Type &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;help&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; help.
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# CREATE ROLE sample_role WITH PASSWORD &amp;#39;sample_password&amp;#39; LOGIN;&lt;/span&gt;
@@ -276,7 +289,7 @@ tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(
 tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in 0.001s
 
 OK
 &lt;/pre&gt;&lt;/div&gt;
@@ -304,7 +317,7 @@ callable:&lt;/p&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to Hello%20World%21 ... ok
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in 0.001s
 
 OK
 &lt;/pre&gt;&lt;/div&gt;
@@ -337,7 +350,7 @@ we can rewrite the above example as:&lt;/p&gt;
 
 &lt;p&gt;with verbose output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ py.test -v tests/pytest_tests.py
-platform darwin -- Python &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
+platform darwin -- Python 2.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
 collected &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; items
 
 tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields0-value&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
@@ -466,7 +479,7 @@ record.&lt;/p&gt;
     &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;filename,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs):&lt;/span&gt;
         &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;filename&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;filename&lt;/span&gt;
         &lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;delay&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;True&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseFileHandler&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/dev/null&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseFileHandler&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__init__(self,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/dev/null&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs)&lt;/span&gt;
 
     &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;_open&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
         &lt;span style=&#34;color: #75715e&#34;&gt;# We import settings here to avoid a circular reference as this module&lt;/span&gt;
@@ -618,7 +631,7 @@ radio button, but above the container elements.&lt;/li&gt;
         &lt;span style=&#34;color: #f8f8f2&#34;&gt;label&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;required&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;False)&lt;/span&gt;
 
     &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;None,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs):&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;super(ScheduleForm,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;__init__&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(data,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs)&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;super(ScheduleForm,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self)&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__init__(data,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;kwargs)&lt;/span&gt;
 
         &lt;span style=&#34;color: #75715e&#34;&gt;# If &amp;#39;later&amp;#39; is chosen, set send_date as required&lt;/span&gt;
         &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;data&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;and&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;data&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;schedule&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;None)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;LATER:&lt;/span&gt;
@@ -816,11 +829,11 @@ $ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;u
 &lt;p&gt;PIL should now install with support for JPEGs, PNGs and FreeType, as
 indicated by the compilation output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
-PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
+PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
-version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
-platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+version       1.1.7
+platform      linux2 2.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; 2012, 22:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC 4.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
 --------------------------------------------------------------------
 *** TKINTER support not available
 --- JPEG support available
@@ -837,11 +850,11 @@ platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7
 &lt;p&gt;If the image libraries are not installed and available in &lt;code&gt;/usr/lib&lt;/code&gt;,
 you&amp;rsquo;ll see something like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
-PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
+PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
-version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
-platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+version       1.1.7
+platform      linux2 2.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; 2012, 22:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC 4.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
 --------------------------------------------------------------------
 *** TKINTER support not available
 *** JPEG support not available
@@ -873,7 +886,7 @@ _imaging.c:75:20: fatal error: Python.h: No such file or directory
 
 compilation terminated.
 
-error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status 1
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
@@ -1661,110 +1674,6 @@ escaping.&lt;/p&gt;
 
 &lt;p&gt;Taken from a &lt;a href=&#34;http://stackoverflow.com/questions/2053258/how-do-i-output-html-in-a-message-in-the-new-django-messages-framework&#34;&gt;Stack Overflow
 answer&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>csvfilter - a Python command-line tool for manipulating CSV data</title>
-      <link>http://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</link>
-      <pubDate>Sun, 01 Apr 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</guid>
-      <description>
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;You want a unix-like tool for manipulating CSV data from the
-command-line.&lt;/p&gt;
-
-&lt;p&gt;The standard tools &lt;code&gt;cut&lt;/code&gt; and &lt;code&gt;awk&lt;/code&gt; aren&amp;rsquo;t always suitable as they don&amp;rsquo;t
-handle quoting and escaping which are common in CSVs.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;Use the CSV manipulation function &lt;code&gt;csvfilter&lt;/code&gt;, a simple Python library
-I&amp;rsquo;ve put together.&lt;/p&gt;
-
-&lt;p&gt;Install with:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pip install csvfilter
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Sample usage:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Pluck columns 2, 5 and 6&lt;/span&gt;
-cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;,5,6 &amp;gt; out.csv
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Pluck all columns except 4&lt;/span&gt;
-cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt; -i &amp;gt; out.csv
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Skip header row&lt;/span&gt;
-cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &amp;gt; out.csv
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Work with pipe-separated data&lt;/span&gt;
-cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;,3 --delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;|&amp;quot;&lt;/span&gt; &amp;gt; out.csv
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The above examples show &lt;code&gt;csvfilter&lt;/code&gt; processing &lt;code&gt;sys.STDIN&lt;/code&gt; but it can
-also act directly on a file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;,5,6 in.csv  &amp;gt; out.csv
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Help:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ csvfilter --help
-Usage: csvfilter &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;options&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
-
-Options:
--h, --help            show this &lt;span style=&#34;color: #f8f8f2&#34;&gt;help&lt;/span&gt; message and &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt;
--f FIELDS, --fields&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;FIELDS
-                        Specify which fields to pluck
--s SKIP, --skip&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;SKIP  Number of rows to skip
--d DELIMITER, --delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;DELIMITER
-                        Delimiter of incoming CSV data
--i, --inverse         Invert the filter - ie drop the selected fields
---out-delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;OUT_DELIMITER
-                        Delimiter to use &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; output
---out-quotechar&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;OUT_QUOTECHAR
-                        Quote character to use &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; output
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;There is also a simple python API that allows you to add validators to
-determine which rows are filtered out:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;csvfilter&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Processor&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;contains_cheese&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(row):&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;cheese&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;row&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;processor&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Processor(fields&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;])&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;processor&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;add_validator(contains_cheese)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;generator&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;processor&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;process(sys&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;stdin)&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;cheesy_row&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;generator:&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;do_something(cheesy_row)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
-
-&lt;p&gt;It&amp;rsquo;s possible to do basic CSV manipulation from the command-line using
-&lt;code&gt;cut&lt;/code&gt; or &lt;code&gt;awk&lt;/code&gt; - for example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;,&amp;quot;&lt;/span&gt; -f &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;,1,2 &amp;gt; out.csv
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;or :&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;,&amp;quot;} {print $1,$2,$3}&amp;#39;&lt;/span&gt; &amp;gt; out.csv
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;However neither &lt;code&gt;cut&lt;/code&gt; or &lt;code&gt;awk&lt;/code&gt; make it easy to handle CSVs with escaped
-characters - hence the motivation for this tool.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m not the first to write such a utility - there are several others out
-there (although none had quite the API I was looking for):&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://bitbucket.org/neilb/csvfix/src&#34;&gt;csvfix&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://pypi.python.org/pypi/dropcols&#34;&gt;dropcols&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/onyxfish/csvkit&#34;&gt;csvkit&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://github.com/codeinthehole/csvfilter&#34;&gt;Source available on Github&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     

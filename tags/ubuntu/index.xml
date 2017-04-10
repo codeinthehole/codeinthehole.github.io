@@ -35,11 +35,11 @@ $ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;u
 &lt;p&gt;PIL should now install with support for JPEGs, PNGs and FreeType, as
 indicated by the compilation output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
-PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
+PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
-version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
-platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+version       1.1.7
+platform      linux2 2.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; 2012, 22:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC 4.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
 --------------------------------------------------------------------
 *** TKINTER support not available
 --- JPEG support available
@@ -56,11 +56,11 @@ platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7
 &lt;p&gt;If the image libraries are not installed and available in &lt;code&gt;/usr/lib&lt;/code&gt;,
 you&amp;rsquo;ll see something like this:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
-PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
+PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
-version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
-platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
+version       1.1.7
+platform      linux2 2.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; 2012, 22:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC 4.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
 --------------------------------------------------------------------
 *** TKINTER support not available
 *** JPEG support not available
@@ -92,7 +92,7 @@ _imaging.c:75:20: fatal error: Python.h: No such file or directory
 
 compilation terminated.
 
-error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status 1
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
@@ -212,12 +212,12 @@ pip install -U pip
 Running setup.py egg_info &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; package MySQL-python
     sh: mysql_config: not found
     Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line 14, in &amp;lt;module&amp;gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line 15, in &amp;lt;module&amp;gt;
         metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 43, in get_config
         &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 24, in mysql_config
         raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
     EnvironmentError: mysql_config not found
     Complete output from &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; python setup.py egg_info:
@@ -225,17 +225,17 @@ Running setup.py egg_info &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/spa
 
 Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line 14, in &amp;lt;module&amp;gt;
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line 15, in &amp;lt;module&amp;gt;
 
     metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 43, in get_config
 
     &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 24, in mysql_config
 
     raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
 
@@ -259,10 +259,10 @@ _mysql.c:2810: error: expected declaration specifiers before &lt;span style=&#34
 
 _mysql.c:2888: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{&amp;#39;&lt;/span&gt; at end of input
 
-error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status 1
 
 ----------------------------------------
-Command /usr/bin/python -c &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;import setuptools;__file__=&amp;#39;/home/vagrant/build/MySQL-python/setup.py&amp;#39;;exec(compile(open(__file__).read().replace(&amp;#39;\r\n&amp;#39;, &amp;#39;\n&amp;#39;), __file__, &amp;#39;exec&amp;#39;))&amp;quot;&lt;/span&gt; install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+Command /usr/bin/python -c &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;import setuptools;__file__=&amp;#39;/home/vagrant/build/MySQL-python/setup.py&amp;#39;;exec(compile(open(__file__).read().replace(&amp;#39;\r\n&amp;#39;, &amp;#39;\n&amp;#39;), __file__, &amp;#39;exec&amp;#39;))&amp;quot;&lt;/span&gt; install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code 1
 Storing &lt;span style=&#34;color: #f8f8f2&#34;&gt;complete&lt;/span&gt; log in /home/vagrant/.pip/pip.log
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;

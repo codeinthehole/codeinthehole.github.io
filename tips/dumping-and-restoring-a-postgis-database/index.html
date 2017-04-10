@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1490647287" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -110,7 +110,7 @@ destination database from a PostGIS template with the appropriate owner:</p>
 </pre></div>
 
 <p>and restore the database using the stage user:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ psql --host<span style="color: #f92672">=</span><span style="color: #ae81ff">127</span>.0.0.1 --username<span style="color: #f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ psql --host<span style="color: #f92672">=</span>127.0.0.1 --username<span style="color: #f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql
 </pre></div>
 
 <p>Be warned: this command will generated a lot of warnings (which can be
@@ -140,6 +140,10 @@ a relevant thread from the PostGIS mailing list.</li>
         <div id="article_meta">
             <span class="hr">----</span>
             <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/backing-up-a-postgres-postgis-db.md">Suggest an improvement</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/backing-up-a-postgres-postgis-db.md">previous changes</a>)<br/>
+
             
                 Tagged with:
                 
@@ -147,10 +151,10 @@ a relevant thread from the PostGIS mailing list.</li>
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a><br/>
+                Filed in: <a href="/tips/">tips</a>
             
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/backing-up-a-postgres-postgis-db.md">Revision history</a>
             </p>
+
             <p>
             
                 Previous: <a href="/projects/purl-uri-templates-and-generated-tests/">purl, URI templates and generated tests</a><br/>
@@ -159,6 +163,7 @@ a relevant thread from the PostGIS mailing list.</li>
                 Next: <a href="/tips/enhancing-your-git-commit-editor/">Enhancing your git commit editor</a>
             
             </p>
+
             <p>
             Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.

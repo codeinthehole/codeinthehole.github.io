@@ -172,7 +172,7 @@ timestamp delta.&lt;/p&gt;
 
 &lt;p&gt;To use this script, simply copy it into a convenient location, ensure it
 is executable and add the following line to your crontab.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null 2&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;As soon as this is done, your Ganglia web front-end should start

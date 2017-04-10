@@ -35,11 +35,11 @@ connections in state &lt;code&gt;login&lt;/code&gt;:&lt;/p&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Id  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; User                 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Host               &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; db &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Command &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Time &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; State &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
 +-----+----------------------+--------------------+----+---------+------+-------+
 ...
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;261&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43381 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;262&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43396 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;263&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43420 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;264&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.19:43429 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;265&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;10&lt;/span&gt;.20.115.4:55297  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;261&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; 10.20.115.19:43381 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;262&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; 10.20.115.19:43396 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;263&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; 10.20.115.19:43420 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;264&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; 10.20.115.19:43429 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;265&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; unauthenticated user &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; 10.20.115.4:55297  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Connect &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;      &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; login &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
 ...
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -61,7 +61,7 @@ in &lt;code&gt;/etc/resolv.conf&lt;/code&gt;. Here&amp;rsquo;s the broken one (y
 the time-out):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;dig @180.179.39.80 www.google.com
 
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG &lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.7.0-P1 &amp;lt;&amp;lt;&amp;gt;&amp;gt; @180.179.39.80 www.google.com
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.7.0-P1 &amp;lt;&amp;lt;&amp;gt;&amp;gt; @180.179.39.80 www.google.com
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; server found&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; global options: +cmd
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; connection timed out&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; no servers could be reached
@@ -70,23 +70,23 @@ the time-out):&lt;/p&gt;
 &lt;p&gt;A working name server would return something like:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;dig @180.179.39.81 www.google.com
 
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG &lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.7.0-P1 &amp;lt;&amp;lt;&amp;gt;&amp;gt; @180.179.39.81 www.google.com
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &amp;lt;&amp;lt;&amp;gt;&amp;gt; DiG 9.7.0-P1 &amp;lt;&amp;lt;&amp;gt;&amp;gt; @180.179.39.81 www.google.com
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; server found&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; global options: +cmd
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; Got answer:
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; -&amp;gt;&amp;gt;HEADER&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;lt;&amp;lt;- opco&lt;/span&gt;de: QUERY, status: NOERROR, id: &lt;span style=&#34;color: #ae81ff&#34;&gt;14538&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; flags: qr rd ra&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; QUERY: &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;, ANSWER: &lt;span style=&#34;color: #ae81ff&#34;&gt;6&lt;/span&gt;, AUTHORITY: &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;, ADDITIONAL: &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; -&amp;gt;&amp;gt;HEADER&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;lt;&amp;lt;- opco&lt;/span&gt;de: QUERY, status: NOERROR, id: 14538
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; flags: qr rd ra&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; QUERY: 1, ANSWER: 6, AUTHORITY: 4, ADDITIONAL: 4
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; QUESTION SECTION:
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;www.google.com.googleINA
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; ANSWER SECTION:
 www.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;427763&lt;/span&gt;  IN  CNAME   www.l.google.com.
-www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.116
-www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.112
-www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.113
-www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.114
-www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;74&lt;/span&gt;.125.236.115
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       74.125.236.116
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       74.125.236.112
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       74.125.236.113
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       74.125.236.114
+www.l.google.com.com    &lt;span style=&#34;color: #ae81ff&#34;&gt;97&lt;/span&gt;      IN  A       74.125.236.115
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; AUTHORITY SECTION:
 google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/span&gt;  IN  NS      ns2.google.com.
@@ -95,15 +95,15 @@ google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/sp
 google.com.com          &lt;span style=&#34;color: #ae81ff&#34;&gt;250791&lt;/span&gt;  IN  NS      ns1.google.com.
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; ADDITIONAL SECTION:
-ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.32.10
-ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.34.10
-ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.36.10
-ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       &lt;span style=&#34;color: #ae81ff&#34;&gt;216&lt;/span&gt;.239.38.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       216.239.32.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       216.239.34.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       216.239.36.10
+ns1.google.com.com      &lt;span style=&#34;color: #ae81ff&#34;&gt;76667&lt;/span&gt;   IN  A       216.239.38.10
 
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; Query time: &lt;span style=&#34;color: #ae81ff&#34;&gt;13&lt;/span&gt; msec
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; SERVER: &lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;.179.39.81#53&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;180&lt;/span&gt;.179.39.81&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; WHEN: Thu Feb  &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;16&lt;/span&gt;:18:38 &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; MSG SIZE  rcvd: &lt;span style=&#34;color: #ae81ff&#34;&gt;268&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; SERVER: 180.179.39.81#53&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;180.179.39.81&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; WHEN: Thu Feb  &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; 16:18:38 2012
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;;;&lt;/span&gt; MSG SIZE  rcvd: 268
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
@@ -174,12 +174,12 @@ pip install -U pip
 Running setup.py egg_info &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; package MySQL-python
     sh: mysql_config: not found
     Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line 14, in &amp;lt;module&amp;gt;
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line 15, in &amp;lt;module&amp;gt;
         metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 43, in get_config
         &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
+    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 24, in mysql_config
         raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
     EnvironmentError: mysql_config not found
     Complete output from &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; python setup.py egg_info:
@@ -187,17 +187,17 @@ Running setup.py egg_info &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/spa
 
 Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line 14, in &amp;lt;module&amp;gt;
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line 15, in &amp;lt;module&amp;gt;
 
     metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 43, in get_config
 
     &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
 
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
+File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line 24, in mysql_config
 
     raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
 
@@ -221,10 +221,10 @@ _mysql.c:2810: error: expected declaration specifiers before &lt;span style=&#34
 
 _mysql.c:2888: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{&amp;#39;&lt;/span&gt; at end of input
 
-error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status 1
 
 ----------------------------------------
-Command /usr/bin/python -c &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;import setuptools;__file__=&amp;#39;/home/vagrant/build/MySQL-python/setup.py&amp;#39;;exec(compile(open(__file__).read().replace(&amp;#39;\r\n&amp;#39;, &amp;#39;\n&amp;#39;), __file__, &amp;#39;exec&amp;#39;))&amp;quot;&lt;/span&gt; install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+Command /usr/bin/python -c &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;import setuptools;__file__=&amp;#39;/home/vagrant/build/MySQL-python/setup.py&amp;#39;;exec(compile(open(__file__).read().replace(&amp;#39;\r\n&amp;#39;, &amp;#39;\n&amp;#39;), __file__, &amp;#39;exec&amp;#39;))&amp;quot;&lt;/span&gt; install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code 1
 Storing &lt;span style=&#34;color: #f8f8f2&#34;&gt;complete&lt;/span&gt; log in /home/vagrant/.pip/pip.log
 &lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;footnotes&#34;&gt;
@@ -254,7 +254,7 @@ achieved with a little bash magic. Here&amp;rsquo;s how:&lt;/p&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
     &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Usage: `basename &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$0&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;` database wildcardpattern&amp;quot;&lt;/span&gt;
     &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Eg: `basename &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$0&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;` mydatabase App_%&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; 1
 &lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;database&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;pattern&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
@@ -411,7 +411,7 @@ timestamp delta.&lt;/p&gt;
 
 &lt;p&gt;To use this script, simply copy it into a convenient location, ensure it
 is executable and add the following line to your crontab.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null 2&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;1
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;As soon as this is done, your Ganglia web front-end should start

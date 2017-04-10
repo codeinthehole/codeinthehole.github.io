@@ -6,8 +6,21 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Mar 2017 15:25:05 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Podcast.__init__ on Oscar</title>
+      <link>http://codeinthehole.com/news/podcast-init/</link>
+      <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/news/podcast-init/</guid>
+      <description>&lt;p&gt;I was interviewed, along with &lt;a href=&#34;https://www.mvantellingen.nl/&#34;&gt;Michael van Tellingen&lt;/a&gt;, on the
+&amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.&lt;/p&gt;
+
+&lt;script class=&#34;podigee-podcast-player&#34; src=&#34;//cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js&#34; data-configuration=&#34;https://www.podcastinit.com?podigee_player=288&#34;&gt;&lt;/script&gt;
+</description>
+    </item>
     
     <item>
       <title>Reorganising a Consul key-value store</title>
@@ -18,9 +31,9 @@
       <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
     A/
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 1
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 2
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 3
     C 
     D
 &lt;/pre&gt;&lt;/div&gt;
@@ -30,9 +43,9 @@ something like that):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
     WEBSERVER/
         A/
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 1
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 2
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 3
         C
         D
 &lt;/pre&gt;&lt;/div&gt;
@@ -826,56 +839,6 @@ container on OSX. See
  &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Using the silver searcher with Vim</title>
-      <link>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</link>
-      <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
-      <description>
-
-&lt;h1 id=&#34;here-is-my-title&#34;&gt;Here is my title&lt;/h1&gt;
-
-&lt;p&gt;If you&amp;rsquo;re not doing this already, then you should use the &lt;a href=&#34;http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/&#34;&gt;Silver
-Searcher&lt;/a&gt;
-within Vim for rapid, convenient file searching. In a nutshell, &lt;code&gt;ag&lt;/code&gt;
-offers similar functionality to &lt;code&gt;ack&lt;/code&gt; but with much better performance.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s easily installed - on OSX, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install the_silver_searcher
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Urge Vim to use it for &lt;code&gt;:grep&lt;/code&gt; commands by adding the following to
-&lt;code&gt;~/.vimrc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; executable&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ag&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; 
-&lt;span style=&#34;color: #75715e&#34;&gt;    &amp;quot; Note we extract the column as well as the file and line number&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;grepprg=&lt;/span&gt;ag\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;nogroup\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;nocolor\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;column
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;grepformat=&lt;/span&gt;%&lt;span style=&#34;color: #66d9ef&#34;&gt;f&lt;/span&gt;:%&lt;span style=&#34;color: #66d9ef&#34;&gt;l&lt;/span&gt;:%&lt;span style=&#34;color: #66d9ef&#34;&gt;c&lt;/span&gt;%&lt;span style=&#34;color: #66d9ef&#34;&gt;m&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;endif&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code&gt;:grep&lt;/code&gt; searches are now lightning-fast and respectful of your
-&lt;code&gt;~/.gitignore&lt;/code&gt; patterns. It&amp;rsquo;s genuinely impressive.&lt;/p&gt;
-
-&lt;p&gt;Improve your efficiency further by remapping the keys for jumping
-through search matches (stored in the &amp;ldquo;quickfix&amp;rdquo; list):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;nmap &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;silent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;RIGHT&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; :cnext&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;CR&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-nmap &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;silent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;LEFT&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; :cprev&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;CR&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I&amp;rsquo;m using the cursor keys since I normally have them disabled.&lt;/p&gt;
-
-&lt;p&gt;See also:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://robots.thoughtbot.com/faster-grepping-in-vim&#34;&gt;Faster Grepping in Vim&lt;/a&gt; by Dan
-Croak - this shows how to use the Silver searcher with the &lt;a href=&#34;https://github.com/kien/ctrlp.vim&#34;&gt;CtrlP&lt;/a&gt; plugin.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/rking/ag.vim&#34;&gt;ag.vim&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

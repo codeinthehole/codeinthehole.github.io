@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1490647287" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -358,7 +358,7 @@ easier. Here&rsquo;s a bash snippet for adding the current git branch to your
 prompt:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.bashrc</span>
 <span style="color: #66d9ef">function</span> parse_git_branch <span style="color: #f92672">{</span>
-    git branch --no-color <span style="color: #ae81ff">2</span>&gt; /dev/null <span style="color: #f8f8f2">|</span> sed -e <span style="color: #e6db74">&#39;/^[^*]/d&#39;</span> -e <span style="color: #e6db74">&#39;s/* \(.*\)/(\1) /&#39;</span>
+    git branch --no-color 2&gt; /dev/null <span style="color: #f8f8f2">|</span> sed -e <span style="color: #e6db74">&#39;/^[^*]/d&#39;</span> -e <span style="color: #e6db74">&#39;s/* \(.*\)/(\1) /&#39;</span>
 <span style="color: #f92672">}</span>
 <span style="color: #f8f8f2">PS1</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]&quot;</span>
 <span style="color: #f8f8f2">export</span> PS1
@@ -424,6 +424,10 @@ such as which commits other branches point to. See the definition of
         <div id="article_meta">
             <span class="hr">----</span>
             <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/git-tips.md">Suggest an improvement</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/git-tips.md">previous changes</a>)<br/>
+
             
                 Tagged with:
                 
@@ -431,10 +435,10 @@ such as which commits other branches point to. See the definition of
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a><br/>
+                Filed in: <a href="/tips/">tips</a>
             
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/git-tips.md">Revision history</a>
             </p>
+
             <p>
             
                 Previous: <a href="/tips/how-to-chroot-a-user-in-ubuntu-1204/">How to chroot a user in Ubuntu 12.04</a><br/>
@@ -443,6 +447,7 @@ such as which commits other branches point to. See the definition of
                 Next: <a href="/tidbits/mathematics-and-engineering/">Mathematics and engineering</a>
             
             </p>
+
             <p>
             Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.

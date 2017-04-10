@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1490647288" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -114,8 +114,8 @@ user&rsquo;s crontab automatically.</p>
 <p>A much better way is to create a number of scripts which specify the
 cron tasks and are deployed to the /etc/cron.d folder. In the above
 example, these are stored in /src/cron.d and would look something like:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null <span style="color: #ae81ff">2</span>&gt;&gt; /var/log/cron.errors.log
-<span style="color: #ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null <span style="color: #ae81ff">2</span>&gt;&gt; /var/log/cron.errors.log
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
+<span style="color: #ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
 </pre></div>
 
 <p>(Note that, for some reason, a blank line is required at the end of this
@@ -190,6 +190,10 @@ appropriate crontabs by hand.</p>
         <div id="article_meta">
             <span class="hr">----</span>
             <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/deploying-cronjobs-with-phing.md">Suggest an improvement</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/deploying-cronjobs-with-phing.md">previous changes</a>)<br/>
+
             
                 Tagged with:
                 
@@ -197,10 +201,10 @@ appropriate crontabs by hand.</p>
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a><br/>
+                Filed in: <a href="/tips/">tips</a>
             
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/deploying-cronjobs-with-phing.md">Revision history</a>
             </p>
+
             <p>
             
                 Previous: <a href="/tips/auto-generating-an-faq-with-prototype/">Auto-generating an FAQ with Prototype</a><br/>
@@ -209,6 +213,7 @@ appropriate crontabs by hand.</p>
                 Next: <a href="/tidbits/a-pseudo-code-job-advert-and-its-discontents/">A pseudo-code job advert and its discontents</a>
             
             </p>
+
             <p>
             Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.

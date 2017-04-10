@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1490647287" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -164,7 +164,7 @@ radio button, but above the container elements.</li>
         <span style="color: #f8f8f2">label</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">required</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
 
     <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">data</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs):</span>
-        <span style="color: #f8f8f2">super(ScheduleForm,</span> <span style="color: #f8f8f2">self)</span><span style="color: #f92672">.</span><span style="color: #a6e22e">__init__</span><span style="color: #f8f8f2">(data,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs)</span>
+        <span style="color: #f8f8f2">super(ScheduleForm,</span> <span style="color: #f8f8f2">self)</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">__init__(data,</span> <span style="color: #f92672">*</span><span style="color: #f8f8f2">args,</span> <span style="color: #f92672">**</span><span style="color: #f8f8f2">kwargs)</span>
 
         <span style="color: #75715e"># If &#39;later&#39; is chosen, set send_date as required</span>
         <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">data</span> <span style="color: #f92672">and</span> <span style="color: #f8f8f2">data</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(</span><span style="color: #e6db74">&#39;schedule&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">None)</span> <span style="color: #f92672">==</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">LATER:</span>
@@ -197,6 +197,10 @@ DjangoCon 2011.</li>
         <div id="article_meta">
             <span class="hr">----</span>
             <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/conditional-validation-in-django-forms.md">Suggest an improvement</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/conditional-validation-in-django-forms.md">previous changes</a>)<br/>
+
             
                 Tagged with:
                 
@@ -204,10 +208,10 @@ DjangoCon 2011.</li>
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a><br/>
+                Filed in: <a href="/tips/">tips</a>
             
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/conditional-validation-in-django-forms.md">Revision history</a>
             </p>
+
             <p>
             
                 Previous: <a href="/tips/pypi-readme-badges/">PyPI README badges</a><br/>
@@ -216,6 +220,7 @@ DjangoCon 2011.</li>
                 Next: <a href="/tips/a-deferred-logging-file-handler-for-django/">A deferred logging file handler for Django</a>
             
             </p>
+
             <p>
             Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1490647288" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1491862789" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -127,7 +127,7 @@ timestamp delta.</p>
 
 <p>To use this script, simply copy it into a convenient location, ensure it
 is executable and add the following line to your crontab.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>* * * * * /path/to/gmetric-mysql.sh &gt; /dev/null <span style="color: #ae81ff">2</span>&gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">1</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>* * * * * /path/to/gmetric-mysql.sh &gt; /dev/null 2&gt;<span style="color: #f8f8f2">&amp;</span>1
 </pre></div>
 
 <p>As soon as this is done, your Ganglia web front-end should start
@@ -140,6 +140,10 @@ plotting the new metrics.</p>
         <div id="article_meta">
             <span class="hr">----</span>
             <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/monitoring-mysql-with-ganglia.md">Suggest an improvement</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/monitoring-mysql-with-ganglia.md">previous changes</a>)<br/>
+
             
                 Tagged with:
                 
@@ -147,10 +151,10 @@ plotting the new metrics.</p>
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a><br/>
+                Filed in: <a href="/tips/">tips</a>
             
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/monitoring-mysql-with-ganglia.md">Revision history</a>
             </p>
+
             <p>
             
                 Previous: <a href="/books/high-performance-web-sites-by-steve-souders/">High Performance Web Sites by Steve Souders</a><br/>
@@ -159,6 +163,7 @@ plotting the new metrics.</p>
                 Next: <a href="/tips/deploying-to-a-shared-hosting-environment-using-phing/">Deploying to a shared hosting environment using Phing</a>
             
             </p>
+
             <p>
             Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.

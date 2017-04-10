@@ -249,7 +249,7 @@ tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(
 tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in 0.001s
 
 OK
 &lt;/pre&gt;&lt;/div&gt;
@@ -277,7 +277,7 @@ callable:&lt;/p&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to Hello%20World%21 ... ok
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in 0.001s
 
 OK
 &lt;/pre&gt;&lt;/div&gt;
@@ -310,7 +310,7 @@ we can rewrite the above example as:&lt;/p&gt;
 
 &lt;p&gt;with verbose output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ py.test -v tests/pytest_tests.py
-platform darwin -- Python &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
+platform darwin -- Python 2.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
 collected &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; items
 
 tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields0-value&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
@@ -747,7 +747,7 @@ I&amp;rsquo;ve put together.&lt;/p&gt;
 
 &lt;p&gt;Sample usage:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Pluck columns 2, 5 and 6&lt;/span&gt;
-cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;,5,6 &amp;gt; out.csv
+cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f 2,5,6 &amp;gt; out.csv
 
 &lt;span style=&#34;color: #75715e&#34;&gt;# Pluck all columns except 4&lt;/span&gt;
 cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt; -i &amp;gt; out.csv
@@ -756,12 +756,12 @@ cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -
 cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &amp;gt; out.csv
 
 &lt;span style=&#34;color: #75715e&#34;&gt;# Work with pipe-separated data&lt;/span&gt;
-cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;,3 --delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;|&amp;quot;&lt;/span&gt; &amp;gt; out.csv
+cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; csvfilter -s 1,3 --delimiter&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;|&amp;quot;&lt;/span&gt; &amp;gt; out.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The above examples show &lt;code&gt;csvfilter&lt;/code&gt; processing &lt;code&gt;sys.STDIN&lt;/code&gt; but it can
 also act directly on a file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;csvfilter -f &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;,5,6 in.csv  &amp;gt; out.csv
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;csvfilter -f 2,5,6 in.csv  &amp;gt; out.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Help:&lt;/p&gt;
@@ -801,7 +801,7 @@ determine which rows are filtered out:&lt;/p&gt;
 
 &lt;p&gt;It&amp;rsquo;s possible to do basic CSV manipulation from the command-line using
 &lt;code&gt;cut&lt;/code&gt; or &lt;code&gt;awk&lt;/code&gt; - for example:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;,&amp;quot;&lt;/span&gt; -f &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;,1,2 &amp;gt; out.csv
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;cat in.csv &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;,&amp;quot;&lt;/span&gt; -f 0,1,2 &amp;gt; out.csv
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;or :&lt;/p&gt;
