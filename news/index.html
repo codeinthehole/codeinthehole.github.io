@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1492504696" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1492605477" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
