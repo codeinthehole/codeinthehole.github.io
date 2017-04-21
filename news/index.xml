@@ -64,6 +64,28 @@ HTML files in a separate repo.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Django, ELB health checks and continuous delivery</title>
+      <link>http://codeinthehole.com/news/oe-tech-elb-health-checks/</link>
+      <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
+      <description>&lt;p&gt;I wrote an article
+on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html&#34;&gt;Django, ELB health checks and continuous delivery&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing for missing migrations in Django</title>
+      <link>http://codeinthehole.com/news/oe-tech-missing-migrations/</link>
+      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
+      <description>&lt;p&gt;Octopus Energy has a &lt;a href=&#34;http://tech.octopus.energy&#34;&gt;tech blog&lt;/a&gt;. I wrote an article
+on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html&#34;&gt;Testing for missing migrations in Django&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Octopus Energy</title>
       <link>http://codeinthehole.com/news/octopus-energy/</link>
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>

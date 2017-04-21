@@ -9,6 +9,28 @@
     <atom:link href="http://codeinthehole.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Django, ELB health checks and continuous delivery</title>
+      <link>http://codeinthehole.com/news/oe-tech-elb-health-checks/</link>
+      <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
+      <description>&lt;p&gt;I wrote an article
+on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html&#34;&gt;Django, ELB health checks and continuous delivery&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing for missing migrations in Django</title>
+      <link>http://codeinthehole.com/news/oe-tech-missing-migrations/</link>
+      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
+      <description>&lt;p&gt;Octopus Energy has a &lt;a href=&#34;http://tech.octopus.energy&#34;&gt;tech blog&lt;/a&gt;. I wrote an article
+on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html&#34;&gt;Testing for missing migrations in Django&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Avoiding clashing Django migrations</title>
       <link>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</link>
       <pubDate>Sat, 31 Jan 2015 00:00:00 +0000</pubDate>
@@ -1653,186 +1675,6 @@ be used. For instance, you may not want to keep the processing logic on
 the model itself, it may make sense to have a separate function for
 this. However the general notion of using a model to represent an
 uploaded file and to track its state is a useful one.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Vim macros for adding i18n support to Django templates</title>
-      <link>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</link>
-      <pubDate>Fri, 06 Jul 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</guid>
-      <description>
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;You want to add i18n support to an existing project. One part of this is
-modifying all templates to use the &lt;code&gt;{% trans &amp;quot;...&amp;quot; %}&lt;/code&gt; block around all
-hard-coded strings.&lt;/p&gt;
-
-&lt;p&gt;When you have a lot of templates, this gets pretty tedious.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;Use Vim macros!&lt;/p&gt;
-
-&lt;h4 id=&#34;macro-1-convert-tag-text&#34;&gt;Macro 1 - Convert tag text&lt;/h4&gt;
-
-&lt;p&gt;To convert&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;Welcome to my site&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;{% trans &amp;quot;Welcome to my site&amp;quot; %}&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;use the macro&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;vitc{% trans &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; %}&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;ESC&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;hp
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which breaks down as:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;vit&lt;/code&gt; - select content inside the tag;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;c{% trans &amp;quot;&amp;quot; %}&lt;/code&gt; - change tag content to be &lt;code&gt;{% trans &amp;quot;&amp;quot; %}&lt;/code&gt; while
-saving the original tag content to the anonymous register;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;ESC&amp;gt;4hp&lt;/code&gt; - move the cursor to the first speech mark and paste the
-original tag contents. Note that &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; is one key-stroke, not
-five.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To record the macro, locate the cursor over a tag that you want to
-convert then start recording by pressing &lt;code&gt;q&lt;/code&gt; twice (to record the macro
-to the named register &lt;code&gt;q&lt;/code&gt;). Then type the characters detailed above and
-press &lt;code&gt;q&lt;/code&gt; again to stop recording.&lt;/p&gt;
-
-&lt;p&gt;To apply the macro, again locate the cursor over a tag, or the text it
-contains, and type &lt;code&gt;@q&lt;/code&gt;. This will save you a lot of key-strokes.&lt;/p&gt;
-
-&lt;h4 id=&#34;macro-2-convert-selected-text&#34;&gt;Macro 2 - Convert selected text&lt;/h4&gt;
-
-&lt;p&gt;To convert&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;See this image: &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;img&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/images/1.jpg&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;/&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;{% trans &amp;quot;See this image:&amp;quot; %} &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;img&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/images/1.jpg&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;/&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;enter visual mode and select the text to convert (eg &amp;ldquo;See this image:&amp;ldquo;)
-then use the macro&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;c&lt;/span&gt;{% trans &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; %}&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;ESC&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;hp
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which is the same as the one above but without the tag text selection.&lt;/p&gt;
-
-&lt;p&gt;To summarise: Vim&amp;rsquo;s macros are great - learn how to use them.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>A data migration for every Django project</title>
-      <link>http://codeinthehole.com/tips/a-data-migration-for-every-django-project/</link>
-      <pubDate>Sat, 16 Jun 2012 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
-      <description>
-
-&lt;p&gt;How to use a South data migration to avoid accidentally sending emails
-from example.com.&lt;/p&gt;
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;Consider the following snippet from Django&amp;rsquo;s docs&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; for sending a
-confirmation email:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.contrib.sites.models&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Site&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.mail&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;send_mail&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;register_for_newsletter&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(request):&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;current_site&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;objects&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get_current()&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;send_mail(&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Thanks for subscribing to %s alerts&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;current_site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;name,&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Thanks for your subscription. We appreciate it.&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;-The %s team.&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;current_site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;name,&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;editor@%s&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;current_site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;domain,&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;[user&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;email]&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo;
-instance, which is controlled by &lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/sites/?from=olddocs&#34;&gt;Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo;
-framework&lt;/a&gt;
-and accessible by a custom method on the manager of the &lt;code&gt;Site&lt;/code&gt; model.&lt;/p&gt;
-
-&lt;p&gt;By default, a &lt;code&gt;Site&lt;/code&gt; instance is created with domain and display name
-&amp;lsquo;example.com&amp;rsquo; and you have to correct these values. This is often done
-by hand using the admin suite.&lt;/p&gt;
-
-&lt;p&gt;However, as with any manual change, it&amp;rsquo;s easy to forget and you&amp;rsquo;ll often
-find Django projects sending email from &lt;code&gt;editor@example.com&lt;/code&gt;. Highly
-embarassing.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;Automation, of course! We can use a South data migration to set the
-domain and display name correctly in each environment.&lt;/p&gt;
-
-&lt;p&gt;First, ensure that each environment has settings for the domain and site
-name.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# conf/test.py&lt;/span&gt;
-...
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;DOMAIN_NAME&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;test.project.client.tangentlabs.co.uk&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;SITE_NAME&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;project - client (test)&amp;#39;&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# conf/stage.py&lt;/span&gt;
-...
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;DOMAIN_NAME&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;stage.project.client.tangentlabs.co.uk&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;SITE_NAME&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;project - client (stage)&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This snippet assumes you are using a set-up similar to that outlined by
-&lt;a href=&#34;http://justcramer.com/2011/01/13/settings-in-django/&#34;&gt;David Cramer&lt;/a&gt;,
-where an environmental variable specifies an additional settings file to
-import. You don&amp;rsquo;t have to use this method; employing a
-&lt;code&gt;settings_local.py&lt;/code&gt; file for each environment works just as well.&lt;/p&gt;
-
-&lt;p&gt;Next, create a data migration to set the domain and display name
-correctly in each environment. This migration sits most naturally in the
-&lt;code&gt;django.contrib.sites&lt;/code&gt; app, but since that&amp;rsquo;s in Django&amp;rsquo;s core, it&amp;rsquo;s not
-an option. You could use an existing app within your project to house
-the migration or perhaps create a simple &amp;lsquo;core&amp;rsquo; or &amp;lsquo;data&amp;rsquo; app to house
-data migrations that alter 3rd party apps.&lt;/p&gt;
-
-&lt;p&gt;Since we&amp;rsquo;re not using the actual app where the &lt;code&gt;Site&lt;/code&gt; model is defined,
-we must employ South&amp;rsquo;s &lt;code&gt;--freeze&lt;/code&gt; option to ensure the &lt;code&gt;Site&lt;/code&gt; model is
-available to the migration.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;python manage.py datamigration &amp;lt;appname&amp;gt; create_domains --freeze&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;sites
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Finally implement the &lt;code&gt;forwards&lt;/code&gt; method:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;south.v2&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;DataMigration&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.conf&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Migration&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(DataMigration):&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;forwards&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;orm):&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Site&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;orm[&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;sites.Site&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;site&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;Site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;objects&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;get(id&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;SITE_ID)&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;domain&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;DOMAIN_NAME&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;SITE_NAME&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;site&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;save()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then your next deployment to each environment will perform the update.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;See
-&lt;a href=&#34;https://docs.djangoproject.com/en/1.4/ref/contrib/sites/#getting-the-current-domain-for-display&#34;&gt;https://docs.djangoproject.com/en/1.4/ref/contrib/sites/#getting-the-current-domain-for-display&lt;/a&gt;&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     

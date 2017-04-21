@@ -181,6 +181,28 @@ HTML files in a separate repo.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Django, ELB health checks and continuous delivery</title>
+      <link>http://codeinthehole.com/news/oe-tech-elb-health-checks/</link>
+      <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
+      <description>&lt;p&gt;I wrote an article
+on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html&#34;&gt;Django, ELB health checks and continuous delivery&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Testing for missing migrations in Django</title>
+      <link>http://codeinthehole.com/news/oe-tech-missing-migrations/</link>
+      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
+      <description>&lt;p&gt;Octopus Energy has a &lt;a href=&#34;http://tech.octopus.energy&#34;&gt;tech blog&lt;/a&gt;. I wrote an article
+on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html&#34;&gt;Testing for missing migrations in Django&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Octopus Energy</title>
       <link>http://codeinthehole.com/news/octopus-energy/</link>
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
@@ -628,217 +650,6 @@ the first argument through to the management command.&lt;/p&gt;
 
 &lt;p&gt;And that&amp;rsquo;s it: this metric will now be collected by Zabbix and can be
 used for graphing and alerting.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Linking to Github</title>
-      <link>http://codeinthehole.com/tips/linking-to-github/</link>
-      <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/linking-to-github/</guid>
-      <description>&lt;p&gt;It was rightly &lt;a href=&#34;http://andrew.yurisich.com/work/2014/07/16/dont-link-that-line-number/&#34;&gt;pointed out
-yesterday&lt;/a&gt;
-that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without
-explicitly specifying the commit hash in the URL. On this theme,
-consider this git command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git browse -u -- commit/&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This emits the Github URL to the &lt;code&gt;HEAD&lt;/code&gt; commit on the current branch,
-specifying the commit hash in the URL. Note that the &lt;code&gt;browse&lt;/code&gt; subcommand
-is provided by the excellent &lt;a href=&#34;https://hub.github.com/&#34;&gt;hub&lt;/a&gt; library.&lt;/p&gt;
-
-&lt;p&gt;Pasting links to commits is common, both for mailing list posts and
-within discussion on Github itself. Getting the correct URL quickly is
-useful.&lt;/p&gt;
-
-&lt;p&gt;We can streamline further using an alias:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.gitconfig&lt;/span&gt;
-
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;alias&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -u -- commit/&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse HEAD&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;so we can run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git url
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to get the expanded &lt;code&gt;HEAD&lt;/code&gt; URL. Even better, we can parameterise:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.gitconfig&lt;/span&gt;
-
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;alias&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;url&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;!f() { sha=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse &lt;span style=&#34;color: #e6db74&#34;&gt;${&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;:-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;HEAD&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;}&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;; hub browse -u -- commit/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$sha&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;; }; f&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;so we can now specify a commit:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git url
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-
-$ git url head
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-
-$ git url head^
-https://github.com/tangentlabs/django-oscar/commit/f49d055befc90897c030e0447a98d512cca4265b
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Several times a day, I run one of the above, piping the output into the
-clipboard for easy pasting:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git url &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.bashrc&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;alias&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;clipboard&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;pbcopy&amp;#39;&lt;/span&gt;  &lt;span style=&#34;color: #75715e&#34;&gt;# osx clipboard&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here&amp;rsquo;s a few more useful git aliases based on the &lt;code&gt;browse&lt;/code&gt; subcommand:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.gitconfig&lt;/span&gt;
-
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;alias&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;commits&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- commits
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;issues&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- issues
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;wiki&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- wiki
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;settings&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; !hub browse -- settings
-&lt;/pre&gt;&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Continuously rebuild your project</title>
-      <link>http://codeinthehole.com/tips/continuously-re-build-your-project/</link>
-      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/continuously-re-build-your-project/</guid>
-      <description>
-
-&lt;p&gt;New developers joining a project will often find that the project won&amp;rsquo;t
-build cleanly on their machine, and hours of time will be sunk into
-setting up the project so work can start. This is sad and expensive for
-all concerned.&lt;/p&gt;
-
-&lt;p&gt;This is a particular menace in agencies (or anywhere with lots of small
-projects) where a large team of developers need to jump between
-projects. Tools like &lt;a href=&#34;http://www.vagrantup.com&#34;&gt;Vagrant&lt;/a&gt; and
-&lt;a href=&#34;http://www.docker.com/&#34;&gt;Docker&lt;/a&gt; can help but aren&amp;rsquo;t the panacea they
-first seem to be&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;Counter this by using continuous integration to build your project from
-scratch. Then any changes that break the build process (such as database
-schema changes not applying correctly) will be spotted early. New team
-members will be dishing out high-fives when their development
-environment is built and primed with sample data sixty seconds after
-cloning the repo.&lt;/p&gt;
-
-&lt;h3 id=&#34;tips&#34;&gt;Tips&lt;/h3&gt;
-
-&lt;p&gt;It should be trivial to get a project working locally. At
-&lt;a href=&#34;http://www.tangentsnowball.com/&#34;&gt;Tangent&lt;/a&gt;, projects use a &lt;code&gt;makefile&lt;/code&gt;
-for common tasks. Setting up a working version of the project is as
-simple as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ make 
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;It&amp;rsquo;s helpful if you can template new projects to embed good practices
-like this. We frequently use Django and maintain a &lt;a href=&#34;https://github.com/tangentlabs/tangent-django-boilerplate/&#34;&gt;boilerplate Django
-project&lt;/a&gt; for
-this purpose. It includes a
-&lt;a href=&#34;https://github.com/tangentlabs/tangent-django-boilerplate/blob/master/makefile&#34;&gt;makefile&lt;/a&gt;
-along these lines:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# Build a working version of the project&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;build&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;clean&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;virtualenv&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;database&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Delete all temporary or untracked files&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;clean&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; 
-    -find . -type f -name &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*.pyc&amp;quot;&lt;/span&gt; -delete
-    -rm -rf www/public/media/*
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Update the virtualenv&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;virtualenv&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; 
-    pip install -r www/deploy/requirements.txt
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Create a database populated with data&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;database&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; 
-    python www/manage.py reset_db --router&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;default --noinput
-    python www/manage.py syncdb --noinput
-    python www/manage.py migrate
-&lt;span style=&#34;color: #75715e&#34;&gt;    # Load any project fixtures to pre-populate the initial database&lt;/span&gt;
-    python www/manage.py loaddata fixtures/*.json
-
-&lt;span style=&#34;color: #a6e22e&#34;&gt;test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;cd&lt;/span&gt; www &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; py.test
-
-&lt;span style=&#34;color: #a6e22e&#34;&gt;ci&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;test&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;database&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Witness the &lt;code&gt;ci&lt;/code&gt; target which runs the test suite &lt;em&gt;and&lt;/em&gt; builds the
-database, effectively smoke-testing that the migrations apply correctly
-and the fixtures load (which is where we&amp;rsquo;ve historically had pain).&lt;/p&gt;
-
-&lt;p&gt;We use &lt;a href=&#34;https://travis-ci.com/&#34;&gt;Travis&lt;/a&gt; for CI and our template
-&lt;code&gt;.travis.yml&lt;/code&gt; looks a little like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;language&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;2.7&amp;#39;&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;install&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make virtualenv&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Use the same database as used in production&lt;/span&gt;
-&lt;span style=&#34;color: #ae81ff&#34;&gt;before_script&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;psql -c &amp;#39;CREATE ROLE test_role login createdb superuser;&amp;#39; -U postgres&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;psql -c &amp;#39;CREATE DATABASE test_db OWNER test_role;&amp;#39; -U postgres&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;script&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-  &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make ci&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which means that, &lt;em&gt;by default&lt;/em&gt;, all new projects will be built from
-scratch as part of continuous integration. You should do this.&lt;/p&gt;
-
-&lt;h3 id=&#34;django-specific-issues&#34;&gt;Django-specific issues&lt;/h3&gt;
-
-&lt;p&gt;For the record, here&amp;rsquo;s some of the build issues we&amp;rsquo;ve encountered in
-Django projects (both internal and external) Most stem from South
-migrations, which worked fine when applied piecemeal by the incumbent
-team but fail when run on a blank database. For instance:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Migrations fail to apply as there are dependencies between
-migrations which haven&amp;rsquo;t been captured. This is easily solved by
-employing South&amp;rsquo;s support for dependent migrations (eg adding
-&lt;code&gt;depends_on&lt;/code&gt; to the relevant migration class).&lt;/li&gt;
-&lt;li&gt;Migrations fail as they import models directly rather than using the
-reconstituted models that South provides. This is a beginner mistake
-really but still quite common. Fortunately, it&amp;rsquo;s trivial to fix.&lt;/li&gt;
-&lt;li&gt;Migrations import and call functions that are no longer defined (but
-did exist when the migration was originally written).&lt;/li&gt;
-&lt;li&gt;Migrations create instances of models from &lt;em&gt;other&lt;/em&gt; apps where
-South&amp;rsquo;s serialised version is out of sync with the database schema.
-This can be tricky to fix as you can get circular dependencies
-between migrations. Often you&amp;rsquo;ll need to rewrite migrations to
-create models in the migrations of their own apps.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;a href=&#34;https://twitter.com/andrewingram&#34;&gt;Andrew Ingram&lt;/a&gt; has written up an
-excellent summary of &lt;a href=&#34;http://andrewingram.net/2012/dec/common-pitfalls-django-south/#check-your-migrations-run-from-scratch&#34;&gt;common South
-pitfalls&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;For instance, it&amp;rsquo;s not trivial to share folders with a Docker
-container on OSX. See
-&lt;a href=&#34;https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293&#34;&gt;https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293&lt;/a&gt;&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     
