@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1492785524" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1494498112" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -360,7 +360,7 @@ easier. Here&rsquo;s a bash snippet for adding the current git branch to your
 prompt:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.bashrc</span>
 <span style="color: #66d9ef">function</span> parse_git_branch <span style="color: #f92672">{</span>
-    git branch --no-color 2&gt; /dev/null <span style="color: #f8f8f2">|</span> sed -e <span style="color: #e6db74">&#39;/^[^*]/d&#39;</span> -e <span style="color: #e6db74">&#39;s/* \(.*\)/(\1) /&#39;</span>
+    git branch --no-color <span style="color: #ae81ff">2</span>&gt; /dev/null <span style="color: #f8f8f2">|</span> sed -e <span style="color: #e6db74">&#39;/^[^*]/d&#39;</span> -e <span style="color: #e6db74">&#39;s/* \(.*\)/(\1) /&#39;</span>
 <span style="color: #f92672">}</span>
 <span style="color: #f8f8f2">PS1</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]&quot;</span>
 <span style="color: #f8f8f2">export</span> PS1

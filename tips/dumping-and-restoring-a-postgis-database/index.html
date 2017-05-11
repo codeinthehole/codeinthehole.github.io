@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1492785524" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1494498112" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -112,7 +112,7 @@ destination database from a PostGIS template with the appropriate owner:</p>
 </pre></div>
 
 <p>and restore the database using the stage user:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ psql --host<span style="color: #f92672">=</span>127.0.0.1 --username<span style="color: #f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ psql --host<span style="color: #f92672">=</span><span style="color: #ae81ff">127</span>.0.0.1 --username<span style="color: #f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql
 </pre></div>
 
 <p>Be warned: this command will generated a lot of warnings (which can be

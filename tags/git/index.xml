@@ -141,24 +141,24 @@ are a few command-line tricks for analysing your git history.&lt;/p&gt;
 &lt;h3 id=&#34;analysing-codebase-changes-since-a-tag&#34;&gt;Analysing codebase changes since a tag&lt;/h3&gt;
 
 &lt;p&gt;Basics: browse commits since the last tagged release&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log 0.5..0.6
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;The &lt;code&gt;--name-status&lt;/code&gt; option for &lt;code&gt;git diff&lt;/code&gt; is useful for analysing
 codebase changes between two commits. For instance, you can view changes
 to a particular directory:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status 0.5..0.6 oscar/apps/address
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 oscar/apps/address
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;which can be useful if thousands of files have changed and you want to
 review each package individually.&lt;/p&gt;
 
 &lt;p&gt;Extensions include finding deleted files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status 0.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^D&amp;quot;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^D&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;or all new migration files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status 0.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^A.*migrations/[0-9]&amp;quot;&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^A.*migrations/[0-9]&amp;quot;&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;which is important for projects like Oscar which ship with database
@@ -187,15 +187,15 @@ oscar/templates/oscar/404.html error_message
 
 &lt;p&gt;To compare the template blocks from each release, we create two
 temporary files and analyse the diff:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git checkout 0.5
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git checkout &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5
 $ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
     awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt; &amp;gt;
     /tmp/templates-0.5.txt
-$ git checkout 0.6
+$ git checkout &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.6
 $ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
     awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt; &amp;gt;
     /tmp/templates-0.6.txt
-$ vimdiff /tmp/templates-0.&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;5,6&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;.txt
+$ vimdiff /tmp/templates-0.&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;5&lt;/span&gt;,6&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;.txt
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;I imagine there&amp;rsquo;s a better way to do this but I couldn&amp;rsquo;t find one.&lt;/p&gt;
@@ -225,7 +225,7 @@ in the master branch. We generate this file automatically.&lt;/p&gt;
 
 &lt;p&gt;and extend this to find authors with more than a certain number of
 commits&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;THRESHOLD&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;15
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;THRESHOLD&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;
 $ git shortlog -sn master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$1 &amp;gt;= $THRESHOLD {$1=&amp;quot;&amp;quot;;print $0}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -f2-
 &lt;/pre&gt;&lt;/div&gt;
 
@@ -253,7 +253,7 @@ contributors that their patch is in a release: you can email them.&lt;/p&gt;
 
 &lt;p&gt;To do this, extract the email addresses of committers whose patches are
 in the new release:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log 0.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;and CC these addresses in your mailing list release announcement.&lt;/p&gt;
@@ -263,8 +263,8 @@ the project, where the release is the first to contain one of their
 commits. We do this by extracting two lists of email addresses and
 employing the lovely but neglected &lt;code&gt;comm&lt;/code&gt; command to pluck the email
 addresses that only exist in the latest release:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ comm -13 &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log 0.5 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log 0.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ comm -13 &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
+    &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Note the first input is all contributors up to release 0.5, while the
@@ -280,8 +280,8 @@ lines exclusive to the first file (&lt;code&gt;-1&lt;/code&gt;) and lines common
 &lt;p&gt;If your release isn&amp;rsquo;t large, your release notes could include a summary
 of the contained commits; this is useful for minor point releases. You
 can use &lt;code&gt;git shortlog&lt;/code&gt; to do this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog 0.5..0.6 --no-merges
-David Winterbottom &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;661&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --no-merges
+David Winterbottom &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;661&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
       Add defaults to the counts on the product summary dashboard page
       Tidy up urls.py and settings.py
       Use mirrors when pip installing the demo site
@@ -291,7 +291,7 @@ David Winterbottom &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;661&
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You can even use &lt;code&gt;--format&lt;/code&gt; to provide links to Github commits:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog 0.3.4..0.4 --no-merges --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&amp;quot;&lt;/span&gt; 
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.3.4..0.4 --no-merges --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&amp;quot;&lt;/span&gt; 
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This won&amp;rsquo;t always be appropriate if your release if there are thousands
@@ -798,7 +798,7 @@ easier. Here&amp;rsquo;s a bash snippet for adding the current git branch to you
 prompt:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# ~/.bashrc&lt;/span&gt;
 &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; parse_git_branch &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    git branch --no-color 2&amp;gt; /dev/null &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sed -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/^[^*]/d&amp;#39;&lt;/span&gt; -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;s/* \(.*\)/(\1) /&amp;#39;&lt;/span&gt;
+    git branch --no-color &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt; /dev/null &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sed -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/^[^*]/d&amp;#39;&lt;/span&gt; -e &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;s/* \(.*\)/(\1) /&amp;#39;&lt;/span&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;PS1&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]&amp;quot;&lt;/span&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; PS1
@@ -917,8 +917,8 @@ git stash -q --keep-index
 ./run_tests.sh
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;RESULT&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$?&lt;/span&gt;
 git stash pop -q
-&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$RESULT&lt;/span&gt; -ne &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; 1
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; 0
+&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$RESULT&lt;/span&gt; -ne &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+&lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;where a sample &lt;code&gt;run_tests.sh&lt;/code&gt; implementation for a Django project may
@@ -955,7 +955,7 @@ forbidden strings are found.&lt;/p&gt;
 &lt;span style=&#34;color: #f8f8f2&#34;&gt;FORBIDDEN&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;console.log&amp;#39;&lt;/span&gt;
 git diff --cached --name-only &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
     grep -E &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FILES_PATTERN&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;GREP_COLOR&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;4;5;37;41&amp;#39;&lt;/span&gt; xargs grep --color --with-filename -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FORBIDDEN&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;COMMIT REJECTED Found &amp;quot;$FORBIDDEN&amp;quot; references. Please remove them before commiting&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; 1
+    &lt;span style=&#34;color: #f8f8f2&#34;&gt;GREP_COLOR&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;4;5;37;41&amp;#39;&lt;/span&gt; xargs grep --color --with-filename -n &lt;span style=&#34;color: #f8f8f2&#34;&gt;$FORBIDDEN&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;COMMIT REJECTED Found &amp;quot;$FORBIDDEN&amp;quot; references. Please remove them before commiting&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;It&amp;rsquo;s straightforward to extend this code block to search for other
@@ -1070,7 +1070,7 @@ next tag to use:&lt;/p&gt;
 &lt;p&gt;For builds to test that aren&amp;rsquo;t tagged, it&amp;rsquo;s still useful to give them a
 build number that indicates what the latest tagged release was. This can
 be done with &lt;code&gt;git describe&lt;/code&gt;, which will output something like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;0.1.3-149-g1a48a5a
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.1.3-149-g1a48a5a
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;which indicates that the build came from the 149th commit after tag

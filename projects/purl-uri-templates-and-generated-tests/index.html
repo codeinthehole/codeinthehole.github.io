@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1492785524" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1494498112" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -174,7 +174,7 @@ tests.expansion_tests.test_expansion<span style="color: #f92672">(</span><span s
 tests.expansion_tests.test_expansion<span style="color: #f92672">(</span><span style="color: #e6db74">&#39;{hello}&#39;</span>, <span style="color: #f92672">{</span><span style="color: #e6db74">&#39;var&#39;</span>: <span style="color: #e6db74">&#39;value&#39;</span>, <span style="color: #e6db74">&#39;hello&#39;</span>: <span style="color: #e6db74">&#39;Hello World!&#39;</span><span style="color: #f92672">}</span>, <span style="color: #e6db74">&#39;Hello%20World%21&#39;</span><span style="color: #f92672">)</span> ... ok
 
 ----------------------------------------------------------------------
-Ran <span style="color: #ae81ff">2</span> tests in 0.001s
+Ran <span style="color: #ae81ff">2</span> tests in <span style="color: #ae81ff">0</span>.001s
 
 OK
 </pre></div>
@@ -202,7 +202,7 @@ callable:</p>
 <span style="color: #f92672">{</span>hello<span style="color: #f92672">}</span> expands to Hello%20World%21 ... ok
 
 ----------------------------------------------------------------------
-Ran <span style="color: #ae81ff">2</span> tests in 0.001s
+Ran <span style="color: #ae81ff">2</span> tests in <span style="color: #ae81ff">0</span>.001s
 
 OK
 </pre></div>
@@ -235,7 +235,7 @@ we can rewrite the above example as:</p>
 
 <p>with verbose output:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ py.test -v tests/pytest_tests.py
-platform darwin -- Python 2.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
+platform darwin -- Python <span style="color: #ae81ff">2</span>.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
 collected <span style="color: #ae81ff">2</span> items
 
 tests/pytest_tests.py:123: test_expand<span style="color: #f92672">[{</span>var<span style="color: #f92672">}</span>-fields0-value<span style="color: #f92672">]</span> PASSED

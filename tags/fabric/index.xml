@@ -115,7 +115,7 @@ next tag to use:&lt;/p&gt;
 &lt;p&gt;For builds to test that aren&amp;rsquo;t tagged, it&amp;rsquo;s still useful to give them a
 build number that indicates what the latest tagged release was. This can
 be done with &lt;code&gt;git describe&lt;/code&gt;, which will output something like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;0.1.3-149-g1a48a5a
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.1.3-149-g1a48a5a
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;which indicates that the build came from the 149th commit after tag

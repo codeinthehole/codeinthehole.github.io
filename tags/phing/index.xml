@@ -102,8 +102,8 @@ user&amp;rsquo;s crontab automatically.&lt;/p&gt;
 &lt;p&gt;A much better way is to create a number of scripts which specify the
 cron tasks and are deployed to the /etc/cron.d folder. In the above
 example, these are stored in /src/cron.d and would look something like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt; * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &amp;gt; /dev/null 2&amp;gt;&amp;gt; /var/log/cron.errors.log
-&lt;span style=&#34;color: #ae81ff&#34;&gt;35&lt;/span&gt; * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &amp;gt; /dev/null 2&amp;gt;&amp;gt; /var/log/cron.errors.log
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt; * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&amp;gt; /var/log/cron.errors.log
+&lt;span style=&#34;color: #ae81ff&#34;&gt;35&lt;/span&gt; * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&amp;gt; /var/log/cron.errors.log
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;(Note that, for some reason, a blank line is required at the end of this

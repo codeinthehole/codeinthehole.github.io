@@ -188,7 +188,7 @@ tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(
 tests.expansion_tests.test_expansion&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{hello}&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;var&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;value&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hello&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello World!&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Hello%20World%21&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; ... ok
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in 0.001s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
 
 OK
 &lt;/pre&gt;&lt;/div&gt;
@@ -216,7 +216,7 @@ callable:&lt;/p&gt;
 &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;hello&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt; expands to Hello%20World%21 ... ok
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in 0.001s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.001s
 
 OK
 &lt;/pre&gt;&lt;/div&gt;
@@ -249,7 +249,7 @@ we can rewrite the above example as:&lt;/p&gt;
 
 &lt;p&gt;with verbose output:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ py.test -v tests/pytest_tests.py
-platform darwin -- Python 2.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
+platform darwin -- Python &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
 collected &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; items
 
 tests/pytest_tests.py:123: test_expand&lt;span style=&#34;color: #f92672&#34;&gt;[{&lt;/span&gt;var&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;-fields0-value&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; PASSED
@@ -447,7 +447,7 @@ An admin
 - can upload a csv to create allocations
 
 ----------------------------------------------------------------------
-Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; tests in 0.269s
+Ran &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; tests in &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.269s
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;This is a useful way of running functional tests. It also pushes you

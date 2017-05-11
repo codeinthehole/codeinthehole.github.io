@@ -17,9 +17,9 @@
       <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
     A/
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 1
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 2
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 3
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
     C 
     D
 &lt;/pre&gt;&lt;/div&gt;
@@ -29,9 +29,9 @@ something like that):&lt;/p&gt;
 &lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
     WEBSERVER/
         A/
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 1
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 2
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; 3
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
+            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
         C
         D
 &lt;/pre&gt;&lt;/div&gt;

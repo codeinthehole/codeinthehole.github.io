@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1492785524" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1494498112" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -87,24 +87,24 @@ are a few command-line tricks for analysing your git history.</p>
 <h3 id="analysing-codebase-changes-since-a-tag">Analysing codebase changes since a tag</h3>
 
 <p>Basics: browse commits since the last tagged release</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git log 0.5..0.6
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git log <span style="color: #ae81ff">0</span>.5..0.6
 </pre></div>
 
 <p>The <code>--name-status</code> option for <code>git diff</code> is useful for analysing
 codebase changes between two commits. For instance, you can view changes
 to a particular directory:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git diff --name-status 0.5..0.6 oscar/apps/address
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git diff --name-status <span style="color: #ae81ff">0</span>.5..0.6 oscar/apps/address
 </pre></div>
 
 <p>which can be useful if thousands of files have changed and you want to
 review each package individually.</p>
 
 <p>Extensions include finding deleted files:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git diff --name-status 0.5..0.6 <span style="color: #f8f8f2">|</span> grep <span style="color: #e6db74">&quot;^D&quot;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git diff --name-status <span style="color: #ae81ff">0</span>.5..0.6 <span style="color: #f8f8f2">|</span> grep <span style="color: #e6db74">&quot;^D&quot;</span>
 </pre></div>
 
 <p>or all new migration files:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git diff --name-status 0.5..0.6 <span style="color: #f8f8f2">|</span> grep <span style="color: #e6db74">&quot;^A.*migrations/[0-9]&quot;</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git diff --name-status <span style="color: #ae81ff">0</span>.5..0.6 <span style="color: #f8f8f2">|</span> grep <span style="color: #e6db74">&quot;^A.*migrations/[0-9]&quot;</span>
 </pre></div>
 
 <p>which is important for projects like Oscar which ship with database
@@ -133,15 +133,15 @@ oscar/templates/oscar/404.html error_message
 
 <p>To compare the template blocks from each release, we create two
 temporary files and analyse the diff:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git checkout 0.5
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git checkout <span style="color: #ae81ff">0</span>.5
 $ grep -or <span style="color: #e6db74">&quot;{% block .* %}&quot;</span> oscar/templates/oscar <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\</span>
     awk <span style="color: #e6db74">&#39;BEGIN {FS=&quot;:&quot;} {split($2, parts, &quot; &quot;); print $1, parts[3]}&#39;</span> &gt;
     /tmp/templates-0.5.txt
-$ git checkout 0.6
+$ git checkout <span style="color: #ae81ff">0</span>.6
 $ grep -or <span style="color: #e6db74">&quot;{% block .* %}&quot;</span> oscar/templates/oscar <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\</span>
     awk <span style="color: #e6db74">&#39;BEGIN {FS=&quot;:&quot;} {split($2, parts, &quot; &quot;); print $1, parts[3]}&#39;</span> &gt;
     /tmp/templates-0.6.txt
-$ vimdiff /tmp/templates-0.<span style="color: #f92672">{</span>5,6<span style="color: #f92672">}</span>.txt
+$ vimdiff /tmp/templates-0.<span style="color: #f92672">{</span><span style="color: #ae81ff">5</span>,6<span style="color: #f92672">}</span>.txt
 </pre></div>
 
 <p>I imagine there&rsquo;s a better way to do this but I couldn&rsquo;t find one.</p>
@@ -171,7 +171,7 @@ in the master branch. We generate this file automatically.</p>
 
 <p>and extend this to find authors with more than a certain number of
 commits</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">THRESHOLD</span><span style="color: #f92672">=</span>15
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">THRESHOLD</span><span style="color: #f92672">=</span><span style="color: #ae81ff">15</span>
 $ git shortlog -sn master <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;$1 &gt;= $THRESHOLD {$1=&quot;&quot;;print $0}&#39;</span> <span style="color: #f8f8f2">|</span> cut -d<span style="color: #e6db74">&quot; &quot;</span> -f2-
 </pre></div>
 
@@ -199,7 +199,7 @@ contributors that their patch is in a release: you can email them.</p>
 
 <p>To do this, extract the email addresses of committers whose patches are
 in the new release:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git log 0.5..0.6 --format<span style="color: #f92672">=</span><span style="color: #e6db74">&#39;%aE&#39;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git log <span style="color: #ae81ff">0</span>.5..0.6 --format<span style="color: #f92672">=</span><span style="color: #e6db74">&#39;%aE&#39;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq
 </pre></div>
 
 <p>and CC these addresses in your mailing list release announcement.</p>
@@ -209,8 +209,8 @@ the project, where the release is the first to contain one of their
 commits. We do this by extracting two lists of email addresses and
 employing the lovely but neglected <code>comm</code> command to pluck the email
 addresses that only exist in the latest release:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ comm -13 &lt;<span style="color: #f92672">(</span>git log 0.5 --format<span style="color: #f92672">=</span><span style="color: #e6db74">&#39;%aE&#39;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq<span style="color: #f92672">)</span> <span style="color: #ae81ff">\</span>
-    &lt;<span style="color: #f92672">(</span>git log 0.5..0.6 --format<span style="color: #f92672">=</span><span style="color: #e6db74">&#39;%aE&#39;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq<span style="color: #f92672">)</span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ comm -13 &lt;<span style="color: #f92672">(</span>git log <span style="color: #ae81ff">0</span>.5 --format<span style="color: #f92672">=</span><span style="color: #e6db74">&#39;%aE&#39;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq<span style="color: #f92672">)</span> <span style="color: #ae81ff">\</span>
+    &lt;<span style="color: #f92672">(</span>git log <span style="color: #ae81ff">0</span>.5..0.6 --format<span style="color: #f92672">=</span><span style="color: #e6db74">&#39;%aE&#39;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq<span style="color: #f92672">)</span>
 </pre></div>
 
 <p>Note the first input is all contributors up to release 0.5, while the
@@ -226,8 +226,8 @@ lines exclusive to the first file (<code>-1</code>) and lines common to both
 <p>If your release isn&rsquo;t large, your release notes could include a summary
 of the contained commits; this is useful for minor point releases. You
 can use <code>git shortlog</code> to do this:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git shortlog 0.5..0.6 --no-merges
-David Winterbottom <span style="color: #f92672">(</span>661<span style="color: #f92672">)</span>:
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git shortlog <span style="color: #ae81ff">0</span>.5..0.6 --no-merges
+David Winterbottom <span style="color: #f92672">(</span><span style="color: #ae81ff">661</span><span style="color: #f92672">)</span>:
       Add defaults to the counts on the product summary dashboard page
       Tidy up urls.py and settings.py
       Use mirrors when pip installing the demo site
@@ -237,7 +237,7 @@ David Winterbottom <span style="color: #f92672">(</span>661<span style="color: #
 </pre></div>
 
 <p>You can even use <code>--format</code> to provide links to Github commits:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git shortlog 0.3.4..0.4 --no-merges --format<span style="color: #f92672">=</span><span style="color: #e6db74">&quot;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&quot;</span> 
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git shortlog <span style="color: #ae81ff">0</span>.3.4..0.4 --no-merges --format<span style="color: #f92672">=</span><span style="color: #e6db74">&quot;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&quot;</span> 
 </pre></div>
 
 <p>This won&rsquo;t always be appropriate if your release if there are thousands

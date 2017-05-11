@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1492785524" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1494498112" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -81,8 +81,12 @@ configure psql&rsquo;s output to get it.</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>=&gt; <span style="color: #66d9ef">\a</span>
 </pre></div>
 
-<p>and set the field separator to a tab character:</p>
+<p>set the field separator to a tab character:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>=&gt; <span style="color: #66d9ef">\f</span> <span style="color: #e6db74">&#39;\t&#39;</span>
+</pre></div>
+
+<p>and turn the pager off:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>=&gt; <span style="color: #66d9ef">\pset</span> <span style="color: #e6db74">pager</span> <span style="color: #e6db74">off</span>
 </pre></div>
 
 <p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
