@@ -9,6 +9,40 @@
     <atom:link href="http://codeinthehole.com/tags/jq/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Converting JSON into CSV data for Google Sheets</title>
+      <link>http://codeinthehole.com/tips/json-to-google-sheets/</link>
+      <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
+      <description>&lt;p&gt;Like many people, I use Google Sheets to quickly create and share tabular data. As well as
+&lt;a href=&#34;http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/&#34;&gt;creating spreadsheets by pasting results generated in &lt;code&gt;psql&lt;/code&gt;&lt;/a&gt;,
+I often create reports from JSON files using
+&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;JQ&lt;/a&gt;. This post is a note-to-self on how to do
+this.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from
+Loggly:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat loggly_events.json &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\ &lt;/span&gt;
+    jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.events[].event.json | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           select(.params | has(&amp;quot;payment_day&amp;quot;)) | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           [.timestamp, .account, .params.payment_day] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           @tsv&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;-r&lt;/code&gt; option instructs JQ to output raw strings, not quoted JSON strings.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;@tsv&lt;/code&gt; is a JQ format string for &lt;a href=&#34;https://stedolan.github.io/jq/manual/#Formatstringsandescaping&#34;&gt;outputting tab-separated values&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;clipboard&lt;/code&gt; command is an alias for &lt;code&gt;pbcopy&lt;/code&gt;, the system clipboard on
+OS-X.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Reorganising a Consul key-value store</title>
       <link>http://codeinthehole.com/tips/migrate-consul-key-value-store/</link>
       <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>

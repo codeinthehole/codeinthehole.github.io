@@ -6,8 +6,42 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 27 Mar 2017 15:25:05 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 16 May 2017 21:52:21 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Converting JSON into CSV data for Google Sheets</title>
+      <link>http://codeinthehole.com/tips/json-to-google-sheets/</link>
+      <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
+      <description>&lt;p&gt;Like many people, I use Google Sheets to quickly create and share tabular data. As well as
+&lt;a href=&#34;http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/&#34;&gt;creating spreadsheets by pasting results generated in &lt;code&gt;psql&lt;/code&gt;&lt;/a&gt;,
+I often create reports from JSON files using
+&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;JQ&lt;/a&gt;. This post is a note-to-self on how to do
+this.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from
+Loggly:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat loggly_events.json &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\ &lt;/span&gt;
+    jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.events[].event.json | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           select(.params | has(&amp;quot;payment_day&amp;quot;)) | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           [.timestamp, .account, .params.payment_day] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           @tsv&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;-r&lt;/code&gt; option instructs JQ to output raw strings, not quoted JSON strings.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;@tsv&lt;/code&gt; is a JQ format string for &lt;a href=&#34;https://stedolan.github.io/jq/manual/#Formatstringsandescaping&#34;&gt;outputting tab-separated values&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;clipboard&lt;/code&gt; command is an alias for &lt;code&gt;pbcopy&lt;/code&gt;, the system clipboard on
+OS-X.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Reorganising a Consul key-value store</title>
@@ -1099,80 +1133,6 @@ newlines are preserved (which I learnt in &lt;a href=&#34;http://stackoverflow.c
 answer&lt;/a&gt;).
 Also we don&amp;rsquo;t echo commit messages while rebasing as it has &lt;a href=&#34;http://gmurphey.com/2013/02/02/ignoring-git-hooks-when-rebasing.html&#34;&gt;strange
 side-effects&lt;/a&gt;.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Dumping and restoring a PostGIS database</title>
-      <link>http://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</link>
-      <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</guid>
-      <description>
-
-&lt;p&gt;I wasted at least twenty minutes getting this to work. These are my
-notes.&lt;/p&gt;
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;You are using a PostGIS database and want to take a backup copy from
-production and restore it in a different environment. One complication
-is that each environment connects to its database with its own user.&lt;/p&gt;
-
-&lt;p&gt;This is a common scenario if you are using
-&lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/gis/&#34;&gt;GeoDjango&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;Suppose your production database is called &amp;ldquo;myproject_prod&amp;rdquo; which you
-connect to with user &amp;ldquo;myproject_prod_role&amp;rdquo; and you want to replace
-your existing stage database &amp;ldquo;myproject_stage&amp;rdquo; that you connect to with
-user &amp;ldquo;myproject_stage_role&amp;rdquo;.&lt;/p&gt;
-
-&lt;p&gt;First, dump your production database:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ pg_dump --no-acl --no-owner &lt;span style=&#34;color: #f8f8f2&#34;&gt;$DATABASE&lt;/span&gt; &amp;gt; dump.sql
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;access control is ignored (&lt;code&gt;--no-acl&lt;/code&gt;) as your production database
-may have additional users that you&amp;rsquo;re not interested in;&lt;/li&gt;
-&lt;li&gt;ownership is ignored (&lt;code&gt;--no-owner&lt;/code&gt;) as you will be restoring as a
-different user.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Now, copy the SQL file across to the appropriate server and create the
-destination database from a PostGIS template with the appropriate owner:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=#&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DROP&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DATABASE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject_stage;&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=#&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;CREATE&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;DATABASE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject_stage&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;TEMPLATE&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;template_postgis&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;OWNER&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;myproject_role_stage;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and restore the database using the stage user:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ psql --host&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;127&lt;/span&gt;.0.0.1 --username&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;myproject_role_stage myproject_stage &amp;lt; dump.sql
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Be warned: this command will generated a lot of warnings (which can be
-ignored). This happens as &lt;code&gt;pg_dump&lt;/code&gt; generates SQL relative to the
-&amp;lsquo;template0&amp;rsquo; database (not &amp;lsquo;template_postgis&amp;rsquo; which would be more
-helpful in this situation). Thus, the dumped SQL file contains the
-definitions of PostGIS types which have already been defined when we
-created the database from &amp;ldquo;template_postgis&amp;rdquo;.&lt;/p&gt;
-
-&lt;div class=&#34;admonition note&#34;&gt;
-    The host is specified in the restore operation (&lt;code&gt;--host=127.0.0.1&lt;/code&gt;) so
-    as to trigger the correct authentication rules from &lt;code&gt;pg_hba.conf&lt;/code&gt;. I
-    usually forget this and am confused about why I can&#39;t authenticate. You
-    might not need this if your authentication config is different.
-&lt;/div&gt;
-
-&lt;p&gt;Related reading:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://postgis.17.x6.nabble.com/Backup-and-Restore-of-a-PostGis-database-td3565498.html&#34;&gt;Backup and Restore of a PostGis
-database&lt;/a&gt; -
-a relevant thread from the PostGIS mailing list.&lt;/li&gt;
-&lt;/ul&gt;
 </description>
     </item>
     

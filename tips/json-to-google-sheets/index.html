@@ -32,9 +32,9 @@ ga('send', 'pageview');
 
         
         
-        <title>Tutorial: the complex Ginzburg-Landau equation - by David Winterbottom</title>
+        <title>Converting JSON into CSV data for Google Sheets - by David Winterbottom</title>
         <meta name="author" content="David Winterbottom">
-        <meta name="description" content="An introduction to this well-known equation.">
+        <meta name="description" content="Another note-to-self on how to use JQ">
 
     </head>
 
@@ -59,20 +59,43 @@ ga('send', 'pageview');
 
     <div id="content" class="article">
 
-        <h1 id="article_title" class="entry-title">Tutorial: the complex Ginzburg-Landau equation</h1>
+        <h1 id="article_title" class="entry-title">Converting JSON into CSV data for Google Sheets</h1>
 
         <div class="byline desktop_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a>
-            on <time class="published" datetime="">Tuesday, 1 February 2005</time>
+            on <time class="published" datetime="">Tuesday, 16 May 2017</time>
         </div>
         <div class="byline mobile_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
-            <span class="article_date">on <time class="published" datetime="">Tuesday, 1 February 2005</time></span>
+            <span class="article_date">on <time class="published" datetime="">Tuesday, 16 May 2017</time></span>
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>I wrote a <a href="/tutorial/index.html">tutorial on the complex Ginzburg-Landau equation</a> as a
-set of simple HTML pages.</p>
+            <p>Like many people, I use Google Sheets to quickly create and share tabular data. As well as
+<a href="/tips/copying-postgres-output-into-a-spreadsheet/">creating spreadsheets by pasting results generated in <code>psql</code></a>,
+I often create reports from JSON files using
+<a href="https://stedolan.github.io/jq/">JQ</a>. This post is a note-to-self on how to do
+this.</p>
+
+<p>Here&rsquo;s a command to create a tab-separated report from a JSON events file exported from
+Loggly:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ cat loggly_events.json <span style="color: #f8f8f2">|</span> <span style="color: #ae81ff">\ </span>
+    jq -r <span style="color: #e6db74">&#39;.events[].event.json | </span>
+<span style="color: #e6db74">           select(.params | has(&quot;payment_day&quot;)) | </span>
+<span style="color: #e6db74">           [.timestamp, .account, .params.payment_day] | </span>
+<span style="color: #e6db74">           @tsv&#39;</span> <span style="color: #f8f8f2">|</span> clipboard
+</pre></div>
+
+<p>Note:</p>
+
+<ul>
+<li><p>The <code>-r</code> option instructs JQ to output raw strings, not quoted JSON strings.</p></li>
+
+<li><p><code>@tsv</code> is a JQ format string for <a href="https://stedolan.github.io/jq/manual/#Formatstringsandescaping">outputting tab-separated values</a>.</p></li>
+
+<li><p>The <code>clipboard</code> command is an alias for <code>pbcopy</code>, the system clipboard on
+OS-X.</p></li>
+</ul>
 
         </div>
 
@@ -80,28 +103,26 @@ set of simple HTML pages.</p>
             <span class="hr">----</span>
             <p>
             Something wrong? 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/projects/ginzburg-landau-tutorial.md">Suggest an improvement</a>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/json-to-google-sheets.md">Suggest an improvement</a>
             or 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Tutorial%3a%20the%20complex%20Ginzburg-Landau%20equation%22&body=Article:%20Tutorial%3a%20the%20complex%20Ginzburg-Landau%20equation%0AURL:%20http%3a%2f%2fcodeinthehole.com%2fprojects%2fginzburg-landau-tutorial%2f">add a comment</a>
-            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/projects/ginzburg-landau-tutorial.md">article history</a>)<br/>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Converting%20JSON%20into%20CSV%20data%20for%20Google%20Sheets%22&body=Article:%20Converting%20JSON%20into%20CSV%20data%20for%20Google%20Sheets%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fjson-to-google-sheets%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/json-to-google-sheets.md">article history</a>)<br/>
 
             
                 Tagged with:
                 
-                 <a href="/tags/maths">maths</a>
+                 <a href="/tags/jq">jq</a>, <a href="/tags/loggly">loggly</a>
                 <br/>
             
             
-                Filed in: <a href="/projects/">projects</a>
+                Filed in: <a href="/tips/">tips</a>
             
             </p>
 
             <p>
             
-                Previous: <a href="/about/">About</a><br/>
+                Previous: <a href="/news/podcast-init/">Podcast.__init__ on Oscar</a><br/>
             
-            
-                Next: <a href="/guides/writing-a-thesis-in-latex/">Writing a Thesis in LaTeX</a>
             
             </p>
 

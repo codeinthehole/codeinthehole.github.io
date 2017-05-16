@@ -6,8 +6,42 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 16 May 2017 21:52:21 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Converting JSON into CSV data for Google Sheets</title>
+      <link>http://codeinthehole.com/tips/json-to-google-sheets/</link>
+      <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
+      <description>&lt;p&gt;Like many people, I use Google Sheets to quickly create and share tabular data. As well as
+&lt;a href=&#34;http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/&#34;&gt;creating spreadsheets by pasting results generated in &lt;code&gt;psql&lt;/code&gt;&lt;/a&gt;,
+I often create reports from JSON files using
+&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;JQ&lt;/a&gt;. This post is a note-to-self on how to do
+this.&lt;/p&gt;
+
+&lt;p&gt;Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from
+Loggly:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat loggly_events.json &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\ &lt;/span&gt;
+    jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.events[].event.json | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           select(.params | has(&amp;quot;payment_day&amp;quot;)) | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           [.timestamp, .account, .params.payment_day] | &lt;/span&gt;
+&lt;span style=&#34;color: #e6db74&#34;&gt;           @tsv&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
+&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;-r&lt;/code&gt; option instructs JQ to output raw strings, not quoted JSON strings.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;code&gt;@tsv&lt;/code&gt; is a JQ format string for &lt;a href=&#34;https://stedolan.github.io/jq/manual/#Formatstringsandescaping&#34;&gt;outputting tab-separated values&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;clipboard&lt;/code&gt; command is an alias for &lt;code&gt;pbcopy&lt;/code&gt;, the system clipboard on
+OS-X.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Podcast.__init__ on Oscar</title>
@@ -554,106 +588,6 @@ tab titles is a useful navigation aid.&lt;/p&gt;
 &lt;p&gt;There are more &lt;a href=&#34;http://virtualenvwrapper.readthedocs.org/en/latest/tips.html&#34;&gt;tips and
 tricks&lt;/a&gt;
 available in the virtualenvwrapper docs.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Integrating Django application metrics into Zabbix</title>
-      <link>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</link>
-      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
-      <description>
-
-&lt;p&gt;At &lt;a href=&#34;http://www.tangentsnowball.com&#34;&gt;Tangent&lt;/a&gt;, we use
-&lt;a href=&#34;http://www.zabbix.com/&#34;&gt;Zabbix&lt;/a&gt; for monitoring and alerting. This is a
-note-to-self on how to configure application monitoring.&lt;/p&gt;
-
-&lt;h3 id=&#34;management-command&#34;&gt;Management command&lt;/h3&gt;
-
-&lt;p&gt;You need a script that prints out a value to STDOUT. A simple management
-command suffices:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.management.base&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseCommand,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CommandError&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Command&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(BaseCommand):&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;options):&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;args:&lt;/span&gt;
-            &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;usage()&lt;/span&gt;
-            &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;fetch_%s&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;args[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;hasattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name):&lt;/span&gt;
-            &lt;span style=&#34;color: #66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CommandError(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;No method found with name &amp;#39;%s&amp;#39;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name)&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;getattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name)(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:])&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;usage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetchers&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[m&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;dir(self)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;startswith(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;fetch&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)]&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;descriptions&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetchers:&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;getattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher)&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;docstring&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__doc__&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;strip()&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__doc__&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;no description&amp;gt;&amp;quot;&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;descriptions&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;append(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; - %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
-                &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;split(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;docstring))&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Available fetchers:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;%s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;join(descriptions)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This uses dynamic dispatch to call &amp;ldquo;fetcher&amp;rdquo; methods with name
-&lt;code&gt;fetch_%s&lt;/code&gt; where the first argument defines the format variable. Eg, a
-method:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch_num_users&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;    Fetch number of users&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;objects&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;all()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;count()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;is called via:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py application_metric num_users
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Without arguments, a list of fetchers is shown:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py application_metric
-Available fetchers:
- - num_users : Fetch number of users
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;It&amp;rsquo;s trivial to add more &lt;code&gt;fetch_*&lt;/code&gt; methods to emit additional metrics.&lt;/p&gt;
-
-&lt;h3 id=&#34;zabbix-plugin&#34;&gt;Zabbix plugin&lt;/h3&gt;
-
-&lt;p&gt;Hook this up to Zabbix by first creating a plugin script which calls the
-management command, passing on an arg:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/zabbix/plugins/application
-&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; /path/to/virtualenv/bin/activate &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /path/to/project/manage.py application_metric &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then create the Zabbix &amp;ldquo;UserParameter&amp;rdquo; declaration which calls the
-plugin script:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/zabbix/zabbix_agentd.conf.d/application.conf
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;UserParameter&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;application&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;*&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;,/etc/zabbix/plugins/application &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;application[*]&lt;/code&gt; syntax means that you can configure various &amp;ldquo;Items&amp;rdquo;
-in Zabbix like &lt;code&gt;application[num_orders]&lt;/code&gt; and &lt;code&gt;application[num_users]&lt;/code&gt;
-and the bracketed string will get passed all the way through to the
-management command.&lt;/p&gt;
-
-&lt;p&gt;Now restart Zabbix to pick up the new conf file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ /etc/init.d/zabbix-agent restart
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;zabbix-dashboard&#34;&gt;Zabbix dashboard&lt;/h3&gt;
-
-&lt;p&gt;In the Zabbix web dashboard add new &amp;ldquo;Items&amp;rdquo; that use this new
-&amp;ldquo;UserParameter&amp;rdquo;. Add a new &amp;ldquo;Item&amp;rdquo; by navigating through
-&lt;code&gt;Configuration &amp;gt; Hosts &amp;gt; Items &amp;gt; Create item&lt;/code&gt;. In the resulting form,
-set the &amp;ldquo;Key&amp;rdquo; to, say, &lt;code&gt;application[num_users]&lt;/code&gt; to pass &lt;code&gt;num_users&lt;/code&gt; as
-the first argument through to the management command.&lt;/p&gt;
-
-&lt;p&gt;And that&amp;rsquo;s it: this metric will now be collected by Zabbix and can be
-used for graphing and alerting.&lt;/p&gt;
 </description>
     </item>
     
