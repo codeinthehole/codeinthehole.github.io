@@ -641,6 +641,10 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/music/</loc>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tags/mysql/</loc>
     <lastmod>2012-02-02T00:00:00+00:00</lastmod>
     <priority>0</priority>
