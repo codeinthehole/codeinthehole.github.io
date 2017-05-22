@@ -681,6 +681,10 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/monitor/</loc>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tags/phing/</loc>
     <lastmod>2010-08-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
