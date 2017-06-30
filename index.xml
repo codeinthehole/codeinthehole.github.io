@@ -6,8 +6,64 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Jun 2017 21:30:36 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 30 Jun 2017 11:26:39 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Your codebase is your house</title>
+      <link>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</link>
+      <pubDate>Fri, 30 Jun 2017 11:26:39 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</guid>
+      <description>&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;“Remember, code is your house, and you have to live in it.” - Michael Feathers 🏠&lt;/p&gt;&amp;mdash; Programming Wisdom (@CodeWisdom) &lt;a href=&#34;https://twitter.com/CodeWisdom/status/854726796172034049&#34;&gt;April 19, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;This is the best metaphor I know for promoting or defending software quality.&lt;/p&gt;
+
+&lt;p&gt;We do live in our codebases: shoddy software engineering has direct,
+easily-visualised analogues from construction and house maintenance.&lt;/p&gt;
+
+&lt;p&gt;For instance, I&amp;rsquo;m sure you&amp;rsquo;ve seen these pull requests before&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bricks.png&#34; class=&#34;photo&#34; /&gt;
+&lt;img src=&#34;http://codeinthehole.com/images/fan.jpg&#34; class=&#34;photo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Furthermore, the episode &lt;a href=&#34;https://en.wikipedia.org/wiki/Hurricane_Neddy&#34;&gt;&amp;ldquo;Hurrican Neddy&amp;rdquo;&lt;/a&gt; from season 8
+of The Simpsons is a parable of a failed software project, where feature delivery is prioritised
+at the expense of maintainability.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy1.jpg&#34; class=&#34;photo&#34; /&gt;
+&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy2.png&#34; class=&#34;photo&#34; /&gt;
+&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy3.jpg&#34; class=&#34;photo&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Homer: Your beautiful kitchen, Ned, just as you remember it.&lt;/p&gt;
+
+&lt;p&gt;Ned: Was that, uh, was that toilet always next to the refrigerator?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I often think of the toilet in the kitchen often when reviewing code, when an
+issue is addressed by shoving code into a place where it really doesn&amp;rsquo;t belong.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s a useful metaphor - it will serve you well in the struggle to keep a large
+codebase maintainable&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/this-is-fine.png&#34; style=&#34;width:100%&#34;/&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I first saw the fan image in a &lt;a href=&#34;https://twitter.com/isoiphone/status/824771226585296896&#34;&gt;tweet by @isoiphone&lt;/a&gt;.
+  I can&amp;rsquo;t find the tweet I saw the bricks image in - please let me know if you
+  know it.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Anthropomorphic dog image from a &lt;a href=&#34;https://en.wikipedia.org/wiki/Gunshow_(webcomic)#.22This_is_Fine.22&#34;&gt;&lt;em&gt;Gunshow&lt;/em&gt; strip called &amp;ldquo;On Fire&amp;rdquo;&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Git tips for working with pull requests</title>
@@ -564,77 +620,6 @@ them with:&lt;/p&gt;
 &lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;Moderately useful.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Avoiding clashing Django migrations</title>
-      <link>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</link>
-      <pubDate>Sat, 31 Jan 2015 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</guid>
-      <description>&lt;p&gt;Managing South migrations on a multi-developer Django project can be
-painful. Developers working on separate branches will often create
-migrations for the same app with the same migration number&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. When
-merged into master, these clashing migrations can cause deployment
-hiccups as South will complain if migrations are applied out of order.&lt;/p&gt;
-
-&lt;p&gt;There are various techniques available for dealing with this&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;, but
-what we do at &lt;a href=&#34;http://justyoyo.com/&#34;&gt;Yoyo&lt;/a&gt; is test for such clashes as
-part of our Travis continuous integration.&lt;/p&gt;
-
-&lt;p&gt;This is done by calling a &lt;code&gt;makefile&lt;/code&gt; target from &lt;code&gt;.travis.yml&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# .travis.yml&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;language&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;python&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2.7&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;install&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;make virtualenv&lt;/span&gt;
-
-&lt;span style=&#34;color: #ae81ff&#34;&gt;script&lt;/span&gt;
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;- make test&lt;/span&gt;
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;- make migration_test&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where the &lt;code&gt;migration_test&lt;/code&gt; target is:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# makefile&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;MIGRATION_CLASHES&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;shell find . -type f -name &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;*.py&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep -o &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;.*/migrations/[0-9]\+&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq -c &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$$1 &amp;gt; 1 {print $$0}&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;migration_test&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;:&lt;/span&gt;
-    &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -n &lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;MIGRATION_CLASHES&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;||&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;true&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here the &lt;code&gt;$(shell ...)&lt;/code&gt; call extracts the app name and migration number
-from all migration files then uses &lt;code&gt;awk&lt;/code&gt; to look for clashes. If any are
-found, the Travis build will fail and the console output should reveal
-which apps have clashes.&lt;/p&gt;
-
-&lt;p&gt;This works best if you only allow fast-forward commits into master
-(something we do at &lt;a href=&#34;http://justyoyo.com/&#34;&gt;Yoyo&lt;/a&gt;). Doing this forces you
-to merge master back into your pull request branch and allows Travis to
-catch migration clashes before it is merged. Then any conflicts can be
-resolved by renumbering or recreating any migrations not yet merged to
-master.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I&amp;rsquo;m only talking about Django versions less than 1.7 - I&amp;rsquo;m not
-sure if this is still an issue in more modern Django versions.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-
-&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;As noted by the &lt;a href=&#34;http://south.readthedocs.org/en/latest/tutorial/part5.html&#34;&gt;South
-docs&lt;/a&gt;,
-you can run the migrations with the &lt;code&gt;--merge&lt;/code&gt; option although this
-generally means a manual intervention in your deployment process
-which isn&amp;rsquo;t ideal.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
 </description>
     </item>
     

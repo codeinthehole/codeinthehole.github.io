@@ -6,8 +6,64 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Jun 2017 21:30:36 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 30 Jun 2017 11:26:39 +0100</lastBuildDate>
     <atom:link href="http://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Your codebase is your house</title>
+      <link>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</link>
+      <pubDate>Fri, 30 Jun 2017 11:26:39 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</guid>
+      <description>&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;“Remember, code is your house, and you have to live in it.” - Michael Feathers 🏠&lt;/p&gt;&amp;mdash; Programming Wisdom (@CodeWisdom) &lt;a href=&#34;https://twitter.com/CodeWisdom/status/854726796172034049&#34;&gt;April 19, 2017&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+
+&lt;p&gt;This is the best metaphor I know for promoting or defending software quality.&lt;/p&gt;
+
+&lt;p&gt;We do live in our codebases: shoddy software engineering has direct,
+easily-visualised analogues from construction and house maintenance.&lt;/p&gt;
+
+&lt;p&gt;For instance, I&amp;rsquo;m sure you&amp;rsquo;ve seen these pull requests before&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bricks.png&#34; class=&#34;photo&#34; /&gt;
+&lt;img src=&#34;http://codeinthehole.com/images/fan.jpg&#34; class=&#34;photo&#34; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Furthermore, the episode &lt;a href=&#34;https://en.wikipedia.org/wiki/Hurricane_Neddy&#34;&gt;&amp;ldquo;Hurrican Neddy&amp;rdquo;&lt;/a&gt; from season 8
+of The Simpsons is a parable of a failed software project, where feature delivery is prioritised
+at the expense of maintainability.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy1.jpg&#34; class=&#34;photo&#34; /&gt;
+&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy2.png&#34; class=&#34;photo&#34; /&gt;
+&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy3.jpg&#34; class=&#34;photo&#34; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Homer: Your beautiful kitchen, Ned, just as you remember it.&lt;/p&gt;
+
+&lt;p&gt;Ned: Was that, uh, was that toilet always next to the refrigerator?&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I often think of the toilet in the kitchen often when reviewing code, when an
+issue is addressed by shoving code into a place where it really doesn&amp;rsquo;t belong.&lt;/p&gt;
+
+&lt;p&gt;It&amp;rsquo;s a useful metaphor - it will serve you well in the struggle to keep a large
+codebase maintainable&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/this-is-fine.png&#34; style=&#34;width:100%&#34;/&gt;&lt;/p&gt;
+&lt;div class=&#34;footnotes&#34;&gt;
+
+&lt;hr /&gt;
+
+&lt;ol&gt;
+&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I first saw the fan image in a &lt;a href=&#34;https://twitter.com/isoiphone/status/824771226585296896&#34;&gt;tweet by @isoiphone&lt;/a&gt;.
+  I can&amp;rsquo;t find the tweet I saw the bricks image in - please let me know if you
+  know it.&lt;/p&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li id=&#34;fn:2&#34;&gt;Anthropomorphic dog image from a &lt;a href=&#34;https://en.wikipedia.org/wiki/Gunshow_(webcomic)#.22This_is_Fine.22&#34;&gt;&lt;em&gt;Gunshow&lt;/em&gt; strip called &amp;ldquo;On Fire&amp;rdquo;&lt;/a&gt;
+ &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Git tips for working with pull requests</title>
@@ -1085,112 +1141,6 @@ David Winterbottom &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;
 
 &lt;p&gt;This won&amp;rsquo;t always be appropriate if your release if there are thousands
 of commits.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>How to install PostGIS and GeoDjango on Ubuntu</title>
-      <link>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</link>
-      <pubDate>Fri, 04 Oct 2013 00:00:00 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
-      <description>
-
-&lt;p&gt;Despite its &lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/&#34;&gt;extensive
-documentation&lt;/a&gt;,
-getting GeoDjango installed and configured can be a pain. Here are my
-notes for future reference:&lt;/p&gt;
-
-&lt;h3 id=&#34;installation-on-ubuntu-12-04&#34;&gt;Installation on Ubuntu 12.04&lt;/h3&gt;
-
-&lt;p&gt;First, ensure your system locale is UTF8 as PostgreSQL uses it to
-determine its default encoding during installation:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LANGUAGE&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
-$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LANG&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
-$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;export&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;LC_ALL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;en_US.UTF-8&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now install dependencies:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get update
-$ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis 
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;PostgreSQL should now be installed and running with UTF8 encodings.
-Verify this with:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres psql -l    
-                                     List of databases
-       Name       &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;  Owner   &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; Encoding &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;   Collate   &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;    Ctype    &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-------------------+----------+----------+-------------+-------------+-...
- postgres         &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; postgres &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; UTF8     &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
- template0        &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; postgres &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; UTF8     &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
- template1        &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; postgres &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; UTF8     &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; en_US.UTF-8 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-                  &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;          &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;             &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now create a spatial database. The above commands will have installed
-PostGIS 1.5.3 hence, &lt;a href=&#34;https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/#creating-a-spatial-database-template-for-earlier-versions&#34;&gt;according to Django&amp;rsquo;s
-docs&lt;/a&gt;,
-we need to download and install a shell script that executes the
-appropriate commands:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ wget https://docs.djangoproject.com/en/dev/_downloads/create_template_postgis-1.5.sh
-$ chmod +x create_template_postgis-1.5.sh
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and run it as a privileged user:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres ./create_template_postgis-1.5.sh
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If this is successful, a deluge of SQL output will echo to the console.
-This is normal. PostGIS is now correctly installed and we have a
-template database we can use to create a database for our GeoDjango
-project.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres psql
-psql &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;9&lt;/span&gt;.1.9&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-Type &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;help&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; help.
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# CREATE ROLE sample_role WITH PASSWORD &amp;#39;sample_password&amp;#39; LOGIN;&lt;/span&gt;
-CREATE ROLE
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;postgres&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;# CREATE DATABASE sample_db OWNER sample_role TEMPLATE template_postgis;&lt;/span&gt;
-CREATE DATABASE
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This is the tricky bit over: you can now &lt;code&gt;pip install psycopg2&lt;/code&gt; and
-you&amp;rsquo;re basically done. Remember to use the PostGIS database engine in
-your &lt;code&gt;DATABASES&lt;/code&gt; setting:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;DATABASES&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;default&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ENGINE&amp;#39;&lt;/span&gt;: &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;django.contrib.gis.db.backends.postgis&amp;#39;&lt;/span&gt;,
-        ...
-    &lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;,
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h4 id=&#34;common-errors&#34;&gt;Common errors&lt;/h4&gt;
-
-&lt;p&gt;If your system locale is not UTF8 when attempting to create a spatial
-database, you&amp;rsquo;ll see something like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo -u postgres ./create_template_postgis-debian.sh
-createdb: database creation failed: ERROR: encoding UTF8 does not match locale en_US
-DETAIL:  The chosen LC_CTYPE setting requires encoding LATIN1 
-FATAL:  database &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;template_postgis&amp;quot;&lt;/span&gt; does not exist
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If PostgreSQL is not installed when trying to install psycopg2, you see
-something that ends with this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;warning: manifest_maker: standard file &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;-c&amp;#39;&lt;/span&gt; not found
-
-Error: pg_config executable not found.
-
-Please add the directory containing pg_config to the PATH
-or specify the full executable path with the option:
-
-    python setup.py build_ext --pg-config /path/to/pg_config build ...
-
-or with the pg_config option in &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;setup.cfg&amp;#39;&lt;/span&gt;.
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I&amp;rsquo;ll add more error symptoms when I see them in the wild.&lt;/p&gt;
 </description>
     </item>
     

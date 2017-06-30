@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</loc>
+    <lastmod>2017-06-30T11:26:39+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tips/open-github-pull-request-command/</loc>
     <lastmod>2017-06-06T21:30:36+01:00</lastmod>
   </url>
@@ -539,7 +544,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2017-06-06T21:30:36+01:00</lastmod>
+    <lastmod>2017-06-30T11:26:39+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -780,7 +785,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2017-06-06T21:30:36+01:00</lastmod>
+    <lastmod>2017-06-30T11:26:39+01:00</lastmod>
     <priority>0</priority>
   </url>
   
