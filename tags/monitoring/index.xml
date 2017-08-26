@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Monitoring on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/monitoring/index.xml</link>
+    <link>http://codeinthehole.com/tags/monitoring/</link>
     <description>Recent content in Monitoring on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 22 Oct 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Integrating Django application metrics into Zabbix</title>
@@ -14,98 +17,9 @@
       <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
-      <description>
-
-&lt;p&gt;At &lt;a href=&#34;http://www.tangentsnowball.com&#34;&gt;Tangent&lt;/a&gt;, we use
-&lt;a href=&#34;http://www.zabbix.com/&#34;&gt;Zabbix&lt;/a&gt; for monitoring and alerting. This is a
-note-to-self on how to configure application monitoring.&lt;/p&gt;
-
-&lt;h3 id=&#34;management-command&#34;&gt;Management command&lt;/h3&gt;
-
-&lt;p&gt;You need a script that prints out a value to STDOUT. A simple management
-command suffices:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;django.core.management.base&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;import&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;BaseCommand,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CommandError&lt;/span&gt;
-
-&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Command&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(BaseCommand):&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;handle&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args,&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;**&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;options):&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;args:&lt;/span&gt;
-            &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;usage()&lt;/span&gt;
-            &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;fetch_%s&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;args[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;]&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;not&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;hasattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name):&lt;/span&gt;
-            &lt;span style=&#34;color: #66d9ef&#34;&gt;raise&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;CommandError(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;No method found with name &amp;#39;%s&amp;#39;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name)&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;print&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;getattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method_name)(&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;args[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:])&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;usage&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetchers&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[m&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;dir(self)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;m&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;startswith(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;fetch&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)]&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;descriptions&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;[]&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetchers:&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;getattr(self,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher)&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;docstring&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__doc__&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;strip()&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;method&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;__doc__&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;no description&amp;gt;&amp;quot;&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;descriptions&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;append(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; - %s : %s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
-                &lt;span style=&#34;color: #f8f8f2&#34;&gt;fetcher&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;split(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)[&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;],&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;docstring))&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;Available fetchers:&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;%s&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;\n&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;join(descriptions)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This uses dynamic dispatch to call &amp;ldquo;fetcher&amp;rdquo; methods with name
-&lt;code&gt;fetch_%s&lt;/code&gt; where the first argument defines the format variable. Eg, a
-method:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;fetch_num_users&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(self):&lt;/span&gt;
-    &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;    Fetch number of users&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;User&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;objects&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;all()&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;count()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;is called via:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py application_metric num_users
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Without arguments, a list of fetchers is shown:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ./manage.py application_metric
-Available fetchers:
- - num_users : Fetch number of users
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;It&amp;rsquo;s trivial to add more &lt;code&gt;fetch_*&lt;/code&gt; methods to emit additional metrics.&lt;/p&gt;
-
-&lt;h3 id=&#34;zabbix-plugin&#34;&gt;Zabbix plugin&lt;/h3&gt;
-
-&lt;p&gt;Hook this up to Zabbix by first creating a plugin script which calls the
-management command, passing on an arg:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/zabbix/plugins/application
-&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;source&lt;/span&gt; /path/to/virtualenv/bin/activate &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; /path/to/project/manage.py application_metric &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then create the Zabbix &amp;ldquo;UserParameter&amp;rdquo; declaration which calls the
-plugin script:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat /etc/zabbix/zabbix_agentd.conf.d/application.conf
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;UserParameter&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;application&lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;*&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;,/etc/zabbix/plugins/application &lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;application[*]&lt;/code&gt; syntax means that you can configure various &amp;ldquo;Items&amp;rdquo;
-in Zabbix like &lt;code&gt;application[num_orders]&lt;/code&gt; and &lt;code&gt;application[num_users]&lt;/code&gt;
-and the bracketed string will get passed all the way through to the
-management command.&lt;/p&gt;
-
-&lt;p&gt;Now restart Zabbix to pick up the new conf file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ /etc/init.d/zabbix-agent restart
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;zabbix-dashboard&#34;&gt;Zabbix dashboard&lt;/h3&gt;
-
-&lt;p&gt;In the Zabbix web dashboard add new &amp;ldquo;Items&amp;rdquo; that use this new
-&amp;ldquo;UserParameter&amp;rdquo;. Add a new &amp;ldquo;Item&amp;rdquo; by navigating through
-&lt;code&gt;Configuration &amp;gt; Hosts &amp;gt; Items &amp;gt; Create item&lt;/code&gt;. In the resulting form,
-set the &amp;ldquo;Key&amp;rdquo; to, say, &lt;code&gt;application[num_users]&lt;/code&gt; to pass &lt;code&gt;num_users&lt;/code&gt; as
-the first argument through to the management command.&lt;/p&gt;
-
-&lt;p&gt;And that&amp;rsquo;s it: this metric will now be collected by Zabbix and can be
-used for graphing and alerting.&lt;/p&gt;
-</description>
+      <description>At Tangent, we use Zabbix for monitoring and alerting. This is a note-to-self on how to configure application monitoring.
+Management command You need a script that prints out a value to STDOUT. A simple management command suffices:
+from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch_%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;quot;No method found with name &amp;#39;%s&amp;#39;&amp;quot; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
     </item>
     
     <item>
@@ -114,72 +28,8 @@ used for graphing and alerting.&lt;/p&gt;
       <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9780596102357.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Following some server monitoring advice from the excellent &amp;lsquo;Building
-Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting
-with &lt;a href=&#34;http://ganglia.info/&#34;&gt;Ganglia&lt;/a&gt; on a cluster of servers at Tangent
-Labs. It has proved to be deeply impressive and has given us a great
-tool for keeping an eye on how our servers are performing, as well as
-providing an invaluable diagnostic tool should things go wrong.&lt;/p&gt;
-
-&lt;p&gt;In essence, Ganglia is a distributed monitoring application that allows
-statistics on a cluster of servers to be aggregated in a single place.
-Moreover, an excellent web front-end is also provided to view charts of
-the statistics being collected. You can view a &lt;a href=&#34;http://monitor.millennium.berkeley.edu/&#34;&gt;live demo of the Ganglia
-monitoring application for the UC Berkeley Millennium
-Project&lt;/a&gt; which shows exactly
-what Ganglia can provide.&lt;/p&gt;
-
-&lt;p&gt;Out of the box, Ganglia collects basic server stats on load, memory,
-CPU, network and disk. However, what makes it great is that it can be
-easily extended to collect statistics on anything that you can measure
-from the command line. There is a &lt;a href=&#34;http://ganglia.sourceforge.net/gmetric/&#34;&gt;repository of user-contributed
-scripts&lt;/a&gt; although it&amp;rsquo;s not that
-extensive. In this post, I detail a script that can used to feed
-statistics about MySQL into Ganglia for monitoring - something important
-to any LAMP-stack application.&lt;/p&gt;
-
-&lt;p&gt;A few technical details first: Ganglia utilises three utilities to run
-each with a distinct responsibility:&lt;/p&gt;
-
-&lt;dl&gt;
-&lt;dt&gt;gmond&lt;/dt&gt;
-&lt;dd&gt;&lt;p&gt;A daemon responsible for collecting monitoring stats and sharing
-them using XML over TCP. The gmond daemon runs on all nodes that you
-want to monitor.&lt;/p&gt;&lt;/dd&gt;
-&lt;dt&gt;gmetad&lt;/dt&gt;
-&lt;dd&gt;&lt;p&gt;A daemon responsible for collecting and storing data from other
-gmetad and gmomd services. This only needs to be running on a
-single, central node.&lt;/p&gt;&lt;/dd&gt;
-&lt;dt&gt;gmetric&lt;/dt&gt;
-&lt;dd&gt;&lt;p&gt;A command-line application used for using Ganglia to monitor custom
-metrics.&lt;/p&gt;&lt;/dd&gt;
-&lt;/dl&gt;
-
-&lt;p&gt;All very simple really - see the
-&lt;a href=&#34;http://ganglia.wiki.sourceforge.net/ganglia_documents&#34;&gt;docs&lt;/a&gt; for the
-nitty gritty. Ok, enough intro -here&amp;rsquo;s my script for MySQL:&lt;/p&gt;
-
-&lt;p&gt;» &lt;a href=&#34;http://codeinthehole.com/downloads/gmetric-mysql.sh&#34;&gt;gmetric-mysql.sh (3.1kb)&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s written in Bash and uses a temporary file to read the MySQL stats
-into before parsing and submitting to gmetric. This is done as many of
-the MySQL stats of interest are cumulative counts rather than rates (eg
-SELECTs per second) which are generally of more interest. Hence, the
-script estimates the rate of change by dividing the value delta by the
-timestamp delta.&lt;/p&gt;
-
-&lt;p&gt;To use this script, simply copy it into a convenient location, ensure it
-is executable and add the following line to your crontab.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;* * * * * /path/to/gmetric-mysql.sh &amp;gt; /dev/null &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;&amp;gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;As soon as this is done, your Ganglia web front-end should start
-plotting the new metrics.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/ganglia-snapshot.jpeg&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-</description>
+      <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.
+In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
     </item>
     
   </channel>

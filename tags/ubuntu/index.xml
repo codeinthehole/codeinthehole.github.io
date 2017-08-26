@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ubuntu on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/ubuntu/index.xml</link>
+    <link>http://codeinthehole.com/tags/ubuntu/</link>
     <description>Recent content in Ubuntu on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 Apr 2013 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>How to install PIL on 64-bit Ubuntu 12.04</title>
@@ -14,102 +17,10 @@
       <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
-      <description>
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;With pip already installed, install the required development packages:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and symlink the three image libraries into &lt;code&gt;/usr/lib&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;uname -i&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;-linux-gnu/libfreetype.so /usr/lib/
-$ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;uname -i&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;-linux-gnu/libjpeg.so /usr/lib/
-$ sudo ln -s /usr/lib/&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;uname -i&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;-linux-gnu/libz.so /usr/lib/
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;PIL should now install with support for JPEGs, PNGs and FreeType, as
-indicated by the compilation output:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
-PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
---------------------------------------------------------------------
-version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
-platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
---------------------------------------------------------------------
-*** TKINTER support not available
---- JPEG support available
---- ZLIB &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;PNG/ZIP&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; support available
---- FREETYPE2 support available
-*** LITTLECMS support not available
---------------------------------------------------------------------
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;common-problems&#34;&gt;Common problems&lt;/h3&gt;
-
-&lt;h4 id=&#34;missing-image-libraries&#34;&gt;Missing image libraries&lt;/h4&gt;
-
-&lt;p&gt;If the image libraries are not installed and available in &lt;code&gt;/usr/lib&lt;/code&gt;,
-you&amp;rsquo;ll see something like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;--------------------------------------------------------------------
-PIL &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7 SETUP SUMMARY
---------------------------------------------------------------------
-version       &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;.1.7
-platform      linux2 &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;.7.3 &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;default, Apr &lt;span style=&#34;color: #ae81ff&#34;&gt;20&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2012&lt;/span&gt;, &lt;span style=&#34;color: #ae81ff&#34;&gt;22&lt;/span&gt;:39:59&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-              &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt;GCC &lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;.6.3&lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;
---------------------------------------------------------------------
-*** TKINTER support not available
-*** JPEG support not available
-*** ZLIB &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;PNG/ZIP&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; support not available
-*** FREETYPE2 support not available
-*** LITTLECMS support not available
---------------------------------------------------------------------
-To add a missing option, make sure you have the required
-library, and &lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; the corresponding ROOT variable in the
-setup.py script.
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h4 id=&#34;missing-python-headers&#34;&gt;Missing python headers&lt;/h4&gt;
-
-&lt;p&gt;Without &lt;code&gt;python-dev&lt;/code&gt;, you&amp;rsquo;ll see something that ends with the following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;...
-
-running build_ext
-
-building &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;_imaging&amp;#39;&lt;/span&gt; extension
-
-creating build/temp.linux-x86_64-2.7
-
-creating build/temp.linux-x86_64-2.7/libImaging
-
-gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -IlibImaging -I/usr/include -I/usr/local/include -I/usr/include/python2.7 -c _imaging.c -o build/temp.linux-x86_64-2.7/_imaging.o
-
-_imaging.c:75:20: fatal error: Python.h: No such file or directory
-
-compilation terminated.
-
-error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;discussion&#34;&gt;Discussion&lt;/h3&gt;
-
-&lt;p&gt;Yes, this has been written about before. This is just my note-to-self
-that I can refer others to - I also wanted to include the common error
-messages that people will search for.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/&#34;&gt;Installing PIL in a virtualenv on Ubuntu 12.04 Precise
-Pangolin&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/&#34;&gt;Install PIL with JPEG support on Ubuntu Oneric
-64bit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.saltycrane.com/blog/2010/10/how-install-pil-ubuntu/&#34;&gt;How to install PIL on
-Ubuntu&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
+Solution With pip already installed, install the required development packages:
+$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev  and symlink the three image libraries into /usr/lib:
+$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/  PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     
     <item>
@@ -118,62 +29,11 @@ Ubuntu&lt;/a&gt;&lt;/li&gt;
       <pubDate>Tue, 16 Oct 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/how-to-chroot-a-user-in-ubuntu-1204/</guid>
-      <description>
-
-&lt;p&gt;External parties often need to upload data to your application. Sadly,
-most ask for a FTP server. Push back against this and suggest they use
-sFTP.&lt;/p&gt;
-
-&lt;p&gt;This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so
-that an external party can upload data to your application securely.&lt;/p&gt;
-
-&lt;p&gt;This is mainly for my own reference.&lt;/p&gt;
-
-&lt;h3 id=&#34;user-set-up&#34;&gt;User set-up&lt;/h3&gt;
-
-&lt;p&gt;Create user with a dummy shell:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ adduser --shell&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;/bin/false barry
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and alter the ownership and permissions of their home folder:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ chown root:barry /home/barry
-$ chmod &lt;span style=&#34;color: #ae81ff&#34;&gt;755&lt;/span&gt; /home/barry
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now create a folder to upload to:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ mkdir /home/barry/uploads
-$ chown barry:barry /home/barry/uploads
-$ chmod &lt;span style=&#34;color: #ae81ff&#34;&gt;755&lt;/span&gt; /home/barry/uploads
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;ssh-config&#34;&gt;SSH config&lt;/h3&gt;
-
-&lt;p&gt;Edit &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt; and comment out the line:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Subsystem sftp /usr/lib/openssh/sftp-server
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and add the following at the bottom of the file:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Subsystem sftp internal-sftp
-Match User barry
-    ChrootDirectory %h
-    ForceCommand internal-sftp
-    X11Forwarding no
-    AllowTCPForwarding no
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then restart SSH:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ /etc/init.d/ssh restart
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The new user should now be able to sFTP.&lt;/p&gt;
-
-&lt;h3 id=&#34;further-reading&#34;&gt;Further reading&lt;/h3&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://www.ericstockwell.com/?p=54&#34;&gt;How to set up and chroot SFTP users with OpenSSH 5.1p1 in Ubuntu
-8.10&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>External parties often need to upload data to your application. Sadly, most ask for a FTP server. Push back against this and suggest they use sFTP.
+This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.
+This is mainly for my own reference.
+User set-up Create user with a dummy shell:
+$ adduser --shell=/bin/false barry  and alter the ownership and permissions of their home folder:</description>
     </item>
     
     <item>
@@ -182,100 +42,12 @@ Match User barry
       <pubDate>Thu, 05 Jan 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
-      <description>
-
-&lt;p&gt;This is just for my own reference as I always forget the dependencies
-for setting up MySQL on a new machine.&lt;/p&gt;
-
-&lt;h3 id=&#34;installation&#34;&gt;Installation&lt;/h3&gt;
-
-&lt;p&gt;Starting with a vanilla Lucid install&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, install pip and upgrade to
-the latest version:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;apt-get install python-pip
-pip install -U pip
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Next, install the required development packages:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;apt-get install python-dev libmysqlclient-dev
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;pip install MySQL-python
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;should complete successfully.&lt;/p&gt;
-
-&lt;h3 id=&#34;symptoms-of-missing-headers&#34;&gt;Symptoms of missing headers&lt;/h3&gt;
-
-&lt;p&gt;Without &lt;code&gt;libmysqlclient-dev&lt;/code&gt;, you&amp;rsquo;ll see something like this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;Downloading/unpacking MySQL-python
-Running setup.py egg_info &lt;span style=&#34;color: #66d9ef&#34;&gt;for&lt;/span&gt; package MySQL-python
-    sh: mysql_config: not found
-    Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
-        metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-    File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
-        raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
-    EnvironmentError: mysql_config not found
-    Complete output from &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; python setup.py egg_info:
-    sh: mysql_config: not found
-
-Traceback &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;most recent call last&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
-
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;lt;string&amp;gt;&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;14&lt;/span&gt;, in &amp;lt;module&amp;gt;
-
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/home/vagrant/build/MySQL-python/setup.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;, in &amp;lt;module&amp;gt;
-
-    metadata, &lt;span style=&#34;color: #f8f8f2&#34;&gt;options&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; get_config&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt;
-
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;43&lt;/span&gt;, in get_config
-
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;libs&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; mysql_config&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;libs_r&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-
-File &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;setup_posix.py&amp;quot;&lt;/span&gt;, line &lt;span style=&#34;color: #ae81ff&#34;&gt;24&lt;/span&gt;, in mysql_config
-
-    raise EnvironmentError&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s not found&amp;quot;&lt;/span&gt; % &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;mysql_config.path,&lt;span style=&#34;color: #f92672&#34;&gt;))&lt;/span&gt;
-
-EnvironmentError: mysql_config not found
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Without &lt;code&gt;python-dev&lt;/code&gt;, you&amp;rsquo;ll see something that ends with the following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;...
-
-    _mysql.c:2620: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;asm&amp;#39;&lt;/span&gt; or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;__attribute__&amp;#39;&lt;/span&gt; before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;_mysql_ResultObject_Type&amp;#39;&lt;/span&gt;
-
-_mysql.c:2706: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;asm&amp;#39;&lt;/span&gt; or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;__attribute__&amp;#39;&lt;/span&gt; before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;_mysql_methods&amp;#39;&lt;/span&gt;
-
-_mysql.c:2778: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;;&amp;#39;&lt;/span&gt;, &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;asm&amp;#39;&lt;/span&gt; or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;__attribute__&amp;#39;&lt;/span&gt; before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;*&amp;#39;&lt;/span&gt; token
-
-_mysql.c:2810: warning: &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;type&lt;/span&gt; defaults to &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;int&amp;#39;&lt;/span&gt;
-
-_mysql.c: In &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;DL_EXPORT&amp;#39;&lt;/span&gt;:
-
-_mysql.c:2810: error: expected declaration specifiers before &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;init_mysql&amp;#39;&lt;/span&gt;
-
-_mysql.c:2888: error: expected &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;{&amp;#39;&lt;/span&gt; at end of input
-
-error: &lt;span style=&#34;color: #f8f8f2&#34;&gt;command&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;gcc&amp;#39;&lt;/span&gt; failed with &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; status &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-
-----------------------------------------
-Command /usr/bin/python -c &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;import setuptools;__file__=&amp;#39;/home/vagrant/build/MySQL-python/setup.py&amp;#39;;exec(compile(open(__file__).read().replace(&amp;#39;\r\n&amp;#39;, &amp;#39;\n&amp;#39;), __file__, &amp;#39;exec&amp;#39;))&amp;quot;&lt;/span&gt; install --single-version-externally-managed --record /tmp/pip-dPF1DK-record/install-record.txt failed with error code &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-Storing &lt;span style=&#34;color: #f8f8f2&#34;&gt;complete&lt;/span&gt; log in /home/vagrant/.pip/pip.log
-&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;Tested using the Lucid32 Vagrant box:
-&lt;a href=&#34;http://files.vagrantup.com/lucid32.box&#34;&gt;http://files.vagrantup.com/lucid32.box&lt;/a&gt;&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
+Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
+apt-get install python-pip pip install -U pip  Next, install the required development packages:
+apt-get install python-dev libmysqlclient-dev  then
+pip install MySQL-python  should complete successfully.
+Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
     </item>
     
   </channel>

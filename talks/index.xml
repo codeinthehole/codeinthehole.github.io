@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Talks on David Winterbottom</title>
-    <link>http://codeinthehole.com/talks/index.xml</link>
+    <link>http://codeinthehole.com/talks/</link>
     <description>Recent content in Talks on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Mar 2012 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://codeinthehole.com/talks/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://codeinthehole.com/talks/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Confoo 2012 presentations</title>
@@ -15,62 +17,9 @@
       <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/talks/confoo-2012-presentations/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/confoo2012.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I gave two presentations at Confoo 2012 - below are the abstracts and
-slides.&lt;/p&gt;
-
-&lt;h3 id=&#34;migrating-from-php-to-python-and-django&#34;&gt;Migrating from PHP to Python and Django&lt;/h3&gt;
-
-&lt;p&gt;Abstract:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Many programmers cut their teeth with PHP before getting interested in
-Python. However, while the languages seem similar at first, there are
-many new concepts to grasp and a rich ecosystem of tools to master.
-This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can
-become an excellent Python developer very quickly.&lt;/p&gt;
-
-&lt;p&gt;Based on the experience of migrating a development team from PHP to
-Python and Django, this talk will examine how to tackle this journey.
-While the fundamental languages differences will be touched upon, this
-talk will focus on more interesting topics such as common python
-gotchas, tips for grokking Django, awesome tools and applications from
-the community, and how to manage such a migration for a large team of
-developers.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Slides:&lt;/p&gt;
-
-&lt;div class=&#34;slidedeck&#34;&gt;
-    &lt;script src=&#34;http://speakerdeck.com/embed/4f5127b373c922001f001c60.js?size=preview&#34;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;writing-a-django-e-commerce-framework&#34;&gt;Writing a Django e-commerce framework&lt;/h3&gt;
-
-&lt;p&gt;Abstract:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Django is well-suited for e-commerce, and there are currently several
-nascent django e-commerce frameworks in development. This talk is
-about the development of django-oscar, a framework designed to
-leverage Django&amp;rsquo;s core functionality to allow domain-driven e-commerce
-applications to be built. This is a very powerful approach.&lt;/p&gt;
-
-&lt;p&gt;Writing django apps which are flexible enough to be adapted to a wide
-variety of scenarios is a non-trivial problem which will be explored.
-The talk will also cover a range of e-commerce best practices and how
-they can be implemented in Django.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Slides:&lt;/p&gt;
-
-&lt;div class=&#34;slidedeck&#34;&gt;
-    &lt;script src=&#34;http://speakerdeck.com/embed/4f512f128a37d6001f003114.js&#34;&gt;&lt;/script&gt;
-&lt;/div&gt;
-</description>
+      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
+Migrating from PHP to Python and Django Abstract:
+ Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     
     <item>
@@ -79,21 +28,8 @@ they can be implemented in Django.&lt;/p&gt;
       <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</guid>
-      <description>&lt;p&gt;The presentation I gave at &lt;a href=&#34;http://confoo.ca/en&#34;&gt;Confoo 2011&lt;/a&gt; is now
-&lt;a href=&#34;http://presentations.codeinthehole.com/confoo2011/&#34;&gt;available online&lt;/a&gt;,
-there is feedback on &lt;a href=&#34;http://joind.in/talk/view/2896&#34;&gt;joind.in&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/clf-presentation.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The slides are written in &lt;a href=&#34;http://meyerweb.com/eric/tools/s5/&#34;&gt;Eric Meyer&amp;rsquo;s
-S5&lt;/a&gt;, which is a XHTML, CSS and
-Javascript based slide show format. I enjoyed using this as it was easy
-to port my styles across from the website CSS file, it also means the
-presentation is viewable as a normal webpage (no flash required).
-However, the downside is that it is not easy to submit the slides to
-Slideshare which is the common thing to do. There are a few work-arounds
-out there but nothing good enough that I could find.&lt;/p&gt;
-</description>
+      <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.
+The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
     </item>
     
   </channel>

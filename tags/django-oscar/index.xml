@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Django Oscar on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/django-oscar/index.xml</link>
+    <link>http://codeinthehole.com/tags/django-oscar/</link>
     <description>Recent content in Django Oscar on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/django-oscar/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/django-oscar/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Podcast.__init__ on Oscar</title>
@@ -14,11 +17,8 @@
       <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
       
       <guid>http://codeinthehole.com/news/podcast-init/</guid>
-      <description>&lt;p&gt;I was interviewed, along with &lt;a href=&#34;https://www.mvantellingen.nl/&#34;&gt;Michael van Tellingen&lt;/a&gt;, on the
-&amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.&lt;/p&gt;
-
-&lt;script class=&#34;podigee-podcast-player&#34; src=&#34;//cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js&#34; data-configuration=&#34;https://www.podcastinit.com?podigee_player=288&#34;&gt;&lt;/script&gt;
-</description>
+      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.
+ </description>
     </item>
     
     <item>
@@ -27,129 +27,8 @@
       <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/projects/the-road-to-oscar-10/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/oscar.png&#34; class=&#34;noborder align-right&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Oscar 0.7 was &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/releases/v0.7.html&#34;&gt;released this
-week&lt;/a&gt;,
-a comparatively minor house-keeping release that allowed us to reduce
-our pull-request and issue backlogs. We have a plan for Oscar through
-2014 and this article outlines the roadmap.&lt;/p&gt;
-
-&lt;h3 id=&#34;v1-0&#34;&gt;v1.0&lt;/h3&gt;
-
-&lt;p&gt;We&amp;rsquo;re aiming to be v1.0 before the end of the year&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. Oscar has been
-beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to
-commit to the backward compatibility responsibilities associated with
-coming out of beta.&lt;/p&gt;
-
-&lt;p&gt;Plus, this will help &lt;a href=&#34;http://www.tangentsnowball.com/&#34;&gt;Tangent Snowball&lt;/a&gt;
-(who sponsor Oscar&amp;rsquo;s development) promote Oscar to blue-chip or
-&amp;ldquo;enterprise&amp;rdquo; clients, who feel nervous enough using open-source
-e-commerce software, let alone &lt;em&gt;beta&lt;/em&gt; open-source software.&lt;/p&gt;
-
-&lt;p&gt;There isn&amp;rsquo;t a lot to do before this milestone. Oscar&amp;rsquo;s philosophy is to
-keep the core package lean and flexible, hence we don&amp;rsquo;t have a large
-shopping list of features we want to add. Rather, there are a few areas
-that need careful review to ensure they are flexible enough. Also, there
-are a few topics that we want to research thoroughly in case they have
-design implications.&lt;/p&gt;
-
-&lt;p&gt;These are detailed here:&lt;/p&gt;
-
-&lt;h4 id=&#34;product-dashboard&#34;&gt;Product dashboard&lt;/h4&gt;
-
-&lt;p&gt;The current version uses a one-size-fits-all approach which is now
-stretched to breaking point trying to handle a wide range of scenarios.
-In particular, it&amp;rsquo;s not easy to administer group and variant products
-using the current implementation&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;A new, carefully considered version will be built that provides separate
-views and forms for the different work-flows. The new implementation
-will be simpler than the current, provide a superior user experience and
-be easier to customise and extend.&lt;/p&gt;
-
-&lt;p&gt;This piece of work is scheduled to be looked at by Tangent&amp;rsquo;s UX team
-shortly and should land in master over the summer.&lt;/p&gt;
-
-&lt;h4 id=&#34;multi-tenancy&#34;&gt;Multi-tenancy&lt;/h4&gt;
-
-&lt;p&gt;We&amp;rsquo;re aiming to provide better support for multi-tenanted sites where a
-single dashboard is used to manage a product catalogue that can be used
-across several sites. Several people on the mailing list have requested
-this, and Tangent have a forthcoming project that will require a form of
-this.&lt;/p&gt;
-
-&lt;p&gt;This poses some tricky design questions around how products, categories
-and offers are linked to sites. It&amp;rsquo;s tempting to slap a new many-to-many
-relationship onto every core model that links them to sites, but this
-may not be the right approach as it will add extra joins to SQL queries.
-Some careful research is required: we don&amp;rsquo;t want to impair performance
-for the many to satisfy the requirements of the few.&lt;/p&gt;
-
-&lt;p&gt;We&amp;rsquo;ll be talking to several people at DjangoCon EU 2014 about how
-Tangent can partner with other Oscar implementors to first design the
-appropriate handling, and later drive forward an implementation.&lt;/p&gt;
-
-&lt;h4 id=&#34;faceted-browsing-everywhere&#34;&gt;Faceted browsing everywhere&lt;/h4&gt;
-
-&lt;p&gt;Oscar uses &lt;a href=&#34;http://haystacksearch.org/&#34;&gt;Haystack&lt;/a&gt; for search (with a
-preference for &lt;a href=&#34;https://lucene.apache.org/solr/&#34;&gt;Solr&lt;/a&gt;) and has some
-&lt;a href=&#34;https://github.com/tangentlabs/django-oscar/blob/master/oscar/apps/search/facets.py&#34;&gt;custom
-helpers&lt;/a&gt;
-to make working with facets easier. Facets are great for customers
-whenever they&amp;rsquo;re browsing a list of products and it&amp;rsquo;s desirable to allow
-faceting on all product browsing views. This would require using the
-search back-end to drive all browsing views.&lt;/p&gt;
-
-&lt;p&gt;Some &lt;a href=&#34;https://groups.google.com/forum/?fromgroups#!topicsearchin/django-oscar/haystack%7Csort:date%7Cspell:true/django-oscar/7cykIQSS7lw&#34;&gt;initial
-work&lt;/a&gt;
-has been done on this already. We intend to review and merge this into
-master soon.&lt;/p&gt;
-
-&lt;h4 id=&#34;research-topics&#34;&gt;Research topics&lt;/h4&gt;
-
-&lt;p&gt;Some things to look into:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Oscar ships with a set of translation message files but doesn&amp;rsquo;t
-currently provide built-in support for translating model content
-into multiple languages. There are &lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation/&#34;&gt;various Django
-libraries&lt;/a&gt;
-that address this issue already. We need to research the best
-approach (or approaches) and document how to use them with Oscar.&lt;/li&gt;
-&lt;li&gt;Since Oscar is just a set of apps, it works with all existing
-&lt;a href=&#34;https://www.djangopackages.com/grids/g/model-translation://www.djangopackages.com/grids/g/cms/&#34;&gt;Django CMS
-packages&lt;/a&gt;.
-However, more research is required to find the right way to
-integrate content management. With its &amp;ldquo;promotions&amp;rdquo; app, Oscar
-already provides some limited forms of merchandising but it might be
-better to drop this app and provide better hooks for CMS packages to
-manage all content. We&amp;rsquo;ll see.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&#34;thanks&#34;&gt;Thanks&lt;/h3&gt;
-
-&lt;p&gt;As ever, we&amp;rsquo;re hugely grateful to the work of the community: submitting
-pull requests, adding translations, reporting bugs.&lt;/p&gt;
-
-&lt;p&gt;If you&amp;rsquo;d like to get involved, please see our &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/internals/contributing/index.html&#34;&gt;contributing
-guidelines&lt;/a&gt;.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;We&amp;rsquo;re using &lt;a href=&#34;http://semver.org/&#34;&gt;semantic versioning&lt;/a&gt;.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-
-&lt;li id=&#34;fn:2&#34;&gt;&lt;p&gt;This is driven in part by the fact that Tangent haven&amp;rsquo;t had to
-build a large-scale clothing site yet.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>Oscar 0.7 was released this week, a comparatively minor house-keeping release that allowed us to reduce our pull-request and issue backlogs. We have a plan for Oscar through 2014 and this article outlines the roadmap.
+v1.0 We&amp;rsquo;re aiming to be v1.0 before the end of the year1. Oscar has been beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to commit to the backward compatibility responsibilities associated with coming out of beta.</description>
     </item>
     
     <item>
@@ -158,178 +37,8 @@ build a large-scale clothing site yet.&lt;/p&gt;
       <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
-      <description>
-
-&lt;p&gt;We finally &lt;a href=&#34;http://django-oscar.readthedocs.org/en/latest/releases/v0.6.html&#34;&gt;released Oscar
-0.6&lt;/a&gt;
-last week. The process brought home the importance of writing your
-release notes as you go rather than at the end. It&amp;rsquo;s a real pain to
-extract the key changes from 1200 commits spread over the last 8 months.
-Lesson learnt.&lt;/p&gt;
-
-&lt;p&gt;This article is largely a note-to-self in case I have to repeat the
-process. However, if you do find yourself in a similar position, here
-are a few command-line tricks for analysing your git history.&lt;/p&gt;
-
-&lt;h3 id=&#34;analysing-codebase-changes-since-a-tag&#34;&gt;Analysing codebase changes since a tag&lt;/h3&gt;
-
-&lt;p&gt;Basics: browse commits since the last tagged release&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The &lt;code&gt;--name-status&lt;/code&gt; option for &lt;code&gt;git diff&lt;/code&gt; is useful for analysing
-codebase changes between two commits. For instance, you can view changes
-to a particular directory:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 oscar/apps/address
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which can be useful if thousands of files have changed and you want to
-review each package individually.&lt;/p&gt;
-
-&lt;p&gt;Extensions include finding deleted files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^D&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;or all new migration files:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git diff --name-status &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; grep &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;^A.*migrations/[0-9]&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which is important for projects like Oscar which ship with database
-migrations.&lt;/p&gt;
-
-&lt;h3 id=&#34;determine-changes-template-block-names&#34;&gt;Determine changes template block names&lt;/h3&gt;
-
-&lt;p&gt;Since Oscar allows customisation of templates and overriding template
-blocks, we try and document any changes to template block names. The
-process here is more involved and requires two temporary files generated
-with this command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This writes out each pairs of filename and template block name:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;oscar/templates/oscar/403.html title
-oscar/templates/oscar/403.html error_heading
-oscar/templates/oscar/403.html error_message
-oscar/templates/oscar/404.html title
-oscar/templates/oscar/404.html error_heading
-oscar/templates/oscar/404.html error_message
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To compare the template blocks from each release, we create two
-temporary files and analyse the diff:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git checkout &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5
-$ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt; &amp;gt;
-    /tmp/templates-0.5.txt
-$ git checkout &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.6
-$ grep -or &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;{% block .* %}&amp;quot;&lt;/span&gt; oscar/templates/oscar &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;BEGIN {FS=&amp;quot;:&amp;quot;} {split($2, parts, &amp;quot; &amp;quot;); print $1, parts[3]}&amp;#39;&lt;/span&gt; &amp;gt;
-    /tmp/templates-0.6.txt
-$ vimdiff /tmp/templates-0.&lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;5&lt;/span&gt;,6&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;.txt
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I imagine there&amp;rsquo;s a better way to do this but I couldn&amp;rsquo;t find one.&lt;/p&gt;
-
-&lt;div class=&#34;admonition note&#34;&gt;
-    This is a Django specific technique, but the general approach is quite
-    useful for analysing changes between two codebases.
-&lt;/div&gt;
-
-&lt;h3 id=&#34;updating-an-authors-files&#34;&gt;Updating an &lt;code&gt;AUTHORS&lt;/code&gt; files&lt;/h3&gt;
-
-&lt;p&gt;Oscar&amp;rsquo;s &lt;code&gt;AUTHORS&lt;/code&gt; file contains all contributors with 15 or more commits
-in the master branch. We generate this file automatically.&lt;/p&gt;
-
-&lt;p&gt;You can sort authors by number of commits:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog -sn master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; head
-  &lt;span style=&#34;color: #ae81ff&#34;&gt;2992&lt;/span&gt;  David Winterbottom
-   &lt;span style=&#34;color: #ae81ff&#34;&gt;355&lt;/span&gt;  Maik Hoepfel
-   &lt;span style=&#34;color: #ae81ff&#34;&gt;167&lt;/span&gt;  Sebastian Vetter
-   &lt;span style=&#34;color: #ae81ff&#34;&gt;166&lt;/span&gt;  Jon Price
-   &lt;span style=&#34;color: #ae81ff&#34;&gt;120&lt;/span&gt;  Andrew Ingram
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;73&lt;/span&gt;  Asia Biega
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;65&lt;/span&gt;  Oliver Randell
-    &lt;span style=&#34;color: #ae81ff&#34;&gt;49&lt;/span&gt;  Eleni Lixourioti
-  ...
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and extend this to find authors with more than a certain number of
-commits&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span style=&#34;color: #f8f8f2&#34;&gt;THRESHOLD&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;15&lt;/span&gt;
-$ git shortlog -sn master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$1 &amp;gt;= $THRESHOLD {$1=&amp;quot;&amp;quot;;print $0}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -f2-
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Note, &lt;code&gt;git shortlog&lt;/code&gt; uses a &lt;code&gt;.mailmap&lt;/code&gt; file to aggregate commits from
-the same committer where their name or email were different in the
-commit history.&lt;/p&gt;
-
-&lt;p&gt;Using this command, we can create a new &lt;code&gt;AUTHORS&lt;/code&gt; file containing all
-contributors with greater than 15 commits on the master branch:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog -ns master &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; awk &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;$1 &amp;gt;= $THRESHOLD {$1=&amp;quot;&amp;quot;;print $0}&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    cut -d&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt; -f2- &amp;gt; AUTHORS
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h3 id=&#34;notifying-contributors&#34;&gt;Notifying contributors&lt;/h3&gt;
-
-&lt;p&gt;If you have a patch accepted into a project, it&amp;rsquo;s useful to know when a
-formal release has been cut that includes said patch. Before then, you
-might be linking your project to a fork and maintaining a work-around
-within your codebase.&lt;/p&gt;
-
-&lt;p&gt;As the project maintainer, you might assume that such people are already
-subscribed to your project mailing list, or following your project
-Twitter stream. However, there&amp;rsquo;s a more thorough way to notify
-contributors that their patch is in a release: you can email them.&lt;/p&gt;
-
-&lt;p&gt;To do this, extract the email addresses of committers whose patches are
-in the new release:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and CC these addresses in your mailing list release announcement.&lt;/p&gt;
-
-&lt;p&gt;Even better, you can only grab the addresses of &lt;em&gt;new&lt;/em&gt; contributors to
-the project, where the release is the first to contain one of their
-commits. We do this by extracting two lists of email addresses and
-employing the lovely but neglected &lt;code&gt;comm&lt;/code&gt; command to pluck the email
-addresses that only exist in the latest release:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ comm -13 &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-    &amp;lt;&lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;git log &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;%aE&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; sort &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; uniq&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Note the first input is all contributors up to release 0.5, while the
-second is contibutors to the 0.6 release only.&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;comm&lt;/code&gt; is an extremely useful command for selecting lines common between
-two files, or exclusive to one. The &lt;code&gt;-13&lt;/code&gt; options indicate to exclude
-lines exclusive to the first file (&lt;code&gt;-1&lt;/code&gt;) and lines common to both
-(&lt;code&gt;-3&lt;/code&gt;).&lt;/p&gt;
-
-&lt;h3 id=&#34;summarising-changes&#34;&gt;Summarising changes&lt;/h3&gt;
-
-&lt;p&gt;If your release isn&amp;rsquo;t large, your release notes could include a summary
-of the contained commits; this is useful for minor point releases. You
-can use &lt;code&gt;git shortlog&lt;/code&gt; to do this:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.5..0.6 --no-merges
-David Winterbottom &lt;span style=&#34;color: #f92672&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;661&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;)&lt;/span&gt;:
-      Add defaults to the counts on the product summary dashboard page
-      Tidy up urls.py and settings.py
-      Use mirrors when pip installing the demo site
-      Install django-oscar-stores
-      Add link to stores page in footer
-...
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You can even use &lt;code&gt;--format&lt;/code&gt; to provide links to Github commits:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git shortlog &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;.3.4..0.4 --no-merges --format&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&amp;quot;&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This won&amp;rsquo;t always be appropriate if your release if there are thousands
-of commits.&lt;/p&gt;
-</description>
+      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&amp;rsquo;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
+This article is largely a note-to-self in case I have to repeat the process. However, if you do find yourself in a similar position, here are a few command-line tricks for analysing your git history.</description>
     </item>
     
     <item>
@@ -338,62 +47,9 @@ of commits.&lt;/p&gt;
       <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/talks/confoo-2012-presentations/</guid>
-      <description>
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/confoo2012.gif&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I gave two presentations at Confoo 2012 - below are the abstracts and
-slides.&lt;/p&gt;
-
-&lt;h3 id=&#34;migrating-from-php-to-python-and-django&#34;&gt;Migrating from PHP to Python and Django&lt;/h3&gt;
-
-&lt;p&gt;Abstract:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Many programmers cut their teeth with PHP before getting interested in
-Python. However, while the languages seem similar at first, there are
-many new concepts to grasp and a rich ecosystem of tools to master.
-This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can
-become an excellent Python developer very quickly.&lt;/p&gt;
-
-&lt;p&gt;Based on the experience of migrating a development team from PHP to
-Python and Django, this talk will examine how to tackle this journey.
-While the fundamental languages differences will be touched upon, this
-talk will focus on more interesting topics such as common python
-gotchas, tips for grokking Django, awesome tools and applications from
-the community, and how to manage such a migration for a large team of
-developers.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Slides:&lt;/p&gt;
-
-&lt;div class=&#34;slidedeck&#34;&gt;
-    &lt;script src=&#34;http://speakerdeck.com/embed/4f5127b373c922001f001c60.js?size=preview&#34;&gt;&lt;/script&gt;
-&lt;/div&gt;
-
-&lt;h3 id=&#34;writing-a-django-e-commerce-framework&#34;&gt;Writing a Django e-commerce framework&lt;/h3&gt;
-
-&lt;p&gt;Abstract:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Django is well-suited for e-commerce, and there are currently several
-nascent django e-commerce frameworks in development. This talk is
-about the development of django-oscar, a framework designed to
-leverage Django&amp;rsquo;s core functionality to allow domain-driven e-commerce
-applications to be built. This is a very powerful approach.&lt;/p&gt;
-
-&lt;p&gt;Writing django apps which are flexible enough to be adapted to a wide
-variety of scenarios is a non-trivial problem which will be explored.
-The talk will also cover a range of e-commerce best practices and how
-they can be implemented in Django.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Slides:&lt;/p&gt;
-
-&lt;div class=&#34;slidedeck&#34;&gt;
-    &lt;script src=&#34;http://speakerdeck.com/embed/4f512f128a37d6001f003114.js&#34;&gt;&lt;/script&gt;
-&lt;/div&gt;
-</description>
+      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
+Migrating from PHP to Python and Django Abstract:
+ Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     
   </channel>

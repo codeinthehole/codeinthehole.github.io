@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Career on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/career/index.xml</link>
+    <link>http://codeinthehole.com/tags/career/</link>
     <description>Recent content in Career on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/career/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 23 Nov 2015 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/career/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Octopus Energy</title>
@@ -14,20 +17,9 @@
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/octopus-energy/</guid>
-      <description>&lt;p&gt;Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first
-day at Octopus Energy.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology,
-especially automation and cloud computing, Octopus Energy is going to
-radically change how people consume and pay for energy in the UK. We&amp;rsquo;re
-going to be both cheaper and massively better at customer service than
-the much-maligned incumbents.&lt;/p&gt;
-
-&lt;p&gt;Right now, &lt;a href=&#34;http://tech.octopus.energy/news/2015/11/23/tech-jobs.html&#34;&gt;we&amp;rsquo;re looking to build a superb tech team&lt;/a&gt;. Get in
-touch if you&amp;rsquo;re looking for a challenge and would like to play a
-formative part in a company that&amp;rsquo;s genuinely making the world a better
-place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
-</description>
+      <description>Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first day at Octopus Energy.
+I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology, especially automation and cloud computing, Octopus Energy is going to radically change how people consume and pay for energy in the UK. We&amp;rsquo;re going to be both cheaper and massively better at customer service than the much-maligned incumbents.
+Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
     </item>
     
   </channel>

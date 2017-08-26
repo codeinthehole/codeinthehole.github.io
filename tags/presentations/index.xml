@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Presentations on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/presentations/index.xml</link>
+    <link>http://codeinthehole.com/tags/presentations/</link>
     <description>Recent content in Presentations on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/presentations/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Mar 2011 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/presentations/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Commandlinefu presentation at Confoo 2011</title>
@@ -14,21 +17,8 @@
       <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</guid>
-      <description>&lt;p&gt;The presentation I gave at &lt;a href=&#34;http://confoo.ca/en&#34;&gt;Confoo 2011&lt;/a&gt; is now
-&lt;a href=&#34;http://presentations.codeinthehole.com/confoo2011/&#34;&gt;available online&lt;/a&gt;,
-there is feedback on &lt;a href=&#34;http://joind.in/talk/view/2896&#34;&gt;joind.in&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/clf-presentation.png&#34; alt=&#34;image&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The slides are written in &lt;a href=&#34;http://meyerweb.com/eric/tools/s5/&#34;&gt;Eric Meyer&amp;rsquo;s
-S5&lt;/a&gt;, which is a XHTML, CSS and
-Javascript based slide show format. I enjoyed using this as it was easy
-to port my styles across from the website CSS file, it also means the
-presentation is viewable as a normal webpage (no flash required).
-However, the downside is that it is not easy to submit the slides to
-Slideshare which is the common thing to do. There are a few work-arounds
-out there but nothing good enough that I could find.&lt;/p&gt;
-</description>
+      <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.
+The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
     </item>
     
   </channel>

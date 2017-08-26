@@ -2,67 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>David Winterbottom</title>
-    <link>http://codeinthehole.com/index.xml</link>
+    <link>http://codeinthehole.com/</link>
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 30 Jun 2017 11:26:39 +0100</lastBuildDate>
-    <atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A mnemonic for mock decorators</title>
+      <link>http://codeinthehole.com/tips/a-mnemonic-for-mocks/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-mnemonic-for-mocks/</guid>
+      <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&amp;rsquo;s not always clear what order arguments are being injected.
+For instance, which of these is right? This:
+@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass  Or this?
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass  Or this?
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass  I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
+    </item>
     
     <item>
       <title>Your codebase is your house</title>
-      <link>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</link>
+      <link>http://codeinthehole.com/tips/your-codebase-is-your-/</link>
       <pubDate>Fri, 30 Jun 2017 11:26:39 +0100</pubDate>
       
-      <guid>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</guid>
-      <description>&lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;“Remember, code is your house, and you have to live in it.” - Michael Feathers 🏠&lt;/p&gt;&amp;mdash; Programming Wisdom (@CodeWisdom) &lt;a href=&#34;https://twitter.com/CodeWisdom/status/854726796172034049&#34;&gt;April 19, 2017&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
-
-&lt;p&gt;This is the best metaphor I know for promoting or defending software quality.&lt;/p&gt;
-
-&lt;p&gt;We do live in our codebases: shoddy software engineering has direct,
-easily-visualised analogues from construction and house maintenance.&lt;/p&gt;
-
-&lt;p&gt;For instance, I&amp;rsquo;m sure you&amp;rsquo;ve seen these pull requests before&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bricks.jpg&#34; class=&#34;photo&#34; /&gt;
-&lt;img src=&#34;http://codeinthehole.com/images/fan.jpg&#34; class=&#34;photo&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Furthermore, the episode &lt;a href=&#34;https://en.wikipedia.org/wiki/Hurricane_Neddy&#34;&gt;&amp;ldquo;Hurrican Neddy&amp;rdquo;&lt;/a&gt; from season 8
-of The Simpsons is a parable of a failed software project, where feature delivery is prioritised
-at the expense of maintainability.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy1.jpg&#34; class=&#34;photo&#34; /&gt;
-&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy2.jpg&#34; class=&#34;photo&#34; /&gt;
-&lt;img src=&#34;http://codeinthehole.com/images/hurricane-neddy3.jpg&#34; class=&#34;photo&#34; /&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Homer: Your beautiful kitchen, Ned, just as you remember it.&lt;/p&gt;
-
-&lt;p&gt;Ned: Was that, uh, was that toilet always next to the refrigerator?&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I often think of the toilet in the kitchen often when reviewing code, when an
-issue is addressed by shoving code into a place where it really doesn&amp;rsquo;t belong.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s a useful metaphor - it will serve you well in the struggle to keep a large
-codebase maintainable&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/this-is-fine.jpg&#34; style=&#34;width:100%&#34;/&gt;&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I first saw the fan image in a &lt;a href=&#34;https://twitter.com/isoiphone/status/824771226585296896&#34;&gt;tweet by @isoiphone&lt;/a&gt;.
-  I can&amp;rsquo;t find the tweet I saw the bricks image in - please let me know if you
-  know it.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;Anthropomorphic dog image from a &lt;a href=&#34;https://en.wikipedia.org/wiki/Gunshow_(webcomic)#.22This_is_Fine.22&#34;&gt;&lt;em&gt;Gunshow&lt;/em&gt; strip called &amp;ldquo;On Fire&amp;rdquo;&lt;/a&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <guid>http://codeinthehole.com/tips/your-codebase-is-your-/</guid>
+      <description>“Remember, code is your house, and you have to live in it.” - Michael Feathers 🏠
+&amp;mdash; Programming Wisdom (@CodeWisdom) April 19, 2017  This is the best metaphor I know for promoting or defending software quality.
+We do live in our codebases: shoddy software engineering has direct, easily-visualised analogues from construction and house maintenance.
+For instance, I&amp;rsquo;m sure you&amp;rsquo;ve seen these pull requests before1:
+Furthermore, the episode &amp;ldquo;Hurrican Neddy&amp;rdquo; from season 8 of The Simpsons is a parable of a failed software project, where feature delivery is prioritised at the expense of maintainability.</description>
     </item>
     
     <item>
@@ -71,98 +43,9 @@ codebase maintainable&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&g
       <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tips/open-github-pull-request-command/</guid>
-      <description>&lt;p&gt;I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding
-both commits and comments. As such I often want to quickly jump from a terminal window
-to the pull request detail page to check previous comments or add new.&lt;/p&gt;
-
-&lt;p&gt;Even with the excellent &lt;a href=&#34;https://hub.github.com/&#34;&gt;hub&lt;/a&gt; git wrapper, there&amp;rsquo;s no easy way to do this. I can
-jump to the pull request &lt;em&gt;list&lt;/em&gt; page with:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git pulls
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where &lt;code&gt;pulls&lt;/code&gt; is aliased in &lt;code&gt;~/.gitconfig&lt;/code&gt; as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pulls&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!hub browse -- pulls&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;but there&amp;rsquo;s no easy way to jump to the pull request &lt;em&gt;detail&lt;/em&gt; page in one
-command&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;So we use a bash script that makes a HTTP call to the Github API and
-parses the response with &lt;code&gt;jq&lt;/code&gt;. Here&amp;rsquo;s the source to &lt;code&gt;open-github-pr-page.sh&lt;/code&gt;
-which just needs to be somewhere on your path&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# Open the Github pull request detail page for the current branch &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# Requires:&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# - A GITHUB_AUTH_TOKEN env var&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# - httpie and jq.&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;GITHUB_ORG&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git config --local remote.origin.url &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d: -f2 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d/ -f1&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;GITHUB_REPO&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git config --local remote.origin.url &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d/ -f2 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d. -f1&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;BRANCH&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse --abbrev-ref HEAD&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-
-fetch_pr_detail_url&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    http https://api.github.com/repos/&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_ORG&lt;/span&gt;/&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_REPO&lt;/span&gt;/pulls &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;head&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_ORG&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$BRANCH&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-        Authorization:&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;token &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_AUTH_TOKEN&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.[].html_url&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-main&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -z &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_AUTH_TOKEN&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;A GITHUB_AUTH_TOKEN env var is required&amp;quot;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
-
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;GITHUB_PULL_URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;fetch_pr_detail_url&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -z &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_PULL_URL&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;No pull request found from branch &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$BRANCH&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;
-        open &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_PULL_URL&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-main
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;For this to work, you need to create a personal API token and export it as an
-&lt;code&gt;GITHUB_AUTH_TOKEN&lt;/code&gt; env var in your &lt;code&gt;~/.bashrc&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Alias this to something memorable, such as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;openpr&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;!f() { open-github-pr-page.sh; }; f&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I would use &lt;code&gt;git pr&lt;/code&gt; but I&amp;rsquo;ve already got that aliased to &lt;em&gt;create&lt;/em&gt; a new pull
-request:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pr&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!git publish &amp;amp;&amp;amp; hub pull-request&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;publish&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!git push -u origin $(git branchname)&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;branchname&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!git rev-parse --abbrev-ref HEAD&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Works a treat.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;Although you can get there with a command &lt;em&gt;and&lt;/em&gt; a click using the hub
-command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git compare
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which opens a page with a link to the pull request detail page, if one exists.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;I use &lt;code&gt;~/Dropbox/bin/&lt;/code&gt; for this kind of thing.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
+Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
+$ git pulls  where pulls is aliased in ~/.</description>
     </item>
     
     <item>
@@ -171,32 +54,9 @@ command:&lt;/p&gt;
       <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
-      <description>&lt;p&gt;Like many people, I use Google Sheets to quickly create and share tabular data. As well as
-&lt;a href=&#34;http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/&#34;&gt;creating spreadsheets by pasting results generated in &lt;code&gt;psql&lt;/code&gt;&lt;/a&gt;,
-I often create reports from JSON files using
-&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;JQ&lt;/a&gt;. This post is a note-to-self on how to do
-this.&lt;/p&gt;
-
-&lt;p&gt;Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from
-Loggly:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat loggly_events.json &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\ &lt;/span&gt;
-    jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.events[].event.json | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;           select(.params | has(&amp;quot;payment_day&amp;quot;)) | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;           [.timestamp, .account, .params.payment_day] | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;           @tsv&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Note:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The &lt;code&gt;-r&lt;/code&gt; option instructs JQ to output raw strings, not quoted JSON strings.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;@tsv&lt;/code&gt; is a JQ format string for &lt;a href=&#34;https://stedolan.github.io/jq/manual/#Formatstringsandescaping&#34;&gt;outputting tab-separated values&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The &lt;code&gt;clipboard&lt;/code&gt; command is an alias for &lt;code&gt;pbcopy&lt;/code&gt;, the system clipboard on
-OS-X.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
+Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
+$ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json |  select(.</description>
     </item>
     
     <item>
@@ -205,11 +65,8 @@ OS-X.&lt;/p&gt;&lt;/li&gt;
       <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
       
       <guid>http://codeinthehole.com/news/podcast-init/</guid>
-      <description>&lt;p&gt;I was interviewed, along with &lt;a href=&#34;https://www.mvantellingen.nl/&#34;&gt;Michael van Tellingen&lt;/a&gt;, on the
-&amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.&lt;/p&gt;
-
-&lt;script class=&#34;podigee-podcast-player&#34; src=&#34;//cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js&#34; data-configuration=&#34;https://www.podcastinit.com?podigee_player=288&#34;&gt;&lt;/script&gt;
-</description>
+      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.
+ </description>
     </item>
     
     <item>
@@ -218,84 +75,10 @@ OS-X.&lt;/p&gt;&lt;/li&gt;
       <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
-      <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
-    A/
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
-    C 
-    D
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;but you now realise you should have namespaced everything within &lt;code&gt;WEBSERVER/&lt;/code&gt; (or
-something like that):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
-    WEBSERVER/
-        A/
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
-        C
-        D
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then this Bash script will help you migrate:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -e  &lt;span style=&#34;color: #75715e&#34;&gt;# Exit on error&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store&lt;/span&gt;
-keys_and_values&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;# Recursively fetch all values from Consul but exclude:&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;# (a) those that end in / (as these are folders)&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;# (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;#     to).&lt;/span&gt;
-    curl -s &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/?recurse&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        .[] | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        select(&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | endswith(&amp;quot;/&amp;quot;) | not) and &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | startswith(&amp;quot;WEBSERVER&amp;quot;) | not)&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        ) | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        [.Key, &amp;quot; &amp;quot;, .Value] | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        add&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key b64value
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;# Consul&amp;#39;s REST API returns values base64-encoded so we decode here.&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$b64value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; base64 -d&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Set a new value in Consul&amp;#39;s KV store&lt;/span&gt;
-set_key&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
-    curl -s -X PUT -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt; /dev/null
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-migrate_to_webserver_namespace&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    keys_and_values &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key value
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
-        set_key &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;WEBSERVER/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt; 
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-migrate_to_webserver_namespace
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This script uses &lt;a href=&#34;https://www.consul.io/docs/agent/http/kv.html&#34;&gt;Consul&amp;rsquo;s REST API&lt;/a&gt; and filters the results using
-&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;&lt;code&gt;jq&lt;/code&gt;&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. It&amp;rsquo;s easily
-adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I can never remember jq&amp;rsquo;s &lt;code&gt;select&lt;/code&gt; syntax so this post is intended largely
-  as a personal reference on how to do this.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>If your Consul key-value store is structured as:
+/ A/ X = 1 Z = 2 Y = 3 C D  but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
+/ WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D  then this Bash script will help you migrate:
+#!/bin/bash set -e # Exit on error # Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
     
     <item>
@@ -304,29 +87,9 @@ adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
       <pubDate>Tue, 21 Mar 2017 11:54:01 +0000</pubDate>
       
       <guid>http://codeinthehole.com/lists/lies/</guid>
-      <description>&lt;p&gt;In approximate chronological order:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;Sorry I missed stand-up this morning&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;I didn&amp;rsquo;t see that email&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;I&amp;rsquo;ll get back to you shortly&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;Sounds easy - should only take a couple of days&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;It&amp;rsquo;s nearly finished&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;I didn&amp;rsquo;t have time to write tests&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;We&amp;rsquo;ll clean this up later&amp;rdquo;&lt;/em&gt; &lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&lt;/li&gt;
-&lt;li&gt;&lt;em&gt;&amp;ldquo;Lessons have been learnt&amp;rdquo;&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;Remember: &lt;blockquote class=&#34;twitter-tweet&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;&amp;quot;Later equals never.&amp;quot; - Le Blanc&amp;#39;s law&lt;/p&gt;&amp;mdash; Programming Wisdom (@CodeWisdom) &lt;a href=&#34;https://twitter.com/CodeWisdom/status/843943743841583107&#34;&gt;March 20, 2017&lt;/a&gt;&lt;/blockquote&gt;
-&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>In approximate chronological order:
+ &amp;ldquo;Sorry I missed stand-up this morning&amp;rdquo; &amp;ldquo;I didn&amp;rsquo;t see that email&amp;rdquo; &amp;ldquo;I&amp;rsquo;ll get back to you shortly&amp;rdquo; &amp;ldquo;Sounds easy - should only take a couple of days&amp;rdquo; &amp;ldquo;It&amp;rsquo;s nearly finished&amp;rdquo; &amp;ldquo;I didn&amp;rsquo;t have time to write tests&amp;rdquo; &amp;ldquo;We&amp;rsquo;ll clean this up later&amp;rdquo; 1 &amp;ldquo;Lessons have been learnt&amp;rdquo;   Remember: &amp;quot;Later equals never.&amp;quot; - Le Blanc&amp;#39;s law
+&amp;mdash; Programming Wisdom (@CodeWisdom) March 20, 2017  [return]   </description>
     </item>
     
     <item>
@@ -335,39 +98,9 @@ adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
       <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/hugo/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve migrated this site to &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; so I can host it on Github
-pages&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;Hugo is a fast and well thought-out static site generator, written in Golang.
-It&amp;rsquo;s easy to learn and has some neat features&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; - the trickiest part is understanding the difference
-between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.&lt;/p&gt;
-
-&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/plasticboy/vim-markdown&#34;&gt;vim-markdown&lt;/a&gt;
-provides good support for authoring Hugo posts since it supports
-syntax-highlighting for:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Github-style &amp;ldquo;fenced&amp;rdquo; code blocks and&lt;/li&gt;
-&lt;li&gt;JSON or TOML front-matter.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Both things that Hugo supports.&lt;/p&gt;
-
-&lt;p&gt;Downside: you have to use git submodules to keep the &lt;code&gt;public&lt;/code&gt; folder of
-HTML files in a separate repo.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;Which lets you do neat things like link to the revision history of an
-  article &amp;ndash; see below.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;Like footnotes in markdown (thanks to the &lt;a href=&#34;https://github.com/russross/blackfriday#extensions&#34;&gt;blackfriday&lt;/a&gt; library).
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>I&amp;rsquo;ve migrated this site to Hugo so I can host it on Github pages1.
+Hugo is a fast and well thought-out static site generator, written in Golang. It&amp;rsquo;s easy to learn and has some neat features2 - the trickiest part is understanding the difference between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.
+The Vim plugin vim-markdown provides good support for authoring Hugo posts since it supports syntax-highlighting for:</description>
     </item>
     
     <item>
@@ -376,9 +109,7 @@ HTML files in a separate repo.&lt;/p&gt;
       <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
-      <description>&lt;p&gt;I wrote an article
-on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html&#34;&gt;Django, ELB health checks and continuous delivery&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description>I wrote an article on Django, ELB health checks and continuous delivery.</description>
     </item>
     
     <item>
@@ -387,9 +118,7 @@ on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-
       <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
-      <description>&lt;p&gt;Octopus Energy has a &lt;a href=&#34;http://tech.octopus.energy&#34;&gt;tech blog&lt;/a&gt;. I wrote an article
-on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html&#34;&gt;Testing for missing migrations in Django&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description>Octopus Energy has a tech blog. I wrote an article on Testing for missing migrations in Django.</description>
     </item>
     
     <item>
@@ -398,20 +127,9 @@ on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missin
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/octopus-energy/</guid>
-      <description>&lt;p&gt;Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first
-day at Octopus Energy.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology,
-especially automation and cloud computing, Octopus Energy is going to
-radically change how people consume and pay for energy in the UK. We&amp;rsquo;re
-going to be both cheaper and massively better at customer service than
-the much-maligned incumbents.&lt;/p&gt;
-
-&lt;p&gt;Right now, &lt;a href=&#34;http://tech.octopus.energy/news/2015/11/23/tech-jobs.html&#34;&gt;we&amp;rsquo;re looking to build a superb tech team&lt;/a&gt;. Get in
-touch if you&amp;rsquo;re looking for a challenge and would like to play a
-formative part in a company that&amp;rsquo;s genuinely making the world a better
-place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
-</description>
+      <description>Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first day at Octopus Energy.
+I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology, especially automation and cloud computing, Octopus Energy is going to radically change how people consume and pay for energy in the UK. We&amp;rsquo;re going to be both cheaper and massively better at customer service than the much-maligned incumbents.
+Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
     </item>
     
     <item>
@@ -420,32 +138,8 @@ place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
       <pubDate>Fri, 02 Oct 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
-      <description>&lt;p&gt;Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your
-commit message template to:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;# If applied, this commit will...
-
-# Explain why this change is being made
-
-# Provide links to any relevant tickets, articles or other resources
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and you&amp;rsquo;ll be guided into writing concise commit subjects in the
-imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &lt;a href=&#34;http://chris.beams.io/posts/git-commit/&#34;&gt;&amp;ldquo;How to
-write a commit message&amp;rdquo;&lt;/a&gt; for
-the inspiration of this tip and more reasoning on the use of the
-imperative mood.&lt;/p&gt;
-
-&lt;p&gt;To do this in Git, save the above content in a file (eg
-&lt;code&gt;~/.git_commit_msg.txt&lt;/code&gt;) and run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git config --global commit.template ~/.git_commit_msg.txt
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here&amp;rsquo;s what this looks like in practice:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/git-commit-snap.png&#34; width=&#34;800px&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Try it - it&amp;rsquo;s genuinely useful.&lt;/p&gt;
-</description>
+      <description>Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your commit message template to:
+# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources  and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
     </item>
     
     <item>
@@ -454,27 +148,9 @@ imperative mood.&lt;/p&gt;
       <pubDate>Wed, 02 Sep 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
-      <description>&lt;p&gt;I often need to grab information from a Postgres database and paste it
-into a spreadsheet for sharing with others. Google Sheets needs the
-pasted data to be tab-separated in order to be correctly split into
-columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to
-configure psql&amp;rsquo;s output to get it.&lt;/p&gt;
-
-&lt;p&gt;At a psql prompt, switch to unaligned output&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\a&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;set the field separator to a tab character:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\f&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and turn the pager off:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;=&amp;gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;\pset&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;pager&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;off&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then the output from subsequent &lt;code&gt;SELECT ...&lt;/code&gt; statements can be cleanly
-pasted into your Google Doc.&lt;/p&gt;
-</description>
+      <description>I often need to grab information from a Postgres database and paste it into a spreadsheet for sharing with others. Google Sheets needs the pasted data to be tab-separated in order to be correctly split into columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to configure psql&amp;rsquo;s output to get it.
+At a psql prompt, switch to unaligned output
+=&amp;gt; \a  set the field separator to a tab character:</description>
     </item>
     
     <item>
@@ -483,104 +159,9 @@ pasted into your Google Doc.&lt;/p&gt;
       <pubDate>Sat, 02 May 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</guid>
-      <description>
-
-&lt;p&gt;Cloud computing and immutable infrastructure deployments have changed
-the way I use SSH. I miss the days when I could run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh app1-prod
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to jump onto a machine and investigate an issue. This would work as,
-back in the days of yore, your web servers didn&amp;rsquo;t change IP address
-several times a week so I could create a helpful alias in
-&lt;code&gt;~/.ssh/config&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Host app1-prod
-    User example_user
-    HostName 74.207.251.29
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This circumvented the labour-intensive act of typing in the remote
-username and IP address when SSHing around town.&lt;/p&gt;
-
-&lt;p&gt;I can no longer do this as:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Immutable infrastructure deployments mean EC2 instances are replaced
-for every update so the IP addresses keep changing. Life is too
-short to keep updating &lt;code&gt;~/.ssh/config&lt;/code&gt; with their details.&lt;/li&gt;
-&lt;li&gt;Plus, aside from your load balancers, servers should be unreachable
-from the outside world. Now all access is via a bastion machine: the
-only machine in the VPC that exposes its SSH port to the network
-your laptop is using.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;These are both good things.&lt;/p&gt;
-
-&lt;h3 id=&#34;aren-t-you-supposed-to-stop-using-ssh-with-aws&#34;&gt;Aren&amp;rsquo;t you supposed to stop using SSH with AWS?&lt;/h3&gt;
-
-&lt;p&gt;Yeah, &lt;a href=&#34;https://wblinks.com/notes/aws-tips-i-wish-id-known-before-i-started/&#34;&gt;that&amp;rsquo;s been recommended
-before&lt;/a&gt;
-and seems a good idea.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m not there yet though. There&amp;rsquo;s still occasions where I want to SSH
-onto a machine and run diagnostics. For instance, as part of a &lt;a href=&#34;http://martinfowler.com/bliki/CanaryRelease.html&#34;&gt;canary
-release&lt;/a&gt; I often SSH
-onto one of the new machines and check for smoke before replacing the
-entire auto-scale group with the new AMI. (I&amp;rsquo;m happy to accept this is
-an regrettable practice and I need to raise my automation game.)&lt;/p&gt;
-
-&lt;p&gt;In such circumstances, I want to be able to run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh ip-10-5-8-179.eu-west-1.compute.internal
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;jumping straight onto an AWS EC2 instance using only its internal DNS
-name, plucked from the AWS console or a &lt;code&gt;boto&lt;/code&gt; command.&lt;/p&gt;
-
-&lt;p&gt;Here&amp;rsquo;s how.&lt;/p&gt;
-
-&lt;h3 id=&#34;proxycommand-and-a-wildcard-ssh-alias&#34;&gt;ProxyCommand and a wildcard SSH alias&lt;/h3&gt;
-
-&lt;p&gt;Add an alias to &lt;code&gt;~/.ssh/config&lt;/code&gt; for your bastion server. Something like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Host bastion-prod
-    User example_user
-    Hostname bastion.example.com
-    IdentityFile ~/.ssh/bastion-prod.key
-    LogLevel Quiet
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;then you can route SSH traffic through the bastion server using
-&lt;code&gt;ProxyCommand&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Host *.compute.internal
-    User ubuntu
-    IdentityFile ~/.ssh/aws-prod.key
-    ProxyCommand ssh bastion-prod -W %h:%p
-    StrictHostKeyChecking no
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and that&amp;rsquo;s sufficient for commands like:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ ssh ip-10-5-8-179.eu-west-1.compute.internal
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to work.&lt;/p&gt;
-
-&lt;p&gt;Note, disabling &lt;code&gt;StrictHostKeyChecking&lt;/code&gt; suppresses the confirmation
-prompt when connecting to a new host for the first time. I&amp;rsquo;m ignorant of
-whether this is a dreadful security misstep.&lt;/p&gt;
-
-&lt;p&gt;Some vaguely related articles:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://edgeofsanity.net/article/2012/10/15/ssh-leap-frog.html&#34;&gt;Using a ProxyCommand to Leap Frog Your
-Bastions&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;A &lt;a href=&#34;https://github.com/gianlucaborello/aws-ssh-config&#34;&gt;Github repo&lt;/a&gt;
-for dynamically building &lt;code&gt;~/.ssh/config&lt;/code&gt; using boto.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;http://blog.ryanparman.com/2014/01/29/easily-ssh-into-amazon-ec2-instances-using-the-name-tag/&#34;&gt;Easily SSH into Amazon EC2 instances using the Name
-tag&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Cloud computing and immutable infrastructure deployments have changed the way I use SSH. I miss the days when I could run:
+$ ssh app1-prod  to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&amp;rsquo;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
+Host app1-prod User example_user HostName 74.</description>
     </item>
     
     <item>
@@ -589,13 +170,7 @@ tag&lt;/a&gt;&lt;/li&gt;
       <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</guid>
-      <description>&lt;p&gt;For the record, I no longer maintain
-&lt;a href=&#34;http://www.commandlinefu.com/&#34;&gt;commandlinefu.com&lt;/a&gt;. I&amp;rsquo;ve handed over the
-baton to notable Bay Area celebrity, Jon Hendren
-(&lt;a href=&#34;https://twitter.com/fart&#34;&gt;@fart&lt;/a&gt;). This is a good thing for the site
-and its users as I have been unable to do much maintenance in recent
-times. I look forward to seeing how the site evolves.&lt;/p&gt;
-</description>
+      <description>For the record, I no longer maintain commandlinefu.com. I&amp;rsquo;ve handed over the baton to notable Bay Area celebrity, Jon Hendren (@fart). This is a good thing for the site and its users as I have been unable to do much maintenance in recent times. I look forward to seeing how the site evolves.</description>
     </item>
     
     <item>
@@ -604,23 +179,949 @@ times. I look forward to seeing how the site evolves.&lt;/p&gt;
       <pubDate>Thu, 19 Mar 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;Hmmm, this delete statement is taking longer than I thought it
-would&amp;hellip;&lt;/p&gt;
-&lt;/blockquote&gt;
+      <description>Hmmm, this delete statement is taking longer than I thought it would&amp;hellip;
+ If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
+\copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39;  and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
+\copy $table from &amp;#39;/tmp/backup.</description>
+    </item>
+    
+    <item>
+      <title>Avoiding clashing Django migrations</title>
+      <link>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</link>
+      <pubDate>Sat, 31 Jan 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/avoiding-clashing-django-migrations/</guid>
+      <description>Managing South migrations on a multi-developer Django project can be painful. Developers working on separate branches will often create migrations for the same app with the same migration number1. When merged into master, these clashing migrations can cause deployment hiccups as South will complain if migrations are applied out of order.
+There are various techniques available for dealing with this2, but what we do at Yoyo is test for such clashes as part of our Travis continuous integration.</description>
+    </item>
+    
+    <item>
+      <title>Bootstrapped virtualenvs</title>
+      <link>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</link>
+      <pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
+      <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
+#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;quot;title $NAME&amp;quot; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line  # will need to edited later if not.</description>
+    </item>
+    
+    <item>
+      <title>Integrating Django application metrics into Zabbix</title>
+      <link>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
+      <description>At Tangent, we use Zabbix for monitoring and alerting. This is a note-to-self on how to configure application monitoring.
+Management command You need a script that prints out a value to STDOUT. A simple management command suffices:
+from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch_%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;quot;No method found with name &amp;#39;%s&amp;#39;&amp;quot; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
+    </item>
+    
+    <item>
+      <title>Linking to Github</title>
+      <link>http://codeinthehole.com/tips/linking-to-github/</link>
+      <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/linking-to-github/</guid>
+      <description>It was rightly pointed out yesterday that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
+$ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db  This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
+    </item>
+    
+    <item>
+      <title>Continuously rebuild your project</title>
+      <link>http://codeinthehole.com/tips/continuously-re-build-your-project/</link>
+      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/continuously-re-build-your-project/</guid>
+      <description>New developers joining a project will often find that the project won&amp;rsquo;t build cleanly on their machine, and hours of time will be sunk into setting up the project so work can start. This is sad and expensive for all concerned.
+This is a particular menace in agencies (or anywhere with lots of small projects) where a large team of developers need to jump between projects. Tools like Vagrant and Docker can help but aren&amp;rsquo;t the panacea they first seem to be1.</description>
+    </item>
+    
+    <item>
+      <title>Using the silver searcher with Vim</title>
+      <link>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</link>
+      <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
+      <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
+It&amp;rsquo;s easily installed - on OSX, run:
+$ brew install the_silver_searcher  Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
+if executable(&amp;#39;ag&amp;#39;) &amp;quot; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif  :grep searches are now lightning-fast and respectful of your ~/.</description>
+    </item>
+    
+    <item>
+      <title>The road to Oscar 1.0</title>
+      <link>http://codeinthehole.com/projects/the-road-to-oscar-10/</link>
+      <pubDate>Thu, 01 May 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/the-road-to-oscar-10/</guid>
+      <description>Oscar 0.7 was released this week, a comparatively minor house-keeping release that allowed us to reduce our pull-request and issue backlogs. We have a plan for Oscar through 2014 and this article outlines the roadmap.
+v1.0 We&amp;rsquo;re aiming to be v1.0 before the end of the year1. Oscar has been beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to commit to the backward compatibility responsibilities associated with coming out of beta.</description>
+    </item>
+    
+    <item>
+      <title>Command-line tips for effective release announcements</title>
+      <link>http://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</link>
+      <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
+      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&amp;rsquo;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
+This article is largely a note-to-self in case I have to repeat the process. However, if you do find yourself in a similar position, here are a few command-line tricks for analysing your git history.</description>
+    </item>
+    
+    <item>
+      <title>How to install PostGIS and GeoDjango on Ubuntu</title>
+      <link>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</link>
+      <pubDate>Fri, 04 Oct 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
+      <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
+Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
+$ export LANGUAGE=&amp;quot;en_US.UTF-8&amp;quot; $ export LANG=&amp;quot;en_US.UTF-8&amp;quot; $ export LC_ALL=&amp;quot;en_US.UTF-8&amp;quot;  Now install dependencies:
+$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis  PostgreSQL should now be installed and running with UTF8 encodings.</description>
+    </item>
+    
+    <item>
+      <title>Enhancing your git commit editor</title>
+      <link>http://codeinthehole.com/tips/enhancing-your-git-commit-editor/</link>
+      <pubDate>Thu, 08 Aug 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/enhancing-your-git-commit-editor/</guid>
+      <description>Confession: I am a pedant, especially around commit messages.
+I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
+Use the following .git/hooks/prepare-commit-msg hook:
+#!/bin/sh BRANCH_NAME=$(git branch | grep &amp;#39;*&amp;#39; | sed &amp;#39;s/* //&amp;#39;) if [ $BRANCH_NAME !</description>
+    </item>
+    
+    <item>
+      <title>Dumping and restoring a PostGIS database</title>
+      <link>http://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</link>
+      <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</guid>
+      <description>I wasted at least twenty minutes getting this to work. These are my notes.
+Problem You are using a PostGIS database and want to take a backup copy from production and restore it in a different environment. One complication is that each environment connects to its database with its own user.
+This is a common scenario if you are using GeoDjango.
+Solution Suppose your production database is called &amp;ldquo;myproject_prod&amp;rdquo; which you connect to with user &amp;ldquo;myproject_prod_role&amp;rdquo; and you want to replace your existing stage database &amp;ldquo;myproject_stage&amp;rdquo; that you connect to with user &amp;ldquo;myproject_stage_role&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>purl, URI templates and generated tests</title>
+      <link>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</link>
+      <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
+      <description>TLDR: Parameterised tests are a useful testing technique. Both Nose and py.test support them.
+URI templates in purl The newly released purl 0.8 (a URL library of mine) supports URI templates as per RFC 6570. These allow new URL instances to be created by passing bindings to a template instance.
+&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39;  Alternatively, you can expand template strings directly:</description>
+    </item>
+    
+    <item>
+      <title>A deferred logging file handler for Django</title>
+      <link>http://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</link>
+      <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</guid>
+      <description>At Tangent we handle environment-specific configuration of Django projects using the method outlined by David Cramer. This involves distinguishing between core settings (which we keep in core/default.py) and environment specific settings (eg core/stage.py, core/test.py). The standard settings.py module imports all defaults and then uses a enviromental shell variable to determine which environment settings module to import.
+A problem One tricky issue with this arrangement is logging to file. Ideally, we want to define a single LOGGING dict in the default settings but have file logging use an environment-specific folder.</description>
+    </item>
+    
+    <item>
+      <title>Conditional logic in Django forms</title>
+      <link>http://codeinthehole.com/tips/conditional-logic-in-django-forms/</link>
+      <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/conditional-logic-in-django-forms/</guid>
+      <description>The problem It&amp;rsquo;s common for UX professionals to design forms like the following:
+where radio buttons are employed to split the form into sections, each of which can have it&amp;rsquo;s own fields which are only mandatory if the parent radio button is checked. Thus the validation logic is conditional on the submitted form data.
+Such requirements are slightly tricky to capture in Django as they tread slightly outside the normal path of form validation.</description>
+    </item>
+    
+    <item>
+      <title>PyPI README badges</title>
+      <link>http://codeinthehole.com/tips/pypi-readme-badges/</link>
+      <pubDate>Fri, 03 May 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/pypi-readme-badges/</guid>
+      <description>Thanks to @kuramanga, it&amp;rsquo;s now possible to add shiny PyPi badges to your Python project READMEs that indicate the latest released version on PyPI and the total number of downloads.
 
-&lt;p&gt;If you ever have to manually run a SQL delete statement in &lt;code&gt;psql&lt;/code&gt;, you
-can back-up the rows you&amp;rsquo;re about to delete:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;copy&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;select&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;*&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;where&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;id&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;in&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;...&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;to&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/backup.csv&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore
-them with:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;\&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;copy&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;table&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;from&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;/tmp/backup.csv&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Moderately useful.&lt;/p&gt;
-</description>
+This screenshot is taken from django-oscar&amp;rsquo;s README.
+Embed these badges in your own repo as Restructured text:
+.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads  or Markdown:</description>
+    </item>
+    
+    <item>
+      <title>A useful Git post-checkout hook for Python repos</title>
+      <link>http://codeinthehole.com/tips/a-useful-git-post-checkout-hook-for-python-repos/</link>
+      <pubDate>Tue, 23 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-useful-git-post-checkout-hook-for-python-repos/</guid>
+      <description>Every now and again, an innocent python developer checks out a new Git branch then proceeds to bang their head against a bug caused by an orphaned .pyc file from the previous branch. Since *.pyc files are typically in the repo&amp;rsquo;s .gitignore file, they are not removed when switching branches and can cause issues if the corresponding .py is removed.
+This can be neatly addressed through a &amp;lsquo;post checkout&amp;rsquo; hook which deletes all such files.</description>
+    </item>
+    
+    <item>
+      <title>Disable database access when writing unit tests in Django</title>
+      <link>http://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</link>
+      <pubDate>Mon, 22 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</guid>
+      <description>Consider this curio:
+import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;quot;Using the database is not permitted&amp;quot;)))  This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
+Use by wrapping a TestCase subclass:
+from django.test import TestCase @no_database() class UnitTestCase(TestCase): ...  or method:</description>
+    </item>
+    
+    <item>
+      <title>How to install PIL on 64-bit Ubuntu 12.04</title>
+      <link>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</link>
+      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
+      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
+Solution With pip already installed, install the required development packages:
+$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev  and symlink the three image libraries into /usr/lib:
+$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/  PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+    </item>
+    
+    <item>
+      <title>Converting Github issues into pull requests</title>
+      <link>http://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</link>
+      <pubDate>Mon, 04 Mar 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</guid>
+      <description>Using the Hub library, it&amp;rsquo;s possible to convert Github issues into pull requests. This gives rise to a useful Github workflow which this article describes.
+This is nothing new; it&amp;rsquo;s been written about before. However, this is something I do all the time whilst developing Oscar and I&amp;rsquo;m fed up with explaining it. This article is a reference I can point people at.
+Workflow Discuss Discuss an idea for a new feature on the project mailing list.</description>
+    </item>
+    
+    <item>
+      <title>Altering Postgres table columns with South</title>
+      <link>http://codeinthehole.com/tips/altering-postgres-table-columns-with-south/</link>
+      <pubDate>Tue, 19 Feb 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/altering-postgres-table-columns-with-south/</guid>
+      <description>Problem You&amp;rsquo;re using Postgres with Django.
+You change a field type of one of your models, generate an --auto South migration and attempt to run it. However, South chokes on the new migration complaining that the data in the column cannot be cast to the new type.
+For instance, I recently changed a CharField to a TimeField but the corresponding migration lead to:
+Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_openingperiod_start__chg_field_openingperiod_end.</description>
+    </item>
+    
+    <item>
+      <title>Configuring logging for Postgres.app</title>
+      <link>http://codeinthehole.com/tips/configuring-logging-for-postgresapp/</link>
+      <pubDate>Mon, 14 Jan 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
+      <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
+ERROR: current transaction is aborted, commands ignored until end of transaction block  This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
+Solution Turn on Postgres&amp;rsquo; logging and watch the log files when the error is generated.
+This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
+    </item>
+    
+    <item>
+      <title>Mathematics and engineering</title>
+      <link>http://codeinthehole.com/tidbits/mathematics-and-engineering/</link>
+      <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tidbits/mathematics-and-engineering/</guid>
+      <description>Structure and Interpretation of Computer Programs is full of interesting footnotes. Here&amp;rsquo;s a good one about the Fermat test for prime numbers:
+ Numbers that fool the Fermat test are called Carmichael numbers, and little is known about them other than that they are extremely rare. There 255 Carmichael below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821 and 6601. In testing primality of very large numbers chosen at random, the chance of stumbling upon a value that fools the Fermat test is less than the chance that cosmic radiation will cause the computer to make an error in carrying out a correct algorithm.</description>
+    </item>
+    
+    <item>
+      <title>Effective pull requests and other good practices for teams using github</title>
+      <link>http://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</link>
+      <pubDate>Sat, 20 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</guid>
+      <description>I work at an agency where we pay $200 a month to Github for their platinum plan. This article is a summary of an internal talk I gave on making the most of our subscription.
+There&amp;rsquo;s nothing original here: it&amp;rsquo;s just a collection of tips that I&amp;rsquo;ve harvested over the last few years. I&amp;rsquo;m publishing this article mainly so I have something to refer future employees to.
+Use pull requests Pull requests are an excellent tool for fostering code review.</description>
+    </item>
+    
+    <item>
+      <title>How to chroot a user in Ubuntu 12.04</title>
+      <link>http://codeinthehole.com/tips/how-to-chroot-a-user-in-ubuntu-1204/</link>
+      <pubDate>Tue, 16 Oct 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-chroot-a-user-in-ubuntu-1204/</guid>
+      <description>External parties often need to upload data to your application. Sadly, most ask for a FTP server. Push back against this and suggest they use sFTP.
+This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.
+This is mainly for my own reference.
+User set-up Create user with a dummy shell:
+$ adduser --shell=/bin/false barry  and alter the ownership and permissions of their home folder:</description>
+    </item>
+    
+    <item>
+      <title>Prefer WebTest to Django&#39;s test client for functional tests</title>
+      <link>http://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</link>
+      <pubDate>Sun, 09 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</guid>
+      <description>Since watching Carl Meyer&amp;rsquo;s superb &amp;lsquo;Testing and Django&amp;rsquo; talk, I&amp;rsquo;ve been using Ian Bicking&amp;rsquo;s WebTest library for functional tests, via django-webtest. I&amp;rsquo;ve been really impressed and I&amp;rsquo;d like to stress one of Carl&amp;rsquo;s points - that using WebTest for functional tests is superior to using the Django client.
+Why? Several reasons - here&amp;rsquo;s a few:
+ WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
+    </item>
+    
+    <item>
+      <title>Cacheback - asynchronous cache refreshing for Django</title>
+      <link>http://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</link>
+      <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</guid>
+      <description>Inspired by Jacob Kaplan-Moss&amp;rsquo;s excellent talk &amp;ldquo;Django doesn&amp;rsquo;t scale&amp;rdquo; at this year&amp;rsquo;s OSCon, I&amp;rsquo;ve put together a Django package for re-populating caches asynchronously.
+It provides a simple API for wrapping expensive read operations that caches results and uses Celery to repopulate items when they become stale. It can be used as a decorator for simple cases but provides an extensible class for more fine-grained control. It also provides helper classes for working with querysets.</description>
+    </item>
+    
+    <item>
+      <title>Use models for uploads</title>
+      <link>http://codeinthehole.com/tips/use-models-for-uploads/</link>
+      <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/use-models-for-uploads/</guid>
+      <description>All Django developers will deal with file uploads at some point. I contend that it&amp;rsquo;s a good practice to use models to capture the upload metadata and to track processing status. This article explains how and why.
+An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:</description>
+    </item>
+    
+    <item>
+      <title>Vim macros for adding i18n support to Django templates</title>
+      <link>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</link>
+      <pubDate>Fri, 06 Jul 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</guid>
+      <description>Problem You want to add i18n support to an existing project. One part of this is modifying all templates to use the {% trans &amp;quot;...&amp;quot; %} block around all hard-coded strings.
+When you have a lot of templates, this gets pretty tedious.
+Solution Use Vim macros!
+Macro 1 - Convert tag text To convert
+&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt;  to
+&amp;lt;h1&amp;gt;{% trans &amp;quot;Welcome to my site&amp;quot; %}&amp;lt;/h1&amp;gt;  use the macro</description>
+    </item>
+    
+    <item>
+      <title>A data migration for every Django project</title>
+      <link>http://codeinthehole.com/tips/a-data-migration-for-every-django-project/</link>
+      <pubDate>Sat, 16 Jun 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
+      <description>How to use a South data migration to avoid accidentally sending emails from example.com.
+Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
+from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] )  Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+    </item>
+    
+    <item>
+      <title>Django, Nginx, WSGI and encoded slashes</title>
+      <link>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
+      <description>Problem You are serving a Django application using Nginx to proxy to an Apache server running mod_wsgi and you want to allow slashes in your URL keywords.
+For example, you may want to edit some attribute of the page at URL /; hence, you want to use a URL regex of the form:
+url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...)  and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
+    </item>
+    
+    <item>
+      <title>purl - immutable URL objects for Python</title>
+      <link>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</link>
+      <pubDate>Thu, 19 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</guid>
+      <description>Working with URLs in Python feels clunky when it should be pleasant. In urlparse and urllib, the standard library has all the functionality you need, but the code you have to write is often cumbersome and unclear.
+For instance, here&amp;rsquo;s a typical test method that makes an assertion about a query parameter:
+import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0])  Not terrible, but could be more concise.</description>
+    </item>
+    
+    <item>
+      <title>Embedding HTML in Django messages</title>
+      <link>http://codeinthehole.com/tips/embedding-html-in-django-messages/</link>
+      <pubDate>Thu, 12 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/embedding-html-in-django-messages/</guid>
+      <description>Problem You want to embed HTML within a message using Django&amp;rsquo;s messages framework.
+This is a reasonably common requirement - for instance, it&amp;rsquo;s common to want to include a link within the message, perhaps pointing the user towards a sign-in or registration page.
+This problem exists as of Django 1.4 but may be solved within the framework in later versions.
+Solution Use the extra_tags keyword argument to pass a flag indicating that the message is safe for rendering without escaping.</description>
+    </item>
+    
+    <item>
+      <title>csvfilter - a Python command-line tool for manipulating CSV data</title>
+      <link>http://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</link>
+      <pubDate>Sun, 01 Apr 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</guid>
+      <description>Problem You want a unix-like tool for manipulating CSV data from the command-line.
+The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
+Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
+Install with:
+pip install csvfilter  Sample usage:
+# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
+    </item>
+    
+    <item>
+      <title>How to reload Django&#39;s URL config</title>
+      <link>http://codeinthehole.com/tips/how-to-reload-djangos-url-config/</link>
+      <pubDate>Wed, 21 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-reload-djangos-url-config/</guid>
+      <description>Problem For some reason, you need to reload your Django URL config.
+Normally, the root URL config will be imported and stored in memory when your server process starts up. Occasionally though, you may want to reload it. This can be the case if your URL configuration changes depending on certain parameters.
+Solution You can reload the URL config using the following snippet:
+import sys from django.conf import settings def reload_urlconf(urlconf=None): if urlconf is None: urlconf = settings.</description>
+    </item>
+    
+    <item>
+      <title>Validating international postcodes in Django</title>
+      <link>http://codeinthehole.com/tips/validating-international-postcodes-in-django/</link>
+      <pubDate>Tue, 13 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/validating-international-postcodes-in-django/</guid>
+      <description>Problem You want to validate a post/zip-code when you only know the country at runtime.
+Solution Use this snippet to dynamically fetch a validation method from Django&amp;rsquo;s suite of &amp;ldquo;localflavor&amp;rdquo; form fields using the ISO 3166-1 two character country code.
+def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39; instead of GB - this changes in 1.4 if country_code == &amp;#39;GB&amp;#39;: country_code = &amp;#39;UK&amp;#39; module_path = &amp;#39;django.contrib.localflavor.%s&amp;#39; % country_code.lower() try: module = __import__(module_path, fromlist=[&amp;#39;forms&amp;#39;]) except ImportError: # No forms module for this country return lambda x: x fieldname_variants = [&amp;#39;%sPostcodeField&amp;#39;, &amp;#39;%sPostCodeField&amp;#39;, &amp;#39;%sPostalCodeField&amp;#39;, &amp;#39;%sZipCodeField&amp;#39;,] for variant in fieldname_variants: fieldname = variant % country_code.</description>
+    </item>
+    
+    <item>
+      <title>How to sync PyCon videos to your iPhone</title>
+      <link>http://codeinthehole.com/tips/how-to-sync-pycon-videos-to-your-iphone/</link>
+      <pubDate>Sun, 11 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-sync-pycon-videos-to-your-iphone/</guid>
+      <description>Problem You want to all the PyCon videos on your iPhone for offline viewing.
+Solution Use the following Python script to fetch pycon videos from YouTube and convert them to M4V format so they can be imported to iTunes.
+ This gist is stale now - the code for downloading videos has been expanding into a [Github repository](https://github.com/codeinthehole/pyvideo2quicktime).  To run the script:
+ Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script  Run this script using:</description>
+    </item>
+    
+    <item>
+      <title>Tips for using a git pre-commit hook</title>
+      <link>http://codeinthehole.com/tips/tips-for-using-a-git-pre-commit-hook/</link>
+      <pubDate>Mon, 05 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/tips-for-using-a-git-pre-commit-hook/</guid>
+      <description>Here&amp;rsquo;s a few tips for using a Git pre-commit hook.
+Keep your hook script in source control Commit your hook script (say pre-commit.sh) at the root of your project and include the installation instructions in your README/documentation to encourage all developers use it.
+Installation is nothing more than:
+ln -s ../../pre-commit.sh .git/hooks/pre-commit  Then everyone benefits from running the same set of tests before committing and updates are picked up automatically.</description>
+    </item>
+    
+    <item>
+      <title>Confoo 2012 presentations</title>
+      <link>http://codeinthehole.com/talks/confoo-2012-presentations/</link>
+      <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/talks/confoo-2012-presentations/</guid>
+      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
+Migrating from PHP to Python and Django Abstract:
+ Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+    </item>
+    
+    <item>
+      <title>Testing HTTPS handling in Django</title>
+      <link>http://codeinthehole.com/tips/testing-https-handling-in-django/</link>
+      <pubDate>Thu, 01 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/testing-https-handling-in-django/</guid>
+      <description>Problem You want to test how your application handles HTTPS requests.
+Solution Use the following to simulate a HTTPS request using the Django test client:
+from django.test.client import Client client = Client() response = client.get(url, **{&amp;#39;wsgi.url_scheme&amp;#39;: &amp;#39;https&amp;#39;})  Discussion The standard way to test for a HTTPS request is using the is_secure method of the django.http.HttpRequest class1 and its subclasses. As of Django 1.3, the implementation of this method checks whether an environmental variable HTTPS is equal to &amp;ldquo;on&amp;rdquo;:</description>
+    </item>
+    
+    <item>
+      <title>Prefer data migrations to initial data</title>
+      <link>http://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</link>
+      <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
+      <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.
+Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:
+ This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
+    </item>
+    
+    <item>
+      <title>A Fabric function for git tagging</title>
+      <link>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
+      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
+      <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
+Set-up Assume there is a test environment where:
+ the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit  There will also be stage and production environments.
+Fabric function The following function can be used as part of Fabric build script.</description>
+    </item>
+    
+    <item>
+      <title>Solving MySQL connection problems caused by a dead name server</title>
+      <link>http://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</link>
+      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</guid>
+      <description>A client site went down today. This is what happened and how it was fixed.
+Symptoms The immediate symptom is that your application servers can&amp;rsquo;t connect to your database servers. Attempted connections get an error message:
+ Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)
+ The relevant MySQL process list reveals a long list of attempted connections in state login:
+root@server-db1:~ $ mysqladmin processlist +-----+----------------------+--------------------+----+---------+------+-------+ | Id | User | Host | db | Command | Time | State | +-----+----------------------+--------------------+----+---------+------+-------+ .</description>
+    </item>
+    
+    <item>
+      <title>Auto-setting terminal titles for python virtual environments</title>
+      <link>http://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</link>
+      <pubDate>Mon, 23 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</guid>
+      <description>Problem You&amp;rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&amp;rsquo;s difficult to remember which tab is for which project. This is making you unhappy.
+Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment.</description>
+    </item>
+    
+    <item>
+      <title>Introducing unittest-xml: testing XML in Python</title>
+      <link>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</link>
+      <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
+      <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.
+Sample Usage Enable the additional assert methods using a mixin:
+import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ...  Now suppose that the expected XML from some SUT1 is:</description>
+    </item>
+    
+    <item>
+      <title>Rewriting codeinthehole.com</title>
+      <link>http://codeinthehole.com/news/rewriting-codeintheholecom/</link>
+      <pubDate>Fri, 06 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
+      <description>I rewrote this blog recently with the following aims:
+ to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs.</description>
+    </item>
+    
+    <item>
+      <title>How to set-up MySQL for Python on Ubuntu</title>
+      <link>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</link>
+      <pubDate>Thu, 05 Jan 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
+      <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
+Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
+apt-get install python-pip pip install -U pip  Next, install the required development packages:
+apt-get install python-dev libmysqlclient-dev  then
+pip install MySQL-python  should complete successfully.
+Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
+    </item>
+    
+    <item>
+      <title>Using pip and requirements.txt to install from the HEAD of a Github branch</title>
+      <link>http://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</link>
+      <pubDate>Sat, 20 Aug 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</guid>
+      <description>Problem The python package installer pip can be used to install directly from Github, like so:
+$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar  This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
+$ pip freeze | grep oscar -e git://github.</description>
+    </item>
+    
+    <item>
+      <title>Console logging to STDOUT in Django</title>
+      <link>http://codeinthehole.com/tips/console-logging-to-stdout-in-django/</link>
+      <pubDate>Tue, 16 Aug 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/console-logging-to-stdout-in-django/</guid>
+      <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.
+Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:
+import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } }  For Python 2.</description>
+    </item>
+    
+    <item>
+      <title>Running django cronjobs within a virtualenv</title>
+      <link>http://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</link>
+      <pubDate>Thu, 11 Aug 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</guid>
+      <description>If you use virtual environments on your django servers, then getting manage.py commands to run from cron is a little tricky. You need to activate the virtualenv before running the command and so you might think that the following would work:
+*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null  It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
+    </item>
+    
+    <item>
+      <title>Multi-scp: copying a file to all hosts in your SSH config</title>
+      <link>http://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</link>
+      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</guid>
+      <description>I am totally reliant on my bash aliases and readline configuration. When working on a new server, the first thing I do is copy over my local Bash (~/.bashrc) and Readline (~/.inputrc) configuration files.
+One mildly annoying issue is when you update a config file, it&amp;rsquo;s a pain to copy it onto all your remote hosts. To scratch this itch, I wrote a simple node.js executable for copying a file to all the defined hosts in your ~/.</description>
+    </item>
+    
+    <item>
+      <title>Coloured output while doing TDD with Django and Fabric</title>
+      <link>http://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</link>
+      <pubDate>Wed, 20 Apr 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</guid>
+      <description>I&amp;rsquo;m a big fan of using PHPUnit with console colours turned on (using the --colors option). Eg:
+It helps gets into the natural &amp;ldquo;red, green, refactor&amp;rdquo; rhythm.
+I&amp;rsquo;m currently totally immersed in Django, and greatly miss the lack of colour support within the &amp;ldquo;test&amp;rdquo; management command. A simple workaround for this is to use Fabric with a few modified color commands. Your fabric file should include the following:
+from fabric.colors import _wrap_with green_bg = _wrap_with(&amp;#39;42&amp;#39;) red_bg = _wrap_with(&amp;#39;41&amp;#39;) # Set the list of apps to test env.</description>
+    </item>
+    
+    <item>
+      <title>Domain-model-mapper - A PHP Data Mapper implementation</title>
+      <link>http://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</link>
+      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
+      <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:
+ The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
+    </item>
+    
+    <item>
+      <title>Commandlinefu presentation at Confoo 2011</title>
+      <link>http://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</link>
+      <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</guid>
+      <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.
+The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
+    </item>
+    
+    <item>
+      <title>The British way of dealing with foreign APIs.</title>
+      <link>http://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</link>
+      <pubDate>Fri, 04 Feb 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
+      <description>A bad joke told in Python:
+def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper())  </description>
+    </item>
+    
+    <item>
+      <title>nurl - an immutable URL object for node.js</title>
+      <link>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</guid>
+      <description>I&amp;rsquo;m a big fan of Value Objects - some of the most useful classes I&amp;rsquo;ve ever written have been lightweight wrappers around strings.
+For my first contribution to the node.js ecosystem, I&amp;rsquo;ve published a simple, immutable URL object to the Node package manager (npm) directory. It provides a light-weight, immutable URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and &amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various extension methods that make working with URLs easy.</description>
+    </item>
+    
+    <item>
+      <title>mysqldump with wildcard table matching</title>
+      <link>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</link>
+      <pubDate>Fri, 05 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
+      <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&amp;rsquo;s not currently supported as an option but can be achieved with a little bash magic. Here&amp;rsquo;s how:
+#!/bin/bash if [ $# -lt 2 ] then echo &amp;quot;Usage: `basename $0` database wildcardpattern&amp;quot; echo &amp;quot;Eg: `basename $0` mydatabase App_%&amp;quot; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;quot;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;quot; | awk &amp;#39;{printf $1&amp;quot; &amp;quot;}&amp;#39;`  This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
+    </item>
+    
+    <item>
+      <title>How to sync a MySQL table between two remote databases.</title>
+      <link>http://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</link>
+      <pubDate>Fri, 03 Sep 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</guid>
+      <description>Definitely tricker than you might think.
+Seems like it should be trivial using SELECT ... INTO OUTFILE and LOAD DATA INFILE ... to make the transfer via dumping the table into a temporary file. However, SELECT ... INTO OUTFILE creates a file on the remote server rather than locally. This prevents the use of LOAD DATA INFILE for the second step as the file being loaded has to be local or on the destination server.</description>
+    </item>
+    
+    <item>
+      <title>Phing trick for avoiding deploying debug code</title>
+      <link>http://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</link>
+      <pubDate>Sun, 22 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</guid>
+      <description>As the saying goes:
+ Fool me once, shame on you; fool me twice, shame on me
+ Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
+We had an issue recently where some debugging code got committed and wasn&amp;rsquo;t picked up during testing.</description>
+    </item>
+    
+    <item>
+      <title>Return false with prudence</title>
+      <link>http://codeinthehole.com/tips/return-false-with-prudence/</link>
+      <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/return-false-with-prudence/</guid>
+      <description>From &amp;ldquo;Javascript: the good parts&amp;rdquo;:
+ It is rarely possible for standards comittees to remove imperfections from a language because doing so would cause the breakdage of all of the bad programs that depend on those bad parts. They are usually powerless to do anything except heap more features on top of the existing pile of imperfections.
+ Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excellent points on writing in a language with more than its fair of share of shortcomings.</description>
+    </item>
+    
+    <item>
+      <title>Javascript refactoring for customising shared libraries</title>
+      <link>http://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</link>
+      <pubDate>Tue, 13 Oct 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</guid>
+      <description>One difficulty working with a shared in-house framework is it is difficult to maintain a common javascript file that is valid across multiple applications. This is currently an issue we face at Tangent, where we run a generic e-commerce platform which we customise to the needs of each client. Most of these e-commerce applications have a javascript-rich checkout page whose functionality differs in small yet significant ways such as the required and optional fields within a delivery address, or the range of delivery options available.</description>
+    </item>
+    
+    <item>
+      <title>A pseudo-code job advert and its discontents</title>
+      <link>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</link>
+      <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
+      <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:
+&amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
+    </item>
+    
+    <item>
+      <title>Deploying cron jobs using Phing</title>
+      <link>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</link>
+      <pubDate>Sun, 31 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
+      <description>Deploying applications that depend on cron-jobs can be a pain. However, Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;
+Consider an application folder structure as follows:
+/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ...  All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
+    </item>
+    
+    <item>
+      <title>Auto-generating an FAQ with Prototype</title>
+      <link>http://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</link>
+      <pubDate>Mon, 25 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</guid>
+      <description>Have just been writing an FAQ page for commandlinefu.com. Documenting is always tiresome, but FAQs particularly so when hand-coding the HTML links between each question and the summary table at the top of the page.
+Javascript to the rescue: I cobbled together a quick Prototype script which automatically generates the FAQ summary links by parsing the DOM for the appropriate links:
+document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.question&amp;#39;).each(function(ele){ var id = ele.innerHTML.unescapeHTML().gsub(/[^\w- ]/, &amp;#39;&amp;#39;).gsub(/[\s-]+/, &amp;#39;-&amp;#39;).</description>
+    </item>
+    
+    <item>
+      <title>Inspecting Javascript objects</title>
+      <link>http://codeinthehole.com/tips/inspecting-javascript-objects/</link>
+      <pubDate>Sun, 24 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/inspecting-javascript-objects/</guid>
+      <description>Learning Ruby or Python from the command-line prompt is greatly enhanced by the built-in inspection methods these languages provide. These allow the methods and properties of an object to be interrogated via a simple method call which returns an array of all property or method names.
+For instance, in IRB (the interactive Ruby command-line) we can interrogate the integer object:
+irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods  This returns an array of all method names for integer objects:</description>
+    </item>
+    
+    <item>
+      <title>Phing, Xinc and Nabaztags</title>
+      <link>http://codeinthehole.com/tips/phing-xinc-and-nabaztags/</link>
+      <pubDate>Wed, 06 May 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/phing-xinc-and-nabaztags/</guid>
+      <description>Finally got around to setting up continuous integration for some of the projects that comprise the day-job. We&amp;rsquo;re using the PEAR package Xinc, which has proved to be excellent thus far - especially as it integrates so well with my deployment tool of choice: Phing. Part of the fun in setting it up was looking for suitable feedback mechanisms or devices. Email notifications are a given but there are a range of more interesting feedback mechanisms available such as toolbar notifications, remote-controlled lava lamps, or plain humiliation tactics (such as making the person who broke the build wear the dunce&amp;rsquo;s hat till it is fixed).</description>
+    </item>
+    
+    <item>
+      <title>Ingenious use of an anonymous function</title>
+      <link>http://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</link>
+      <pubDate>Wed, 15 Apr 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</guid>
+      <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:
+ Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.
+ Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
+    </item>
+    
+    <item>
+      <title>Using a Phing filter to flush browser caches</title>
+      <link>http://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</link>
+      <pubDate>Sun, 15 Mar 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</guid>
+      <description>A quick Phing tip that&amp;rsquo;s made my life easier when deploying new versions of commandlinefu.com.
+One of the key performance recommendations from Steve Souders&amp;rsquo; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
+    </item>
+    
+    <item>
+      <title>The most important command-line tip - incremental history searching with .inputrc</title>
+      <link>http://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/</link>
+      <pubDate>Tue, 03 Feb 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/</guid>
+      <description>Getting www.commandlinefu.com off the ground has renewed my interest in Bash, UNIX and all things command-line. Powerful one-liners are things of beauty and are worth collecting; however what I consider to be the most influential command-line tip I know covers four:
+&amp;quot;\e[A&amp;quot;: history-search-backward &amp;quot;\e[B&amp;quot;: history-search-forward &amp;quot;\e[C&amp;quot;: forward-char &amp;quot;\e[D&amp;quot;: backward-char  These lines need to be placed in your ~/.inputrc file, the start-up script for the Readline utility used by Bash (as well as several other applications) and others).</description>
+    </item>
+    
+    <item>
+      <title>Current pet project: Command-Line-Fu</title>
+      <link>http://codeinthehole.com/projects/current-pet-project-command-line-fu/</link>
+      <pubDate>Thu, 22 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/current-pet-project-command-line-fu/</guid>
+      <description>If you&amp;rsquo;re anything like me, you spend a lot of time at the UNIX command-line manipulating the filesystem, configuring Linux, playing with services and so forth. As any UNIX user knows, tremendous power can be wielded through judicious function selection, piping and output redirection. It&amp;rsquo;s often quite staggering what can be achieved in a single line given a rudimentary knowledge of sed, grep, awk, cut…
+Indeed, when I stumble upon a line of particular elegance or usefulness, I generally log them to a Tomboy note (fired up in a flash using Gnome-do).</description>
+    </item>
+    
+    <item>
+      <title>Phing task to create an Unfuddle message</title>
+      <link>http://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</link>
+      <pubDate>Sun, 11 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</guid>
+      <description>Another day, another new Phing task; again integrating with project management software - this time the excellent Unfuddle.
+I&amp;rsquo;ve been playing with Unfuddle for a few days now and it&amp;rsquo;s very impressive. You get SVN and git hosting as well as superb issue tracking. It also supports simple project messages (which are displayed on the project dashboard) and so-called notebooks which are essentially project wikis that can be used to house documentation and manuals.</description>
+    </item>
+    
+    <item>
+      <title>Phing task to update Twitter status</title>
+      <link>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</link>
+      <pubDate>Sat, 10 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</guid>
+      <description>At Tangent Labs, we&amp;rsquo;re currently experimenting with integrating Twitter into our project workflow to provide a latest activity feed in a easily digestible format (for both developers and non-technical people). For a pilot project, we&amp;rsquo;ve created a Twitter account and added an SVN post-commit hook script that updates Twitter with the latest commit information (commit message, affected files, author). We&amp;rsquo;re going to integrate our bug-tracking software shortly too but that&amp;rsquo;s not the subject of this post.</description>
+    </item>
+    
+    <item>
+      <title>Deploying to a shared hosting environment using Phing</title>
+      <link>http://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</link>
+      <pubDate>Sun, 04 Jan 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</guid>
+      <description>Deploying applications to shared hosting environments can be a pain when no SSH access is provided. Consequently, it&amp;rsquo;s hard to avoid using FTP to deploy files from your development environment to a production server. In such trying circumstances, it&amp;rsquo;s easy to form self-destructive habits like using drag-and-drop FTP deployment - a very bad thing. Much better is to write an automated deployment script so that you can build to production in one clean step, a key tenet of The Joel Test for writing better code (highly recommended).</description>
+    </item>
+    
+    <item>
+      <title>Monitoring MySQL with Ganglia and gmetric</title>
+      <link>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
+      <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
+      <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.
+In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
+    </item>
+    
+    <item>
+      <title>High Performance Web Sites by Steve Souders</title>
+      <link>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</link>
+      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</guid>
+      <description>High Performance Web Sites (HPWS) is essentially a book-length exposition of the YSlow extension to Firebug augmented with case studies of popular US websites. YSlow itself links to some explanation paragraphs regarding the various guidelines that are used to grade the performance of a website. However, even for those familiar with this documentation, HPWS is still an excellent resource on how the performance of a web app can be tuned.</description>
+    </item>
+    
+    <item>
+      <title>Checking all MySQL tables</title>
+      <link>http://codeinthehole.com/tips/checking-all-mysql-tables/</link>
+      <pubDate>Sun, 23 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/checking-all-mysql-tables/</guid>
+      <description>It&amp;rsquo;s well known that MyISAM tables are prone to corruption and need to be regularly checked and repaired. Moreover, in a production environment, it can be beneficial to run a daily check of all tables and mail news of any errors to an appropriate developer/DBA.
+There are two options for checking MySQL tables. The most effective method is to run the myisamchk utility directly on the index files (.MYI) of the tables in question (some simple shell expansion makes this easy):</description>
+    </item>
+    
+    <item>
+      <title>Javascript cookie objects using Prototype and JSON</title>
+      <link>http://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</link>
+      <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</guid>
+      <description>It&amp;rsquo;s sometime useful to interact with cookies directly on the client-side using javascript. This can be useful for a variety of situations, such as persisting display settings between page requests without storing anything on the server. I&amp;rsquo;ve also used them to display a simple welcome message to new visitors. It can make your controller code simpler if this kind of simple display logic is contained entirely on the client side.</description>
+    </item>
+    
+    <item>
+      <title>Date conditional redirects with mod_rewrite</title>
+      <link>http://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</link>
+      <pubDate>Fri, 07 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</guid>
+      <description>The Apache module mod_rewite is capable of some very cool stuff. One neat trick is to use the time and date variables to control redirects and URL rewriting. This is useful if you have a URL that you don&amp;rsquo;t want to be exposed to the world until a certain date has passed - this could be the case with special offers and competitions which have a one-off static page that isn&amp;rsquo;t to be revealed until a specified date.</description>
+    </item>
+    
+    <item>
+      <title>Creating large XML files with PHP</title>
+      <link>http://codeinthehole.com/tips/creating-large-xml-files-with-php/</link>
+      <pubDate>Fri, 31 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/creating-large-xml-files-with-php/</guid>
+      <description>When creating large XML files with PHP, there are some important considerations to bear in mind with regards to scalability. There are several libraries available for writing XML files of small to intermediate size (such as DOMDocument), but when dealing with very large files (eg. &amp;gt; 500Mb, or several million elements), these libraries are no longer useful as the size of the file then can create is memory-bound.
+For example, DOMDocument stores the XML tree in memory while it is being built - you then flush it out to file after all elements have been created:</description>
+    </item>
+    
+    <item>
+      <title>Monitoring MySQL</title>
+      <link>http://codeinthehole.com/tips/monitoring-mysql/</link>
+      <pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/monitoring-mysql/</guid>
+      <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&amp;rsquo;s going on.
+watch -n 1 mysqladmin processlist  The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
+    </item>
+    
+    <item>
+      <title>Following log files with tail -f</title>
+      <link>http://codeinthehole.com/tips/following-log-files-with-tail-f/</link>
+      <pubDate>Wed, 22 Oct 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/following-log-files-with-tail-f/</guid>
+      <description>UNIX is a majestic onion of discovery. Every day a new layer of understanding can be peeled away to give some new pungent goodness. Today&amp;rsquo;s was the &amp;lsquo;follow&amp;rsquo; option of the tail command.
+It&amp;rsquo;s commonplace to use tail for viewing the recent entries to a log file:
+tail /var/log/apache2/error.log  Much more useful is set the &amp;lsquo;follow&amp;rsquo; option so that, rather than echoing to STDOUT and returning control to the prompt - tail continues to watch the file in question and echos additional lines to the terminal.</description>
+    </item>
+    
+    <item>
+      <title>Writing a Thesis in LaTeX</title>
+      <link>http://codeinthehole.com/guides/writing-a-thesis-in-latex/</link>
+      <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/guides/writing-a-thesis-in-latex/</guid>
+      <description>Overview This article is a guide to constructing a decent parent file for a thesis or dissertation compiled in Latex. The specific details implemented here, and included in the example files, are those set out by the guidelines for submission to the University of Nottingham, but can be easily amended to suit any sensible requirements.
+Considerable attention has been paid to presenting the final document as a PDF file, which keeps the file size manageable (compared to postscript) and allows groovy add-ons such as hyperlinks and back-referencing.</description>
+    </item>
+    
+    <item>
+      <title>Tutorial: the complex Ginzburg-Landau equation</title>
+      <link>http://codeinthehole.com/projects/ginzburg-landau-tutorial/</link>
+      <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/projects/ginzburg-landau-tutorial/</guid>
+      <description>I wrote a tutorial on the complex Ginzburg-Landau equation as a set of simple HTML pages.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://codeinthehole.com/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/about/</guid>
+      <description>Hello, I&amp;rsquo;m David, a software engineer working in London.
+Employment I&amp;rsquo;m Head of Engineering at Octopus Energy, a UK energy supplier.
+Previously I&amp;rsquo;ve worked as:
+ Director of Engineering at Yoyo Wallet, a payments and loyalty start-up; a Technical Director (and various other roles) at Tangent Snowball, a digital agency; an Operational Researcher at HM Revenue and Customs.  Interests Everything to do with software; but especially:
+ Software design, patterns and architecture.</description>
+    </item>
+    
+    <item>
+      <title>Code</title>
+      <link>http://codeinthehole.com/code/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/code/</guid>
+      <description>I am a software engineer.
+Open-source I occasionally write open-source software - a selection of projects are listed below. See my Github profile for a more exhaustive list.
+Oscar Oscar is an open-source e-commerce framework for Django.
+ django-oscar - domain-driven e-commerce for Django django-oscar-accounts - managed accounts using double-entry bookkeeping django-oscar-datacash - a Django app for integrating with the DataCash payment gateway django-oscar-paypal - Oscar integration with PayPal django-oscar-gocardless - Oscar integration with GoCardless.</description>
+    </item>
+    
+    <item>
+      <title>Music</title>
+      <link>http://codeinthehole.com/music/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/music/</guid>
+      <description>Some curated content can be found at:
+ youtube.com/user/codeinthehole soundcloud.com/codeinthehole mixcloud.com/codeinthehole  Other good sources for stuff to code to:
+ WeFunk radio rain.today  </description>
+    </item>
+    
+    <item>
+      <title>Octopus status</title>
+      <link>http://codeinthehole.com/monitor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/monitor/</guid>
+      <description>Everything is fine </description>
+    </item>
+    
+    <item>
+      <title>Writing</title>
+      <link>http://codeinthehole.com/writing/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/writing/</guid>
+      <description></description>
     </item>
     
   </channel>

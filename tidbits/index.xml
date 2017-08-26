@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tidbits on David Winterbottom</title>
-    <link>http://codeinthehole.com/tidbits/index.xml</link>
+    <link>http://codeinthehole.com/tidbits/</link>
     <description>Recent content in Tidbits on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 14 Dec 2012 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://codeinthehole.com/tidbits/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://codeinthehole.com/tidbits/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Mathematics and engineering</title>
@@ -15,28 +17,8 @@
       <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tidbits/mathematics-and-engineering/</guid>
-      <description>&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9780262510875.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&#34;http://en.wikipedia.org/wiki/Structure_and_Interpretation_of_Computer_Programs&#34;&gt;Structure and Interpretation of Computer
-Programs&lt;/a&gt;
-is full of interesting footnotes. Here&amp;rsquo;s a good one about the Fermat
-test for prime numbers:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Numbers that fool the Fermat test are called &lt;em&gt;Carmichael numbers&lt;/em&gt;, and
-little is known about them other than that they are extremely rare.
-There 255 Carmichael below 100,000,000. The smallest few are 561,
-1105, 1729, 2465, 2821 and 6601. In testing primality of very large
-numbers chosen at random, the chance of stumbling upon a value that
-fools the Fermat test is less than the chance that cosmic radiation
-will cause the computer to make an error in carrying out a correct
-algorithm. Considering an algorithm to be inadequate for the first
-reason but not for the second illustrates the difference between
-mathematics and engineering.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Taken from page 53.&lt;/p&gt;
-</description>
+      <description>Structure and Interpretation of Computer Programs is full of interesting footnotes. Here&amp;rsquo;s a good one about the Fermat test for prime numbers:
+ Numbers that fool the Fermat test are called Carmichael numbers, and little is known about them other than that they are extremely rare. There 255 Carmichael below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821 and 6601. In testing primality of very large numbers chosen at random, the chance of stumbling upon a value that fools the Fermat test is less than the chance that cosmic radiation will cause the computer to make an error in carrying out a correct algorithm.</description>
     </item>
     
     <item>
@@ -45,14 +27,8 @@ mathematics and engineering.&lt;/p&gt;
       <pubDate>Fri, 04 Feb 2011 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
-      <description>&lt;p&gt;A bad joke told in Python:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;call_foreign_api&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(str):&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;try&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;foreign_api(str)&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;except&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;NotUnderstoodError:&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;foreign_api(str&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;upper())&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description>
+      <description>A bad joke told in Python:
+def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper())  </description>
     </item>
     
     <item>
@@ -61,83 +37,8 @@ mathematics and engineering.&lt;/p&gt;
       <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
-      <description>&lt;p&gt;Based on the success of a highly tongue-in-cheek ad for a project
-manager, we recently experimented with a similar approach for finding
-developers: a job ad written in PHP. Now I appreciate this is deeply
-lame, but the results of the campaign were quite surprising - more of
-which in a minute. First, hold your nose and parse the following:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;&amp;lt;?php&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;TangentLabs&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;extends&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;HoxtonWebCompany&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;implements&lt;/span&gt; 
-    &lt;span style=&#34;color: #a6e22e&#34;&gt;InnovativeWebsites&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;WorldBeatingApplications&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;IngeniousECommerce&lt;/span&gt; 
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;vacancyForBrilliantDevelopers&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$benefits&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Smartest web agency in London&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$drawbacks&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;null&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$sampleProjects&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.borders.co.uk&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.labour.co.uk&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt;
-        &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.sap.com/education&amp;#39;&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;public&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;offerJob&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Developer&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$you)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;hasTheSkills&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($you)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;self&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;hasWowFactor&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($you));&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;hasTheSkills&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($developer)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;    
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;$desiredSkills&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;array&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Object-oriented PHP 5&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Advanced MySQL&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;Flex/AS3&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt; 
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;count(array_intersect($developer&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;skills&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$desiredSkills))&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;int&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)$developer&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;loveForCoding&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;lt;&amp;lt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;30&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;private&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;static&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;hasWowFactor&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($developer)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;($developer&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;instanceof&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;creativeThinker&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;sizeof($developer&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;brain&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;floatval(&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;strpad&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;100&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;))&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;property_exists($developer,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;hungerForNewTechnologies&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;));&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;$you&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Developer&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;true&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;===&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;TangentLabs&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;::&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;offerJob&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;($you))&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;throw&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;Party&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;();&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;It&amp;rsquo;s actually quite a fun challenge to write a decent job ad in PHP,
-conveying both the requirements and writing PHP code that isn&amp;rsquo;t
-hilariously convoluted. I&amp;rsquo;d tried to do the same in Bash later on when
-we were hiring a sys-admin, but gave up after 5 minutes.&lt;/p&gt;
-
-&lt;p&gt;As you would expect with such a self-consciously smug job advert like
-this, torrents of abuse came tumbling down? Salutations along the lines
-of &amp;ldquo;You pretentious Shoreditch wankers&amp;hellip;&amp;rdquo; and so forth. However, what
-was a little unexpected were emails along the lines of:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Hi, I really like your job ad - the best I&amp;rsquo;ve seen for ages. I live in
-California though and don&amp;rsquo;t actually want to apply for a job.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;How strange? Who can be bothered to type up a complimentary cover letter
-for a job they don&amp;rsquo;t even want to apply for - most genuine applicants
-can&amp;rsquo;t be bothered to get the spelling and grammar right in their opening
-salvos.&lt;/p&gt;
-
-&lt;p&gt;Another consequence is that most applicant&amp;rsquo;s responses are also written
-in PHP pseudocode, which become a bit tiresome after the twentieth
-implementation of &lt;code&gt;Developer&lt;/code&gt; - we were asking for it though.&lt;/p&gt;
-
-&lt;p&gt;Strangely though, the clinching factor for several candidates was the
-following comment, left at the end of the ad:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;// If you have questions, just ask, and if you’re a recruitment consultant don’t even 
-// think about emailing – our board won’t let us use you, even though you may have our 
-// literal exact perfect candidate just waiting for an interview. Sorry.
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;There&amp;rsquo;s nothing like the mutual hatred of recruitment consultants to
-bring people together.&lt;/p&gt;
-</description>
+      <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:
+&amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
     </item>
     
     <item>
@@ -146,48 +47,9 @@ bring people together.&lt;/p&gt;
       <pubDate>Wed, 15 Apr 2009 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</guid>
-      <description>&lt;p&gt;Just stumbled across a gem of a question whilst idly browsing &lt;a href=&#34;http://stackoverflow.com/&#34;&gt;Stack
-Overflow&lt;/a&gt;:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Design a function &lt;code&gt;f&lt;/code&gt;, such that: &lt;code&gt;f(f(n)) == -n&lt;/code&gt; where &lt;code&gt;n&lt;/code&gt; is a
-32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Interesting in its own right, what makes this particularly intriguing is
-that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice
-of language has a major say in the range of solutions available. The
-following solution in Python is stunningly elegant:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;def&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;f&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(x):&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;isinstance(x,&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;int):&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;lambda&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;x)&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;x()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;The use of a lambda function is very clever but does feel like cheating
-a little. Nevertheless, such a solution was a sharp reminder of the
-dangers of being too versed in a particular language (PHP in my case)
-such that it&amp;rsquo;s hard to think outside the language constraints. Of
-course, the above solution can be implemented in any language that
-supports anonymous functions.&lt;/p&gt;
-
-&lt;p&gt;The less clever but more &amp;ldquo;natural&amp;rdquo; solution (at least to a
-mathematician) is for &lt;code&gt;f&lt;/code&gt; to toggle the parity of &lt;code&gt;n&lt;/code&gt;, multiplying by -1
-only for one parity (the cases of positive and negative n need handling
-separately). It&amp;rsquo;s fairly easy to build up the solution by considering in
-sequence &lt;code&gt;n=0,1,2,3,...&lt;/code&gt; - see the following clunky PHP implementation:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;function&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;f(&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n)&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n;&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;{&lt;/span&gt;
-        &lt;span style=&#34;color: #66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;%&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;?&lt;/span&gt; &lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;:&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;-&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #960050; background-color: #1e0010&#34;&gt;$&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;n&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;+&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;}&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-</description>
+      <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:
+ Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.
+ Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
     </item>
     
   </channel>

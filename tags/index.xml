@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/</link>
+    <description>Recent content in Tags on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 05 May 2012 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Apache</title>
+      <link>http://codeinthehole.com/tags/apache/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Aws</title>
+      <link>http://codeinthehole.com/tags/aws/</link>
+      <pubDate>Sat, 02 May 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Bash</title>
+      <link>http://codeinthehole.com/tags/bash/</link>
+      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Books</title>
+      <link>http://codeinthehole.com/tags/books/</link>
+      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/books/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Career</title>
+      <link>http://codeinthehole.com/tags/career/</link>
+      <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/career/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Commandlinefu</title>
+      <link>http://codeinthehole.com/tags/commandlinefu/</link>
+      <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/commandlinefu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Consul</title>
+      <link>http://codeinthehole.com/tags/consul/</link>
+      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/consul/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Deployment</title>
+      <link>http://codeinthehole.com/tags/deployment/</link>
+      <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/deployment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Design Patterns</title>
+      <link>http://codeinthehole.com/tags/design-patterns/</link>
+      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/design-patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django</title>
+      <link>http://codeinthehole.com/tags/django/</link>
+      <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/django/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Django Oscar</title>
+      <link>http://codeinthehole.com/tags/django-oscar/</link>
+      <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/django-oscar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Fabric</title>
+      <link>http://codeinthehole.com/tags/fabric/</link>
+      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/fabric/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ganglia</title>
+      <link>http://codeinthehole.com/tags/ganglia/</link>
+      <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/ganglia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Geodjango</title>
+      <link>http://codeinthehole.com/tags/geodjango/</link>
+      <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/geodjango/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Git</title>
+      <link>http://codeinthehole.com/tags/git/</link>
+      <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Hugo</title>
+      <link>http://codeinthehole.com/tags/hugo/</link>
+      <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Javascript</title>
+      <link>http://codeinthehole.com/tags/javascript/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Jq</title>
+      <link>http://codeinthehole.com/tags/jq/</link>
+      <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/jq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Latex</title>
+      <link>http://codeinthehole.com/tags/latex/</link>
+      <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/latex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Loggly</title>
+      <link>http://codeinthehole.com/tags/loggly/</link>
+      <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/loggly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Maths</title>
+      <link>http://codeinthehole.com/tags/maths/</link>
+      <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/maths/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Monitoring</title>
+      <link>http://codeinthehole.com/tags/monitoring/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/monitoring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql</title>
+      <link>http://codeinthehole.com/tags/mysql/</link>
+      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Nginx</title>
+      <link>http://codeinthehole.com/tags/nginx/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node</title>
+      <link>http://codeinthehole.com/tags/node/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Node.Js</title>
+      <link>http://codeinthehole.com/tags/node.js/</link>
+      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Octopus Energy</title>
+      <link>http://codeinthehole.com/tags/octopus-energy/</link>
+      <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/octopus-energy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Phing</title>
+      <link>http://codeinthehole.com/tags/phing/</link>
+      <pubDate>Sun, 22 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/phing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Php</title>
+      <link>http://codeinthehole.com/tags/php/</link>
+      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pil</title>
+      <link>http://codeinthehole.com/tags/pil/</link>
+      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/pil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Postgres</title>
+      <link>http://codeinthehole.com/tags/postgres/</link>
+      <pubDate>Wed, 02 Sep 2015 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Presentations</title>
+      <link>http://codeinthehole.com/tags/presentations/</link>
+      <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/presentations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Prototype</title>
+      <link>http://codeinthehole.com/tags/prototype/</link>
+      <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/prototype/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>http://codeinthehole.com/tags/python/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Quotes</title>
+      <link>http://codeinthehole.com/tags/quotes/</link>
+      <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/quotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Recruitment</title>
+      <link>http://codeinthehole.com/tags/recruitment/</link>
+      <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/recruitment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Talks</title>
+      <link>http://codeinthehole.com/tags/talks/</link>
+      <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Testing</title>
+      <link>http://codeinthehole.com/tags/testing/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ubuntu</title>
+      <link>http://codeinthehole.com/tags/ubuntu/</link>
+      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/ubuntu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>http://codeinthehole.com/tags/vim/</link>
+      <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/vim/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

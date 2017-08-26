@@ -2,12 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>News on David Winterbottom</title>
-    <link>http://codeinthehole.com/news/index.xml</link>
+    <link>http://codeinthehole.com/news/</link>
     <description>Recent content in News on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate>
-    <atom:link href="http://codeinthehole.com/news/index.xml" rel="self" type="application/rss+xml" />
+    
+	<atom:link href="http://codeinthehole.com/news/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Podcast.__init__ on Oscar</title>
@@ -15,11 +17,8 @@
       <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
       
       <guid>http://codeinthehole.com/news/podcast-init/</guid>
-      <description>&lt;p&gt;I was interviewed, along with &lt;a href=&#34;https://www.mvantellingen.nl/&#34;&gt;Michael van Tellingen&lt;/a&gt;, on the
-&amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.&lt;/p&gt;
-
-&lt;script class=&#34;podigee-podcast-player&#34; src=&#34;//cdn.podigee.com/podcast-player/javascripts/podigee-podcast-player.js&#34; data-configuration=&#34;https://www.podcastinit.com?podigee_player=288&#34;&gt;&lt;/script&gt;
-</description>
+      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.
+ </description>
     </item>
     
     <item>
@@ -28,39 +27,9 @@
       <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/hugo/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;ve migrated this site to &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; so I can host it on Github
-pages&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;Hugo is a fast and well thought-out static site generator, written in Golang.
-It&amp;rsquo;s easy to learn and has some neat features&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt; - the trickiest part is understanding the difference
-between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.&lt;/p&gt;
-
-&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/plasticboy/vim-markdown&#34;&gt;vim-markdown&lt;/a&gt;
-provides good support for authoring Hugo posts since it supports
-syntax-highlighting for:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Github-style &amp;ldquo;fenced&amp;rdquo; code blocks and&lt;/li&gt;
-&lt;li&gt;JSON or TOML front-matter.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Both things that Hugo supports.&lt;/p&gt;
-
-&lt;p&gt;Downside: you have to use git submodules to keep the &lt;code&gt;public&lt;/code&gt; folder of
-HTML files in a separate repo.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;Which lets you do neat things like link to the revision history of an
-  article &amp;ndash; see below.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;Like footnotes in markdown (thanks to the &lt;a href=&#34;https://github.com/russross/blackfriday#extensions&#34;&gt;blackfriday&lt;/a&gt; library).
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>I&amp;rsquo;ve migrated this site to Hugo so I can host it on Github pages1.
+Hugo is a fast and well thought-out static site generator, written in Golang. It&amp;rsquo;s easy to learn and has some neat features2 - the trickiest part is understanding the difference between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.
+The Vim plugin vim-markdown provides good support for authoring Hugo posts since it supports syntax-highlighting for:</description>
     </item>
     
     <item>
@@ -69,9 +38,7 @@ HTML files in a separate repo.&lt;/p&gt;
       <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
-      <description>&lt;p&gt;I wrote an article
-on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-checks.html&#34;&gt;Django, ELB health checks and continuous delivery&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description>I wrote an article on Django, ELB health checks and continuous delivery.</description>
     </item>
     
     <item>
@@ -80,9 +47,7 @@ on &lt;a href=&#34;http://tech.octopus.energy/news/2016/05/05/django-elb-health-
       <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
-      <description>&lt;p&gt;Octopus Energy has a &lt;a href=&#34;http://tech.octopus.energy&#34;&gt;tech blog&lt;/a&gt;. I wrote an article
-on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html&#34;&gt;Testing for missing migrations in Django&lt;/a&gt;.&lt;/p&gt;
-</description>
+      <description>Octopus Energy has a tech blog. I wrote an article on Testing for missing migrations in Django.</description>
     </item>
     
     <item>
@@ -91,20 +56,9 @@ on &lt;a href=&#34;http://tech.octopus.energy/news/2016/01/21/testing-for-missin
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/octopus-energy/</guid>
-      <description>&lt;p&gt;Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first
-day at Octopus Energy.&lt;/p&gt;
-
-&lt;p&gt;I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology,
-especially automation and cloud computing, Octopus Energy is going to
-radically change how people consume and pay for energy in the UK. We&amp;rsquo;re
-going to be both cheaper and massively better at customer service than
-the much-maligned incumbents.&lt;/p&gt;
-
-&lt;p&gt;Right now, &lt;a href=&#34;http://tech.octopus.energy/news/2015/11/23/tech-jobs.html&#34;&gt;we&amp;rsquo;re looking to build a superb tech team&lt;/a&gt;. Get in
-touch if you&amp;rsquo;re looking for a challenge and would like to play a
-formative part in a company that&amp;rsquo;s genuinely making the world a better
-place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
-</description>
+      <description>Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first day at Octopus Energy.
+I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology, especially automation and cloud computing, Octopus Energy is going to radically change how people consume and pay for energy in the UK. We&amp;rsquo;re going to be both cheaper and massively better at customer service than the much-maligned incumbents.
+Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
     </item>
     
     <item>
@@ -113,13 +67,7 @@ place, in helping transition the UK to a lower carbon future.&lt;/p&gt;
       <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</guid>
-      <description>&lt;p&gt;For the record, I no longer maintain
-&lt;a href=&#34;http://www.commandlinefu.com/&#34;&gt;commandlinefu.com&lt;/a&gt;. I&amp;rsquo;ve handed over the
-baton to notable Bay Area celebrity, Jon Hendren
-(&lt;a href=&#34;https://twitter.com/fart&#34;&gt;@fart&lt;/a&gt;). This is a good thing for the site
-and its users as I have been unable to do much maintenance in recent
-times. I look forward to seeing how the site evolves.&lt;/p&gt;
-</description>
+      <description>For the record, I no longer maintain commandlinefu.com. I&amp;rsquo;ve handed over the baton to notable Bay Area celebrity, Jon Hendren (@fart). This is a good thing for the site and its users as I have been unable to do much maintenance in recent times. I look forward to seeing how the site evolves.</description>
     </item>
     
     <item>
@@ -128,99 +76,8 @@ times. I look forward to seeing how the site evolves.&lt;/p&gt;
       <pubDate>Fri, 06 Jan 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
-      <description>
-
-&lt;p&gt;I rewrote this blog recently with the following aims:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;to make it as easy as possible to create a new article, using
-&lt;a href=&#34;http://docutils.sourceforge.net/rst.html&#34;&gt;reStructuredText&lt;/a&gt; (RST);&lt;/li&gt;
-&lt;li&gt;to clean up and simplify the design, focussing on the readability of
-articles that include code snippets.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I knew that there were various static blogs out there, with many
-supporting RST, but I still fancied the challenge of crafting something
-specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if
-you want to learn about wheels.&lt;/p&gt;
-
-&lt;p&gt;This article is a short summary.&lt;/p&gt;
-
-&lt;h3 id=&#34;technology&#34;&gt;Technology&lt;/h3&gt;
-
-&lt;p&gt;Django, Fabric and pygments - the &lt;a href=&#34;http://github.com/codeinthehole/codeinthehole.com&#34;&gt;source is on
-github&lt;/a&gt;. I intend to
-pull out the generic blogging code into a separate library,
-reStructuredBlog, at some point, hence the &amp;ldquo;rsb&amp;rdquo; acronym used in the
-codebase.&lt;/p&gt;
-
-&lt;h3 id=&#34;writing-a-post&#34;&gt;Writing a post&lt;/h3&gt;
-
-&lt;p&gt;My ideal for writing a blog post is:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Use vim to create a &lt;code&gt;.rst&lt;/code&gt; file for the article;&lt;/li&gt;
-&lt;li&gt;Preview the article locally;&lt;/li&gt;
-&lt;li&gt;Publish to the remote server&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;This translates to:&lt;/p&gt;
-
-&lt;h4 id=&#34;write&#34;&gt;Write&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;vim posts/my-new-article.rst 
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h4 id=&#34;preview&#34;&gt;Preview&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;./manage.py rsb_article posts/my-new-article.rst
-./manage.py runserver
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This converts the RST file into a instance of &lt;code&gt;rsb.models.Article&lt;/code&gt;,
-plucking out the title, subtitle and any tags in the process.&lt;/p&gt;
-
-&lt;p&gt;Rinse and repeat the write and preview steps until happy.&lt;/p&gt;
-
-&lt;h4 id=&#34;publish&#34;&gt;Publish&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;fab prod publish posts/0036-my-new-article.rst
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This copies the RST file up to the remote server and re-runs the
-&lt;code&gt;rsb_article&lt;/code&gt; management command to create the article in the production
-database.&lt;/p&gt;
-
-&lt;h3 id=&#34;design&#34;&gt;Design&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/bookcovers/9781119998952.jpg&#34; class=&#34;align-right&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;I recently read the excellent &amp;ldquo;Design for Hackers&amp;rdquo; by David Kadavy. Duly
-inspired, I attempted to rework the design to be clean and pleasing on
-the eye. The color scheme is deliberately kept simple; the fonts used
-are Verdana, &lt;a href=&#34;http://www.google.com/webfonts/specimen/Droid+Serif&#34;&gt;Droid
-Serif&lt;/a&gt; and
-&lt;a href=&#34;http://www.google.com/webfonts/specimen/Inconsolata&#34;&gt;Inconsolata&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;I was also influenced by the clean look of the personal sites of &lt;a href=&#34;http://stevelosh.com/&#34;&gt;Steve
-Losh&lt;/a&gt;, &lt;a href=&#34;http://zachholman.com/&#34;&gt;Zach Holman&lt;/a&gt; and
-&lt;a href=&#34;http://lucumr.pocoo.org/&#34;&gt;Armin Ronacher&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&#34;overall&#34;&gt;Overall&lt;/h3&gt;
-
-&lt;p&gt;I&amp;rsquo;m pleased that:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The site isn&amp;rsquo;t painfully ugly like the old;&lt;/li&gt;
-&lt;li&gt;I can write articles easily and using my favourite tools (vim +
-RST);&lt;/li&gt;
-&lt;li&gt;I can write articles on the tube on the way home;&lt;/li&gt;
-&lt;li&gt;Github is now my backup of both code and content. For instance, you
-can &lt;a href=&#34;https://raw.github.com/codeinthehole/codeinthehole.com/master/www/posts/0038-restructured-blog.rst&#34;&gt;view the source of this
-article&lt;/a&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Since I switched to Disqus for comments, I decided to drop all the old
-ones (not that were that many), since I wasn&amp;rsquo;t sure it was possible to
-migrate Apologies to the comment authors.&lt;/p&gt;
-</description>
+      <description>I rewrote this blog recently with the following aims:
+ to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs.</description>
     </item>
     
   </channel>

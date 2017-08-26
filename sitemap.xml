@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://codeinthehole.com/tips/your-codebase-is-your-%F0%9F%8F%A0/</loc>
+    <loc>http://codeinthehole.com/tips/a-mnemonic-for-mocks/</loc>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://codeinthehole.com/tips/your-codebase-is-your-/</loc>
     <lastmod>2017-06-30T11:26:39+01:00</lastmod>
   </url>
   
@@ -509,13 +515,13 @@
   </url>
   
   <url>
-    <loc>http://codeinthehole.com/tags/books/</loc>
+    <loc>http://codeinthehole.com/books/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://codeinthehole.com/books/</loc>
+    <loc>http://codeinthehole.com/tags/books/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -523,6 +529,11 @@
   <url>
     <loc>http://codeinthehole.com/tags/career/</loc>
     <lastmod>2015-11-23T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://codeinthehole.com/categories/</loc>
     <priority>0</priority>
   </url>
   
@@ -544,7 +555,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2017-06-30T11:26:39+01:00</lastmod>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -679,7 +690,7 @@
   </url>
   
   <url>
-    <loc>http://codeinthehole.com/tags/node/index.js/</loc>
+    <loc>http://codeinthehole.com/tags/node.js/</loc>
     <lastmod>2011-05-22T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -738,7 +749,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/python/</loc>
-    <lastmod>2017-04-10T23:00:20+01:00</lastmod>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -756,12 +767,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/</loc>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://codeinthehole.com/tags/talks/</loc>
-    <lastmod>2012-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2012-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -772,8 +778,14 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/tags/talks/</loc>
+    <lastmod>2012-03-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tags/testing/</loc>
-    <lastmod>2015-01-31T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -785,7 +797,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2017-06-30T11:26:39+01:00</lastmod>
+    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

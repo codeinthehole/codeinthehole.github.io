@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Jq on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/jq/index.xml</link>
+    <link>http://codeinthehole.com/tags/jq/</link>
     <description>Recent content in Jq on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/jq/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jun 2017 21:30:36 +0100</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/jq/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Git tips for working with pull requests</title>
@@ -14,98 +17,9 @@
       <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tips/open-github-pull-request-command/</guid>
-      <description>&lt;p&gt;I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding
-both commits and comments. As such I often want to quickly jump from a terminal window
-to the pull request detail page to check previous comments or add new.&lt;/p&gt;
-
-&lt;p&gt;Even with the excellent &lt;a href=&#34;https://hub.github.com/&#34;&gt;hub&lt;/a&gt; git wrapper, there&amp;rsquo;s no easy way to do this. I can
-jump to the pull request &lt;em&gt;list&lt;/em&gt; page with:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git pulls
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where &lt;code&gt;pulls&lt;/code&gt; is aliased in &lt;code&gt;~/.gitconfig&lt;/code&gt; as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pulls&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!hub browse -- pulls&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;but there&amp;rsquo;s no easy way to jump to the pull request &lt;em&gt;detail&lt;/em&gt; page in one
-command&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;.&lt;/p&gt;
-
-&lt;p&gt;So we use a bash script that makes a HTTP call to the Github API and
-parses the response with &lt;code&gt;jq&lt;/code&gt;. Here&amp;rsquo;s the source to &lt;code&gt;open-github-pr-page.sh&lt;/code&gt;
-which just needs to be somewhere on your path&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:2&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:2&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# Open the Github pull request detail page for the current branch &lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# Requires:&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;#&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# - A GITHUB_AUTH_TOKEN env var&lt;/span&gt;
-&lt;span style=&#34;color: #75715e&#34;&gt;# - httpie and jq.&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;GITHUB_ORG&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git config --local remote.origin.url &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d: -f2 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d/ -f1&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;GITHUB_REPO&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git config --local remote.origin.url &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d/ -f2 &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; cut -d. -f1&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;BRANCH&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;git rev-parse --abbrev-ref HEAD&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-
-fetch_pr_detail_url&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    http https://api.github.com/repos/&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_ORG&lt;/span&gt;/&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_REPO&lt;/span&gt;/pulls &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;head&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;==&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_ORG&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;:&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$BRANCH&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\&lt;/span&gt;
-        Authorization:&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;token &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_AUTH_TOKEN&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.[].html_url&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-main&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -z &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_AUTH_TOKEN&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;A GITHUB_AUTH_TOKEN env var is required&amp;quot;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
-
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;GITHUB_PULL_URL&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;$(&lt;/span&gt;fetch_pr_detail_url&lt;span style=&#34;color: #66d9ef&#34;&gt;)&lt;/span&gt;
-
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;[&lt;/span&gt; -z &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_PULL_URL&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;]&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;;&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;then&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;No pull request found from branch &lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$BRANCH&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;exit&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;else&lt;/span&gt;
-        open &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$GITHUB_PULL_URL&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;fi&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-main
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;For this to work, you need to create a personal API token and export it as an
-&lt;code&gt;GITHUB_AUTH_TOKEN&lt;/code&gt; env var in your &lt;code&gt;~/.bashrc&lt;/code&gt;.&lt;/p&gt;
-
-&lt;p&gt;Alias this to something memorable, such as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;openpr&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;!f() { open-github-pr-page.sh; }; f&amp;quot;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I would use &lt;code&gt;git pr&lt;/code&gt; but I&amp;rsquo;ve already got that aliased to &lt;em&gt;create&lt;/em&gt; a new pull
-request:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;pr&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!git publish &amp;amp;&amp;amp; hub pull-request&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;where&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;publish&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!git push -u origin $(git branchname)&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;branchname&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;!git rev-parse --abbrev-ref HEAD&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Works a treat.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;Although you can get there with a command &lt;em&gt;and&lt;/em&gt; a click using the hub
-command:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ git compare
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which opens a page with a link to the pull request detail page, if one exists.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li id=&#34;fn:2&#34;&gt;I use &lt;code&gt;~/Dropbox/bin/&lt;/code&gt; for this kind of thing.
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:2&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
+Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
+$ git pulls  where pulls is aliased in ~/.</description>
     </item>
     
     <item>
@@ -114,32 +28,9 @@ command:&lt;/p&gt;
       <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
-      <description>&lt;p&gt;Like many people, I use Google Sheets to quickly create and share tabular data. As well as
-&lt;a href=&#34;http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/&#34;&gt;creating spreadsheets by pasting results generated in &lt;code&gt;psql&lt;/code&gt;&lt;/a&gt;,
-I often create reports from JSON files using
-&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;JQ&lt;/a&gt;. This post is a note-to-self on how to do
-this.&lt;/p&gt;
-
-&lt;p&gt;Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from
-Loggly:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ cat loggly_events.json &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;\ &lt;/span&gt;
-    jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;.events[].event.json | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;           select(.params | has(&amp;quot;payment_day&amp;quot;)) | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;           [.timestamp, .account, .params.payment_day] | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;           @tsv&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; clipboard
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Note:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;The &lt;code&gt;-r&lt;/code&gt; option instructs JQ to output raw strings, not quoted JSON strings.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;&lt;code&gt;@tsv&lt;/code&gt; is a JQ format string for &lt;a href=&#34;https://stedolan.github.io/jq/manual/#Formatstringsandescaping&#34;&gt;outputting tab-separated values&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The &lt;code&gt;clipboard&lt;/code&gt; command is an alias for &lt;code&gt;pbcopy&lt;/code&gt;, the system clipboard on
-OS-X.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
+Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
+$ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json |  select(.</description>
     </item>
     
     <item>
@@ -148,84 +39,10 @@ OS-X.&lt;/p&gt;&lt;/li&gt;
       <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
-      <description>&lt;p&gt;If your Consul key-value store is structured as:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
-    A/
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
-    C 
-    D
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;but you now realise you should have namespaced everything within &lt;code&gt;WEBSERVER/&lt;/code&gt; (or
-something like that):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;/
-    WEBSERVER/
-        A/
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;X&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Z&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;2&lt;/span&gt;
-            &lt;span style=&#34;color: #f8f8f2&#34;&gt;Y&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #ae81ff&#34;&gt;3&lt;/span&gt;
-        C
-        D
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;then this Bash script will help you migrate:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
-
-&lt;span style=&#34;color: #f8f8f2&#34;&gt;set&lt;/span&gt; -e  &lt;span style=&#34;color: #75715e&#34;&gt;# Exit on error&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store&lt;/span&gt;
-keys_and_values&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;# Recursively fetch all values from Consul but exclude:&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;# (a) those that end in / (as these are folders)&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;# (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating&lt;/span&gt;
-    &lt;span style=&#34;color: #75715e&#34;&gt;#     to).&lt;/span&gt;
-    curl -s &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/?recurse&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; jq -r &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        .[] | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        select(&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | endswith(&amp;quot;/&amp;quot;) | not) and &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;            (.Key | startswith(&amp;quot;WEBSERVER&amp;quot;) | not)&lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        ) | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        [.Key, &amp;quot; &amp;quot;, .Value] | &lt;/span&gt;
-&lt;span style=&#34;color: #e6db74&#34;&gt;        add&amp;#39;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key b64value
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
-        &lt;span style=&#34;color: #75715e&#34;&gt;# Consul&amp;#39;s REST API returns values base64-encoded so we decode here.&lt;/span&gt;
-        &lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;echo&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$b64value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; base64 -d&lt;span style=&#34;color: #e6db74&#34;&gt;`&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt;
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-&lt;span style=&#34;color: #75715e&#34;&gt;# Set a new value in Consul&amp;#39;s KV store&lt;/span&gt;
-set_key&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;key&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$1&lt;/span&gt;
-    &lt;span style=&#34;color: #f8f8f2&#34;&gt;value&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$2&lt;/span&gt;
-    curl -s -X PUT -d &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;localhost/v1/kv/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &amp;gt; /dev/null
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-migrate_to_webserver_namespace&lt;span style=&#34;color: #f92672&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;{&lt;/span&gt;
-    keys_and_values &lt;span style=&#34;color: #f8f8f2&#34;&gt;|&lt;/span&gt; &lt;span style=&#34;color: #66d9ef&#34;&gt;while&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;read&lt;/span&gt; key value
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;do&lt;/span&gt;
-        set_key &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;WEBSERVER/&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$key&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;$value&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;done&lt;/span&gt; 
-&lt;span style=&#34;color: #f92672&#34;&gt;}&lt;/span&gt;
-
-migrate_to_webserver_namespace
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;This script uses &lt;a href=&#34;https://www.consul.io/docs/agent/http/kv.html&#34;&gt;Consul&amp;rsquo;s REST API&lt;/a&gt; and filters the results using
-&lt;a href=&#34;https://stedolan.github.io/jq/&#34;&gt;&lt;code&gt;jq&lt;/code&gt;&lt;/a&gt;&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a rel=&#34;footnote&#34; href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;. It&amp;rsquo;s easily
-adapted to migrate key-value pairs between different namespaces.&lt;/p&gt;
-&lt;div class=&#34;footnotes&#34;&gt;
-
-&lt;hr /&gt;
-
-&lt;ol&gt;
-&lt;li id=&#34;fn:1&#34;&gt;&lt;p&gt;I can never remember jq&amp;rsquo;s &lt;code&gt;select&lt;/code&gt; syntax so this post is intended largely
-  as a personal reference on how to do this.&lt;/p&gt;
- &lt;a class=&#34;footnote-return&#34; href=&#34;#fnref:1&#34;&gt;&lt;sup&gt;[return]&lt;/sup&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;/div&gt;
-</description>
+      <description>If your Consul key-value store is structured as:
+/ A/ X = 1 Z = 2 Y = 3 C D  but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
+/ WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D  then this Bash script will help you migrate:
+#!/bin/bash set -e # Exit on error # Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
     
   </channel>

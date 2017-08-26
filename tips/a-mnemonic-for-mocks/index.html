@@ -1,0 +1,169 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-3494213-5', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?2017-08-26%2012%3a02%3a17.730711933%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>A mnemonic for mock decorators - by David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="An easy way to remember the order arguments get injected">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">A mnemonic for mock decorators</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Saturday, 26 August 2017</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Saturday, 26 August 2017</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Using both <code>@mock.patch</code> decorators and <a href="https://docs.pytest.org/en/latest/fixture.html">py.test fixtures</a> can be confusing as it&rsquo;s not
+always clear what order arguments are being injected.</p>
+
+<p>For instance, which of these is right? This:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">some_pytest_fixture):</span>
+    <span style="color: #66d9ef">pass</span>
+</pre></div>
+
+<p>Or this?</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">some_pytest_fixture):</span>
+    <span style="color: #66d9ef">pass</span>
+</pre></div>
+
+<p>Or this?</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(some_pytest_fixture,</span> <span style="color: #f8f8f2">collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2):</span>
+    <span style="color: #66d9ef">pass</span>
+</pre></div>
+
+<p>I&rsquo;ve wasted considerable time using PDB to work out what is being injected
+where.</p>
+
+<p>Not any more though. Here&rsquo;s how I remember:</p>
+
+<ul>
+<li><p>The py.test fixtures always go at the end of the argument list. Their order
+doesn&rsquo;t matter.</p></li>
+
+<li><p>The <code>@mock.patch</code> decorators inject arguments sequentially so the inner
+decorator injects the first argument, then the next outer decorator injects
+the second argument and so on. Like this:</p></li>
+</ul>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_3&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">collaborator_3):</span>
+    <span style="color: #66d9ef">pass</span>
+</pre></div>
+
+<p>The things to remember is that it&rsquo;s a <em>symmetrical</em> arrangement with the test function or method in the centre.</p>
+
+<p>So the correct arrangement above is:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
+<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">some_pytest_fixture):</span>
+    <span style="color: #66d9ef">pass</span>
+</pre></div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/a-mnemonic-for-mocks.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22A%20mnemonic%20for%20mock%20decorators%22&body=Article:%20A%20mnemonic%20for%20mock%20decorators%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fa-mnemonic-for-mocks%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/a-mnemonic-for-mocks.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/python">python</a>, <a href="/tags/testing">testing</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/your-codebase-is-your-/">Your codebase is your house</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

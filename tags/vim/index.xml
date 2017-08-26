@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/vim/index.xml</link>
+    <link>http://codeinthehole.com/tags/vim/</link>
     <description>Recent content in Vim on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 17 Jun 2014 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Using the silver searcher with Vim</title>
@@ -14,48 +17,10 @@
       <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
-      <description>
-
-&lt;h1 id=&#34;here-is-my-title&#34;&gt;Here is my title&lt;/h1&gt;
-
-&lt;p&gt;If you&amp;rsquo;re not doing this already, then you should use the &lt;a href=&#34;http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/&#34;&gt;Silver
-Searcher&lt;/a&gt;
-within Vim for rapid, convenient file searching. In a nutshell, &lt;code&gt;ag&lt;/code&gt;
-offers similar functionality to &lt;code&gt;ack&lt;/code&gt; but with much better performance.&lt;/p&gt;
-
-&lt;p&gt;It&amp;rsquo;s easily installed - on OSX, run:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;$ brew install the_silver_searcher
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Urge Vim to use it for &lt;code&gt;:grep&lt;/code&gt; commands by adding the following to
-&lt;code&gt;~/.vimrc&lt;/code&gt;:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;if&lt;/span&gt; executable&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;ag&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; 
-&lt;span style=&#34;color: #75715e&#34;&gt;    &amp;quot; Note we extract the column as well as the file and line number&lt;/span&gt;
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;grepprg=&lt;/span&gt;ag\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;nogroup\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;nocolor\ &lt;span style=&#34;color: #f8f8f2&#34;&gt;--&lt;/span&gt;column
-    &lt;span style=&#34;color: #66d9ef&#34;&gt;set&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;grepformat=&lt;/span&gt;%&lt;span style=&#34;color: #66d9ef&#34;&gt;f&lt;/span&gt;:%&lt;span style=&#34;color: #66d9ef&#34;&gt;l&lt;/span&gt;:%&lt;span style=&#34;color: #66d9ef&#34;&gt;c&lt;/span&gt;%&lt;span style=&#34;color: #66d9ef&#34;&gt;m&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;endif&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;code&gt;:grep&lt;/code&gt; searches are now lightning-fast and respectful of your
-&lt;code&gt;~/.gitignore&lt;/code&gt; patterns. It&amp;rsquo;s genuinely impressive.&lt;/p&gt;
-
-&lt;p&gt;Improve your efficiency further by remapping the keys for jumping
-through search matches (stored in the &amp;ldquo;quickfix&amp;rdquo; list):&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;nmap &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;silent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;RIGHT&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; :cnext&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;CR&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-nmap &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;silent&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;LEFT&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt; :cprev&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;CR&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I&amp;rsquo;m using the cursor keys since I normally have them disabled.&lt;/p&gt;
-
-&lt;p&gt;See also:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://robots.thoughtbot.com/faster-grepping-in-vim&#34;&gt;Faster Grepping in Vim&lt;/a&gt; by Dan
-Croak - this shows how to use the Silver searcher with the &lt;a href=&#34;https://github.com/kien/ctrlp.vim&#34;&gt;CtrlP&lt;/a&gt; plugin.&lt;/p&gt;&lt;/li&gt;
-
-&lt;li&gt;&lt;p&gt;The Vim plugin &lt;a href=&#34;https://github.com/rking/ag.vim&#34;&gt;ag.vim&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
+      <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
+It&amp;rsquo;s easily installed - on OSX, run:
+$ brew install the_silver_searcher  Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
+if executable(&amp;#39;ag&amp;#39;) &amp;quot; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif  :grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -64,72 +29,12 @@ Croak - this shows how to use the Silver searcher with the &lt;a href=&#34;https
       <pubDate>Fri, 06 Jul 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</guid>
-      <description>
-
-&lt;h3 id=&#34;problem&#34;&gt;Problem&lt;/h3&gt;
-
-&lt;p&gt;You want to add i18n support to an existing project. One part of this is
-modifying all templates to use the &lt;code&gt;{% trans &amp;quot;...&amp;quot; %}&lt;/code&gt; block around all
-hard-coded strings.&lt;/p&gt;
-
-&lt;p&gt;When you have a lot of templates, this gets pretty tedious.&lt;/p&gt;
-
-&lt;h3 id=&#34;solution&#34;&gt;Solution&lt;/h3&gt;
-
-&lt;p&gt;Use Vim macros!&lt;/p&gt;
-
-&lt;h4 id=&#34;macro-1-convert-tag-text&#34;&gt;Macro 1 - Convert tag text&lt;/h4&gt;
-
-&lt;p&gt;To convert&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;Welcome to my site&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;{% trans &amp;quot;Welcome to my site&amp;quot; %}&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;h1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;use the macro&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;vitc{% trans &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; %}&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;ESC&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;hp
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which breaks down as:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;vit&lt;/code&gt; - select content inside the tag;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;c{% trans &amp;quot;&amp;quot; %}&lt;/code&gt; - change tag content to be &lt;code&gt;{% trans &amp;quot;&amp;quot; %}&lt;/code&gt; while
-saving the original tag content to the anonymous register;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;&amp;lt;ESC&amp;gt;4hp&lt;/code&gt; - move the cursor to the first speech mark and paste the
-original tag contents. Note that &lt;code&gt;&amp;lt;ESC&amp;gt;&lt;/code&gt; is one key-stroke, not
-five.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To record the macro, locate the cursor over a tag that you want to
-convert then start recording by pressing &lt;code&gt;q&lt;/code&gt; twice (to record the macro
-to the named register &lt;code&gt;q&lt;/code&gt;). Then type the characters detailed above and
-press &lt;code&gt;q&lt;/code&gt; again to stop recording.&lt;/p&gt;
-
-&lt;p&gt;To apply the macro, again locate the cursor over a tag, or the text it
-contains, and type &lt;code&gt;@q&lt;/code&gt;. This will save you a lot of key-strokes.&lt;/p&gt;
-
-&lt;h4 id=&#34;macro-2-convert-selected-text&#34;&gt;Macro 2 - Convert selected text&lt;/h4&gt;
-
-&lt;p&gt;To convert&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;See this image: &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;img&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/images/1.jpg&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;/&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;to&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;{% trans &amp;quot;See this image:&amp;quot; %} &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;img&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;src&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;/images/1.jpg&amp;quot;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;/&amp;gt;&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span style=&#34;color: #f92672&#34;&gt;p&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;enter visual mode and select the text to convert (eg &amp;ldquo;See this image:&amp;ldquo;)
-then use the macro&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;c&lt;/span&gt;{% trans &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt; %}&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;lt;&lt;/span&gt;ESC&lt;span style=&#34;color: #f8f8f2&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;4&lt;/span&gt;hp
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;which is the same as the one above but without the tag text selection.&lt;/p&gt;
-
-&lt;p&gt;To summarise: Vim&amp;rsquo;s macros are great - learn how to use them.&lt;/p&gt;
-</description>
+      <description>Problem You want to add i18n support to an existing project. One part of this is modifying all templates to use the {% trans &amp;quot;...&amp;quot; %} block around all hard-coded strings.
+When you have a lot of templates, this gets pretty tedious.
+Solution Use Vim macros!
+Macro 1 - Convert tag text To convert
+&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt;  to
+&amp;lt;h1&amp;gt;{% trans &amp;quot;Welcome to my site&amp;quot; %}&amp;lt;/h1&amp;gt;  use the macro</description>
     </item>
     
   </channel>

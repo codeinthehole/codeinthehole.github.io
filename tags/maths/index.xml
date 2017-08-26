@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Maths on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/maths/index.xml</link>
+    <link>http://codeinthehole.com/tags/maths/</link>
     <description>Recent content in Maths on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/maths/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2005 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/maths/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Tutorial: the complex Ginzburg-Landau equation</title>
@@ -14,9 +17,7 @@
       <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/projects/ginzburg-landau-tutorial/</guid>
-      <description>&lt;p&gt;I wrote a &lt;a href=&#34;http://codeinthehole.com/tutorial/index.html&#34;&gt;tutorial on the complex Ginzburg-Landau equation&lt;/a&gt; as a
-set of simple HTML pages.&lt;/p&gt;
-</description>
+      <description>I wrote a tutorial on the complex Ginzburg-Landau equation as a set of simple HTML pages.</description>
     </item>
     
   </channel>

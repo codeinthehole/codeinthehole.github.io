@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Node on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/node/index.xml</link>
+    <link>http://codeinthehole.com/tags/node/</link>
     <description>Recent content in Node on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://codeinthehole.com/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 10 Nov 2010 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://codeinthehole.com/tags/node/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>nurl - an immutable URL object for node.js</title>
@@ -14,54 +17,8 @@
       <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</guid>
-      <description>&lt;p&gt;I&amp;rsquo;m a big fan of &lt;a href=&#34;http://c2.com/cgi/wiki?ValueObject&#34;&gt;Value Objects&lt;/a&gt; -
-some of the most useful classes I&amp;rsquo;ve ever written have been lightweight
-wrappers around strings.&lt;/p&gt;
-
-&lt;p&gt;For my first contribution to the &lt;a href=&#34;http://nodejs.org/&#34;&gt;node.js&lt;/a&gt;
-ecosystem, I&amp;rsquo;ve published a simple, immutable URL object to the Node
-package manager (npm) directory. It provides a light-weight, immutable
-URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and
-&amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various
-extension methods that make working with URLs easy.&lt;/p&gt;
-
-&lt;p&gt;Source and detailed docs available at
-&lt;a href=&#34;http://github.com/codeinthehole/nurl&#34;&gt;http://github.com/codeinthehole/nurl&lt;/a&gt; -but here&amp;rsquo;s some sample usage for
-dynamically building a URL:&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;nurl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;require&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;nurl&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;baseUrl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;nurl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;Url&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()).&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setProtocol&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
-                              &lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setHostname&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;api.example.com&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt;
-                              &lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setPathname&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;search&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;searchUrl&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;baseUrl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;setPathSegment&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;1&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;my search term&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;searchUrl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;toString&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// =&amp;gt; &amp;#39;http://api.example.com/search/my%20search%20term&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;All components of a URL are exposed as read-only properties as well as
-through getter functions.&lt;/p&gt;
-&lt;div class=&#34;highlight&#34; style=&#34;background: #272822&#34;&gt;&lt;pre style=&#34;line-height: 125%&#34;&gt;&lt;span&gt;&lt;/span&gt;&lt;span style=&#34;color: #66d9ef&#34;&gt;var&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt; &lt;span style=&#34;color: #f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color: #a6e22e&#34;&gt;nurl&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;parse&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;http://www.example.com/path/to/somewhere?q=node.js&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;);&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getSubdomains&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;()&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// [&amp;#39;www&amp;#39;, &amp;#39;example&amp;#39;, &amp;#39;com&amp;#39;]&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getPathSegment&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #ae81ff&#34;&gt;0&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// &amp;#39;path&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getQueryParam&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;q&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// &amp;#39;node.js&amp;#39;&lt;/span&gt;
-&lt;span style=&#34;color: #a6e22e&#34;&gt;u&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;.&lt;/span&gt;&lt;span style=&#34;color: #a6e22e&#34;&gt;getQueryParam&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;(&lt;/span&gt;&lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;p&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;,&lt;/span&gt; &lt;span style=&#34;color: #e6db74&#34;&gt;&amp;#39;a default value&amp;#39;&lt;/span&gt;&lt;span style=&#34;color: #f8f8f2&#34;&gt;)&lt;/span&gt; &lt;span style=&#34;color: #75715e&#34;&gt;// &amp;#39;a default value&amp;#39;&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;All very simple but potentially quite useful thanks to the ubiquity of
-the humble URL.&lt;/p&gt;
-
-&lt;p&gt;Writing this module introduced me to some of the excellent software
-already available for node.js. Firstly, the package management system
-&lt;a href=&#34;http://github.com/isaacs/npm&#34;&gt;npm&lt;/a&gt; is brilliantly simple to get started
-with, and to publish modules for all to use. Secondly, I&amp;rsquo;m a huge fan of
-the &lt;a href=&#34;http://vowsjs.org/&#34;&gt;Vows BDD package&lt;/a&gt;. Writing tests in javascript
-offers some cunning possibilities such as dynamically building
-test-suites at run-time - this is great for this package as I can create
-a fixture object of URL strings and their decomposition into components,
-then build the context dynamically.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&#34;http://codeinthehole.com/images/screenshots/vows.png&#34; alt=&#34;Screenshot of vows in action&#34; /&gt;&lt;/p&gt;
-
-&lt;p&gt;All feedback, forks and pull requests gratefully accepted.&lt;/p&gt;
-</description>
+      <description>I&amp;rsquo;m a big fan of Value Objects - some of the most useful classes I&amp;rsquo;ve ever written have been lightweight wrappers around strings.
+For my first contribution to the node.js ecosystem, I&amp;rsquo;ve published a simple, immutable URL object to the Node package manager (npm) directory. It provides a light-weight, immutable URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and &amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various extension methods that make working with URLs easy.</description>
     </item>
     
   </channel>
