@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-08-29%2014%3a47%3a35.665881268%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-08-29%2014%3a47%3a35.66236438%20%2b0100%20BST" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -32,9 +32,9 @@ ga('send', 'pageview');
 
         
         
-        <title>A useful template for commit messages - David Winterbottom</title>
+        <title>Using pgbadger with AWS RDS - David Winterbottom</title>
         <meta name="author" content="David Winterbottom">
-        <meta name="description" content="A simple heuristic for preferring the imperative mood">
+        <meta name="description" content="Two gotchas that I wasted time on">
 
     </head>
 
@@ -59,47 +59,44 @@ ga('send', 'pageview');
 
     <div id="content" class="article">
 
-        <h1 id="article_title" class="entry-title">A useful template for commit messages</h1>
+        <h1 id="article_title" class="entry-title">Using pgbadger with AWS RDS</h1>
 
         <div class="byline desktop_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a>
-            on <time class="published" datetime="">Friday, 2 October 2015</time>
+            on <time class="published" datetime="">Tuesday, 29 August 2017</time>
         </div>
         <div class="byline mobile_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
-            <span class="article_date">on <time class="published" datetime="">Friday, 2 October 2015</time></span>
+            <span class="article_date">on <time class="published" datetime="">Tuesday, 29 August 2017</time></span>
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Here&rsquo;s a useful heuristic for writing better commit messages. Set your
-commit message template to:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span># If applied, this commit will...
+            <p>There&rsquo;s two non-obvious things to know when starting to use
+<a href="http://dalibo.github.io/pgbadger/">pgbadger</a> with AWS
+RDS.</p>
 
-# Why is this change needed?
-Prior to this change, 
-
-# How does it address the issue?
-This change
-
-# Provide links to any relevant tickets, articles or other resources
+<p>First, set:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>    <span style="color: #a6e22e">log_statement</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">None </span>
 </pre></div>
 
-<p>and you&rsquo;ll be guided into writing concise commit subjects in the
-imperative mood - a good practice. See rule 5 of Chris Beam&rsquo;s <a href="http://chris.beams.io/posts/git-commit/">&ldquo;How to
-write a commit message&rdquo;</a> for
-the inspiration of this tip and more reasoning on the use of the
-imperative mood.</p>
+<p>Don&rsquo;t set this to <em>all</em> as the <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html">AWS docs</a> suggest.</p>
 
-<p>To do this in Git, save the above content in a file (eg
-<code>~/.git_commit_msg.txt</code>) and run:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git config --global commit.template ~/.git_commit_msg.txt
+<p>Further, don&rsquo;t waste your time trying to add a DB parameter to set <code>log_line_prefix</code>
+to pgbadger&rsquo;s recommended value: it&rsquo;s not possible<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. Instead pass
+the custom format when calling pgbadger:</p>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pgbadger -p <span style="color: #e6db74">&#39;%t:%r:%u@%d:[%p]:&#39;</span> postgres.log
 </pre></div>
 
-<p>Here&rsquo;s what this looks like in practice:</p>
+<p>Hope that saves you some time.</p>
+<div class="footnotes">
 
-<p><img src="/images/git-commit-snap.png" width="800px" /></p>
+<hr />
 
-<p>Try it - it&rsquo;s genuinely useful.</p>
+<ol>
+<li id="fn:1">See <a href="https://forums.aws.amazon.com/thread.jspa?threadID=145342">https://forums.aws.amazon.com/thread.jspa?threadID=145342</a>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+</ol>
+</div>
 
         </div>
 
@@ -107,15 +104,15 @@ imperative mood.</p>
             <span class="hr">----</span>
             <p>
             Something wrong? 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/git-commit-template.md">Suggest an improvement</a>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/using-pgbadger-with-aws-rds.md">Suggest an improvement</a>
             or 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22A%20useful%20template%20for%20commit%20messages%22&body=Article:%20A%20useful%20template%20for%20commit%20messages%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fa-useful-template-for-commit-messages%2f">add a comment</a>
-            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/git-commit-template.md">article history</a>)<br/>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Using%20pgbadger%20with%20AWS%20RDS%22&body=Article:%20Using%20pgbadger%20with%20AWS%20RDS%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fusing-pgbadger-with-aws-rds%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/using-pgbadger-with-aws-rds.md">article history</a>)<br/>
 
             
                 Tagged with:
                 
-                 <a href="/tags/git">git</a>
+                 <a href="/tags/aws">AWS</a>, <a href="/tags/postgres">postgres</a>
                 <br/>
             
             
@@ -125,10 +122,8 @@ imperative mood.</p>
 
             <p>
             
-                Previous: <a href="/tips/copying-postgres-output-into-a-spreadsheet/">Copying Postgres output into a spreadsheet</a><br/>
+                Previous: <a href="/tips/a-mnemonic-for-mocks/">A mnemonic for mock decorators</a><br/>
             
-            
-                Next: <a href="/news/octopus-energy/">Octopus Energy</a>
             
             </p>
 

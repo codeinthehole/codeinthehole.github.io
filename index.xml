@@ -6,10 +6,23 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 26 Aug 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 29 Aug 2017 14:08:08 +0100</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using pgbadger with AWS RDS</title>
+      <link>http://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</link>
+      <pubDate>Tue, 29 Aug 2017 14:08:08 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</guid>
+      <description>There&amp;rsquo;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
+First, set:
+ log_statement = None   Don&amp;rsquo;t set this to all as the AWS docs suggest.
+Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead pass the custom format when calling pgbadger:
+$ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log  Hope that saves you some time.</description>
+    </item>
     
     <item>
       <title>A mnemonic for mock decorators</title>

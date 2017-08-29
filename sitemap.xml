@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</loc>
+    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tips/a-mnemonic-for-mocks/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
   </url>
@@ -504,7 +509,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/aws/</loc>
-    <lastmod>2015-05-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -555,7 +560,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -725,7 +730,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/postgres/</loc>
-    <lastmod>2015-09-02T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -797,7 +802,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2017-08-26T00:00:00+00:00</lastmod>
+    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
     <priority>0</priority>
   </url>
   
