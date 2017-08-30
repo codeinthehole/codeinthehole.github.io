@@ -19,8 +19,8 @@
       <guid>http://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</guid>
       <description>There&amp;rsquo;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
 First, set:
- log_statement = None   Don&amp;rsquo;t set this to all as the AWS docs suggest.
-Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead pass the custom format when calling pgbadger:
+log_statement = None   Don&amp;rsquo;t set this to all as the AWS docs suggest.
+Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
 $ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log  Hope that saves you some time.</description>
     </item>
     

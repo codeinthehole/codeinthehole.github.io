@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-08-29%2014%3a47%3a35.66236438%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-08-30%2011%3a23%3a04.048741379%20%2b0100%20BST" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -76,14 +76,14 @@ ga('send', 'pageview');
 RDS.</p>
 
 <p>First, set:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>    <span style="color: #a6e22e">log_statement</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">None </span>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">log_statement</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">None </span>
 </pre></div>
 
 <p>Don&rsquo;t set this to <em>all</em> as the <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html">AWS docs</a> suggest.</p>
 
 <p>Further, don&rsquo;t waste your time trying to add a DB parameter to set <code>log_line_prefix</code>
-to pgbadger&rsquo;s recommended value: it&rsquo;s not possible<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. Instead pass
-the custom format when calling pgbadger:</p>
+to pgbadger&rsquo;s recommended value: it&rsquo;s not possible<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. Instead tell
+pgbadger about the log format that RDS insists on:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pgbadger -p <span style="color: #e6db74">&#39;%t:%r:%u@%d:[%p]:&#39;</span> postgres.log
 </pre></div>
 
