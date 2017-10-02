@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-09-30%2022%3a46%3a19.076828396%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-10-02%2009%3a30%3a50.167285188%20%2b0100%20BST" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,7 +78,7 @@ ga('send', 'pageview');
 <h2 id="fail-fast">Fail fast</h2>
 
 <p>You probably already know that you can force Bash scripts to exit immediately if
-any command exits with a non-zero status using:</p>
+there&rsquo;s an error (that is, if any command exits with a non-zero exit code) using:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/usr/bin/env bash</span>
 
 <span style="color: #f8f8f2">set</span> -e
@@ -93,19 +93,19 @@ any command exits with a non-zero status using:</p>
 <ul>
 <li>exits on an error (<code>-e</code>, equivalent to <code>-o errexit</code>);</li>
 <li>exits on an undefined variable (<code>-u</code>, equivalent to <code>-o nounset</code>);</li>
-<li>exits on an error in piped-together processes (<code>-o pipefail</code>)<sup class="footnote-ref" id="fnref:pgdump"><a rel="footnote" href="#fn:pgdump">1</a></sup>.</li>
+<li>exits on an error in piped-together commands (<code>-o pipefail</code>)<sup class="footnote-ref" id="fnref:pgdump"><a rel="footnote" href="#fn:pgdump">1</a></sup>.</li>
 </ul>
 
-<p>Learn more about these built-ins with:</p>
+<p>You can learn more about these built-ins with:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">help</span> <span style="color: #f8f8f2">set</span>
 </pre></div>
 
 <h2 id="fail-noisy">Fail noisy</h2>
 
-<p>Failing fast is all very well but, by default, scripts fail silently, offering
+<p>Failing fast is all very well but, by default scripts fail silently offering
 no debug information.</p>
 
-<p>You can add</p>
+<p>You can add:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">set</span> -x
 </pre></div>
 
@@ -119,8 +119,12 @@ handling using <code>trap</code>:.</p>
 <span style="color: #f8f8f2">trap</span> print_error ERR
 </pre></div>
 
-<p>Here we bind the <code>print_error</code> function to the <code>ERR</code> event and print out the
-offending line of the script using <code>sed</code>.</p>
+<p>Here we bind the <code>print_error</code> function to the <code>ERR</code> event and print out an
+error message and offending line of the script (extracted using <code>sed</code>) to
+STDERR.</p>
+
+<p>Note the use of a <code>&lt;&lt;&lt;</code> <em>here string</em> and the <code>caller</code> built-in to
+assign the line and filename of the error.</p>
 
 <p>So running the script:</p>
 <div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/usr/bin/env bash</span>
@@ -142,8 +146,8 @@ An error occurred in line <span style="color: #ae81ff">11</span> of file ./test.
 <span style="color: #f8f8f2">false</span>
 </pre></div>
 
-<p>There are more sophisticated ways to handle errors<sup class="footnote-ref" id="fnref:othertools"><a rel="footnote" href="#fn:othertools">2</a></sup> but
-this is a simple option that&rsquo;s easy to paste into new scripts.</p>
+<p>There are more sophisticated ways to handle errors in Bash scripts<sup class="footnote-ref" id="fnref:othertools"><a rel="footnote" href="#fn:othertools">2</a></sup> but
+this is a concise, simple option to have to hand.</p>
 
 
 
@@ -170,6 +174,11 @@ this is a simple option that&rsquo;s easy to paste into new scripts.</p>
             <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Bash%20error%20reporting%22&body=Article:%20Bash%20error%20reporting%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fbash-error-reporting%2f">add a comment</a>
             (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/bash-error-reporting.md">article history</a>)<br/>
 
+            
+                Tagged with:
+                
+                 <a href="/tags/bash">bash</a>
+                <br/>
             
             
                 Filed in: <a href="/tips/">tips</a>
