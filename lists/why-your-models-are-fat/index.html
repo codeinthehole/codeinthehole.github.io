@@ -1,0 +1,173 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-3494213-5', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?2017-10-04%2012%3a11%3a30.995735125%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Why your Django models are fat - David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A tongue-in-cheek list">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Why your Django models are fat</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 4 October 2017</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Wednesday, 4 October 2017</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Because:</p>
+
+<ul>
+<li><p>You moved everything out of the <code>views.py</code> modules when you heard fat controllers
+were bad.</p></li>
+
+<li><p>And you&rsquo;ve read that fat models are a good idea<sup class="footnote-ref" id="fnref:fatmodels"><a rel="footnote" href="#fn:fatmodels">1</a></sup>.</p></li>
+
+<li><p>You need some extra functionality in a template and this is the easiest way
+to shoehorn it in. Eg:</p></li>
+</ul>
+<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>The current balance is <span style="color: #75715e">{{</span> <span style="color: #f8f8f2">account.get_balance_via_three_network_calls_lol</span> <span style="color: #75715e">}}</span><span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
+</pre></div>
+
+<ul>
+<li><p>You can quickly solve your current problem by adding <em>n</em> more lines to that method (repeat <em>ad infinitum</em>)<sup class="footnote-ref" id="fnref:srp"><a rel="footnote" href="#fn:srp">2</a></sup>.</p></li>
+
+<li><p>You&rsquo;re scared people will ignore your crucial wrapper function if it&rsquo;s not
+directly on the model<sup class="footnote-ref" id="fnref:scared"><a rel="footnote" href="#fn:scared">3</a></sup>.</p></li>
+
+<li><p>Are you even allowed to put application logic anywhere but a <code>models.py</code>?<sup class="footnote-ref" id="fnref:permission"><a rel="footnote" href="#fn:permission">4</a></sup></p></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:fatmodels"><p>For example:</p>
+
+<ul>
+<li><a href="https://hackerfall.com/story/fat-models--a-django-code-organization-strategy">Fat Models - A Django Code Organization Strategy</a></li>
+<li><a href="http://django-best-practices.readthedocs.io/en/latest/applications.html#make-em-fat">Django Best Practices: Make &lsquo;em Fat</a></li>
+<li><a href="https://ultimatedjango.com/learn-django/lessons/adding-business-logic-to-models/">Ultimate Django: Adding Business Logic to Models</a></li>
+</ul>
+
+<p>However, in practice, they&rsquo;re a bad idea (although this sometimes takes a
+few months to become apparent).</p>
+ <a class="footnote-return" href="#fnref:fatmodels"><sup>[return]</sup></a></li>
+
+<li id="fn:srp"><p>Requires a poor-quality test suite and diligent ignorance of the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single
+Responsibility Principle</a>.</p>
+ <a class="footnote-return" href="#fnref:srp"><sup>[return]</sup></a></li>
+
+<li id="fn:scared"><p>A legitimate problem with a liberal language like Python where it&rsquo;s
+hard to enforce calling conventions as nothing is truly private.</p>
+ <a class="footnote-return" href="#fnref:scared"><sup>[return]</sup></a></li>
+
+<li id="fn:permission"><p>You are: your web framework is not your boss.</p>
+
+<p>As a rule-of-thumb, your application logic should live in modules that aren&rsquo;t
+Django-specific modules (eg not in <code>views.py</code>, <code>models.py</code> or <code>forms.py</code>).
+If I had my way, Django would create an empty <code>business_logic.py</code> in each
+new app to encourage this.</p>
+ <a class="footnote-return" href="#fnref:permission"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/lists/why-your-models-are-fat.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Why%20your%20Django%20models%20are%20fat%22&body=Article:%20Why%20your%20Django%20models%20are%20fat%0AURL:%20http%3a%2f%2fcodeinthehole.com%2flists%2fwhy-your-models-are-fat%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/lists/why-your-models-are-fat.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/django">django</a>
+                <br/>
+            
+            
+                Filed in: <a href="/lists/">lists</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/bash-error-reporting/">Bash error reporting</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

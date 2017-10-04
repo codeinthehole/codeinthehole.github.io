@@ -6,10 +6,23 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 04 Oct 2017 10:30:02 +0000</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Why your Django models are fat</title>
+      <link>http://codeinthehole.com/lists/why-your-models-are-fat/</link>
+      <pubDate>Wed, 04 Oct 2017 10:30:02 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/lists/why-your-models-are-fat/</guid>
+      <description>Because:
+ You moved everything out of the views.py modules when you heard fat controllers were bad.
+ And you&amp;rsquo;ve read that fat models are a good idea1.
+ You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
+  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+    </item>
     
     <item>
       <title>Bash error reporting</title>
@@ -1128,16 +1141,19 @@ Oscar Oscar is an open-source e-commerce framework for Django.
       <guid>http://codeinthehole.com/music/</guid>
       <description>Some curated content can be found at:
  youtube.com/user/codeinthehole soundcloud.com/codeinthehole mixcloud.com/codeinthehole  Other good sources for stuff to code to:
- WeFunk radio rain.today  </description>
+ WeFunk radio rain.today (also try Piano jazz and rain)  </description>
     </item>
     
     <item>
-      <title>Octopus status</title>
-      <link>http://codeinthehole.com/monitor/</link>
+      <title>Videos</title>
+      <link>http://codeinthehole.com/videos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/monitor/</guid>
-      <description>Everything is fine </description>
+      <guid>http://codeinthehole.com/videos/</guid>
+      <description>Good technical talks that I can refer people to.
+Misc:
+ Inventing on Principle by Brett Victor. An inspiring talk demonstrating new UI concepts for creation.  All talks (and articles) by James Mickens are essential:
+ Computers are a Sadness, I am the Cure by James Mickens. &amp;ldquo;Say word count one more time&amp;hellip;&amp;rdquo;  </description>
     </item>
     
     <item>

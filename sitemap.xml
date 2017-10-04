@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://codeinthehole.com/lists/why-your-models-are-fat/</loc>
+    <lastmod>2017-10-04T10:30:02+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tips/bash-error-reporting/</loc>
     <lastmod>2017-09-30T22:44:03+01:00</lastmod>
   </url>
@@ -565,7 +570,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2017-09-30T22:44:03+01:00</lastmod>
+    <lastmod>2017-10-04T10:30:02+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -583,7 +588,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/django/</loc>
-    <lastmod>2016-05-05T00:00:00+00:00</lastmod>
+    <lastmod>2017-10-04T10:30:02+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -649,7 +654,7 @@
   
   <url>
     <loc>http://codeinthehole.com/lists/</loc>
-    <lastmod>2017-03-21T11:54:01+00:00</lastmod>
+    <lastmod>2017-10-04T10:30:02+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -709,10 +714,6 @@
     <loc>http://codeinthehole.com/tags/octopus-energy/</loc>
     <lastmod>2016-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>http://codeinthehole.com/monitor/</loc>
   </url>
   
   <url>
@@ -815,6 +816,10 @@
     <loc>http://codeinthehole.com/tags/ubuntu/</loc>
     <lastmod>2013-04-18T00:00:00+00:00</lastmod>
     <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://codeinthehole.com/videos/</loc>
   </url>
   
   <url>
