@@ -6,10 +6,19 @@
     <description>Recent content in Octopus Energy on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 05 May 2016 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 16 Oct 2017 16:33:45 +0100</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/tags/octopus-energy/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using a custom Sentry client</title>
+      <link>http://codeinthehole.com/news/oe-tech-custom-sentry-client/</link>
+      <pubDate>Mon, 16 Oct 2017 16:33:45 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-tech-custom-sentry-client/</guid>
+      <description>I wrote up a short tip on using a custom Sentry client.</description>
+    </item>
     
     <item>
       <title>Django, ELB health checks and continuous delivery</title>
