@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.778950355%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.320815942%20%2b0000%20GMT%20m%3d%2b0.534413607" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -79,15 +79,11 @@ ga('send', 'pageview');
 
 <p>You probably already know that you can force Bash scripts to exit immediately if
 there&rsquo;s an error (that is, if any command exits with a non-zero exit code) using:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/usr/bin/env bash</span>
-
-<span style="color: #f8f8f2">set</span> -e
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
+</span><span style="color:#75715e"></span>
+set -e</code></pre></div>
 <p>but it&rsquo;s even better to use:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">set</span> -eu -o pipefail
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -eu -o pipefail</code></pre></div>
 <p>so that the script:</p>
 
 <ul>
@@ -97,28 +93,22 @@ there&rsquo;s an error (that is, if any command exits with a non-zero exit code)
 </ul>
 
 <p>You can learn more about these built-ins with:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ <span style="color: #f8f8f2">help</span> <span style="color: #f8f8f2">set</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ help set</code></pre></div>
 <h2 id="fail-noisy">Fail noisy</h2>
 
 <p>Failing fast is all very well but, by default scripts fail silently offering
 no debug information.</p>
 
 <p>You can add:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">set</span> -x
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -x</code></pre></div>
 <p>to print each command before execution but it&rsquo;s easy to add simple error
 handling using <code>trap</code>:.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">function</span> print_error <span style="color: #f92672">{</span>
-    <span style="color: #f8f8f2">read</span> line file <span style="color: #f92672">&lt;&lt;&lt;</span><span style="color: #66d9ef">$(</span><span style="color: #f8f8f2">caller</span><span style="color: #66d9ef">)</span>
-    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;An error occurred in line </span><span style="color: #f8f8f2">$line</span><span style="color: #e6db74"> of file </span><span style="color: #f8f8f2">$file</span><span style="color: #e6db74">:&quot;</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
-    sed <span style="color: #e6db74">&quot;${</span><span style="color: #f8f8f2">line</span><span style="color: #e6db74">}q;d&quot;</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$file</span><span style="color: #e6db74">&quot;</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
-<span style="color: #f92672">}</span>
-<span style="color: #f8f8f2">trap</span> print_error ERR
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> print_error <span style="color:#f92672">{</span>
+    read line file <span style="color:#f92672">&lt;&lt;&lt;</span><span style="color:#66d9ef">$(</span>caller<span style="color:#66d9ef">)</span>
+    echo <span style="color:#e6db74">&#34;An error occurred in line </span>$line<span style="color:#e6db74"> of file </span>$file<span style="color:#e6db74">:&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    sed <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">q;d&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+<span style="color:#f92672">}</span>
+trap print_error ERR</code></pre></div>
 <p>Here we bind the <code>print_error</code> function to the <code>ERR</code> event and print out an
 error message and offending line of the script (extracted using <code>sed</code>) to
 STDERR.</p>
@@ -127,25 +117,21 @@ STDERR.</p>
 assign the line and filename of the error.</p>
 
 <p>So running the script:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/usr/bin/env bash</span>
-<span style="color: #f8f8f2">set</span> -eu -o pipefail
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
+</span><span style="color:#75715e"></span>set -eu -o pipefail
 
-<span style="color: #66d9ef">function</span> print_error <span style="color: #f92672">{</span>
-    <span style="color: #f8f8f2">read</span> line file <span style="color: #f92672">&lt;&lt;&lt;</span><span style="color: #66d9ef">$(</span><span style="color: #f8f8f2">caller</span><span style="color: #66d9ef">)</span>
-    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;An error occurred in line </span><span style="color: #f8f8f2">$line</span><span style="color: #e6db74"> of file </span><span style="color: #f8f8f2">$file</span><span style="color: #e6db74">:&quot;</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
-    sed <span style="color: #e6db74">&quot;${</span><span style="color: #f8f8f2">line</span><span style="color: #e6db74">}q;d&quot;</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$file</span><span style="color: #e6db74">&quot;</span> &gt;<span style="color: #f8f8f2">&amp;</span><span style="color: #ae81ff">2</span>
-<span style="color: #f92672">}</span>
-<span style="color: #f8f8f2">trap</span> print_error ERR
+<span style="color:#66d9ef">function</span> print_error <span style="color:#f92672">{</span>
+    read line file <span style="color:#f92672">&lt;&lt;&lt;</span><span style="color:#66d9ef">$(</span>caller<span style="color:#66d9ef">)</span>
+    echo <span style="color:#e6db74">&#34;An error occurred in line </span>$line<span style="color:#e6db74"> of file </span>$file<span style="color:#e6db74">:&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    sed <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">q;d&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+<span style="color:#f92672">}</span>
+trap print_error ERR
 
-<span style="color: #f8f8f2">false</span>
-</pre></div>
-
+false</code></pre></div>
 <p>gives:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ ./script.sh
-An error occurred in line <span style="color: #ae81ff">11</span> of file ./test.sh:
-<span style="color: #f8f8f2">false</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./script.sh
+An error occurred in line <span style="color:#ae81ff">11</span> of file ./test.sh:
+false</code></pre></div>
 <p>There are more sophisticated ways to handle errors in Bash scripts<sup class="footnote-ref" id="fnref:othertools"><a rel="footnote" href="#fn:othertools">2</a></sup> but
 this is a concise, simple option to have to hand.</p>
 

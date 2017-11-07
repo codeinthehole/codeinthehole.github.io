@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.796182501%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.334377349%20%2b0000%20GMT%20m%3d%2b0.547975014" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -87,72 +87,58 @@ handle quoting and escaping which are common in CSVs.</p>
 I&rsquo;ve put together.</p>
 
 <p>Install with:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>pip install csvfilter
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install csvfilter</code></pre></div>
 <p>Sample usage:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Pluck columns 2, 5 and 6</span>
-cat in.csv <span style="color: #f8f8f2">|</span> csvfilter -f <span style="color: #ae81ff">2</span>,5,6 &gt; out.csv
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pluck columns 2, 5 and 6
+</span><span style="color:#75715e"></span>cat in.csv | csvfilter -f <span style="color:#ae81ff">2</span>,5,6 &gt; out.csv
 
-<span style="color: #75715e"># Pluck all columns except 4</span>
-cat in.csv <span style="color: #f8f8f2">|</span> csvfilter -f <span style="color: #ae81ff">4</span> -i &gt; out.csv
+<span style="color:#75715e"># Pluck all columns except 4
+</span><span style="color:#75715e"></span>cat in.csv | csvfilter -f <span style="color:#ae81ff">4</span> -i &gt; out.csv
 
-<span style="color: #75715e"># Skip header row</span>
-cat in.csv <span style="color: #f8f8f2">|</span> csvfilter -s <span style="color: #ae81ff">1</span> &gt; out.csv
+<span style="color:#75715e"># Skip header row
+</span><span style="color:#75715e"></span>cat in.csv | csvfilter -s <span style="color:#ae81ff">1</span> &gt; out.csv
 
-<span style="color: #75715e"># Work with pipe-separated data</span>
-cat in.csv <span style="color: #f8f8f2">|</span> csvfilter -s <span style="color: #ae81ff">1</span>,3 --delimiter<span style="color: #f92672">=</span><span style="color: #e6db74">&quot;|&quot;</span> &gt; out.csv
-</pre></div>
-
+<span style="color:#75715e"># Work with pipe-separated data
+</span><span style="color:#75715e"></span>cat in.csv | csvfilter -s <span style="color:#ae81ff">1</span>,3 --delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;|&#34;</span> &gt; out.csv</code></pre></div>
 <p>The above examples show <code>csvfilter</code> processing <code>sys.STDIN</code> but it can
 also act directly on a file:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>csvfilter -f <span style="color: #ae81ff">2</span>,5,6 in.csv  &gt; out.csv
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">csvfilter -f <span style="color:#ae81ff">2</span>,5,6 in.csv  &gt; out.csv</code></pre></div>
 <p>Help:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ csvfilter --help
-Usage: csvfilter <span style="color: #f92672">[</span>options<span style="color: #f92672">]</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ csvfilter --help
+Usage: csvfilter <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span>
 
 Options:
--h, --help            show this <span style="color: #f8f8f2">help</span> message and <span style="color: #f8f8f2">exit</span>
--f FIELDS, --fields<span style="color: #f92672">=</span>FIELDS
+-h, --help            show this help message and exit
+-f FIELDS, --fields<span style="color:#f92672">=</span>FIELDS
                         Specify which fields to pluck
--s SKIP, --skip<span style="color: #f92672">=</span>SKIP  Number of rows to skip
--d DELIMITER, --delimiter<span style="color: #f92672">=</span>DELIMITER
+-s SKIP, --skip<span style="color:#f92672">=</span>SKIP  Number of rows to skip
+-d DELIMITER, --delimiter<span style="color:#f92672">=</span>DELIMITER
                         Delimiter of incoming CSV data
 -i, --inverse         Invert the filter - ie drop the selected fields
---out-delimiter<span style="color: #f92672">=</span>OUT_DELIMITER
-                        Delimiter to use <span style="color: #66d9ef">for</span> output
---out-quotechar<span style="color: #f92672">=</span>OUT_QUOTECHAR
-                        Quote character to use <span style="color: #66d9ef">for</span> output
-</pre></div>
-
+--out-delimiter<span style="color:#f92672">=</span>OUT_DELIMITER
+                        Delimiter to use <span style="color:#66d9ef">for</span> output
+--out-quotechar<span style="color:#f92672">=</span>OUT_QUOTECHAR
+                        Quote character to use <span style="color:#66d9ef">for</span> output</code></pre></div>
 <p>There is also a simple python API that allows you to add validators to
 determine which rows are filtered out:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">csvfilter</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Processor</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> csvfilter <span style="color:#f92672">import</span> Processor
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">contains_cheese</span><span style="color: #f8f8f2">(row):</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #e6db74">&#39;cheese&#39;</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">row</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">contains_cheese</span>(row):
+    <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;cheese&#39;</span> <span style="color:#f92672">in</span> row
 
-<span style="color: #f8f8f2">processor</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Processor(fields</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">[</span><span style="color: #ae81ff">1</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">2</span><span style="color: #f8f8f2">,</span><span style="color: #ae81ff">3</span><span style="color: #f8f8f2">])</span>
-<span style="color: #f8f8f2">processor</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">add_validator(contains_cheese)</span>
-<span style="color: #f8f8f2">generator</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">processor</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">process(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">stdin)</span>
+processor <span style="color:#f92672">=</span> Processor(fields<span style="color:#f92672">=</span>[<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>])
+processor<span style="color:#f92672">.</span>add_validator(contains_cheese)
+generator <span style="color:#f92672">=</span> processor<span style="color:#f92672">.</span>process(sys<span style="color:#f92672">.</span>stdin)
 
-<span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">cheesy_row</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">generator:</span>
-    <span style="color: #f8f8f2">do_something(cheesy_row)</span>
-</pre></div>
-
+<span style="color:#66d9ef">for</span> cheesy_row <span style="color:#f92672">in</span> generator:
+    do_something(cheesy_row)</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 
 <p>It&rsquo;s possible to do basic CSV manipulation from the command-line using
 <code>cut</code> or <code>awk</code> - for example:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>cat in.csv <span style="color: #f8f8f2">|</span> cut -d <span style="color: #e6db74">&quot;,&quot;</span> -f <span style="color: #ae81ff">0</span>,1,2 &gt; out.csv
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat in.csv | cut -d <span style="color:#e6db74">&#34;,&#34;</span> -f <span style="color:#ae81ff">0</span>,1,2 &gt; out.csv</code></pre></div>
 <p>or :</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>cat in.csv <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;BEGIN {FS=&quot;,&quot;} {print $1,$2,$3}&#39;</span> &gt; out.csv
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat in.csv | awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;,&#34;} {print $1,$2,$3}&#39;</span> &gt; out.csv</code></pre></div>
 <p>However neither <code>cut</code> or <code>awk</code> make it easy to handle CSVs with escaped
 characters - hence the motivation for this tool.</p>
 

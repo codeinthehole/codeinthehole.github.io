@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.780552333%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.322592597%20%2b0000%20GMT%20m%3d%2b0.536190262" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,26 +75,20 @@ ga('send', 'pageview');
 always clear what order arguments are being injected.</p>
 
 <p>For instance, which of these is right? This:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">some_pytest_fixture):</span>
-    <span style="color: #66d9ef">pass</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
+<span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something_in_module</span>(collaborator_1, collaborator_2, some_pytest_fixture):
+    <span style="color:#66d9ef">pass</span></code></pre></div>
 <p>Or this?</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">some_pytest_fixture):</span>
-    <span style="color: #66d9ef">pass</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
+<span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something_in_module</span>(collaborator_1, collaborator_2, some_pytest_fixture):
+    <span style="color:#66d9ef">pass</span></code></pre></div>
 <p>Or this?</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(some_pytest_fixture,</span> <span style="color: #f8f8f2">collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2):</span>
-    <span style="color: #66d9ef">pass</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
+<span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something_in_module</span>(some_pytest_fixture, collaborator_1, collaborator_2):
+    <span style="color:#66d9ef">pass</span></code></pre></div>
 <p>I&rsquo;ve wasted considerable time using PDB to work out what is being injected
 where.</p>
 
@@ -108,22 +102,18 @@ doesn&rsquo;t matter.</p></li>
 decorator injects the first argument, then the next outer decorator injects
 the second argument and so on. Like this:</p></li>
 </ul>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_3&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">collaborator_3):</span>
-    <span style="color: #66d9ef">pass</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_3&#39;</span>)
+<span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
+<span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something_in_module</span>(collaborator_1, collaborator_2, collaborator_3):
+    <span style="color:#66d9ef">pass</span></code></pre></div>
 <p>The things to remember is that it&rsquo;s a <em>symmetrical</em> arrangement with the test function or method in the centre.</p>
 
 <p>So the correct arrangement above is:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_2&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #a6e22e">@mock.patch.object</span><span style="color: #f8f8f2">(module,</span> <span style="color: #e6db74">&#39;collaborator_1&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something_in_module</span><span style="color: #f8f8f2">(collaborator_1,</span> <span style="color: #f8f8f2">collaborator_2,</span> <span style="color: #f8f8f2">some_pytest_fixture):</span>
-    <span style="color: #66d9ef">pass</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
+<span style="color:#a6e22e">@mock.patch.object</span>(module, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something_in_module</span>(collaborator_1, collaborator_2, some_pytest_fixture):
+    <span style="color:#66d9ef">pass</span></code></pre></div>
 <p>&ndash;</p>
 
 <div class="admonition warning">

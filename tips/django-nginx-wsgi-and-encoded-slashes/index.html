@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.794365608%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.333593173%20%2b0000%20GMT%20m%3d%2b0.547190838" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -81,9 +81,7 @@ keywords.</p>
 
 <p>For example, you may want to edit some attribute of the page at URL <code>/</code>;
 hence, you want to use a URL regex of the form:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">url(</span><span style="color: #e6db74">r&#39;/edit/page/(?P&lt;page_url&gt;.*)/$&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f92672">...</span><span style="color: #f8f8f2">)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/edit/page/(?P&lt;page_url&gt;.*)/$&#39;</span>, <span style="color:#f92672">...</span>)</code></pre></div>
 <p>and use the URL <code>/edit/page/%2F/</code> to edit this page, where the third
 path segment is URL-encoded.</p>
 
@@ -96,19 +94,13 @@ the above request path as <code>/edit/path</code>.</p>
 
 <p>First, in order to get django to encode slashes, you need to pass an
 empty string to the <code>urlencode</code> template filter.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">{</span><span style="color: #f92672">%</span> <span style="color: #f8f8f2">url</span> <span style="color: #f8f8f2">edit</span><span style="color: #f92672">-</span><span style="color: #f8f8f2">page</span> <span style="color: #f8f8f2">url</span><span style="color: #f92672">|</span><span style="color: #f8f8f2">urlencode:</span><span style="color: #e6db74">&quot;&quot;</span> <span style="color: #f92672">%</span><span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> url edit<span style="color:#f92672">-</span>page url<span style="color:#f92672">|</span>urlencode:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">%</span>}</code></pre></div>
 <p>Next ensure Nginx&rsquo;s <code>proxy_pass</code> configuration is transmitting the URL
 in &lsquo;unprocessed form&rsquo; by omitting the path on the proxied server
 argmenent. That is, use:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">proxy_pass</span> <span style="color: #e6db74">http://localhost:80</span><span style="color: #f8f8f2">;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">proxy_pass</span> <span style="color:#e6db74">http://localhost:80</span>;</code></pre></div>
 <p>instead of:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">proxy_pass</span> <span style="color: #e6db74">http://localhost:80/</span><span style="color: #f8f8f2">;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">proxy_pass</span> <span style="color:#e6db74">http://localhost:80/</span>;</code></pre></div>
 <p>The only different between these two examples is the trailing slash. See
 the <a href="http://wiki.nginx.org/HttpProxyModule">nginx documentation for
 proxy_pass</a> for more details on
@@ -116,28 +108,24 @@ what &lsquo;unprocessed&rsquo; means.</p>
 
 <p>Next, alter your Apache config to include the <code>AllowEncodedSlashes</code>
 directive to ensure Apache recognises encoded slashes:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;VirtualHost</span> <span style="color: #e6db74">\*</span><span style="color: #f92672">&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">\*</span><span style="color:#f92672">&gt;</span>
     ...
-    <span style="color: #f8f8f2">AllowEncodedSlashes</span> <span style="color: #66d9ef">On</span>
+    AllowEncodedSlashes <span style="color:#66d9ef">On</span>
     ...
-<span style="color: #f92672">&lt;/VirtualHost&gt;</span>
-</pre></div>
-
+<span style="color:#f92672">&lt;/VirtualHost</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span></code></pre></div>
 <p>Finally modify your WSGI script to ensure Django gets the slashes in its
 <code>PATH_INFO</code> environmental variable which it uses for resolving the URL
 to a view function:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ... other WSGI stuff: setting up path, virtualenv etc</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># ... other WSGI stuff: setting up path, virtualenv etc</span>
 
-<span style="color: #f8f8f2">os</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">environ[</span><span style="color: #e6db74">&#39;DJANGO_SETTINGS_MODULE&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;settings&#39;</span>
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">django.core.handlers.wsgi</span>
-<span style="color: #f8f8f2">_application</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">django</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">core</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">handlers</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">wsgi</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">WSGIHandler()</span>
+os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;DJANGO_SETTINGS_MODULE&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;settings&#39;</span>
+<span style="color:#f92672">import</span> django.core.handlers.wsgi
+_application <span style="color:#f92672">=</span> django<span style="color:#f92672">.</span>core<span style="color:#f92672">.</span>handlers<span style="color:#f92672">.</span>wsgi<span style="color:#f92672">.</span>WSGIHandler()
 
-<span style="color: #f92672">import</span> <span style="color: #f8f8f2">urllib</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">application</span><span style="color: #f8f8f2">(environ,</span> <span style="color: #f8f8f2">start_response):</span>
-    <span style="color: #f8f8f2">environ[</span><span style="color: #e6db74">&#39;PATH_INFO&#39;</span><span style="color: #f8f8f2">]</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">urllib</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">unquote(environ[</span><span style="color: #e6db74">&#39;REQUEST_URI&#39;</span><span style="color: #f8f8f2">]</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">split(</span><span style="color: #e6db74">&#39;?&#39;</span><span style="color: #f8f8f2">)[</span><span style="color: #ae81ff">0</span><span style="color: #f8f8f2">])</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">_application(environ,</span> <span style="color: #f8f8f2">start_response)</span>
-</pre></div>
-
+<span style="color:#f92672">import</span> urllib
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">application</span>(environ, start_response):
+    environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;PATH_INFO&#39;</span>] <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>unquote(environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;REQUEST_URI&#39;</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;?&#39;</span>)[<span style="color:#ae81ff">0</span>])
+    <span style="color:#66d9ef">return</span> _application(environ, start_response)</code></pre></div>
 <p>The key change is using the <code>REQUEST_URI</code> variable to set <code>PATH_INFO</code>.
 We pluck the path component from <code>REQUEST_URI</code> and use <code>urllib.unquote</code>
 to ensure encoded slashes are decoded.</p>

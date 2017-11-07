@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.793553218%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.332325268%20%2b0000%20GMT%20m%3d%2b0.545922933" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -93,14 +93,12 @@ explained with an &hellip;</p>
 <h3 id="example">Example</h3>
 
 <p>Consider a view that renders a user&rsquo;s tweets:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.shortcuts</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">render</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">myproject.twitter</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fetch_tweets</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">show_tweets</span><span style="color: #f8f8f2">(request,</span> <span style="color: #f8f8f2">username):</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render(request,</span> <span style="color: #e6db74">&#39;tweets.html&#39;</span><span style="color: #f8f8f2">,</span> 
-                  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;tweets&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">fetch_tweets(username)})</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_tweets(username)})</code></pre></div>
 <p>This works fine but the <code>fetch_tweets</code> function involves a HTTP
 round-trip and is slow. Enter caching.</p>
 
@@ -108,22 +106,20 @@ round-trip and is slow. Enter caching.</p>
 
 <p>Performance can be improved using Django&rsquo;s <a href="https://docs.djangoproject.com/en/dev/topics/cache/?from=olddocs#the-low-level-cache-api">low-level cache
 API</a>:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.shortcuts</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">render</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.cache</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cache</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">myproject.twitter</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fetch_tweets</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
+<span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">show_tweets</span><span style="color: #f8f8f2">(request,</span> <span style="color: #f8f8f2">username):</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render(request,</span> <span style="color: #e6db74">&#39;tweets.html&#39;</span><span style="color: #f8f8f2">,</span> 
-                  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;tweets&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">fetch_cached_tweets(username)})</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fetch_cached_tweets</span><span style="color: #f8f8f2">(username):</span>
-    <span style="color: #f8f8f2">tweets</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">cache</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(username)</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">tweets</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
-        <span style="color: #f8f8f2">tweets</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fetch_tweets(username)</span>
-        <span style="color: #f8f8f2">cache</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">set(username,</span> <span style="color: #f8f8f2">tweets,</span> <span style="color: #ae81ff">60</span><span style="color: #f92672">*</span><span style="color: #ae81ff">15</span><span style="color: #f8f8f2">)</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">tweets</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username):
+    tweets <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(username)
+    <span style="color:#66d9ef">if</span> tweets <span style="color:#f92672">is</span> None:
+        tweets <span style="color:#f92672">=</span> fetch_tweets(username)
+        cache<span style="color:#f92672">.</span>set(username, tweets, <span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>)
+    <span style="color:#66d9ef">return</span> tweets</code></pre></div>
 <p>Now tweets are cached for 15 minutes after they are first fetched, using
 the twitter username as a key. This is obviously a performance
 improvement but the shortcomings of this approach are:</p>
@@ -150,42 +146,38 @@ stampedes.</p>
 
 <p>Consider an alternative implementation that uses a Celery task to
 repopulate the cache.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">datetime</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.shortcuts</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">render</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.cache</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cache</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">myproject.tasks</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">update_tweets</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
+<span style="color:#f92672">from</span> myproject.tasks <span style="color:#f92672">import</span> update_tweets
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">show_tweets</span><span style="color: #f8f8f2">(request,</span> <span style="color: #f8f8f2">username):</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render(request,</span> <span style="color: #e6db74">&#39;tweets.html&#39;</span><span style="color: #f8f8f2">,</span> 
-                  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;tweets&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">fetch_cached_tweets(username)})</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fetch_cached_tweets</span><span style="color: #f8f8f2">(username,</span> <span style="color: #f8f8f2">lifetime</span><span style="color: #f92672">=</span><span style="color: #ae81ff">60</span><span style="color: #f92672">*</span><span style="color: #ae81ff">15</span><span style="color: #f8f8f2">):</span>
-    <span style="color: #f8f8f2">item</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">cache</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(username)</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">item</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
-        <span style="color: #75715e"># Scenario 1: Cache miss - return empty result set and trigger a refresh</span>
-        <span style="color: #f8f8f2">update_tweets</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">delay(username,</span> <span style="color: #f8f8f2">lifetime)</span>
-        <span style="color: #f8f8f2">tweets</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">None</span>
-    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
-        <span style="color: #f8f8f2">tweets,</span> <span style="color: #f8f8f2">expiry</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">item</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">expiry</span> <span style="color: #f92672">&lt;</span> <span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">now():</span>
-            <span style="color: #75715e"># Scenario 2: Cached item is stale - return it but trigger a refresh</span>
-            <span style="color: #f8f8f2">update_tweets</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">delay(username,</span> <span style="color: #f8f8f2">lifetime)</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">tweets</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username, lifetime<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>):
+    item <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(username)
+    <span style="color:#66d9ef">if</span> item <span style="color:#f92672">is</span> None:
+        <span style="color:#75715e"># Scenario 1: Cache miss - return empty result set and trigger a refresh</span>
+        update_tweets<span style="color:#f92672">.</span>delay(username, lifetime)
+        tweets <span style="color:#f92672">=</span> None
+    <span style="color:#66d9ef">else</span>:
+        tweets, expiry <span style="color:#f92672">=</span> item
+        <span style="color:#66d9ef">if</span> expiry <span style="color:#f92672">&lt;</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now():
+            <span style="color:#75715e"># Scenario 2: Cached item is stale - return it but trigger a refresh</span>
+            update_tweets<span style="color:#f92672">.</span>delay(username, lifetime)
+    <span style="color:#66d9ef">return</span> tweets</code></pre></div>
 <p>where the <code>myproject.tasks.update_tweets</code> task is implemented as:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">datetime</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">celery</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">task</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.cache</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cache</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">myproject.twitter</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fetch_tweets</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<span style="color:#f92672">from</span> celery <span style="color:#f92672">import</span> task
+<span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
+<span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
-<span style="color: #a6e22e">@task</span><span style="color: #f8f8f2">()</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">update_tweets</span><span style="color: #f8f8f2">(username,</span> <span style="color: #f8f8f2">ttl):</span>
-    <span style="color: #f8f8f2">tweets</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">fetch_tweets(username)</span>
-    <span style="color: #f8f8f2">now</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">datetime</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">now()</span>
-    <span style="color: #f8f8f2">cache</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">set(username,</span> <span style="color: #f8f8f2">(tweets,</span> <span style="color: #f8f8f2">now</span><span style="color: #f92672">+</span><span style="color: #f8f8f2">ttl),</span> <span style="color: #ae81ff">2592000</span><span style="color: #f8f8f2">)</span> 
-</pre></div>
-
+<span style="color:#a6e22e">@task</span>()
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_tweets</span>(username, ttl):
+    tweets <span style="color:#f92672">=</span> fetch_tweets(username)
+    now <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
+    cache<span style="color:#f92672">.</span>set(username, (tweets, now<span style="color:#f92672">+</span>ttl), <span style="color:#ae81ff">2592000</span>) </code></pre></div>
 <p>Some things to note:</p>
 
 <ul>
@@ -213,17 +205,15 @@ Indeed it is the basic of the Cacheback package.</p>
 
 <p>Here&rsquo;s the same functionality implemented using the <code>cacheback</code>
 function:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.shortcuts</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">render</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.cache</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cache</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">myproject.twitter</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fetch_tweets</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">cacheback.decorators</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cacheback</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
+<span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
+<span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">show_tweets</span><span style="color: #f8f8f2">(request,</span> <span style="color: #f8f8f2">username):</span>
-    <span style="color: #f8f8f2">fetch_cached_tweets</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">cacheback(</span><span style="color: #ae81ff">60</span><span style="color: #f92672">*</span><span style="color: #ae81ff">15</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">fetch_on_miss</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)(fetch_tweets)</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render(request,</span> <span style="color: #e6db74">&#39;tweets.html&#39;</span><span style="color: #f8f8f2">,</span> 
-                  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;tweets&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">fetch_cached_tweets(username)})</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
+    fetch_cached_tweets <span style="color:#f92672">=</span> cacheback(<span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>, fetch_on_miss<span style="color:#f92672">=</span>False)(fetch_tweets)
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})</code></pre></div>
 <p>The <code>cacheback</code> function provides a wrapper function for the
 <code>fetch_tweets</code> function. When called, the wrapper will generate a cache
 key based on the module path of the wrapped function and the passed args
@@ -232,31 +222,27 @@ it will serialise the function and its args so it can be executed
 asynchronously by a Celery task.</p>
 
 <p>The <code>cacheback</code> function can also be used as a decorator:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">cacheback.decorators</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cacheback</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
 
-<span style="color: #a6e22e">@cacheback</span><span style="color: #f8f8f2">(</span><span style="color: #ae81ff">15</span><span style="color: #f92672">*</span><span style="color: #ae81ff">60</span><span style="color: #f8f8f2">)</span>
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fetch_tweets</span><span style="color: #f8f8f2">(username):</span>
-    <span style="color: #f92672">...</span>
-</pre></div>
-
+<span style="color:#a6e22e">@cacheback</span>(<span style="color:#ae81ff">15</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>)
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_tweets</span>(username):
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>Or for more fine-grained control: using a subclass of
 <code>cacheback.base.Job</code>:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.shortcuts</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">render</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.cache</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">cache</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">myproject.twitter</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">fetch_tweets</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">cacheback.base</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Job</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
+<span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
+<span style="color:#f92672">from</span> cacheback.base <span style="color:#f92672">import</span> Job
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">show_tweets</span><span style="color: #f8f8f2">(request,</span> <span style="color: #f8f8f2">username):</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">render(request,</span> <span style="color: #e6db74">&#39;tweets.html&#39;</span><span style="color: #f8f8f2">,</span> 
-                  <span style="color: #f8f8f2">{</span><span style="color: #e6db74">&#39;tweets&#39;</span><span style="color: #f8f8f2">:</span> <span style="color: #f8f8f2">FetchTweets()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(username)})</span>
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: FetchTweets()<span style="color:#f92672">.</span>get(username)})
 
-<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">FetchTweets</span><span style="color: #f8f8f2">(Job):</span>
-    <span style="color: #f8f8f2">expiry</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">60</span> <span style="color: #f92672">*</span> <span style="color: #ae81ff">15</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FetchTweets</span>(Job):
+    expiry <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">15</span>
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">fetch</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">username):</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">fetch_tweets(username)</span>
-</pre></div>
-
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch</span>(self, username):
+        <span style="color:#66d9ef">return</span> fetch_tweets(username)</code></pre></div>
 <p>While only the <code>fetch</code> method must be implemented, the <code>cacheback.Job</code>
 class provides several other overridable methods that provide
 fine-grained control of the caching process.</p>

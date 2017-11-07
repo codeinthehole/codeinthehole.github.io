@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.80260331%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.340508971%20%2b0000%20GMT%20m%3d%2b0.554106636" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -84,9 +84,7 @@ be local or on the destination server.</p>
 docs</a>, you can
 create local dump of a table by using the <code>--execute</code> option to output
 the results of a <code>SELECT ...</code> statement into a local file.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mysql -D database_name -e <span style="color: #e6db74">&quot;SELECT ... &quot;</span> &gt; /path/to/file.txt
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -D database_name -e <span style="color:#e6db74">&#34;SELECT ... &#34;</span> &gt; /path/to/file.txt</code></pre></div>
 <p>This works but has two downsides:</p>
 
 <ol>
@@ -107,41 +105,37 @@ database connection.</p>
 <p>Now that we&rsquo;ve got our data locally, we load it into the remote database
 using <code>LOAD DATA INFILE</code> and make use of the <code>LOCAL</code> keyword which lets
 us use a local data file:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>mysql -h x.x.x.x -u user -D database_name --password<span style="color: #f92672">=</span>... -e <span style="color: #ae81ff">\</span>
-<span style="color: #e6db74">&quot;LOAD DATA LOCAL INFILE &#39;/path/to/file.txt&#39; \</span>
-<span style="color: #e6db74">REPLACE INTO TABLE table_name \</span>
-<span style="color: #e6db74">IGNORE 1 LINES&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -h x.x.x.x -u user -D database_name --password<span style="color:#f92672">=</span>... -e <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span><span style="color:#e6db74">&#34;LOAD DATA LOCAL INFILE &#39;/path/to/file.txt&#39; \
+</span><span style="color:#e6db74">REPLACE INTO TABLE table_name \
+</span><span style="color:#e6db74">IGNORE 1 LINES&#34;</span></code></pre></div>
 <p>Of course, you may want to truncate the table first if you want a clean
 sync. As this operations locks the destination table, it often makes
 sense to load the data into a temporary copy of the table, and then
 perform a <code>RENAME TABLE</code> operation to swap in the new table.</p>
 
 <p>Here&rsquo;s a quick and dirty PHP implementation:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?php</span>
-<span style="color: #f8f8f2">$tableName</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;some_table&#39;</span><span style="color: #f8f8f2">;</span>
-<span style="color: #f8f8f2">$sql</span> <span style="color: #f92672">=</span>
-   <span style="color: #e6db74">&quot;SELECT * </span>
-<span style="color: #e6db74">    FROM $tableName&quot;</span><span style="color: #f8f8f2">;</span>
-<span style="color: #f8f8f2">$pathToCsv</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;/tmp/some-file.csv&#39;</span><span style="color: #f8f8f2">;</span>
-<span style="color: #f8f8f2">$command</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">sprintf(</span><span style="color: #e6db74">&quot;mysql -h %s -u %s  --password=%s -D %s -e &#39;%s&#39; &gt; %s&quot;</span><span style="color: #f8f8f2">,</span>
-    <span style="color: #e6db74">&#39;10.0.0.2&#39;</span><span style="color: #f8f8f2">,</span> 
-    <span style="color: #e6db74">&#39;db-user&#39;</span><span style="color: #f8f8f2">,</span> 
-    <span style="color: #e6db74">&#39;db-password&#39;</span><span style="color: #f8f8f2">,</span> 
-    <span style="color: #e6db74">&#39;database_name&#39;</span><span style="color: #f8f8f2">,</span> 
-    <span style="color: #f8f8f2">$sql,</span> 
-    <span style="color: #f8f8f2">$pathToCsv);</span>
-<span style="color: #f8f8f2">exec($command);</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+$tableName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;some_table&#39;</span>;
+$sql <span style="color:#f92672">=</span>
+   <span style="color:#e6db74">&#34;SELECT * 
+</span><span style="color:#e6db74">    FROM </span><span style="color:#e6db74">$tableName</span><span style="color:#e6db74">&#34;</span>;
+$pathToCsv <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/some-file.csv&#39;</span>;
+$command <span style="color:#f92672">=</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;mysql -h %s -u %s  --password=%s -D %s -e &#39;%s&#39; &gt; %s&#34;</span>,
+    <span style="color:#e6db74">&#39;10.0.0.2&#39;</span>, 
+    <span style="color:#e6db74">&#39;db-user&#39;</span>, 
+    <span style="color:#e6db74">&#39;db-password&#39;</span>, 
+    <span style="color:#e6db74">&#39;database_name&#39;</span>, 
+    $sql, 
+    $pathToCsv);
+<span style="color:#a6e22e">exec</span>($command);
 
-<span style="color: #f8f8f2">$sql</span> <span style="color: #f92672">=</span>
-   <span style="color: #e6db74">&quot;LOAD DATA LOCAL INFILE &#39;$pathToCsv&#39;</span>
-<span style="color: #e6db74">    REPLACE INTO TABLE `$tableName`</span>
-<span style="color: #e6db74">    CHARACTER SET &#39;utf8&#39;</span>
-<span style="color: #e6db74">    IGNORE 1 LINES&quot;</span><span style="color: #f8f8f2">;</span>
-<span style="color: #f8f8f2">$db</span><span style="color: #f92672">-&gt;</span><span style="color: #a6e22e">execute</span><span style="color: #f8f8f2">($sql);</span> <span style="color: #75715e">// Using your favourite database adapter</span>
-</pre></div>
-
+$sql <span style="color:#f92672">=</span>
+   <span style="color:#e6db74">&#34;LOAD DATA LOCAL INFILE &#39;</span><span style="color:#e6db74">$pathToCsv</span><span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">    REPLACE INTO TABLE `</span><span style="color:#e6db74">$tableName</span><span style="color:#e6db74">`
+</span><span style="color:#e6db74">    CHARACTER SET &#39;utf8&#39;
+</span><span style="color:#e6db74">    IGNORE 1 LINES&#34;</span>;
+$db<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</span>($sql); <span style="color:#f92672">//</span> <span style="color:#a6e22e">Using</span> <span style="color:#a6e22e">your</span> <span style="color:#a6e22e">favourite</span> <span style="color:#a6e22e">database</span> <span style="color:#a6e22e">adapter</span></code></pre></div>
         </div>
 
         <div id="article_meta">

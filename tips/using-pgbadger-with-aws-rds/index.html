@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.779033752%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.321469231%20%2b0000%20GMT%20m%3d%2b0.535066896" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -76,17 +76,13 @@ ga('send', 'pageview');
 RDS.</p>
 
 <p>First, set:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #a6e22e">log_statement</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">None </span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">log_statement</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">None </span></code></pre></div>
 <p>Don&rsquo;t set this to <em>all</em> as the <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html">AWS docs</a> suggest.</p>
 
 <p>Further, don&rsquo;t waste your time trying to add a DB parameter to set <code>log_line_prefix</code>
 to pgbadger&rsquo;s recommended value: it&rsquo;s not possible<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. Instead tell
 pgbadger about the log format that RDS insists on:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pgbadger -p <span style="color: #e6db74">&#39;%t:%r:%u@%d:[%p]:&#39;</span> postgres.log
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pgbadger -p <span style="color:#e6db74">&#39;%t:%r:%u@%d:[%p]:&#39;</span> postgres.log</code></pre></div>
 <p>Hope that saves you some time.</p>
 <div class="footnotes">
 

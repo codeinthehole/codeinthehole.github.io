@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.804529196%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.342455699%20%2b0000%20GMT%20m%3d%2b0.556053364" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -128,41 +128,37 @@ various attributes mirror those from the API docs.</p>
 locally, export the file to a local phing tasks folder (I use
 <code>/usr/share/php/phing/tasks/my</code> on my Ubuntu machine). Having done that,
 a simple example build.xml file to exercise the task would be:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?xml version=&quot;1.0&quot; ?&gt;</span>
-<span style="color: #f92672">&lt;project</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;Example Nabaztag update&quot;</span> <span style="color: #a6e22e">basedir=</span><span style="color: #e6db74">&quot;.&quot;</span><span style="color: #f92672">&gt;</span>
-    <span style="color: #f92672">&lt;taskdef</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;nabaztag&quot;</span> <span style="color: #a6e22e">classname=</span><span style="color: #e6db74">&quot;phing.tasks.my.NabaztagTask&quot;</span> <span style="color: #f92672">/&gt;</span>
-    <span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;build-failure&quot;</span><span style="color: #f92672">&gt;</span>
-        <span style="color: #f92672">&lt;nabaztag</span> <span style="color: #a6e22e">serialNum=</span><span style="color: #e6db74">&quot;${nabaztag.serialNum}&quot;</span> <span style="color: #a6e22e">token=</span><span style="color: #e6db74">&quot;${nabaztag.token}&quot;</span> <span style="color: #a6e22e">message=</span><span style="color: #e6db74">&quot;The build failed!&quot;</span> <span style="color: #a6e22e">voice=</span><span style="color: #e6db74">&quot;US-Liberty&quot;</span> <span style="color: #f92672">/&gt;</span>
-    <span style="color: #f92672">&lt;/target&gt;</span>
-<span style="color: #f92672">&lt;/project&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+<span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Nabaztag update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
+    <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;nabaztag&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.NabaztagTask&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;build-failure&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;nabaztag</span> <span style="color:#a6e22e">serialNum=</span><span style="color:#e6db74">&#34;${nabaztag.serialNum}&#34;</span> <span style="color:#a6e22e">token=</span><span style="color:#e6db74">&#34;${nabaztag.token}&#34;</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;The build failed!&#34;</span> <span style="color:#a6e22e">voice=</span><span style="color:#e6db74">&#34;US-Liberty&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/target&gt;</span>
+<span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
 <p>To use this with Xinc, you simply need to called the appropriate target
 from your project configuration file. Another toy example:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
-<span style="color: #f92672">&lt;xinc&gt;</span>
-    <span style="color: #f92672">&lt;project</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;Toy example&quot;</span><span style="color: #f92672">&gt;</span>
-        <span style="color: #f92672">&lt;configuration&gt;</span>
-                <span style="color: #f92672">&lt;setting</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;loglevel&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;1&quot;</span><span style="color: #f92672">/&gt;</span>
-                <span style="color: #f92672">&lt;setting</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;timezone&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;Europe/London&quot;</span><span style="color: #f92672">/&gt;</span>
-        <span style="color: #f92672">&lt;/configuration&gt;</span>
-        <span style="color: #f92672">&lt;property</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;dir&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;/var/xinc/projects/sample&quot;</span><span style="color: #f92672">/&gt;</span>
-        <span style="color: #f92672">&lt;cron</span> <span style="color: #a6e22e">timer=</span><span style="color: #e6db74">&quot;*/15 * * * *&quot;</span><span style="color: #f92672">/&gt;</span>
-        <span style="color: #f92672">&lt;modificationset&gt;</span>
-            <span style="color: #f92672">&lt;svn</span> <span style="color: #a6e22e">directory=</span><span style="color: #e6db74">&quot;${dir}&quot;</span> <span style="color: #a6e22e">update=</span><span style="color: #e6db74">&quot;true&quot;</span> <span style="color: #f92672">/&gt;</span>
-        <span style="color: #f92672">&lt;/modificationset&gt;</span>              
-        <span style="color: #f92672">&lt;builders&gt;</span>
-                <span style="color: #f92672">&lt;phingBuilder</span> <span style="color: #a6e22e">buildfile=</span><span style="color: #e6db74">&quot;${dir}/build.xml&quot;</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;build-project&quot;</span><span style="color: #f92672">/&gt;</span>
-        <span style="color: #f92672">&lt;/builders&gt;</span>
-        <span style="color: #f92672">&lt;publishers&gt;</span>
-            <span style="color: #f92672">&lt;onfailure&gt;</span>
-                <span style="color: #f92672">&lt;phingpublisher</span> <span style="color: #a6e22e">buildfile=</span><span style="color: #e6db74">&quot;${dir}/build.xml&quot;</span> <span style="color: #a6e22e">target=</span><span style="color: #e6db74">&quot;build-failure&quot;</span> <span style="color: #f92672">/&gt;</span>
-            <span style="color: #f92672">&lt;/onfailure&gt;</span>
-        <span style="color: #f92672">&lt;/publishers&gt;</span>
-    <span style="color: #f92672">&lt;/project&gt;</span>
-<span style="color: #f92672">&lt;/xinc&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+<span style="color:#f92672">&lt;xinc&gt;</span>
+    <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Toy example&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;configuration&gt;</span>
+                <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;loglevel&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">/&gt;</span>
+                <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;timezone&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Europe/London&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/configuration&gt;</span>
+        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/var/xinc/projects/sample&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;cron</span> <span style="color:#a6e22e">timer=</span><span style="color:#e6db74">&#34;*/15 * * * *&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;modificationset&gt;</span>
+            <span style="color:#f92672">&lt;svn</span> <span style="color:#a6e22e">directory=</span><span style="color:#e6db74">&#34;${dir}&#34;</span> <span style="color:#a6e22e">update=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/modificationset&gt;</span>              
+        <span style="color:#f92672">&lt;builders&gt;</span>
+                <span style="color:#f92672">&lt;phingBuilder</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-project&#34;</span><span style="color:#f92672">/&gt;</span>
+        <span style="color:#f92672">&lt;/builders&gt;</span>
+        <span style="color:#f92672">&lt;publishers&gt;</span>
+            <span style="color:#f92672">&lt;onfailure&gt;</span>
+                <span style="color:#f92672">&lt;phingpublisher</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-failure&#34;</span> <span style="color:#f92672">/&gt;</span>
+            <span style="color:#f92672">&lt;/onfailure&gt;</span>
+        <span style="color:#f92672">&lt;/publishers&gt;</span>
+    <span style="color:#f92672">&lt;/project&gt;</span>
+<span style="color:#f92672">&lt;/xinc&gt;</span></code></pre></div>
 <p>Some of the options for controlling the Nabaztag are only available with
 the V2 version. The one on my desk is V1 and so I haven&rsquo;t tested every
 action, I&rsquo;ve just followed the instructions in the API docs.
@@ -172,9 +168,7 @@ fails or not. This makes it a touch tricky to handle failed updates.</p>
 
 <p>Nabaztags are also useful for general reminders - I have the following
 line in my crontab:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">15</span> <span style="color: #ae81ff">18</span> * * <span style="color: #ae81ff">5</span> curl <span style="color: #e6db74">&quot;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span><span style="color: #f8f8f2">$SERIAL</span><span style="color: #e6db74">&amp;token=</span><span style="color: #f8f8f2">$TOKEN</span><span style="color: #e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&quot;</span> 
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&#34;</span> </code></pre></div>
         </div>
 
         <div id="article_meta">

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.795768593%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.334844739%20%2b0000%20GMT%20m%3d%2b0.548442404" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -84,41 +84,37 @@ runtime.</p>
 suite of &ldquo;localflavor&rdquo; form fields using the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
 3166-1</a> two character
 country code.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">get_postcode_validator</span><span style="color: #f8f8f2">(country_code):</span>
-    <span style="color: #75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">country_code</span> <span style="color: #f92672">==</span> <span style="color: #e6db74">&#39;GB&#39;</span><span style="color: #f8f8f2">:</span>
-        <span style="color: #f8f8f2">country_code</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;UK&#39;</span>
-    <span style="color: #f8f8f2">module_path</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;django.contrib.localflavor.%s&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">country_code</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">lower()</span>
-    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
-        <span style="color: #f8f8f2">module</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">__import__(module_path,</span> <span style="color: #f8f8f2">fromlist</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;forms&#39;</span><span style="color: #f8f8f2">])</span>
-    <span style="color: #66d9ef">except</span> <span style="color: #a6e22e">ImportError</span><span style="color: #f8f8f2">:</span>
-        <span style="color: #75715e"># No forms module for this country</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x:</span> <span style="color: #f8f8f2">x</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_postcode_validator</span>(country_code):
+    <span style="color:#75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
+    <span style="color:#66d9ef">if</span> country_code <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GB&#39;</span>:
+        country_code <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;UK&#39;</span>
+    module_path <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;django.contrib.localflavor.</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>lower()
+    <span style="color:#66d9ef">try</span>:
+        module <span style="color:#f92672">=</span> __import__(module_path, fromlist<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;forms&#39;</span>])
+    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ImportError</span>:
+        <span style="color:#75715e"># No forms module for this country</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x
 
-    <span style="color: #f8f8f2">fieldname_variants</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">[</span><span style="color: #e6db74">&#39;%sPostcodeField&#39;</span><span style="color: #f8f8f2">,</span>
-                          <span style="color: #e6db74">&#39;%sPostCodeField&#39;</span><span style="color: #f8f8f2">,</span>
-                          <span style="color: #e6db74">&#39;%sPostalCodeField&#39;</span><span style="color: #f8f8f2">,</span>
-                          <span style="color: #e6db74">&#39;%sZipCodeField&#39;</span><span style="color: #f8f8f2">,]</span>
-    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">variant</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">fieldname_variants:</span>
-        <span style="color: #f8f8f2">fieldname</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">variant</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">country_code</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">upper()</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">hasattr(module</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">forms,</span> <span style="color: #f8f8f2">fieldname):</span>
-            <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">getattr(module</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">forms,</span> <span style="color: #f8f8f2">fieldname)()</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">clean</span> 
-    <span style="color: #66d9ef">return</span> <span style="color: #66d9ef">lambda</span> <span style="color: #f8f8f2">x:</span> <span style="color: #f8f8f2">x</span>
-</pre></div>
-
+    fieldname_variants <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostcodeField&#39;</span>,
+                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostCodeField&#39;</span>,
+                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostalCodeField&#39;</span>,
+                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">ZipCodeField&#39;</span>,]
+    <span style="color:#66d9ef">for</span> variant <span style="color:#f92672">in</span> fieldname_variants:
+        fieldname <span style="color:#f92672">=</span> variant <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>upper()
+        <span style="color:#66d9ef">if</span> hasattr(module<span style="color:#f92672">.</span>forms, fieldname):
+            <span style="color:#66d9ef">return</span> getattr(module<span style="color:#f92672">.</span>forms, fieldname)()<span style="color:#f92672">.</span>clean 
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x</code></pre></div>
 <p>As these validators are from forms, they will raise
 <code>django.forms.ValidationError</code> if the passed postcode is invalid. Hence
 your client code should look something like:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.forms</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">ValidationError</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> ValidationError
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">is_postcode_valid</span><span style="color: #f8f8f2">(postcode,</span> <span style="color: #f8f8f2">country_code):</span>
-    <span style="color: #66d9ef">try</span><span style="color: #f8f8f2">:</span>
-        <span style="color: #f8f8f2">get_postcode_validator(country_code)(postcode)</span>
-    <span style="color: #66d9ef">except</span> <span style="color: #f8f8f2">ValidationError:</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">False</span>
-    <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">True</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_postcode_valid</span>(postcode, country_code):
+    <span style="color:#66d9ef">try</span>:
+        get_postcode_validator(country_code)(postcode)
+    <span style="color:#66d9ef">except</span> ValidationError:
+        <span style="color:#66d9ef">return</span> False
+    <span style="color:#66d9ef">return</span> True</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 
 <p>As you can see, this is a touch messy as:</p>

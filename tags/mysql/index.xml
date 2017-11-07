@@ -32,9 +32,9 @@ root@server-db1:~ $ mysqladmin processlist +-----+----------------------+-------
       <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
       <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
 Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
-apt-get install python-pip pip install -U pip  Next, install the required development packages:
-apt-get install python-dev libmysqlclient-dev  then
-pip install MySQL-python  should complete successfully.
+apt-get install python-pip pip install -U pip Next, install the required development packages:
+apt-get install python-dev libmysqlclient-dev then
+pip install MySQL-python should complete successfully.
 Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
     </item>
     
@@ -45,7 +45,7 @@ Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see som
       
       <guid>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
       <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&amp;rsquo;s not currently supported as an option but can be achieved with a little bash magic. Here&amp;rsquo;s how:
-#!/bin/bash if [ $# -lt 2 ] then echo &amp;quot;Usage: `basename $0` database wildcardpattern&amp;quot; echo &amp;quot;Eg: `basename $0` mydatabase App_%&amp;quot; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;quot;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;quot; | awk &amp;#39;{printf $1&amp;quot; &amp;quot;}&amp;#39;`  This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
+#!/bin/bash if [ $# -lt 2 ] then echo &amp;#34;Usage: `basename $0` database wildcardpattern&amp;#34; echo &amp;#34;Eg: `basename $0` mydatabase App_%&amp;#34; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;#34;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;#34; | awk &amp;#39;{printf $1&amp;#34; &amp;#34;}&amp;#39;` This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@ There are two options for checking MySQL tables. The most effective method is to
       
       <guid>http://codeinthehole.com/tips/monitoring-mysql/</guid>
       <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&amp;rsquo;s going on.
-watch -n 1 mysqladmin processlist  The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
+watch -n 1 mysqladmin processlist The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
     </item>
     
   </channel>

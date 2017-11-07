@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.792190652%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.33100854%20%2b0000%20GMT%20m%3d%2b0.544606205" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,10 +78,8 @@ ga('send', 'pageview');
 <p>You&rsquo;re using <a href="http://postgresapp.com/">Postgres.app</a> on a Mac for local
 development but are getting SQL errors from your application. You&rsquo;re
 seeing an error message:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>ERROR:  current transaction is aborted, commands ignored <span style="color: #66d9ef">until</span> end of
-transaction block
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ERROR:  current transaction is aborted, commands ignored <span style="color:#66d9ef">until</span> end of
+transaction block</code></pre></div>
 <p>This isn&rsquo;t very useful: you want to know which query is generating the
 error.</p>
 
@@ -100,9 +98,7 @@ log_directory = 'pg_log'
 
 <p>then restarting Postgres to pick up the new settings. You can then watch
 the log files to find out which queries are failing:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ tail -f ~/Library/Application<span style="color: #ae81ff">\ </span>Support/Postgres/var/pg_log/*
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tail -f ~/Library/Application<span style="color:#ae81ff">\ </span>Support/Postgres/var/pg_log/*</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 
 <p>By default, Postgres.app does not have logging enabled which makes local

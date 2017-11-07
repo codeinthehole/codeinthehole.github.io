@@ -27,7 +27,7 @@
       
       <guid>http://codeinthehole.com/tips/linking-to-github/</guid>
       <description>It was rightly pointed out yesterday that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
-$ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db  This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
+$ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
     </item>
     
     <item>
@@ -61,7 +61,7 @@ Use pull requests Pull requests are an excellent tool for fostering code review.
 The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
-pip install csvfilter  Sample usage:
+pip install csvfilter Sample usage:
 # Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
     </item>
     
@@ -92,7 +92,7 @@ The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and J
       
       <guid>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
       <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&amp;rsquo;s not currently supported as an option but can be achieved with a little bash magic. Here&amp;rsquo;s how:
-#!/bin/bash if [ $# -lt 2 ] then echo &amp;quot;Usage: `basename $0` database wildcardpattern&amp;quot; echo &amp;quot;Eg: `basename $0` mydatabase App_%&amp;quot; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;quot;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;quot; | awk &amp;#39;{printf $1&amp;quot; &amp;quot;}&amp;#39;`  This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
+#!/bin/bash if [ $# -lt 2 ] then echo &amp;#34;Usage: `basename $0` database wildcardpattern&amp;#34; echo &amp;#34;Eg: `basename $0` mydatabase App_%&amp;#34; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;#34;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;#34; | awk &amp;#39;{printf $1&amp;#34; &amp;#34;}&amp;#39;` This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
     </item>
     
     <item>
@@ -114,7 +114,7 @@ We had an issue recently where some debugging code got committed and wasn&amp;rs
       
       <guid>http://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/</guid>
       <description>Getting www.commandlinefu.com off the ground has renewed my interest in Bash, UNIX and all things command-line. Powerful one-liners are things of beauty and are worth collecting; however what I consider to be the most influential command-line tip I know covers four:
-&amp;quot;\e[A&amp;quot;: history-search-backward &amp;quot;\e[B&amp;quot;: history-search-forward &amp;quot;\e[C&amp;quot;: forward-char &amp;quot;\e[D&amp;quot;: backward-char  These lines need to be placed in your ~/.inputrc file, the start-up script for the Readline utility used by Bash (as well as several other applications) and others).</description>
+&amp;#34;\e[A&amp;#34;: history-search-backward &amp;#34;\e[B&amp;#34;: history-search-forward &amp;#34;\e[C&amp;#34;: forward-char &amp;#34;\e[D&amp;#34;: backward-char These lines need to be placed in your ~/.inputrc file, the start-up script for the Readline utility used by Bash (as well as several other applications) and others).</description>
     </item>
     
     <item>
@@ -144,7 +144,7 @@ There are two options for checking MySQL tables. The most effective method is to
       
       <guid>http://codeinthehole.com/tips/monitoring-mysql/</guid>
       <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&amp;rsquo;s going on.
-watch -n 1 mysqladmin processlist  The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
+watch -n 1 mysqladmin processlist The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
     </item>
     
   </channel>

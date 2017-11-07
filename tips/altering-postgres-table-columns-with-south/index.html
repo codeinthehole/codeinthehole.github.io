@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.7921641%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.33080591%20%2b0000%20GMT%20m%3d%2b0.544403575" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -101,27 +101,21 @@ The error was: column &quot;start&quot; cannot be cast to type time without time
 specify how to compute the new value from the old.</p>
 
 <p>For the above example, the correct SQL to use is:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">ALTER</span> <span style="color: #66d9ef">TABLE</span> <span style="color: #e6db74">&quot;stores_openingperiod&quot;</span> 
-    <span style="color: #66d9ef">ALTER</span> <span style="color: #66d9ef">COLUMN</span> <span style="color: #e6db74">&quot;end&quot;</span> <span style="color: #66d9ef">DROP</span> <span style="color: #66d9ef">DEFAULT</span><span style="color: #f8f8f2">,</span> 
-    <span style="color: #66d9ef">ALTER</span> <span style="color: #66d9ef">COLUMN</span> <span style="color: #e6db74">&quot;end&quot;</span> <span style="color: #66d9ef">DROP</span> <span style="color: #66d9ef">NOT</span> <span style="color: #66d9ef">NULL</span><span style="color: #f8f8f2">,</span> 
-    <span style="color: #66d9ef">ALTER</span> <span style="color: #66d9ef">COLUMN</span> <span style="color: #e6db74">&quot;end&quot;</span> <span style="color: #66d9ef">TYPE</span> <span style="color: #f8f8f2">time</span> <span style="color: #66d9ef">USING</span> <span style="color: #f8f8f2">to_timestamp(</span><span style="color: #e6db74">&quot;end&quot;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;HHam&#39;</span><span style="color: #f8f8f2">)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#e6db74">&#34;stores_openingperiod&#34;</span> 
+    <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#e6db74">&#34;end&#34;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DEFAULT</span>, 
+    <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#e6db74">&#34;end&#34;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, 
+    <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#e6db74">&#34;end&#34;</span> <span style="color:#66d9ef">TYPE</span> time <span style="color:#66d9ef">USING</span> to_timestamp(<span style="color:#e6db74">&#34;end&#34;</span>, <span style="color:#e6db74">&#39;HHam&#39;</span>)</code></pre></div>
 <p>We need to modify the migration file to execute raw SQL with
 <code>db.execute</code> instead of using <code>db.alter_table</code> to generate the SQL. So
 we change:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">db</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">alter_column(</span><span style="color: #e6db74">&#39;stores_openingperiod&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;end&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">gf(</span><span style="color: #e6db74">&#39;django.db.models.fields.TimeField&#39;</span><span style="color: #f8f8f2">)(null</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True))</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>alter_column(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;stores_openingperiod&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;end&#39;</span>, self<span style="color:#f92672">.</span>gf(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;django.db.models.fields.TimeField&#39;</span>)(null<span style="color:#f92672">=</span>True))</code></pre></div>
 <p>to:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">db</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">execute(</span>
-    <span style="color: #e6db74">&#39;ALTER TABLE &quot;stores_openingperiod&quot; &#39;</span>
-    <span style="color: #e6db74">&#39;ALTER COLUMN &quot;end&quot; DROP DEFAULT, &#39;</span>
-    <span style="color: #e6db74">&#39;ALTER COLUMN &quot;end&quot; DROP NOT NULL, &#39;</span>
-    <span style="color: #e6db74">&#39;ALTER COLUMN &quot;end&quot; TYPE time USING to_timestamp(&quot;end&quot;, </span><span style="color: #ae81ff">\&#39;</span><span style="color: #e6db74">HHam</span><span style="color: #ae81ff">\&#39;</span><span style="color: #e6db74">)&#39;</span>
-<span style="color: #f8f8f2">)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>execute(
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;ALTER TABLE &#34;stores_openingperiod&#34; &#39;</span>
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;ALTER COLUMN &#34;end&#34; DROP DEFAULT, &#39;</span>
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;ALTER COLUMN &#34;end&#34; DROP NOT NULL, &#39;</span>
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;ALTER COLUMN &#34;end&#34; TYPE time USING to_timestamp(&#34;end&#34;, </span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">HHam</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">)&#39;</span>
+)</code></pre></div>
 <p>and all is well.</p>
 
 <p>A similar technique can be used wherever Postgres refuses to run a

@@ -19,8 +19,8 @@
       <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
       <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
-$ brew install the_silver_searcher  Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;quot; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif  :grep searches are now lightning-fast and respectful of your ~/.</description>
+$ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
+if executable(&amp;#39;ag&amp;#39;)&amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif :grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -33,8 +33,8 @@ if executable(&amp;#39;ag&amp;#39;) &amp;quot; Note we extract the column as wel
 When you have a lot of templates, this gets pretty tedious.
 Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
-&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt;  to
-&amp;lt;h1&amp;gt;{% trans &amp;quot;Welcome to my site&amp;quot; %}&amp;lt;/h1&amp;gt;  use the macro</description>
+&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
+&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro</description>
     </item>
     
   </channel>

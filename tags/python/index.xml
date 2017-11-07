@@ -19,9 +19,9 @@
       <guid>http://codeinthehole.com/tips/a-mnemonic-for-mocks/</guid>
       <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&amp;rsquo;s not always clear what order arguments are being injected.
 For instance, which of these is right? This:
-@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass  Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass  Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass  I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
+@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
     </item>
     
     <item>
@@ -41,7 +41,7 @@ For instance, which of these is right? This:
       
       <guid>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
       <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;quot;title $NAME&amp;quot; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line  # will need to edited later if not.</description>
+#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
     </item>
     
     <item>
@@ -52,7 +52,7 @@ For instance, which of these is right? This:
       <guid>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
       <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
 Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
-$ export LANGUAGE=&amp;quot;en_US.UTF-8&amp;quot; $ export LANG=&amp;quot;en_US.UTF-8&amp;quot; $ export LC_ALL=&amp;quot;en_US.UTF-8&amp;quot;  Now install dependencies:
+$ export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; $ export LANG=&amp;#34;en_US.UTF-8&amp;#34; $ export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
 $ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis  PostgreSQL should now be installed and running with UTF8 encodings.</description>
     </item>
     
@@ -64,7 +64,7 @@ $ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresq
       <guid>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
       <description>TLDR: Parameterised tests are a useful testing technique. Both Nose and py.test support them.
 URI templates in purl The newly released purl 0.8 (a URL library of mine) supports URI templates as per RFC 6570. These allow new URL instances to be created by passing bindings to a template instance.
-&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39;  Alternatively, you can expand template strings directly:</description>
+&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39; Alternatively, you can expand template strings directly:</description>
     </item>
     
     <item>
@@ -98,7 +98,8 @@ Such requirements are slightly tricky to capture in Django as they tread slightl
 
 This screenshot is taken from django-oscar&amp;rsquo;s README.
 Embed these badges in your own repo as Restructured text:
-.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads  or Markdown:</description>
+.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version.. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:
+[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
     </item>
     
     <item>
@@ -118,9 +119,9 @@ This can be neatly addressed through a &amp;lsquo;post checkout&amp;rsquo; hook 
       
       <guid>http://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</guid>
       <description>Consider this curio:
-import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;quot;Using the database is not permitted&amp;quot;)))  This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
+import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;#34;Using the database is not permitted&amp;#34;))) This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
 Use by wrapping a TestCase subclass:
-from django.test import TestCase @no_database() class UnitTestCase(TestCase): ...  or method:</description>
+from django.test import TestCase @no_database() class UnitTestCase(TestCase): ... or method:</description>
     </item>
     
     <item>
@@ -131,8 +132,8 @@ from django.test import TestCase @no_database() class UnitTestCase(TestCase): ..
       <guid>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
       <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
 Solution With pip already installed, install the required development packages:
-$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev  and symlink the three image libraries into /usr/lib:
-$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/  PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
+$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     
     <item>
@@ -163,7 +164,7 @@ An e-commerce example Suppose your e-commerce application allows admins to uploa
       <guid>http://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
       <description>How to use a South data migration to avoid accidentally sending emails from example.com.
 Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
-from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] )  Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %salerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %steam.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
     </item>
     
     <item>
@@ -174,7 +175,7 @@ from django.contrib.sites.models import Site from django.core.mail import send_m
       <guid>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</guid>
       <description>Working with URLs in Python feels clunky when it should be pleasant. In urlparse and urllib, the standard library has all the functionality you need, but the code you have to write is often cumbersome and unclear.
 For instance, here&amp;rsquo;s a typical test method that makes an assertion about a query parameter:
-import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0])  Not terrible, but could be more concise.</description>
+import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0]) Not terrible, but could be more concise.</description>
     </item>
     
     <item>
@@ -199,7 +200,7 @@ Solution Use the extra_tags keyword argument to pass a flag indicating that the 
 The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
-pip install csvfilter  Sample usage:
+pip install csvfilter Sample usage:
 # Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
     </item>
     
@@ -290,7 +291,7 @@ Solution Use your postactivate1 script to set the terminal title when you activa
       <guid>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
       <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.
 Sample Usage Enable the additional assert methods using a mixin:
-import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ...  Now suppose that the expected XML from some SUT1 is:</description>
+import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ... Now suppose that the expected XML from some SUT1 is:</description>
     </item>
     
     <item>
@@ -301,9 +302,9 @@ import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.
       <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
       <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
 Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
-apt-get install python-pip pip install -U pip  Next, install the required development packages:
-apt-get install python-dev libmysqlclient-dev  then
-pip install MySQL-python  should complete successfully.
+apt-get install python-pip pip install -U pip Next, install the required development packages:
+apt-get install python-dev libmysqlclient-dev then
+pip install MySQL-python should complete successfully.
 Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
     </item>
     
@@ -314,8 +315,8 @@ Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see som
       
       <guid>http://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</guid>
       <description>Problem The python package installer pip can be used to install directly from Github, like so:
-$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar  This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
-$ pip freeze | grep oscar -e git://github.</description>
+$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
+$ pip freeze | grep oscar -e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg=django_oscar-dev Hence running pip install -r requirements.</description>
     </item>
     
     <item>
@@ -326,7 +327,7 @@ $ pip freeze | grep oscar -e git://github.</description>
       <guid>http://codeinthehole.com/tips/console-logging-to-stdout-in-django/</guid>
       <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.
 Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:
-import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } }  For Python 2.</description>
+import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.</description>
     </item>
     
     <item>
@@ -336,7 +337,7 @@ import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{
       
       <guid>http://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</guid>
       <description>If you use virtual environments on your django servers, then getting manage.py commands to run from cron is a little tricky. You need to activate the virtualenv before running the command and so you might think that the following would work:
-*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null  It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
+*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
     </item>
     
     <item>
@@ -358,7 +359,7 @@ from fabric.colors import _wrap_with green_bg = _wrap_with(&amp;#39;42&amp;#39;)
       
       <guid>http://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
       <description>A bad joke told in Python:
-def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper())  </description>
+def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.</description>
     </item>
     
     <item>

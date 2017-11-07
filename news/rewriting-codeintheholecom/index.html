@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.798700692%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.337352448%20%2b0000%20GMT%20m%3d%2b0.550950113" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -110,23 +110,17 @@ codebase.</p>
 <p>This translates to:</p>
 
 <h4 id="write">Write</h4>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>vim posts/my-new-article.rst 
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim posts/my-new-article.rst </code></pre></div>
 <h4 id="preview">Preview</h4>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>./manage.py rsb_article posts/my-new-article.rst
-./manage.py runserver
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py rsb_article posts/my-new-article.rst
+./manage.py runserver</code></pre></div>
 <p>This converts the RST file into a instance of <code>rsb.models.Article</code>,
 plucking out the title, subtitle and any tags in the process.</p>
 
 <p>Rinse and repeat the write and preview steps until happy.</p>
 
 <h4 id="publish">Publish</h4>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>fab prod publish posts/0036-my-new-article.rst
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">fab prod publish posts/0036-my-new-article.rst</code></pre></div>
 <p>This copies the RST file up to the remote server and re-runs the
 <code>rsb_article</code> management command to create the article in the production
 database.</p>

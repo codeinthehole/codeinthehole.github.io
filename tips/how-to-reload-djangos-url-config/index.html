@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.795768591%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.334836317%20%2b0000%20GMT%20m%3d%2b0.548433982" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -85,16 +85,14 @@ depending on certain parameters.</p>
 <h3 id="solution">Solution</h3>
 
 <p>You can reload the URL config using the following snippet:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">sys</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.conf</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">settings</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">reload_urlconf</span><span style="color: #f8f8f2">(urlconf</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">None):</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">urlconf</span> <span style="color: #f92672">is</span> <span style="color: #f8f8f2">None:</span>
-        <span style="color: #f8f8f2">urlconf</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">urlconf</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules:</span>
-        <span style="color: #f8f8f2">reload(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules[urlconf])</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reload_urlconf</span>(urlconf<span style="color:#f92672">=</span>None):
+    <span style="color:#66d9ef">if</span> urlconf <span style="color:#f92672">is</span> None:
+        urlconf <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>ROOT_URLCONF
+    <span style="color:#66d9ef">if</span> urlconf <span style="color:#f92672">in</span> sys<span style="color:#f92672">.</span>modules:
+        reload(sys<span style="color:#f92672">.</span>modules[urlconf])</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 
 <p>This was a problem I needed to solve while testing the checkout process
@@ -106,26 +104,24 @@ set-up for a test.</p>
 <p>This was achieved in the following way, where the setting
 <code>OSCAR_ALLOW_ANON_CHECKOUT</code> is set to <code>True</code> and the URL config is
 reloaded.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">sys</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.conf</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">settings</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.utils.importlib</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">import_module</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
+<span style="color:#f92672">from</span> django.utils.importlib <span style="color:#f92672">import</span> import_module
 
-<span style="color: #f92672">...</span>
+<span style="color:#f92672">...</span>
 
-<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">EnabledAnonymousCheckoutViewsTests</span><span style="color: #f8f8f2">(ClientTestCase,</span> <span style="color: #f8f8f2">CheckoutMixin):</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EnabledAnonymousCheckoutViewsTests</span>(ClientTestCase, CheckoutMixin):
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">reload_urlconf</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules:</span>
-            <span style="color: #f8f8f2">reload(sys</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">modules[settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF])</span>
-        <span style="color: #66d9ef">return</span> <span style="color: #f8f8f2">import_module(settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">ROOT_URLCONF)</span>
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reload_urlconf</span>(self):
+        <span style="color:#66d9ef">if</span> settings<span style="color:#f92672">.</span>ROOT_URLCONF <span style="color:#f92672">in</span> sys<span style="color:#f92672">.</span>modules:
+            reload(sys<span style="color:#f92672">.</span>modules[settings<span style="color:#f92672">.</span>ROOT_URLCONF])
+        <span style="color:#66d9ef">return</span> import_module(settings<span style="color:#f92672">.</span>ROOT_URLCONF)
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_shipping_address_requires_session_email_address</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">patch_settings(OSCAR_ALLOW_ANON_CHECKOUT</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True):</span>
-            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">reload_urlconf()</span>
-            <span style="color: #f8f8f2">response</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">client</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(reverse(</span><span style="color: #e6db74">&#39;checkout:shipping-address&#39;</span><span style="color: #f8f8f2">))</span>
-            <span style="color: #f8f8f2">self</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">assertIsRedirect(response)</span>
-</pre></div>
-
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_shipping_address_requires_session_email_address</span>(self):
+        <span style="color:#66d9ef">with</span> patch_settings(OSCAR_ALLOW_ANON_CHECKOUT<span style="color:#f92672">=</span>True):
+            self<span style="color:#f92672">.</span>reload_urlconf()
+            response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;checkout:shipping-address&#39;</span>))
+            self<span style="color:#f92672">.</span>assertIsRedirect(response)</code></pre></div>
 <p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
 me when working on this problem today.</p>
 

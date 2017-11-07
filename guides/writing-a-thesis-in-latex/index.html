@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.811358135%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.35010829%20%2b0000%20GMT%20m%3d%2b0.563705955" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -164,18 +164,14 @@ that come with the PDF format will be apparent.</p>
 <h3 id="document-structure">Document structure</h3>
 
 <p>The document begins in a standard and entirely self-explanatory manner.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\documentclass</span><span style="color: #a6e22e">[11pt,a4paper]</span><span style="color: #f8f8f2">{</span>report<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\documentclass[11pt,a4paper]{report}</code></pre></div>
 <h4 id="preamble-essential-packages">Preamble: essential packages</h4>
 
 <p>Next, the essential packages are loaded:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\usepackage</span><span style="color: #f8f8f2">{</span>amsmath, amssymb, amsthm<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% AMS packages</span>
-<span style="color: #66d9ef">\usepackage</span><span style="color: #f8f8f2">{</span>graphicx,color<span style="color: #f8f8f2">}</span>           <span style="color: #75715e">% Packages for graphics and color</span>
-<span style="color: #66d9ef">\usepackage</span><span style="color: #a6e22e">[left=1.5in, right=1in, top=1in, bottom=1in, includefoot, headheight=13.6pt]</span><span style="color: #f8f8f2">{</span>geometry<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\usepackge</span><span style="color: #a6e22e">[T1]</span><span style="color: #f8f8f2">{</span>fontenc<span style="color: #f8f8f2">}</span>               <span style="color: #75715e">% Ensure correct font encoding</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-tex" data-lang="tex">\usepackage{amsmath, amssymb, amsthm} % AMS packages
+\usepackage{graphicx,color}           % Packages for graphics and color
+\usepackage[left=1.5in, right=1in, top=1in, bottom=1in, includefoot, headheight=13.6pt]{geometry}
+\usepackge[T1]{fontenc}               % Ensure correct font encoding</code></pre></div>
 <p>where the <code>geometry</code> package has been loaded to allow the margins to be
 set in a neat and consistent way. The non-obvious option <code>includefoot</code>
 ensures that the footer (which only contains the pagenumber) is included
@@ -186,9 +182,7 @@ offending option and extend the bottom margin to 1.4in.
 <code>headheight=13.6pt</code> is included due to to ensure compatibility with the
 <code>fancyhdr</code> package (and is not required if you don&rsquo;t use the <code>fancyhdr</code>
 package). Also quite essential is the <code>natbib</code> package:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\includepackage</span><span style="color: #a6e22e">[square, comma, numbers, sort&amp;compress]</span><span style="color: #f8f8f2">{</span>natbib<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\includepackage[square, comma, numbers, sort&amp;compress]{natbib}</code></pre></div>
 <p>where the various options ensure that references appear in the document
 as:</p>
 
@@ -204,10 +198,8 @@ difference between <code>\citet</code> and <code>\citep</code>, and I insist you
 <h4 id="preamble-custom-captions-optional">Preamble: custom captions (optional)</h4>
 
 <p>We now set the figure captions to be elegant and dignified:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\usepackage</span><span style="color: #a6e22e">[hang, small, bf, margin=20pt, tableposition=top]</span><span style="color: #f8f8f2">{</span>caption<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\setlength</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\abovecaptionskip</span><span style="color: #f8f8f2">}{</span>0pt<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\usepackage[hang, small, bf, margin=20pt, tableposition=top]{caption}
+\setlength{\abovecaptionskip}{0pt}</code></pre></div>
 <p>Note that early versions of this package don&rsquo;t support the <code>margin=</code> and
 <code>tableposition=</code> options; in this case, these trimmings will have to be
 ignored.</p>
@@ -216,9 +208,7 @@ ignored.</p>
 
 <p>You can also choose an alternative font for both the text and the
 mathematical characters. This can be acheived by:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\usepackage</span><span style="color: #f8f8f2">{</span>mathpazo<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\usepackage{mathpazo}</code></pre></div>
 <p>Aside from <code>mathpazo</code>, there are several other fonts available, such as
 <code>chancery</code>, <code>palatino</code> and <code>times</code> (all loaded in the same way).</p>
 
@@ -227,16 +217,14 @@ mathematical characters. This can be acheived by:</p>
 <p>Feeling a little devil-may-care? If so, you&rsquo;ll probably want to install
 some elegant headers along each page. This is easily acheived through
 the <code>fancyhdr</code> package:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\usepackage</span><span style="color: #f8f8f2">{</span>fancyhdr<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\pagestyle</span><span style="color: #f8f8f2">{</span>fancy<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\rhead</span><span style="color: #f8f8f2">{}</span>
-<span style="color: #66d9ef">\lhead</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\nouppercase</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\textsc</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\leftmark</span><span style="color: #f8f8f2">}}}</span>
-<span style="color: #66d9ef">\renewcommand</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\headrulewidth</span><span style="color: #f8f8f2">}{</span>0pt<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\makeatletter</span>
-<span style="color: #66d9ef">\renewcommand</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\chaptermark</span><span style="color: #f8f8f2">}</span>[1]<span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\markboth</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\textsc</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\@</span>chapapp<span style="color: #f8f8f2">}</span><span style="color: #66d9ef">\ \thechapter</span>:<span style="color: #66d9ef">\ </span>#1<span style="color: #f8f8f2">}{}}</span>
-<span style="color: #66d9ef">\makeatother</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\usepackage{fancyhdr}
+\pagestyle{fancy}
+\rhead{}
+\lhead{\nouppercase{\textsc{\leftmark}}}
+\renewcommand{\headrulewidth}{0pt}
+\makeatletter
+\renewcommand{\chaptermark}[1]{\markboth{\textsc{\@chapapp}\ \thechapter:\ #1}{}}
+\makeatother</code></pre></div>
 <p>The final complicated-looking three lines simply ensure that the
 headings for appendices are formatted correctly. (Without these lines,
 what should read &ldquo;Appendix A&rdquo; is set as &ldquo;Chapter A&rdquo;.)</p>
@@ -245,12 +233,10 @@ what should read &ldquo;Appendix A&rdquo; is set as &ldquo;Chapter A&rdquo;.)</p
 
 <p>We now make use of several customisation options that are bundled with
 the sectsty package.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\usepackage</span><span style="color: #f8f8f2">{</span>sectsty<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\chapterfont</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\large\sc\centering</span><span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\chaptertitlefont</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\centering</span><span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\subsubsectionfont</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\centering</span><span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\usepackage{sectsty}
+\chapterfont{\large\sc\centering}
+\chaptertitlefont{\centering}
+\subsubsectionfont{\centering}</code></pre></div>
 <p>These alter the appearance of the first page of each chapter to have a
 centred title, with the word &ldquo;chapter&rdquo; set in small capitals immediately
 above. Feel free to employ your own individual and highly refined tastes
@@ -262,18 +248,16 @@ here in choosing your own chapter/section settings.</p>
 email it to someone, then you&rsquo;ll want to store it in the ubiquitous PDF
 format. Doing so offers some neat facilities, such as hyperlinking,
 which are implemented by the <code>hyperref</code> package:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\usepackage</span><span style="color: #a6e22e">[ps2pdf=true,colorlinks]</span><span style="color: #f8f8f2">{</span>hyperref<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\usepackage</span><span style="color: #a6e22e">[figure,table]</span><span style="color: #f8f8f2">{</span>hypcap<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% Correct a problem with hyperref</span>
-<span style="color: #66d9ef">\hypersetup</span><span style="color: #f8f8f2">{</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\usepackage[ps2pdf=true,colorlinks]{hyperref}
+\usepackage[figure,table]{hypcap} % Correct a problem with hyperref
+\hypersetup{
     bookmarksnumbered,
-    pdfstartview=<span style="color: #f8f8f2">{</span>FitH<span style="color: #f8f8f2">}</span>,
-    citecolor=<span style="color: #f8f8f2">{</span>black<span style="color: #f8f8f2">}</span>,
-    linkcolor=<span style="color: #f8f8f2">{</span>black<span style="color: #f8f8f2">}</span>,
-    urlcolor=<span style="color: #f8f8f2">{</span>black<span style="color: #f8f8f2">}</span>,
-    pdfpagemode=<span style="color: #f8f8f2">{</span>UseOutlines<span style="color: #f8f8f2">}</span>
-<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+    pdfstartview={FitH},
+    citecolor={black},
+    linkcolor={black},
+    urlcolor={black},
+    pdfpagemode={UseOutlines}
+}</code></pre></div>
 <p>There are various other options you can pass to your favourite PDF
 reader via the <code>\hypersetup</code> command, such as <code>pdftitle</code>, <code>pdfauthor</code>
 and <code>pdfsubject</code>; however, they&rsquo;re not really essential. Note that the
@@ -284,24 +268,20 @@ exciting.</p>
 
 <p>Things get a little messy now as a hack is required to ensure the
 hyperlinks actually jump to the right place.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\makeatletter</span>
-<span style="color: #66d9ef">\newcommand\org</span>@hypertarget<span style="color: #f8f8f2">{}</span>
-<span style="color: #66d9ef">\let\org</span>@hypertarget<span style="color: #66d9ef">\hypertarget</span>
-<span style="color: #66d9ef">\renewcommand\hypertarget</span><span style="color: #a6e22e">[2]</span><span style="color: #f8f8f2">{</span><span style="color: #75715e">%</span>
-<span style="color: #66d9ef">\Hy</span>@raisedlink<span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\org</span>@hypertarget<span style="color: #f8f8f2">{</span>#1<span style="color: #f8f8f2">}{}}</span>#2<span style="color: #75715e">%</span>
-<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">\makeatother</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\makeatletter
+\newcommand\org@hypertarget{}
+\let\org@hypertarget\hypertarget
+\renewcommand\hypertarget[2]{%
+\Hy@raisedlink{\org@hypertarget{#1}{}}#2%
+} \makeatother</code></pre></div>
 <p>No need to worry about this code, let&rsquo;s just move straight on.</p>
 
 <h4 id="preamble-page-layout">Preamble: page layout</h4>
 
 <p>We now set various parameters to alter the general page layout:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\parindent</span> 0pt
-<span style="color: #66d9ef">\parskip</span> 1ex
-<span style="color: #66d9ef">\renewcommand</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\baselinestretch</span><span style="color: #f8f8f2">}{</span>1.33<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\parindent 0pt
+\parskip 1ex
+\renewcommand{\baselinestretch}{1.33}</code></pre></div>
 <p>The first two of these commands alter the paragraph formatting so that
 new paragraphs are not indented but separated from the previous one by a
 small amount of whitespace; the third sets the line spacing. The
@@ -314,72 +294,56 @@ accept theses set with the above line-spacing, which is more pleasing to
 the eye.</p>
 
 <p>Some final settings:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\numberwithin</span><span style="color: #f8f8f2">{</span>equation<span style="color: #f8f8f2">}{</span>section<span style="color: #f8f8f2">}</span>       <span style="color: #75715e">% Tinker with equation numbering</span>
-<span style="color: #66d9ef">\renewcommand</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\bibname</span><span style="color: #f8f8f2">}{</span>References<span style="color: #f8f8f2">}</span>    <span style="color: #75715e">% Alter appearance of table of contents slightly</span>
-<span style="color: #66d9ef">\renewcommand</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\contentsname</span><span style="color: #f8f8f2">}{</span>Contents<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\pagenumbering</span><span style="color: #f8f8f2">{</span>roman<span style="color: #f8f8f2">}</span>                  <span style="color: #75715e">% Sets the pagenumbering to Roman nunerals to begin with</span>
-<span style="color: #66d9ef">\bibliographystyle</span><span style="color: #f8f8f2">{</span>unsrtnat<span style="color: #f8f8f2">}</span>           <span style="color: #75715e">% Sets bibliography style file (see natbib literature)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\numberwithin{equation}{section}       % Tinker with equation numbering
+\renewcommand{\bibname}{References}    % Alter appearance of table of contents slightly
+\renewcommand{\contentsname}{Contents}
+\pagenumbering{roman}                  % Sets the pagenumbering to Roman nunerals to begin with
+\bibliographystyle{unsrtnat}           % Sets bibliography style file (see natbib literature)</code></pre></div>
 <p>Set which chapters to include when Latex is next run. The advantage of
 this method is that all your cross-references are remembered and Latex
 does not spit out loads of warnings.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\includeonly</span><span style="color: #f8f8f2">{</span>chapter1,chapter2,chapter3,conclusions,appendices<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\includeonly{chapter1,chapter2,chapter3,conclusions,appendices}</code></pre></div>
 <h4 id="main-matter">Main matter</h4>
 
 <p>We now begin the document in earnest and define a suitable title:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\begin</span><span style="color: #f8f8f2">{</span>document<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\title</span><span style="color: #f8f8f2">{</span>
-<span style="color: #66d9ef">\huge</span><span style="color: #f8f8f2">{</span><span style="color: #66d9ef">\textbf</span><span style="color: #f8f8f2">{</span>Collected studies in<span style="color: #66d9ef">\\</span>pseudoscience<span style="color: #f8f8f2">}}</span><span style="color: #66d9ef">\\</span><span style="color: #a6e22e">[1.2cm]</span>
-<span style="color: #66d9ef">\Large</span><span style="color: #f8f8f2">{</span>Nathan P. Utah, MMath.<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">\\</span><span style="color: #a6e22e">[1.2cm]</span>
-<span style="color: #66d9ef">\Large</span><span style="color: #f8f8f2">{</span>Thesis submitted to The University of Nottingham <span style="color: #66d9ef">\\</span>
-for the degree of Doctor of Philosophy<span style="color: #f8f8f2">}</span> <span style="color: #66d9ef">\\</span><span style="color: #a6e22e">[1cm]</span>
-<span style="color: #66d9ef">\Large</span><span style="color: #f8f8f2">{</span>November 2005<span style="color: #f8f8f2">}</span> <span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\author</span><span style="color: #f8f8f2">{}</span> <span style="color: #66d9ef">\date</span><span style="color: #f8f8f2">{}</span>
-<span style="color: #66d9ef">\pdfbookmark</span><span style="color: #a6e22e">[0]</span><span style="color: #f8f8f2">{</span>Titlepage<span style="color: #f8f8f2">}{</span>title<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% Sets a PDF bookmark for the title page</span>
-<span style="color: #66d9ef">\maketitle</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\begin{document}
+\title{
+\huge{\textbf{Collected studies in\\pseudoscience}}\\[1.2cm]
+\Large{Nathan P. Utah, MMath.} \\[1.2cm]
+\Large{Thesis submitted to The University of Nottingham \\
+for the degree of Doctor of Philosophy} \\[1cm]
+\Large{November 2005} }
+\author{} \date{}
+\pdfbookmark[0]{Titlepage}{title} % Sets a PDF bookmark for the title page
+\maketitle</code></pre></div>
 <p>followed by a dedication:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\newpage</span> <span style="color: #66d9ef">\vspace*</span><span style="color: #f8f8f2">{</span>8cm<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\pdfbookmark</span><span style="color: #a6e22e">[0]</span><span style="color: #f8f8f2">{</span>Dedication<span style="color: #f8f8f2">}{</span>dedication<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% Sets a PDF bookmark for the dedication</span>
-<span style="color: #66d9ef">\begin</span><span style="color: #f8f8f2">{</span>center<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\large</span> Dedicated to the steel workers of America
-<span style="color: #66d9ef">\end</span><span style="color: #f8f8f2">{</span>center<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\newpage \vspace*{8cm}
+\pdfbookmark[0]{Dedication}{dedication} % Sets a PDF bookmark for the dedication
+\begin{center}
+\large Dedicated to the steel workers of America
+\end{center}</code></pre></div>
 <p>We now construct an abstract:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\newpage</span>
-<span style="color: #66d9ef">\pdfbookmark</span><span style="color: #a6e22e">[0]</span><span style="color: #f8f8f2">{</span>Abstract<span style="color: #f8f8f2">}{</span>abstract<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% Sets a PDF bookmark for the abstract</span>
-<span style="color: #66d9ef">\chapter*</span><span style="color: #f8f8f2">{</span>Abstract<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\textsc</span><span style="color: #f8f8f2">{</span>The celebrated number<span style="color: #f8f8f2">}</span> -17 was discovered in Manchester in 1989 ...
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\newpage
+\pdfbookmark[0]{Abstract}{abstract} % Sets a PDF bookmark for the abstract
+\chapter*{Abstract}
+\textsc{The celebrated number} -17 was discovered in Manchester in 1989 ...</code></pre></div>
 <p>some acknowledgements:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\pdfbookmark</span><span style="color: #a6e22e">[0]</span><span style="color: #f8f8f2">{</span>Acknowledgements<span style="color: #f8f8f2">}{</span>acknowledgements<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% Sets a PDF bookmark for the acknowledements</span>
-<span style="color: #66d9ef">\chapter*</span><span style="color: #f8f8f2">{</span>Acknowledgements<span style="color: #f8f8f2">}</span>
-I would like to thank Rambo, my pet fishfinger...
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\pdfbookmark[0]{Acknowledgements}{acknowledgements} % Sets a PDF bookmark for the acknowledements
+\chapter*{Acknowledgements}
+I would like to thank Rambo, my pet fishfinger...</code></pre></div>
 <p>and a contents page:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\pdfbookmark</span><span style="color: #a6e22e">[0]</span><span style="color: #f8f8f2">{</span>Contents<span style="color: #f8f8f2">}{</span>contents<span style="color: #f8f8f2">}</span> <span style="color: #75715e">% Sets a PDF bookmark for the contents page</span>
-<span style="color: #66d9ef">\tableofcontents</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\pdfbookmark[0]{Contents}{contents} % Sets a PDF bookmark for the contents page
+\tableofcontents</code></pre></div>
 <p>Now, we alter the pagenumbering to arabic and point to the relevant
 chapter files:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\newpage</span>
-<span style="color: #66d9ef">\pagenumbering</span><span style="color: #f8f8f2">{</span>arabic<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\include</span><span style="color: #f8f8f2">{</span>chapter1<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\include</span><span style="color: #f8f8f2">{</span>chapter2<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\include</span><span style="color: #f8f8f2">{</span>chapter3<span style="color: #f8f8f2">}</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\newpage
+\pagenumbering{arabic}
+\include{chapter1}
+\include{chapter2}
+\include{chapter3}
 ...
-<span style="color: #66d9ef">\include</span><span style="color: #f8f8f2">{</span>conclusions<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\include</span><span style="color: #f8f8f2">{</span>appendices<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+\include{conclusions}
+\include{appendices}</code></pre></div>
 <p>All your chapter files should be included here; to save time when
 editing, use the <code>\includeonly</code> command to specify which chapters to
 compile.</p>
@@ -387,12 +351,10 @@ compile.</p>
 <p>Finally, we make sure there is a link to the references section in the
 table of contents and reference the correct bibiography file (which in
 this case is called <code>bibliography.bib</code>).</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">\phantomsection</span> <span style="color: #75715e">% Ensures that a PDF bookmark is set here</span>
-<span style="color: #66d9ef">\addcontentsline</span><span style="color: #f8f8f2">{</span>toc<span style="color: #f8f8f2">}{</span>chapter<span style="color: #f8f8f2">}{</span>References<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\bibliography</span><span style="color: #f8f8f2">{</span>bibliography<span style="color: #f8f8f2">}</span>
-<span style="color: #66d9ef">\end</span><span style="color: #f8f8f2">{</span>document<span style="color: #f8f8f2">}</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex">\phantomsection % Ensures that a PDF bookmark is set here
+\addcontentsline{toc}{chapter}{References}
+\bibliography{bibliography}
+\end{document}</code></pre></div>
 <p>And there we have it: a complete thesis parent file that not only looks
 good on the printed page, but is fully functional and hyperlinked in PDF
 format.</p>
@@ -401,11 +363,9 @@ format.</p>
 
 <p>Whether you&rsquo;ve included all the red PDF commands or not, you can convert
 your TEX file to PDF by running (in unix):</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ latex thesis_with_pdfcode.tex
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ latex thesis_with_pdfcode.tex
 $ dvips thesis_with_pdfcode.dvi
-$ ps2pdf -sPAPERSIZE<span style="color: #f92672">=</span>a4 thesis_with_pdfcode.ps
-</pre></div>
-
+$ ps2pdf -sPAPERSIZE<span style="color:#f92672">=</span>a4 thesis_with_pdfcode.ps</code></pre></div>
 <p>The additional argument to <code>ps2pdf</code> is required as the default paper
 size is US Letter. Note that you will probably need to bibtex your
 thesis file before running latex for the final time.</p>
@@ -413,11 +373,9 @@ thesis file before running latex for the final time.</p>
 <p>For Windows, first open a command window by going <code>Start-&gt;Run</code> and
 entering <code>cmd</code>. Provided MiKTeX and GhostScript are correctly installed
 then the necessary commands are:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>&gt; latex thesis_with_pdfcode.tex
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt; latex thesis_with_pdfcode.tex
 &gt; dvips thesis_with_pdfcode.dvi
-&gt; ps2pdf.bat -sPAPERSIZE#a4 thesis_with_pdfcode.ps thesis_with_pdfcode.pdf
-</pre></div>
-
+&gt; ps2pdf.bat -sPAPERSIZE#a4 thesis_with_pdfcode.ps thesis_with_pdfcode.pdf</code></pre></div>
 <p>The syntax for <code>ps2pdf</code> is slightly different in Windows compared to
 Unix - and note that the output pdf filename MUST be specified, else the
 ps file is overwritten and corrupted.</p>

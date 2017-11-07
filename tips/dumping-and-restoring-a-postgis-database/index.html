@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.78954145%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.328530981%20%2b0000%20GMT%20m%3d%2b0.542128646" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -93,9 +93,7 @@ your existing stage database &ldquo;myproject_stage&rdquo; that you connect to w
 user &ldquo;myproject_stage_role&rdquo;.</p>
 
 <p>First, dump your production database:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ pg_dump --no-acl --no-owner <span style="color: #f8f8f2">$DATABASE</span> &gt; dump.sql
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pg_dump --no-acl --no-owner $DATABASE &gt; dump.sql</code></pre></div>
 <p>where:</p>
 
 <ul>
@@ -107,14 +105,10 @@ different user.</li>
 
 <p>Now, copy the SQL file across to the appropriate server and create the
 destination database from a PostGIS template with the appropriate owner:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">postgres</span><span style="color: #f92672">=#</span> <span style="color: #66d9ef">DROP</span> <span style="color: #66d9ef">DATABASE</span> <span style="color: #f8f8f2">myproject_stage;</span>
-<span style="color: #f8f8f2">postgres</span><span style="color: #f92672">=#</span> <span style="color: #66d9ef">CREATE</span> <span style="color: #66d9ef">DATABASE</span> <span style="color: #f8f8f2">myproject_stage</span> <span style="color: #66d9ef">TEMPLATE</span> <span style="color: #f8f8f2">template_postgis</span> <span style="color: #66d9ef">OWNER</span> <span style="color: #f8f8f2">myproject_role_stage;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres">postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DATABASE</span> myproject_stage;
+postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> myproject_stage <span style="color:#66d9ef">TEMPLATE</span> template_postgis <span style="color:#66d9ef">OWNER</span> myproject_role_stage;</code></pre></div>
 <p>and restore the database using the stage user:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ psql --host<span style="color: #f92672">=</span><span style="color: #ae81ff">127</span>.0.0.1 --username<span style="color: #f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ psql --host<span style="color:#f92672">=</span><span style="color:#ae81ff">127</span>.0.0.1 --username<span style="color:#f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql</code></pre></div>
 <p>Be warned: this command will generated a lot of warnings (which can be
 ignored). This happens as <code>pg_dump</code> generates SQL relative to the
 &lsquo;template0&rsquo; database (not &lsquo;template_postgis&rsquo; which would be more

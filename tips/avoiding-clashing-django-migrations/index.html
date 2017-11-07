@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.786962719%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.326129055%20%2b0000%20GMT%20m%3d%2b0.539726720" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -82,29 +82,26 @@ what we do at <a href="http://justyoyo.com/">Yoyo</a> is test for such clashes a
 part of our Travis continuous integration.</p>
 
 <p>This is done by calling a <code>makefile</code> target from <code>.travis.yml</code>:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># .travis.yml</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .travis.yml</span>
 
-<span style="color: #ae81ff">language</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">python</span>
+language: python
 
-<span style="color: #ae81ff">python</span><span style="color: #f8f8f2">:</span>
-    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">2.7</span>
+python:
+    - <span style="color:#ae81ff">2.7</span>
 
-<span style="color: #ae81ff">install</span><span style="color: #f8f8f2">:</span>
-    <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">make virtualenv</span>
+install:
+    - make virtualenv
 
-<span style="color: #ae81ff">script</span>
-    <span style="color: #ae81ff">- make test</span>
-    <span style="color: #ae81ff">- make migration_test</span>
-</pre></div>
-
+script
+    - make test
+    - make migration_test</code></pre></div>
 <p>where the <code>migration_test</code> target is:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># makefile</span>
-
-<span style="color: #f8f8f2">MIGRATION_CLASHES</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>shell find . -type f -name <span style="color: #e6db74">&quot;*.py&quot;</span> <span style="color: #f8f8f2">|</span> grep -o <span style="color: #e6db74">&quot;.*/migrations/[0-9]\+&quot;</span> <span style="color: #f8f8f2">|</span> sort <span style="color: #f8f8f2">|</span> uniq -c <span style="color: #f8f8f2">|</span> awk <span style="color: #e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color: #66d9ef">)</span>
-<span style="color: #a6e22e">migration_test</span><span style="color: #f92672">:</span>
-    <span style="color: #f92672">[</span> -n <span style="color: #66d9ef">$(</span>MIGRATION_CLASHES<span style="color: #66d9ef">)</span> <span style="color: #f92672">]</span> <span style="color: #f92672">&amp;&amp;</span> <span style="color: #f8f8f2">exit</span> <span style="color: #ae81ff">1</span> <span style="color: #f92672">||</span> <span style="color: #f8f8f2">true</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># makefile
+</span><span style="color:#75715e"></span>
+MIGRATION_CLASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell find . -type f -name <span style="color:#e6db74">&#34;*.py&#34;</span> | grep -o <span style="color:#e6db74">&#34;.*/migrations/[0-9]\+&#34;</span> | sort | uniq -c | awk <span style="color:#e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color:#66d9ef">)</span>
+<span style="color:#a6e22e">migration_test</span><span style="color:#f92672">:</span>
+    <span style="color:#f92672">[</span> -n <span style="color:#66d9ef">$(</span>MIGRATION_CLASHES<span style="color:#66d9ef">)</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> true
+</code></pre></div>
 <p>Here the <code>$(shell ...)</code> call extracts the app name and migration number
 from all migration files then uses <code>awk</code> to look for clashes. If any are
 found, the Travis build will fail and the console output should reveal

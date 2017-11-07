@@ -49,7 +49,7 @@ document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.questio
       <guid>http://codeinthehole.com/tips/inspecting-javascript-objects/</guid>
       <description>Learning Ruby or Python from the command-line prompt is greatly enhanced by the built-in inspection methods these languages provide. These allow the methods and properties of an object to be interrogated via a simple method call which returns an array of all property or method names.
 For instance, in IRB (the interactive Ruby command-line) we can interrogate the integer object:
-irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods  This returns an array of all method names for integer objects:</description>
+irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This returns an array of all method names for integer objects:</description>
     </item>
     
     <item>

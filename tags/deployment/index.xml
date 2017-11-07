@@ -42,7 +42,7 @@ Fabric function The following function can be used as part of Fabric build scrip
       <guid>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
       <description>Deploying applications that depend on cron-jobs can be a pain. However, Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;
 Consider an application folder structure as follows:
-/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ...  All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
+/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ... All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
     </item>
     
     <item>

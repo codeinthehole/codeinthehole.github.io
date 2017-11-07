@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.810510706%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.349834909%20%2b0000%20GMT%20m%3d%2b0.563432574" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,14 +75,10 @@ ga('send', 'pageview');
 production site. You can use the mysqladmin tool to return a list of the
 processes currently being handled. Combining this with the UNIX watch
 command allows a real-time monitoring of what&rsquo;s going on.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>watch -n <span style="color: #ae81ff">1</span> mysqladmin processlist
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> mysqladmin processlist</code></pre></div>
 <p>The <code>-n 1</code> specifies that mysqladmin executes every second. Depending on
 your set-up, you may need to specify a mysql user and password:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>watch -n <span style="color: #ae81ff">1</span> mysqladmin --user<span style="color: #f92672">=</span>&lt;user&gt; --password<span style="color: #f92672">=</span>&lt;password&gt; processlist
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> mysqladmin --user<span style="color:#f92672">=</span>&lt;user&gt; --password<span style="color:#f92672">=</span>&lt;password&gt; processlist</code></pre></div>
         </div>
 
         <div id="article_meta">

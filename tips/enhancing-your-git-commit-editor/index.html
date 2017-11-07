@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.789143748%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.328085607%20%2b0000%20GMT%20m%3d%2b0.541683272" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -82,19 +82,17 @@ hook to display the last 5 commit messages when I&rsquo;m editing a commit
 message.</p>
 
 <p>Use the following <code>.git/hooks/prepare-commit-msg</code> hook:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/bin/sh</span>
-
-<span style="color: #f8f8f2">BRANCH_NAME</span><span style="color: #f92672">=</span><span style="color: #66d9ef">$(</span>git branch <span style="color: #f8f8f2">|</span> grep <span style="color: #e6db74">&#39;*&#39;</span> <span style="color: #f8f8f2">|</span> sed <span style="color: #e6db74">&#39;s/* //&#39;</span><span style="color: #66d9ef">)</span>
-<span style="color: #66d9ef">if</span> <span style="color: #f92672">[</span> <span style="color: #f8f8f2">$BRANCH_NAME</span> !<span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;(no branch)&#39;</span> <span style="color: #f92672">]</span>
-<span style="color: #66d9ef">then</span>
-    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;#&quot;</span> &gt;&gt; <span style="color: #f8f8f2">$1</span>
-    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;# Last 5 commit messages&quot;</span> &gt;&gt; <span style="color: #f8f8f2">$1</span>
-    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;# ----------------------&quot;</span> &gt;&gt; <span style="color: #f8f8f2">$1</span>
-    <span style="color: #f8f8f2">COMMITS</span><span style="color: #f92672">=</span><span style="color: #e6db74">`</span>git log --pretty<span style="color: #f92672">=</span>format:<span style="color: #e6db74">&quot;# %h %s [%an]&quot;</span> -5<span style="color: #e6db74">`</span>
-    <span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;${</span><span style="color: #f8f8f2">COMMITS</span><span style="color: #e6db74">}&quot;</span> &gt;&gt; <span style="color: #f8f8f2">$1</span>
-<span style="color: #66d9ef">fi</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
+</span><span style="color:#75715e"></span>
+BRANCH_NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git branch | grep <span style="color:#e6db74">&#39;*&#39;</span> | sed <span style="color:#e6db74">&#39;s/* //&#39;</span><span style="color:#66d9ef">)</span>
+<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $BRANCH_NAME !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;(no branch)&#39;</span> <span style="color:#f92672">]</span>
+<span style="color:#66d9ef">then</span>
+    echo <span style="color:#e6db74">&#34;#&#34;</span> &gt;&gt; $1
+    echo <span style="color:#e6db74">&#34;# Last 5 commit messages&#34;</span> &gt;&gt; $1
+    echo <span style="color:#e6db74">&#34;# ----------------------&#34;</span> &gt;&gt; $1
+    COMMITS<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>git log --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#34;# %h %s [%an]&#34;</span> -5<span style="color:#e6db74">`</span>
+    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt;&gt; $1
+<span style="color:#66d9ef">fi</span></code></pre></div>
 <p>then your default commit template looks like this:</p>
 
 <p><img src="/images/screenshots/git-commit-editor.png" alt="image" /></p>

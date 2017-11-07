@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.790940158%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.330076648%20%2b0000%20GMT%20m%3d%2b0.543674313" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -72,36 +72,30 @@ ga('send', 'pageview');
 
         <div id="article_content" class="entry-content">
             <p>Consider this curio:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">import</span> <span style="color: #f8f8f2">mock</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.utils.functional</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">curry</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> mock
+<span style="color:#f92672">from</span> django.utils.functional <span style="color:#f92672">import</span> curry
 
-<span style="color: #f8f8f2">no_database</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">curry(</span>
-    <span style="color: #f8f8f2">mock</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">patch,</span> <span style="color: #e6db74">&#39;django.db.backends.util.CursorWrapper&#39;</span><span style="color: #f8f8f2">,</span>
-    <span style="color: #f8f8f2">Mock(side_effect</span><span style="color: #f92672">=</span><span style="color: #a6e22e">RuntimeError</span><span style="color: #f8f8f2">(</span><span style="color: #e6db74">&quot;Using the database is not permitted&quot;</span><span style="color: #f8f8f2">)))</span>
-</pre></div>
-
+no_database <span style="color:#f92672">=</span> curry(
+    mock<span style="color:#f92672">.</span>patch, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;django.db.backends.util.CursorWrapper&#39;</span>,
+    Mock(side_effect<span style="color:#f92672">=</span><span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Using the database is not permitted&#34;</span>)))</code></pre></div>
 <p>This snippet creates a decorator that can wrap a test case or method and
 raises an exception if the database is accessed. This can be useful if
 you&rsquo;re a puritan about <em>true</em> unit tests.</p>
 
 <p>Use by wrapping a <code>TestCase</code> subclass:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.test</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">TestCase</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
 
-<span style="color: #a6e22e">@no_database</span><span style="color: #f8f8f2">()</span>
-<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">UnitTestCase</span><span style="color: #f8f8f2">(TestCase):</span>
-    <span style="color: #f92672">...</span>
-</pre></div>
-
+<span style="color:#a6e22e">@no_database</span>()
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnitTestCase</span>(TestCase):
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>or method:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.test</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">TestCase</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
 
-<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">UnitTestCase</span><span style="color: #f8f8f2">(TestCase):</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnitTestCase</span>(TestCase):
 
-    <span style="color: #a6e22e">@no_database</span><span style="color: #f8f8f2">()</span>
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test_something</span><span style="color: #f8f8f2">(self):</span>
-        <span style="color: #f92672">...</span>
-</pre></div>
-
+    <span style="color:#a6e22e">@no_database</span>()
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something</span>(self):
+        <span style="color:#f92672">...</span></code></pre></div>
 <p>This snippet is a reformulation of one from Carl Meyer&rsquo;s excellent
 <a href="http://pyvideo.org/video/699/testing-and-django">&lsquo;Testing and Django&rsquo;</a>
 (about 24 minutes in).</p>

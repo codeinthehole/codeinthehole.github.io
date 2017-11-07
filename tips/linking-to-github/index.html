@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.787840586%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.326736153%20%2b0000%20GMT%20m%3d%2b0.540333818" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -76,10 +76,8 @@ yesterday</a>
 that it&rsquo;s dangerous to link to lines or blocks of code on Github without
 explicitly specifying the commit hash in the URL. On this theme,
 consider this git command:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git browse -u -- commit/<span style="color: #66d9ef">$(</span>git rev-parse HEAD<span style="color: #66d9ef">)</span>
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git browse -u -- commit/<span style="color:#66d9ef">$(</span>git rev-parse HEAD<span style="color:#66d9ef">)</span>
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db</code></pre></div>
 <p>This emits the Github URL to the <code>HEAD</code> commit on the current branch,
 specifying the commit hash in the URL. Note that the <code>browse</code> subcommand
 is provided by the excellent <a href="https://hub.github.com/">hub</a> library.</p>
@@ -89,57 +87,43 @@ within discussion on Github itself. Getting the correct URL quickly is
 useful.</p>
 
 <p>We can streamline further using an alias:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.gitconfig</span>
-
-<span style="color: #f92672">[</span>alias<span style="color: #f92672">]</span>
-<span style="color: #f8f8f2">url</span> <span style="color: #f92672">=</span> !hub browse -u -- commit/<span style="color: #66d9ef">$(</span>git rev-parse HEAD<span style="color: #66d9ef">)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
+url <span style="color:#f92672">=</span> !hub browse -u -- commit/<span style="color:#66d9ef">$(</span>git rev-parse HEAD<span style="color:#66d9ef">)</span></code></pre></div>
 <p>so we can run:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git url
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git url
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db</code></pre></div>
 <p>to get the expanded <code>HEAD</code> URL. Even better, we can parameterise:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.gitconfig</span>
-
-<span style="color: #f92672">[</span>alias<span style="color: #f92672">]</span>
-<span style="color: #f8f8f2">url</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;!f() { sha=</span><span style="color: #66d9ef">$(</span>git rev-parse <span style="color: #e6db74">${</span><span style="color: #f8f8f2">1</span><span style="color: #66d9ef">:-</span><span style="color: #f8f8f2">HEAD</span><span style="color: #e6db74">}</span><span style="color: #66d9ef">)</span><span style="color: #e6db74">; hub browse -u -- commit/</span><span style="color: #f8f8f2">$sha</span><span style="color: #e6db74">; }; f&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
+url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!f() { sha=</span><span style="color:#66d9ef">$(</span>git rev-parse <span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>HEAD<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">; hub browse -u -- commit/</span>$sha<span style="color:#e6db74">; }; f&#34;</span></code></pre></div>
 <p>so we can now specify a commit:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git url
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git url
 https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
 
 $ git url head
 https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
 
 $ git url head^
-https://github.com/tangentlabs/django-oscar/commit/f49d055befc90897c030e0447a98d512cca4265b
-</pre></div>
-
+https://github.com/tangentlabs/django-oscar/commit/f49d055befc90897c030e0447a98d512cca4265b</code></pre></div>
 <p>Several times a day, I run one of the above, piping the output into the
 clipboard for easy pasting:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ git url <span style="color: #f8f8f2">|</span> clipboard
-https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git url | clipboard
+https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db</code></pre></div>
 <p>where:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.bashrc</span>
-
-<span style="color: #f8f8f2">alias</span> <span style="color: #f8f8f2">clipboard</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;pbcopy&#39;</span>  <span style="color: #75715e"># osx clipboard</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
+</span><span style="color:#75715e"></span>
+alias clipboard<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pbcopy&#39;</span>  # osx clipboard</code></pre></div>
 <p>Here&rsquo;s a few more useful git aliases based on the <code>browse</code> subcommand:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># ~/.gitconfig</span>
-
-<span style="color: #f92672">[</span>alias<span style="color: #f92672">]</span>
-<span style="color: #f8f8f2">commits</span> <span style="color: #f92672">=</span> !hub browse -- commits
-<span style="color: #f8f8f2">issues</span> <span style="color: #f92672">=</span> !hub browse -- issues
-<span style="color: #f8f8f2">wiki</span> <span style="color: #f92672">=</span> !hub browse -- wiki
-<span style="color: #f8f8f2">settings</span> <span style="color: #f92672">=</span> !hub browse -- settings
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig
+</span><span style="color:#75715e"></span>
+<span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
+commits <span style="color:#f92672">=</span> !hub browse -- commits
+issues <span style="color:#f92672">=</span> !hub browse -- issues
+wiki <span style="color:#f92672">=</span> !hub browse -- wiki
+settings <span style="color:#f92672">=</span> !hub browse -- settings</code></pre></div>
         </div>
 
         <div id="article_meta">

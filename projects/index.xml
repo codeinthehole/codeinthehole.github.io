@@ -29,7 +29,7 @@ v1.0 We&amp;rsquo;re aiming to be v1.0 before the end of the year1. Oscar has be
       <guid>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
       <description>TLDR: Parameterised tests are a useful testing technique. Both Nose and py.test support them.
 URI templates in purl The newly released purl 0.8 (a URL library of mine) supports URI templates as per RFC 6570. These allow new URL instances to be created by passing bindings to a template instance.
-&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39;  Alternatively, you can expand template strings directly:</description>
+&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39; Alternatively, you can expand template strings directly:</description>
     </item>
     
     <item>
@@ -50,7 +50,7 @@ It provides a simple API for wrapping expensive read operations that caches resu
       <guid>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</guid>
       <description>Working with URLs in Python feels clunky when it should be pleasant. In urlparse and urllib, the standard library has all the functionality you need, but the code you have to write is often cumbersome and unclear.
 For instance, here&amp;rsquo;s a typical test method that makes an assertion about a query parameter:
-import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0])  Not terrible, but could be more concise.</description>
+import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0]) Not terrible, but could be more concise.</description>
     </item>
     
     <item>
@@ -63,7 +63,7 @@ import urlparse def test_url_has_correct_query_parameter(self): url = get_url_fr
 The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
-pip install csvfilter  Sample usage:
+pip install csvfilter Sample usage:
 # Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
     </item>
     
@@ -75,7 +75,7 @@ pip install csvfilter  Sample usage:
       <guid>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
       <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.
 Sample Usage Enable the additional assert methods using a mixin:
-import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ...  Now suppose that the expected XML from some SUT1 is:</description>
+import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ... Now suppose that the expected XML from some SUT1 is:</description>
     </item>
     
     <item>

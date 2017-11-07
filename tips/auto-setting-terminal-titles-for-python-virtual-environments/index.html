@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.798609156%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.336996785%20%2b0000%20GMT%20m%3d%2b0.550594450" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -86,10 +86,8 @@ project. This is making you unhappy.</p>
 <p>Use your <code>postactivate</code><sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> script to set the terminal title when you
 activate a virtual environment. Add something similar to the following
 to your <code>postactivate</code> script:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">TITLE</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;codeinthehole.com&quot;</span>
-<span style="color: #f8f8f2">echo</span> -ne <span style="color: #e6db74">&quot;\033]0;</span><span style="color: #f8f8f2">$TITLE</span><span style="color: #e6db74">\007&quot;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;codeinthehole.com&#34;</span>
+echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$TITLE<span style="color:#e6db74">\007&#34;</span></code></pre></div>
 <p>Then whenever you start working on a project (using <code>workon</code>), your tab
 title will be labelled correctly.</p>
 <div class="footnotes">

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.794139781%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.333259232%20%2b0000%20GMT%20m%3d%2b0.546856897" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -80,19 +80,17 @@ from example.com.</p>
 
 <p>Consider the following snippet from Django&rsquo;s docs<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> for sending a
 confirmation email:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.contrib.sites.models</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">Site</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.core.mail</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">send_mail</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib.sites.models <span style="color:#f92672">import</span> Site
+<span style="color:#f92672">from</span> django.core.mail <span style="color:#f92672">import</span> send_mail
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">register_for_newsletter</span><span style="color: #f8f8f2">(request):</span>
-    <span style="color: #f8f8f2">current_site</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get_current()</span>
-    <span style="color: #f8f8f2">send_mail(</span>
-        <span style="color: #e6db74">&#39;Thanks for subscribing to %s alerts&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">current_site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name,</span>
-        <span style="color: #e6db74">&#39;Thanks for your subscription. We appreciate it.</span><span style="color: #ae81ff">\n\n</span><span style="color: #e6db74">-The %s team.&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">current_site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name,</span>
-        <span style="color: #e6db74">&#39;editor@%s&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">current_site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">domain,</span>
-        <span style="color: #f8f8f2">[user</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">email]</span>
-    <span style="color: #f8f8f2">)</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register_for_newsletter</span>(request):
+    current_site <span style="color:#f92672">=</span> Site<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get_current()
+    send_mail(
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Thanks for subscribing to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> alerts&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Thanks for your subscription. We appreciate it.</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">-The </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> team.&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;editor@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>domain,
+        [user<span style="color:#f92672">.</span>email]
+    )</code></pre></div>
 <p>Here the domain for the email sender is taken from the &lsquo;current site&rsquo;
 instance, which is controlled by <a href="https://docs.djangoproject.com/en/dev/ref/contrib/sites/?from=olddocs">Django&rsquo;s &lsquo;Sites&rsquo;
 framework</a>
@@ -113,17 +111,15 @@ domain and display name correctly in each environment.</p>
 
 <p>First, ensure that each environment has settings for the domain and site
 name.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># conf/test.py</span>
-...
-<span style="color: #f8f8f2">DOMAIN_NAME</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;test.project.client.tangentlabs.co.uk&#39;</span>
-<span style="color: #f8f8f2">SITE_NAME</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;project - client (test)&#39;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># conf/test.py
+</span><span style="color:#75715e"></span>...
+DOMAIN_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.project.client.tangentlabs.co.uk&#39;</span>
+SITE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;project - client (test)&#39;</span>
 
-<span style="color: #75715e"># conf/stage.py</span>
-...
-<span style="color: #f8f8f2">DOMAIN_NAME</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;stage.project.client.tangentlabs.co.uk&#39;</span>
-<span style="color: #f8f8f2">SITE_NAME</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&#39;project - client (stage)&#39;</span>
-</pre></div>
-
+<span style="color:#75715e"># conf/stage.py
+</span><span style="color:#75715e"></span>...
+DOMAIN_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;stage.project.client.tangentlabs.co.uk&#39;</span>
+SITE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;project - client (stage)&#39;</span></code></pre></div>
 <p>This snippet assumes you are using a set-up similar to that outlined by
 <a href="http://justcramer.com/2011/01/13/settings-in-django/">David Cramer</a>,
 where an environmental variable specifies an additional settings file to
@@ -140,23 +136,19 @@ data migrations that alter 3rd party apps.</p>
 <p>Since we&rsquo;re not using the actual app where the <code>Site</code> model is defined,
 we must employ South&rsquo;s <code>--freeze</code> option to ensure the <code>Site</code> model is
 available to the migration.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>python manage.py datamigration &lt;appname&gt; create_domains --freeze<span style="color: #f92672">=</span>sites
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py datamigration &lt;appname&gt; create_domains --freeze<span style="color:#f92672">=</span>sites</code></pre></div>
 <p>Finally implement the <code>forwards</code> method:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">south.v2</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">DataMigration</span>
-<span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.conf</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">settings</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> south.v2 <span style="color:#f92672">import</span> DataMigration
+<span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 
-<span style="color: #66d9ef">class</span> <span style="color: #a6e22e">Migration</span><span style="color: #f8f8f2">(DataMigration):</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Migration</span>(DataMigration):
 
-    <span style="color: #66d9ef">def</span> <span style="color: #a6e22e">forwards</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">orm):</span>
-        <span style="color: #f8f8f2">Site</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">orm[</span><span style="color: #e6db74">&#39;sites.Site&#39;</span><span style="color: #f8f8f2">]</span>
-        <span style="color: #f8f8f2">site</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">Site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">get(id</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">SITE_ID)</span>
-        <span style="color: #f8f8f2">site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">domain</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">DOMAIN_NAME</span>
-        <span style="color: #f8f8f2">site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">name</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">settings</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">SITE_NAME</span>
-        <span style="color: #f8f8f2">site</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">save()</span>
-</pre></div>
-
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
+        Site <span style="color:#f92672">=</span> orm[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;sites.Site&#39;</span>]
+        site <span style="color:#f92672">=</span> Site<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>SITE_ID)
+        site<span style="color:#f92672">.</span>domain <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>DOMAIN_NAME
+        site<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>SITE_NAME
+        site<span style="color:#f92672">.</span>save()</code></pre></div>
 <p>Then your next deployment to each environment will perform the update.</p>
 <div class="footnotes">
 

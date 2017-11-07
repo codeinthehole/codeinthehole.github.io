@@ -19,7 +19,7 @@
       <guid>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
       <description>Problem You are serving a Django application using Nginx to proxy to an Apache server running mod_wsgi and you want to allow slashes in your URL keywords.
 For example, you may want to edit some attribute of the page at URL /; hence, you want to use a URL regex of the form:
-url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...)  and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
+url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
     </item>
     
   </channel>

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.800860026%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.338749995%20%2b0000%20GMT%20m%3d%2b0.552347660" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -82,24 +82,22 @@ ga('send', 'pageview');
 colour support within the &ldquo;test&rdquo; management command. A simple workaround
 for this is to use Fabric with a few modified color commands. Your
 fabric file should include the following:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">fabric.colors</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">_wrap_with</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> fabric.colors <span style="color:#f92672">import</span> _wrap_with
 
-<span style="color: #f8f8f2">green_bg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">_wrap_with(</span><span style="color: #e6db74">&#39;42&#39;</span><span style="color: #f8f8f2">)</span>
-<span style="color: #f8f8f2">red_bg</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">_wrap_with(</span><span style="color: #e6db74">&#39;41&#39;</span><span style="color: #f8f8f2">)</span>
+green_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;42&#39;</span>)
+red_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;41&#39;</span>)
 
-<span style="color: #75715e"># Set the list of apps to test</span>
-<span style="color: #f8f8f2">env</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">test_apps</span> <span style="color: #f92672">=</span> <span style="color: #e6db74">&quot;app1 app2&quot;</span>
+<span style="color:#75715e"># Set the list of apps to test</span>
+env<span style="color:#f92672">.</span>test_apps <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;app1 app2&#34;</span>
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">test</span><span style="color: #f8f8f2">():</span>
-    <span style="color: #66d9ef">with</span> <span style="color: #f8f8f2">settings(warn_only</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">True):</span>
-        <span style="color: #f8f8f2">result</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">local(</span><span style="color: #e6db74">&#39;./manage.py test %(test_apps)s --settings=settings_test -v 2 --failfast&#39;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">env,</span> <span style="color: #f8f8f2">capture</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">False)</span>
-    <span style="color: #66d9ef">if</span> <span style="color: #f8f8f2">result</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">failed:</span>
-        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">red_bg(</span><span style="color: #e6db74">&quot;Some tests failed&quot;</span><span style="color: #f8f8f2">)</span>
-    <span style="color: #66d9ef">else</span><span style="color: #f8f8f2">:</span>
-        <span style="color: #66d9ef">print</span>
-        <span style="color: #66d9ef">print</span> <span style="color: #f8f8f2">green_bg(</span><span style="color: #e6db74">&quot;All tests passed - have a banana!&quot;</span><span style="color: #f8f8f2">)</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>():
+    <span style="color:#66d9ef">with</span> settings(warn_only<span style="color:#f92672">=</span>True):
+        result <span style="color:#f92672">=</span> local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;./manage.py test </span><span style="color:#e6db74">%(test_apps)s</span><span style="color:#e6db74"> --settings=settings_test -v 2 --failfast&#39;</span> <span style="color:#f92672">%</span> env, capture<span style="color:#f92672">=</span>False)
+    <span style="color:#66d9ef">if</span> result<span style="color:#f92672">.</span>failed:
+        <span style="color:#66d9ef">print</span> red_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Some tests failed&#34;</span>)
+    <span style="color:#66d9ef">else</span>:
+        <span style="color:#66d9ef">print</span>
+        <span style="color:#66d9ef">print</span> green_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;All tests passed - have a banana!&#34;</span>)</code></pre></div>
 <p>You can choose your own success and failure messages.</p>
 
 <p>Now we have lovely colours while doing TDD in Django:</p>

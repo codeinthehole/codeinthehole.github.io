@@ -6,10 +6,23 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Oct 2017 16:33:45 +0100</lastBuildDate>
+    <lastBuildDate>Tue, 07 Nov 2017 22:41:21 +0100</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Little-known words relevant to software development</title>
+      <link>http://codeinthehole.com/lists/qikipedia-words-that-could-be-about-software-developement/</link>
+      <pubDate>Tue, 07 Nov 2017 22:41:21 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/lists/qikipedia-words-that-could-be-about-software-developement/</guid>
+      <description>A curated1 collection of words-of-the-day from @qikipedia:
+Word of the day: ARSLE - to move backwards.
+&amp;mdash; Quite Interesting (@qikipedia) May 14, 2017  Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better
+&amp;mdash; Quite Interesting (@qikipedia) July 3, 2017  Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.
+&amp;mdash; Quite Interesting (@qikipedia) October 21, 2017  Word of the day : FANKLE (Scottish) - to tangle or entangle something.</description>
+    </item>
     
     <item>
       <title>Using a custom Sentry client</title>
@@ -30,7 +43,7 @@
  You moved everything out of the views.py modules when you heard fat controllers were bad.
  And you&amp;rsquo;ve read that fat models are a good idea1.
  You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;  You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>
@@ -41,8 +54,8 @@
       <guid>http://codeinthehole.com/tips/bash-error-reporting/</guid>
       <description>Two tips:
 Fail fast You probably already know that you can force Bash scripts to exit immediately if there&amp;rsquo;s an error (that is, if any command exits with a non-zero exit code) using:
-#!/usr/bin/env bash set -e  but it&amp;rsquo;s even better to use:
-set -eu -o pipefail  so that the script:
+#!/usr/bin/env bash  set -e but it&amp;rsquo;s even better to use:
+set -eu -o pipefail so that the script:
  exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
     </item>
     
@@ -54,9 +67,9 @@ set -eu -o pipefail  so that the script:
       <guid>http://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</guid>
       <description>There&amp;rsquo;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
 First, set:
-log_statement = None   Don&amp;rsquo;t set this to all as the AWS docs suggest.
+log_statement = None  Don&amp;rsquo;t set this to all as the AWS docs suggest.
 Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
-$ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log  Hope that saves you some time.</description>
+$ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
     </item>
     
     <item>
@@ -67,9 +80,9 @@ $ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log  Hope that saves 
       <guid>http://codeinthehole.com/tips/a-mnemonic-for-mocks/</guid>
       <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&amp;rsquo;s not always clear what order arguments are being injected.
 For instance, which of these is right? This:
-@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass  Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass  Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass  I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
+@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
     </item>
     
     <item>
@@ -93,7 +106,7 @@ Furthermore, the episode &amp;ldquo;Hurrican Neddy&amp;rdquo; from season 8 of T
       <guid>http://codeinthehole.com/tips/open-github-pull-request-command/</guid>
       <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
 Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
-$ git pulls  where pulls is aliased in ~/.</description>
+$ git pulls where pulls is aliased in ~/.</description>
     </item>
     
     <item>
@@ -104,7 +117,7 @@ $ git pulls  where pulls is aliased in ~/.</description>
       <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
       <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
 Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
-$ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json |  select(.</description>
+$ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</description>
     </item>
     
     <item>
@@ -124,9 +137,9 @@ $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json |  select(.</d
       
       <guid>http://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
       <description>If your Consul key-value store is structured as:
-/ A/ X = 1 Z = 2 Y = 3 C D  but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
-/ WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D  then this Bash script will help you migrate:
-#!/bin/bash set -e # Exit on error # Emit &amp;quot;key value&amp;quot; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
+/ A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
+/ WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:
+#!/bin/bash  set -e # Exit on error  # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude:  # (a) those that end in / (as these are folders)  # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating  # to).</description>
     </item>
     
     <item>
@@ -187,7 +200,7 @@ Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
       
       <guid>http://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
       <description>Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your commit message template to:
-# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources  and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
+# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
     </item>
     
     <item>
@@ -198,7 +211,7 @@ Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
       <guid>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
       <description>I often need to grab information from a Postgres database and paste it into a spreadsheet for sharing with others. Google Sheets needs the pasted data to be tab-separated in order to be correctly split into columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to configure psql&amp;rsquo;s output to get it.
 At a psql prompt, switch to unaligned output
-=&amp;gt; \a  set the field separator to a tab character:</description>
+=&amp;gt; \a set the field separator to a tab character:</description>
     </item>
     
     <item>
@@ -208,8 +221,8 @@ At a psql prompt, switch to unaligned output
       
       <guid>http://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</guid>
       <description>Cloud computing and immutable infrastructure deployments have changed the way I use SSH. I miss the days when I could run:
-$ ssh app1-prod  to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&amp;rsquo;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
-Host app1-prod User example_user HostName 74.</description>
+$ ssh app1-prod to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&amp;rsquo;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
+Host app1-prod User example_user HostName 74.207.251.29  This circumvented the labour-intensive act of typing in the remote username and IP address when SSHing around town.</description>
     </item>
     
     <item>
@@ -229,8 +242,8 @@ Host app1-prod User example_user HostName 74.</description>
       <guid>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
       <description>Hmmm, this delete statement is taking longer than I thought it would&amp;hellip;
  If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
-\copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39;  and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
-\copy $table from &amp;#39;/tmp/backup.</description>
+\copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39; and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
+\copy $table from &amp;#39;/tmp/backup.csv&amp;#39; Moderately useful.</description>
     </item>
     
     <item>
@@ -250,7 +263,7 @@ There are various techniques available for dealing with this2, but what we do at
       
       <guid>http://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
       <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;quot;title $NAME&amp;quot; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line  # will need to edited later if not.</description>
+#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
     </item>
     
     <item>
@@ -261,7 +274,7 @@ There are various techniques available for dealing with this2, but what we do at
       <guid>http://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
       <description>At Tangent, we use Zabbix for monitoring and alerting. This is a note-to-self on how to configure application monitoring.
 Management command You need a script that prints out a value to STDOUT. A simple management command suffices:
-from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch_%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;quot;No method found with name &amp;#39;%s&amp;#39;&amp;quot; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
+from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch_%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;#34;No method found with name &amp;#39;%s&amp;#39;&amp;#34; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
     </item>
     
     <item>
@@ -271,7 +284,7 @@ from django.core.management.base import BaseCommand, CommandError class Command(
       
       <guid>http://codeinthehole.com/tips/linking-to-github/</guid>
       <description>It was rightly pointed out yesterday that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
-$ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db  This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
+$ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
     </item>
     
     <item>
@@ -292,8 +305,8 @@ This is a particular menace in agencies (or anywhere with lots of small projects
       <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
       <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
-$ brew install the_silver_searcher  Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;quot; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif  :grep searches are now lightning-fast and respectful of your ~/.</description>
+$ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
+if executable(&amp;#39;ag&amp;#39;)&amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif :grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -324,7 +337,7 @@ This article is largely a note-to-self in case I have to repeat the process. How
       <guid>http://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
       <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
 Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
-$ export LANGUAGE=&amp;quot;en_US.UTF-8&amp;quot; $ export LANG=&amp;quot;en_US.UTF-8&amp;quot; $ export LC_ALL=&amp;quot;en_US.UTF-8&amp;quot;  Now install dependencies:
+$ export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; $ export LANG=&amp;#34;en_US.UTF-8&amp;#34; $ export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
 $ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis  PostgreSQL should now be installed and running with UTF8 encodings.</description>
     </item>
     
@@ -337,7 +350,7 @@ $ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresq
       <description>Confession: I am a pedant, especially around commit messages.
 I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
 Use the following .git/hooks/prepare-commit-msg hook:
-#!/bin/sh BRANCH_NAME=$(git branch | grep &amp;#39;*&amp;#39; | sed &amp;#39;s/* //&amp;#39;) if [ $BRANCH_NAME !</description>
+#!/bin/sh  BRANCH_NAME=$(git branch | grep &amp;#39;*&amp;#39; | sed &amp;#39;s/* //&amp;#39;) if [ $BRANCH_NAME !</description>
     </item>
     
     <item>
@@ -360,7 +373,7 @@ Solution Suppose your production database is called &amp;ldquo;myproject_prod&am
       <guid>http://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
       <description>TLDR: Parameterised tests are a useful testing technique. Both Nose and py.test support them.
 URI templates in purl The newly released purl 0.8 (a URL library of mine) supports URI templates as per RFC 6570. These allow new URL instances to be created by passing bindings to a template instance.
-&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39;  Alternatively, you can expand template strings directly:</description>
+&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39; Alternatively, you can expand template strings directly:</description>
     </item>
     
     <item>
@@ -394,7 +407,8 @@ Such requirements are slightly tricky to capture in Django as they tread slightl
 
 This screenshot is taken from django-oscar&amp;rsquo;s README.
 Embed these badges in your own repo as Restructured text:
-.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads  or Markdown:</description>
+.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version.. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:
+[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
     </item>
     
     <item>
@@ -414,9 +428,9 @@ This can be neatly addressed through a &amp;lsquo;post checkout&amp;rsquo; hook 
       
       <guid>http://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</guid>
       <description>Consider this curio:
-import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;quot;Using the database is not permitted&amp;quot;)))  This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
+import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;#34;Using the database is not permitted&amp;#34;))) This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
 Use by wrapping a TestCase subclass:
-from django.test import TestCase @no_database() class UnitTestCase(TestCase): ...  or method:</description>
+from django.test import TestCase @no_database() class UnitTestCase(TestCase): ... or method:</description>
     </item>
     
     <item>
@@ -427,8 +441,8 @@ from django.test import TestCase @no_database() class UnitTestCase(TestCase): ..
       <guid>http://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
       <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
 Solution With pip already installed, install the required development packages:
-$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev  and symlink the three image libraries into /usr/lib:
-$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/  PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
+$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     
     <item>
@@ -461,7 +475,7 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       
       <guid>http://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
       <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
-ERROR: current transaction is aborted, commands ignored until end of transaction block  This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
+ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
 Solution Turn on Postgres&amp;rsquo; logging and watch the log files when the error is generated.
 This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
     </item>
@@ -497,7 +511,7 @@ Use pull requests Pull requests are an excellent tool for fostering code review.
 This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.
 This is mainly for my own reference.
 User set-up Create user with a dummy shell:
-$ adduser --shell=/bin/false barry  and alter the ownership and permissions of their home folder:</description>
+$ adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
     </item>
     
     <item>
@@ -541,8 +555,8 @@ An e-commerce example Suppose your e-commerce application allows admins to uploa
 When you have a lot of templates, this gets pretty tedious.
 Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
-&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt;  to
-&amp;lt;h1&amp;gt;{% trans &amp;quot;Welcome to my site&amp;quot; %}&amp;lt;/h1&amp;gt;  use the macro</description>
+&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
+&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro</description>
     </item>
     
     <item>
@@ -553,7 +567,7 @@ Macro 1 - Convert tag text To convert
       <guid>http://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
       <description>How to use a South data migration to avoid accidentally sending emails from example.com.
 Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
-from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] )  Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %salerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %steam.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
     </item>
     
     <item>
@@ -564,7 +578,7 @@ from django.contrib.sites.models import Site from django.core.mail import send_m
       <guid>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
       <description>Problem You are serving a Django application using Nginx to proxy to an Apache server running mod_wsgi and you want to allow slashes in your URL keywords.
 For example, you may want to edit some attribute of the page at URL /; hence, you want to use a URL regex of the form:
-url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...)  and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
+url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
     </item>
     
     <item>
@@ -575,7 +589,7 @@ url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...)  and us
       <guid>http://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</guid>
       <description>Working with URLs in Python feels clunky when it should be pleasant. In urlparse and urllib, the standard library has all the functionality you need, but the code you have to write is often cumbersome and unclear.
 For instance, here&amp;rsquo;s a typical test method that makes an assertion about a query parameter:
-import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0])  Not terrible, but could be more concise.</description>
+import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0]) Not terrible, but could be more concise.</description>
     </item>
     
     <item>
@@ -600,7 +614,7 @@ Solution Use the extra_tags keyword argument to pass a flag indicating that the 
 The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
-pip install csvfilter  Sample usage:
+pip install csvfilter Sample usage:
 # Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
     </item>
     
@@ -648,7 +662,7 @@ Solution Use the following Python script to fetch pycon videos from YouTube and 
       <description>Here&amp;rsquo;s a few tips for using a Git pre-commit hook.
 Keep your hook script in source control Commit your hook script (say pre-commit.sh) at the root of your project and include the installation instructions in your README/documentation to encourage all developers use it.
 Installation is nothing more than:
-ln -s ../../pre-commit.sh .git/hooks/pre-commit  Then everyone benefits from running the same set of tests before committing and updates are picked up automatically.</description>
+ln -s ../../pre-commit.sh .git/hooks/pre-commit Then everyone benefits from running the same set of tests before committing and updates are picked up automatically.</description>
     </item>
     
     <item>
@@ -670,7 +684,7 @@ Migrating from PHP to Python and Django Abstract:
       <guid>http://codeinthehole.com/tips/testing-https-handling-in-django/</guid>
       <description>Problem You want to test how your application handles HTTPS requests.
 Solution Use the following to simulate a HTTPS request using the Django test client:
-from django.test.client import Client client = Client() response = client.get(url, **{&amp;#39;wsgi.url_scheme&amp;#39;: &amp;#39;https&amp;#39;})  Discussion The standard way to test for a HTTPS request is using the is_secure method of the django.http.HttpRequest class1 and its subclasses. As of Django 1.3, the implementation of this method checks whether an environmental variable HTTPS is equal to &amp;ldquo;on&amp;rdquo;:</description>
+from django.test.client import Client client = Client() response = client.get(url, **{&amp;#39;wsgi.url_scheme&amp;#39;: &amp;#39;https&amp;#39;}) Discussion The standard way to test for a HTTPS request is using the is_secure method of the django.http.HttpRequest class1 and its subclasses. As of Django 1.3, the implementation of this method checks whether an environmental variable HTTPS is equal to &amp;ldquo;on&amp;rdquo;:</description>
     </item>
     
     <item>
@@ -727,7 +741,7 @@ Solution Use your postactivate1 script to set the terminal title when you activa
       <guid>http://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
       <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.
 Sample Usage Enable the additional assert methods using a mixin:
-import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ...  Now suppose that the expected XML from some SUT1 is:</description>
+import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ... Now suppose that the expected XML from some SUT1 is:</description>
     </item>
     
     <item>
@@ -748,9 +762,9 @@ import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.
       <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
       <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
 Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
-apt-get install python-pip pip install -U pip  Next, install the required development packages:
-apt-get install python-dev libmysqlclient-dev  then
-pip install MySQL-python  should complete successfully.
+apt-get install python-pip pip install -U pip Next, install the required development packages:
+apt-get install python-dev libmysqlclient-dev then
+pip install MySQL-python should complete successfully.
 Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
     </item>
     
@@ -761,8 +775,8 @@ Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see som
       
       <guid>http://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</guid>
       <description>Problem The python package installer pip can be used to install directly from Github, like so:
-$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar  This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
-$ pip freeze | grep oscar -e git://github.</description>
+$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
+$ pip freeze | grep oscar -e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg=django_oscar-dev Hence running pip install -r requirements.</description>
     </item>
     
     <item>
@@ -773,7 +787,7 @@ $ pip freeze | grep oscar -e git://github.</description>
       <guid>http://codeinthehole.com/tips/console-logging-to-stdout-in-django/</guid>
       <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.
 Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:
-import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } }  For Python 2.</description>
+import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.</description>
     </item>
     
     <item>
@@ -783,7 +797,7 @@ import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{
       
       <guid>http://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</guid>
       <description>If you use virtual environments on your django servers, then getting manage.py commands to run from cron is a little tricky. You need to activate the virtualenv before running the command and so you might think that the following would work:
-*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null  It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
+*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
     </item>
     
     <item>
@@ -835,7 +849,7 @@ The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and J
       
       <guid>http://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
       <description>A bad joke told in Python:
-def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper())  </description>
+def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.</description>
     </item>
     
     <item>
@@ -855,7 +869,7 @@ For my first contribution to the node.js ecosystem, I&amp;rsquo;ve published a s
       
       <guid>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
       <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&amp;rsquo;s not currently supported as an option but can be achieved with a little bash magic. Here&amp;rsquo;s how:
-#!/bin/bash if [ $# -lt 2 ] then echo &amp;quot;Usage: `basename $0` database wildcardpattern&amp;quot; echo &amp;quot;Eg: `basename $0` mydatabase App_%&amp;quot; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;quot;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;quot; | awk &amp;#39;{printf $1&amp;quot; &amp;quot;}&amp;#39;`  This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
+#!/bin/bash if [ $# -lt 2 ] then echo &amp;#34;Usage: `basename $0` database wildcardpattern&amp;#34; echo &amp;#34;Eg: `basename $0` mydatabase App_%&amp;#34; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;#34;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;#34; | awk &amp;#39;{printf $1&amp;#34; &amp;#34;}&amp;#39;` This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
     </item>
     
     <item>
@@ -918,7 +932,7 @@ We had an issue recently where some debugging code got committed and wasn&amp;rs
       <guid>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
       <description>Deploying applications that depend on cron-jobs can be a pain. However, Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;
 Consider an application folder structure as follows:
-/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ...  All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
+/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ... All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
     </item>
     
     <item>
@@ -940,7 +954,7 @@ document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.questio
       <guid>http://codeinthehole.com/tips/inspecting-javascript-objects/</guid>
       <description>Learning Ruby or Python from the command-line prompt is greatly enhanced by the built-in inspection methods these languages provide. These allow the methods and properties of an object to be interrogated via a simple method call which returns an array of all property or method names.
 For instance, in IRB (the interactive Ruby command-line) we can interrogate the integer object:
-irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods  This returns an array of all method names for integer objects:</description>
+irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This returns an array of all method names for integer objects:</description>
     </item>
     
     <item>
@@ -980,7 +994,7 @@ One of the key performance recommendations from Steve Souders&amp;rsquo; excelle
       
       <guid>http://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/</guid>
       <description>Getting www.commandlinefu.com off the ground has renewed my interest in Bash, UNIX and all things command-line. Powerful one-liners are things of beauty and are worth collecting; however what I consider to be the most influential command-line tip I know covers four:
-&amp;quot;\e[A&amp;quot;: history-search-backward &amp;quot;\e[B&amp;quot;: history-search-forward &amp;quot;\e[C&amp;quot;: forward-char &amp;quot;\e[D&amp;quot;: backward-char  These lines need to be placed in your ~/.inputrc file, the start-up script for the Readline utility used by Bash (as well as several other applications) and others).</description>
+&amp;#34;\e[A&amp;#34;: history-search-backward &amp;#34;\e[B&amp;#34;: history-search-forward &amp;#34;\e[C&amp;#34;: forward-char &amp;#34;\e[D&amp;#34;: backward-char These lines need to be placed in your ~/.inputrc file, the start-up script for the Readline utility used by Bash (as well as several other applications) and others).</description>
     </item>
     
     <item>
@@ -1085,7 +1099,7 @@ For example, DOMDocument stores the XML tree in memory while it is being built -
       
       <guid>http://codeinthehole.com/tips/monitoring-mysql/</guid>
       <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&amp;rsquo;s going on.
-watch -n 1 mysqladmin processlist  The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
+watch -n 1 mysqladmin processlist The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
     </item>
     
     <item>
@@ -1096,7 +1110,7 @@ watch -n 1 mysqladmin processlist  The -n 1 specifies that mysqladmin executes e
       <guid>http://codeinthehole.com/tips/following-log-files-with-tail-f/</guid>
       <description>UNIX is a majestic onion of discovery. Every day a new layer of understanding can be peeled away to give some new pungent goodness. Today&amp;rsquo;s was the &amp;lsquo;follow&amp;rsquo; option of the tail command.
 It&amp;rsquo;s commonplace to use tail for viewing the recent entries to a log file:
-tail /var/log/apache2/error.log  Much more useful is set the &amp;lsquo;follow&amp;rsquo; option so that, rather than echoing to STDOUT and returning control to the prompt - tail continues to watch the file in question and echos additional lines to the terminal.</description>
+tail /var/log/apache2/error.log Much more useful is set the &amp;lsquo;follow&amp;rsquo; option so that, rather than echoing to STDOUT and returning control to the prompt - tail continues to watch the file in question and echos additional lines to the terminal.</description>
     </item>
     
     <item>

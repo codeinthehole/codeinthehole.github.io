@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.783673358%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.323563154%20%2b0000%20GMT%20m%3d%2b0.537160819" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -72,69 +72,63 @@ ga('send', 'pageview');
 
         <div id="article_content" class="entry-content">
             <p>If your Consul key-value store is structured as:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/
     A/
-        <span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span>
-        <span style="color: #f8f8f2">Z</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2</span>
-        <span style="color: #f8f8f2">Y</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span>
+        X <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+        Z <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+        Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
     C 
-    D
-</pre></div>
-
+    D</code></pre></div>
 <p>but you now realise you should have namespaced everything within <code>WEBSERVER/</code> (or
 something like that):</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>/
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/
     WEBSERVER/
         A/
-            <span style="color: #f8f8f2">X</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">1</span>
-            <span style="color: #f8f8f2">Z</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">2</span>
-            <span style="color: #f8f8f2">Y</span> <span style="color: #f92672">=</span> <span style="color: #ae81ff">3</span>
+            X <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
+            Z <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
+            Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
         C
-        D
-</pre></div>
-
+        D</code></pre></div>
 <p>then this Bash script will help you migrate:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e">#!/bin/bash</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+</span><span style="color:#75715e"></span>
+set -e  <span style="color:#75715e"># Exit on error
+</span><span style="color:#75715e"></span>
+<span style="color:#75715e"># Emit &#34;key value&#34; lines for all keys in Consul&#39;s KV store
+</span><span style="color:#75715e"></span>keys_and_values<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Recursively fetch all values from Consul but exclude:
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># (a) those that end in / (as these are folders)
+</span><span style="color:#75715e"></span>    <span style="color:#75715e"># (b) those that start with WEBSERVER/ (as that&#39;s where we are migrating
+</span><span style="color:#75715e"></span>    <span style="color:#75715e">#     to).
+</span><span style="color:#75715e"></span>    curl -s <span style="color:#e6db74">&#34;localhost/v1/kv/?recurse&#34;</span> | jq -r <span style="color:#e6db74">&#39;
+</span><span style="color:#e6db74">        .[] | 
+</span><span style="color:#e6db74">        select(
+</span><span style="color:#e6db74">            (.Key | endswith(&#34;/&#34;) | not) and 
+</span><span style="color:#e6db74">            (.Key | startswith(&#34;WEBSERVER&#34;) | not)
+</span><span style="color:#e6db74">        ) | 
+</span><span style="color:#e6db74">        [.Key, &#34; &#34;, .Value] | 
+</span><span style="color:#e6db74">        add&#39;</span> | <span style="color:#66d9ef">while</span> read key b64value
+    <span style="color:#66d9ef">do</span>
+        <span style="color:#75715e"># Consul&#39;s REST API returns values base64-encoded so we decode here.
+</span><span style="color:#75715e"></span>        echo $key <span style="color:#e6db74">`</span>echo <span style="color:#e6db74">&#34;</span>$b64value<span style="color:#e6db74">&#34;</span> | base64 -d<span style="color:#e6db74">`</span>
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
 
-<span style="color: #f8f8f2">set</span> -e  <span style="color: #75715e"># Exit on error</span>
+<span style="color:#75715e"># Set a new value in Consul&#39;s KV store
+</span><span style="color:#75715e"></span>set_key<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    key<span style="color:#f92672">=</span>$1
+    value<span style="color:#f92672">=</span>$2
+    curl -s -X PUT -d <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;localhost/v1/kv/</span>$key<span style="color:#e6db74">&#34;</span> &gt; /dev/null
+<span style="color:#f92672">}</span>
 
-<span style="color: #75715e"># Emit &quot;key value&quot; lines for all keys in Consul&#39;s KV store</span>
-keys_and_values<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
-    <span style="color: #75715e"># Recursively fetch all values from Consul but exclude:</span>
-    <span style="color: #75715e"># (a) those that end in / (as these are folders)</span>
-    <span style="color: #75715e"># (b) those that start with WEBSERVER/ (as that&#39;s where we are migrating</span>
-    <span style="color: #75715e">#     to).</span>
-    curl -s <span style="color: #e6db74">&quot;localhost/v1/kv/?recurse&quot;</span> <span style="color: #f8f8f2">|</span> jq -r <span style="color: #e6db74">&#39;</span>
-<span style="color: #e6db74">        .[] | </span>
-<span style="color: #e6db74">        select(</span>
-<span style="color: #e6db74">            (.Key | endswith(&quot;/&quot;) | not) and </span>
-<span style="color: #e6db74">            (.Key | startswith(&quot;WEBSERVER&quot;) | not)</span>
-<span style="color: #e6db74">        ) | </span>
-<span style="color: #e6db74">        [.Key, &quot; &quot;, .Value] | </span>
-<span style="color: #e6db74">        add&#39;</span> <span style="color: #f8f8f2">|</span> <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">read</span> key b64value
-    <span style="color: #66d9ef">do</span>
-        <span style="color: #75715e"># Consul&#39;s REST API returns values base64-encoded so we decode here.</span>
-        <span style="color: #f8f8f2">echo</span> <span style="color: #f8f8f2">$key</span> <span style="color: #e6db74">`</span><span style="color: #f8f8f2">echo</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$b64value</span><span style="color: #e6db74">&quot;</span> <span style="color: #f8f8f2">|</span> base64 -d<span style="color: #e6db74">`</span>
-    <span style="color: #66d9ef">done</span>
-<span style="color: #f92672">}</span>
+migrate_to_webserver_namespace<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    keys_and_values | <span style="color:#66d9ef">while</span> read key value
+    <span style="color:#66d9ef">do</span>
+        set_key <span style="color:#e6db74">&#34;WEBSERVER/</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span>
+    <span style="color:#66d9ef">done</span> 
+<span style="color:#f92672">}</span>
 
-<span style="color: #75715e"># Set a new value in Consul&#39;s KV store</span>
-set_key<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
-    <span style="color: #f8f8f2">key</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$1</span>
-    <span style="color: #f8f8f2">value</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">$2</span>
-    curl -s -X PUT -d <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$value</span><span style="color: #e6db74">&quot;</span> <span style="color: #e6db74">&quot;localhost/v1/kv/</span><span style="color: #f8f8f2">$key</span><span style="color: #e6db74">&quot;</span> &gt; /dev/null
-<span style="color: #f92672">}</span>
-
-migrate_to_webserver_namespace<span style="color: #f92672">()</span> <span style="color: #f92672">{</span>
-    keys_and_values <span style="color: #f8f8f2">|</span> <span style="color: #66d9ef">while</span> <span style="color: #f8f8f2">read</span> key value
-    <span style="color: #66d9ef">do</span>
-        set_key <span style="color: #e6db74">&quot;WEBSERVER/</span><span style="color: #f8f8f2">$key</span><span style="color: #e6db74">&quot;</span> <span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">$value</span><span style="color: #e6db74">&quot;</span>
-    <span style="color: #66d9ef">done</span> 
-<span style="color: #f92672">}</span>
-
-migrate_to_webserver_namespace
-</pre></div>
-
+migrate_to_webserver_namespace</code></pre></div>
 <p>This script uses <a href="https://www.consul.io/docs/agent/http/kv.html">Consul&rsquo;s REST API</a> and filters the results using
 <a href="https://stedolan.github.io/jq/"><code>jq</code></a><sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>. It&rsquo;s easily
 adapted to migrate key-value pairs between different namespaces.</p>

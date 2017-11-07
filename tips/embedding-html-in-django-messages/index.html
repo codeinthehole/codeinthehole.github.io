@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.794897366%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.333969767%20%2b0000%20GMT%20m%3d%2b0.547567432" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -91,44 +91,38 @@ framework in later versions.</p>
 argument</a>
 to pass a flag indicating that the message is safe for rendering without
 escaping. For example:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.contrib</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">messages</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> messages
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">some_view</span><span style="color: #f8f8f2">(request):</span>
-    <span style="color: #f92672">...</span>
-    <span style="color: #f8f8f2">messages</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">success(request,</span> 
-                     <span style="color: #e6db74">&#39;Here is a &lt;a href=&quot;/&quot;&gt;link&lt;/a&gt;.&#39;</span><span style="color: #f8f8f2">,</span>
-                     <span style="color: #f8f8f2">extra_tags</span><span style="color: #f92672">=</span><span style="color: #e6db74">&#39;safe&#39;</span><span style="color: #f8f8f2">)</span>
-    <span style="color: #f92672">...</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_view</span>(request):
+    <span style="color:#f92672">...</span>
+    messages<span style="color:#f92672">.</span>success(request, 
+                     <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Here is a &lt;a href=&#34;/&#34;&gt;link&lt;/a&gt;.&#39;</span>,
+                     extra_tags<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;safe&#39;</span>)
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>Then use some simple template logic to determine whether to use the
 <code>safe</code> filter:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">ul</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #75715e">{%</span> <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">message</span> <span style="color: #66d9ef">in</span> <span style="color: #f8f8f2">messages</span> <span style="color: #75715e">%}</span>
-    <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">li</span> <span style="color: #a6e22e">class</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;</span><span style="color: #75715e">{{</span> <span style="color: #f8f8f2">message.tags</span> <span style="color: #75715e">}}</span><span style="color: #e6db74">&quot;</span><span style="color: #f8f8f2">&gt;</span>
-        <span style="color: #75715e">{%</span> <span style="color: #66d9ef">if</span> <span style="color: #e6db74">&#39;safe&#39;</span> <span style="color: #66d9ef">in</span> <span style="color: #f8f8f2">message.tags</span> <span style="color: #75715e">%}</span>
-            <span style="color: #75715e">{{</span> <span style="color: #f8f8f2">message</span><span style="color: #f92672">|</span><span style="color: #a6e22e">safe</span> <span style="color: #75715e">}}</span>
-        <span style="color: #75715e">{%</span> <span style="color: #66d9ef">else</span> <span style="color: #75715e">%}</span>
-            <span style="color: #75715e">{{</span> <span style="color: #f8f8f2">message</span> <span style="color: #75715e">}}</span>
-        <span style="color: #75715e">{%</span> <span style="color: #66d9ef">endif</span> <span style="color: #75715e">%}</span>
-    <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">li</span><span style="color: #f8f8f2">&gt;</span>
-    <span style="color: #75715e">{%</span> <span style="color: #66d9ef">endfor</span> <span style="color: #75715e">%}</span>
-<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">ul</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html+django" data-lang="html+django">&lt;ul&gt;
+    {% for message in messages %}
+    &lt;li class=&#34;{{ message.tags }}&#34;&gt;
+        {% if &#39;safe&#39; in message.tags %}
+            {{ message|safe }}
+        {% else %}
+            {{ message }}
+        {% endif %}
+    &lt;/li&gt;
+    {% endfor %}
+&lt;/ul&gt;</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 
 <p>It&rsquo;s tempting to use the <code>safe</code> filter for all messages but this opens
 up a XSS security hole if you are not careful as it&rsquo;s easy to include
 user input verbatim in the message. For instance:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.contrib</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">messages</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> messages
 
-<span style="color: #66d9ef">def</span> <span style="color: #a6e22e">some_view</span><span style="color: #f8f8f2">(request):</span>
-    <span style="color: #f8f8f2">code</span> <span style="color: #f92672">=</span> <span style="color: #f8f8f2">request</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">GET[</span><span style="color: #e6db74">&#39;code&#39;</span><span style="color: #f8f8f2">]</span>
-    <span style="color: #f92672">...</span>
-    <span style="color: #f8f8f2">messages</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">success(request,</span> <span style="color: #e6db74">&quot;&#39;%s&#39; is not valid voucher code&quot;</span> <span style="color: #f92672">%</span> <span style="color: #f8f8f2">code)</span>
-</pre></div>
-
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_view</span>(request):
+    code <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>GET[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;code&#39;</span>]
+    <span style="color:#f92672">...</span>
+    messages<span style="color:#f92672">.</span>success(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; is not valid voucher code&#34;</span> <span style="color:#f92672">%</span> code)</code></pre></div>
 <p>leads to an XSS hole if the <code>safe</code> filter is used on all messages as the
 contents of <code>request.GET['code']</code> cannot be trusted. It&rsquo;s better to
 explicitly indicate which messages can be safely rendered without

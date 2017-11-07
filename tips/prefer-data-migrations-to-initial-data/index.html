@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.797770607%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.336064155%20%2b0000%20GMT%20m%3d%2b0.549661820" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -123,16 +123,12 @@ Django projects already do.</p>
 <h3 id="simple-example">Simple example</h3>
 
 <p>Create a blank data migration:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>./manage.py datamigration myapp mymigrationname
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py datamigration myapp mymigrationname</code></pre></div>
 <p>then implement the <code>forward</code> method to create the appropriate initial
 data:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">forwards</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">orm):</span>
-    <span style="color: #66d9ef">for</span> <span style="color: #f8f8f2">name</span> <span style="color: #f92672">in</span> <span style="color: #f8f8f2">(</span><span style="color: #e6db74">&#39;Foo&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;Bar&#39;</span><span style="color: #f8f8f2">):</span>
-        <span style="color: #f8f8f2">orm</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">Frob</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">objects</span><span style="color: #f92672">.</span><span style="color: #f8f8f2">create(name</span><span style="color: #f92672">=</span><span style="color: #f8f8f2">name)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
+    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Foo&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Bar&#39;</span>):
+        orm<span style="color:#f92672">.</span>Frob<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>name)</code></pre></div>
 <p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked
 example</a> in South&rsquo;s
 docs for further details on writing data migrations.</p>
@@ -141,11 +137,9 @@ docs for further details on writing data migrations.</p>
 
 <p>It&rsquo;s possible to use JSON fixture files with data migrations, by
 utilising the <code>call_command</code> function.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">def</span> <span style="color: #a6e22e">forwards</span><span style="color: #f8f8f2">(self,</span> <span style="color: #f8f8f2">orm):</span>
-    <span style="color: #f92672">from</span> <span style="color: #f8f8f2">django.core.management</span> <span style="color: #f92672">import</span> <span style="color: #f8f8f2">call_command</span>
-    <span style="color: #f8f8f2">call_command(</span><span style="color: #e6db74">&#39;loaddata&#39;</span><span style="color: #f8f8f2">,</span> <span style="color: #e6db74">&#39;countries.json&#39;</span><span style="color: #f8f8f2">)</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
+    <span style="color:#f92672">from</span> django.core.management <span style="color:#f92672">import</span> call_command
+    call_command(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;loaddata&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;countries.json&#39;</span>)</code></pre></div>
 <p>I had thought this was very useful feature as you can use the <code>dumpdata</code>
 command to produce your initial fixtures, and you will have them
 available to be used by unit tests.</p>

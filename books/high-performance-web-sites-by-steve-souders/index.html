@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.809640732%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.346310775%20%2b0000%20GMT%20m%3d%2b0.559908440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -90,17 +90,15 @@ Expires HTTP headers is an easy-win recommendation that prevents
 unnecessary requests once a browser&rsquo;s cache has been primed. This is
 something I&rsquo;ve used on several sites previously, employing the following
 Apache directives to add Expires headers to the HTTP:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;IfModule</span> <span style="color: #e6db74">mod_expires.c</span><span style="color: #f92672">&gt;</span>
-    <span style="color: #f8f8f2">ExpiresActive</span> <span style="color: #66d9ef">on</span>
-    <span style="color: #f8f8f2">ExpiresByType</span> image/jpg “access plus <span style="color: #ae81ff">2</span> years”
-    <span style="color: #f8f8f2">ExpiresByType</span> image/jpeg “access plus <span style="color: #ae81ff">2</span> years”
-    <span style="color: #f8f8f2">ExpiresByType</span> image/gif “access plus <span style="color: #ae81ff">2</span> years”
-    <span style="color: #f8f8f2">ExpiresByType</span> text/css “access plus <span style="color: #ae81ff">2</span> days”
-    <span style="color: #f8f8f2">ExpiresByType</span> image/js “access plus <span style="color: #ae81ff">2</span> days”
-    <span style="color: #f8f8f2">ExpiresDefault</span> ”access plus <span style="color: #ae81ff">1</span> days”
-<span style="color: #f92672">&lt;/IfModule&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
+    ExpiresActive <span style="color:#66d9ef">on</span>
+    ExpiresByType image/jpg “access plus <span style="color:#ae81ff">2</span> years”
+    ExpiresByType image/jpeg “access plus <span style="color:#ae81ff">2</span> years”
+    ExpiresByType image/gif “access plus <span style="color:#ae81ff">2</span> years”
+    ExpiresByType text/css “access plus <span style="color:#ae81ff">2</span> days”
+    ExpiresByType image/js “access plus <span style="color:#ae81ff">2</span> days”
+    ExpiresDefault ”access plus <span style="color:#ae81ff">1</span> days”
+<span style="color:#f92672">&lt;/IfModule</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span></code></pre></div>
 <p>Additional areas where I found out something new include:</p>
 
 <ul>

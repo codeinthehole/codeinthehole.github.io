@@ -19,9 +19,9 @@
       <guid>http://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</guid>
       <description>There&amp;rsquo;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
 First, set:
-log_statement = None   Don&amp;rsquo;t set this to all as the AWS docs suggest.
+log_statement = None  Don&amp;rsquo;t set this to all as the AWS docs suggest.
 Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
-$ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log  Hope that saves you some time.</description>
+$ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
     </item>
     
     <item>
@@ -32,7 +32,7 @@ $ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log  Hope that saves 
       <guid>http://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
       <description>I often need to grab information from a Postgres database and paste it into a spreadsheet for sharing with others. Google Sheets needs the pasted data to be tab-separated in order to be correctly split into columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to configure psql&amp;rsquo;s output to get it.
 At a psql prompt, switch to unaligned output
-=&amp;gt; \a  set the field separator to a tab character:</description>
+=&amp;gt; \a set the field separator to a tab character:</description>
     </item>
     
     <item>
@@ -43,8 +43,8 @@ At a psql prompt, switch to unaligned output
       <guid>http://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
       <description>Hmmm, this delete statement is taking longer than I thought it would&amp;hellip;
  If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
-\copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39;  and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
-\copy $table from &amp;#39;/tmp/backup.</description>
+\copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39; and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
+\copy $table from &amp;#39;/tmp/backup.csv&amp;#39; Moderately useful.</description>
     </item>
     
     <item>
@@ -78,7 +78,7 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       
       <guid>http://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
       <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
-ERROR: current transaction is aborted, commands ignored until end of transaction block  This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
+ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
 Solution Turn on Postgres&amp;rsquo; logging and watch the log files when the error is generated.
 This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
     </item>

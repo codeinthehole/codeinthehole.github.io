@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.810293889%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.349799058%20%2b0000%20GMT%20m%3d%2b0.563396723" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -81,11 +81,9 @@ static page that isn&rsquo;t to be revealed until a specified date.</p>
 <p>For example, the following directives specify that a temporary 302
 redirect should be issued for all requests to the URL <code>/special_offer</code>
 before a certain date has passed:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">RewriteCond</span> %{TIME} &lt;20081031000000 
-<span style="color: #f8f8f2">RewriteCond</span> %{REQUEST_URI} <span style="color: #e6db74">/special_offer.</span>*
-<span style="color: #f8f8f2">RewriteRule</span> (.*) <span style="color: #e6db74">/offers</span> [L,R=302,QSA]
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache">RewriteCond %{TIME} &lt;20081031000000 
+RewriteCond %{REQUEST_URI} <span style="color:#e6db74">/special_offer.</span>*
+RewriteRule (.*) <span style="color:#e6db74">/offers</span> [L,R=302,QSA]</code></pre></div>
 <p>This means that the <code>/special_offer</code> page can be prepared and deployed
 beforehand and apache will handle the transfer once the publish date has
 passed. There&rsquo;s a whole load of other nifty things that can be done in a
@@ -96,11 +94,9 @@ time of day.</p>
 you&rsquo;re playing around trying to get something to work. I find the
 easiest thing to do is to redirect to a URL which contains the variable
 being tested against. For example:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">RewriteEngine</span> <span style="color: #66d9ef">On</span> 
-<span style="color: #f8f8f2">RewriteCond</span> %{REQUEST_URI} <span style="color: #e6db74">/debug</span> 
-<span style="color: #f8f8f2">RewriteRule</span> (.*) <span style="color: #e6db74">/debug/</span>?%{TIME}&amp;%{TIME_DAY} [L,R=302]
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache">RewriteEngine <span style="color:#66d9ef">On</span> 
+RewriteCond %{REQUEST_URI} <span style="color:#e6db74">/debug</span> 
+RewriteRule (.*) <span style="color:#e6db74">/debug/</span>?%{TIME}&amp;%{TIME_DAY} [L,R=302]</code></pre></div>
 <p>Then you can see what the values of <code>%{TIME}</code> and <code>%{TIME_DAY}</code> are from
 the URL you&rsquo;ve been redirected to. There are almost certainly better
 ways of doing this but this way is quick and it works.</p>

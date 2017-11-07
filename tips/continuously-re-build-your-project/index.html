@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.788190831%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.326918264%20%2b0000%20GMT%20m%3d%2b0.540515929" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -97,64 +97,59 @@ cloning the repo.</p>
 <a href="http://www.tangentsnowball.com/">Tangent</a>, projects use a <code>makefile</code>
 for common tasks. Setting up a working version of the project is as
 simple as:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>$ make 
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make </code></pre></div>
 <p>It&rsquo;s helpful if you can template new projects to embed good practices
 like this. We frequently use Django and maintain a <a href="https://github.com/tangentlabs/tangent-django-boilerplate/">boilerplate Django
 project</a> for
 this purpose. It includes a
 <a href="https://github.com/tangentlabs/tangent-django-boilerplate/blob/master/makefile">makefile</a>
 along these lines:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #75715e"># Build a working version of the project</span>
-<span style="color: #a6e22e">build</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">clean</span> <span style="color: #f8f8f2">virtualenv</span> <span style="color: #f8f8f2">database</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># Build a working version of the project
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> clean virtualenv database
 
-<span style="color: #75715e"># Delete all temporary or untracked files</span>
-<span style="color: #a6e22e">clean</span><span style="color: #f92672">:</span> 
-    -find . -type f -name <span style="color: #e6db74">&quot;*.pyc&quot;</span> -delete
+<span style="color:#75715e"># Delete all temporary or untracked files
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">clean</span><span style="color:#f92672">:</span> 
+    -find . -type f -name <span style="color:#e6db74">&#34;*.pyc&#34;</span> -delete
     -rm -rf www/public/media/*
 
-<span style="color: #75715e"># Update the virtualenv</span>
-<span style="color: #a6e22e">virtualenv</span><span style="color: #f92672">:</span> 
+<span style="color:#75715e"># Update the virtualenv
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">virtualenv</span><span style="color:#f92672">:</span> 
     pip install -r www/deploy/requirements.txt
 
-<span style="color: #75715e"># Create a database populated with data</span>
-<span style="color: #a6e22e">database</span><span style="color: #f92672">:</span> 
-    python www/manage.py reset_db --router<span style="color: #f92672">=</span>default --noinput
+<span style="color:#75715e"># Create a database populated with data
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">database</span><span style="color:#f92672">:</span> 
+    python www/manage.py reset_db --router<span style="color:#f92672">=</span>default --noinput
     python www/manage.py syncdb --noinput
     python www/manage.py migrate
-<span style="color: #75715e">    # Load any project fixtures to pre-populate the initial database</span>
-    python www/manage.py loaddata fixtures/*.json
+    <span style="color:#75715e"># Load any project fixtures to pre-populate the initial database
+</span><span style="color:#75715e"></span>    python www/manage.py loaddata fixtures/*.json
 
-<span style="color: #a6e22e">test</span><span style="color: #f92672">:</span>
-    <span style="color: #f8f8f2">cd</span> www <span style="color: #f92672">&amp;&amp;</span> py.test
+<span style="color:#a6e22e">test</span><span style="color:#f92672">:</span>
+    cd www <span style="color:#f92672">&amp;&amp;</span> py.test
 
-<span style="color: #a6e22e">ci</span><span style="color: #f92672">:</span> <span style="color: #f8f8f2">test</span> <span style="color: #f8f8f2">database</span>
-</pre></div>
-
+<span style="color:#a6e22e">ci</span><span style="color:#f92672">:</span> test database
+</code></pre></div>
 <p>Witness the <code>ci</code> target which runs the test suite <em>and</em> builds the
 database, effectively smoke-testing that the migrations apply correctly
 and the fixtures load (which is where we&rsquo;ve historically had pain).</p>
 
 <p>We use <a href="https://travis-ci.com/">Travis</a> for CI and our template
 <code>.travis.yml</code> looks a little like this:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #ae81ff">language</span><span style="color: #f8f8f2">:</span> <span style="color: #ae81ff">python</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: python
 
-<span style="color: #ae81ff">python</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #f8f8f2">-</span> <span style="color: #e6db74">&#39;2.7&#39;</span>
+python:
+  - <span style="color:#e6db74">&#39;2.7&#39;</span>
 
-<span style="color: #ae81ff">install</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">make virtualenv</span>
+install:
+  - make virtualenv
 
-<span style="color: #75715e"># Use the same database as used in production</span>
-<span style="color: #ae81ff">before_script</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">psql -c &#39;CREATE ROLE test_role login createdb superuser;&#39; -U postgres</span>
-  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">psql -c &#39;CREATE DATABASE test_db OWNER test_role;&#39; -U postgres</span>
+<span style="color:#75715e"># Use the same database as used in production</span>
+before_script:
+  - psql -c <span style="color:#e6db74">&#39;CREATE ROLE test_role login createdb superuser;&#39;</span> -U postgres
+  - psql -c <span style="color:#e6db74">&#39;CREATE DATABASE test_db OWNER test_role;&#39;</span> -U postgres
 
-<span style="color: #ae81ff">script</span><span style="color: #f8f8f2">:</span>
-  <span style="color: #f8f8f2">-</span> <span style="color: #ae81ff">make ci</span>
-</pre></div>
-
+script:
+  - make ci</code></pre></div>
 <p>which means that, <em>by default</em>, all new projects will be built from
 scratch as part of continuous integration. You should do this.</p>
 

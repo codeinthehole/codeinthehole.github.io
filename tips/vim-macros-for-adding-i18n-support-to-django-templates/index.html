@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.794162671%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.332863513%20%2b0000%20GMT%20m%3d%2b0.546461178" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -88,17 +88,11 @@ hard-coded strings.</p>
 <h4 id="macro-1-convert-tag-text">Macro 1 - Convert tag text</h4>
 
 <p>To convert</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>Welcome to my site<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">h1</span>&gt;Welcome to my site&lt;/<span style="color:#f92672">h1</span>&gt;</code></pre></div>
 <p>to</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>{% trans &quot;Welcome to my site&quot; %}<span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">h1</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">h1</span>&gt;{% trans &#34;Welcome to my site&#34; %}&lt;/<span style="color:#f92672">h1</span>&gt;</code></pre></div>
 <p>use the macro</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span>vitc{% trans <span style="color: #e6db74">&quot;&quot;</span> %}<span style="color: #f8f8f2">&lt;</span>ESC<span style="color: #f8f8f2">&gt;</span><span style="color: #ae81ff">4</span>hp
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">vitc</span>{% <span style="color:#a6e22e">trans</span><span style="color:#75715e"> &#34;&#34; %}&lt;ESC&gt;4hp</span></code></pre></div>
 <p>which breaks down as:</p>
 
 <ul>
@@ -121,18 +115,12 @@ contains, and type <code>@q</code>. This will save you a lot of key-strokes.</p>
 <h4 id="macro-2-convert-selected-text">Macro 2 - Convert selected text</h4>
 
 <p>To convert</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>See this image: <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">img</span> <span style="color: #a6e22e">src</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/images/1.jpg&quot;</span> <span style="color: #f8f8f2">/&gt;</span> <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">p</span>&gt;See this image: &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/images/1.jpg&#34;</span> /&gt; &lt;/<span style="color:#f92672">p</span>&gt;</code></pre></div>
 <p>to</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>{% trans &quot;See this image:&quot; %} <span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">img</span> <span style="color: #a6e22e">src</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/images/1.jpg&quot;</span> <span style="color: #f8f8f2">/&gt;</span> <span style="color: #f8f8f2">&lt;/</span><span style="color: #f92672">p</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">p</span>&gt;{% trans &#34;See this image:&#34; %} &lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/images/1.jpg&#34;</span> /&gt; &lt;/<span style="color:#f92672">p</span>&gt;</code></pre></div>
 <p>enter visual mode and select the text to convert (eg &ldquo;See this image:&ldquo;)
 then use the macro</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #66d9ef">c</span>{% trans <span style="color: #e6db74">&quot;&quot;</span> %}<span style="color: #f8f8f2">&lt;</span>ESC<span style="color: #f8f8f2">&gt;</span><span style="color: #ae81ff">4</span>hp
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">c</span>{% <span style="color:#a6e22e">trans</span><span style="color:#75715e"> &#34;&#34; %}&lt;ESC&gt;4hp</span></code></pre></div>
 <p>which is the same as the one above but without the tag text selection.</p>
 
 <p>To summarise: Vim&rsquo;s macros are great - learn how to use them.</p>

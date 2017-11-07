@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-10-16%2016%3a35%3a36.805044907%20%2b0100%20BST" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?2017-11-07%2022%3a57%3a02.342649066%20%2b0000%20GMT%20m%3d%2b0.556246731" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -84,11 +84,9 @@ browsers can cache the files between requests giving a performance boost
 to your site. Assuming you&rsquo;re using Apache for serving, the following
 settings can be used to set these headers for all Javascript and CSS
 files (there are a few alternative ways of achieving the same result):</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;FilesMatch</span> <span style="color: #960050; background-color: #1e0010">&quot;\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$&quot;</span><span style="color: #f92672">&gt;</span>
-    Header set Expires &quot;Thu, 15 Apr 2010 20:00:00 GMT&quot;
-<span style="color: #f92672">&lt;/FilesMatch&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;FilesMatch</span> <span style="color:#960050;background-color:#1e0010">&#34;\.(ico|pdf|flv|jpg|jpeg|png|gif|js|css|swf)$&#34;</span><span style="color:#f92672">&gt;</span>
+    Header set Expires &#34;Thu, 15 Apr 2010 20:00:00 GMT&#34;
+<span style="color:#f92672">&lt;/FilesMatch&gt;</span></code></pre></div>
 <p>The main issue to be aware of using this technique is that, when your
 components change, you need to ensure your visitors are forced to
 download the latest version rather than using the one cached by their
@@ -108,32 +106,28 @@ string as the query string after your asset URLs. That is:</p>
 <p><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css?~~CACHEBUSTER~~&quot; type=&quot;text/css&quot; /&gt;</code>
 where the <code>~~</code> delimiter indicates the token. Then include something
 like the following snippet in your Phing deployment script.</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f92672">&lt;tstamp&gt;</span>
-    <span style="color: #f92672">&lt;format</span> <span style="color: #a6e22e">property=</span><span style="color: #e6db74">&quot;build.datetimestring&quot;</span> <span style="color: #a6e22e">pattern=</span><span style="color: #e6db74">&quot;%Y-%m-%d-%H-%M&quot;</span> <span style="color: #f92672">/&gt;</span>
-<span style="color: #f92672">&lt;/tstamp&gt;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;tstamp&gt;</span>
+    <span style="color:#f92672">&lt;format</span> <span style="color:#a6e22e">property=</span><span style="color:#e6db74">&#34;build.datetimestring&#34;</span> <span style="color:#a6e22e">pattern=</span><span style="color:#e6db74">&#34;%Y-%m-%d-%H-%M&#34;</span> <span style="color:#f92672">/&gt;</span>
+<span style="color:#f92672">&lt;/tstamp&gt;</span>
 ...
-<span style="color: #f92672">&lt;target</span> <span style="color: #a6e22e">name=</span><span style="color: #e6db74">&quot;create-temp-build&quot;</span> <span style="color: #a6e22e">description=</span><span style="color: #e6db74">&quot;Creates a temporary copy of the source files&quot;</span><span style="color: #f92672">&gt;</span>    
-    <span style="color: #f92672">&lt;echo</span> <span style="color: #a6e22e">msg=</span><span style="color: #e6db74">&quot;Copying deployment files into temporary directory&quot;</span> <span style="color: #f92672">/&gt;</span>
-    <span style="color: #f92672">&lt;copy</span> <span style="color: #a6e22e">todir=</span><span style="color: #e6db74">&quot;${dev.folder.temp}&quot;</span><span style="color: #f92672">&gt;</span>
-        <span style="color: #f92672">&lt;filterchain&gt;</span>
-            <span style="color: #f92672">&lt;replacetokens</span> <span style="color: #a6e22e">begintoken=</span><span style="color: #e6db74">&quot;~~&quot;</span> <span style="color: #a6e22e">endtoken=</span><span style="color: #e6db74">&quot;~~&quot;</span><span style="color: #f92672">&gt;</span>
-                <span style="color: #f92672">&lt;token</span> <span style="color: #a6e22e">key=</span><span style="color: #e6db74">&quot;CACHEBUSTER&quot;</span> <span style="color: #a6e22e">value=</span><span style="color: #e6db74">&quot;${build.datetimestring}&quot;</span> <span style="color: #f92672">/&gt;</span>
-            <span style="color: #f92672">&lt;/replacetokens&gt;</span>
-        <span style="color: #f92672">&lt;/filterchain&gt;</span>
-        <span style="color: #f92672">&lt;fileset</span> <span style="color: #a6e22e">refid=</span><span style="color: #e6db74">&quot;deployment-files&quot;</span> <span style="color: #f92672">/&gt;</span>
-    <span style="color: #f92672">&lt;/copy&gt;</span>
-<span style="color: #f92672">&lt;/target&gt;</span>
-</pre></div>
-
+<span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;create-temp-build&#34;</span> <span style="color:#a6e22e">description=</span><span style="color:#e6db74">&#34;Creates a temporary copy of the source files&#34;</span><span style="color:#f92672">&gt;</span>    
+    <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Copying deployment files into temporary directory&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;copy</span> <span style="color:#a6e22e">todir=</span><span style="color:#e6db74">&#34;${dev.folder.temp}&#34;</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;filterchain&gt;</span>
+            <span style="color:#f92672">&lt;replacetokens</span> <span style="color:#a6e22e">begintoken=</span><span style="color:#e6db74">&#34;~~&#34;</span> <span style="color:#a6e22e">endtoken=</span><span style="color:#e6db74">&#34;~~&#34;</span><span style="color:#f92672">&gt;</span>
+                <span style="color:#f92672">&lt;token</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;CACHEBUSTER&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${build.datetimestring}&#34;</span> <span style="color:#f92672">/&gt;</span>
+            <span style="color:#f92672">&lt;/replacetokens&gt;</span>
+        <span style="color:#f92672">&lt;/filterchain&gt;</span>
+        <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">refid=</span><span style="color:#e6db74">&#34;deployment-files&#34;</span> <span style="color:#f92672">/&gt;</span>
+    <span style="color:#f92672">&lt;/copy&gt;</span>
+<span style="color:#f92672">&lt;/target&gt;</span></code></pre></div>
 <p>The filterchain component of the copy task parses the given fileset for
 matching tokens that match and replaces them with the given value. In
 this example, I&rsquo;m using timestamps as the replacements as these will
 ensure a different query string on each deployment. Doing so ensures
 that the deployed HTML includes the lines:</p>
-<div class="highlight" style="background: #272822"><pre style="line-height: 125%"><span></span><span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">link</span> <span style="color: #a6e22e">rel</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;stylesheet&quot;</span> <span style="color: #a6e22e">href</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/css/styles.css?2008-03-15-21-51&quot;</span> <span style="color: #a6e22e">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;text/css&quot;</span> <span style="color: #f8f8f2">/&gt;</span>
-<span style="color: #f8f8f2">&lt;</span><span style="color: #f92672">script</span> <span style="color: #a6e22e">type</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;text/javascript&quot;</span> <span style="color: #a6e22e">src</span><span style="color: #f92672">=</span><span style="color: #e6db74">&quot;/js/site-behaviour.js?2008-03-15-21-51&quot;</span><span style="color: #f8f8f2">&gt;</span>
-</pre></div>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/css/styles.css?2008-03-15-21-51&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span> /&gt;
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/js/site-behaviour.js?2008-03-15-21-51&#34;</span>&gt;</code></pre></div>
 <p>which then ensure that all subsequent visitors download the latest
 versions of the CSS and javascript files. The above target is taken from
 a deployment script I use which creates a temporary snapshot of the
