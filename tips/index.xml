@@ -6,10 +6,21 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 16 Nov 2017 15:50:04 +0000</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Joining between date and timestamp fields in Postgres</title>
+      <link>http://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</link>
+      <pubDate>Thu, 16 Nov 2017 15:50:04 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</guid>
+      <description>Joining tables on date and timestamp with timezone fields in Postgres1 needs careful handling because of time zones and daylight-saving time.
+To illustrate, assume we have two tables:
+ t1 which has a field of type date and a foreign-key t2_id to t2 which has a field of timestamp with timezone.  We want to build SQL queries that join between these two tables with additional date constraints on the join.</description>
+    </item>
     
     <item>
       <title>Bash error reporting</title>

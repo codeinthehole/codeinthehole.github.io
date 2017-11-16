@@ -6,10 +6,21 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Nov 2017 22:41:21 +0100</lastBuildDate>
+    <lastBuildDate>Thu, 16 Nov 2017 15:50:04 +0000</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Joining between date and timestamp fields in Postgres</title>
+      <link>http://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</link>
+      <pubDate>Thu, 16 Nov 2017 15:50:04 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</guid>
+      <description>Joining tables on date and timestamp with timezone fields in Postgres1 needs careful handling because of time zones and daylight-saving time.
+To illustrate, assume we have two tables:
+ t1 which has a field of type date and a foreign-key t2_id to t2 which has a field of timestamp with timezone.  We want to build SQL queries that join between these two tables with additional date constraints on the join.</description>
+    </item>
     
     <item>
       <title>Little-known words relevant to software development</title>
@@ -1151,8 +1162,8 @@ Previously I&amp;rsquo;ve worked as:
       
       <guid>http://codeinthehole.com/code/</guid>
       <description>I am a software engineer.
-Open-source I occasionally write open-source software - a selection of projects are listed below. See my Github profile for a more exhaustive list.
-Oscar Oscar is an open-source e-commerce framework for Django.
+Open-source I occasionally write open-source software. A selection of projects are listed below but see my Github profile for a more exhaustive list.
+Oscar Oscar is an open-source e-commerce framework for Django. I was the original author and a maintainer for several years. Sadly, I no longer have the time and am no longer involved in the project.
  django-oscar - domain-driven e-commerce for Django django-oscar-accounts - managed accounts using double-entry bookkeeping django-oscar-datacash - a Django app for integrating with the DataCash payment gateway django-oscar-paypal - Oscar integration with PayPal django-oscar-gocardless - Oscar integration with GoCardless.</description>
     </item>
     

@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</loc>
+    <lastmod>2017-11-16T15:50:04+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</loc>
     <lastmod>2017-11-07T22:41:21+01:00</lastmod>
   </url>
@@ -579,7 +584,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2017-11-07T22:41:21+01:00</lastmod>
+    <lastmod>2017-11-16T15:50:04+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -745,7 +750,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/postgres/</loc>
-    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
+    <lastmod>2017-11-16T15:50:04+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -817,7 +822,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2017-09-30T22:44:03+01:00</lastmod>
+    <lastmod>2017-11-16T15:50:04+00:00</lastmod>
     <priority>0</priority>
   </url>
   
