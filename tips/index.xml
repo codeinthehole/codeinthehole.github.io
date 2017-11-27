@@ -6,10 +6,22 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 16 Nov 2017 15:50:04 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 27 Nov 2017 12:27:45 +0100</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Shortcuts of the old and minimalist</title>
+      <link>http://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</link>
+      <pubDate>Mon, 27 Nov 2017 12:27:45 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</guid>
+      <description>As I get older and grumpier, I increasingly value clean, uncluttered working environments. I&amp;rsquo;m sure I&amp;rsquo;m not the only one, so here&amp;rsquo;s a few useful practices and shortcuts that help me avoid using the mouse and satisfy my need for productivity micro-optimisation.
+They are mainly for macOS users.
+Hide everything Adjust your system preferences to automatically hide the Dock and menu bar (there&amp;rsquo;s a checkbox in &amp;ldquo;General&amp;rdquo;).
+With these two changes, a maximised window is effectively full-screen.</description>
+    </item>
     
     <item>
       <title>Joining between date and timestamp fields in Postgres</title>
