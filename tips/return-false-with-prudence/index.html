@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.950131694%20%2b0000%20GMT%20m%3d%2b0.536733465" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -153,7 +153,8 @@ object will always be returned.</p>
         <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveOrder</span>($orderNumber);
 } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">OrderCreationException</span> $e) {
     <span style="color:#75715e">// Rollback transaction, return friendly error message
-</span><span style="color:#75715e"></span>} </code></pre></div>
+</span><span style="color:#75715e"></span>} 
+</code></pre></div>
 <p>instead of</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 $orderNumber <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">generateNewOrderNumber</span>();
@@ -162,7 +163,8 @@ $deliveryAddressSavedOk <span style="color:#f92672">=</span> $this<span style="c
 <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$deliveryAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
 $billingAddressSavedOk <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>();
 <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$billingAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-<span style="color:#f92672">...</span></code></pre></div>
+<span style="color:#f92672">...</span>
+</code></pre></div>
 <p>Using exceptions to indicate errors obeys the Command-query separation
 principle, where (broadly speaking) only &ldquo;getter&rdquo; methods should return
 a value (using fluent interfaces is a mild but acceptable violation of
@@ -173,7 +175,8 @@ this separation).</p>
 <p>Many objects will emply &ldquo;finder&rdquo; or factory methods responsible for
 looking up and then constructing an object:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
-$book <span style="color:#f92672">=</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">::</span><span style="color:#a6e22e">findByIsbn</span>($isbn);</code></pre></div>
+$book <span style="color:#f92672">=</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">::</span><span style="color:#a6e22e">findByIsbn</span>($isbn);
+</code></pre></div>
 <p>In this case, when no book is found, FALSE is not the appropriate return
 value - either return NULL (to indicate the absence of a valid book), or
 employ the Null Object pattern and return an null book object. It just
@@ -183,14 +186,15 @@ should ring as soon as you see the pipe:</p>
 <span style="color:#e6db74">/**
 </span><span style="color:#e6db74">* @param string $isbn
 </span><span style="color:#e6db74">* @return Book|false
-</span><span style="color:#e6db74">*/</span></code></pre></div>
+</span><span style="color:#e6db74">*/</span>
+</code></pre></div>
 <p>A neat idiom for finder methods is to always return a iterable
 collection of objects, which is simply empty when no object is found:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span>
 {
     <span style="color:#f92672">...</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">findByIsbn</span>($isbn)
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findByIsbn</span>($isbn)
     {
         $books <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BookCollection</span>; <span style="color:#75715e">// An iterable collection object
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">...</span>
@@ -198,7 +202,8 @@ collection of objects, which is simply empty when no object is found:</p>
 </span><span style="color:#75715e"></span>        <span style="color:#f92672">...</span>
         <span style="color:#66d9ef">return</span> $books;
     }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Client code can then simply iterate over the returned value - it doesn&rsquo;t
 have to check for the presence of an item. JQuery employs this pattern
 extensively with its <code>$</code> CSS selector and it works wonderfully. The only
@@ -241,7 +246,7 @@ appropriate: that&rsquo;s in a method that only returns boolean values.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.951211106%20%2b0000%20GMT%20m%3d%2b0.537812877" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -91,7 +91,8 @@ for the appropriate links:</p>
             });
         <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;questions&#39;</span>).<span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Element</span>(<span style="color:#e6db74">&#39;li&#39;</span>).<span style="color:#a6e22e">insert</span>(<span style="color:#a6e22e">link</span>));
     });
-});</code></pre></div>
+});
+</code></pre></div>
 <p>Now, all I have to do is write my FAQ ensuring the questions live in
 anchor tags with the class &ldquo;question&rdquo; and there is an empty list tag at
 the top of the page to house the summary block.</p>
@@ -104,7 +105,8 @@ the dom:loaded event has fired. Before:</p>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dd</span><span style="color:#f92672">&gt;</span>...<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dd&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dt</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;question&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Who</span> <span style="color:#a6e22e">created</span> <span style="color:#66d9ef">this</span> <span style="color:#a6e22e">site</span><span style="color:#f92672">?&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;&lt;/dt&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dd</span><span style="color:#f92672">&gt;</span>...<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dd&gt;</span>
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dl&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dl&gt;</span>
+</code></pre></div>
 <p>and after:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;questions&#34;</span><span style="color:#f92672">&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">li</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#what-is-this-site&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">What</span> <span style="color:#a6e22e">is</span> <span style="color:#66d9ef">this</span> <span style="color:#a6e22e">site</span><span style="color:#f92672">?&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;&lt;/li&gt;</span>
@@ -115,7 +117,8 @@ the dom:loaded event has fired. Before:</p>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dd</span><span style="color:#f92672">&gt;</span>...<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dd&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dt</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;question&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;who-created-this-site&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Who</span> <span style="color:#a6e22e">created</span> <span style="color:#66d9ef">this</span> <span style="color:#a6e22e">site</span><span style="color:#f92672">?&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;&lt;/dt&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dd</span><span style="color:#f92672">&gt;</span>...<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dd&gt;</span>
-<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dl&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dl&gt;</span>
+</code></pre></div>
 <p>As you can see, the javascript simply extracts the relevant content from
 the questions and inserts the appropriate identities and links into the
 DOM to form the quick-links. Using the <code>Effect.ScrollTo</code> function also
@@ -153,7 +156,7 @@ gives a pleasant user experience.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

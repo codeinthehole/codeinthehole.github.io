@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.936147993%20%2b0000%20GMT%20m%3d%2b0.522749764" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -97,8 +97,8 @@ explained with an &hellip;</p>
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
-                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_tweets(username)})</code></pre></div>
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_tweets(username)})</code></pre></div>
 <p>This works fine but the <code>fetch_tweets</code> function involves a HTTP
 round-trip and is slow. Enter caching.</p>
 
@@ -111,8 +111,8 @@ API</a>:</p>
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
-                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username):
     tweets <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(username)
@@ -152,8 +152,8 @@ repopulate the cache.</p>
 <span style="color:#f92672">from</span> myproject.tasks <span style="color:#f92672">import</span> update_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
-                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username, lifetime<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>):
     item <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(username)
@@ -212,8 +212,8 @@ function:</p>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
     fetch_cached_tweets <span style="color:#f92672">=</span> cacheback(<span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>, fetch_on_miss<span style="color:#f92672">=</span>False)(fetch_tweets)
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
-                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})</code></pre></div>
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})</code></pre></div>
 <p>The <code>cacheback</code> function provides a wrapper function for the
 <code>fetch_tweets</code> function. When called, the wrapper will generate a cache
 key based on the module path of the wrapped function and the passed args
@@ -235,8 +235,8 @@ asynchronously by a Celery task.</p>
 <span style="color:#f92672">from</span> cacheback.base <span style="color:#f92672">import</span> Job
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
-                  {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;tweets&#39;</span>: FetchTweets()<span style="color:#f92672">.</span>get(username)})
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+                  {<span style="color:#e6db74">&#39;tweets&#39;</span>: FetchTweets()<span style="color:#f92672">.</span>get(username)})
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FetchTweets</span>(Job):
     expiry <span style="color:#f92672">=</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">15</span>
@@ -285,7 +285,7 @@ more information. Comments and feedback welcome.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

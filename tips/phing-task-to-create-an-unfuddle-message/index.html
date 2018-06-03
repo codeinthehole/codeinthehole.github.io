@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.953239685%20%2b0000%20GMT%20m%3d%2b0.539841456" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -178,50 +178,50 @@ stripped out for brevity):</p>
     <span style="color:#66d9ef">private</span> $categoryIds;  
     <span style="color:#66d9ef">private</span> $checkReturn <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setSubdomain</span>($subdomain) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setSubdomain</span>($subdomain) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">subdomain</span> <span style="color:#f92672">=</span> $subdomain;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setProjectId</span>($projectId) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setProjectId</span>($projectId) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">projectId</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$projectId;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setUsername</span>($username) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUsername</span>($username) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> $username;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setPassword</span>($password) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setPassword</span>($password) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> $password;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setTitle</span>($title) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setTitle</span>($title) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> $title;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setBody</span>($body) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setBody</span>($body) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> $body;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setCategoryId</span>($categoryId) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCategoryId</span>($categoryId) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">categoryIds</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>((<span style="color:#a6e22e">int</span>)$categoryId);
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setCategoryIds</span>($categoryIdList) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCategoryIds</span>($categoryIdList) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">categoryIds</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">explode</span>(<span style="color:#e6db74">&#34;,&#34;</span>, $categoryIdList);
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setCheckReturn</span>($checkReturn)
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCheckReturn</span>($checkReturn)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkReturn</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">boolean</span>)$checkReturn;
     }
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">init</span>() 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">init</span>() 
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">extension_loaded</span>(<span style="color:#e6db74">&#39;curl&#39;</span>)) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>(<span style="color:#e6db74">&#34;Cannot update Unfuddle&#34;</span>, <span style="color:#e6db74">&#34;The cURL extension is not installed&#34;</span>);
         }
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">main</span>() 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>() 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validateProperties</span>();
 
@@ -243,7 +243,7 @@ stripped out for brevity):</p>
         }
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handleResponseCode</span>((<span style="color:#a6e22e">int</span>)$responseCode);
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">validateProperties</span>()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">validateProperties</span>()
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">subdomain</span>) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>(<span style="color:#e6db74">&#34;You must specify a subdomain&#34;</span>);
@@ -258,11 +258,11 @@ stripped out for brevity):</p>
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>(<span style="color:#e6db74">&#34;You must specify a message title&#34;</span>);
         }
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">getUpdateUrl</span>()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUpdateUrl</span>()
     {
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">URL_TEMPLATE_UPDATE</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">subdomain</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">projectId</span>);
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">getRequestBodyXml</span>()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getRequestBodyXml</span>()
     {
         $xmlWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLWriter</span>();
         $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">openMemory</span>();
@@ -282,7 +282,7 @@ stripped out for brevity):</p>
         $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">endElement</span>();
         <span style="color:#66d9ef">return</span> $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>();
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">handleResponseCode</span>($code)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleResponseCode</span>($code)
     {
         <span style="color:#66d9ef">if</span> ($code <span style="color:#f92672">==</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">HTTP_RESPONSE_CREATED</span>) {
             $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;New Unfuddle message posted: &#39;</span><span style="color:#e6db74">$this-&gt;title</span><span style="color:#e6db74">&#39;&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_INFO</span>);
@@ -294,14 +294,15 @@ stripped out for brevity):</p>
             $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handleFailedUpdate</span>(<span style="color:#e6db74">&#34;Unrecognised HTTP response code &#39;</span><span style="color:#e6db74">$code</span><span style="color:#e6db74">&#39; from Unfuddle&#34;</span>);
         }
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">handleFailedUpdate</span>($failureMessage)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleFailedUpdate</span>($failureMessage)
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">true</span> <span style="color:#f92672">===</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkReturn</span>) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>($failureMessage);
         }
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;New Unfuddle message unsuccessful: </span><span style="color:#e6db74">$failureMessage</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);   
     }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>The fully documented source and associated example build.xml file are
 available to download: <a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMessageTask.zip
 (2.6kb)</a></p>
@@ -338,7 +339,7 @@ available to download: <a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMess
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

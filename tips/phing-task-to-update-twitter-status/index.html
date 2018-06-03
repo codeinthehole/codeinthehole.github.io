@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.953751301%20%2b0000%20GMT%20m%3d%2b0.540353072" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -194,27 +194,27 @@ stripped out for brevity):</p>
     <span style="color:#66d9ef">private</span> $message;
     <span style="color:#66d9ef">private</span> $checkReturn <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setUsername</span>($username) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUsername</span>($username) {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> $username;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setPassword</span>($password) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setPassword</span>($password) {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> $password;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setMessage</span>($message) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setMessage</span>($message) 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">message</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">trim</span>($message);
     }   
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">setCheckReturn</span>($checkReturn)
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCheckReturn</span>($checkReturn)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkReturn</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">boolean</span>)$checkReturn;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">init</span>() 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">init</span>() 
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">extension_loaded</span>(<span style="color:#e6db74">&#39;curl&#39;</span>)) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>(<span style="color:#e6db74">&#34;Cannot update Twitter&#34;</span>, <span style="color:#e6db74">&#34;The cURL extension is not installed&#34;</span>);
         }
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">main</span>() 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>() 
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validateProperties</span>();       
         $curlHandle <span style="color:#f92672">=</span> <span style="color:#a6e22e">curl_init</span>();
@@ -234,7 +234,7 @@ stripped out for brevity):</p>
         }
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handleTwitterResponseCode</span>((<span style="color:#a6e22e">int</span>)$responseCode);
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">validateProperties</span>()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">validateProperties</span>()
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">password</span>) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>(<span style="color:#e6db74">&#34;You must specify a Twitter username and password&#34;</span>);
@@ -246,15 +246,15 @@ stripped out for brevity):</p>
             $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Message is greater than the maximum message length - truncating...&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);
         }
     }    
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">getUpdateUrl</span>()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getUpdateUrl</span>()
     {
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">URL_TEMPLATE_UPDATE</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getEncodedMessage</span>());
     }   
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">getEncodedMessage</span>()
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getEncodedMessage</span>()
     {
         <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">urlencode</span>(<span style="color:#a6e22e">stripslashes</span>(<span style="color:#a6e22e">urldecode</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">message</span>)));
     }  
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">handleTwitterResponseCode</span>($code)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleTwitterResponseCode</span>($code)
     {
         <span style="color:#66d9ef">if</span> ($code <span style="color:#f92672">==</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">HTTP_RESPONSE_SUCCESS</span>) {
             $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Twitter status updated to: &#39;</span><span style="color:#e6db74">$this-&gt;message</span><span style="color:#e6db74">&#39;&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_INFO</span>);
@@ -266,14 +266,15 @@ stripped out for brevity):</p>
             $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handleFailedUpdate</span>(<span style="color:#e6db74">&#34;Unrecognised HTTP response code &#39;</span><span style="color:#e6db74">$code</span><span style="color:#e6db74">&#39; from Twitter&#34;</span>);
         }
     }   
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">handleFailedUpdate</span>($failureMessage)
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">handleFailedUpdate</span>($failureMessage)
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">true</span> <span style="color:#f92672">===</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkReturn</span>) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>($failureMessage);
         }
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Update unsuccessful: </span><span style="color:#e6db74">$failureMessage</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);   
     }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>The fully documented source and associated example build.xml file are
 available to download:</p>
 
@@ -312,7 +313,7 @@ available to download:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

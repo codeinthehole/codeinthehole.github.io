@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.9429965%20%2b0000%20GMT%20m%3d%2b0.529598271" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -84,11 +84,11 @@ client:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test.client <span style="color:#f92672">import</span> Client
 
 client <span style="color:#f92672">=</span> Client()
-response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>get(url, <span style="color:#f92672">**</span>{<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;wsgi.url_scheme&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;https&#39;</span>})</code></pre></div>
+response <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>get(url, <span style="color:#f92672">**</span>{<span style="color:#e6db74">&#39;wsgi.url_scheme&#39;</span>: <span style="color:#e6db74">&#39;https&#39;</span>})</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 
 <p>The standard way to test for a HTTPS request is using the <code>is_secure</code>
-method of the <code>django.http.HttpRequest</code> class<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup> and its subclasses. As
+method of the <code>django.http.HttpRequest</code> class<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> and its subclasses. As
 of Django 1.3, the implementation of this method checks whether an
 environmental variable <code>HTTPS</code> is equal to &ldquo;on&rdquo;:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># django/http/__init__.py</span>
@@ -96,7 +96,7 @@ environmental variable <code>HTTPS</code> is equal to &ldquo;on&rdquo;:</p>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">HttpRequest</span>(object):
     <span style="color:#f92672">...</span> 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_secure</span>(self):
-        <span style="color:#66d9ef">return</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;HTTPS&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;on&#39;</span></code></pre></div>
+        <span style="color:#66d9ef">return</span> os<span style="color:#f92672">.</span>environ<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;HTTPS&#39;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;on&#39;</span></code></pre></div>
 <p>However, Django&rsquo;s test client uses the
 <code>django.core.handlers.wsgi.WSGIRequest</code> class for requests. This class
 provides an alternative implementation:</p>
@@ -105,8 +105,8 @@ provides an alternative implementation:</p>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">WSGIRequest</span>(http<span style="color:#f92672">.</span>HttpRequest):
     <span style="color:#f92672">...</span>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_secure</span>(self):
-        <span style="color:#66d9ef">return</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;wsgi.url_scheme&#39;</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>environ \
-            <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;wsgi.url_scheme&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;https&#39;</span></code></pre></div>
+        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;wsgi.url_scheme&#39;</span> <span style="color:#f92672">in</span> self<span style="color:#f92672">.</span>environ \
+            <span style="color:#f92672">and</span> self<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;wsgi.url_scheme&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;https&#39;</span></code></pre></div>
 <p>Hence why need to pass the <code>wsgi.url_scheme</code> keyword arg when making the
 request.</p>
 
@@ -154,7 +154,7 @@ way of specifying a keyword arg that includes a dot.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

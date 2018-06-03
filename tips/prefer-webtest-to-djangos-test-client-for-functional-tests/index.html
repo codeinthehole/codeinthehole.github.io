@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.935049933%20%2b0000%20GMT%20m%3d%2b0.521651704" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -127,16 +127,16 @@ customers.</p>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
         self<span style="color:#f92672">.</span>staff <span style="color:#f92672">=</span> G(User, is_staff<span style="color:#f92672">=</span>True)
-        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span>False)
+        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span>False)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_can_upload_a_csv_to_create_allocations</span>(self):
-        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;credits-index&#39;</span>), user<span style="color:#f92672">=</span>staff)
+        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;credits-index&#39;</span>), user<span style="color:#f92672">=</span>staff)
 
         <span style="color:#75715e"># Specify the file content to upload and submit the form</span>
-        form <span style="color:#f92672">=</span> index<span style="color:#f92672">.</span>forms[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;upload_form&#39;</span>]
+        form <span style="color:#f92672">=</span> index<span style="color:#f92672">.</span>forms[<span style="color:#e6db74">&#39;upload_form&#39;</span>]
         <span style="color:#75715e"># CSV content should be: username, credits, start_date, end_date</span>
-        content <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;10000,250,2012-01-01,2013-01-01&#34;</span>
-        form[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;file&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;credits.csv&#39;</span>, content
+        content <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10000,250,2012-01-01,2013-01-01&#34;</span>
+        form[<span style="color:#e6db74">&#39;file&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;credits.csv&#39;</span>, content
         form<span style="color:#f92672">.</span>submit()
 
         <span style="color:#75715e"># Check that an allocation has been created</span>
@@ -209,7 +209,7 @@ the same test case.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.927859377%20%2b0000%20GMT%20m%3d%2b0.514461148" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,10 +78,10 @@ would&hellip;</p>
 
 <p>If you ever have to manually run a SQL delete statement in <code>psql</code>, you
 can back-up the rows you&rsquo;re about to delete:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> ( <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">in</span> ( <span style="color:#ae81ff">...</span> ) ) <span style="color:#66d9ef">to</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/tmp/backup.csv&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> ( <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">in</span> ( <span style="color:#ae81ff">...</span> ) ) <span style="color:#66d9ef">to</span> <span style="color:#e6db74">&#39;/tmp/backup.csv&#39;</span></code></pre></div>
 <p>and, if you&rsquo;ve got your filter clause wrong (we&rsquo;ve all done it), restore
 them with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/tmp/backup.csv&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74">&#39;/tmp/backup.csv&#39;</span></code></pre></div>
 <p>Moderately useful.</p>
 
         </div>
@@ -116,7 +116,7 @@ them with:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

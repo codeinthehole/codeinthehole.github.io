@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.950309177%20%2b0000%20GMT%20m%3d%2b0.536910948" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -92,17 +92,17 @@ which in a minute. First, hold your nose and parse the following:</p>
         <span style="color:#e6db74">&#39;http://www.labour.co.uk&#39;</span>,
         <span style="color:#e6db74">&#39;http://www.sap.com/education&#39;</span>
     );
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">offerJob</span>(<span style="color:#a6e22e">Developer</span> $you) {
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">offerJob</span>(<span style="color:#a6e22e">Developer</span> $you) {
         <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hasTheSkills</span>($you) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hasWowFactor</span>($you));
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">hasTheSkills</span>($developer) {    
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasTheSkills</span>($developer) {    
         $desiredSkills <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#39;Object-oriented PHP 5&#39;</span>, <span style="color:#e6db74">&#39;Advanced MySQL&#39;</span>, <span style="color:#e6db74">&#39;Flex/AS3&#39;</span>); 
         <span style="color:#66d9ef">return</span> (
             <span style="color:#a6e22e">count</span>(<span style="color:#a6e22e">array_intersect</span>($developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">skills</span>, $desiredSkills)) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span>
             (<span style="color:#a6e22e">int</span>)$developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">loveForCoding</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">30</span>
         );
     }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#f92672"></span><span style="color:#a6e22e">hasWowFactor</span>($developer) {
+    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasWowFactor</span>($developer) {
         <span style="color:#66d9ef">return</span> ($developer <span style="color:#a6e22e">instanceof</span> <span style="color:#a6e22e">creativeThinker</span> <span style="color:#f92672">&amp;&amp;</span>
             <span style="color:#a6e22e">sizeof</span>($developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">brain</span>) <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">floatval</span>(<span style="color:#a6e22e">strpad</span>(<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">100</span>, <span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#f92672">&amp;&amp;</span>
             <span style="color:#a6e22e">property_exists</span>($developer, <span style="color:#e6db74">&#39;hungerForNewTechnologies&#39;</span>));
@@ -111,7 +111,8 @@ which in a minute. First, hold your nose and parse the following:</p>
 $you <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Developer</span>;
 <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">true</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">TangentLabs</span><span style="color:#f92672">::</span><span style="color:#a6e22e">offerJob</span>($you)) {
     <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Party</span>();
-}</code></pre></div>
+}
+</code></pre></div>
 <p>It&rsquo;s actually quite a fun challenge to write a decent job ad in PHP,
 conveying both the requirements and writing PHP code that isn&rsquo;t
 hilariously convoluted. I&rsquo;d tried to do the same in Bash later on when
@@ -176,7 +177,7 @@ bring people together.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

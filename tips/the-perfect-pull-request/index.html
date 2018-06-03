@@ -1,0 +1,220 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-3494213-5', 'auto');
+ga('send', 'pageview');
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='http://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>The perfect pull request - David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Working notes based on reviewing several thousand pull requests.">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">The perfect pull request</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 3 June 2018</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Sunday, 3 June 2018</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<!-- Abstract -->
+
+<p>I spend most of my day reviewing pull requests in Github. These are my working
+notes on what makes a good PR.</p>
+
+<h3 id="explain-why-you-did-what-you-did">Explain why you did what you did</h3>
+
+<!-- Title/description -->
+
+<p>It should be clear to the reviewer what change is being made and, crucially,
+why. So choose a good PR title and use the description to detail the motivation for a change.
+Consider including:</p>
+
+<ul>
+<li><p>Screenshots, such as snaps of a new UI or graphs of the devastating performance improvement your PR delivers.</p></li>
+
+<li><p>Deployment notes. For example, flagging up database schema changes or new
+configuration that need careful handling when rolling out to production.</p></li>
+
+<li><p>Links to relevant resources like a ticket in an issue tracker or influential blog post.</p></li>
+</ul>
+
+<!-- Commits -->
+
+<h3 id="tell-a-cogent-story">Tell a cogent story</h3>
+
+<p>Commits should be &ldquo;atomic&rdquo; as described by the (excellent) <a href="https://wiki.qt.io/Commit_Policy">QT Commit Policy</a>:</p>
+
+<blockquote>
+<p>Make atomic commits.</p>
+
+<p>That means that each commit should contain exactly one
+self-contained change - do not mix unrelated changes, and do not create
+inconsistent states.</p>
+</blockquote>
+
+<p>A failing test suite is an example of an &ldquo;inconsistent state&rdquo;. Keep it green
+after every commit.</p>
+
+<blockquote>
+<p>Never &ldquo;hide&rdquo; unrelated fixes in bigger commits.</p>
+</blockquote>
+
+<p>Also, don&rsquo;t push small &ldquo;fix&rdquo; commits with messages like:</p>
+
+<ul>
+<li>&ldquo;Fix tests&rdquo;</li>
+<li>&ldquo;Linting&rdquo;</li>
+<li>&ldquo;Address PR comments&rdquo;</li>
+</ul>
+
+<p>It&rsquo;s sloppy. Use interactive rebasing to squash these into your history and to
+generally massage your commits into shape before submitting for review.
+It&rsquo;s fine to force-push if you&rsquo;re the only one working on a branch.</p>
+
+<p>Obviously, write descriptive commit messages - adopt <a href="https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">Tim Pope&rsquo;s advice</a> if you
+haven&rsquo;t already. Remember, future maintainers (probably you)  will always want to know <em>why</em> a
+change was made. Don&rsquo;t leave them in the dark.</p>
+
+<p>Atomic, descriptive commits mean the PR can be reviewed chronologically, <em>commit-by-commit</em>.
+This is the ideal.</p>
+
+<h3 id="follow-the-boy-scout-rule">Follow the boy-scout rule</h3>
+
+<blockquote>
+<p>&ldquo;Leave things BETTER than you found them.&rdquo; &ndash; Robert Baden Powell</p>
+</blockquote>
+
+<p>Codebases degrade over time; entropy increases. Thoughtful developers will look
+for opportunities to refactor or restructure components as they work, keeping
+the codebase clean.</p>
+
+<p>A useful practice for this is to <em>begin</em> your PR by refactoring or restructuring
+the codebase to make it <em>easy</em> to add the core functionality of your PR. For
+example, start by reviewing the tests for a component you&rsquo;re about to extend,
+adjusting them to be as readable as possible.</p>
+
+<h3 id="make-the-reviewer-s-life-easy">Make the reviewer&rsquo;s life easy</h3>
+
+<p>Don&rsquo;t waste the reviewer&rsquo;s time: before marking a PR for review:</p>
+
+<ul>
+<li>Ensure the CI test suite is green.</li>
+<li>Review the PR diff carefully; ensure you haven&rsquo;t committed all of <code>node_modules</code> again.</li>
+</ul>
+
+<p>Consider adding &ldquo;reviewing notes&rdquo;. These might highlight:</p>
+
+<ul>
+<li>New functionality that the rest of the team should be aware of.</li>
+<li>Critical business logic that needs vigilant review by several pairs
+of eyeballs.</li>
+</ul>
+
+<p>Beware of adding reviewing notes that should be code comments or in commit
+messages.</p>
+
+<h3 id="summary">Summary</h3>
+
+<p>I hope the above advice is useful, the &ldquo;cogent story&rdquo; part is the most
+pertinent. Notes on what makes a good PR <em>reviewer</em> to come later.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/the-perfect-pull-request.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22The%20perfect%20pull%20request%22&body=Article:%20The%20perfect%20pull%20request%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fthe-perfect-pull-request%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/the-perfect-pull-request.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/github">github</a>, <a href="/tags/git">git</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/shortcuts-of-the-old-and-minimalist/">Shortcuts of the old and minimalist</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+

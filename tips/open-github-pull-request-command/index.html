@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.924609705%20%2b0000%20GMT%20m%3d%2b0.511211476" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -81,11 +81,11 @@ jump to the pull request <em>list</em> page with:</p>
 <p>where <code>pulls</code> is aliased in <code>~/.gitconfig</code> as:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">pulls</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!hub browse -- pulls</span></code></pre></div>
 <p>but there&rsquo;s no easy way to jump to the pull request <em>detail</em> page in one
-command<sup class="footnote-ref" id="fnref:1"><a rel="footnote" href="#fn:1">1</a></sup>.</p>
+command<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
 
 <p>So we use a bash script that makes a HTTP call to the Github API and
 parses the response with <code>jq</code>. Here&rsquo;s the source to <code>open-github-pr-page.sh</code>
-which just needs to be somewhere on your path<sup class="footnote-ref" id="fnref:2"><a rel="footnote" href="#fn:2">2</a></sup>:</p>
+which just needs to be somewhere on your path<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span><span style="color:#75715e">#
 </span><span style="color:#75715e"># Open the Github pull request detail page for the current branch 
@@ -181,7 +181,7 @@ command:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

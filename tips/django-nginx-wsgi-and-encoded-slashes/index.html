@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.938209378%20%2b0000%20GMT%20m%3d%2b0.524811149" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -94,7 +94,7 @@ the above request path as <code>/edit/path</code>.</p>
 
 <p>First, in order to get django to encode slashes, you need to pass an
 empty string to the <code>urlencode</code> template filter.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> url edit<span style="color:#f92672">-</span>page url<span style="color:#f92672">|</span>urlencode:<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">%</span>}</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> url edit<span style="color:#f92672">-</span>page url<span style="color:#f92672">|</span>urlencode:<span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">%</span>}</code></pre></div>
 <p>Next ensure Nginx&rsquo;s <code>proxy_pass</code> configuration is transmitting the URL
 in &lsquo;unprocessed form&rsquo; by omitting the path on the proxied server
 argmenent. That is, use:</p>
@@ -112,19 +112,19 @@ directive to ensure Apache recognises encoded slashes:</p>
     ...
     AllowEncodedSlashes <span style="color:#66d9ef">On</span>
     ...
-<span style="color:#f92672">&lt;/VirtualHost</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span></code></pre></div>
+<span style="color:#f92672">&lt;/VirtualHost&gt;</span></code></pre></div>
 <p>Finally modify your WSGI script to ensure Django gets the slashes in its
 <code>PATH_INFO</code> environmental variable which it uses for resolving the URL
 to a view function:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># ... other WSGI stuff: setting up path, virtualenv etc</span>
 
-os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;DJANGO_SETTINGS_MODULE&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;settings&#39;</span>
+os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;DJANGO_SETTINGS_MODULE&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;settings&#39;</span>
 <span style="color:#f92672">import</span> django.core.handlers.wsgi
 _application <span style="color:#f92672">=</span> django<span style="color:#f92672">.</span>core<span style="color:#f92672">.</span>handlers<span style="color:#f92672">.</span>wsgi<span style="color:#f92672">.</span>WSGIHandler()
 
 <span style="color:#f92672">import</span> urllib
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">application</span>(environ, start_response):
-    environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;PATH_INFO&#39;</span>] <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>unquote(environ[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;REQUEST_URI&#39;</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;?&#39;</span>)[<span style="color:#ae81ff">0</span>])
+    environ[<span style="color:#e6db74">&#39;PATH_INFO&#39;</span>] <span style="color:#f92672">=</span> urllib<span style="color:#f92672">.</span>unquote(environ[<span style="color:#e6db74">&#39;REQUEST_URI&#39;</span>]<span style="color:#f92672">.</span>split(<span style="color:#e6db74">&#39;?&#39;</span>)[<span style="color:#ae81ff">0</span>])
     <span style="color:#66d9ef">return</span> _application(environ, start_response)</code></pre></div>
 <p>The key change is using the <code>REQUEST_URI</code> variable to set <code>PATH_INFO</code>.
 We pluck the path component from <code>REQUEST_URI</code> and use <code>urllib.unquote</code>
@@ -180,7 +180,7 @@ of the issue.</li>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

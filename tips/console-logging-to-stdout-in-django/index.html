@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.94577591%20%2b0000%20GMT%20m%3d%2b0.532377681" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -85,11 +85,11 @@ for management commands that run as cronjobs.</p>
 specify a different output stream:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 LOGGING <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;handlers&#39;</span>: {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;console&#39;</span>:{
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;level&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;INFO&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;logging.StreamHandler&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;strm&#39;</span>: sys<span style="color:#f92672">.</span>stdout
+    <span style="color:#e6db74">&#39;handlers&#39;</span>: {
+        <span style="color:#e6db74">&#39;console&#39;</span>:{
+            <span style="color:#e6db74">&#39;level&#39;</span>:<span style="color:#e6db74">&#39;INFO&#39;</span>,
+            <span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;logging.StreamHandler&#39;</span>,
+            <span style="color:#e6db74">&#39;strm&#39;</span>: sys<span style="color:#f92672">.</span>stdout
         },
         <span style="color:#f92672">...</span>
     }
@@ -105,11 +105,11 @@ docs</a>
 detail the following logging configuration for a console handler:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">LOGGING <span style="color:#f92672">=</span> {
     <span style="color:#f92672">...</span>
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;handlers&#39;</span>: {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;console&#39;</span>:{
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;level&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;DEBUG&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;logging.StreamHandler&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;formatter&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;simple&#39;</span>
+    <span style="color:#e6db74">&#39;handlers&#39;</span>: {
+        <span style="color:#e6db74">&#39;console&#39;</span>:{
+            <span style="color:#e6db74">&#39;level&#39;</span>:<span style="color:#e6db74">&#39;DEBUG&#39;</span>,
+            <span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;logging.StreamHandler&#39;</span>,
+            <span style="color:#e6db74">&#39;formatter&#39;</span>: <span style="color:#e6db74">&#39;simple&#39;</span>
         },
     },
     <span style="color:#f92672">...</span>
@@ -158,7 +158,7 @@ MAILTO<span style="color:#f92672">=</span>alerts.someproject@yourcompany.co.uk
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

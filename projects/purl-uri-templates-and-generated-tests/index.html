@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.931220334%20%2b0000%20GMT%20m%3d%2b0.517822105" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -83,12 +83,12 @@ URL library of mine) supports URI templates as per <a href="http://tools.ietf.or
 6570</a>. These allow new URL instances
 to be created by passing bindings to a template instance.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> purl
-<span style="color:#f92672">&gt;&gt;&gt;</span> tpl <span style="color:#f92672">=</span> purl<span style="color:#f92672">.</span>Template(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;http://www.google.com{path}&#39;</span>)
-<span style="color:#f92672">&gt;&gt;&gt;</span> tpl<span style="color:#f92672">.</span>expand({<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;path&#39;</span>: [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;c&#39;</span>]})<span style="color:#f92672">.</span>as_string()
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;http://www.google.com/a/b/c&#39;</span></code></pre></div>
+<span style="color:#f92672">&gt;&gt;&gt;</span> tpl <span style="color:#f92672">=</span> purl<span style="color:#f92672">.</span>Template(<span style="color:#e6db74">&#39;http://www.google.com{path}&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> tpl<span style="color:#f92672">.</span>expand({<span style="color:#e6db74">&#39;path&#39;</span>: [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]})<span style="color:#f92672">.</span>as_string()
+<span style="color:#e6db74">&#39;http://www.google.com/a/b/c&#39;</span></code></pre></div>
 <p>Alternatively, you can expand template strings directly:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> purl<span style="color:#f92672">.</span>expand(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;{?list*}&#39;</span>, {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;list&#39;</span>: [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;c&#39;</span>]})
-<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;/a/b/c&#39;</span></code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> purl<span style="color:#f92672">.</span>expand(<span style="color:#e6db74">&#39;{?list*}&#39;</span>, {<span style="color:#e6db74">&#39;list&#39;</span>: [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]})
+<span style="color:#e6db74">&#39;/a/b/c&#39;</span></code></pre></div>
 <p>There&rsquo;s a plethora of ways template URLs can be used - see the
 <a href="http://tools.ietf.org/html/rfc6570">RFC</a> for details.</p>
 
@@ -146,14 +146,14 @@ section can be constructed as:</p>
 <span style="color:#f92672">from</span> nose.tools <span style="color:#f92672">import</span> eq_
 
 level1_vars <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;var&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;value&#39;</span>,
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;hello&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Hello World!&#39;</span>,
+    <span style="color:#e6db74">&#39;var&#39;</span>: <span style="color:#e6db74">&#39;value&#39;</span>,
+    <span style="color:#e6db74">&#39;hello&#39;</span>: <span style="color:#e6db74">&#39;Hello World!&#39;</span>,
 }
 
 <span style="color:#75715e"># Tuples of (template, bindings, expected URI)</span>
 test_data <span style="color:#f92672">=</span> [
-    (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;{var}&#39;</span>, level1_vars, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;value&#39;</span>),
-    (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;{hello}&#39;</span>, level1_vars, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Hello%20World%21&#39;</span>),
+    (<span style="color:#e6db74">&#39;{var}&#39;</span>, level1_vars, <span style="color:#e6db74">&#39;value&#39;</span>),
+    (<span style="color:#e6db74">&#39;{hello}&#39;</span>, level1_vars, <span style="color:#e6db74">&#39;Hello%20World%21&#39;</span>),
 ]
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">assert_expansion</span>(template, fields, expected):
@@ -184,7 +184,7 @@ be cleaned up by providing a <code>description</code> attribute on the yielded
 callable:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expansion</span>():
     <span style="color:#66d9ef">for</span> template, fields, expected <span style="color:#f92672">in</span> test_data:
-        assert_expansion<span style="color:#f92672">.</span>description <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> expands to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (template, expected)
+        assert_expansion<span style="color:#f92672">.</span>description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> expands to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (template, expected)
         <span style="color:#66d9ef">yield</span> assert_expansion, template, fields, expected</code></pre></div>
 <p>which looks like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nosetests tests/expansion_tests.py
@@ -216,7 +216,7 @@ creating parameterised or generated tests.</p>
 we can rewrite the above example as:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 
-<span style="color:#a6e22e">@pytest.mark.parametrize</span>((<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;expected&#34;</span>), data)
+<span style="color:#a6e22e">@pytest.mark.parametrize</span>((<span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74">&#34;expected&#34;</span>), data)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expand</span>(template, fields, expected):
     <span style="color:#66d9ef">assert</span> expand(template, fields) <span style="color:#f92672">==</span>  expected</code></pre></div>
 <p>with verbose output:</p>
@@ -297,7 +297,7 @@ for Nose&rsquo;s generated tests.</li>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

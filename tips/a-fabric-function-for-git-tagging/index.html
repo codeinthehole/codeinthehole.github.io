@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.944482456%20%2b0000%20GMT%20m%3d%2b0.531084227" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -97,31 +97,31 @@ commit</li>
 <p>The following function can be used as part of Fabric build script. It&rsquo;s
 purpose is to determine the git reference to deploy from.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">determine_refspec_to_deploy_from</span>(is_test<span style="color:#f92672">=</span>False)
-    local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git fetch --tags&#39;</span>)
+    local(<span style="color:#e6db74">&#39;git fetch --tags&#39;</span>)
 
     <span style="color:#66d9ef">if</span> is_test:
-        create_tag <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Tag this release? [y/N] &#39;</span>)
-        <span style="color:#66d9ef">if</span> create_tag<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;y&#39;</span>:
-            notify(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;Showing latest tags for reference&#34;</span>)
-            local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git tag | sort -V | tail -5&#39;</span>)
-            refspec <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Tag name [in format x.x.x]? &#39;</span>)
-            local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git tag </span><span style="color:#e6db74">%(ref)s</span><span style="color:#e6db74"> -m &#34;Tagging version </span><span style="color:#e6db74">%(ref)s</span><span style="color:#e6db74"> in fabfile&#34;&#39;</span> <span style="color:#f92672">%</span> {
-                <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;ref&#39;</span>: refspec})
-            local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git push --tags&#39;</span>)
+        create_tag <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74">&#39;Tag this release? [y/N] &#39;</span>)
+        <span style="color:#66d9ef">if</span> create_tag<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;y&#39;</span>:
+            notify(<span style="color:#e6db74">&#34;Showing latest tags for reference&#34;</span>)
+            local(<span style="color:#e6db74">&#39;git tag | sort -V | tail -5&#39;</span>)
+            refspec <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74">&#39;Tag name [in format x.x.x]? &#39;</span>)
+            local(<span style="color:#e6db74">&#39;git tag </span><span style="color:#e6db74">%(ref)s</span><span style="color:#e6db74"> -m &#34;Tagging version </span><span style="color:#e6db74">%(ref)s</span><span style="color:#e6db74"> in fabfile&#34;&#39;</span> <span style="color:#f92672">%</span> {
+                <span style="color:#e6db74">&#39;ref&#39;</span>: refspec})
+            local(<span style="color:#e6db74">&#39;git push --tags&#39;</span>)
         <span style="color:#66d9ef">else</span>:
-            use_commit <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Build from a specific commit? [y/N] &#39;</span>)
-            <span style="color:#66d9ef">if</span> use_commit<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;y&#39;</span>:
-                refspec <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Choose commit to build from: &#39;</span>)
+            use_commit <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74">&#39;Build from a specific commit? [y/N] &#39;</span>)
+            <span style="color:#66d9ef">if</span> use_commit<span style="color:#f92672">.</span>lower() <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;y&#39;</span>:
+                refspec <span style="color:#f92672">=</span> prompt(<span style="color:#e6db74">&#39;Choose commit to build from: &#39;</span>)
             <span style="color:#66d9ef">else</span>:
-                branch <span style="color:#f92672">=</span> local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git branch | grep &#34;^*&#34; | cut -d&#34; &#34; -f2&#39;</span>, capture<span style="color:#f92672">=</span>True)
-                refspec <span style="color:#f92672">=</span> local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git describe </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> branch, capture<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>strip()
+                branch <span style="color:#f92672">=</span> local(<span style="color:#e6db74">&#39;git branch | grep &#34;^*&#34; | cut -d&#34; &#34; -f2&#39;</span>, capture<span style="color:#f92672">=</span>True)
+                refspec <span style="color:#f92672">=</span> local(<span style="color:#e6db74">&#39;git describe </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> branch, capture<span style="color:#f92672">=</span>True)<span style="color:#f92672">.</span>strip()
     <span style="color:#66d9ef">else</span>:
         <span style="color:#75715e"># An existing tag must be specified</span>
-        local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git tag | sort -V | tail -5&#39;</span>)
-        refspec <span style="color:#f92672">=</span> prompt(red(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;Choose tag to build from: &#39;</span>))
+        local(<span style="color:#e6db74">&#39;git tag | sort -V | tail -5&#39;</span>)
+        refspec <span style="color:#f92672">=</span> prompt(red(<span style="color:#e6db74">&#39;Choose tag to build from: &#39;</span>))
 
         <span style="color:#75715e"># Check this is valid</span>
-        local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;git tag | grep &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;&#39;</span> <span style="color:#f92672">%</span> refspec)
+        local(<span style="color:#e6db74">&#39;git tag | grep &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;&#39;</span> <span style="color:#f92672">%</span> refspec)
 
     <span style="color:#66d9ef">return</span> refspec</code></pre></div>
 <h3 id="building-to-test">Building to test</h3>
@@ -204,7 +204,7 @@ be done with <code>git describe</code>, which will output something like:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

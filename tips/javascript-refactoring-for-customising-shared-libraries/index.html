@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.950309726%20%2b0000%20GMT%20m%3d%2b0.536911497" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -96,7 +96,8 @@ user:</p>
             <span style="color:#75715e">// Do the reloading...
 </span><span style="color:#75715e"></span>            <span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">notify</span>(<span style="color:#e6db74">&#34;Order totals recalculating...&#34;</span>);
         }
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Unfortunately, another client required the same functionality to reload
 the order totals but without the notification call. One option would
 have been to create a local version of the checkout.js file and remove
@@ -108,7 +109,8 @@ shop.checkout.reloadOrderTotals method in an application-specific file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// [application.js]
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">reloadOrderTotals</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
     <span style="color:#75715e">// Reload order totals but without a notification call
-</span><span style="color:#75715e"></span>}</code></pre></div>
+</span><span style="color:#75715e"></span>}
+</code></pre></div>
 <p>However, again this leads to most of the the body of the
 <code>shop.checkout.reloadOrderTotals</code> method being duplicated just to remove
 one line.</p>
@@ -129,11 +131,13 @@ two methods:</p>
         <span style="color:#a6e22e">displayOrderTotalNotification</span>(<span style="color:#a6e22e">message</span>) {
             <span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">notify</span>(<span style="color:#a6e22e">message</span>);
         } 
-}</code></pre></div>
+}
+</code></pre></div>
 <p>Now in the local project javascript file, we can null out the messaging
 behaviour:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// [application.js]
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">displayOrderTotalNotification</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){}</code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">displayOrderTotalNotification</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){}
+</code></pre></div>
 <p>This neat trick allows us to customise our core javascript functionality
 in a way that does not lead to code duplication. The only thing required
 to make this work is to ensure that the shared checkout file is loaded
@@ -171,7 +175,7 @@ before the application-specific one.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

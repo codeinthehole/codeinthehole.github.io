@@ -140,9 +140,18 @@
     <item>
       <title>Git</title>
       <link>http://codeinthehole.com/tags/git/</link>
-      <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
+      <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
       
       <guid>http://codeinthehole.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Github</title>
+      <link>http://codeinthehole.com/tags/github/</link>
+      <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/github/</guid>
       <description></description>
     </item>
     

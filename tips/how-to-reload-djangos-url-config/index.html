@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.941422133%20%2b0000%20GMT%20m%3d%2b0.528023904" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -120,7 +120,7 @@ reloaded.</p>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_shipping_address_requires_session_email_address</span>(self):
         <span style="color:#66d9ef">with</span> patch_settings(OSCAR_ALLOW_ANON_CHECKOUT<span style="color:#f92672">=</span>True):
             self<span style="color:#f92672">.</span>reload_urlconf()
-            response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;checkout:shipping-address&#39;</span>))
+            response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;checkout:shipping-address&#39;</span>))
             self<span style="color:#f92672">.</span>assertIsRedirect(response)</code></pre></div>
 <p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
 me when working on this problem today.</p>
@@ -157,7 +157,7 @@ me when working on this problem today.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

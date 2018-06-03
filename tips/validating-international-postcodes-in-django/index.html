@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.940521822%20%2b0000%20GMT%20m%3d%2b0.527123593" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -86,19 +86,19 @@ suite of &ldquo;localflavor&rdquo; form fields using the <a href="http://en.wiki
 country code.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_postcode_validator</span>(country_code):
     <span style="color:#75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
-    <span style="color:#66d9ef">if</span> country_code <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;GB&#39;</span>:
-        country_code <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;UK&#39;</span>
-    module_path <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;django.contrib.localflavor.</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>lower()
+    <span style="color:#66d9ef">if</span> country_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GB&#39;</span>:
+        country_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UK&#39;</span>
+    module_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;django.contrib.localflavor.</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>lower()
     <span style="color:#66d9ef">try</span>:
-        module <span style="color:#f92672">=</span> __import__(module_path, fromlist<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;forms&#39;</span>])
+        module <span style="color:#f92672">=</span> __import__(module_path, fromlist<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;forms&#39;</span>])
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ImportError</span>:
         <span style="color:#75715e"># No forms module for this country</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x
 
-    fieldname_variants <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostcodeField&#39;</span>,
-                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostCodeField&#39;</span>,
-                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostalCodeField&#39;</span>,
-                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">ZipCodeField&#39;</span>,]
+    fieldname_variants <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostcodeField&#39;</span>,
+                          <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostCodeField&#39;</span>,
+                          <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostalCodeField&#39;</span>,
+                          <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">ZipCodeField&#39;</span>,]
     <span style="color:#66d9ef">for</span> variant <span style="color:#f92672">in</span> fieldname_variants:
         fieldname <span style="color:#f92672">=</span> variant <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>upper()
         <span style="color:#66d9ef">if</span> hasattr(module<span style="color:#f92672">.</span>forms, fieldname):
@@ -160,7 +160,7 @@ to see if the class exists in the forms module.</li>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

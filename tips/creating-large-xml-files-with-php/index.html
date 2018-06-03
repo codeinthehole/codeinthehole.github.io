@@ -21,7 +21,7 @@ ga('send', 'pageview');
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?2017-11-27%2014%3a09%3a49.956044827%20%2b0000%20GMT%20m%3d%2b0.542646598" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1528062397" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -92,7 +92,8 @@ $dom <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span>
     $content<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#39;Example content&#39;</span>));
 }
 <span style="color:#75715e">// Flush XML from memory to file in one go
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveXML</span>());</code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveXML</span>());
+</code></pre></div>
 <p>However, this doesn&rsquo;t scale once your feed size starts exceeding the
 available memory (teaking memory settings in php.ini is only a
 short-term fix). A good solution to this is to use the XMLWriter library
@@ -113,7 +114,8 @@ $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">st
     }
 }
 <span style="color:#75715e">// Final flush to make sure we haven&#39;t missed anything
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">FILE_APPEND</span>);</code></pre></div>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">FILE_APPEND</span>);
+</code></pre></div>
 <p>Here we flush the XML in memory to file every 1000 iterations. This
 ensures that memory usage is capped and opens up the possiblity of
 creating very large XML files.</p>
@@ -150,7 +152,7 @@ creating very large XML files.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2017 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>
