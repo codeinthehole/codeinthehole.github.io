@@ -12,14 +12,14 @@
     
     
     <item>
-      <title>The perfect pull request</title>
-      <link>http://codeinthehole.com/tips/the-perfect-pull-request/</link>
+      <title>Advanced pull-request crafting</title>
+      <link>http://codeinthehole.com/tips/advanced-pull-request-crafting/</link>
       <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
       
-      <guid>http://codeinthehole.com/tips/the-perfect-pull-request/</guid>
+      <guid>http://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
-Explain why you did what you did It should be clear to the reviewer what change is being made and, crucially, why. So choose a good PR title and use the description to detail the motivation for a change. Consider including:
- Screenshots, such as snaps of a new UI or graphs of the devastating performance improvement your PR delivers.</description>
+Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
+ Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
     </item>
     
   </channel>
