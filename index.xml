@@ -1202,6 +1202,21 @@ Oscar Oscar is an open-source e-commerce framework for Django. I was the origina
     </item>
     
     <item>
+      <title>Tweets</title>
+      <link>http://codeinthehole.com/tweets/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tweets/</guid>
+      <description>I have only ever said two funny things on Twitter:
+Desirable developer skills:
+1 Ability to ignore new tools and technologies
+2 Taste for simplicity 3 Good code deletion skills 4 Humility
+&amp;mdash; David Winterbottom (@codeinthehole) December 3, 2014  
+On your first day at the new job, squash every commit from the repo into a single commit with message &amp;quot;Legacy code&amp;quot; and force-push to master.
+&amp;mdash; David Winterbottom (@codeinthehole) August 15, 2018</description>
+    </item>
+    
+    <item>
       <title>Videos</title>
       <link>http://codeinthehole.com/videos/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
