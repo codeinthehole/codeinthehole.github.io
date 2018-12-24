@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://codeinthehole.com/tips/easy-to-change/</loc>
+    <lastmod>2018-12-24T11:51:36+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tips/listing-google-groups/</loc>
     <lastmod>2018-10-27T12:53:24+01:00</lastmod>
   </url>
@@ -600,7 +605,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2018-10-27T12:53:24+01:00</lastmod>
+    <lastmod>2018-12-24T11:51:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -825,6 +830,12 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/tags/software/</loc>
+    <lastmod>2018-12-24T11:51:36+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tags/</loc>
     <lastmod>2012-05-05T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -856,7 +867,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2018-10-27T12:53:24+01:00</lastmod>
+    <lastmod>2018-12-24T11:51:36+00:00</lastmod>
     <priority>0</priority>
   </url>
   

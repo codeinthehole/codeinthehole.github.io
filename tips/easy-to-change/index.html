@@ -1,0 +1,226 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1545653260" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Easy to change - David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="The overarching principle for writing maintainable code">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Easy to change</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 24 December 2018</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Monday, 24 December 2018</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>I care about writing <em>maintainable</em> software<sup class="footnote-ref" id="fnref:octopus"><a href="#fn:octopus">1</a></sup>: code that is a pleasure
+to work with in the long-term; where new requirements can be accommodated
+smoothly and swiftly &ndash; above all, software that is <em>easy to change</em>.</p>
+
+<p>Memorise that phrase.</p>
+
+<p>I feel we lose sight of this overarching guiding principle and
+harm our codebases by dogmatically pursuing well-intentioned but proximate goals.</p>
+
+<p>The main thing the future maintainer of your code (i.e. you) cares about is
+whether the code is easy to change<sup class="footnote-ref" id="fnref:easy-to-delete"><a href="#fn:easy-to-delete">2</a></sup>.</p>
+
+<h3 id="what">What?</h3>
+
+<p>Software has two core values<sup class="footnote-ref" id="fnref:clean-architecture"><a href="#fn:clean-architecture">3</a></sup>:</p>
+
+<ul>
+<li><p><strong>Behaviour</strong> - What the software does. Working software must behave in a way that
+meets its requirements.</p></li>
+
+<li><p><strong>Design</strong> - The <em>structure</em> of software; how it is implemented. This
+will dictate how easy or expensive it is to adapt to changing requirements.</p></li>
+</ul>
+
+<p>Maintainable software not only meets its requirements but is structured to
+ensure it is easy to change in the future.</p>
+
+<p>This should be your aim. For each unit of code that you write, ask yourself:</p>
+
+<blockquote>
+<p>Will this be easy to change in the future?</p>
+</blockquote>
+
+<p>From this simple question, every principle, practice and pattern of &ldquo;good&rdquo; software
+design can be shaken out. Things like:</p>
+
+<ul>
+<li>Loose coupling.</li>
+<li>Simplicity (<a href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a>, <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI</a>).</li>
+<li>Don&rsquo;t Repeat Yourself (<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>)</li>
+<li>Single Responsibility Principle (SRP), polymorphism and the rest of <a href="https://en.wikipedia.org/wiki/SOLID">the SOLID principles</a>.</li>
+<li>Accurate naming; readable code.</li>
+</ul>
+
+<p>These are not goals in themselves - they exist to guide you towards your
+ultimate destination: writing easy-to-change software.</p>
+
+<h3 id="a-warning">A warning</h3>
+
+<p>Beware of dogmatically pursuing these intermediate principles
+and patterns. Whilst they generally guide you in the right direction, they can be
+harmful if applied without thought.</p>
+
+<p>For instance, relentlessly removing all duplication from a component can make it
+<em>harder</em> to change for future maintainers, through increased coupling and poor
+readability<sup class="footnote-ref" id="fnref:test-suites"><a href="#fn:test-suites">4</a></sup>.</p>
+
+<h3 id="recap">Recap</h3>
+
+<p>In short, <em>maintainable</em> code is <em>easy to change</em>.
+This is the overarching principle that should inform your design decisions.</p>
+
+<!-- Footnotes -->
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:octopus"><p>I work at <a href="https://octopus.energy">Octopus Energy</a><sup class="footnote-ref" id="fnref:referral"><a href="#fn:referral">5</a></sup>, a UK energy supplier committed to driving more
+households to use renewable energy (all our tariffs are 100% renewable) and to have a
+more considered relationship with their energy consumption<sup class="footnote-ref" id="fnref:agile"><a href="#fn:agile">6</a></sup>.</p>
+
+<p>Climate change is something I care deeply about and I have every intention of
+working for Octopus Energy for a long time. That means working with the same
+codebase for a long time and consequently, &ldquo;maintainability&rdquo;, ensuring the
+codebase is a pleasure to work with in the long term, is a primary focus of mine and the wider
+software engineering team.</p>
+ <a class="footnote-return" href="#fnref:octopus"><sup>[return]</sup></a></li>
+
+<li id="fn:easy-to-delete"><p>Don&rsquo;t forget: deleting is a form of change. Code that is easy to delete is a gift
+to future maintainers.</p>
+ <a class="footnote-return" href="#fnref:easy-to-delete"><sup>[return]</sup></a></li>
+
+<li id="fn:clean-architecture"><p>See, for example, <em>The Clean Architecture</em> by Robert C.
+Martin (page 14 especially).</p>
+ <a class="footnote-return" href="#fnref:clean-architecture"><sup>[return]</sup></a></li>
+
+<li id="fn:test-suites"><p>This is commonly seen in test suites, where some duplication of
+set-up code is often preferable to extracting everything.</p>
+ <a class="footnote-return" href="#fnref:test-suites"><sup>[return]</sup></a></li>
+
+<li id="fn:referral"><p>If you&rsquo;re in the position to switch suppliers, check-out our
+<a href="https://uk.trustpilot.com/review/octopus.energy">Trust Pilot reviews</a> and, if convinced, consider
+using this <a href="https://share.octopus.energy/tulip-fish-149">referral link</a> to
+switch to us which will give you £50 free credit when your supply has
+switched.</p>
+ <a class="footnote-return" href="#fnref:referral"><sup>[return]</sup></a></li>
+
+<li id="fn:agile"><p>See, for example, our <a href="https://octopus.energy/agile/">Agile</a> tariff which uses half-hourly pricing
+to steer consumption away from the peak hours (of 4pm to 7pm) which put the most strain on the
+national grid.</p>
+ <a class="footnote-return" href="#fnref:agile"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/easy-to-change.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Easy%20to%20change%22&body=Article:%20Easy%20to%20change%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2feasy-to-change%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/easy-to-change.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/software">software</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/listing-google-groups/">Listing groups in G-Suite</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+
