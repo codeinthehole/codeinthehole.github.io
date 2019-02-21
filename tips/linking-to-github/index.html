@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1545653260" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1550755807" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -90,16 +90,16 @@ within discussion on Github itself. Getting the correct URL quickly is
 useful.</p>
 
 <p>We can streamline further using an alias:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig
-</span><span style="color:#75715e"></span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig</span>
+
 <span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
 url <span style="color:#f92672">=</span> !hub browse -u -- commit/<span style="color:#66d9ef">$(</span>git rev-parse HEAD<span style="color:#66d9ef">)</span></code></pre></div>
 <p>so we can run:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git url
 https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db</code></pre></div>
 <p>to get the expanded <code>HEAD</code> URL. Even better, we can parameterise:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig
-</span><span style="color:#75715e"></span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig</span>
+
 <span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
 url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!f() { sha=</span><span style="color:#66d9ef">$(</span>git rev-parse <span style="color:#e6db74">${</span>1<span style="color:#66d9ef">:-</span>HEAD<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">; hub browse -u -- commit/</span>$sha<span style="color:#e6db74">; }; f&#34;</span></code></pre></div>
 <p>so we can now specify a commit:</p>
@@ -116,12 +116,12 @@ clipboard for easy pasting:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git url | clipboard
 https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db</code></pre></div>
 <p>where:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc
-</span><span style="color:#75715e"></span>
-alias clipboard<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pbcopy&#39;</span>  # osx clipboard</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc</span>
+
+alias clipboard<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;pbcopy&#39;</span>  <span style="color:#75715e"># osx clipboard</span></code></pre></div>
 <p>Here&rsquo;s a few more useful git aliases based on the <code>browse</code> subcommand:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig
-</span><span style="color:#75715e"></span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig</span>
+
 <span style="color:#f92672">[</span>alias<span style="color:#f92672">]</span>
 commits <span style="color:#f92672">=</span> !hub browse -- commits
 issues <span style="color:#f92672">=</span> !hub browse -- issues
@@ -159,7 +159,7 @@ settings <span style="color:#f92672">=</span> !hub browse -- settings</code></pr
             </p>
 
             <p>
-            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

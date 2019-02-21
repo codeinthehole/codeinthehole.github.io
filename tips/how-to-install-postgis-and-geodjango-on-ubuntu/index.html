@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1545653260" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1550755807" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -119,10 +119,10 @@ project.</p>
 psql <span style="color:#f92672">(</span><span style="color:#ae81ff">9</span>.1.9<span style="color:#f92672">)</span>
 Type <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9ef">for</span> help.
 
-postgres<span style="color:#f92672">=</span><span style="color:#75715e"># CREATE ROLE sample_role WITH PASSWORD &#39;sample_password&#39; LOGIN;
-</span><span style="color:#75715e"></span>CREATE ROLE
-postgres<span style="color:#f92672">=</span><span style="color:#75715e"># CREATE DATABASE sample_db OWNER sample_role TEMPLATE template_postgis;
-</span><span style="color:#75715e"></span>CREATE DATABASE</code></pre></div>
+postgres<span style="color:#f92672">=</span><span style="color:#75715e"># CREATE ROLE sample_role WITH PASSWORD &#39;sample_password&#39; LOGIN;</span>
+CREATE ROLE
+postgres<span style="color:#f92672">=</span><span style="color:#75715e"># CREATE DATABASE sample_db OWNER sample_role TEMPLATE template_postgis;</span>
+CREATE DATABASE</code></pre></div>
 <p>This is the tricky bit over: you can now <code>pip install psycopg2</code> and
 you&rsquo;re basically done. Remember to use the PostGIS database engine in
 your <code>DATABASES</code> setting:</p>
@@ -186,7 +186,7 @@ or with the pg_config option in <span style="color:#e6db74">&#39;setup.cfg&#39;<
             </p>
 
             <p>
-            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

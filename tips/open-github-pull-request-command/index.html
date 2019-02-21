@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1545653260" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1550755807" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -90,14 +90,14 @@ command<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
 parses the response with <code>jq</code>. Here&rsquo;s the source to <code>open-github-pr-page.sh</code>
 which just needs to be somewhere on your path<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
-</span><span style="color:#75715e"></span><span style="color:#75715e">#
-</span><span style="color:#75715e"># Open the Github pull request detail page for the current branch 
-</span><span style="color:#75715e">#
-</span><span style="color:#75715e"># Requires:
-</span><span style="color:#75715e">#
-</span><span style="color:#75715e"># - A GITHUB_AUTH_TOKEN env var
-</span><span style="color:#75715e"># - httpie and jq.
-</span><span style="color:#75715e"></span>
+</span><span style="color:#75715e"></span>#
+<span style="color:#75715e"># Open the Github pull request detail page for the current branch</span> 
+#
+<span style="color:#75715e"># Requires:</span>
+#
+<span style="color:#75715e"># - A GITHUB_AUTH_TOKEN env var</span>
+<span style="color:#75715e"># - httpie and jq.</span>
+
 GITHUB_ORG<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git config --local remote.origin.url | cut -d: -f2 | cut -d/ -f1<span style="color:#66d9ef">)</span>
 GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git config --local remote.origin.url | cut -d/ -f2 | cut -d. -f1<span style="color:#66d9ef">)</span>
 BRANCH<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git rev-parse --abbrev-ref HEAD<span style="color:#66d9ef">)</span>
@@ -184,7 +184,7 @@ command:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

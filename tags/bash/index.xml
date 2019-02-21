@@ -33,7 +33,7 @@ set -eu -o pipefail so that the script:
       <description>If your Consul key-value store is structured as:
 / A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
 / WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:
-#!/bin/bash  set -e # Exit on error  # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude:  # (a) those that end in / (as these are folders)  # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating  # to).</description>
+#!/bin/bash  set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
     
     <item>

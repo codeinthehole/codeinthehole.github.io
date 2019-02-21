@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1545653260" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1550755807" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -86,11 +86,11 @@ deletes all such files. Here is such a script, which also removes empty
 folders and prints a summary:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span>
-<span style="color:#75715e"># Delete .pyc files and empty directories from root of project
-</span><span style="color:#75715e"></span>cd ./<span style="color:#66d9ef">$(</span>git rev-parse --show-cdup<span style="color:#66d9ef">)</span>
+<span style="color:#75715e"># Delete .pyc files and empty directories from root of project</span>
+cd ./<span style="color:#66d9ef">$(</span>git rev-parse --show-cdup<span style="color:#66d9ef">)</span>
 
-<span style="color:#75715e"># Clean-up
-</span><span style="color:#75715e"></span>find . -name <span style="color:#e6db74">&#34;.DS_Store&#34;</span> -delete
+<span style="color:#75715e"># Clean-up</span>
+find . -name <span style="color:#e6db74">&#34;.DS_Store&#34;</span> -delete
 
 NUM_PYC_FILES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span> find . -name <span style="color:#e6db74">&#34;*.pyc&#34;</span> | wc -l | tr -d <span style="color:#e6db74">&#39; &#39;</span> <span style="color:#66d9ef">)</span>
 <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $NUM_PYC_FILES -gt <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
@@ -154,7 +154,7 @@ question</a>.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

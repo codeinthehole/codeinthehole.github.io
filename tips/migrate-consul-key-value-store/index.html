@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1545653260" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1550755807" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -95,15 +95,15 @@ something like that):</p>
 <p>then this Bash script will help you migrate:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
-set -e  <span style="color:#75715e"># Exit on error
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e"># Emit &#34;key value&#34; lines for all keys in Consul&#39;s KV store
-</span><span style="color:#75715e"></span>keys_and_values<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#75715e"># Recursively fetch all values from Consul but exclude:
-</span><span style="color:#75715e"></span>    <span style="color:#75715e"># (a) those that end in / (as these are folders)
-</span><span style="color:#75715e"></span>    <span style="color:#75715e"># (b) those that start with WEBSERVER/ (as that&#39;s where we are migrating
-</span><span style="color:#75715e"></span>    <span style="color:#75715e">#     to).
-</span><span style="color:#75715e"></span>    curl -s <span style="color:#e6db74">&#34;localhost/v1/kv/?recurse&#34;</span> | jq -r <span style="color:#e6db74">&#39;
+set -e  <span style="color:#75715e"># Exit on error</span>
+
+<span style="color:#75715e"># Emit &#34;key value&#34; lines for all keys in Consul&#39;s KV store</span>
+keys_and_values<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Recursively fetch all values from Consul but exclude:</span>
+    <span style="color:#75715e"># (a) those that end in / (as these are folders)</span>
+    <span style="color:#75715e"># (b) those that start with WEBSERVER/ (as that&#39;s where we are migrating</span>
+    <span style="color:#75715e">#     to).</span>
+    curl -s <span style="color:#e6db74">&#34;localhost/v1/kv/?recurse&#34;</span> | jq -r <span style="color:#e6db74">&#39;
 </span><span style="color:#e6db74">        .[] | 
 </span><span style="color:#e6db74">        select(
 </span><span style="color:#e6db74">            (.Key | endswith(&#34;/&#34;) | not) and 
@@ -112,13 +112,13 @@ set -e  <span style="color:#75715e"># Exit on error
 </span><span style="color:#e6db74">        [.Key, &#34; &#34;, .Value] | 
 </span><span style="color:#e6db74">        add&#39;</span> | <span style="color:#66d9ef">while</span> read key b64value
     <span style="color:#66d9ef">do</span>
-        <span style="color:#75715e"># Consul&#39;s REST API returns values base64-encoded so we decode here.
-</span><span style="color:#75715e"></span>        echo $key <span style="color:#e6db74">`</span>echo <span style="color:#e6db74">&#34;</span>$b64value<span style="color:#e6db74">&#34;</span> | base64 -d<span style="color:#e6db74">`</span>
+        <span style="color:#75715e"># Consul&#39;s REST API returns values base64-encoded so we decode here.</span>
+        echo $key <span style="color:#e6db74">`</span>echo <span style="color:#e6db74">&#34;</span>$b64value<span style="color:#e6db74">&#34;</span> | base64 -d<span style="color:#e6db74">`</span>
     <span style="color:#66d9ef">done</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#75715e"># Set a new value in Consul&#39;s KV store
-</span><span style="color:#75715e"></span>set_key<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<span style="color:#75715e"># Set a new value in Consul&#39;s KV store</span>
+set_key<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     key<span style="color:#f92672">=</span>$1
     value<span style="color:#f92672">=</span>$2
     curl -s -X PUT -d <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;localhost/v1/kv/</span>$key<span style="color:#e6db74">&#34;</span> &gt; /dev/null
@@ -178,7 +178,7 @@ adapted to migrate key-value pairs between different namespaces.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2018 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>
