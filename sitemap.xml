@@ -817,6 +817,12 @@
   </url>
   
   <url>
+    <loc>http://codeinthehole.com/tags/puppet/</loc>
+    <lastmod>2019-02-21T12:51:47+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tags/python/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -825,6 +831,12 @@
   <url>
     <loc>http://codeinthehole.com/tags/quotes/</loc>
     <lastmod>2012-12-14T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://codeinthehole.com/tags/rabbitmq/</loc>
+    <lastmod>2019-02-21T12:51:47+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -882,7 +894,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/ubuntu/</loc>
-    <lastmod>2013-04-18T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-21T12:51:47+00:00</lastmod>
     <priority>0</priority>
   </url>
   

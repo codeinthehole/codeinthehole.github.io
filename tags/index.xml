@@ -336,6 +336,15 @@
     </item>
     
     <item>
+      <title>Puppet</title>
+      <link>http://codeinthehole.com/tags/puppet/</link>
+      <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/puppet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Python</title>
       <link>http://codeinthehole.com/tags/python/</link>
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
@@ -350,6 +359,15 @@
       <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tags/quotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Rabbitmq</title>
+      <link>http://codeinthehole.com/tags/rabbitmq/</link>
+      <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tags/rabbitmq/</guid>
       <description></description>
     </item>
     
@@ -392,7 +410,7 @@
     <item>
       <title>Ubuntu</title>
       <link>http://codeinthehole.com/tags/ubuntu/</link>
-      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tags/ubuntu/</guid>
       <description></description>
