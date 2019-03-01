@@ -87,7 +87,7 @@ To illustrate, assume we have two tables:
       <guid>http://codeinthehole.com/tips/bash-error-reporting/</guid>
       <description>Two tips:
 Fail fast You probably already know that you can force Bash scripts to exit immediately if there&amp;rsquo;s an error (that is, if any command exits with a non-zero exit code) using:
-#!/usr/bin/env bash  set -e but it&amp;rsquo;s even better to use:
+#!/usr/bin/env bash set -e but it&amp;rsquo;s even better to use:
 set -eu -o pipefail so that the script:
  exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
     </item>

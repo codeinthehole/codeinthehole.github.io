@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1550757296" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1551479290" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -83,8 +83,7 @@ if (!doNotTrack) {
 <p>You probably already know that you can force Bash scripts to exit immediately if
 there&rsquo;s an error (that is, if any command exits with a non-zero exit code) using:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
-</span><span style="color:#75715e"></span>
-set -e</code></pre></div>
+</span><span style="color:#75715e"></span>set -e</code></pre></div>
 <p>but it&rsquo;s even better to use:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -eu -o pipefail</code></pre></div>
 <p>so that the script:</p>
@@ -145,7 +144,7 @@ this is a concise, simple option to have to hand.</p>
 <hr />
 
 <ol>
-<li id="fn:pgdump">Without this <code>pg_dump ... | gzip</code> would not be treated as an error even if <code>pg_dump</code> exited with a non-zero exiexited with a non-zero exit code.
+<li id="fn:pgdump">Without this <code>pg_dump ... | gzip</code> would not be treated as an error even if <code>pg_dump</code> exited with a non-zero exit code.
  <a class="footnote-return" href="#fnref:pgdump"><sup>[return]</sup></a></li>
 <li id="fn:othertools">See the <a href="https://invent.life/project/bash-infinity-framework">Bash infinity framework</a> for example.
  <a class="footnote-return" href="#fnref:othertools"><sup>[return]</sup></a></li>
