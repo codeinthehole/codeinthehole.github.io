@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Puppet on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/puppet/</link>
-    <description>Recent content in Puppet on David Winterbottom</description>
+    <title>Packer on David Winterbottom</title>
+    <link>http://codeinthehole.com/tags/packer/</link>
+    <description>Recent content in Packer on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Mar 2019 15:49:53 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/puppet/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://codeinthehole.com/tags/packer/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -21,17 +21,6 @@
 This happens as Ubuntu VMs typically start several package-management programs &amp;mdash; unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
 You&amp;rsquo;ll see an error like this:
 E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</description>
-    </item>
-    
-    <item>
-      <title>Installing the latest RabbitMQ on Ubuntu 18.04</title>
-      <link>http://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</link>
-      <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
-      
-      <guid>http://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</guid>
-      <description>I wasted a morning trying to install RabbitMQ v3.7.12 (the latest version as of Feb 2019) on an Ubuntu 18.04 machine using Puppet. This as tricky as:
- Only RabbitMQ version 3.6.10 is available from the default repositories; Getting Puppet to install packages from custom locations can be painful.  Solution Use these Puppet modules in your Puppetfile:
-mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39;mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39;mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34; and something like this in your manifest code:</description>
     </item>
     
   </channel>

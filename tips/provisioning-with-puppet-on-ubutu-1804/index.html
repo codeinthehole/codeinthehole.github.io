@@ -1,0 +1,201 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1551991353" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Avoiding package lock-out when provisioning Ubuntu 18.04 machines - David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A common, frustrating problem">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Avoiding package lock-out when provisioning Ubuntu 18.04 machines</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Wednesday, 6 March 2019</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Wednesday, 6 March 2019</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem
+if being unable to install packages since another process is holding a lock (eg
+on <code>/var/lib/dpkg/lock-frontend</code>).</p>
+
+<p>This happens as Ubuntu VMs typically start several package-management programs &mdash; <a href="https://help.ubuntu.com/lts/serverguide/automatic-updates.html.en">unattended-upgrades</a>
+and its associated <code>apt.daily</code> service &mdash; on boot, and these will block
+your provisioning scripts.</p>
+
+<p>You&rsquo;ll see an error like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</code></pre></div>
+<p>There&rsquo;s lots of internet advice on possible remedies, but it&rsquo;s still a deep well
+of frustration. In my case, I was using <a href="https://www.packer.io/">Packer</a> and <a href="https://puppet.com/docs/puppet/5.4/index.html">Puppet 5.4</a> to provision an AWS AMI, building
+from a clean Ubuntu 18.04 image but spent several hours trying to script a way
+past the lock-out problem. I was this close, 👉👈, to using a <code>sleep</code> statement.</p>
+
+<p>To help others suffering in this situation, here&rsquo;s a solution.</p>
+
+<h2 id="solution">Solution</h2>
+
+<p>Before you start provisioning, you need to stop and disable all services that use
+package management. You can do that with a shell script like this:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
+</span><span style="color:#75715e"></span>
+set -e
+
+<span style="color:#66d9ef">function</span> killService<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    service<span style="color:#f92672">=</span>$1
+    sudo systemctl stop $service
+    sudo systemctl kill --kill-who<span style="color:#f92672">=</span>all $service
+
+    <span style="color:#75715e"># Wait until the status of the service is either exited or killed.</span>
+    <span style="color:#66d9ef">while</span> ! <span style="color:#f92672">(</span>sudo systemctl status <span style="color:#e6db74">&#34;</span>$service<span style="color:#e6db74">&#34;</span> | grep -q <span style="color:#e6db74">&#34;Main.*code=\(exited\|killed\)&#34;</span><span style="color:#f92672">)</span>
+    <span style="color:#66d9ef">do</span>
+        sleep <span style="color:#ae81ff">10</span>
+    <span style="color:#66d9ef">done</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> disableTimers<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    sudo systemctl disable apt-daily.timer
+    sudo systemctl disable apt-daily-upgrade.timer
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> killServices<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    killService unattended-upgrades.service
+    killService apt-daily.service
+    killService apt-daily-upgrade.service
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    disableTimers
+    killServices
+<span style="color:#f92672">}</span>
+
+main</code></pre></div>
+<p>Here we first disable the <code>systemd</code> timers, then stop the services themselves.</p>
+
+<p>Once this has run, you can run your provisioning software without fear of
+locking problems. But once your provisioning is complete, the <code>apt-daily</code> timers should be
+re-enabled.</p>
+
+<p>Here&rsquo;s a snippet from a Packer JSON configuration template:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+    <span style="color:#960050;background-color:#1e0010">...</span>
+    <span style="color:#f92672">&#34;provisioners&#34;</span>: [
+        {
+            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;shell&#34;</span>,
+            <span style="color:#f92672">&#34;script&#34;</span>: <span style="color:#e6db74">&#34;shutdown-apt-services.sh&#34;</span>
+        },
+        <span style="color:#960050;background-color:#1e0010">...</span>
+        {
+            <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;shell&#34;</span>,
+            <span style="color:#f92672">&#34;inline&#34;</span>: [
+                <span style="color:#e6db74">&#34;sudo systemctl enable apt-daily.timer&#34;</span>,
+                <span style="color:#e6db74">&#34;sudo systemctl enable apt-daily-upgrade.timer&#34;</span>
+            ]
+        }
+    ]
+}</code></pre></div>
+<p>Hope that&rsquo;s useful.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/provisioning-with-puppet-on-ubutu-1804.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Avoiding%20package%20lock-out%20when%20provisioning%20Ubuntu%2018.04%20machines%22&body=Article:%20Avoiding%20package%20lock-out%20when%20provisioning%20Ubuntu%2018.04%20machines%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fprovisioning-with-puppet-on-ubutu-1804%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/provisioning-with-puppet-on-ubutu-1804.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/ubuntu">ubuntu</a>, <a href="/tags/puppet">puppet</a>, <a href="/tags/packer">packer</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/install-latest-rabbitmq-on-ubuntu-1804/">Installing the latest RabbitMQ on Ubuntu 18.04</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+</html>
+
+
