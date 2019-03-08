@@ -17,9 +17,9 @@
       <pubDate>Fri, 08 Mar 2019 09:22:04 +0000</pubDate>
       
       <guid>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
-      <description>FYI, the easiest way to get Vim to run black and isort over a Python buffer when saving is to use Ale and set these two commands a &amp;ldquo;fixers&amp;rdquo;.
-&amp;#34; ~/.vim/after/ftplugin/python.vimlet b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
-let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif</description>
+      <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.
+&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
+let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif Further, if you don&amp;rsquo;t want these fixers applied on save, set</description>
     </item>
     
     <item>
