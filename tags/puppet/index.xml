@@ -13,10 +13,10 @@
     
     <item>
       <title>Avoiding package lock-out when provisioning Ubuntu 18.04 machines</title>
-      <link>http://codeinthehole.com/tips/provisioning-with-puppet-on-ubutu-1804/</link>
+      <link>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/provisioning-with-puppet-on-ubutu-1804/</guid>
+      <guid>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
       <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).
 This happens as Ubuntu VMs typically start several package-management programs &amp;mdash; unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
 You&amp;rsquo;ll see an error like this:

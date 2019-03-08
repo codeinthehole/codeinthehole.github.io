@@ -3,7 +3,12 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://codeinthehole.com/tips/provisioning-with-puppet-on-ubutu-1804/</loc>
+    <loc>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</loc>
+    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
   </url>
   
@@ -615,7 +620,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2019-03-06T15:49:53+00:00</lastmod>
+    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -895,7 +900,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2019-03-06T15:49:53+00:00</lastmod>
+    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -915,7 +920,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/vim/</loc>
-    <lastmod>2014-06-17T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
     <priority>0</priority>
   </url>
   

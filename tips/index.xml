@@ -6,17 +6,28 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Mar 2019 15:49:53 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Mar 2019 09:22:04 +0000</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Using black and isort with Vim</title>
+      <link>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</link>
+      <pubDate>Fri, 08 Mar 2019 09:22:04 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
+      <description>FYI, the easiest way to get Vim to run black and isort over a Python buffer when saving is to use Ale and set these two commands a &amp;ldquo;fixers&amp;rdquo;.
+&amp;#34; ~/.vim/after/ftplugin/python.vimlet b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
+let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif</description>
+    </item>
+    
+    <item>
       <title>Avoiding package lock-out when provisioning Ubuntu 18.04 machines</title>
-      <link>http://codeinthehole.com/tips/provisioning-with-puppet-on-ubutu-1804/</link>
+      <link>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/provisioning-with-puppet-on-ubutu-1804/</guid>
+      <guid>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
       <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).
 This happens as Ubuntu VMs typically start several package-management programs &amp;mdash; unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
 You&amp;rsquo;ll see an error like this:

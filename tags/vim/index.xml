@@ -6,10 +6,21 @@
     <description>Recent content in Vim on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 17 Jun 2014 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 08 Mar 2019 09:22:04 +0000</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using black and isort with Vim</title>
+      <link>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</link>
+      <pubDate>Fri, 08 Mar 2019 09:22:04 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
+      <description>FYI, the easiest way to get Vim to run black and isort over a Python buffer when saving is to use Ale and set these two commands a &amp;ldquo;fixers&amp;rdquo;.
+&amp;#34; ~/.vim/after/ftplugin/python.vimlet b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
+let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif</description>
+    </item>
     
     <item>
       <title>Using the silver searcher with Vim</title>
