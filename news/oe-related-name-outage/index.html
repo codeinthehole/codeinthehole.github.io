@@ -35,9 +35,9 @@ if (!doNotTrack) {
 
         
         
-        <title>A useful template for commit messages - David Winterbottom</title>
+        <title>Beware of changing the &#39;related name&#39; of a Django model field - David Winterbottom</title>
         <meta name="author" content="David Winterbottom">
-        <meta name="description" content="A simple heuristic for preferring the imperative mood">
+        <meta name="description" content="It can generate unnecessary database operations.">
 
     </head>
 
@@ -62,43 +62,21 @@ if (!doNotTrack) {
 
     <div id="content" class="article">
 
-        <h1 id="article_title" class="entry-title">A useful template for commit messages</h1>
+        <h1 id="article_title" class="entry-title">Beware of changing the &#39;related name&#39; of a Django model field</h1>
 
         <div class="byline desktop_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a>
-            on <time class="published" datetime="">Friday, 2 October 2015</time>
+            on <time class="published" datetime="">Monday, 18 March 2019</time>
         </div>
         <div class="byline mobile_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
-            <span class="article_date">on <time class="published" datetime="">Friday, 2 October 2015</time></span>
+            <span class="article_date">on <time class="published" datetime="">Monday, 18 March 2019</time></span>
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Here&rsquo;s a useful heuristic for writing better commit messages. Set your
-commit message template to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># If applied, this commit will...
-
-# Why is this change needed?
-Prior to this change, 
-
-# How does it address the issue?
-This change
-
-# Provide links to any relevant tickets, articles or other resources</code></pre></div>
-<p>and you&rsquo;ll be guided into writing concise commit subjects in the
-imperative mood - a good practice. See rule 5 of Chris Beam&rsquo;s <a href="http://chris.beams.io/posts/git-commit/">&ldquo;How to
-write a commit message&rdquo;</a> for
-the inspiration of this tip and more reasoning on the use of the
-imperative mood.</p>
-
-<p>To do this in Git, save the above content in a file (eg
-<code>~/.git_commit_msg.txt</code>) and run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global commit.template ~/.git_commit_msg.txt</code></pre></div>
-<p>Here&rsquo;s what this looks like in practice:</p>
-
-<p><img src="/images/git-commit-snap.png" width="800px" /></p>
-
-<p>Try it - it&rsquo;s genuinely useful.</p>
+            <p>I wrote up a lesson on the dangers of
+<a href="https://tech.octopus.energy/news/2019/03/18/django-related-name-outage.html">renaming the <code>related_name</code> of a Django model field </a>
+over on the Octopus Energy tech blog.</p>
 
         </div>
 
@@ -106,28 +84,26 @@ imperative mood.</p>
             <span class="hr">----</span>
             <p>
             Something wrong? 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/git-commit-template.md">Suggest an improvement</a>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/news/oe-related-name-outage.md">Suggest an improvement</a>
             or 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22A%20useful%20template%20for%20commit%20messages%22&body=Article:%20A%20useful%20template%20for%20commit%20messages%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fa-useful-template-for-commit-messages%2f">add a comment</a>
-            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/git-commit-template.md">article history</a>)<br/>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Beware%20of%20changing%20the%20%27related%20name%27%20of%20a%20Django%20model%20field%22&body=Article:%20Beware%20of%20changing%20the%20%27related%20name%27%20of%20a%20Django%20model%20field%0AURL:%20http%3a%2f%2fcodeinthehole.com%2fnews%2foe-related-name-outage%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/news/oe-related-name-outage.md">article history</a>)<br/>
 
             
                 Tagged with:
                 
-                 <a href="/tags/git">git</a>
+                 <a href="/tags/django">django</a>, <a href="/tags/octopus-energy">octopus energy</a>
                 <br/>
             
             
-                Filed in: <a href="/tips/">tips</a>
+                Filed in: <a href="/news/">news</a>
             
             </p>
 
             <p>
             
-                Previous: <a href="/tips/copying-postgres-output-into-a-spreadsheet/">Copying Postgres output into a spreadsheet</a><br/>
+                Previous: <a href="/tips/using-black-and-isort-with-vim/">Using black and isort with Vim</a><br/>
             
-            
-                Next: <a href="/news/octopus-energy/">Octopus Energy</a>
             
             </p>
 

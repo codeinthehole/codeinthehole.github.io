@@ -6,10 +6,19 @@
     <description>Recent content in News on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 16 Oct 2017 16:33:45 +0100</lastBuildDate>
+    <lastBuildDate>Mon, 18 Mar 2019 17:05:53 +0000</lastBuildDate>
     
 	<atom:link href="http://codeinthehole.com/news/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Beware of changing the &#39;related name&#39; of a Django model field</title>
+      <link>http://codeinthehole.com/news/oe-related-name-outage/</link>
+      <pubDate>Mon, 18 Mar 2019 17:05:53 +0000</pubDate>
+      
+      <guid>http://codeinthehole.com/news/oe-related-name-outage/</guid>
+      <description>I wrote up a lesson on the dangers of renaming the related_name of a Django model field  over on the Octopus Energy tech blog.</description>
+    </item>
     
     <item>
       <title>Using a custom Sentry client</title>

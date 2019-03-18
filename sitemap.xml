@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://codeinthehole.com/news/oe-related-name-outage/</loc>
+    <lastmod>2019-03-18T17:05:53+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</loc>
     <lastmod>2019-03-08T09:22:04+00:00</lastmod>
   </url>
@@ -620,7 +625,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
+    <lastmod>2019-03-18T17:05:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -638,7 +643,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/django/</loc>
-    <lastmod>2017-10-16T16:33:45+01:00</lastmod>
+    <lastmod>2019-03-18T17:05:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -750,7 +755,7 @@
   
   <url>
     <loc>http://codeinthehole.com/news/</loc>
-    <lastmod>2017-10-16T16:33:45+01:00</lastmod>
+    <lastmod>2019-03-18T17:05:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -774,7 +779,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/octopus-energy/</loc>
-    <lastmod>2017-10-16T16:33:45+01:00</lastmod>
+    <lastmod>2019-03-18T17:05:53+00:00</lastmod>
     <priority>0</priority>
   </url>
   
