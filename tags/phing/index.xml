@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Phing on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/phing/</link>
+    <link>https://codeinthehole.com/tags/phing/</link>
     <description>Recent content in Phing on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 Aug 2010 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/phing/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/phing/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Phing trick for avoiding deploying debug code</title>
-      <link>http://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</link>
+      <link>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</link>
       <pubDate>Sun, 22 Aug 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</guid>
+      <guid>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</guid>
       <description>As the saying goes:
  Fool me once, shame on you; fool me twice, shame on me
  Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
@@ -25,10 +25,10 @@ We had an issue recently where some debugging code got committed and wasn&amp;rs
     
     <item>
       <title>Deploying cron jobs using Phing</title>
-      <link>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</link>
+      <link>https://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</link>
       <pubDate>Sun, 31 May 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
+      <guid>https://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
       <description>Deploying applications that depend on cron-jobs can be a pain. However, Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;
 Consider an application folder structure as follows:
 /builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ... All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
@@ -36,48 +36,48 @@ Consider an application folder structure as follows:
     
     <item>
       <title>Phing, Xinc and Nabaztags</title>
-      <link>http://codeinthehole.com/tips/phing-xinc-and-nabaztags/</link>
+      <link>https://codeinthehole.com/tips/phing-xinc-and-nabaztags/</link>
       <pubDate>Wed, 06 May 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/phing-xinc-and-nabaztags/</guid>
+      <guid>https://codeinthehole.com/tips/phing-xinc-and-nabaztags/</guid>
       <description>Finally got around to setting up continuous integration for some of the projects that comprise the day-job. We&amp;rsquo;re using the PEAR package Xinc, which has proved to be excellent thus far - especially as it integrates so well with my deployment tool of choice: Phing. Part of the fun in setting it up was looking for suitable feedback mechanisms or devices. Email notifications are a given but there are a range of more interesting feedback mechanisms available such as toolbar notifications, remote-controlled lava lamps, or plain humiliation tactics (such as making the person who broke the build wear the dunce&amp;rsquo;s hat till it is fixed).</description>
     </item>
     
     <item>
       <title>Using a Phing filter to flush browser caches</title>
-      <link>http://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</link>
+      <link>https://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</link>
       <pubDate>Sun, 15 Mar 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</guid>
+      <guid>https://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</guid>
       <description>A quick Phing tip that&amp;rsquo;s made my life easier when deploying new versions of commandlinefu.com.
 One of the key performance recommendations from Steve Souders&amp;rsquo; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
     </item>
     
     <item>
       <title>Phing task to create an Unfuddle message</title>
-      <link>http://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</link>
+      <link>https://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</link>
       <pubDate>Sun, 11 Jan 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</guid>
+      <guid>https://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</guid>
       <description>Another day, another new Phing task; again integrating with project management software - this time the excellent Unfuddle.
 I&amp;rsquo;ve been playing with Unfuddle for a few days now and it&amp;rsquo;s very impressive. You get SVN and git hosting as well as superb issue tracking. It also supports simple project messages (which are displayed on the project dashboard) and so-called notebooks which are essentially project wikis that can be used to house documentation and manuals.</description>
     </item>
     
     <item>
       <title>Phing task to update Twitter status</title>
-      <link>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</link>
+      <link>https://codeinthehole.com/tips/phing-task-to-update-twitter-status/</link>
       <pubDate>Sat, 10 Jan 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</guid>
+      <guid>https://codeinthehole.com/tips/phing-task-to-update-twitter-status/</guid>
       <description>At Tangent Labs, we&amp;rsquo;re currently experimenting with integrating Twitter into our project workflow to provide a latest activity feed in a easily digestible format (for both developers and non-technical people). For a pilot project, we&amp;rsquo;ve created a Twitter account and added an SVN post-commit hook script that updates Twitter with the latest commit information (commit message, affected files, author). We&amp;rsquo;re going to integrate our bug-tracking software shortly too but that&amp;rsquo;s not the subject of this post.</description>
     </item>
     
     <item>
       <title>Deploying to a shared hosting environment using Phing</title>
-      <link>http://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</link>
+      <link>https://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</link>
       <pubDate>Sun, 04 Jan 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</guid>
+      <guid>https://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</guid>
       <description>Deploying applications to shared hosting environments can be a pain when no SSH access is provided. Consequently, it&amp;rsquo;s hard to avoid using FTP to deploy files from your development environment to a production server. In such trying circumstances, it&amp;rsquo;s easy to form self-destructive habits like using drag-and-drop FTP deployment - a very bad thing. Much better is to write an automated deployment script so that you can build to production in one clean step, a key tenet of The Joel Test for writing better code (highly recommended).</description>
     </item>
     

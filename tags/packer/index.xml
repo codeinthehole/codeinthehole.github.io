@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Packer on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/packer/</link>
+    <link>https://codeinthehole.com/tags/packer/</link>
     <description>Recent content in Packer on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Mar 2019 15:49:53 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/packer/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/packer/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Avoiding package lock-out when provisioning Ubuntu 18.04 machines</title>
-      <link>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</link>
+      <link>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
+      <guid>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
       <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).
 This happens as Ubuntu VMs typically start several package-management programs &amp;mdash; unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
 You&amp;rsquo;ll see an error like this:

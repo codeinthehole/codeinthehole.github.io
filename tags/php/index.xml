@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Php on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/php/</link>
+    <link>https://codeinthehole.com/tags/php/</link>
     <description>Recent content in Php on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 13 Mar 2011 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/php/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Domain-model-mapper - A PHP Data Mapper implementation</title>
-      <link>http://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</link>
+      <link>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</link>
       <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
+      <guid>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
       <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:
  The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
     </item>
     
     <item>
       <title>Return false with prudence</title>
-      <link>http://codeinthehole.com/tips/return-false-with-prudence/</link>
+      <link>https://codeinthehole.com/tips/return-false-with-prudence/</link>
       <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/return-false-with-prudence/</guid>
+      <guid>https://codeinthehole.com/tips/return-false-with-prudence/</guid>
       <description>From &amp;ldquo;Javascript: the good parts&amp;rdquo;:
  It is rarely possible for standards comittees to remove imperfections from a language because doing so would cause the breakdage of all of the bad programs that depend on those bad parts. They are usually powerless to do anything except heap more features on top of the existing pile of imperfections.
  Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excellent points on writing in a language with more than its fair of share of shortcomings.</description>
@@ -34,29 +34,29 @@
     
     <item>
       <title>A pseudo-code job advert and its discontents</title>
-      <link>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</link>
+      <link>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</link>
       <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
+      <guid>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
       <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:
 &amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
     </item>
     
     <item>
       <title>Phing task to update Twitter status</title>
-      <link>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</link>
+      <link>https://codeinthehole.com/tips/phing-task-to-update-twitter-status/</link>
       <pubDate>Sat, 10 Jan 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/phing-task-to-update-twitter-status/</guid>
+      <guid>https://codeinthehole.com/tips/phing-task-to-update-twitter-status/</guid>
       <description>At Tangent Labs, we&amp;rsquo;re currently experimenting with integrating Twitter into our project workflow to provide a latest activity feed in a easily digestible format (for both developers and non-technical people). For a pilot project, we&amp;rsquo;ve created a Twitter account and added an SVN post-commit hook script that updates Twitter with the latest commit information (commit message, affected files, author). We&amp;rsquo;re going to integrate our bug-tracking software shortly too but that&amp;rsquo;s not the subject of this post.</description>
     </item>
     
     <item>
       <title>Creating large XML files with PHP</title>
-      <link>http://codeinthehole.com/tips/creating-large-xml-files-with-php/</link>
+      <link>https://codeinthehole.com/tips/creating-large-xml-files-with-php/</link>
       <pubDate>Fri, 31 Oct 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/creating-large-xml-files-with-php/</guid>
+      <guid>https://codeinthehole.com/tips/creating-large-xml-files-with-php/</guid>
       <description>When creating large XML files with PHP, there are some important considerations to bear in mind with regards to scalability. There are several libraries available for writing XML files of small to intermediate size (such as DOMDocument), but when dealing with very large files (eg. &amp;gt; 500Mb, or several million elements), these libraries are no longer useful as the size of the file then can create is memory-bound.
 For example, DOMDocument stores the XML tree in memory while it is being built - you then flush it out to file after all elements have been created:</description>
     </item>

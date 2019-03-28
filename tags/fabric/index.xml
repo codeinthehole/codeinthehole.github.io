@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Fabric on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/fabric/</link>
+    <link>https://codeinthehole.com/tags/fabric/</link>
     <description>Recent content in Fabric on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 09 Feb 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/fabric/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/fabric/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A Fabric function for git tagging</title>
-      <link>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
+      <link>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
       <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
+      <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
       <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
 Set-up Assume there is a test environment where:
  the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit  There will also be stage and production environments.

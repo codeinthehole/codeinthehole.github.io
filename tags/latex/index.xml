@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Latex on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/latex/</link>
+    <link>https://codeinthehole.com/tags/latex/</link>
     <description>Recent content in Latex on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 10 Nov 2005 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/latex/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/latex/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Writing a Thesis in LaTeX</title>
-      <link>http://codeinthehole.com/guides/writing-a-thesis-in-latex/</link>
+      <link>https://codeinthehole.com/guides/writing-a-thesis-in-latex/</link>
       <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/guides/writing-a-thesis-in-latex/</guid>
+      <guid>https://codeinthehole.com/guides/writing-a-thesis-in-latex/</guid>
       <description>Overview This article is a guide to constructing a decent parent file for a thesis or dissertation compiled in Latex. The specific details implemented here, and included in the example files, are those set out by the guidelines for submission to the University of Nottingham, but can be easily amended to suit any sensible requirements.
 Considerable attention has been paid to presenting the final document as a PDF file, which keeps the file size manageable (compared to postscript) and allows groovy add-ons such as hyperlinks and back-referencing.</description>
     </item>

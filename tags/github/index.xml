@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Github on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/github/</link>
+    <link>https://codeinthehole.com/tags/github/</link>
     <description>Recent content in Github on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 03 Jun 2018 12:30:05 +0100</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Advanced pull-request crafting</title>
-      <link>http://codeinthehole.com/tips/advanced-pull-request-crafting/</link>
+      <link>https://codeinthehole.com/tips/advanced-pull-request-crafting/</link>
       <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
       
-      <guid>http://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
+      <guid>https://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
 Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
  Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>

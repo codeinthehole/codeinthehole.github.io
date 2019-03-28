@@ -2,57 +2,57 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Octopus Energy on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/octopus-energy/</link>
+    <link>https://codeinthehole.com/tags/octopus-energy/</link>
     <description>Recent content in Octopus Energy on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 18 Mar 2019 17:05:53 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/octopus-energy/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/octopus-energy/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Beware of changing the &#39;related name&#39; of a Django model field</title>
-      <link>http://codeinthehole.com/news/oe-related-name-outage/</link>
+      <link>https://codeinthehole.com/news/oe-related-name-outage/</link>
       <pubDate>Mon, 18 Mar 2019 17:05:53 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/news/oe-related-name-outage/</guid>
+      <guid>https://codeinthehole.com/news/oe-related-name-outage/</guid>
       <description>I wrote up a lesson on the dangers of renaming the related_name of a Django model field  over on the Octopus Energy tech blog.</description>
     </item>
     
     <item>
       <title>Using a custom Sentry client</title>
-      <link>http://codeinthehole.com/news/oe-tech-custom-sentry-client/</link>
+      <link>https://codeinthehole.com/news/oe-tech-custom-sentry-client/</link>
       <pubDate>Mon, 16 Oct 2017 16:33:45 +0100</pubDate>
       
-      <guid>http://codeinthehole.com/news/oe-tech-custom-sentry-client/</guid>
+      <guid>https://codeinthehole.com/news/oe-tech-custom-sentry-client/</guid>
       <description>I wrote up a short tip on using a custom Sentry client.</description>
     </item>
     
     <item>
       <title>Django, ELB health checks and continuous delivery</title>
-      <link>http://codeinthehole.com/news/oe-tech-elb-health-checks/</link>
+      <link>https://codeinthehole.com/news/oe-tech-elb-health-checks/</link>
       <pubDate>Thu, 05 May 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
+      <guid>https://codeinthehole.com/news/oe-tech-elb-health-checks/</guid>
       <description>I wrote an article on Django, ELB health checks and continuous delivery.</description>
     </item>
     
     <item>
       <title>Testing for missing migrations in Django</title>
-      <link>http://codeinthehole.com/news/oe-tech-missing-migrations/</link>
+      <link>https://codeinthehole.com/news/oe-tech-missing-migrations/</link>
       <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
+      <guid>https://codeinthehole.com/news/oe-tech-missing-migrations/</guid>
       <description>Octopus Energy has a tech blog. I wrote an article on Testing for missing migrations in Django.</description>
     </item>
     
     <item>
       <title>Octopus Energy</title>
-      <link>http://codeinthehole.com/news/octopus-energy/</link>
+      <link>https://codeinthehole.com/news/octopus-energy/</link>
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/news/octopus-energy/</guid>
+      <guid>https://codeinthehole.com/news/octopus-energy/</guid>
       <description>Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first day at Octopus Energy.
 I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology, especially automation and cloud computing, Octopus Energy is going to radically change how people consume and pay for energy in the UK. We&amp;rsquo;re going to be both cheaper and massively better at customer service than the much-maligned incumbents.
 Right now, we&amp;rsquo;re looking to build a superb tech team.</description>

@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vim on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/vim/</link>
+    <link>https://codeinthehole.com/tags/vim/</link>
     <description>Recent content in Vim on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Debugging Vim by example</title>
-      <link>http://codeinthehole.com/tips/debugging-vim-by-example/</link>
+      <link>https://codeinthehole.com/tips/debugging-vim-by-example/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/debugging-vim-by-example/</guid>
+      <guid>https://codeinthehole.com/tips/debugging-vim-by-example/</guid>
       <description>There&amp;rsquo;s only so far you can get by cargo-culting other people&amp;rsquo;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&amp;rsquo;s slow or misbehaving. Learn how to scratch things that itch.
 This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.</description>
     </item>
     
     <item>
       <title>Using black and isort with Vim</title>
-      <link>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</link>
+      <link>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</link>
       <pubDate>Fri, 08 Mar 2019 09:22:04 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
+      <guid>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
       <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.
 &amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
 let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif Further, if you don&amp;rsquo;t want these fixers applied on save, set</description>
@@ -34,10 +34,10 @@ let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(
     
     <item>
       <title>Using the silver searcher with Vim</title>
-      <link>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</link>
+      <link>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</link>
       <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
+      <guid>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
       <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
 $ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
@@ -46,10 +46,10 @@ if executable(&amp;#39;ag&amp;#39;)&amp;#34; Note we extract the column as well 
     
     <item>
       <title>Vim macros for adding i18n support to Django templates</title>
-      <link>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</link>
+      <link>https://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</link>
       <pubDate>Fri, 06 Jul 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</guid>
+      <guid>https://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</guid>
       <description>Problem You want to add i18n support to an existing project. One part of this is modifying all templates to use the {% trans &amp;quot;...&amp;quot; %} block around all hard-coded strings.
 When you have a lot of templates, this gets pretty tedious.
 Solution Use Vim macros!

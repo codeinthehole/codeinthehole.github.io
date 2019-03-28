@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Mysql on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/mysql/</link>
+    <link>https://codeinthehole.com/tags/mysql/</link>
     <description>Recent content in Mysql on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 02 Feb 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Solving MySQL connection problems caused by a dead name server</title>
-      <link>http://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</link>
+      <link>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</link>
       <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</guid>
+      <guid>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</guid>
       <description>A client site went down today. This is what happened and how it was fixed.
 Symptoms The immediate symptom is that your application servers can&amp;rsquo;t connect to your database servers. Attempted connections get an error message:
  Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)
@@ -26,10 +26,10 @@ root@server-db1:~ $ mysqladmin processlist +-----+----------------------+-------
     
     <item>
       <title>How to set-up MySQL for Python on Ubuntu</title>
-      <link>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</link>
+      <link>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</link>
       <pubDate>Thu, 05 Jan 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
+      <guid>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
       <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
 Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
 apt-get install python-pip pip install -U pip Next, install the required development packages:
@@ -40,50 +40,50 @@ Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see som
     
     <item>
       <title>mysqldump with wildcard table matching</title>
-      <link>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</link>
+      <link>https://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</link>
       <pubDate>Fri, 05 Nov 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
+      <guid>https://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
       <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&amp;rsquo;s not currently supported as an option but can be achieved with a little bash magic. Here&amp;rsquo;s how:
 #!/bin/bash if [ $# -lt 2 ] then echo &amp;#34;Usage: `basename $0` database wildcardpattern&amp;#34; echo &amp;#34;Eg: `basename $0` mydatabase App_%&amp;#34; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;#34;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;#34; | awk &amp;#39;{printf $1&amp;#34; &amp;#34;}&amp;#39;` This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
     </item>
     
     <item>
       <title>How to sync a MySQL table between two remote databases.</title>
-      <link>http://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</link>
+      <link>https://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</link>
       <pubDate>Fri, 03 Sep 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</guid>
+      <guid>https://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</guid>
       <description>Definitely tricker than you might think.
 Seems like it should be trivial using SELECT ... INTO OUTFILE and LOAD DATA INFILE ... to make the transfer via dumping the table into a temporary file. However, SELECT ... INTO OUTFILE creates a file on the remote server rather than locally. This prevents the use of LOAD DATA INFILE for the second step as the file being loaded has to be local or on the destination server.</description>
     </item>
     
     <item>
       <title>Monitoring MySQL with Ganglia and gmetric</title>
-      <link>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
+      <link>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
       <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
+      <guid>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
       <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.
 In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
     </item>
     
     <item>
       <title>Checking all MySQL tables</title>
-      <link>http://codeinthehole.com/tips/checking-all-mysql-tables/</link>
+      <link>https://codeinthehole.com/tips/checking-all-mysql-tables/</link>
       <pubDate>Sun, 23 Nov 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/checking-all-mysql-tables/</guid>
+      <guid>https://codeinthehole.com/tips/checking-all-mysql-tables/</guid>
       <description>It&amp;rsquo;s well known that MyISAM tables are prone to corruption and need to be regularly checked and repaired. Moreover, in a production environment, it can be beneficial to run a daily check of all tables and mail news of any errors to an appropriate developer/DBA.
 There are two options for checking MySQL tables. The most effective method is to run the myisamchk utility directly on the index files (.MYI) of the tables in question (some simple shell expansion makes this easy):</description>
     </item>
     
     <item>
       <title>Monitoring MySQL</title>
-      <link>http://codeinthehole.com/tips/monitoring-mysql/</link>
+      <link>https://codeinthehole.com/tips/monitoring-mysql/</link>
       <pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/monitoring-mysql/</guid>
+      <guid>https://codeinthehole.com/tips/monitoring-mysql/</guid>
       <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&amp;rsquo;s going on.
 watch -n 1 mysqladmin processlist The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
     </item>

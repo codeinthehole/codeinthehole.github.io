@@ -2,40 +2,40 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Javascript on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/javascript/</link>
+    <link>https://codeinthehole.com/tags/javascript/</link>
     <description>Recent content in Javascript on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 10 Nov 2010 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/javascript/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>nurl - an immutable URL object for node.js</title>
-      <link>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</link>
+      <link>https://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</link>
       <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</guid>
+      <guid>https://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</guid>
       <description>I&amp;rsquo;m a big fan of Value Objects - some of the most useful classes I&amp;rsquo;ve ever written have been lightweight wrappers around strings.
 For my first contribution to the node.js ecosystem, I&amp;rsquo;ve published a simple, immutable URL object to the Node package manager (npm) directory. It provides a light-weight, immutable URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and &amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various extension methods that make working with URLs easy.</description>
     </item>
     
     <item>
       <title>Javascript refactoring for customising shared libraries</title>
-      <link>http://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</link>
+      <link>https://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</link>
       <pubDate>Tue, 13 Oct 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</guid>
+      <guid>https://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</guid>
       <description>One difficulty working with a shared in-house framework is it is difficult to maintain a common javascript file that is valid across multiple applications. This is currently an issue we face at Tangent, where we run a generic e-commerce platform which we customise to the needs of each client. Most of these e-commerce applications have a javascript-rich checkout page whose functionality differs in small yet significant ways such as the required and optional fields within a delivery address, or the range of delivery options available.</description>
     </item>
     
     <item>
       <title>Auto-generating an FAQ with Prototype</title>
-      <link>http://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</link>
+      <link>https://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</link>
       <pubDate>Mon, 25 May 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</guid>
+      <guid>https://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</guid>
       <description>Have just been writing an FAQ page for commandlinefu.com. Documenting is always tiresome, but FAQs particularly so when hand-coding the HTML links between each question and the summary table at the top of the page.
 Javascript to the rescue: I cobbled together a quick Prototype script which automatically generates the FAQ summary links by parsing the DOM for the appropriate links:
 document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.question&amp;#39;).each(function(ele){ var id = ele.innerHTML.unescapeHTML().gsub(/[^\w- ]/, &amp;#39;&amp;#39;).gsub(/[\s-]+/, &amp;#39;-&amp;#39;).</description>
@@ -43,10 +43,10 @@ document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.questio
     
     <item>
       <title>Inspecting Javascript objects</title>
-      <link>http://codeinthehole.com/tips/inspecting-javascript-objects/</link>
+      <link>https://codeinthehole.com/tips/inspecting-javascript-objects/</link>
       <pubDate>Sun, 24 May 2009 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/inspecting-javascript-objects/</guid>
+      <guid>https://codeinthehole.com/tips/inspecting-javascript-objects/</guid>
       <description>Learning Ruby or Python from the command-line prompt is greatly enhanced by the built-in inspection methods these languages provide. These allow the methods and properties of an object to be interrogated via a simple method call which returns an array of all property or method names.
 For instance, in IRB (the interactive Ruby command-line) we can interrogate the integer object:
 irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This returns an array of all method names for integer objects:</description>
@@ -54,10 +54,10 @@ irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This ret
     
     <item>
       <title>Javascript cookie objects using Prototype and JSON</title>
-      <link>http://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</link>
+      <link>https://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</link>
       <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</guid>
+      <guid>https://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</guid>
       <description>It&amp;rsquo;s sometime useful to interact with cookies directly on the client-side using javascript. This can be useful for a variety of situations, such as persisting display settings between page requests without storing anything on the server. I&amp;rsquo;ve also used them to display a simple welcome message to new visitors. It can make your controller code simpler if this kind of simple display logic is contained entirely on the client side.</description>
     </item>
     

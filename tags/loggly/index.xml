@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Loggly on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/loggly/</link>
+    <link>https://codeinthehole.com/tags/loggly/</link>
     <description>Recent content in Loggly on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 May 2017 21:52:21 +0100</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/loggly/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/loggly/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Converting JSON into CSV data for Google Sheets</title>
-      <link>http://codeinthehole.com/tips/json-to-google-sheets/</link>
+      <link>https://codeinthehole.com/tips/json-to-google-sheets/</link>
       <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
       
-      <guid>http://codeinthehole.com/tips/json-to-google-sheets/</guid>
+      <guid>https://codeinthehole.com/tips/json-to-google-sheets/</guid>
       <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
 Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
 $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</description>

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Software on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/software/</link>
+    <link>https://codeinthehole.com/tags/software/</link>
     <description>Recent content in Software on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 24 Dec 2018 11:51:36 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Easy to change</title>
-      <link>http://codeinthehole.com/tips/easy-to-change/</link>
+      <link>https://codeinthehole.com/tips/easy-to-change/</link>
       <pubDate>Mon, 24 Dec 2018 11:51:36 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/easy-to-change/</guid>
+      <guid>https://codeinthehole.com/tips/easy-to-change/</guid>
       <description>I care about writing maintainable software1: code that is a pleasure to work with in the long-term; where new requirements can be accommodated smoothly and swiftly &amp;ndash; above all, software that is easy to change.
 Memorise that phrase.
 I feel we lose sight of this overarching guiding principle and harm our codebases by dogmatically pursuing well-intentioned but proximate goals.

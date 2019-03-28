@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Apache on David Winterbottom</title>
-    <link>http://codeinthehole.com/tags/apache/</link>
+    <link>https://codeinthehole.com/tags/apache/</link>
     <description>Recent content in Apache on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 May 2012 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://codeinthehole.com/tags/apache/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://codeinthehole.com/tags/apache/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Django, Nginx, WSGI and encoded slashes</title>
-      <link>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
+      <link>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
       <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
+      <guid>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
       <description>Problem You are serving a Django application using Nginx to proxy to an Apache server running mod_wsgi and you want to allow slashes in your URL keywords.
 For example, you may want to edit some attribute of the page at URL /; hence, you want to use a URL regex of the form:
 url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
@@ -24,19 +24,19 @@ url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use
     
     <item>
       <title>High Performance Web Sites by Steve Souders</title>
-      <link>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</link>
+      <link>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</link>
       <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</guid>
+      <guid>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</guid>
       <description>High Performance Web Sites (HPWS) is essentially a book-length exposition of the YSlow extension to Firebug augmented with case studies of popular US websites. YSlow itself links to some explanation paragraphs regarding the various guidelines that are used to grade the performance of a website. However, even for those familiar with this documentation, HPWS is still an excellent resource on how the performance of a web app can be tuned.</description>
     </item>
     
     <item>
       <title>Date conditional redirects with mod_rewrite</title>
-      <link>http://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</link>
+      <link>https://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</link>
       <pubDate>Fri, 07 Nov 2008 00:00:00 +0000</pubDate>
       
-      <guid>http://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</guid>
+      <guid>https://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</guid>
       <description>The Apache module mod_rewite is capable of some very cool stuff. One neat trick is to use the time and date variables to control redirects and URL rewriting. This is useful if you have a URL that you don&amp;rsquo;t want to be exposed to the world until a certain date has passed - this could be the case with special offers and competitions which have a one-off static page that isn&amp;rsquo;t to be revealed until a specified date.</description>
     </item>
     
