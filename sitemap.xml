@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://codeinthehole.com/tips/debugging-vim-by-example/</loc>
+    <lastmod>2019-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://codeinthehole.com/news/oe-related-name-outage/</loc>
     <lastmod>2019-03-18T17:05:53+00:00</lastmod>
   </url>
@@ -625,7 +630,7 @@
   
   <url>
     <loc>http://codeinthehole.com/</loc>
-    <lastmod>2019-03-18T17:05:53+00:00</lastmod>
+    <lastmod>2019-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -905,7 +910,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tips/</loc>
-    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
+    <lastmod>2019-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -925,7 +930,7 @@
   
   <url>
     <loc>http://codeinthehole.com/tags/vim/</loc>
-    <lastmod>2019-03-08T09:22:04+00:00</lastmod>
+    <lastmod>2019-03-28T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

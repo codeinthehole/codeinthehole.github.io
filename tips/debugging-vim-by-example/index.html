@@ -1,0 +1,598 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1553761855" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Debugging Vim by example - David Winterbottom</title>
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A series of short stories.">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Debugging Vim by example</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 28 March 2019</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Thursday, 28 March 2019</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<!-- Abstract -->
+
+<p>There&rsquo;s only so far you can get by cargo-culting other people&rsquo;s <code>~/.vim</code>
+folders. An important next step is understanding how to <em>debug</em> Vim; knowing
+what to do when it&rsquo;s slow or misbehaving. Learn how to scratch
+things that itch.</p>
+
+<p>This post illustrates a range of debugging and profiling approaches for Vim by walking
+through real issues I&rsquo;ve recently investigated, diagnosed and resolved. There&rsquo;s very
+little to copy into your <code>~/.vimrc</code> but hopefully some useful techniques that
+you can use.</p>
+
+<p>If you take anything from this post, let it be that Vim has excellent support
+for debugging and profiling and, with a little knowledge, it&rsquo;s easy
+to resolve most annoyances.</p>
+
+<p>Contents:</p>
+
+<ul>
+<li><a href="#why-isnt-it-working">&ldquo;Why isn&rsquo;t it working?&rdquo;</a></li>
+<li><a href="#why-isn-t-my-option-working">&ldquo;Why isn&rsquo;t my option working?&rdquo;</a></li>
+<li><a href="#why-isnt-syntax-highlighting-working-as-i-want">&ldquo;Why isn&rsquo;t syntax highlighting working as I want?&rdquo;</a></li>
+<li><a href="#why-is-vim-slow-to-start-up">&ldquo;Why is Vim slow to start up?&rdquo;</a></li>
+<li><a href="#why-is-action-slow">&ldquo;Why is {ACTION} slow?&rdquo;</a></li>
+</ul>
+
+<h2 id="why-isn-t-it-working">&ldquo;Why isn&rsquo;t it working?&rdquo;</h2>
+
+<p>I noticed that <a href="https://github.com/hashivim/vim-terraform"><code>hashivim/vim-terraform</code></a> supports running <code>terraform fmt</code> as a pre-save
+autocommand by setting <code>g:terraform_fmt_on_save = 1</code>. I already had the <code>ftplugin</code>
+component of <a href="https://github.com/hashivim/vim-terraform"><code>hashivim/vim-terraform</code></a> installed via <a href="https://github.com/sheerun/vim-polyglot"><code>sheerun/vim-polyglot</code></a>, yet after
+adding the above setting to <code>~/.vimrc</code>, it wasn&rsquo;t working. Saving a poorly
+formatted Terraform file didn&rsquo;t do anything; it seemed that <code>terraform fmt</code>
+wasn&rsquo;t being run. Why?</p>
+
+<h3 id="print-statements">Print statements</h3>
+
+<p>I first identified the file responsible for handling this setting with a quick search:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ag -l terraform_fmt_on_save ~/.vim/bundle/
+~/.vim/bundle/vim-polyglot/ftplugin/terraform.vim</code></pre></div>
+<p>then sprinkled a few:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">echom</span><span style="color:#75715e"> &#34;Got here&#34;</span></code></pre></div>
+<p>statements into that file, opened a new Terraform file-type buffer:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">edit</span> <span style="color:#a6e22e">sample</span>.<span style="color:#a6e22e">tf</span></code></pre></div>
+<p>and ran:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">messages</span></code></pre></div>
+<p>to see the results. This showed that the plugin was prematurely <code>finish</code>ing
+on this guard:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">exists</span>(<span style="color:#75715e">&#34;g:loaded_terraform&#34;) || v:version &lt; 700 || &amp;cp || !executable(&#39;terraform&#39;)</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>  <span style="color:#a6e22e">finish</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span></code></pre></div>
+<p>I then <code>:echo</code>ed each predicate at the command prompt to identify the culprit:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">executable</span>(<span style="color:#e6db74">&#39;terraform&#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">0</span></code></pre></div>
+<!-- Resolution -->
+
+<p>Turned out that <code>executable('terraform')</code> was returning <code>0</code> due to the way I had
+configured my shell&rsquo;s <code>$PATH</code> environment variable. Specifically, downloaded Hashicorp binaries were in a <code>~/hashicorp</code> folder
+that was added to <code>$PATH</code> in <code>~/.bashrc</code> like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">HASHICORP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;~/hashicorp&#34;</span>
+PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HASHICORP<span style="color:#e6db74">:</span>$PATH<span style="color:#e6db74">&#34;</span>
+export $PATH</code></pre></div>
+<p>This works fine in shell sessions but Vim doesn&rsquo;t expand the <code>~</code> when running
+the <code>executable</code> check and so doesn&rsquo;t find the <code>terraform</code> binary.</p>
+
+<p>The fix was to update <code>~/.bashrc</code> to use <code>$HOME</code> instead of the <code>~</code> shorthand:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">HASHICORP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/hashicorp&#34;</span>
+PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HASHICORP<span style="color:#e6db74">:</span>$PATH<span style="color:#e6db74">&#34;</span>
+export $PATH</code></pre></div>
+<p>After that, saving a Terraform file ran <code>terraform fmt</code> automatically. Phew.</p>
+
+<p>Related help docs</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/eval.html#:echomsg"><code>:help echom</code></a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/message.html#:messages"><code>:help messages</code></a>
+(note, there&rsquo;s a superior <code>:Messages</code> command provided by Tim Pope&rsquo;s
+<a href="https://github.com/tpope/vim-scriptease"><code>tpope/vim-scriptease</code></a> that loads the
+messages into the <a href="http://vimdoc.sourceforge.net/htmldoc/quickfix.html">quickfix</a> list which is much more convenient).</li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/eval.html#executable()"><code>:help executable</code></a></li>
+</ul>
+
+<h3 id="debug-mode">Debug mode</h3>
+
+<p>I could have solved the same mystery using Vim&rsquo;s little-known debug mode by
+adding a breakpoint at the start of the suspect <code>ftplugin</code> file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">breakadd</span> <span style="color:#a6e22e">file</span> ~<span style="color:#e6db74">/.vim/</span><span style="color:#a6e22e">bundle</span><span style="color:#e6db74">/vim-polyglot/</span><span style="color:#a6e22e">ftplugin</span>/<span style="color:#a6e22e">terraform</span>.<span style="color:#a6e22e">vim</span></code></pre></div>
+<p>then opening a Terraform file-type buffer in debug mode:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">debug</span> <span style="color:#a6e22e">edit</span> <span style="color:#a6e22e">sample</span>.<span style="color:#a6e22e">tf</span></code></pre></div>
+<p>which drops you at a debugger prompt:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Entering Debug mode.  Type <span style="color:#e6db74">&#34;cont&#34;</span> to <span style="color:#66d9ef">continue</span>.
+cmd edit sample.tf
+&gt;</code></pre></div>
+<p>After hitting <code>c</code> to continue to the breakpoint:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">&gt;c
+<span style="color:#e6db74">&#34;sample.tf&#34;</span> <span style="color:#f92672">[</span>New File<span style="color:#f92672">]</span>
+Breakpoint in <span style="color:#e6db74">&#34;~/.vim/bundle/vim-polyglot/ftplugin/terraform.vim&#34;</span> line <span style="color:#ae81ff">1</span>
+~/.vim/bundle/vim-polyglot/ftplugin/terraform.vim
+line <span style="color:#ae81ff">1</span>: <span style="color:#66d9ef">if</span> !exists<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;g:polyglot_disabled&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">||</span> index<span style="color:#f92672">(</span>g:polyglot_disabled, <span style="color:#e6db74">&#39;terraform&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">==</span> -1
+&gt;</code></pre></div>
+<p>you can run each Ex expression individually to pinpoint the problem:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">&gt;<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">exists</span>(<span style="color:#e6db74">&#39;terraform&#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">0</span></code></pre></div>
+<p>It&rsquo;s also possible to simply insert:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">breakadd</span> <span style="color:#a6e22e">here</span></code></pre></div>
+<p>to set a breakpoint in a file.</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/repeat.html#debug-scripts"><code>:help debug-scripts</code></a></li>
+</ul>
+
+<h3 id="verbose-mode">Verbose mode</h3>
+
+<p>Another approach is to use &ldquo;verbose mode&rdquo; to find out what Vim is doing. You can start Vim in verbose mode with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim -V9 some-file</code></pre></div>
+<p>which <code>echo</code>s out what Vim is doing (the <code>9</code> indicates the level of verbosity).</p>
+
+<p>You can inspect with output with <code>:messages</code> (or <code>:Messages</code>) but
+it&rsquo;s often useful to write the output to file using the
+<code>verbosefile</code> option. Here&rsquo;s an example of doing that for a single action:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">set</span> <span style="color:#a6e22e">verbose</span>=<span style="color:#ae81ff">9</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">set</span> <span style="color:#a6e22e">verbosefile</span>=<span style="color:#e6db74">/tmp/</span><span style="color:#a6e22e">output</span>.<span style="color:#a6e22e">txt</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">verbose</span> {<span style="color:#a6e22e">some</span> <span style="color:#a6e22e">action</span>}</code></pre></div>
+<p>Further reading:</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#" title="verbose"><code>:help 'verbose'</code></a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/options.html#" title="verbosefile"><code>:help 'verbosefile'</code></a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/various.html#:verbose"><code>:help :verbose</code></a></li>
+<li><a href="http://inlehmansterms.net/2014/10/31/debugging-vim/">Debugging Vim</a> by <em>Jonathan Lehman</em> (2014) &mdash; A more thorough overview of Vim&rsquo;s
+debug and verbose modes.</li>
+</ul>
+
+<h3 id="process-of-elimination">Process of elimination</h3>
+
+<p>Finally, you can try and locate the source of a problem through stripping away
+all custom plugins and configuration, then slowly add them back in until the
+symptoms reappear.</p>
+
+<p>Start by verifying the problem is not present when Vim is loaded without custom
+configuration (<code>-N</code> means <code>nocompatible</code> mode):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim -u NONE -U NONE -N</code></pre></div>
+<p>then comment out everything in your <code>~/.vimrc</code> files and slowly uncomment blocks
+until the problem appears.</p>
+
+<p>For this and many other situations, its useful to use the <code>:scriptnames</code> command to see all the sourced files
+for your current buffer. Like <code>:messages</code>, this has a superior counterpart,
+<code>:Scriptnames</code>, in <a href="https://github.com/tpope/vim-scriptease"><code>tpope/vim-scriptease</code></a>, that loads each script into the quickfix list.</p>
+
+<p>Alternatively, you can capture the output of <code>:scriptnames</code>
+(or any other Ex command) in a buffer for further interrogation. Do this
+by redirecting messages to a register of your choice:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">redir</span> @<span style="color:#a6e22e">a</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">scriptnames</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">redir</span> <span style="color:#a6e22e">END</span></code></pre></div>
+<p>which you can then paste into a buffer and examine in detail.</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#startup"><code>:help startup</code></a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/repeat.html#:scriptnames"><code>:help :scriptnames</code></a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/various.html#:redir"><code>:help :redir</code></a></li>
+</ul>
+
+<p><br/>
+Now a few more specific scenarios:</p>
+
+<h2 id="why-isn-t-my-option-working">&ldquo;Why isn&rsquo;t my option working?&rdquo;</h2>
+
+<!-- Problem description -->
+
+<p>I noticed the other day that the <code>textwidth</code>
+option I had carefully suggested in <code>~/.vim/ftplugin/gitcommit.vim</code> wasn&rsquo;t in effect when
+editing a git commit message.</p>
+
+<p>You can check an option&rsquo;s value with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">textwidth</span>?</code></pre></div>
+<!-- Problem resolution -->
+
+<p>To investigate, I looked up which Vim file had last set the option by prepending
+<code>:verbose</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">verbose</span> <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">textwidth</span>?</code></pre></div>
+<p>revealing:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">textwidth=72
+      Last set from ~/.vim/bundle/vim-polyglot/ftplugin/gitcommit.vim line 17</code></pre></div>
+<p>So the <code>ftplugin</code> file from <a href="https://github.com/sheerun/vim-polyglot"><code>sheerun/vim-polyglot</code></a> was to blame.</p>
+
+<p>When you set options from files in <code>~/.vim/ftplugin/</code>, there&rsquo;s always a danger they will be
+clobbered by your plugins (which are sourced afterwards).</p>
+
+<p>The solution was to move the option assignment to <code>~/.vim/after/ftplugin/gitcommit.vim</code> to ensure it gets
+sourced <em>after</em> other matching filepaths on Vim&rsquo;s <code>$RUNTIMEPATH</code>.</p>
+
+<p>Note that you can prepend <code>:verbose</code> to <code>map</code> (and several other) commands to see where particular
+mappings are defined. Eg:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml">:<span style="color:#a6e22e">verbose</span> <span style="color:#a6e22e">imap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;</code></pre></div>
+<p>Further reading:</p>
+
+<ul>
+<li><p><a href="https://vimhelp.org/various.txt.html#%3Averbose"><code>:help :verbose</code></a></p></li>
+
+<li><p><a href="https://vimhelp.org/options.txt.html#%27rtp%27"><code>:help 'rtp'</code></a></p></li>
+
+<li><p><a href="https://vimways.org/2018/runtime-hackery/">Enhanced runtime powers</a> by <em>Tom Ryder</em> (2018) &mdash;
+An excellent post on how to work with Vim&rsquo;s <code>'runtimepath'</code>.</p></li>
+</ul>
+
+<h2 id="why-isn-t-syntax-highlighting-working-as-i-want">&ldquo;Why isn&rsquo;t syntax highlighting working as I want?&rdquo;</h2>
+
+<!-- Problem description -->
+
+<p>I recently enabled spell-checking for all file-types:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#75715e">&#34; ~/.vimrc</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">spell</span></code></pre></div>
+<p>but found that this also includes spell-checking strings in Python, which I
+can&rsquo;t imagine anyone wanting.</p>
+
+<!-- Problem resolution -->
+
+<p>To resolve, I used the <code>zS</code> command from <a href="https://github.com/tpope/vim-scriptease"><code>tpope/scriptease</code></a> to identify the syntax
+region name for Python strings: <code>pythonString</code>. Then used <code>:verbose</code> to
+determine where this was last set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">verbose</span> <span style="color:#a6e22e">hi</span> <span style="color:#a6e22e">pythonString</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">pythonString</span>   <span style="color:#a6e22e">xxx</span> <span style="color:#a6e22e">links</span> <span style="color:#a6e22e">to</span> <span style="color:#a6e22e">String</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">Last</span> <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">from</span> ~<span style="color:#e6db74">/.vim/</span><span style="color:#a6e22e">bundle</span><span style="color:#e6db74">/vim-polyglot/</span><span style="color:#a6e22e">syntax</span>/<span style="color:#a6e22e">python</span>.<span style="color:#a6e22e">vim</span> <span style="color:#a6e22e">line</span> <span style="color:#ae81ff">442</span></code></pre></div>
+<p>Line 442 isn&rsquo;t actually where the <code>syn region</code> declarations are, but they are in the
+same file.</p>
+
+<p>To resolve this issue, I needed to remove <code>@Spell</code> from the <code>syn region
+pythonString</code> declarations. I&rsquo;m sure
+this can be elegantly scripted but I resorted to duplicating the relevant lines into <code>~/.vim/after/syntax/python.vim</code>
+and removing the <code>@Spell</code> clusters. Ugly but effective.</p>
+
+<p>Further reading:</p>
+
+<ul>
+<li><a href="https://vimhelp.org/syntax.txt.html"><code>:help syntax</code></a></li>
+</ul>
+
+<h2 id="why-is-vim-slow-to-start-up">&ldquo;Why is Vim slow to start up?&rdquo;</h2>
+
+<!-- Problem description -->
+
+<p>Recently, after accumulating several plugins, I noticed Vim was
+taking noticeably longer to start-up. Why?</p>
+
+<h3 id="profile-start-up">Profile start-up</h3>
+
+<p>I started Vim in profiling mode:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim --startuptime startup.txt startup.txt</code></pre></div>
+<p>where each executed expression is timed and listed in the specified file (which
+is also opened):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#a6e22e">times</span> <span style="color:#a6e22e">in</span> <span style="color:#a6e22e">msec</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">clock</span>   <span style="color:#a6e22e">self</span>+<span style="color:#a6e22e">sourced</span>   <span style="color:#a6e22e">self</span>:  <span style="color:#a6e22e">sourced</span> <span style="color:#a6e22e">script</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">clock</span>   <span style="color:#a6e22e">elapsed</span>:              <span style="color:#a6e22e">other</span> <span style="color:#a6e22e">lines</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">010</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">010</span>: --- <span style="color:#a6e22e">VIM</span> <span style="color:#a6e22e">STARTING</span> ---<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">152</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">142</span>: <span style="color:#a6e22e">Allocated</span> <span style="color:#a6e22e">generic</span> <span style="color:#a6e22e">buffers</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">001</span>.<span style="color:#ae81ff">230</span>  <span style="color:#ae81ff">001</span>.<span style="color:#ae81ff">078</span>: <span style="color:#a6e22e">locale</span> <span style="color:#a6e22e">set</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">800</span>  <span style="color:#ae81ff">002</span>.<span style="color:#ae81ff">201</span>: <span style="color:#a6e22e">VimEnter</span> <span style="color:#a6e22e">autocommands</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">802</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">002</span>: <span style="color:#a6e22e">before</span> <span style="color:#a6e22e">starting</span> <span style="color:#a6e22e">main</span> <span style="color:#a6e22e">loop</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">957</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">155</span>: <span style="color:#a6e22e">first</span> <span style="color:#a6e22e">screen</span> <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">959</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">002</span>: --- <span style="color:#a6e22e">VIM</span> <span style="color:#a6e22e">STARTED</span> ---</code></pre></div>
+<p>At the bottom of the file, you can see the start-up time was around 280 ms in total.</p>
+
+<p>For reference, your baseline start-up time can be found by starting
+Vim with no custom config:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim +q -u NONE -U NONE -N --startuptime startup-no-config.txt</code></pre></div>
+<p>which, on my 2015 MacBook Pro, gives:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">007</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">007</span>: --- <span style="color:#a6e22e">VIM</span> <span style="color:#a6e22e">STARTING</span> ---<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">108</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">101</span>: <span style="color:#a6e22e">Allocated</span> <span style="color:#a6e22e">generic</span> <span style="color:#a6e22e">buffers</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">530</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">422</span>: <span style="color:#a6e22e">locale</span> <span style="color:#a6e22e">set</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">016</span>.<span style="color:#ae81ff">709</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">129</span>: <span style="color:#a6e22e">VimEnter</span> <span style="color:#a6e22e">autocommands</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">016</span>.<span style="color:#ae81ff">717</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">008</span>: <span style="color:#a6e22e">before</span> <span style="color:#a6e22e">starting</span> <span style="color:#a6e22e">main</span> <span style="color:#a6e22e">loop</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">017</span>.<span style="color:#ae81ff">167</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">450</span>: <span style="color:#a6e22e">first</span> <span style="color:#a6e22e">screen</span> <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">017</span>.<span style="color:#ae81ff">169</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">002</span>: --- <span style="color:#a6e22e">VIM</span> <span style="color:#a6e22e">STARTED</span> ---</code></pre></div>
+<p>17ms &ndash; so I&rsquo;m spending around 260 ms loading my own configuration and plugins each time I open Vim.</p>
+
+<p>Anyway, I sorted the <code>startup.txt</code> buffer numerically by the second column to see the slowest operations:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:%!<span style="color:#a6e22e">sort</span> -<span style="color:#a6e22e">rnk2</span> | <span style="color:#a6e22e">head</span> <span style="color:#ae81ff">-2</span></code></pre></div>
+<p>yielding:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#a6e22e">times</span> <span style="color:#a6e22e">in</span> <span style="color:#a6e22e">msec</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">254</span>.<span style="color:#ae81ff">008</span>  <span style="color:#ae81ff">187</span>.<span style="color:#ae81ff">506</span>  <span style="color:#ae81ff">187</span>.<span style="color:#ae81ff">506</span>: <span style="color:#a6e22e">sourcing</span> ~<span style="color:#e6db74">/.vim/</span><span style="color:#a6e22e">bundle</span><span style="color:#e6db74">/black/</span><span style="color:#a6e22e">plugin</span>/<span style="color:#a6e22e">black</span>.<span style="color:#a6e22e">vim</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">053</span>.<span style="color:#ae81ff">178</span>  <span style="color:#ae81ff">034</span>.<span style="color:#ae81ff">800</span>  <span style="color:#ae81ff">008</span>.<span style="color:#ae81ff">475</span>: <span style="color:#a6e22e">sourcing</span> $<span style="color:#a6e22e">HOME</span>/.<span style="color:#a6e22e">vimrc</span></code></pre></div>
+<p>So the Python formatting plugin <a href="https://github.com/ambv/black"><code>ambv/black</code></a>, which we&rsquo;ve been toying with
+adopting at work, was the culprit, consuming more than half of the start-up
+time.</p>
+
+<p>In this case, the solution was to switch to using <a href="https://codeinthehole.com/tips/using-black-and-isort-with-vim/">Ale&rsquo;s &ldquo;fixer&rdquo; functionality</a>
+to run black but this could be the starting point for an exciting profiling session (see next
+section).</p>
+
+<p>Of course, the scripts sourced at start-up depend on the file-types being
+opened (the above example doesn&rsquo;t open a file). For instance, if opening Python files is slow, ensure you profile with the right
+<code>filetype</code> set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim --startuptime python-startup.txt -c <span style="color:#e6db74">&#34;:set ft=python&#34;</span> python-startup.txt</code></pre></div>
+<p>Further reading:</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#startup"><code>:help startup</code></a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/starting.html#slow-start"><code>:help slow-start</code></a></li>
+<li><a href="https://junegunn.kr/2014/07/vim-plugins-and-startup-time">Vim plugins and startup time</a> by <em>Junegunn Choi</em> (2014) &mdash;
+Interesting article by the author of <a href="https://github.com/junegunn/vim-plug"><code>junegunn/vim-plug</code></a> comparing start-up speeds of
+various Vim plugin managers and highlighting the performance boost of using
+lazy-loading to load plugins on demand.</li>
+<li><a href="https://kynan.github.io/blog/2015/07/31/how-to-speed-up-your-vim-startup-time">How to speed up your Vim startup time</a> by
+<em>Florian Rathgeber</em> (2015) &mdash; Another case-study in switching to
+<a href="https://github.com/junegunn/vim-plug"><code>junegunn/vim-plug</code></a>.</li>
+<li>There&rsquo;s a
+<a href="https://github.com/hyiltiz/vim-plugins-profile">vim-plugins-profile</a> project
+which provides scripts for profiling the start-up time of each plugin.</li>
+</ul>
+
+<h2 id="why-is-action-slow">&ldquo;Why is {ACTION} slow?&rdquo;</h2>
+
+<!-- Problem description -->
+
+<p>I found writing the previous sections of this post, which is a markdown file,
+slightly laggy when typing in insert mode. That shouldn&rsquo;t be the case &ndash; what is
+causing it?</p>
+
+<h3 id="profile-anything-that-is-slow">Profile anything that is slow</h3>
+
+<p>The generic pattern to remember for profiling is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml">:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">start</span> <span style="color:#a6e22e">profile</span>.<span style="color:#a6e22e">log</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">func</span> *<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">file</span> *<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>{<span style="color:#a6e22e">SLOW</span> <span style="color:#a6e22e">ACTIONS</span>}<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">pause</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">wqall</span><span style="color:#75715e">  &#34; Quit Vim (required)</span></code></pre></div>
+<p>which profiles all files and functions<sup class="footnote-ref" id="fnref:profile-args"><a href="#fn:profile-args">1</a></sup> executed during the slow actions.</p>
+
+<p>It pays to pipe together the three set-up commands so it&rsquo;s easier to
+recall from command history<sup class="footnote-ref" id="fnref:command-history"><a href="#fn:command-history">2</a></sup>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml">:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">start</span> <span style="color:#a6e22e">profile</span>.<span style="color:#a6e22e">log</span> | :<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">func</span> * | :<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">file</span> *</code></pre></div>
+<p>Back to the problem at hand, my <code>{SLOW ACTIONS}</code> were to type a
+simple sentence into a markdown-filetype buffer. I did this and collected the
+output.</p>
+
+<p>The profile output shows summary tables at the bottom with detailed breakdowns above. of each function
+When interpreting the profile output, start at the bottom of the file which
+shows the most expensive functions.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#a6e22e">FUNCTIONS</span> <span style="color:#a6e22e">SORTED</span> <span style="color:#a6e22e">ON</span> <span style="color:#a6e22e">SELF</span> <span style="color:#a6e22e">TIME</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">count</span>  <span style="color:#a6e22e">total</span> (<span style="color:#a6e22e">s</span>)   <span style="color:#a6e22e">self</span> (<span style="color:#a6e22e">s</span>)  <span style="color:#66d9ef">function</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#ae81ff">5805</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">267815</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">255992</span>  <span style="color:#a6e22e">Foldexpr_markdown</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>   <span style="color:#ae81ff">27</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">011823</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">86</span><span style="color:#a6e22e">_is_mkdCode</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">011755</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">79</span><span style="color:#a6e22e">_MarkdownHighlightSources</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>   <span style="color:#ae81ff">53</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">005295</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">44</span><span style="color:#a6e22e">_Highlight_Matching_Pair</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000355</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000284</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">ShouldDoNothing</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000705</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000247</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">cursor</span>#<span style="color:#a6e22e">EchoCursorWarning</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">011855</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000100</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">79</span><span style="color:#a6e22e">_MarkdownRefreshSyntax</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000103</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000080</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">FindItemAtCursor</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">1</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000087</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000064</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">cursor</span>#<span style="color:#a6e22e">EchoCursorWarningWithDelay</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000030</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">InSandbox</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000026</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">FileTooLarge</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000023</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">BinarySearch</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000015</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">Mode</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">1</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000015</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">Var</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">1</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000008</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">111</span><span style="color:#a6e22e">_StopCursorTimer</span>()</code></pre></div>
+<p>This showed that <code>Foldexpr_markdown</code> was a bottleneck.</p>
+
+<p>A quick <code>:grep</code> shows that the <code>Foldexpr_markdown</code> function lives in
+<code>~/.vim/bundle/vim-markdown/after/ftplugin/markdown.vim</code> and a glance at
+the docs showed that folding can be disabled with a global plugin
+setting<sup class="footnote-ref" id="fnref:markdown"><a href="#fn:markdown">3</a></sup>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_folding_disabled</span> = <span style="color:#ae81ff">1</span></code></pre></div>
+<p>Profiling the same actions including this change gave a great improvement:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#a6e22e">FUNCTIONS</span> <span style="color:#a6e22e">SORTED</span> <span style="color:#a6e22e">ON</span> <span style="color:#a6e22e">SELF</span> <span style="color:#a6e22e">TIME</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">count</span>  <span style="color:#a6e22e">total</span> (<span style="color:#a6e22e">s</span>)   <span style="color:#a6e22e">self</span> (<span style="color:#a6e22e">s</span>)  <span style="color:#66d9ef">function</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">011698</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">79</span><span style="color:#a6e22e">_MarkdownHighlightSources</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>   <span style="color:#ae81ff">51</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">005496</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">44</span><span style="color:#a6e22e">_Highlight_Matching_Pair</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000323</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000256</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">ShouldDoNothing</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000627</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000205</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">cursor</span>#<span style="color:#a6e22e">EchoCursorWarning</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">011833</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000135</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">79</span><span style="color:#a6e22e">_MarkdownRefreshSyntax</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000099</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000076</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">FindItemAtCursor</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">1</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000091</span>   <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000067</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">cursor</span>#<span style="color:#a6e22e">EchoCursorWarningWithDelay</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000030</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">InSandbox</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000023</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">BinarySearch</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000023</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">FileTooLarge</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">1</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000016</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">Var</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">2</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000014</span>  <span style="color:#a6e22e">ale</span>#<span style="color:#a6e22e">util</span>#<span style="color:#a6e22e">Mode</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#ae81ff">1</span>              <span style="color:#ae81ff">0</span>.<span style="color:#ae81ff">000008</span>  &lt;<span style="color:#a6e22e">SNR</span>&gt;<span style="color:#ae81ff">111</span><span style="color:#a6e22e">_StopCursorTimer</span>()</code></pre></div>
+<p>Of course, there&rsquo;s no one-size-fits-all solution to addressing performance
+bottlenecks. There are a few things to try:</p>
+
+<ul>
+<li><p>If the offending code is in a plugin, start by reading the docs and
+checking the issue tracker. Is this a known issue?</p></li>
+
+<li><p>If the code is within Vim&rsquo;s runtime files, read the source of the slow file. There&rsquo;s often
+settings that can be used to tune or disable the behaviour.</p></li>
+</ul>
+
+<p>Further reading:</p>
+
+<ul>
+<li><p><a href="http://vimdoc.sourceforge.net/htmldoc/repeat.html#profiling"><code>:help profiling</code></a></p></li>
+
+<li><p><a href="http://vimcasts.org/episodes/profiling-vimscript-performance/">Vimcast: Profiling Vimscript performance</a>  &mdash;
+an informative video demonstrating Vim&rsquo;s <code>--cmd</code> and <code>-c</code> options for profiling your
+<code>~/.vimrc</code>:</p></li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">  vim --cmd <span style="color:#e6db74">&#34;profile start vimrc.profile&#34;</span> --cmd <span style="color:#e6db74">&#34;profile! file ~/.vimrc&#34;</span></code></pre></div>
+<ul>
+<li><p><a href="http://inlehmansterms.net/2015/01/17/profiling-vim/">Profiling Vim</a> by <em>Jonathan Lehman</em> (2015) &mdash;
+A detailed examination of profiling techniques.</p></li>
+
+<li><p><a href="https://medium.com/@MauroMorales/profiling-vim-e142280a91ae">Profiling Vim</a>
+by <em>Mauro Morales</em> &mdash; Mentions you can cross-reference the <code>&lt;SNR&gt;</code> tag in the
+profile output with the numbers in <code>:scriptnames</code> to identify the source file.</p></li>
+</ul>
+
+<h2 id="summary">Summary</h2>
+
+<p>Other than the advice above, here&rsquo;s a couple of final thoughts:</p>
+
+<ul>
+<li><p>Use <a href="https://github.com/tpope/vim-scriptease"><code>tpope/scriptease</code></a> &ndash; it provides a few really useful
+commands for debugging.</p></li>
+
+<li><p>Keep your <code>~/.vim</code> folder in source control, which makes it much easier to try
+out new things in branches or walk back through your history to find the
+commit that introduced a performance problem.</p></li>
+</ul>
+
+<p>Above all, it&rsquo;s not difficult to debug or profile Vim. Get into the habit of
+investigating and resolving annoying niggles when they appear.</p>
+
+<p>Finally, here are some other articles and resources on the same topic as this
+post:</p>
+
+<ul>
+<li><p><a href="https://sanctum.geek.nz/arabesque/debugging-vim-setup/">Debugging Vim setup</a>
+by <em>Tom Ryder</em> (2012) &mdash; A brief overview of some of the techniques exhibited in this
+article.</p></li>
+
+<li><p><a href="https://vimways.org/2018/debugging-your-vim-config/">Debugging your Vim config</a> by <em>Samuel Walladge</em> (2018) &mdash; Quite
+a similar but less detailed article to this, covering a range of debugging techniques.</p></li>
+</ul>
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:profile-args"><p>Your can profile selected files or functions by passing
+specific names instead of <code>*</code> to the <code>:profile func</code> and <code>:profile file</code>
+commands.</p>
+ <a class="footnote-return" href="#fnref:profile-args"><sup>[return]</sup></a></li>
+
+<li id="fn:command-history"><p>Just type a few characters, eg <code>:pro</code>, and hit <code>&lt;UP&gt;</code> a few
+times. Even better, add this to your <code>~/.vimrc</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#a6e22e">cmap</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">P</span>&gt; &lt;<span style="color:#a6e22e">UP</span>&gt;</code></pre></div>
+<p>then you can use <code>CTRL-P</code> and your fingers don&rsquo;t have to leave the home keys.</p>
+ <a class="footnote-return" href="#fnref:command-history"><sup>[return]</sup></a></li>
+<li id="fn:markdown">It&rsquo;s a <a href="https://github.com/plasticboy/vim-markdown/issues/162">known issue</a>.
+ <a class="footnote-return" href="#fnref:markdown"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/debugging-vim-by-example.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Debugging%20Vim%20by%20example%22&body=Article:%20Debugging%20Vim%20by%20example%0AURL:%20http%3a%2f%2fcodeinthehole.com%2ftips%2fdebugging-vim-by-example%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/debugging-vim-by-example.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/vim">vim</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/news/oe-related-name-outage/">Beware of changing the &#39;related name&#39; of a Django model field</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        anchors.add('h2,h3,h4');
+    </script>
+
+</html>
+
+
