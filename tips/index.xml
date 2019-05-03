@@ -135,7 +135,7 @@ set -eu -o pipefail so that the script:
 First, set:
 log_statement = None  Don&amp;rsquo;t set this to all as the AWS docs suggest.
 Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
-$ pgbadger -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
+$ pgbadger -f stderr -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
     </item>
     
     <item>
