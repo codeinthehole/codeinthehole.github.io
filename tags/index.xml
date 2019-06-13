@@ -6,265 +6,40 @@
     <description>Recent content in Tags on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 May 2012 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://codeinthehole.com/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Apache</title>
-      <link>https://codeinthehole.com/tags/apache/</link>
-      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/apache/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Aws</title>
-      <link>https://codeinthehole.com/tags/aws/</link>
-      <pubDate>Tue, 29 Aug 2017 14:08:08 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/aws/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Bash</title>
-      <link>https://codeinthehole.com/tags/bash/</link>
-      <pubDate>Sat, 30 Sep 2017 22:44:03 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/bash/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Books</title>
-      <link>https://codeinthehole.com/tags/books/</link>
-      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/books/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Career</title>
-      <link>https://codeinthehole.com/tags/career/</link>
-      <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/career/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Commandlinefu</title>
-      <link>https://codeinthehole.com/tags/commandlinefu/</link>
-      <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/commandlinefu/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Consul</title>
-      <link>https://codeinthehole.com/tags/consul/</link>
-      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/consul/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deployment</title>
-      <link>https://codeinthehole.com/tags/deployment/</link>
-      <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/deployment/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Design Patterns</title>
-      <link>https://codeinthehole.com/tags/design-patterns/</link>
-      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/design-patterns/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Django</title>
+      <title>django</title>
       <link>https://codeinthehole.com/tags/django/</link>
-      <pubDate>Mon, 18 Mar 2019 17:05:53 +0000</pubDate>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tags/django/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Django Oscar</title>
-      <link>https://codeinthehole.com/tags/django-oscar/</link>
-      <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
+      <title>python</title>
+      <link>https://codeinthehole.com/tags/python/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://codeinthehole.com/tags/django-oscar/</guid>
+      <guid>https://codeinthehole.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Fabric</title>
-      <link>https://codeinthehole.com/tags/fabric/</link>
-      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      <title>vim</title>
+      <link>https://codeinthehole.com/tags/vim/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
-      <guid>https://codeinthehole.com/tags/fabric/</guid>
+      <guid>https://codeinthehole.com/tags/vim/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Ganglia</title>
-      <link>https://codeinthehole.com/tags/ganglia/</link>
-      <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/ganglia/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Geodjango</title>
-      <link>https://codeinthehole.com/tags/geodjango/</link>
-      <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/geodjango/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Git</title>
-      <link>https://codeinthehole.com/tags/git/</link>
-      <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Github</title>
-      <link>https://codeinthehole.com/tags/github/</link>
-      <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/github/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Gsuite</title>
-      <link>https://codeinthehole.com/tags/gsuite/</link>
-      <pubDate>Sat, 27 Oct 2018 12:53:24 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/gsuite/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Hugo</title>
-      <link>https://codeinthehole.com/tags/hugo/</link>
-      <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/hugo/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Javascript</title>
-      <link>https://codeinthehole.com/tags/javascript/</link>
-      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/javascript/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Jq</title>
-      <link>https://codeinthehole.com/tags/jq/</link>
-      <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/jq/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Latex</title>
-      <link>https://codeinthehole.com/tags/latex/</link>
-      <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/latex/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Loggly</title>
-      <link>https://codeinthehole.com/tags/loggly/</link>
-      <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/loggly/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Maths</title>
-      <link>https://codeinthehole.com/tags/maths/</link>
-      <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/maths/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Monitoring</title>
-      <link>https://codeinthehole.com/tags/monitoring/</link>
-      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/monitoring/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Mysql</title>
-      <link>https://codeinthehole.com/tags/mysql/</link>
-      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/mysql/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Nginx</title>
-      <link>https://codeinthehole.com/tags/nginx/</link>
-      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/nginx/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Node</title>
-      <link>https://codeinthehole.com/tags/node/</link>
-      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/node/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Node.js</title>
-      <link>https://codeinthehole.com/tags/node.js/</link>
-      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/node.js/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Octopus Energy</title>
+      <title>octopus energy</title>
       <link>https://codeinthehole.com/tags/octopus-energy/</link>
       <pubDate>Mon, 18 Mar 2019 17:05:53 +0000</pubDate>
       
@@ -273,7 +48,7 @@
     </item>
     
     <item>
-      <title>Packer</title>
+      <title>packer</title>
       <link>https://codeinthehole.com/tags/packer/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       
@@ -282,70 +57,7 @@
     </item>
     
     <item>
-      <title>Phing</title>
-      <link>https://codeinthehole.com/tags/phing/</link>
-      <pubDate>Sun, 22 Aug 2010 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/phing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Php</title>
-      <link>https://codeinthehole.com/tags/php/</link>
-      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/php/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pil</title>
-      <link>https://codeinthehole.com/tags/pil/</link>
-      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/pil/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Postgres</title>
-      <link>https://codeinthehole.com/tags/postgres/</link>
-      <pubDate>Thu, 16 Nov 2017 15:50:04 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/postgres/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Presentations</title>
-      <link>https://codeinthehole.com/tags/presentations/</link>
-      <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/presentations/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Productivity</title>
-      <link>https://codeinthehole.com/tags/productivity/</link>
-      <pubDate>Mon, 27 Nov 2017 12:27:45 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/productivity/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Prototype</title>
-      <link>https://codeinthehole.com/tags/prototype/</link>
-      <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/prototype/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Puppet</title>
+      <title>puppet</title>
       <link>https://codeinthehole.com/tags/puppet/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       
@@ -354,70 +66,7 @@
     </item>
     
     <item>
-      <title>Python</title>
-      <link>https://codeinthehole.com/tags/python/</link>
-      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Quotes</title>
-      <link>https://codeinthehole.com/tags/quotes/</link>
-      <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/quotes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Rabbitmq</title>
-      <link>https://codeinthehole.com/tags/rabbitmq/</link>
-      <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/rabbitmq/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Recruitment</title>
-      <link>https://codeinthehole.com/tags/recruitment/</link>
-      <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/recruitment/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Software</title>
-      <link>https://codeinthehole.com/tags/software/</link>
-      <pubDate>Mon, 24 Dec 2018 11:51:36 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/software/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Talks</title>
-      <link>https://codeinthehole.com/tags/talks/</link>
-      <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/talks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Testing</title>
-      <link>https://codeinthehole.com/tags/testing/</link>
-      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/testing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ubuntu</title>
+      <title>ubuntu</title>
       <link>https://codeinthehole.com/tags/ubuntu/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       
@@ -426,20 +75,371 @@
     </item>
     
     <item>
-      <title>Vim</title>
-      <link>https://codeinthehole.com/tags/vim/</link>
-      <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
+      <title>rabbitmq</title>
+      <link>https://codeinthehole.com/tags/rabbitmq/</link>
+      <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
       
-      <guid>https://codeinthehole.com/tags/vim/</guid>
+      <guid>https://codeinthehole.com/tags/rabbitmq/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Words</title>
+      <title>software</title>
+      <link>https://codeinthehole.com/tags/software/</link>
+      <pubDate>Mon, 24 Dec 2018 11:51:36 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/software/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>gsuite</title>
+      <link>https://codeinthehole.com/tags/gsuite/</link>
+      <pubDate>Sat, 27 Oct 2018 12:53:24 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/gsuite/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://codeinthehole.com/tags/git/</link>
+      <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>github</title>
+      <link>https://codeinthehole.com/tags/github/</link>
+      <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/github/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>productivity</title>
+      <link>https://codeinthehole.com/tags/productivity/</link>
+      <pubDate>Mon, 27 Nov 2017 12:27:45 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/productivity/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://codeinthehole.com/tags/postgres/</link>
+      <pubDate>Thu, 16 Nov 2017 15:50:04 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>words</title>
       <link>https://codeinthehole.com/tags/words/</link>
       <pubDate>Tue, 07 Nov 2017 22:41:21 +0100</pubDate>
       
       <guid>https://codeinthehole.com/tags/words/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>bash</title>
+      <link>https://codeinthehole.com/tags/bash/</link>
+      <pubDate>Sat, 30 Sep 2017 22:44:03 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>aws</title>
+      <link>https://codeinthehole.com/tags/aws/</link>
+      <pubDate>Tue, 29 Aug 2017 14:08:08 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/aws/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing</title>
+      <link>https://codeinthehole.com/tags/testing/</link>
+      <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>jq</title>
+      <link>https://codeinthehole.com/tags/jq/</link>
+      <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/jq/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>loggly</title>
+      <link>https://codeinthehole.com/tags/loggly/</link>
+      <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/loggly/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>django-oscar</title>
+      <link>https://codeinthehole.com/tags/django-oscar/</link>
+      <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/django-oscar/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>consul</title>
+      <link>https://codeinthehole.com/tags/consul/</link>
+      <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/consul/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hugo</title>
+      <link>https://codeinthehole.com/tags/hugo/</link>
+      <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/hugo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>career</title>
+      <link>https://codeinthehole.com/tags/career/</link>
+      <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/career/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>commandlinefu</title>
+      <link>https://codeinthehole.com/tags/commandlinefu/</link>
+      <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/commandlinefu/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>monitoring</title>
+      <link>https://codeinthehole.com/tags/monitoring/</link>
+      <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/monitoring/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>geodjango</title>
+      <link>https://codeinthehole.com/tags/geodjango/</link>
+      <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/geodjango/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pil</title>
+      <link>https://codeinthehole.com/tags/pil/</link>
+      <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/pil/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>quotes</title>
+      <link>https://codeinthehole.com/tags/quotes/</link>
+      <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/quotes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>apache</title>
+      <link>https://codeinthehole.com/tags/apache/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/apache/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>nginx</title>
+      <link>https://codeinthehole.com/tags/nginx/</link>
+      <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/nginx/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>talks</title>
+      <link>https://codeinthehole.com/tags/talks/</link>
+      <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deployment</title>
+      <link>https://codeinthehole.com/tags/deployment/</link>
+      <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/deployment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>fabric</title>
+      <link>https://codeinthehole.com/tags/fabric/</link>
+      <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/fabric/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>mysql</title>
+      <link>https://codeinthehole.com/tags/mysql/</link>
+      <pubDate>Thu, 02 Feb 2012 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/mysql/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node.js</title>
+      <link>https://codeinthehole.com/tags/node.js/</link>
+      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/node.js/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>design patterns</title>
+      <link>https://codeinthehole.com/tags/design-patterns/</link>
+      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/design-patterns/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>php</title>
+      <link>https://codeinthehole.com/tags/php/</link>
+      <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/php/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>presentations</title>
+      <link>https://codeinthehole.com/tags/presentations/</link>
+      <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/presentations/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>javascript</title>
+      <link>https://codeinthehole.com/tags/javascript/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node</title>
+      <link>https://codeinthehole.com/tags/node/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/node/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>phing</title>
+      <link>https://codeinthehole.com/tags/phing/</link>
+      <pubDate>Sun, 22 Aug 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/phing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>recruitment</title>
+      <link>https://codeinthehole.com/tags/recruitment/</link>
+      <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/recruitment/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ganglia</title>
+      <link>https://codeinthehole.com/tags/ganglia/</link>
+      <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/ganglia/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>books</title>
+      <link>https://codeinthehole.com/tags/books/</link>
+      <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/books/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prototype</title>
+      <link>https://codeinthehole.com/tags/prototype/</link>
+      <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/prototype/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>latex</title>
+      <link>https://codeinthehole.com/tags/latex/</link>
+      <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/latex/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>maths</title>
+      <link>https://codeinthehole.com/tags/maths/</link>
+      <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/maths/</guid>
       <description></description>
     </item>
     

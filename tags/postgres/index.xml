@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Postgres on David Winterbottom</title>
+    <title>postgres on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/postgres/</link>
-    <description>Recent content in Postgres on David Winterbottom</description>
+    <description>Recent content in postgres on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 16 Nov 2017 15:50:04 +0000</lastBuildDate>

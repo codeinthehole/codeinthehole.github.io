@@ -1,15 +1,27 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Django on David Winterbottom</title>
+    <title>django on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/django/</link>
-    <description>Recent content in Django on David Winterbottom</description>
+    <description>Recent content in django on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 18 Mar 2019 17:05:53 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://codeinthehole.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vim text-objects for Python development</title>
+      <link>https://codeinthehole.com/tips/vim-text-objects/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
+      <description>Text objects, as in the w from ciw, are the nouns of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+From core Vim:
+ w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.vim plugin:
+ , . ; : + - = ~ _ * # / | \ &amp;amp; $ → an area of text delimited by the given character (super useful).</description>
+    </item>
     
     <item>
       <title>Beware of changing the &#39;related name&#39; of a Django model field</title>

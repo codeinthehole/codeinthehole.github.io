@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Bash on David Winterbottom</title>
+    <title>bash on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/bash/</link>
-    <description>Recent content in Bash on David Winterbottom</description>
+    <description>Recent content in bash on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate>

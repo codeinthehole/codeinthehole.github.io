@@ -6,10 +6,22 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 28 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Jun 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vim text-objects for Python development</title>
+      <link>https://codeinthehole.com/tips/vim-text-objects/</link>
+      <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
+      <description>Text objects, as in the w from ciw, are the nouns of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+From core Vim:
+ w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.vim plugin:
+ , . ; : + - = ~ _ * # / | \ &amp;amp; $ → an area of text delimited by the given character (super useful).</description>
+    </item>
     
     <item>
       <title>Debugging Vim by example</title>
