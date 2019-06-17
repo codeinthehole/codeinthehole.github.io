@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1560465858" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1560804636" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,10 +74,11 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">Text objects</a>,
-as in the <span class="keys">w</span> from <span class="keys">ciw</span>, are the nouns of your Vim mentalese<sup class="footnote-ref" id="fnref:verbs"><a href="#fn:verbs">1</a></sup>.
-This post details those that I find most useful for Python and Django
+            <p><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">Text objects</a>, as in the <span class="keys">iw</span> from <span class="keys">ciw</span>
+(&ldquo;change inner word&rdquo;), form an important part of your Vim mentalese<sup class="footnote-ref" id="fnref:verbs"><a href="#fn:verbs">1</a></sup>. This post details those that I find most useful for Python and Django
 development.</p>
+
+<p>For brevity, the leading <span class="keys">a</span> (neumonic: &ldquo;a&rdquo;n) or <span class="keys">i</span> (neumonic: &ldquo;inner&rdquo;), that you combine with the following commands to form the full text-object, are omitted.</p>
 
 <p>From core Vim:</p>
 
@@ -161,9 +162,8 @@ by <em>Owen Garland</em> (2017).</li>
 <hr />
 
 <ol>
-<li id="fn:verbs"><p>Along with <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#left-right-motions">movements</a>,
-which act from the cursor location. In this metaphor, <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#operator">operators</a>
-(like <span class="keys">c</span>, <span class="keys">d</span>, <span class="keys">gU</span> etc) are the verbs.</p>
+<li id="fn:verbs"><p>In the sense that you combine them with <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#operator">operators</a>
+(eg <span class="keys">c</span>, <span class="keys">d</span>, <span class="keys">gU</span>) to build describe what you want to do.</p>
  <a class="footnote-return" href="#fnref:verbs"><sup>[return]</sup></a></li>
 
 <li id="fn:clash"><p>To avoid clashing with the comment text-object binding from <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>, you

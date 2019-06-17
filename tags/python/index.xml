@@ -17,10 +17,10 @@
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the w from ciw, are the nouns of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a (neumonic: &amp;ldquo;a&amp;rdquo;n) or i (neumonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.vim plugin:
- , . ; : + - = ~ _ * # / | \ &amp;amp; $ → an area of text delimited by the given character (super useful).</description>
+ w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
