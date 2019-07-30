@@ -76,16 +76,6 @@ Use the following .git/hooks/prepare-commit-msg hook:
     </item>
     
     <item>
-      <title>A useful Git post-checkout hook for Python repos</title>
-      <link>https://codeinthehole.com/tips/a-useful-git-post-checkout-hook-for-python-repos/</link>
-      <pubDate>Tue, 23 Apr 2013 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tips/a-useful-git-post-checkout-hook-for-python-repos/</guid>
-      <description>Every now and again, an innocent python developer checks out a new Git branch then proceeds to bang their head against a bug caused by an orphaned .pyc file from the previous branch. Since *.pyc files are typically in the repo&amp;rsquo;s .gitignore file, they are not removed when switching branches and can cause issues if the corresponding .py is removed.
-This can be neatly addressed through a &amp;lsquo;post checkout&amp;rsquo; hook which deletes all such files.</description>
-    </item>
-    
-    <item>
       <title>Converting Github issues into pull requests</title>
       <link>https://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</link>
       <pubDate>Mon, 04 Mar 2013 00:00:00 +0000</pubDate>
