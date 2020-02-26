@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743411" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,58 +75,51 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Finally got around to setting up continuous integration for some of the
-projects that comprise the day-job. We&rsquo;re using the PEAR package Xinc,
+projects that comprise the day-job. We're using the PEAR package Xinc,
 which has proved to be excellent thus far - especially as it integrates
 so well with my deployment tool of choice: Phing. Part of the fun in
 setting it up was looking for suitable feedback mechanisms or devices.
 Email notifications are a given but there are a range of more
 interesting feedback mechanisms available such as toolbar notifications,
 remote-controlled lava lamps, or plain humiliation tactics (such as
-making the person who broke the build wear the dunce&rsquo;s hat till it is
+making the person who broke the build wear the dunce's hat till it is
 fixed). By a strange twist of fate there happened to be an unused
 Nabaztag in the office: a strange Rabbit-like fellow able to play
 sounds, move its ears and activate a selection of brightly colours LEDs
 contained in its body. Nabaztags are controlled through a simple HTTP
 web-service, with the various actions been specified by GET requests
 using a simple API.</p>
-
 <p>Out of the box, Xinc only provides email notifications for feedback but
 its design is such that plugins are easy to create. Indeed, Raphael
 Stolt has written recently on creating a publisher that uses the Growl
 notifications native to Macs. A natural extension to this would be to
 create an Linux version, given the inclusion of libnotify in the latest
-Ubuntu release. That&rsquo;s not for today though.</p>
-
+Ubuntu release. That's not for today though.</p>
 <p>The true flexibility in Xinc comes from the phingpublisher publisher,
 which allows an arbitrary target to be called from a phing script.
 Rather than create a Xinc plugin for the Nabaztag, writing a Phing task
 seemed to offer more flexibility as it could then be used in deployment
 scripts elsewhere.</p>
-
-<p>I&rsquo;ve previously created a couple of simple phing tasks for updating a
+<p>I've previously created a couple of simple phing tasks for updating a
 Twitter status, and interacting with the Unfuddle API. Creating a
 Nabaztag task was just a simple extension of these cURL-based tasks. The
 various attributes mirror those from the API docs.</p>
-
 <p>Name                Type      Description                                         Default   Required</p>
-
-<hr />
-
+<hr>
 <p>serialNum           String    Serial number                                       n/a       Yes
-  token               Integer   Token number                                        n/a       Yes
-  leftEarPosition     String    Position of the left ear (0-16)                     n/a       No
-  rightEarPosition    String    Position of the right ear (0-16)                    n/a       No
-  message             String    Message.                                            n/a       No
-  messageId           Integer   Message id.                                         n/a       No
-  voice               Integer   Voice to use (use the API to fetch the full list)   n/a       No
-  choreography        String    A string which prescribes the choreography<br />
-                                to use (see API docs)                               n/a       No
-  choreographyTitle   Boolean   Choreography title                                  n/a       No
-  urlList             Boolean   List of URLs to pass to the Nabaztag (can be<br />
-                                used for playing audio files)                       n/a       No
-  checkReturn         Boolean   Whether to check the return code of the request,<br />
-                                throws a BuildException if the update fails         false     No</p>
-
+token               Integer   Token number                                        n/a       Yes
+leftEarPosition     String    Position of the left ear (0-16)                     n/a       No
+rightEarPosition    String    Position of the right ear (0-16)                    n/a       No
+message             String    Message.                                            n/a       No
+messageId           Integer   Message id.                                         n/a       No
+voice               Integer   Voice to use (use the API to fetch the full list)   n/a       No
+choreography        String    A string which prescribes the choreography                 <br>
+to use (see API docs)                               n/a       No
+choreographyTitle   Boolean   Choreography title                                  n/a       No
+urlList             Boolean   List of URLs to pass to the Nabaztag (can be               <br>
+used for playing audio files)                       n/a       No
+checkReturn         Boolean   Whether to check the return code of the request,           <br>
+throws a BuildException if the update fails         false     No</p>
 <p>The code for this task can be found in my github repo - to install
 locally, export the file to a local phing tasks folder (I use
 <code>/usr/share/php/phing/tasks/my</code> on my Ubuntu machine). Having done that,
@@ -137,41 +130,41 @@ a simple example build.xml file to exercise the task would be:</p>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;build-failure&#34;</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;nabaztag</span> <span style="color:#a6e22e">serialNum=</span><span style="color:#e6db74">&#34;${nabaztag.serialNum}&#34;</span> <span style="color:#a6e22e">token=</span><span style="color:#e6db74">&#34;${nabaztag.token}&#34;</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;The build failed!&#34;</span> <span style="color:#a6e22e">voice=</span><span style="color:#e6db74">&#34;US-Liberty&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
-<p>To use this with Xinc, you simply need to called the appropriate target
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><p>To use this with Xinc, you simply need to called the appropriate target
 from your project configuration file. Another toy example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
-<span style="color:#f92672">&lt;xinc&gt;</span>
+<span style="color:#f92672">&lt;xinc</span><span style="color:#f92672">&gt;</span>
     <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Toy example&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;configuration&gt;</span>
+        <span style="color:#f92672">&lt;configuration</span><span style="color:#f92672">&gt;</span>
                 <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;loglevel&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">/&gt;</span>
                 <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;timezone&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Europe/London&#34;</span><span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;/configuration&gt;</span>
         <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/var/xinc/projects/sample&#34;</span><span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;cron</span> <span style="color:#a6e22e">timer=</span><span style="color:#e6db74">&#34;*/15 * * * *&#34;</span><span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;modificationset&gt;</span>
+        <span style="color:#f92672">&lt;modificationset</span><span style="color:#f92672">&gt;</span>
             <span style="color:#f92672">&lt;svn</span> <span style="color:#a6e22e">directory=</span><span style="color:#e6db74">&#34;${dir}&#34;</span> <span style="color:#a6e22e">update=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;/modificationset&gt;</span>              
-        <span style="color:#f92672">&lt;builders&gt;</span>
+        <span style="color:#f92672">&lt;builders</span><span style="color:#f92672">&gt;</span>
                 <span style="color:#f92672">&lt;phingBuilder</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-project&#34;</span><span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;/builders&gt;</span>
-        <span style="color:#f92672">&lt;publishers&gt;</span>
-            <span style="color:#f92672">&lt;onfailure&gt;</span>
+        <span style="color:#f92672">&lt;publishers</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;onfailure</span><span style="color:#f92672">&gt;</span>
                 <span style="color:#f92672">&lt;phingpublisher</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-failure&#34;</span> <span style="color:#f92672">/&gt;</span>
             <span style="color:#f92672">&lt;/onfailure&gt;</span>
         <span style="color:#f92672">&lt;/publishers&gt;</span>
     <span style="color:#f92672">&lt;/project&gt;</span>
-<span style="color:#f92672">&lt;/xinc&gt;</span></code></pre></div>
-<p>Some of the options for controlling the Nabaztag are only available with
-the V2 version. The one on my desk is V1 and so I haven&rsquo;t tested every
-action, I&rsquo;ve just followed the instructions in the API docs.
-Unfortunately, the Nabaztag webservice isn&rsquo;t as RESTful as would be
+<span style="color:#f92672">&lt;/xinc&gt;</span>
+</code></pre></div><p>Some of the options for controlling the Nabaztag are only available with
+the V2 version. The one on my desk is V1 and so I haven't tested every
+action, I've just followed the instructions in the API docs.
+Unfortunately, the Nabaztag webservice isn't as RESTful as would be
 desired - it returns a 200 response code for every request, whether it
 fails or not. This makes it a touch tricky to handle failed updates.</p>
-
 <p>Nabaztags are also useful for general reminders - I have the following
 line in my crontab:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&#34;</span> </code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub</span><span style="color:#e6db74">&#34;</span> 
+</code></pre></div>
         </div>
 
         <div id="article_meta">
@@ -204,7 +197,7 @@ line in my crontab:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743411" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -76,32 +76,29 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <p>Just stumbled across a gem of a question whilst idly browsing <a href="http://stackoverflow.com/">Stack
 Overflow</a>:</p>
-
 <blockquote>
 <p>Design a function <code>f</code>, such that: <code>f(f(n)) == -n</code> where <code>n</code> is a
-32-bit signed integer; you can&rsquo;t use complex numbers arithmetic.</p>
+32-bit signed integer; you can't use complex numbers arithmetic.</p>
 </blockquote>
-
 <p>Interesting in its own right, what makes this particularly intriguing is
-that the question doesn&rsquo;t specify a language to use - indeed, the choice
+that the question doesn't specify a language to use - indeed, the choice
 of language has a major say in the range of solutions available. The
 following solution in Python is stunningly elegant:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">f</span>(x):
     <span style="color:#66d9ef">if</span> isinstance(x, int):
         <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">lambda</span>: <span style="color:#f92672">-</span>x)
     <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">return</span> x()</code></pre></div>
-<p>The use of a lambda function is very clever but does feel like cheating
+        <span style="color:#66d9ef">return</span> x()
+</code></pre></div><p>The use of a lambda function is very clever but does feel like cheating
 a little. Nevertheless, such a solution was a sharp reminder of the
 dangers of being too versed in a particular language (PHP in my case)
-such that it&rsquo;s hard to think outside the language constraints. Of
+such that it's hard to think outside the language constraints. Of
 course, the above solution can be implemented in any language that
 supports anonymous functions.</p>
-
 <p>The less clever but more &ldquo;natural&rdquo; solution (at least to a
 mathematician) is for <code>f</code> to toggle the parity of <code>n</code>, multiplying by -1
 only for one parity (the cases of positive and negative n need handling
-separately). It&rsquo;s fairly easy to build up the solution by considering in
+separately). It's fairly easy to build up the solution by considering in
 sequence <code>n=0,1,2,3,...</code> - see the following clunky PHP implementation:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">function f(<span style="color:#960050;background-color:#1e0010">$</span>n)
 {
@@ -111,7 +108,8 @@ sequence <code>n=0,1,2,3,...</code> - see the following clunky PHP implementatio
     } <span style="color:#66d9ef">else</span> {
         <span style="color:#66d9ef">return</span> (<span style="color:#960050;background-color:#1e0010">$</span>n <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#960050;background-color:#1e0010">?</span> <span style="color:#960050;background-color:#1e0010">$</span>n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> : <span style="color:#f92672">-</span>(<span style="color:#960050;background-color:#1e0010">$</span>n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
     }
-}</code></pre></div>
+}
+</code></pre></div>
         </div>
 
         <div id="article_meta">
@@ -144,7 +142,7 @@ sequence <code>n=0,1,2,3,...</code> - see the following clunky PHP implementatio
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

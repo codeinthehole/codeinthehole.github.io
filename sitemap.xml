@@ -1,46 +1,60 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>https://codeinthehole.com/</loc>
-    <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/productivity/</loc>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tips/software-development-tips-part1/</loc>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/</loc>
-    <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/teams/</loc>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tips/</loc>
-    <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tips/vim-text-objects/</loc>
-    <lastmod>2019-06-13T00:00:00+00:00</lastmod>
+    <loc>https://codeinthehole.com/tags/tools/</loc>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/vim/</loc>
+    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/django/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/python/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/vim/</loc>
+    <loc>https://codeinthehole.com/tips/vim-text-objects/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -56,13 +70,11 @@
   <url>
     <loc>https://codeinthehole.com/news/</loc>
     <lastmod>2019-03-18T17:05:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/octopus-energy/</loc>
     <lastmod>2019-03-18T17:05:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -78,19 +90,16 @@
   <url>
     <loc>https://codeinthehole.com/tags/packer/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/puppet/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/ubuntu/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -101,7 +110,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/rabbitmq/</loc>
     <lastmod>2019-02-21T12:51:47+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -112,18 +120,16 @@
   <url>
     <loc>https://codeinthehole.com/tags/software/</loc>
     <lastmod>2018-12-24T11:51:36+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tips/listing-google-groups/</loc>
-    <lastmod>2018-10-27T12:53:24+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/gsuite/</loc>
     <lastmod>2018-10-27T12:53:24+01:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tips/listing-google-groups/</loc>
+    <lastmod>2018-10-27T12:53:24+01:00</lastmod>
   </url>
   
   <url>
@@ -134,24 +140,16 @@
   <url>
     <loc>https://codeinthehole.com/tags/git/</loc>
     <lastmod>2018-06-03T12:30:05+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/github/</loc>
     <lastmod>2018-06-03T12:30:05+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</loc>
     <lastmod>2017-11-27T12:27:45+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tags/productivity/</loc>
-    <lastmod>2017-11-27T12:27:45+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -162,13 +160,11 @@
   <url>
     <loc>https://codeinthehole.com/tags/postgres/</loc>
     <lastmod>2017-11-16T15:50:04+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/lists/</loc>
     <lastmod>2017-11-07T22:41:21+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -179,7 +175,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/words/</loc>
     <lastmod>2017-11-07T22:41:21+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -193,25 +188,23 @@
   </url>
   
   <url>
+    <loc>https://codeinthehole.com/tags/bash/</loc>
+    <lastmod>2017-09-30T22:44:03+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://codeinthehole.com/tips/bash-error-reporting/</loc>
     <lastmod>2017-09-30T22:44:03+01:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/bash/</loc>
-    <lastmod>2017-09-30T22:44:03+01:00</lastmod>
-    <priority>0</priority>
+    <loc>https://codeinthehole.com/tags/aws/</loc>
+    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</loc>
     <lastmod>2017-08-29T14:08:08+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tags/aws/</loc>
-    <lastmod>2017-08-29T14:08:08+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -222,7 +215,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/testing/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -238,7 +230,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/jq/</loc>
     <lastmod>2017-06-06T21:30:36+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -249,7 +240,11 @@
   <url>
     <loc>https://codeinthehole.com/tags/loggly/</loc>
     <lastmod>2017-05-16T21:52:21+01:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/django-oscar/</loc>
+    <lastmod>2017-04-10T23:00:20+01:00</lastmod>
   </url>
   
   <url>
@@ -258,20 +253,13 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/django-oscar/</loc>
-    <lastmod>2017-04-10T23:00:20+01:00</lastmod>
-    <priority>0</priority>
+    <loc>https://codeinthehole.com/tags/consul/</loc>
+    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tips/migrate-consul-key-value-store/</loc>
     <lastmod>2017-03-27T15:25:05+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tags/consul/</loc>
-    <lastmod>2017-03-27T15:25:05+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -287,7 +275,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/hugo/</loc>
     <lastmod>2017-03-16T10:30:02+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -301,14 +288,13 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/news/octopus-energy/</loc>
+    <loc>https://codeinthehole.com/tags/career/</loc>
     <lastmod>2015-11-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/career/</loc>
+    <loc>https://codeinthehole.com/news/octopus-energy/</loc>
     <lastmod>2015-11-23T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -329,7 +315,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/commandlinefu/</loc>
     <lastmod>2015-04-04T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -360,7 +345,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/monitoring/</loc>
     <lastmod>2014-10-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -381,7 +365,6 @@
   <url>
     <loc>https://codeinthehole.com/projects/</loc>
     <lastmod>2014-05-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -412,7 +395,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/geodjango/</loc>
     <lastmod>2013-07-28T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -453,7 +435,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/pil/</loc>
     <lastmod>2013-04-18T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -477,15 +458,13 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tidbits/</loc>
+    <loc>https://codeinthehole.com/tags/quotes/</loc>
     <lastmod>2012-12-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/quotes/</loc>
+    <loc>https://codeinthehole.com/tidbits/</loc>
     <lastmod>2012-12-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -524,20 +503,18 @@
   </url>
   
   <url>
+    <loc>https://codeinthehole.com/tags/apache/</loc>
+    <lastmod>2012-05-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</loc>
     <lastmod>2012-05-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/apache/</loc>
-    <lastmod>2012-05-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://codeinthehole.com/tags/nginx/</loc>
     <lastmod>2012-05-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -583,13 +560,11 @@
   <url>
     <loc>https://codeinthehole.com/talks/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/talks/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -598,14 +573,13 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</loc>
+    <loc>https://codeinthehole.com/tags/deployment/</loc>
     <lastmod>2012-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/deployment/</loc>
+    <loc>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</loc>
     <lastmod>2012-02-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -616,18 +590,16 @@
   <url>
     <loc>https://codeinthehole.com/tags/fabric/</loc>
     <lastmod>2012-02-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</loc>
-    <lastmod>2012-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/mysql/</loc>
     <lastmod>2012-02-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</loc>
+    <lastmod>2012-02-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -673,7 +645,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/node.js/</loc>
     <lastmod>2011-05-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -682,20 +653,18 @@
   </url>
   
   <url>
+    <loc>https://codeinthehole.com/tags/design-patterns/</loc>
+    <lastmod>2011-03-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</loc>
     <lastmod>2011-03-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/design-patterns/</loc>
-    <lastmod>2011-03-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://codeinthehole.com/tags/php/</loc>
     <lastmod>2011-03-13T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -706,7 +675,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/presentations/</loc>
     <lastmod>2011-03-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -717,13 +685,11 @@
   <url>
     <loc>https://codeinthehole.com/tags/javascript/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/node/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -742,14 +708,13 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</loc>
+    <loc>https://codeinthehole.com/tags/phing/</loc>
     <lastmod>2010-08-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/phing/</loc>
+    <loc>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</loc>
     <lastmod>2010-08-22T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -770,7 +735,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/recruitment/</loc>
     <lastmod>2009-07-09T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -829,31 +793,28 @@
   </url>
   
   <url>
+    <loc>https://codeinthehole.com/tags/ganglia/</loc>
+    <lastmod>2008-12-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</loc>
     <lastmod>2008-12-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/ganglia/</loc>
-    <lastmod>2008-12-14T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://codeinthehole.com/books/</loc>
-    <lastmod>2008-12-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/tags/books/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</loc>
+    <lastmod>2008-12-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -869,7 +830,6 @@
   <url>
     <loc>https://codeinthehole.com/tags/prototype/</loc>
     <lastmod>2008-11-08T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -895,7 +855,11 @@
   <url>
     <loc>https://codeinthehole.com/guides/</loc>
     <lastmod>2005-11-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/latex/</loc>
+    <lastmod>2005-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -904,9 +868,8 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/latex/</loc>
-    <lastmod>2005-11-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>https://codeinthehole.com/tags/maths/</loc>
+    <lastmod>2005-02-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -915,18 +878,11 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/maths/</loc>
-    <lastmod>2005-02-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>https://codeinthehole.com/about/</loc>
   </url>
   
   <url>
     <loc>https://codeinthehole.com/categories/</loc>
-    <priority>0</priority>
   </url>
   
   <url>

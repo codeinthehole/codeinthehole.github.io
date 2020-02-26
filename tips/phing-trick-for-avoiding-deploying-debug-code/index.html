@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,36 +75,32 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>As the saying goes:</p>
-
 <blockquote>
 <p>Fool me once, shame on you; fool me twice, shame on me</p>
 </blockquote>
-
-<p>Ensuring mistakes aren&rsquo;t repeated is a commonplace activity for any
+<p>Ensuring mistakes aren't repeated is a commonplace activity for any
 development team. This can manifest itself in many ways such as writing
 regression tests, stepping up your code reviews, adding stories to a
 testing plan or humiliating the developer in question through use of an
-unusual (dunce&rsquo;s) hat.</p>
-
+unusual (dunce's) hat.</p>
 <p>We had an issue recently where some debugging code got committed and
-wasn&rsquo;t picked up during testing. Naturally, this code was picked up once
+wasn't picked up during testing. Naturally, this code was picked up once
 it hit the production environment, we put rapidly put a patch in place.
 An embarrassing moment but the kind of thing that happens from time to
 time down in the trenches.</p>
-
 <p>One possible remedy for this would be to add a new sniff to the in-house
 coding standard (which is tested using the <a href="http://pear.php.net/package/PHP_CodeSniffer/redirected">PEAR code
 sniffer</a> on a
 SVN pre-commit hook) to look for debugging code and block the commit if
 any is found. However, a quicker solution was to modify our deployment
 scripts to search the codebase and bail out if any debug code was found.
-We use phing as our deployment tool -here&rsquo;s the appropriate section from
+We use phing as our deployment tool -here's the appropriate section from
 our build file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Checking codebase for use of var_dump()&#34;</span> <span style="color:#f92672">/&gt;</span>
-<span style="color:#f92672">&lt;exec</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;[ `find ${folder.app.export}/classes -name &#39;*.php&#39; | xargs grep -nr &#39;\(^\s*|\s\+\)var_dump(.*\?);&#39; | wc -l` -eq 0 ]&#34;</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">checkreturn=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span></code></pre></div>
-<p>The command here is grepping all PHP files within the SVN export for
+<span style="color:#f92672">&lt;exec</span> <span style="color:#a6e22e">command=</span><span style="color:#e6db74">&#34;[ `find ${folder.app.export}/classes -name &#39;*.php&#39; | xargs grep -nr &#39;\(^\s*|\s\+\)var_dump(.*\?);&#39; | wc -l` -eq 0 ]&#34;</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">checkreturn=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</code></pre></div><p>The command here is grepping all PHP files within the SVN export for
 occurrences of var_dump. If any such matching lines are found then a
-non-zero exit will be returned and the build will fail. We haven&rsquo;t had
+non-zero exit will be returned and the build will fail. We haven't had
 such an issue since.</p>
 
         </div>
@@ -139,7 +135,7 @@ such an issue since.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

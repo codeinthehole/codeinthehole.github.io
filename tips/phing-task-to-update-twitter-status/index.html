@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743411" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,16 +74,15 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>At Tangent Labs, we&rsquo;re currently experimenting with integrating Twitter
+            <p>At Tangent Labs, we're currently experimenting with integrating Twitter
 into our project workflow to provide a latest activity feed in a easily
 digestible format (for both developers and non-technical people). For a
-pilot project, we&rsquo;ve created a Twitter account and added an SVN
+pilot project, we've created a Twitter account and added an SVN
 post-commit hook script that updates Twitter with the latest commit
-information (commit message, affected files, author). We&rsquo;re going to
-integrate our bug-tracking software shortly too but that&rsquo;s not the
+information (commit message, affected files, author). We're going to
+integrate our bug-tracking software shortly too but that's not the
 subject of this post.</p>
-
-<p>Instead, I&rsquo;m going to detail a custom Phing task I&rsquo;ve written that
+<p>Instead, I'm going to detail a custom Phing task I've written that
 updates the project Twitter account. This allows notices of builds (to
 test, stage and production) to be integrated into a single feed. One of
 the great things about Twitter is its API and the range of applications
@@ -92,25 +91,20 @@ Gwibber, which (amongst other things) displays a small pop-up whenever
 the account gets a new update. Having this running while working on the
 project is great for staying informed with the latest activity, be it
 new commits, opened tickets or deployments.</p>
-
-<p>The task I&rsquo;ve written is TwitterUpdateTask.php and should be copied into
-your <code>$PATH_TO_PHING/ext/my/</code> folder (create it if it doesn&rsquo;t exist
+<p>The task I've written is TwitterUpdateTask.php and should be copied into
+your <code>$PATH_TO_PHING/ext/my/</code> folder (create it if it doesn't exist
 already). Mirroring the format of the Phing docs, this task has the
 following attributes:</p>
-
 <p>Name          Type      Description                                Default   Required</p>
-
-<hr />
-
+<hr>
 <p>username      String    Twitter username                           n/a       Yes
-  password      String    Twitter password                           n/a       Yes
-  message       String    Update message                             n/a       Yes
-  checkreturn   Boolean   Whether to check the request return code   false     No</p>
-
+password      String    Twitter password                           n/a       Yes
+message       String    Update message                             n/a       Yes
+checkreturn   Boolean   Whether to check the request return code   false     No</p>
 <p>A simple example build.xml file using this task is as follows:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Simple Twitter update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;tweet&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;tstamp&gt;</span>
+    <span style="color:#f92672">&lt;tstamp</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;format</span> <span style="color:#a6e22e">property=</span><span style="color:#e6db74">&#34;build.time&#34;</span> <span style="color:#a6e22e">pattern=</span><span style="color:#e6db74">&#34;%Y-%m-%d %H:%I&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/tstamp&gt;</span>
     <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;twitterupdate&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.TwitterUpdateTask&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -119,14 +113,14 @@ following attributes:</p>
             <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;example&#34;</span> <span style="color:#a6e22e">password=</span><span style="color:#e6db74">&#34;mypassword&#34;</span> 
             <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;Build at ${build.time}&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
-<p>This simply updates the Twitter status with the time of the last build.
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><p>This simply updates the Twitter status with the time of the last build.
 A more useful means of using this task is to parameterise the Twitter
 target to take a specified message so that it can be called from
 different deployment targets:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Twitter update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;deploy-to-test&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;tstamp&gt;</span>
+    <span style="color:#f92672">&lt;tstamp</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;format</span> <span style="color:#a6e22e">property=</span><span style="color:#e6db74">&#34;build.time&#34;</span> <span style="color:#a6e22e">pattern=</span><span style="color:#e6db74">&#34;%Y-%m-%d %H:%I&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/tstamp&gt;</span>
     <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;twitterupdate&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.TwitterUpdateTask&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -156,11 +150,10 @@ different deployment targets:</p>
                 <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Deploying to production: ${build.time}&#34;</span> <span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;/phingcall&gt;</span>
     <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
-<p>There are lots of extensions from this idea such as updating Twitter
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><p>There are lots of extensions from this idea such as updating Twitter
 with continuous integration results, failed builds, code coverage
 metrics.</p>
-
 <p>The source code for TwitterUpdateTask.php is as follows (with docblocks
 stripped out for brevity):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
@@ -277,10 +270,8 @@ stripped out for brevity):</p>
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;Update unsuccessful: </span><span style="color:#e6db74">$failureMessage</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);   
     }
 }
-</code></pre></div>
-<p>The fully documented source and associated example build.xml file are
+</code></pre></div><p>The fully documented source and associated example build.xml file are
 available to download:</p>
-
 <p>» <a href="/downloads/TwitterUpdateTask.zip">TwitterUpdateTask.zip
 (2.6kb)</a></p>
 
@@ -316,7 +307,7 @@ available to download:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

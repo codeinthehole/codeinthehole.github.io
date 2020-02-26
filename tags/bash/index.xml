@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>bash on David Winterbottom</title>
@@ -18,8 +18,8 @@
       
       <guid>https://codeinthehole.com/tips/bash-error-reporting/</guid>
       <description>Two tips:
-Fail fast You probably already know that you can force Bash scripts to exit immediately if there&amp;rsquo;s an error (that is, if any command exits with a non-zero exit code) using:
-#!/usr/bin/env bash set -e but it&amp;rsquo;s even better to use:
+Fail fast You probably already know that you can force Bash scripts to exit immediately if there&#39;s an error (that is, if any command exits with a non-zero exit code) using:
+#!/usr/bin/env bash set -e but it&#39;s even better to use:
 set -eu -o pipefail so that the script:
  exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
     </item>
@@ -42,8 +42,8 @@ set -eu -o pipefail so that the script:
       <pubDate>Wed, 22 Oct 2008 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/following-log-files-with-tail-f/</guid>
-      <description>UNIX is a majestic onion of discovery. Every day a new layer of understanding can be peeled away to give some new pungent goodness. Today&amp;rsquo;s was the &amp;lsquo;follow&amp;rsquo; option of the tail command.
-It&amp;rsquo;s commonplace to use tail for viewing the recent entries to a log file:
+      <description>UNIX is a majestic onion of discovery. Every day a new layer of understanding can be peeled away to give some new pungent goodness. Today&#39;s was the &amp;lsquo;follow&amp;rsquo; option of the tail command.
+It&#39;s commonplace to use tail for viewing the recent entries to a log file:
 tail /var/log/apache2/error.log Much more useful is set the &amp;lsquo;follow&amp;rsquo; option so that, rather than echoing to STDOUT and returning control to the prompt - tail continues to watch the file in question and echos additional lines to the terminal.</description>
     </item>
     

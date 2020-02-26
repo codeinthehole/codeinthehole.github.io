@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,35 +74,29 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<h3 id="problem">Problem</h3>
-
-<p>You&rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range
+            <h3 id="problem">Problem</h3>
+<p>You're a python hacker using virtualenv and virtualenvwrapper on a range
 of projects. After a few hours in the office and much context switching,
 your terminal emulator is bursting with open tabs with the unhelpful
-title &lsquo;bash&rsquo; and it&rsquo;s difficult to remember which tab is for which
+title &lsquo;bash&rsquo; and it's difficult to remember which tab is for which
 project. This is making you unhappy.</p>
-
 <h3 id="solution">Solution</h3>
-
-<p>Use your <code>postactivate</code><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> script to set the terminal title when you
+<p>Use your <code>postactivate</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> script to set the terminal title when you
 activate a virtual environment. Add something similar to the following
 to your <code>postactivate</code> script:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;codeinthehole.com&#34;</span>
-echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$TITLE<span style="color:#e6db74">\007&#34;</span></code></pre></div>
-<p>Then whenever you start working on a project (using <code>workon</code>), your tab
+echo -ne <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\033]0;</span>$TITLE<span style="color:#e6db74">\007</span><span style="color:#e6db74">&#34;</span>
+</code></pre></div><p>Then whenever you start working on a project (using <code>workon</code>), your tab
 title will be labelled correctly.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1"><p>which will be somewhere like
-<code>~/.virtualenvs/yourproject/bin/postactivate</code>.</p>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>which will be somewhere like
+<code>~/.virtualenvs/yourproject/bin/postactivate</code>. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -136,7 +130,7 @@ title will be labelled correctly.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

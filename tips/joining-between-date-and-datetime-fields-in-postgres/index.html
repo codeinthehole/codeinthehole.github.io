@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,50 +74,41 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>Joining tables on <code>date</code> and <code>timestamp with timezone</code> fields in Postgres<sup class="footnote-ref" id="fnref:django"><a href="#fn:django">1</a></sup> needs careful handling
+            <p>Joining tables on <code>date</code> and <code>timestamp with timezone</code> fields in Postgres<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> needs careful handling
 because of time zones and daylight-saving time.</p>
-
 <p>To illustrate, assume we have two tables:</p>
-
 <ul>
 <li><code>t1</code> which has a field of type <code>date</code> and a foreign-key <code>t2_id</code> to</li>
 <li><code>t2</code> which has a field of <code>timestamp with timezone</code>.</li>
 </ul>
-
 <p>We want to build SQL queries that join between these two tables with additional date
 constraints on the join.</p>
-
 <p>Assume the date values in <code>t1</code> correspond to the <code>Europe/London</code> time zone.</p>
-
-<h2 id="join-rows-where-a-timestamp-value-is-within-the-date">Join rows where a timestamp value is <em>within</em> the date</h2>
+<h2 id="join-rows-where-a-timestamp-value-is-_within_-the-date">Join rows where a timestamp value is <em>within</em> the date</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> t1.<span style="color:#f92672">*</span>
 <span style="color:#66d9ef">FROM</span> t1 
 <span style="color:#66d9ef">JOIN</span> t2 <span style="color:#66d9ef">ON</span> (
     t1.t2_id <span style="color:#f92672">=</span> t2.id <span style="color:#66d9ef">AND</span>
-    t1.date_field <span style="color:#f92672">=</span> (t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;Europe/London&#39;</span>)::DATE
-)</code></pre></div>
-<p>Here we convert the datetime values to the <code>Europe/London</code> time zone before
+    t1.date_field <span style="color:#f92672">=</span> (t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Europe/London</span><span style="color:#e6db74">&#39;</span>)::DATE
+)
+</code></pre></div><p>Here we convert the datetime values to the <code>Europe/London</code> time zone before
 casting to date.</p>
-
 <h2 id="join-rows-where-a-timestamp-value-is-equal-to-midnight-of-the-date">Join rows where a timestamp value is equal to midnight of the date</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> t1.<span style="color:#f92672">*</span>
 <span style="color:#66d9ef">FROM</span> t1 
 <span style="color:#66d9ef">JOIN</span> t2 <span style="color:#66d9ef">ON</span> (
     t1.t2_id <span style="color:#f92672">=</span> t2.id <span style="color:#66d9ef">AND</span>
-    t1.date_field::<span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#f92672">=</span> t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;Europe/London&#39;</span>
-)</code></pre></div>
-<p>Here we use the fact that <a href="https://www.postgresql.org/docs/9.1/static/sql-expressions.html#SQL-SYNTAX-TYPE-CASTS">type-casting</a> a <code>date</code> field with <code>::TIMESTAMP</code> converts it to the midnight timestamp of the date.</p>
-<div class="footnotes">
-
-<hr />
-
+    t1.date_field::<span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#f92672">=</span> t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Europe/London</span><span style="color:#e6db74">&#39;</span>
+)
+</code></pre></div><p>Here we use the fact that <a href="https://www.postgresql.org/docs/9.1/static/sql-expressions.html#SQL-SYNTAX-TYPE-CASTS">type-casting</a> a <code>date</code> field with <code>::TIMESTAMP</code> converts it to the midnight timestamp of the date.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:django">Which correspond to time-zone-aware <code>datetime</code> values in Python.
- <a class="footnote-return" href="#fnref:django"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>Which correspond to time-zone-aware <code>datetime</code> values in Python. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -151,7 +142,7 @@ casting to date.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

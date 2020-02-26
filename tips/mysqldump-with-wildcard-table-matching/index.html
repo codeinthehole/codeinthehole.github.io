@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,21 +75,21 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Ever wanted to use <code>mysqldump</code> to dump tables that match a wildcard
-pattern? I have. It&rsquo;s not currently supported as an option but can be
-achieved with a little bash magic. Here&rsquo;s how:</p>
+pattern? I have. It's not currently supported as an option but can be
+achieved with a little bash magic. Here's how:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -lt <span style="color:#ae81ff">2</span> <span style="color:#f92672">]</span>
 <span style="color:#66d9ef">then</span>
-    echo <span style="color:#e6db74">&#34;Usage: `basename </span>$0<span style="color:#e6db74">` database wildcardpattern&#34;</span>
-    echo <span style="color:#e6db74">&#34;Eg: `basename </span>$0<span style="color:#e6db74">` mydatabase App_%&#34;</span>
+    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Usage: `basename </span>$0<span style="color:#e6db74">` database wildcardpattern</span><span style="color:#e6db74">&#34;</span>
+    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Eg: `basename </span>$0<span style="color:#e6db74">` mydatabase App_%</span><span style="color:#e6db74">&#34;</span>
     exit <span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">fi</span>
 database<span style="color:#f92672">=</span>$1
 pattern<span style="color:#f92672">=</span>$2
-mysqldump $database <span style="color:#e6db74">`</span>mysql -ND $database -e <span style="color:#e6db74">&#34;SHOW TABLES LIKE &#39;</span>$pattern<span style="color:#e6db74">&#39;&#34;</span> | awk <span style="color:#e6db74">&#39;{printf $1&#34; &#34;}&#39;</span><span style="color:#e6db74">`</span></code></pre></div>
-<p>This uses a simple SQL query to extract all the table names that match
+mysqldump $database <span style="color:#e6db74">`</span>mysql -ND $database -e <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">SHOW TABLES LIKE &#39;</span>$pattern<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">&#34;</span> | awk <span style="color:#e6db74">&#39;{printf $1&#34; &#34;}&#39;</span><span style="color:#e6db74">`</span>
+</code></pre></div><p>This uses a simple SQL query to extract all the table names that match
 the pattern and concatenate them in the format that mysqldump expects.
-Note that you&rsquo;ll need your <code>~/.my.cnf</code> set up correctly to allow the
+Note that you'll need your <code>~/.my.cnf</code> set up correctly to allow the
 connections to MySQL to happen without a authentication prompt.</p>
 
         </div>
@@ -124,7 +124,7 @@ connections to MySQL to happen without a authentication prompt.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

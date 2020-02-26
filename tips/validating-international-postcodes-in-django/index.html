@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,40 +74,35 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<h3 id="problem">Problem</h3>
-
+            <h3 id="problem">Problem</h3>
 <p>You want to validate a post/zip-code when you only know the country at
 runtime.</p>
-
 <h3 id="solution">Solution</h3>
-
-<p>Use this snippet to dynamically fetch a validation method from Django&rsquo;s
+<p>Use this snippet to dynamically fetch a validation method from Django's
 suite of &ldquo;localflavor&rdquo; form fields using the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
 3166-1</a> two character
 country code.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_postcode_validator</span>(country_code):
     <span style="color:#75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
-    <span style="color:#66d9ef">if</span> country_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GB&#39;</span>:
-        country_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UK&#39;</span>
-    module_path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;django.contrib.localflavor.</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>lower()
+    <span style="color:#66d9ef">if</span> country_code <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">GB</span><span style="color:#e6db74">&#39;</span>:
+        country_code <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">UK</span><span style="color:#e6db74">&#39;</span>
+    module_path <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">django.contrib.localflavor.</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>lower()
     <span style="color:#66d9ef">try</span>:
-        module <span style="color:#f92672">=</span> __import__(module_path, fromlist<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;forms&#39;</span>])
+        module <span style="color:#f92672">=</span> __import__(module_path, fromlist<span style="color:#f92672">=</span>[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">forms</span><span style="color:#e6db74">&#39;</span>])
     <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">ImportError</span>:
         <span style="color:#75715e"># No forms module for this country</span>
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x
 
-    fieldname_variants <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostcodeField&#39;</span>,
-                          <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostCodeField&#39;</span>,
-                          <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostalCodeField&#39;</span>,
-                          <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">ZipCodeField&#39;</span>,]
+    fieldname_variants <span style="color:#f92672">=</span> [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostcodeField</span><span style="color:#e6db74">&#39;</span>,
+                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostCodeField</span><span style="color:#e6db74">&#39;</span>,
+                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">PostalCodeField</span><span style="color:#e6db74">&#39;</span>,
+                          <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">ZipCodeField</span><span style="color:#e6db74">&#39;</span>,]
     <span style="color:#66d9ef">for</span> variant <span style="color:#f92672">in</span> fieldname_variants:
         fieldname <span style="color:#f92672">=</span> variant <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>upper()
         <span style="color:#66d9ef">if</span> hasattr(module<span style="color:#f92672">.</span>forms, fieldname):
             <span style="color:#66d9ef">return</span> getattr(module<span style="color:#f92672">.</span>forms, fieldname)()<span style="color:#f92672">.</span>clean 
-    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x</code></pre></div>
-<p>As these validators are from forms, they will raise
+    <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x
+</code></pre></div><p>As these validators are from forms, they will raise
 <code>django.forms.ValidationError</code> if the passed postcode is invalid. Hence
 your client code should look something like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> ValidationError
@@ -117,18 +112,15 @@ your client code should look something like:</p>
         get_postcode_validator(country_code)(postcode)
     <span style="color:#66d9ef">except</span> ValidationError:
         <span style="color:#66d9ef">return</span> False
-    <span style="color:#66d9ef">return</span> True</code></pre></div>
-<h3 id="discussion">Discussion</h3>
-
+    <span style="color:#66d9ef">return</span> True
+</code></pre></div><h3 id="discussion">Discussion</h3>
 <p>As you can see, this is a touch messy as:</p>
-
 <ul>
 <li>Django 1.3 uses the incorrect code for the UK (it should be &lsquo;GB&rsquo;)</li>
 <li>There are a variety of different class names used for the
 appropriate field. We simply iterate over the possibilities and test
 to see if the class exists in the forms module.</li>
 </ul>
-
 <p>This code is used within an internal Tangent geocoding webservice.</p>
 
         </div>
@@ -163,7 +155,7 @@ to see if the class exists in the forms module.</li>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

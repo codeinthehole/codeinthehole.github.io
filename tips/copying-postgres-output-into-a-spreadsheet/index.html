@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -77,16 +77,15 @@ if (!doNotTrack) {
             <p>I often need to grab information from a Postgres database and paste it
 into a spreadsheet for sharing with others. Google Sheets needs the
 pasted data to be tab-separated in order to be correctly split into
-columns. This isn&rsquo;t the default behaviour for psql but here&rsquo;s how to
-configure psql&rsquo;s output to get it.</p>
-
+columns. This isn't the default behaviour for psql but here's how to
+configure psql's output to get it.</p>
 <p>At a psql prompt, switch to unaligned output</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-psql" data-lang="psql">=&gt; \a</code></pre></div>
-<p>set the field separator to a tab character:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-psql" data-lang="psql">=&gt; \f &#39;\t&#39;</code></pre></div>
-<p>and turn the pager off:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-psql" data-lang="psql">=&gt; \pset pager off</code></pre></div>
-<p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
+<pre><code class="language-psql" data-lang="psql">=&gt; \a
+</code></pre><p>set the field separator to a tab character:</p>
+<pre><code class="language-psql" data-lang="psql">=&gt; \f '\t'
+</code></pre><p>and turn the pager off:</p>
+<pre><code class="language-psql" data-lang="psql">=&gt; \pset pager off
+</code></pre><p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
 pasted into your Google Doc.</p>
 
         </div>
@@ -121,7 +120,7 @@ pasted into your Google Doc.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

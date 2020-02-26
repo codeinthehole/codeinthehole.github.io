@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,50 +74,40 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>Since watching Carl Meyer&rsquo;s superb &lsquo;<a href="http://pyvideo.org/video/699/testing-and-django">Testing and
-Django</a>&rsquo; talk, I&rsquo;ve
-been using Ian Bicking&rsquo;s
+            <p>Since watching Carl Meyer's superb &lsquo;<a href="http://pyvideo.org/video/699/testing-and-django">Testing and
+Django</a>&rsquo; talk, I've
+been using Ian Bicking's
 <a href="http://webtest.pythonpaste.org/en/latest/index.html">WebTest</a> library
 for functional tests, via
-<a href="http://pypi.python.org/pypi/django-webtest">django-webtest</a>. I&rsquo;ve been
-really impressed and I&rsquo;d like to stress one of Carl&rsquo;s points - that
+<a href="http://pypi.python.org/pypi/django-webtest">django-webtest</a>. I've been
+really impressed and I'd like to stress one of Carl's points - that
 using WebTest for functional tests is superior to using the Django
 client.</p>
-
 <h3 id="why">Why?</h3>
-
-<p>Several reasons - here&rsquo;s a few:</p>
-
+<p>Several reasons - here's a few:</p>
 <ul>
-<li>WebTest allows you to model a user&rsquo;s experience much more closely as
+<li>WebTest allows you to model a user's experience much more closely as
 it is smart about mark-up. Instead of hand-crafting GET and POST
 requests, you can use the WebTest API to follow links and submit
 forms - this is what users actually do. As a result, your tests
 accurately capture user stories.</li>
 <li>A corollary to the last point is that writing functional tests with
-WebTest is both easier and quicker than using Django&rsquo;s test client.
-It&rsquo;s much simpler to fill in forms that construct complicated arrays
+WebTest is both easier and quicker than using Django's test client.
+It's much simpler to fill in forms that construct complicated arrays
 of POST data - this is particularly noticable with formsets.</li>
 <li>The WebTest response object supports <a href="http://webtest.pythonpaste.org/en/latest/index.html#parsing-the-body">several ways of parsing the
 response
 HTML</a>,
 making it easy to make complicated assertions about the response.</li>
 </ul>
-
-<p>Watch from 29:48 in Carl&rsquo;s talk for further details.</p>
-
+<p>Watch from 29:48 in Carl's talk for further details.</p>
 <h3 id="example-functional-test">Example functional test</h3>
-
 <p>Consider this story from a functional spec:</p>
-
 <blockquote>
 <p>A staff member can upload a CSV to create new credit allocations for
 customers.</p>
 </blockquote>
-
-<p>Here&rsquo;s a WebTest for this:</p>
+<p>Here's a WebTest for this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django_webtest <span style="color:#f92672">import</span> WebTest
 <span style="color:#f92672">from</span> django.core.urlresolvers <span style="color:#f92672">import</span> reverse
 <span style="color:#f92672">from</span> django.contrib.auth.models <span style="color:#f92672">import</span> User
@@ -130,31 +120,28 @@ customers.</p>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
         self<span style="color:#f92672">.</span>staff <span style="color:#f92672">=</span> G(User, is_staff<span style="color:#f92672">=</span>True)
-        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span>False)
+        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">10000</span><span style="color:#e6db74">&#39;</span>, is_staff<span style="color:#f92672">=</span>False)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_can_upload_a_csv_to_create_allocations</span>(self):
-        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;credits-index&#39;</span>), user<span style="color:#f92672">=</span>staff)
+        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">credits-index</span><span style="color:#e6db74">&#39;</span>), user<span style="color:#f92672">=</span>staff)
 
         <span style="color:#75715e"># Specify the file content to upload and submit the form</span>
-        form <span style="color:#f92672">=</span> index<span style="color:#f92672">.</span>forms[<span style="color:#e6db74">&#39;upload_form&#39;</span>]
+        form <span style="color:#f92672">=</span> index<span style="color:#f92672">.</span>forms[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upload_form</span><span style="color:#e6db74">&#39;</span>]
         <span style="color:#75715e"># CSV content should be: username, credits, start_date, end_date</span>
-        content <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10000,250,2012-01-01,2013-01-01&#34;</span>
-        form[<span style="color:#e6db74">&#39;file&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;credits.csv&#39;</span>, content
+        content <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">10000,250,2012-01-01,2013-01-01</span><span style="color:#e6db74">&#34;</span>
+        form[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">credits.csv</span><span style="color:#e6db74">&#39;</span>, content
         form<span style="color:#f92672">.</span>submit()
 
         <span style="color:#75715e"># Check that an allocation has been created</span>
         self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">250</span>, api<span style="color:#f92672">.</span>balance(customer))
-        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())</code></pre></div>
-<p>As you can see, using WebTest allows the story to be captured in a
+        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())
+</code></pre></div><p>As you can see, using WebTest allows the story to be captured in a
 simple and readable test. This is based on a real functional test from a
 current project of mine. Writing the above test took about 2 minutes.</p>
-
 <h4 id="other-useful-testing-libraries">Other useful testing libraries</h4>
-
 <p>The example test uses
 <a href="http://paulocheque.github.com/django-dynamic-fixture/">django_dynamic_fixture</a>
 to create users, specifying only the attributes relevant to the test.</p>
-
 <p>Note also the mildly unusual naming convention of the example TestCase
 and method are because I use
 <a href="https://github.com/jbalogh/django-nose">django_nose</a> with the &lsquo;spec&rsquo;
@@ -170,15 +157,13 @@ An admin
 - can upload a csv to create allocations
 
 ----------------------------------------------------------------------
-Ran <span style="color:#ae81ff">1</span> tests in <span style="color:#ae81ff">0</span>.269s</code></pre></div>
-<p>This is a useful way of running functional tests. It also pushes you
+Ran <span style="color:#ae81ff">1</span> tests in 0.269s
+</code></pre></div><p>This is a useful way of running functional tests. It also pushes you
 towards splitting your tests suites into more carefully named,
 tightly-focussed test cases - rather than bundling disparate tests into
 the same test case.</p>
-
 <h3 id="summary">Summary</h3>
-
-<p>Use WebTest for your functional tests - you won&rsquo;t regret it.</p>
+<p>Use WebTest for your functional tests - you won't regret it.</p>
 
         </div>
 
@@ -212,7 +197,7 @@ the same test case.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

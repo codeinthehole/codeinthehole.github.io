@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>django-oscar on David Winterbottom</title>
@@ -17,8 +17,7 @@
       <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
       
       <guid>https://codeinthehole.com/news/podcast-init/</guid>
-      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.
- </description>
+      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.</description>
     </item>
     
     <item>
@@ -28,7 +27,7 @@
       
       <guid>https://codeinthehole.com/projects/the-road-to-oscar-10/</guid>
       <description>Oscar 0.7 was released this week, a comparatively minor house-keeping release that allowed us to reduce our pull-request and issue backlogs. We have a plan for Oscar through 2014 and this article outlines the roadmap.
-v1.0 We&amp;rsquo;re aiming to be v1.0 before the end of the year1. Oscar has been beta for nearly two years and its APIs are stabilising. We&amp;rsquo;re ready to commit to the backward compatibility responsibilities associated with coming out of beta.</description>
+v1.0 We&#39;re aiming to be v1.0 before the end of the year1. Oscar has been beta for nearly two years and its APIs are stabilising. We&#39;re ready to commit to the backward compatibility responsibilities associated with coming out of beta.</description>
     </item>
     
     <item>
@@ -37,7 +36,7 @@ v1.0 We&amp;rsquo;re aiming to be v1.0 before the end of the year1. Oscar has be
       <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
-      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&amp;rsquo;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
+      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&#39;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
 This article is largely a note-to-self in case I have to repeat the process. However, if you do find yourself in a similar position, here are a few command-line tricks for analysing your git history.</description>
     </item>
     
@@ -49,7 +48,7 @@ This article is largely a note-to-self in case I have to repeat the process. How
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
       <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
 Migrating from PHP to Python and Django Abstract:
- Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+ Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&#39;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     
   </channel>

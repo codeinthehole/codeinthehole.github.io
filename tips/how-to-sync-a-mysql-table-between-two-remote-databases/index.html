@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,49 +75,43 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Definitely tricker than you might think.</p>
-
 <p>Seems like it should be trivial using <code>SELECT ... INTO OUTFILE</code> and
 <code>LOAD DATA INFILE ...</code> to make the transfer via dumping the table into a
 temporary file. However, <code>SELECT ... INTO OUTFILE</code> creates a file on the
 remote server rather than locally. This prevents the use of
 <code>LOAD DATA INFILE</code> for the second step as the file being loaded has to
 be local or on the destination server.</p>
-
 <p>Following the <a href="http://dev.mysql.com/doc/refman/5.0/en/select.html">guidance in the
 docs</a>, you can
 create local dump of a table by using the <code>--execute</code> option to output
 the results of a <code>SELECT ...</code> statement into a local file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -D database_name -e <span style="color:#e6db74">&#34;SELECT ... &#34;</span> &gt; /path/to/file.txt</code></pre></div>
-<p>This works but has two downsides:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -D database_name -e <span style="color:#e6db74">&#34;SELECT ... &#34;</span> &gt; /path/to/file.txt
+</code></pre></div><p>This works but has two downsides:</p>
 <ol>
 <li>First, running a shell command forces you to step outside the MySQL
 adapter of your progamming language which means it is a new place
 where the database credentials need to be passed. Shelling out
-commands always feels like you&rsquo;ve failed.</li>
-<li>Further, as far as I can tell, you can&rsquo;t control the field separator
+commands always feels like you've failed.</li>
+<li>Further, as far as I can tell, you can't control the field separator
 or line endings using this technique (in the same way as you can
 with <code>SELECT ... INTO OUTFILE ...</code>) and so the file includes an
 unwanted line with the field names and tab-separates the fields.</li>
 </ol>
-
-<p>It&rsquo;s worth noting the <code>mysqldump</code> isn&rsquo;t much help here, as the <code>--tab</code>
+<p>It's worth noting the <code>mysqldump</code> isn't much help here, as the <code>--tab</code>
 option that allows CSV output to be generated only works with a local
 database connection.</p>
-
-<p>Now that we&rsquo;ve got our data locally, we load it into the remote database
+<p>Now that we've got our data locally, we load it into the remote database
 using <code>LOAD DATA INFILE</code> and make use of the <code>LOCAL</code> keyword which lets
 us use a local data file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -h x.x.x.x -u user -D database_name --password<span style="color:#f92672">=</span>... -e <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span><span style="color:#e6db74">&#34;LOAD DATA LOCAL INFILE &#39;/path/to/file.txt&#39; \
 </span><span style="color:#e6db74">REPLACE INTO TABLE table_name \
-</span><span style="color:#e6db74">IGNORE 1 LINES&#34;</span></code></pre></div>
-<p>Of course, you may want to truncate the table first if you want a clean
+</span><span style="color:#e6db74">IGNORE 1 LINES&#34;</span>
+</code></pre></div><p>Of course, you may want to truncate the table first if you want a clean
 sync. As this operations locks the destination table, it often makes
 sense to load the data into a temporary copy of the table, and then
 perform a <code>RENAME TABLE</code> operation to swap in the new table.</p>
-
-<p>Here&rsquo;s a quick and dirty PHP implementation:</p>
+<p>Here's a quick and dirty PHP implementation:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 $tableName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;some_table&#39;</span>;
 $sql <span style="color:#f92672">=</span>
@@ -172,7 +166,7 @@ $db<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

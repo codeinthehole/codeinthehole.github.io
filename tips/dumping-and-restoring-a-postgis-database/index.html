@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,60 +74,42 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>I wasted at least twenty minutes getting this to work. These are my
+            <p>I wasted at least twenty minutes getting this to work. These are my
 notes.</p>
-
 <h3 id="problem">Problem</h3>
-
 <p>You are using a PostGIS database and want to take a backup copy from
 production and restore it in a different environment. One complication
 is that each environment connects to its database with its own user.</p>
-
 <p>This is a common scenario if you are using
 <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/">GeoDjango</a>.</p>
-
 <h3 id="solution">Solution</h3>
-
 <p>Suppose your production database is called &ldquo;myproject_prod&rdquo; which you
 connect to with user &ldquo;myproject_prod_role&rdquo; and you want to replace
 your existing stage database &ldquo;myproject_stage&rdquo; that you connect to with
 user &ldquo;myproject_stage_role&rdquo;.</p>
-
 <p>First, dump your production database:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pg_dump --no-acl --no-owner $DATABASE &gt; dump.sql</code></pre></div>
-<p>where:</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pg_dump --no-acl --no-owner $DATABASE &gt; dump.sql
+</code></pre></div><p>where:</p>
 <ul>
 <li>access control is ignored (<code>--no-acl</code>) as your production database
-may have additional users that you&rsquo;re not interested in;</li>
+may have additional users that you're not interested in;</li>
 <li>ownership is ignored (<code>--no-owner</code>) as you will be restoring as a
 different user.</li>
 </ul>
-
 <p>Now, copy the SQL file across to the appropriate server and create the
 destination database from a PostGIS template with the appropriate owner:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres">postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DATABASE</span> myproject_stage;
-postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> myproject_stage <span style="color:#66d9ef">TEMPLATE</span> template_postgis <span style="color:#66d9ef">OWNER</span> myproject_role_stage;</code></pre></div>
-<p>and restore the database using the stage user:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ psql --host<span style="color:#f92672">=</span><span style="color:#ae81ff">127</span>.0.0.1 --username<span style="color:#f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql</code></pre></div>
-<p>Be warned: this command will generated a lot of warnings (which can be
+postgres<span style="color:#f92672">=#</span> <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">DATABASE</span> myproject_stage <span style="color:#66d9ef">TEMPLATE</span> template_postgis <span style="color:#66d9ef">OWNER</span> myproject_role_stage;
+</code></pre></div><p>and restore the database using the stage user:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ psql --host<span style="color:#f92672">=</span>127.0.0.1 --username<span style="color:#f92672">=</span>myproject_role_stage myproject_stage &lt; dump.sql
+</code></pre></div><p>Be warned: this command will generated a lot of warnings (which can be
 ignored). This happens as <code>pg_dump</code> generates SQL relative to the
 &lsquo;template0&rsquo; database (not &lsquo;template_postgis&rsquo; which would be more
 helpful in this situation). Thus, the dumped SQL file contains the
 definitions of PostGIS types which have already been defined when we
 created the database from &ldquo;template_postgis&rdquo;.</p>
-
-<div class="admonition note">
-    The host is specified in the restore operation (<code>--host=127.0.0.1</code>) so
-    as to trigger the correct authentication rules from <code>pg_hba.conf</code>. I
-    usually forget this and am confused about why I can't authenticate. You
-    might not need this if your authentication config is different.
-</div>
-
+<!-- raw HTML omitted -->
 <p>Related reading:</p>
-
 <ul>
 <li><a href="http://postgis.17.x6.nabble.com/Backup-and-Restore-of-a-PostGis-database-td3565498.html">Backup and Restore of a PostGis
 database</a> -
@@ -166,7 +148,7 @@ a relevant thread from the PostGIS mailing list.</li>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

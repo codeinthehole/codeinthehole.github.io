@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743411" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -76,19 +76,18 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <p>UNIX is a majestic onion of discovery. Every day a new layer of
 understanding can be peeled away to give some new pungent goodness.
-Today&rsquo;s was the &lsquo;follow&rsquo; option of the tail command.</p>
-
-<p>It&rsquo;s commonplace to use tail for viewing the recent entries to a log
+Today's was the &lsquo;follow&rsquo; option of the tail command.</p>
+<p>It's commonplace to use tail for viewing the recent entries to a log
 file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail /var/log/apache2/error.log</code></pre></div>
-<p>Much more useful is set the &lsquo;follow&rsquo; option so that, rather than echoing
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail /var/log/apache2/error.log
+</code></pre></div><p>Much more useful is set the &lsquo;follow&rsquo; option so that, rather than echoing
 to STDOUT and returning control to the prompt - tail continues to watch
 the file in question and echos additional lines to the terminal. This
 can be very useful during development - I often leave a terminal open
 watching the error logs while I develop - so that I can quickly pounce
 on any errors that pop up.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f my-app-error.log</code></pre></div>
-<p>Return control to the command prompt using CTRL+C (or run as a
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f my-app-error.log
+</code></pre></div><p>Return control to the command prompt using CTRL+C (or run as a
 background process using &amp;). This can be quite useful for monitoring the
 error logs of production sites where echoing error messages and warnings
 to the screen would be unacceptable.</p>
@@ -125,7 +124,7 @@ to the screen would be unacceptable.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

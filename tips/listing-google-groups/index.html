@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,9 +74,8 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Oddly, you can&rsquo;t pull a report of all groups from G-Suite like you can for users. The only option is to
-use the API. Here&rsquo;s how.</p>
-
+            <p>Oddly, you can't pull a report of all groups from G-Suite like you can for users. The only option is to
+use the API. Here's how.</p>
 <p>Follow steps 1 and 2 from <a href="https://developers.google.com/admin-sdk/directory/v1/quickstart/python">the quickstart guide</a> but
 instead of the sample Python script, use this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> httplib2 <span style="color:#f92672">import</span> Http
@@ -91,38 +90,38 @@ instead of the sample Python script, use this:</p>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_print_all_groups</span>():
     <span style="color:#66d9ef">for</span> group <span style="color:#f92672">in</span> _all_groups():
-        <span style="color:#66d9ef">print</span>(group[<span style="color:#e6db74">&#39;email&#39;</span>])
+        <span style="color:#66d9ef">print</span>(group[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">email</span><span style="color:#e6db74">&#39;</span>])
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_all_groups</span>():
-    <span style="color:#e6db74">&#34;&#34;&#34;
-</span><span style="color:#e6db74">    Return a list of all group dicts.
-</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Return a list of all group dicts.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
     <span style="color:#75715e"># Build a client with appropriate scope privileges</span>
     service <span style="color:#f92672">=</span> _service(
-        service_name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;admin&#34;</span>,
-        service_version<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;directory_v1&#34;</span>,
+        service_name<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">admin</span><span style="color:#e6db74">&#34;</span>,
+        service_version<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">directory_v1</span><span style="color:#e6db74">&#34;</span>,
         <span style="color:#75715e"># See https://developers.google.com/admin-sdk/directory/v1/guides/authorizing</span>
         <span style="color:#75715e"># for a complete list of scopes.</span>
-        scope<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;https://www.googleapis.com/auth/admin.directory.group.readonly&#34;</span>)
+        scope<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">https://www.googleapis.com/auth/admin.directory.group.readonly</span><span style="color:#e6db74">&#34;</span>)
 
     <span style="color:#75715e"># Call the Admin SDK Directory API</span>
     <span style="color:#66d9ef">return</span> service<span style="color:#f92672">.</span>groups()<span style="color:#f92672">.</span>list(
         <span style="color:#75715e"># &#34;my_customer&#34; is a special alias that admins can use.</span>
-        customer<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;my_customer&#39;</span>
+        customer<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">my_customer</span><span style="color:#e6db74">&#39;</span>
     )<span style="color:#f92672">.</span>execute()
 
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_service</span>(service_name, service_version, scope):
-    <span style="color:#e6db74">&#34;&#34;&#34;
-</span><span style="color:#e6db74">    Return a configured service client for the API.
-</span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;&#34;&#34;</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    Return a configured service client for the API.</span><span style="color:#e6db74">
+</span><span style="color:#e6db74"></span><span style="color:#e6db74">    </span><span style="color:#e6db74">&#34;&#34;&#34;</span>
     <span style="color:#75715e"># Look for a local token.json file. Remove this if changing the scope.</span>
-    store <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>Storage(<span style="color:#e6db74">&#39;token.json&#39;</span>)
+    store <span style="color:#f92672">=</span> file<span style="color:#f92672">.</span>Storage(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">token.json</span><span style="color:#e6db74">&#39;</span>)
     creds <span style="color:#f92672">=</span> store<span style="color:#f92672">.</span>get()
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> creds <span style="color:#f92672">or</span> creds<span style="color:#f92672">.</span>invalid:
         <span style="color:#75715e"># If no valid creds, open a browser window to complete OAuth flow and save token.</span>
-        flow <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>flow_from_clientsecrets(<span style="color:#e6db74">&#39;credentials.json&#39;</span>, scope)
+        flow <span style="color:#f92672">=</span> client<span style="color:#f92672">.</span>flow_from_clientsecrets(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">credentials.json</span><span style="color:#e6db74">&#39;</span>, scope)
         creds <span style="color:#f92672">=</span> tools<span style="color:#f92672">.</span>run_flow(flow, store)
 
     <span style="color:#66d9ef">return</span> build(
@@ -131,9 +130,9 @@ instead of the sample Python script, use this:</p>
         http<span style="color:#f92672">=</span>creds<span style="color:#f92672">.</span>authorize(Http()))
 
 
-<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;__main__&#39;</span>:
-    main()</code></pre></div>
-<p>Execute this script to print out a complete list of group email addresses.</p>
+<span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">__main__</span><span style="color:#e6db74">&#39;</span>:
+    main()
+</code></pre></div><p>Execute this script to print out a complete list of group email addresses.</p>
 
         </div>
 
@@ -167,7 +166,7 @@ instead of the sample Python script, use this:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

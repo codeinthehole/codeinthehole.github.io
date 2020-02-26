@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,34 +74,28 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>New developers joining a project will often find that the project won&rsquo;t
+            <p>New developers joining a project will often find that the project won't
 build cleanly on their machine, and hours of time will be sunk into
 setting up the project so work can start. This is sad and expensive for
 all concerned.</p>
-
 <p>This is a particular menace in agencies (or anywhere with lots of small
 projects) where a large team of developers need to jump between
 projects. Tools like <a href="http://www.vagrantup.com">Vagrant</a> and
-<a href="http://www.docker.com/">Docker</a> can help but aren&rsquo;t the panacea they
-first seem to be<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
-
+<a href="http://www.docker.com/">Docker</a> can help but aren't the panacea they
+first seem to be<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 <p>Counter this by using continuous integration to build your project from
 scratch. Then any changes that break the build process (such as database
 schema changes not applying correctly) will be spotted early. New team
 members will be dishing out high-fives when their development
 environment is built and primed with sample data sixty seconds after
 cloning the repo.</p>
-
 <h3 id="tips">Tips</h3>
-
 <p>It should be trivial to get a project working locally. At
 <a href="http://www.tangentsnowball.com/">Tangent</a>, projects use a <code>makefile</code>
 for common tasks. Setting up a working version of the project is as
 simple as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make </code></pre></div>
-<p>It&rsquo;s helpful if you can template new projects to embed good practices
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make 
+</code></pre></div><p>It's helpful if you can template new projects to embed good practices
 like this. We frequently use Django and maintain a <a href="https://github.com/tangentlabs/tangent-django-boilerplate/">boilerplate Django
 project</a> for
 this purpose. It includes a
@@ -131,11 +125,9 @@ along these lines:</p>
     cd www <span style="color:#f92672">&amp;&amp;</span> py.test
 
 <span style="color:#a6e22e">ci</span><span style="color:#f92672">:</span> test database
-</code></pre></div>
-<p>Witness the <code>ci</code> target which runs the test suite <em>and</em> builds the
+</code></pre></div><p>Witness the <code>ci</code> target which runs the test suite <em>and</em> builds the
 database, effectively smoke-testing that the migrations apply correctly
-and the fixtures load (which is where we&rsquo;ve historically had pain).</p>
-
+and the fixtures load (which is where we've historically had pain).</p>
 <p>We use <a href="https://travis-ci.com/">Travis</a> for CI and our template
 <code>.travis.yml</code> looks a little like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: python
@@ -152,48 +144,43 @@ before_script:
   - psql -c <span style="color:#e6db74">&#39;CREATE DATABASE test_db OWNER test_role;&#39;</span> -U postgres
 
 script:
-  - make ci</code></pre></div>
-<p>which means that, <em>by default</em>, all new projects will be built from
+  - make ci
+</code></pre></div><p>which means that, <em>by default</em>, all new projects will be built from
 scratch as part of continuous integration. You should do this.</p>
-
 <h3 id="django-specific-issues">Django-specific issues</h3>
-
-<p>For the record, here&rsquo;s some of the build issues we&rsquo;ve encountered in
+<p>For the record, here's some of the build issues we've encountered in
 Django projects (both internal and external) Most stem from South
 migrations, which worked fine when applied piecemeal by the incumbent
 team but fail when run on a blank database. For instance:</p>
-
 <ul>
 <li>Migrations fail to apply as there are dependencies between
-migrations which haven&rsquo;t been captured. This is easily solved by
-employing South&rsquo;s support for dependent migrations (eg adding
+migrations which haven't been captured. This is easily solved by
+employing South's support for dependent migrations (eg adding
 <code>depends_on</code> to the relevant migration class).</li>
 <li>Migrations fail as they import models directly rather than using the
 reconstituted models that South provides. This is a beginner mistake
-really but still quite common. Fortunately, it&rsquo;s trivial to fix.</li>
+really but still quite common. Fortunately, it's trivial to fix.</li>
 <li>Migrations import and call functions that are no longer defined (but
 did exist when the migration was originally written).</li>
 <li>Migrations create instances of models from <em>other</em> apps where
-South&rsquo;s serialised version is out of sync with the database schema.
+South's serialised version is out of sync with the database schema.
 This can be tricky to fix as you can get circular dependencies
-between migrations. Often you&rsquo;ll need to rewrite migrations to
+between migrations. Often you'll need to rewrite migrations to
 create models in the migrations of their own apps.</li>
 </ul>
-
 <p><a href="https://twitter.com/andrewingram">Andrew Ingram</a> has written up an
 excellent summary of <a href="http://andrewingram.net/2012/dec/common-pitfalls-django-south/#check-your-migrations-run-from-scratch">common South
 pitfalls</a>.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1"><p>For instance, it&rsquo;s not trivial to share folders with a Docker
+<li id="fn:1" role="doc-endnote">
+<p>For instance, it's not trivial to share folders with a Docker
 container on OSX. See
-<a href="https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293">https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293</a></p>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<a href="https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293">https://gist.github.com/codeinthehole/7ea69f8a21c67cc07293</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -227,7 +214,7 @@ container on OSX. See
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

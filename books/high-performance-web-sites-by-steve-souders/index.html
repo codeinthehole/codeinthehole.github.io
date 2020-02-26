@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743411" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,8 +74,7 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><img src="/images/bookcovers/9780596529307.jpg" class="align-right" /></p>
-
+            <p><!-- raw HTML omitted --></p>
 <p>High Performance Web Sites (HPWS) is essentially a book-length
 exposition of the <a href="http://developer.yahoo.com/yslow/">YSlow extension to
 Firebug</a> augmented with case studies
@@ -85,13 +84,12 @@ the various guidelines that are used to grade the performance of a
 website. However, even for those familiar with this documentation, HPWS
 is still an excellent resource on how the performance of a web app can
 be tuned.</p>
-
 <p>Chapter by chapter, HPWS introduces a new guideline and expounds the
 underlying rationale, giving illustrations of the HTTP requests with and
 without the suggested improvement. For instance, the use of far-future
 Expires HTTP headers is an easy-win recommendation that prevents
-unnecessary requests once a browser&rsquo;s cache has been primed. This is
-something I&rsquo;ve used on several sites previously, employing the following
+unnecessary requests once a browser's cache has been primed. This is
+something I've used on several sites previously, employing the following
 Apache directives to add Expires headers to the HTTP:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
     ExpiresActive <span style="color:#66d9ef">on</span>
@@ -101,9 +99,8 @@ Apache directives to add Expires headers to the HTTP:</p>
     ExpiresByType text/css “access plus <span style="color:#ae81ff">2</span> days”
     ExpiresByType image/js “access plus <span style="color:#ae81ff">2</span> days”
     ExpiresDefault ”access plus <span style="color:#ae81ff">1</span> days”
-<span style="color:#f92672">&lt;/IfModule&gt;</span></code></pre></div>
-<p>Additional areas where I found out something new include:</p>
-
+<span style="color:#f92672">&lt;/IfModule</span><span style="color:#e6db74"></span><span style="color:#f92672">&gt;</span>
+</code></pre></div><p>Additional areas where I found out something new include:</p>
 <ul>
 <li>The performance hit that using @import directives within CSS files
 has.</li>
@@ -114,7 +111,6 @@ request.</li>
 balanced against the extra DNS look-up costs that each new domain
 incurs.</li>
 </ul>
-
 <p>Many of the performance guidelines can be adhered to easily, by making a
 few adjustments to the Apache configuration of your site; However, some
 performance-enhancing measures come at a cost to the development process
@@ -124,8 +120,7 @@ the conversion of easy-to-use development files to more
 performance-savvy production files. Nevertheless, in many cases, one has
 to decide where the balance between performance and inconvenience in
 development lies.</p>
-
-<p>It&rsquo;s quite a short book at 137 pages, but definitely a worthwhile
+<p>It's quite a short book at 137 pages, but definitely a worthwhile
 addition to any company library.</p>
 
         </div>
@@ -160,7 +155,7 @@ addition to any company library.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

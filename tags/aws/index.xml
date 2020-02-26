@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>aws on David Winterbottom</title>
@@ -17,10 +17,10 @@
       <pubDate>Tue, 29 Aug 2017 14:08:08 +0100</pubDate>
       
       <guid>https://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</guid>
-      <description>There&amp;rsquo;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
+      <description>There&#39;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
 First, set:
-log_statement = None  Don&amp;rsquo;t set this to all as the AWS docs suggest.
-Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
+log_statement = None  Don&#39;t set this to all as the AWS docs suggest.
+Further, don&#39;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&#39;s recommended value: it&#39;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
 $ pgbadger -f stderr -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
     </item>
     
@@ -31,8 +31,8 @@ $ pgbadger -f stderr -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope th
       
       <guid>https://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</guid>
       <description>Cloud computing and immutable infrastructure deployments have changed the way I use SSH. I miss the days when I could run:
-$ ssh app1-prod to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&amp;rsquo;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
-Host app1-prod User example_user HostName 74.207.251.29  This circumvented the labour-intensive act of typing in the remote username and IP address when SSHing around town.</description>
+$ ssh app1-prod to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&#39;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
+Host app1-prod User example_user HostName 74.207.251.29 This circumvented the labour-intensive act of typing in the remote username and IP address when SSHing around town.</description>
     </item>
     
   </channel>

@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -77,40 +77,35 @@ if (!doNotTrack) {
             <p>The excellent
 <a href="https://bitbucket.org/dhellmann/virtualenvwrapper..">virtualenvwrapper</a>
 supports a <code>postmkvirtualenv</code> script to bootstrap your virtual
-environments. Here&rsquo;s a useful implementation:</p>
+environments. Here's a useful implementation:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e"># Grab project name from virtualenv name</span>
 NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>basename $VIRTUAL_ENV<span style="color:#66d9ef">)</span>
 
 <span style="color:#75715e"># Set terminal title on postactivate</span>
-echo <span style="color:#e6db74">&#34;title </span>$NAME<span style="color:#e6db74">&#34;</span> &gt; $VIRTUAL_ENV/bin/postactivate
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">title </span>$NAME<span style="color:#e6db74">&#34;</span> &gt; $VIRTUAL_ENV/bin/postactivate
 
 <span style="color:#75715e"># Change directory to root of project on postactivate. We assume the</span>
 <span style="color:#75715e"># mkvirtualenv is being run from the root of the project. This line</span> 
 <span style="color:#75715e"># will need to edited later if not.</span>
-echo <span style="color:#e6db74">&#34;cd </span>$PWD<span style="color:#e6db74">&#34;</span> &gt;&gt; $VIRTUAL_ENV/bin/postactivate
+echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">cd </span>$PWD<span style="color:#e6db74">&#34;</span> &gt;&gt; $VIRTUAL_ENV/bin/postactivate
 
 <span style="color:#75715e"># Run postactivate now to get the title set</span>
-source $VIRTUAL_ENV/bin/postactivate</code></pre></div>
-<p>This ensures that a new virtualenv has a <code>postactivate</code> script which:</p>
-
+source $VIRTUAL_ENV/bin/postactivate
+</code></pre></div><p>This ensures that a new virtualenv has a <code>postactivate</code> script which:</p>
 <ol>
 <li>Sets the terminal title to that of the virtualenv</li>
 <li>Changes directory to the root of the project</li>
 </ol>
-
 <p>By convention, such a script lives in <code>~/.virtualenvs/postmkvirtualenv</code>.</p>
-
 <p>Note that the <code>title</code> function is defined in my <code>~/.bashrc</code> as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> title<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$1<span style="color:#e6db74">\007&#34;</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>As someone who develops in iTerm and Terminal, automatically setting the
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> title<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+    echo -ne <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\033]0;</span>$1<span style="color:#e6db74">\007</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>As someone who develops in iTerm and Terminal, automatically setting the
 tab titles is a useful navigation aid.</p>
-
-<p><img src="/images/screenshots/terminal-titles.png" alt="image" /></p>
-
+<p><img src="/images/screenshots/terminal-titles.png" alt="image"></p>
 <p>There are more <a href="http://virtualenvwrapper.readthedocs.org/en/latest/tips.html">tips and
 tricks</a>
 available in the virtualenvwrapper docs.</p>
@@ -147,7 +142,7 @@ available in the virtualenvwrapper docs.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

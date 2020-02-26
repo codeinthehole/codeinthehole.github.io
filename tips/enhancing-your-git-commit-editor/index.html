@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,15 +75,13 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Confession: I am a pedant, especially around commit messages.</p>
-
 <p>I often find myself writing very similar commit messages (like &ldquo;Bump
 version to 0.4.3&rdquo;) and want to ensure I use the same wording each time.
 Thanks to <a href="https://twitter.com/LuRsT">@LuRsT</a>, I learnt how to employ
-git&rsquo;s
+git's
 <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks#Client-Side-Hooks">prepare-commit-msg</a>
-hook to display the last 5 commit messages when I&rsquo;m editing a commit
+hook to display the last 5 commit messages when I'm editing a commit
 message.</p>
-
 <p>Use the following <code>.git/hooks/prepare-commit-msg</code> hook:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>
@@ -95,15 +93,13 @@ BRANCH_NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</s
     echo <span style="color:#e6db74">&#34;# ----------------------&#34;</span> &gt;&gt; $1
     COMMITS<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>git log --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#34;# %h %s [%an]&#34;</span> -5<span style="color:#e6db74">`</span>
     echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt;&gt; $1
-<span style="color:#66d9ef">fi</span></code></pre></div>
-<p>then your default commit template looks like this:</p>
-
-<p><img src="/images/screenshots/git-commit-editor.png" alt="image" /></p>
-
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><p>then your default commit template looks like this:</p>
+<p><img src="/images/screenshots/git-commit-editor.png" alt="image"></p>
 <p>Note, using <code>echo &quot;${COMMITS}&quot;</code> (instead of <code>echo $COMMITS</code>) ensures
 newlines are preserved (which I learnt in <a href="http://stackoverflow.com/questions/754395/losing-newline-after-assigning-grep-result-to-a-shell-variable">this Stack Overflow
 answer</a>).
-Also we don&rsquo;t echo commit messages while rebasing as it has <a href="http://gmurphey.com/2013/02/02/ignoring-git-hooks-when-rebasing.html">strange
+Also we don't echo commit messages while rebasing as it has <a href="http://gmurphey.com/2013/02/02/ignoring-git-hooks-when-rebasing.html">strange
 side-effects</a>.</p>
 
         </div>
@@ -138,7 +134,7 @@ side-effects</a>.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

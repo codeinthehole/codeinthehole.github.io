@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,70 +74,50 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>Using the <a href="http://defunkt.io/hub/">Hub</a> library, it&rsquo;s possible to
+            <p>Using the <a href="http://defunkt.io/hub/">Hub</a> library, it's possible to
 convert Github issues into pull requests. This gives rise to a useful
 Github workflow which this article describes.</p>
-
-<p>This is nothing new; it&rsquo;s been <a href="http://www.topbug.net/blog/2012/03/25/attach-a-pull-request-to-an-existing-github-issue/">written about
+<p>This is nothing new; it's been <a href="http://www.topbug.net/blog/2012/03/25/attach-a-pull-request-to-an-existing-github-issue/">written about
 before</a>.
 However, this is something I do all the time whilst developing
-<a href="https://github.com/tangentlabs/django-oscar">Oscar</a> and I&rsquo;m fed up with
+<a href="https://github.com/tangentlabs/django-oscar">Oscar</a> and I'm fed up with
 explaining it. This article is a reference I can point people at.</p>
-
 <h3 id="workflow">Workflow</h3>
-
 <h4 id="discuss">Discuss</h4>
-
 <p>Discuss an idea for a new feature on the project mailing list. Agree on
 what needs to be done.</p>
-
 <h4 id="specify">Specify</h4>
-
 <p>Create a Github issue for the feature.</p>
-
-<p>It&rsquo;s often useful to write the ticket as a brief functional spec,
-documenting the requirements as user stories. Github&rsquo;s <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">support for
+<p>It's often useful to write the ticket as a brief functional spec,
+documenting the requirements as user stories. Github's <a href="https://github.com/blog/1375-task-lists-in-gfm-issues-pulls-comments">support for
 checkboxes in
 markdown</a>
 is useful here:</p>
-
 <h4 id="work">Work</h4>
-
 <p>Create a feature branch to work on this issue:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b issue/472/django1.5</code></pre></div>
-<p>I find it helpful to include the issue number in the branch name but
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b issue/472/django1.5
+</code></pre></div><p>I find it helpful to include the issue number in the branch name but
 that might not be to your taste.</p>
-
 <p>Work and commit onto your branch as normal.</p>
-
 <h4 id="review">Review</h4>
-
 <p>Now push to the remote:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ git push -u origin issue/472/django1.5</code></pre></div>
-<p>and attach your commits to the original issue, thereby converting it
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ git push -u origin issue/472/django1.5
+</code></pre></div><p>and attach your commits to the original issue, thereby converting it
 into a pull request.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ hub pull-request -i <span style="color:#ae81ff">472</span> -h tangentlabs:issue/472/django1.5</code></pre></div>
-<p>where <code>tangentlabs</code> is the Github username of the owner of the <code>origin</code>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ hub pull-request -i <span style="color:#ae81ff">472</span> -h tangentlabs:issue/472/django1.5
+</code></pre></div><p>where <code>tangentlabs</code> is the Github username of the owner of the <code>origin</code>
 remote.</p>
-
 <p>Note the issue branch was pushed to the <code>origin</code> remote rather than a
 fork. This is convenient as it lets other developers add commits to the
 pull request.</p>
-
 <h4 id="iterate">Iterate</h4>
-
 <p>The pull request can now be code-reviewed and further commits added.
 This process continues until the issue is resolved and can be merged
 into <code>master</code>.</p>
-
 <h3 id="notes">Notes</h3>
-
-<p>Hub&rsquo;s <code>pull-request</code> command is useful yet relatively unknown. The <code>-i</code>
+<p>Hub's <code>pull-request</code> command is useful yet relatively unknown. The <code>-i</code>
 flag indicates the Github issue number while <code>-h</code> specifies the source
-branch for the pull request. Here&rsquo;s the relevant help snippet:</p>
-
+branch for the pull request. Here's the relevant help snippet:</p>
 <pre><code>git pull-request [-f] [TITLE|-i ISSUE|ISSUE-URL] [-b BASE] [-h HEAD]
        Opens a pull request on GitHub for the project that the &quot;origin&quot;
        remote points to. The default head of the pull  request  is  the
@@ -157,11 +137,9 @@ branch for the pull request. Here&rsquo;s the relevant help snippet:</p>
        Alternatively, instead of title you can paste a full URL  to  an
        issue on GitHub.
 </code></pre>
-
 <p>Without this command, you would end up creating a separate pull-request
 and issue for the same piece of work.</p>
-
-<p>You can see this workflow in action via <a href="https://github.com/tangentlabs/django-oscar/pulls">Oscar&rsquo;s pull
+<p>You can see this workflow in action via <a href="https://github.com/tangentlabs/django-oscar/pulls">Oscar's pull
 requests</a>.</p>
 
         </div>
@@ -196,7 +174,7 @@ requests</a>.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

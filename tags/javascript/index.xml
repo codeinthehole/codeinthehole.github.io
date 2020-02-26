@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>javascript on David Winterbottom</title>
@@ -17,8 +17,8 @@
       <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</guid>
-      <description>I&amp;rsquo;m a big fan of Value Objects - some of the most useful classes I&amp;rsquo;ve ever written have been lightweight wrappers around strings.
-For my first contribution to the node.js ecosystem, I&amp;rsquo;ve published a simple, immutable URL object to the Node package manager (npm) directory. It provides a light-weight, immutable URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and &amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various extension methods that make working with URLs easy.</description>
+      <description>I&#39;m a big fan of Value Objects - some of the most useful classes I&#39;ve ever written have been lightweight wrappers around strings.
+For my first contribution to the node.js ecosystem, I&#39;ve published a simple, immutable URL object to the Node package manager (npm) directory. It provides a light-weight, immutable URL object that encapsulates the functionality of the existing &amp;lsquo;url&amp;rsquo; and &amp;lsquo;querystring&amp;rsquo; modules in a single object as well as offering various extension methods that make working with URLs easy.</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@ irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This ret
       <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</guid>
-      <description>It&amp;rsquo;s sometime useful to interact with cookies directly on the client-side using javascript. This can be useful for a variety of situations, such as persisting display settings between page requests without storing anything on the server. I&amp;rsquo;ve also used them to display a simple welcome message to new visitors. It can make your controller code simpler if this kind of simple display logic is contained entirely on the client side.</description>
+      <description>It&#39;s sometime useful to interact with cookies directly on the client-side using javascript. This can be useful for a variety of situations, such as persisting display settings between page requests without storing anything on the server. I&#39;ve also used them to display a simple welcome message to new visitors. It can make your controller code simpler if this kind of simple display logic is contained entirely on the client side.</description>
     </item>
     
   </channel>

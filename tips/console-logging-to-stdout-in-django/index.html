@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1564474804" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1582743410" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -74,53 +74,45 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<h3 id="problem">Problem</h3>
-
+            <h3 id="problem">Problem</h3>
 <p>By default in Python (and Django), the documented console handler emits
 to STDERR, but you want it to use STDOUT instead. This is often desired
 for management commands that run as cronjobs.</p>
-
 <h3 id="solution">Solution</h3>
-
 <p>For Python 2.6, use the following LOGGING config in your settings to
 specify a different output stream:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 LOGGING <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74">&#39;handlers&#39;</span>: {
-        <span style="color:#e6db74">&#39;console&#39;</span>:{
-            <span style="color:#e6db74">&#39;level&#39;</span>:<span style="color:#e6db74">&#39;INFO&#39;</span>,
-            <span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;logging.StreamHandler&#39;</span>,
-            <span style="color:#e6db74">&#39;strm&#39;</span>: sys<span style="color:#f92672">.</span>stdout
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>: {
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">console</span><span style="color:#e6db74">&#39;</span>:{
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">level</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">INFO</span><span style="color:#e6db74">&#39;</span>,
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging.StreamHandler</span><span style="color:#e6db74">&#39;</span>,
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">strm</span><span style="color:#e6db74">&#39;</span>: sys<span style="color:#f92672">.</span>stdout
         },
-        <span style="color:#f92672">...</span>
+        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
     }
-}</code></pre></div>
-<p>For Python 2.7+, the keyword argument to the constructor of
+}
+</code></pre></div><p>For Python 2.7+, the keyword argument to the constructor of
 <code>logging.StreamHandler</code> is <code>stream</code> rather than <code>strm</code>. Ensure you use
 the right version.</p>
-
 <h3 id="discussion">Discussion</h3>
-
-<p><a href="https://docs.djangoproject.com/en/dev/topics/logging/#an-example">Django&rsquo;s logging
+<p><a href="https://docs.djangoproject.com/en/dev/topics/logging/#an-example">Django's logging
 docs</a>
 detail the following logging configuration for a console handler:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">LOGGING <span style="color:#f92672">=</span> {
-    <span style="color:#f92672">...</span>
-    <span style="color:#e6db74">&#39;handlers&#39;</span>: {
-        <span style="color:#e6db74">&#39;console&#39;</span>:{
-            <span style="color:#e6db74">&#39;level&#39;</span>:<span style="color:#e6db74">&#39;DEBUG&#39;</span>,
-            <span style="color:#e6db74">&#39;class&#39;</span>:<span style="color:#e6db74">&#39;logging.StreamHandler&#39;</span>,
-            <span style="color:#e6db74">&#39;formatter&#39;</span>: <span style="color:#e6db74">&#39;simple&#39;</span>
+    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>: {
+        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">console</span><span style="color:#e6db74">&#39;</span>:{
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">level</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">DEBUG</span><span style="color:#e6db74">&#39;</span>,
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class</span><span style="color:#e6db74">&#39;</span>:<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging.StreamHandler</span><span style="color:#e6db74">&#39;</span>,
+            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">formatter</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">simple</span><span style="color:#e6db74">&#39;</span>
         },
     },
-    <span style="color:#f92672">...</span>
-}</code></pre></div>
-<p>however, the default output stream for <code>logging.StreamHandler</code> is
+    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+}
+</code></pre></div><p>however, the default output stream for <code>logging.StreamHandler</code> is
 STDERR. The extra keyword argument in the solution alter this behaviour
 to use STDOUT.</p>
-
 <p>Logging to STDERR means that any output from cron jobs is emailed to
 root. A more desirable behaviour is for only genuine errors to trigger
 emails, while normal output can be logged to file. Hence, a sensible
@@ -128,7 +120,8 @@ cronjob file would look something like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SHELL<span style="color:#f92672">=</span>/bin/bash
 MAILTO<span style="color:#f92672">=</span>alerts.someproject@yourcompany.co.uk
 
-*/10 * * * * app source /venv/bin/activate <span style="color:#f92672">&amp;&amp;</span> /app/manage.py do_something &gt; /dev/null  </code></pre></div>
+*/10 * * * * app source /venv/bin/activate <span style="color:#f92672">&amp;&amp;</span> /app/manage.py do_something &gt; /dev/null  
+</code></pre></div>
         </div>
 
         <div id="article_meta">
@@ -161,7 +154,7 @@ MAILTO<span style="color:#f92672">=</span>alerts.someproject@yourcompany.co.uk
             </p>
 
             <p>
-            Copyright &copy; 2005-2019 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>
