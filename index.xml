@@ -407,7 +407,7 @@ There are various techniques available for dealing with this2, but what we do at
       <guid>https://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
       <description>At Tangent, we use Zabbix for monitoring and alerting. This is a note-to-self on how to configure application monitoring.
 Management command You need a script that prints out a value to STDOUT. A simple management command suffices:
-from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch_%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;#34;No method found with name &amp;#39;%s&amp;#39;&amp;#34; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
+from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def add_arguments(self, parser): parser.add_argument(&amp;#39;args&amp;#39;, nargs=&amp;#39;*&amp;#39;) def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch__%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;#34;No method found with name &amp;#39;%s&amp;#39;&amp;#34; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
     </item>
     
     <item>
