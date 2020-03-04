@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,7 +75,9 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>At Tangent we handle environment-specific configuration of Django
+            
+
+<p>At Tangent we handle environment-specific configuration of Django
 projects using <a href="http://justcramer.com/2011/01/13/settings-in-django/">the method outlined by David
 Cramer</a>. This
 involves distinguishing between core settings (which we keep in
@@ -83,13 +85,17 @@ involves distinguishing between core settings (which we keep in
 <code>core/stage.py</code>, <code>core/test.py</code>). The standard <code>settings.py</code> module
 imports all defaults and then uses a enviromental shell variable to
 determine which environment settings module to import.</p>
+
 <h3 id="a-problem">A problem</h3>
+
 <p>One tricky issue with this arrangement is logging to file. Ideally, we
 want to define a single <code>LOGGING</code> dict in the default settings but have
 file logging use an environment-specific folder. For example, logging to
 file in the test environment goes to <code>/var/log/project/test/</code> while
 stage goes to a file in <code>/var/log/project/stage</code>.</p>
+
 <h3 id="one-solution">One solution</h3>
+
 <p>This can be solved by using a string template for the <code>filename</code>
 argument to each <code>FileHandler</code> in the <code>LOGGING</code> setting:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
@@ -112,8 +118,8 @@ LOGGING <span style="color:#f92672">=</span> {
             <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">propagate</span><span style="color:#e6db74">&#39;</span>: False,
         },
     }
-}
-</code></pre></div><p>then importing the default <code>LOGGING</code> dict into your environment-specific
+}</code></pre></div>
+<p>then importing the default <code>LOGGING</code> dict into your environment-specific
 settings and formatting each filename with the correct path:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
 
@@ -122,10 +128,12 @@ settings and formatting each filename with the correct path:</p>
 LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/var/log/project/test/</span><span style="color:#e6db74">&#39;</span>
 <span style="color:#66d9ef">for</span> handler <span style="color:#f92672">in</span> LOGGING[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values():
     <span style="color:#66d9ef">if</span> handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging.FileHandler</span><span style="color:#e6db74">&#39;</span>:
-        handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>format(log_root<span style="color:#f92672">=</span>LOG_ROOT)
-</code></pre></div><p>This works but is rather clunky. For instance, the default <code>LOGGING</code>
+        handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>format(log_root<span style="color:#f92672">=</span>LOG_ROOT)</code></pre></div>
+<p>This works but is rather clunky. For instance, the default <code>LOGGING</code>
 setting (without an environmental override) will lead to an error .</p>
+
 <h3 id="another-solution">Another solution</h3>
+
 <p>Another, possibly more elegant, solution is to use a specialisd logging
 handler that defers evaluation of the filepath until it tries to log a
 record.</p>
@@ -145,8 +153,8 @@ record.</p>
         <span style="color:#75715e"># will be imported when settings.py is executed.</span>
         <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
         self<span style="color:#f92672">.</span>baseFilename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(settings<span style="color:#f92672">.</span>LOG_ROOT, self<span style="color:#f92672">.</span>filename)
-        <span style="color:#66d9ef">return</span> BaseFileHandler<span style="color:#f92672">.</span>_open(self)
-</code></pre></div><p>Now, all we need to do is use the new handler in our <code>LOGGING</code> dict:</p>
+        <span style="color:#66d9ef">return</span> BaseFileHandler<span style="color:#f92672">.</span>_open(self)</code></pre></div>
+<p>Now, all we need to do is use the new handler in our <code>LOGGING</code> dict:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
 
 LOGGING <span style="color:#f92672">=</span> {
@@ -167,19 +175,18 @@ LOGGING <span style="color:#f92672">=</span> {
             <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">propagate</span><span style="color:#e6db74">&#39;</span>: False,
         },
     }
-}
-</code></pre></div><p>and specify a <code>LOG_ROOT</code> setting for each environment:</p>
+}</code></pre></div>
+<p>and specify a <code>LOG_ROOT</code> setting for each environment:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
 
-LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/var/log/project/test/</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><p>Such a logger is part of
+LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/var/log/project/test/</span><span style="color:#e6db74">&#39;</span></code></pre></div>
+<p>Such a logger is part of
 <a href="https://github.com/tangentlabs/django-oscar/blob/master/oscar/core/logging/handlers.py">django-oscar</a>,
-but I've packaged it up separately so it can be used in non-Oscar
+but I&rsquo;ve packaged it up separately so it can be used in non-Oscar
 projects. The package is called
 <a href="https://github.com/codeinthehole/django-deferred-filelogger">django-deferred-filelogger</a>
 and can be installed from PyPI using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pip install django-deferred-filelogger
-</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pip install django-deferred-filelogger</code></pre></div>
         </div>
 
         <div id="article_meta">

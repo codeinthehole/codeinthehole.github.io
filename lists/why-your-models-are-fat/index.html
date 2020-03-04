@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -76,62 +76,58 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Because:</p>
+
 <ul>
-<li>
-<p>You moved everything out of the <code>views.py</code> modules when you heard fat controllers
-were bad.</p>
-</li>
-<li>
-<p>And you've read that fat models are a good idea<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
-</li>
-<li>
-<p>You need some extra functionality in a template and this is the easiest way
+<li><p>You moved everything out of the <code>views.py</code> modules when you heard fat controllers
+were bad.</p></li>
+
+<li><p>And you&rsquo;ve read that fat models are a good idea<sup class="footnote-ref" id="fnref:fatmodels"><a href="#fn:fatmodels">1</a></sup>.</p></li>
+
+<li><p>You need some extra functionality in a template and this is the easiest way
 to shoehorn it in. Eg:</p>
-</li>
+<pre><code class="language-html+django" data-lang="html+django"><p>The current balance is {{ account.get_balance_via_three_network_calls_lol }}</p></code></pre></li>
+
+<li><p>You can quickly solve your current problem by adding <em>n</em> more lines to that method (repeat <em>ad infinitum</em>)<sup class="footnote-ref" id="fnref:srp"><a href="#fn:srp">2</a></sup>.</p></li>
+
+<li><p>You&rsquo;re scared people will ignore your crucial wrapper function if it&rsquo;s not
+directly on the model<sup class="footnote-ref" id="fnref:scared"><a href="#fn:scared">3</a></sup>.</p></li>
+
+<li><p>Are you even allowed to put application logic anywhere but a <code>models.py</code>?<sup class="footnote-ref" id="fnref:permission"><a href="#fn:permission">4</a></sup></p></li>
 </ul>
-<pre><code class="language-html+django" data-lang="html+django">&lt;p&gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&lt;/p&gt;
-</code></pre><ul>
-<li>
-<p>You can quickly solve your current problem by adding <em>n</em> more lines to that method (repeat <em>ad infinitum</em>)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
-</li>
-<li>
-<p>You're scared people will ignore your crucial wrapper function if it's not
-directly on the model<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
-</li>
-<li>
-<p>Are you even allowed to put application logic anywhere but a <code>models.py</code>?<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
-</li>
-</ul>
-<section class="footnotes" role="doc-endnotes">
-<hr>
+<div class="footnotes">
+
+<hr />
+
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>For example:</p>
+<li id="fn:fatmodels"><p>For example:</p>
+
 <ul>
 <li><a href="https://hackerfall.com/story/fat-models--a-django-code-organization-strategy">Fat Models - A Django Code Organization Strategy</a></li>
 <li><a href="http://django-best-practices.readthedocs.io/en/latest/applications.html#make-em-fat">Django Best Practices: Make &lsquo;em Fat</a></li>
 <li><a href="https://ultimatedjango.com/learn-django/lessons/adding-business-logic-to-models/">Ultimate Django: Adding Business Logic to Models</a></li>
 </ul>
-<p>However, in practice, they're a bad idea (although this sometimes takes a
-few months to become apparent). <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>Requires a poor-quality test suite and diligent ignorance of the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single
-Responsibility Principle</a>. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3" role="doc-endnote">
-<p>A legitimate problem with a liberal language like Python where it's
-hard to enforce calling conventions as nothing is truly private. <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4" role="doc-endnote">
-<p>You are: your web framework is not your boss.</p>
-<p>As a rule-of-thumb, your application logic should live in modules that aren't
+
+<p>However, in practice, they&rsquo;re a bad idea (although this sometimes takes a
+few months to become apparent).</p>
+ <a class="footnote-return" href="#fnref:fatmodels"><sup>[return]</sup></a></li>
+
+<li id="fn:srp"><p>Requires a poor-quality test suite and diligent ignorance of the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single
+Responsibility Principle</a>.</p>
+ <a class="footnote-return" href="#fnref:srp"><sup>[return]</sup></a></li>
+
+<li id="fn:scared"><p>A legitimate problem with a liberal language like Python where it&rsquo;s
+hard to enforce calling conventions as nothing is truly private.</p>
+ <a class="footnote-return" href="#fnref:scared"><sup>[return]</sup></a></li>
+
+<li id="fn:permission"><p>You are: your web framework is not your boss.</p>
+
+<p>As a rule-of-thumb, your application logic should live in modules that aren&rsquo;t
 Django-specific modules (eg not in <code>views.py</code>, <code>models.py</code> or <code>forms.py</code>).
 If I had my way, Django would create an empty <code>business_logic.py</code> in each
-new app to encourage this. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+new app to encourage this.</p>
+ <a class="footnote-return" href="#fnref:permission"><sup>[return]</sup></a></li>
 </ol>
-</section>
+</div>
 
         </div>
 

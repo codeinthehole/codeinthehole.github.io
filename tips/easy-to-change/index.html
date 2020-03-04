@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,93 +75,112 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>I care about writing <em>maintainable</em> software<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>: code that is a pleasure
+            
+
+<p>I care about writing <em>maintainable</em> software<sup class="footnote-ref" id="fnref:octopus"><a href="#fn:octopus">1</a></sup>: code that is a pleasure
 to work with in the long-term; where new requirements can be accommodated
 smoothly and swiftly &ndash; above all, software that is <em>easy to change</em>.</p>
+
 <p>Memorise that phrase.</p>
+
 <p>I feel we lose sight of this overarching guiding principle and
 harm our codebases by dogmatically pursuing well-intentioned but proximate goals.</p>
+
 <p>The main thing the future maintainer of your code (i.e. you) cares about is
-whether the code is easy to change<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+whether the code is easy to change<sup class="footnote-ref" id="fnref:easy-to-delete"><a href="#fn:easy-to-delete">2</a></sup>.</p>
+
 <h3 id="what">What?</h3>
-<p>Software has two core values<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>:</p>
+
+<p>Software has two core values<sup class="footnote-ref" id="fnref:clean-architecture"><a href="#fn:clean-architecture">3</a></sup>:</p>
+
 <ul>
-<li>
-<p><strong>Behaviour</strong> - What the software does. Working software must behave in a way that
-meets its requirements.</p>
-</li>
-<li>
-<p><strong>Design</strong> - The <em>structure</em> of software; how it is implemented. This
-will dictate how easy or expensive it is to adapt to changing requirements.</p>
-</li>
+<li><p><strong>Behaviour</strong> - What the software does. Working software must behave in a way that
+meets its requirements.</p></li>
+
+<li><p><strong>Design</strong> - The <em>structure</em> of software; how it is implemented. This
+will dictate how easy or expensive it is to adapt to changing requirements.</p></li>
 </ul>
+
 <p>Maintainable software not only meets its requirements but is structured to
 ensure it is easy to change in the future.</p>
+
 <p>This should be your aim. For each unit of code that you write, ask yourself:</p>
+
 <blockquote>
 <p>Will this be easy to change in the future?</p>
 </blockquote>
+
 <p>From this simple question, every principle, practice and pattern of &ldquo;good&rdquo; software
 design can be shaken out. Things like:</p>
+
 <ul>
 <li>Loose coupling.</li>
 <li>Simplicity (<a href="https://en.wikipedia.org/wiki/KISS_principle">KISS</a>, <a href="https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it">YAGNI</a>).</li>
-<li>Don't Repeat Yourself (<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>)</li>
+<li>Don&rsquo;t Repeat Yourself (<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">DRY</a>)</li>
 <li>Single Responsibility Principle (SRP), polymorphism and the rest of <a href="https://en.wikipedia.org/wiki/SOLID">the SOLID principles</a>.</li>
 <li>Accurate naming; readable code.</li>
 </ul>
+
 <p>These are not goals in themselves - they exist to guide you towards your
 ultimate destination: writing easy-to-change software.</p>
+
 <h3 id="a-warning">A warning</h3>
+
 <p>Beware of dogmatically pursuing these intermediate principles
 and patterns. Whilst they generally guide you in the right direction, they can be
 harmful if applied without thought.</p>
+
 <p>For instance, relentlessly removing all duplication from a component can make it
 <em>harder</em> to change for future maintainers, through increased coupling and poor
-readability<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.</p>
+readability<sup class="footnote-ref" id="fnref:test-suites"><a href="#fn:test-suites">4</a></sup>.</p>
+
 <h3 id="recap">Recap</h3>
+
 <p>In short, <em>maintainable</em> code is <em>easy to change</em>.
 This is the overarching principle that should inform your design decisions.</p>
-<!-- raw HTML omitted -->
-<section class="footnotes" role="doc-endnotes">
-<hr>
+
+<!-- Footnotes -->
+<div class="footnotes">
+
+<hr />
+
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>I work at <a href="https://octopus.energy">Octopus Energy</a><sup id="fnref:5"><a href="#fn:5" class="footnote-ref" role="doc-noteref">5</a></sup>, a UK energy supplier committed to driving more
+<li id="fn:octopus"><p>I work at <a href="https://octopus.energy">Octopus Energy</a><sup class="footnote-ref" id="fnref:referral"><a href="#fn:referral">5</a></sup>, a UK energy supplier committed to driving more
 households to use renewable energy (all our tariffs are 100% renewable) and to have a
-more considered relationship with their energy consumption<sup id="fnref:6"><a href="#fn:6" class="footnote-ref" role="doc-noteref">6</a></sup>.</p>
+more considered relationship with their energy consumption<sup class="footnote-ref" id="fnref:agile"><a href="#fn:agile">6</a></sup>.</p>
+
 <p>Climate change is something I care deeply about and I have every intention of
 working for Octopus Energy for a long time. That means working with the same
 codebase for a long time and consequently, &ldquo;maintainability&rdquo;, ensuring the
 codebase is a pleasure to work with in the long term, is a primary focus of mine and the wider
-software engineering team. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>Don't forget: deleting is a form of change. Code that is easy to delete is a gift
-to future maintainers. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:3" role="doc-endnote">
-<p>See, for example, <em>The Clean Architecture</em> by Robert C.
-Martin (page 14 especially). <a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:4" role="doc-endnote">
-<p>This is commonly seen in test suites, where some duplication of
-set-up code is often preferable to extracting everything. <a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:5" role="doc-endnote">
-<p>If you're in the position to switch suppliers, check-out our
+software engineering team.</p>
+ <a class="footnote-return" href="#fnref:octopus"><sup>[return]</sup></a></li>
+
+<li id="fn:easy-to-delete"><p>Don&rsquo;t forget: deleting is a form of change. Code that is easy to delete is a gift
+to future maintainers.</p>
+ <a class="footnote-return" href="#fnref:easy-to-delete"><sup>[return]</sup></a></li>
+
+<li id="fn:clean-architecture"><p>See, for example, <em>The Clean Architecture</em> by Robert C.
+Martin (page 14 especially).</p>
+ <a class="footnote-return" href="#fnref:clean-architecture"><sup>[return]</sup></a></li>
+
+<li id="fn:test-suites"><p>This is commonly seen in test suites, where some duplication of
+set-up code is often preferable to extracting everything.</p>
+ <a class="footnote-return" href="#fnref:test-suites"><sup>[return]</sup></a></li>
+
+<li id="fn:referral"><p>If you&rsquo;re in the position to switch suppliers, check-out our
 <a href="https://uk.trustpilot.com/review/octopus.energy">Trust Pilot reviews</a> and, if convinced, consider
 using this <a href="https://share.octopus.energy/tulip-fish-149">referral link</a> to
 switch to us which will give you £50 free credit when your supply has
-switched. <a href="#fnref:5" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:6" role="doc-endnote">
-<p>See, for example, our <a href="https://octopus.energy/agile/">Agile</a> tariff which uses half-hourly pricing
+switched.</p>
+ <a class="footnote-return" href="#fnref:referral"><sup>[return]</sup></a></li>
+
+<li id="fn:agile"><p>See, for example, our <a href="https://octopus.energy/agile/">Agile</a> tariff which uses half-hourly pricing
 to steer consumption away from the peak hours (of 4pm to 7pm) which put the most strain on the
-national grid. <a href="#fnref:6" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+national grid.</p>
+ <a class="footnote-return" href="#fnref:agile"><sup>[return]</sup></a></li>
 </ol>
-</section>
+</div>
 
         </div>
 

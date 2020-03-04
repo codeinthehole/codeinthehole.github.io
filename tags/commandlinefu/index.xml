@@ -17,7 +17,7 @@
       <pubDate>Sat, 04 Apr 2015 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</guid>
-      <description>For the record, I no longer maintain commandlinefu.com. I&#39;ve handed over the baton to notable Bay Area celebrity, Jon Hendren (@fart). This is a good thing for the site and its users as I have been unable to do much maintenance in recent times. I look forward to seeing how the site evolves.</description>
+      <description>For the record, I no longer maintain commandlinefu.com. I&amp;rsquo;ve handed over the baton to notable Bay Area celebrity, Jon Hendren (@fart). This is a good thing for the site and its users as I have been unable to do much maintenance in recent times. I look forward to seeing how the site evolves.</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/linking-to-github/</guid>
-      <description>It was rightly pointed out yesterday that it&#39;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
+      <description>It was rightly pointed out yesterday that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
 $ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
     </item>
     
@@ -36,7 +36,7 @@ $ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/d
       <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
-      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&#39;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
+      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&amp;rsquo;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
 This article is largely a note-to-self in case I have to repeat the process. However, if you do find yourself in a similar position, here are a few command-line tricks for analysing your git history.</description>
     </item>
     
@@ -47,7 +47,7 @@ This article is largely a note-to-self in case I have to repeat the process. How
       
       <guid>https://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</guid>
       <description>I work at an agency where we pay $200 a month to Github for their platinum plan. This article is a summary of an internal talk I gave on making the most of our subscription.
-There&#39;s nothing original here: it&#39;s just a collection of tips that I&#39;ve harvested over the last few years. I&#39;m publishing this article mainly so I have something to refer future employees to.
+There&amp;rsquo;s nothing original here: it&amp;rsquo;s just a collection of tips that I&amp;rsquo;ve harvested over the last few years. I&amp;rsquo;m publishing this article mainly so I have something to refer future employees to.
 Use pull requests Pull requests are an excellent tool for fostering code review.</description>
     </item>
     
@@ -58,11 +58,11 @@ Use pull requests Pull requests are an excellent tool for fostering code review.
       
       <guid>https://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</guid>
       <description>Problem You want a unix-like tool for manipulating CSV data from the command-line.
-The standard tools cut and awk aren&#39;t always suitable as they don&#39;t handle quoting and escaping which are common in CSVs.
-Solution Use the CSV manipulation function csvfilter, a simple Python library I&#39;ve put together.
+The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
+Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
 pip install csvfilter Sample usage:
-# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.csv # Pluck all columns except 4 cat in.</description>
+# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
     </item>
     
     <item>
@@ -71,8 +71,8 @@ pip install csvfilter Sample usage:
       <pubDate>Mon, 23 Jan 2012 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</guid>
-      <description>Problem You&#39;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&#39;s difficult to remember which tab is for which project. This is making you unhappy.
-Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment. Add something similar to the following to your postactivate script:</description>
+      <description>Problem You&amp;rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&amp;rsquo;s difficult to remember which tab is for which project. This is making you unhappy.
+Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment.</description>
     </item>
     
     <item>
@@ -82,7 +82,7 @@ Solution Use your postactivate1 script to set the terminal title when you activa
       
       <guid>https://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</guid>
       <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.
-The slides are written in Eric Meyer&#39;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
+The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
     </item>
     
     <item>
@@ -91,7 +91,7 @@ The slides are written in Eric Meyer&#39;s S5, which is a XHTML, CSS and Javascr
       <pubDate>Fri, 05 Nov 2010 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</guid>
-      <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&#39;s not currently supported as an option but can be achieved with a little bash magic. Here&#39;s how:
+      <description>Ever wanted to use mysqldump to dump tables that match a wildcard pattern? I have. It&amp;rsquo;s not currently supported as an option but can be achieved with a little bash magic. Here&amp;rsquo;s how:
 #!/bin/bash if [ $# -lt 2 ] then echo &amp;#34;Usage: `basename $0` database wildcardpattern&amp;#34; echo &amp;#34;Eg: `basename $0` mydatabase App_%&amp;#34; exit 1 fi database=$1 pattern=$2 mysqldump $database `mysql -ND $database -e &amp;#34;SHOW TABLES LIKE &amp;#39;$pattern&amp;#39;&amp;#34; | awk &amp;#39;{printf $1&amp;#34; &amp;#34;}&amp;#39;` This uses a simple SQL query to extract all the table names that match the pattern and concatenate them in the format that mysqldump expects.</description>
     </item>
     
@@ -103,8 +103,8 @@ The slides are written in Eric Meyer&#39;s S5, which is a XHTML, CSS and Javascr
       <guid>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</guid>
       <description>As the saying goes:
  Fool me once, shame on you; fool me twice, shame on me
- Ensuring mistakes aren&#39;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&#39;s) hat.
-We had an issue recently where some debugging code got committed and wasn&#39;t picked up during testing.</description>
+ Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
+We had an issue recently where some debugging code got committed and wasn&amp;rsquo;t picked up during testing.</description>
     </item>
     
     <item>
@@ -123,7 +123,7 @@ We had an issue recently where some debugging code got committed and wasn&#39;t 
       <pubDate>Thu, 22 Jan 2009 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/projects/current-pet-project-command-line-fu/</guid>
-      <description>If you&#39;re anything like me, you spend a lot of time at the UNIX command-line manipulating the filesystem, configuring Linux, playing with services and so forth. As any UNIX user knows, tremendous power can be wielded through judicious function selection, piping and output redirection. It&#39;s often quite staggering what can be achieved in a single line given a rudimentary knowledge of sed, grep, awk, cut…
+      <description>If you&amp;rsquo;re anything like me, you spend a lot of time at the UNIX command-line manipulating the filesystem, configuring Linux, playing with services and so forth. As any UNIX user knows, tremendous power can be wielded through judicious function selection, piping and output redirection. It&amp;rsquo;s often quite staggering what can be achieved in a single line given a rudimentary knowledge of sed, grep, awk, cut…
 Indeed, when I stumble upon a line of particular elegance or usefulness, I generally log them to a Tomboy note (fired up in a flash using Gnome-do).</description>
     </item>
     
@@ -133,7 +133,7 @@ Indeed, when I stumble upon a line of particular elegance or usefulness, I gener
       <pubDate>Sun, 23 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/checking-all-mysql-tables/</guid>
-      <description>It&#39;s well known that MyISAM tables are prone to corruption and need to be regularly checked and repaired. Moreover, in a production environment, it can be beneficial to run a daily check of all tables and mail news of any errors to an appropriate developer/DBA.
+      <description>It&amp;rsquo;s well known that MyISAM tables are prone to corruption and need to be regularly checked and repaired. Moreover, in a production environment, it can be beneficial to run a daily check of all tables and mail news of any errors to an appropriate developer/DBA.
 There are two options for checking MySQL tables. The most effective method is to run the myisamchk utility directly on the index files (.MYI) of the tables in question (some simple shell expansion makes this easy):</description>
     </item>
     
@@ -143,7 +143,7 @@ There are two options for checking MySQL tables. The most effective method is to
       <pubDate>Sun, 26 Oct 2008 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/monitoring-mysql/</guid>
-      <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&#39;s going on.
+      <description>Just a quick tip on monitoring the queries that mysql is handling on a production site. You can use the mysqladmin tool to return a list of the processes currently being handled. Combining this with the UNIX watch command allows a real-time monitoring of what&amp;rsquo;s going on.
 watch -n 1 mysqladmin processlist The -n 1 specifies that mysqladmin executes every second. Depending on your set-up, you may need to specify a mysql user and password:</description>
     </item>
     

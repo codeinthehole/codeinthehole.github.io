@@ -18,10 +18,10 @@
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
-  Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
-  If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&#39;t assume anything about the incoming request.
+ Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
+ If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
   On tools:
-  Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+ Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
     
     <item>
@@ -30,9 +30,9 @@
       <pubDate>Mon, 27 Nov 2017 12:27:45 +0100</pubDate>
       
       <guid>https://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</guid>
-      <description>As I get older and grumpier, I increasingly value clean, uncluttered working environments. I&#39;m sure I&#39;m not the only one, so here&#39;s a few useful practices and shortcuts that help me avoid using the mouse and satisfy my need for productivity micro-optimisation.
+      <description>As I get older and grumpier, I increasingly value clean, uncluttered working environments. I&amp;rsquo;m sure I&amp;rsquo;m not the only one, so here&amp;rsquo;s a few useful practices and shortcuts that help me avoid using the mouse and satisfy my need for productivity micro-optimisation.
 They are mainly for macOS users.
-Hide everything Adjust your system preferences to automatically hide the Dock and menu bar (there&#39;s a checkbox in &amp;ldquo;General&amp;rdquo;).
+Hide everything Adjust your system preferences to automatically hide the Dock and menu bar (there&amp;rsquo;s a checkbox in &amp;ldquo;General&amp;rdquo;).
 With these two changes, a maximised window is effectively full-screen.</description>
     </item>
     

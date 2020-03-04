@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,10 +75,14 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>How to use a South data migration to avoid accidentally sending emails
+            
+
+<p>How to use a South data migration to avoid accidentally sending emails
 from example.com.</p>
+
 <h3 id="problem">Problem</h3>
-<p>Consider the following snippet from Django's docs<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> for sending a
+
+<p>Consider the following snippet from Django&rsquo;s docs<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> for sending a
 confirmation email:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib.sites.models <span style="color:#f92672">import</span> Site
 <span style="color:#f92672">from</span> django.core.mail <span style="color:#f92672">import</span> send_mail
@@ -90,20 +94,25 @@ confirmation email:</p>
         <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Thanks for your subscription. We appreciate it.</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">-The </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> team.</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
         <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">editor@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>domain,
         [user<span style="color:#f92672">.</span>email]
-    )
-</code></pre></div><p>Here the domain for the email sender is taken from the &lsquo;current site&rsquo;
-instance, which is controlled by <a href="https://docs.djangoproject.com/en/dev/ref/contrib/sites/?from=olddocs">Django's &lsquo;Sites&rsquo;
+    )</code></pre></div>
+<p>Here the domain for the email sender is taken from the &lsquo;current site&rsquo;
+instance, which is controlled by <a href="https://docs.djangoproject.com/en/dev/ref/contrib/sites/?from=olddocs">Django&rsquo;s &lsquo;Sites&rsquo;
 framework</a>
 and accessible by a custom method on the manager of the <code>Site</code> model.</p>
+
 <p>By default, a <code>Site</code> instance is created with domain and display name
 &lsquo;example.com&rsquo; and you have to correct these values. This is often done
 by hand using the admin suite.</p>
-<p>However, as with any manual change, it's easy to forget and you'll often
+
+<p>However, as with any manual change, it&rsquo;s easy to forget and you&rsquo;ll often
 find Django projects sending email from <code>editor@example.com</code>. Highly
 embarassing.</p>
+
 <h3 id="solution">Solution</h3>
+
 <p>Automation, of course! We can use a South data migration to set the
 domain and display name correctly in each environment.</p>
+
 <p>First, ensure that each environment has settings for the domain and site
 name.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># conf/test.py</span>
@@ -114,23 +123,25 @@ SITE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;
 <span style="color:#75715e"># conf/stage.py</span>
 ...
 DOMAIN_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;stage.project.client.tangentlabs.co.uk&#39;</span>
-SITE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;project - client (stage)&#39;</span>
-</code></pre></div><p>This snippet assumes you are using a set-up similar to that outlined by
+SITE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;project - client (stage)&#39;</span></code></pre></div>
+<p>This snippet assumes you are using a set-up similar to that outlined by
 <a href="http://justcramer.com/2011/01/13/settings-in-django/">David Cramer</a>,
 where an environmental variable specifies an additional settings file to
-import. You don't have to use this method; employing a
+import. You don&rsquo;t have to use this method; employing a
 <code>settings_local.py</code> file for each environment works just as well.</p>
+
 <p>Next, create a data migration to set the domain and display name
 correctly in each environment. This migration sits most naturally in the
-<code>django.contrib.sites</code> app, but since that's in Django's core, it's not
+<code>django.contrib.sites</code> app, but since that&rsquo;s in Django&rsquo;s core, it&rsquo;s not
 an option. You could use an existing app within your project to house
 the migration or perhaps create a simple &lsquo;core&rsquo; or &lsquo;data&rsquo; app to house
 data migrations that alter 3rd party apps.</p>
-<p>Since we're not using the actual app where the <code>Site</code> model is defined,
-we must employ South's <code>--freeze</code> option to ensure the <code>Site</code> model is
+
+<p>Since we&rsquo;re not using the actual app where the <code>Site</code> model is defined,
+we must employ South&rsquo;s <code>--freeze</code> option to ensure the <code>Site</code> model is
 available to the migration.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py datamigration &lt;appname&gt; create_domains --freeze<span style="color:#f92672">=</span>sites
-</code></pre></div><p>Finally implement the <code>forwards</code> method:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py datamigration &lt;appname&gt; create_domains --freeze<span style="color:#f92672">=</span>sites</code></pre></div>
+<p>Finally implement the <code>forwards</code> method:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> south.v2 <span style="color:#f92672">import</span> DataMigration
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 
@@ -141,17 +152,18 @@ available to the migration.</p>
         site <span style="color:#f92672">=</span> Site<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>SITE_ID)
         site<span style="color:#f92672">.</span>domain <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>DOMAIN_NAME
         site<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>SITE_NAME
-        site<span style="color:#f92672">.</span>save()
-</code></pre></div><p>Then your next deployment to each environment will perform the update.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
+        site<span style="color:#f92672">.</span>save()</code></pre></div>
+<p>Then your next deployment to each environment will perform the update.</p>
+<div class="footnotes">
+
+<hr />
+
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>See
-<a href="https://docs.djangoproject.com/en/1.4/ref/contrib/sites/#getting-the-current-domain-for-display">https://docs.djangoproject.com/en/1.4/ref/contrib/sites/#getting-the-current-domain-for-display</a> <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+<li id="fn:1"><p>See
+<a href="https://docs.djangoproject.com/en/1.4/ref/contrib/sites/#getting-the-current-domain-for-display">https://docs.djangoproject.com/en/1.4/ref/contrib/sites/#getting-the-current-domain-for-display</a></p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
 </ol>
-</section>
+</div>
 
         </div>
 

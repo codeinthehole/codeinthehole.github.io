@@ -17,7 +17,7 @@
       <pubDate>Sat, 08 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</guid>
-      <description>It&#39;s sometime useful to interact with cookies directly on the client-side using javascript. This can be useful for a variety of situations, such as persisting display settings between page requests without storing anything on the server. I&#39;ve also used them to display a simple welcome message to new visitors. It can make your controller code simpler if this kind of simple display logic is contained entirely on the client side.</description>
+      <description>It&amp;rsquo;s sometime useful to interact with cookies directly on the client-side using javascript. This can be useful for a variety of situations, such as persisting display settings between page requests without storing anything on the server. I&amp;rsquo;ve also used them to display a simple welcome message to new visitors. It can make your controller code simpler if this kind of simple display logic is contained entirely on the client side.</description>
     </item>
     
   </channel>

@@ -19,7 +19,7 @@
       <guid>https://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
 Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
-  Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
+ Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@ Purpose? It should be clear to the reviewer what change is being made and, cruci
       
       <guid>https://codeinthehole.com/tips/open-github-pull-request-command/</guid>
       <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
-Even with the excellent hub git wrapper, there&#39;s no easy way to do this. I can jump to the pull request list page with:
+Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
 $ git pulls where pulls is aliased in ~/.</description>
     </item>
     
@@ -39,8 +39,8 @@ $ git pulls where pulls is aliased in ~/.</description>
       <pubDate>Fri, 02 Oct 2015 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
-      <description>Here&#39;s a useful heuristic for writing better commit messages. Set your commit message template to:
-# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&#39;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&#39;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
+      <description>Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your commit message template to:
+# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
     </item>
     
     <item>
@@ -49,7 +49,7 @@ $ git pulls where pulls is aliased in ~/.</description>
       <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/linking-to-github/</guid>
-      <description>It was rightly pointed out yesterday that it&#39;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
+      <description>It was rightly pointed out yesterday that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
 $ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
     </item>
     
@@ -59,7 +59,7 @@ $ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/d
       <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
-      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&#39;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
+      <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&amp;rsquo;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
 This article is largely a note-to-self in case I have to repeat the process. However, if you do find yourself in a similar position, here are a few command-line tricks for analysing your git history.</description>
     </item>
     
@@ -70,7 +70,7 @@ This article is largely a note-to-self in case I have to repeat the process. How
       
       <guid>https://codeinthehole.com/tips/enhancing-your-git-commit-editor/</guid>
       <description>Confession: I am a pedant, especially around commit messages.
-I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ git&#39;s prepare-commit-msg hook to display the last 5 commit messages when I&#39;m editing a commit message.
+I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
 Use the following .git/hooks/prepare-commit-msg hook:
 #!/bin/sh  BRANCH_NAME=$(git branch | grep &amp;#39;*&amp;#39; | sed &amp;#39;s/* //&amp;#39;) if [ $BRANCH_NAME !</description>
     </item>
@@ -81,8 +81,8 @@ Use the following .git/hooks/prepare-commit-msg hook:
       <pubDate>Mon, 04 Mar 2013 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</guid>
-      <description>Using the Hub library, it&#39;s possible to convert Github issues into pull requests. This gives rise to a useful Github workflow which this article describes.
-This is nothing new; it&#39;s been written about before. However, this is something I do all the time whilst developing Oscar and I&#39;m fed up with explaining it. This article is a reference I can point people at.
+      <description>Using the Hub library, it&amp;rsquo;s possible to convert Github issues into pull requests. This gives rise to a useful Github workflow which this article describes.
+This is nothing new; it&amp;rsquo;s been written about before. However, this is something I do all the time whilst developing Oscar and I&amp;rsquo;m fed up with explaining it. This article is a reference I can point people at.
 Workflow Discuss Discuss an idea for a new feature on the project mailing list.</description>
     </item>
     
@@ -93,7 +93,7 @@ Workflow Discuss Discuss an idea for a new feature on the project mailing list.<
       
       <guid>https://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</guid>
       <description>I work at an agency where we pay $200 a month to Github for their platinum plan. This article is a summary of an internal talk I gave on making the most of our subscription.
-There&#39;s nothing original here: it&#39;s just a collection of tips that I&#39;ve harvested over the last few years. I&#39;m publishing this article mainly so I have something to refer future employees to.
+There&amp;rsquo;s nothing original here: it&amp;rsquo;s just a collection of tips that I&amp;rsquo;ve harvested over the last few years. I&amp;rsquo;m publishing this article mainly so I have something to refer future employees to.
 Use pull requests Pull requests are an excellent tool for fostering code review.</description>
     </item>
     
@@ -103,7 +103,7 @@ Use pull requests Pull requests are an excellent tool for fostering code review.
       <pubDate>Mon, 05 Mar 2012 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/tips-for-using-a-git-pre-commit-hook/</guid>
-      <description>Here&#39;s a few tips for using a Git pre-commit hook.
+      <description>Here&amp;rsquo;s a few tips for using a Git pre-commit hook.
 Keep your hook script in source control Commit your hook script (say pre-commit.sh) at the root of your project and include the installation instructions in your README/documentation to encourage all developers use it.
 Installation is nothing more than:
 ln -s ../../pre-commit.sh .git/hooks/pre-commit Then everyone benefits from running the same set of tests before committing and updates are picked up automatically.</description>

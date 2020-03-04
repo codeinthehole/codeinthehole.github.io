@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,20 +75,24 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Despite its <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/">extensive
+            
+
+<p>Despite its <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/">extensive
 documentation</a>,
 getting GeoDjango installed and configured can be a pain. Here are my
 notes for future reference:</p>
-<h3 id="installation-on-ubuntu-1204">Installation on Ubuntu 12.04</h3>
+
+<h3 id="installation-on-ubuntu-12-04">Installation on Ubuntu 12.04</h3>
+
 <p>First, ensure your system locale is UTF8 as PostgreSQL uses it to
 determine its default encoding during installation:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ export LANGUAGE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en_US.UTF-8&#34;</span>
 $ export LANG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en_US.UTF-8&#34;</span>
-$ export LC_ALL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en_US.UTF-8&#34;</span>
-</code></pre></div><p>Now install dependencies:</p>
+$ export LC_ALL<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;en_US.UTF-8&#34;</span></code></pre></div>
+<p>Now install dependencies:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get update
-$ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis 
-</code></pre></div><p>PostgreSQL should now be installed and running with UTF8 encodings.
+$ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis </code></pre></div>
+<p>PostgreSQL should now be installed and running with UTF8 encodings.
 Verify this with:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo -u postgres psql -l    
                                      List of databases
@@ -98,17 +102,17 @@ Verify this with:</p>
  template0        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
                   |          |          |             |             |
  template1        | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
-                  |          |          |             |             |
-</code></pre></div><p>Now create a spatial database. The above commands will have installed
-PostGIS 1.5.3 hence, <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/#creating-a-spatial-database-template-for-earlier-versions">according to Django's
+                  |          |          |             |             |</code></pre></div>
+<p>Now create a spatial database. The above commands will have installed
+PostGIS 1.5.3 hence, <a href="https://docs.djangoproject.com/en/dev/ref/contrib/gis/install/postgis/#creating-a-spatial-database-template-for-earlier-versions">according to Django&rsquo;s
 docs</a>,
 we need to download and install a shell script that executes the
 appropriate commands:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget https://docs.djangoproject.com/en/dev/_downloads/create_template_postgis-1.5.sh
-$ chmod +x create_template_postgis-1.5.sh
-</code></pre></div><p>and run it as a privileged user:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo -u postgres ./create_template_postgis-1.5.sh
-</code></pre></div><p>If this is successful, a deluge of SQL output will echo to the console.
+$ chmod +x create_template_postgis-1.5.sh</code></pre></div>
+<p>and run it as a privileged user:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo -u postgres ./create_template_postgis-1.5.sh</code></pre></div>
+<p>If this is successful, a deluge of SQL output will echo to the console.
 This is normal. PostGIS is now correctly installed and we have a
 template database we can use to create a database for our GeoDjango
 project.</p>
@@ -119,24 +123,25 @@ Type <span style="color:#e6db74">&#34;help&#34;</span> <span style="color:#66d9e
 postgres<span style="color:#f92672">=</span><span style="color:#75715e"># CREATE ROLE sample_role WITH PASSWORD &#39;sample_password&#39; LOGIN;</span>
 CREATE ROLE
 postgres<span style="color:#f92672">=</span><span style="color:#75715e"># CREATE DATABASE sample_db OWNER sample_role TEMPLATE template_postgis;</span>
-CREATE DATABASE
-</code></pre></div><p>This is the tricky bit over: you can now <code>pip install psycopg2</code> and
-you're basically done. Remember to use the PostGIS database engine in
+CREATE DATABASE</code></pre></div>
+<p>This is the tricky bit over: you can now <code>pip install psycopg2</code> and
+you&rsquo;re basically done. Remember to use the PostGIS database engine in
 your <code>DATABASES</code> setting:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">DATABASES <span style="color:#f92672">=</span> <span style="color:#f92672">{</span>
     <span style="color:#e6db74">&#39;default&#39;</span>: <span style="color:#f92672">{</span>
         <span style="color:#e6db74">&#39;ENGINE&#39;</span>: <span style="color:#e6db74">&#39;django.contrib.gis.db.backends.postgis&#39;</span>,
         ...
     <span style="color:#f92672">}</span>,
-<span style="color:#f92672">}</span>
-</code></pre></div><h4 id="common-errors">Common errors</h4>
+<span style="color:#f92672">}</span></code></pre></div>
+<h4 id="common-errors">Common errors</h4>
+
 <p>If your system locale is not UTF8 when attempting to create a spatial
-database, you'll see something like this:</p>
+database, you&rsquo;ll see something like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo -u postgres ./create_template_postgis-debian.sh
 createdb: database creation failed: ERROR: encoding UTF8 does not match locale en_US
 DETAIL:  The chosen LC_CTYPE setting requires encoding LATIN1 
-FATAL:  database <span style="color:#e6db74">&#34;template_postgis&#34;</span> does not exist
-</code></pre></div><p>If PostgreSQL is not installed when trying to install psycopg2, you see
+FATAL:  database <span style="color:#e6db74">&#34;template_postgis&#34;</span> does not exist</code></pre></div>
+<p>If PostgreSQL is not installed when trying to install psycopg2, you see
 something that ends with this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">warning: manifest_maker: standard file <span style="color:#e6db74">&#39;-c&#39;</span> not found
 
@@ -147,8 +152,8 @@ or specify the full executable path with the option:
 
     python setup.py build_ext --pg-config /path/to/pg_config build ...
 
-or with the pg_config option in <span style="color:#e6db74">&#39;setup.cfg&#39;</span>.
-</code></pre></div><p>I'll add more error symptoms when I see them in the wild.</p>
+or with the pg_config option in <span style="color:#e6db74">&#39;setup.cfg&#39;</span>.</code></pre></div>
+<p>I&rsquo;ll add more error symptoms when I see them in the wild.</p>
 
         </div>
 

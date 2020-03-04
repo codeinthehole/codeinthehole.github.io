@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,15 +78,16 @@ if (!doNotTrack) {
             <p>I often need to grab information from a Postgres database and paste it
 into a spreadsheet for sharing with others. Google Sheets needs the
 pasted data to be tab-separated in order to be correctly split into
-columns. This isn't the default behaviour for psql but here's how to
-configure psql's output to get it.</p>
+columns. This isn&rsquo;t the default behaviour for psql but here&rsquo;s how to
+configure psql&rsquo;s output to get it.</p>
+
 <p>At a psql prompt, switch to unaligned output</p>
-<pre><code class="language-psql" data-lang="psql">=&gt; \a
-</code></pre><p>set the field separator to a tab character:</p>
-<pre><code class="language-psql" data-lang="psql">=&gt; \f '\t'
-</code></pre><p>and turn the pager off:</p>
-<pre><code class="language-psql" data-lang="psql">=&gt; \pset pager off
-</code></pre><p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
+<pre><code class="language-psql" data-lang="psql">=> \a</code></pre>
+<p>set the field separator to a tab character:</p>
+<pre><code class="language-psql" data-lang="psql">=> \f '\t'</code></pre>
+<p>and turn the pager off:</p>
+<pre><code class="language-psql" data-lang="psql">=> \pset pager off</code></pre>
+<p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
 pasted into your Google Doc.</p>
 
         </div>

@@ -18,7 +18,7 @@
       
       <guid>https://codeinthehole.com/tips/json-to-google-sheets/</guid>
       <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
-Here&#39;s a command to create a tab-separated report from a JSON events file exported from Loggly:
+Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
 $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</description>
     </item>
     

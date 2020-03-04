@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,9 +78,10 @@ if (!doNotTrack) {
             <p>Every now and again, an innocent python developer checks out a new git
 branch then proceeds to bang their head against a bug caused by an
 orphaned <code>.pyc</code> file from the previous branch. Since <code>*.pyc</code> files are
-typically in the repo's <code>.gitignore</code> file, they are not removed when
+typically in the repo&rsquo;s <code>.gitignore</code> file, they are not removed when
 switching branches and can cause issues if the corresponding <code>.py</code> is
 removed.</p>
+
 <p>This can be neatly addressed through a &lsquo;post checkout&rsquo; hook which
 deletes all such files. Here is such a script, which also removes empty
 folders and prints a summary:</p>
@@ -102,14 +103,25 @@ NUM_EMPTY_DIRS<span style="color:#f92672">=</span><span style="color:#66d9ef">$(
 <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $NUM_EMPTY_DIRS -gt <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
     find . -type d -empty -delete
     printf <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">\e[00;31mDeleted </span>$NUM_EMPTY_DIRS<span style="color:#e6db74"> empty directories\e[00m\n</span><span style="color:#e6db74">&#34;</span>
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><p>Sample output:</p>
-<p><img src="/images/screenshots/post-checkout.png" alt="image"></p>
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>Sample output:</p>
+
+<p><img src="/images/screenshots/post-checkout.png" alt="image" /></p>
+
 <p>Inspiration:</p>
-<!-- raw HTML omitted -->
+
+<blockquote class="twitter-tweet"><p>Finally automated. Stop being bitten by residual .pyc files when switching branches in git. 
+<a
+href="http://t.co/JWZOst25Jy"
+title="http://stackoverflow.com/questions/1504724/a-git-hook-for-whenever-i-change-branches">stackoverflow.com/questions/1504…</a></p>&mdash;
+Maik Hoepfel (@maikhoepfel) <a
+href="https://twitter.com/maikhoepfel/status/318437021221806080">March 31,
+2013</a></blockquote>
+
 <p>The above version is an extension of the snippets in the referenced
 <a href="http://stackoverflow.com/questions/1504724/a-git-hook-for-whenever-i-change-branches">Stack Overflow question</a>.</p>
-<!-- raw HTML omitted -->
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         </div>
 

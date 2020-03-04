@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,26 +75,33 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <h3 id="problem">Problem</h3>
-<p>You're using <a href="http://postgresapp.com/">Postgres.app</a> on a Mac for local
-development but are getting SQL errors from your application. You're
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>You&rsquo;re using <a href="http://postgresapp.com/">Postgres.app</a> on a Mac for local
+development but are getting SQL errors from your application. You&rsquo;re
 seeing an error message:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ERROR:  current transaction is aborted, commands ignored <span style="color:#66d9ef">until</span> end of
-transaction block
-</code></pre></div><p>This isn't very useful: you want to know which query is generating the
+transaction block</code></pre></div>
+<p>This isn&rsquo;t very useful: you want to know which query is generating the
 error.</p>
+
 <h3 id="solution">Solution</h3>
+
 <p>Turn on Postgres&rsquo; logging and watch the log files when the error is
 generated.</p>
+
 <p>This is done by editing
 <code>~/Library/Application Support/Postgres/var/postgresql.conf</code> and
 setting:</p>
 <pre><code>logging_collector = on
-log_directory = 'pg_log'
-</code></pre><p>then restarting Postgres to pick up the new settings. You can then watch
+log_directory = 'pg_log'</code></pre>
+<p>then restarting Postgres to pick up the new settings. You can then watch
 the log files to find out which queries are failing:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tail -f ~/Library/Application<span style="color:#ae81ff">\ </span>Support/Postgres/var/pg_log/*
-</code></pre></div><h3 id="discussion">Discussion</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ tail -f ~/Library/Application<span style="color:#ae81ff">\ </span>Support/Postgres/var/pg_log/*</code></pre></div>
+<h3 id="discussion">Discussion</h3>
+
 <p>By default, Postgres.app does not have logging enabled which makes local
 debugging difficult.</p>
 

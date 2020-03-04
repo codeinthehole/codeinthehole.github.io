@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,36 +75,45 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>External parties often need to upload data to your application. Sadly,
+            
+
+<p>External parties often need to upload data to your application. Sadly,
 most ask for a FTP server. Push back against this and suggest they use
 sFTP.</p>
+
 <p>This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so
 that an external party can upload data to your application securely.</p>
+
 <p>This is mainly for my own reference.</p>
+
 <h3 id="user-set-up">User set-up</h3>
+
 <p>Create user with a dummy shell:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ adduser --shell<span style="color:#f92672">=</span>/bin/false barry
-</code></pre></div><p>and alter the ownership and permissions of their home folder:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ adduser --shell<span style="color:#f92672">=</span>/bin/false barry</code></pre></div>
+<p>and alter the ownership and permissions of their home folder:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ chown root:barry /home/barry
-$ chmod <span style="color:#ae81ff">755</span> /home/barry
-</code></pre></div><p>Now create a folder to upload to:</p>
+$ chmod <span style="color:#ae81ff">755</span> /home/barry</code></pre></div>
+<p>Now create a folder to upload to:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir /home/barry/uploads
 $ chown barry:barry /home/barry/uploads
-$ chmod <span style="color:#ae81ff">755</span> /home/barry/uploads
-</code></pre></div><h3 id="ssh-config">SSH config</h3>
+$ chmod <span style="color:#ae81ff">755</span> /home/barry/uploads</code></pre></div>
+<h3 id="ssh-config">SSH config</h3>
+
 <p>Edit <code>/etc/ssh/sshd_config</code> and comment out the line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp /usr/lib/openssh/sftp-server
-</code></pre></div><p>and add the following at the bottom of the file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp /usr/lib/openssh/sftp-server</code></pre></div>
+<p>and add the following at the bottom of the file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp internal-sftp
 Match User barry
     ChrootDirectory %h
     ForceCommand internal-sftp
     X11Forwarding no
-    AllowTCPForwarding no
-</code></pre></div><p>then restart SSH:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /etc/init.d/ssh restart
-</code></pre></div><p>The new user should now be able to sFTP.</p>
+    AllowTCPForwarding no</code></pre></div>
+<p>then restart SSH:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /etc/init.d/ssh restart</code></pre></div>
+<p>The new user should now be able to sFTP.</p>
+
 <h3 id="further-reading">Further reading</h3>
+
 <ul>
 <li><a href="http://www.ericstockwell.com/?p=54">How to set up and chroot SFTP users with OpenSSH 5.1p1 in Ubuntu
 8.10</a></li>

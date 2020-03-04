@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,7 +78,8 @@ if (!doNotTrack) {
             <p>Another day, another new Phing task; again integrating with project
 management software - this time the excellent
 <a href="http://unfuddle.com/">Unfuddle</a>.</p>
-<p>I've been playing with Unfuddle for a few days now and it's very
+
+<p>I&rsquo;ve been playing with Unfuddle for a few days now and it&rsquo;s very
 impressive. You get SVN and git hosting as well as superb issue
 tracking. It also supports simple project messages (which are displayed
 on the project dashboard) and so-called notebooks which are essentially
@@ -91,29 +92,35 @@ project dashboard, where the latest messages are displayed along side
 news of the latest SVN and issue activity. The task detailed below
 provides a means for Phing to automatically add information to this
 dashboard page by creating a new message.</p>
+
 <p>This extension is very similar to my previous Phing task (for updating a
 Twitter status), making use of the <a href="http://uk2.php.net/curl">cURL
 library</a> to POST XML to Unfuddle. In this case
 though, the Unfuddle API for creating a message offers a few extra
 options such as categorising your messages. The task supports the
 following attributes:</p>
+
 <p>Unfuddle Name   Message   Description                                           Default   Required</p>
-<hr>
-<p>subdomain       String    Subdomain of Unfuddle account                                <br>
-(eg. &lsquo;example&rsquo; from <a href="http://example.unfuddle.com">http://example.unfuddle.com</a>).   n/a       Yes
-projectid       Integer   Project id (eg. 123                                          <br>
-from <a href="http://example.unfuddle.com/projects/123/">http://example.unfuddle.com/projects/123/</a>).    n/a       Yes
-username        String    Username.                                             n/a       Yes
-password        String    Password.                                             n/a       Yes
-title           String    Message title.                                        n/a       Yes
-body            String    Message body.                                         '&rsquo;        No
-categoryid      Integer   The category id of the message.                       '&rsquo;        No
-categoryids     String    A comma-separated list of category ids (eg. 1,2,3).   '&rsquo;        No
-checkreturn     Boolean   Whether to check the return code of the request,             <br>
-throws a BuildException the update files.             false     No</p>
+
+<hr />
+
+<p>subdomain       String    Subdomain of Unfuddle account<br />
+                            (eg. &lsquo;example&rsquo; from <a href="http://example.unfuddle.com">http://example.unfuddle.com</a>).   n/a       Yes
+  projectid       Integer   Project id (eg. 123<br />
+                            from <a href="http://example.unfuddle.com/projects/123/">http://example.unfuddle.com/projects/123/</a>).    n/a       Yes
+  username        String    Username.                                             n/a       Yes
+  password        String    Password.                                             n/a       Yes
+  title           String    Message title.                                        n/a       Yes
+  body            String    Message body.                                         &ldquo;        No
+  categoryid      Integer   The category id of the message.                       &ldquo;        No
+  categoryids     String    A comma-separated list of category ids (eg. 1,2,3).   &ldquo;        No
+  checkreturn     Boolean   Whether to check the return code of the request,<br />
+                            throws a BuildException the update files.             false     No</p>
+
 <p>The only thing to note here is that you can choose whether you specify a
-single category id or a collection - it wouldn't make sense to specify
+single category id or a collection - it wouldn&rsquo;t make sense to specify
 both these attributes.</p>
+
 <p>An example build.xml using this task would be:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Unfuddle update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;message&#34;</span><span style="color:#f92672">&gt;</span>
@@ -131,11 +138,12 @@ both these attributes.</p>
             <span style="color:#a6e22e">body=</span><span style="color:#e6db74">&#34;&#34;</span> 
             <span style="color:#a6e22e">categoryid=</span><span style="color:#e6db74">&#34;4&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span>
-</code></pre></div><p>This simply creates a new Unfuddle message with the time of the last
+<span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
+<p>This simply creates a new Unfuddle message with the time of the last
 build. This is an overly simplified example - see my previous post for a
 sample parameterised deployment target that would allow a dynamic
 message to be created by different targets within the deployment file.</p>
+
 <p>The source code for TwitterUpdateTask.php is as follows (with docblocks
 stripped out for brevity):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
@@ -298,7 +306,8 @@ stripped out for brevity):</p>
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;New Unfuddle message unsuccessful: </span><span style="color:#e6db74">$failureMessage</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);   
     }
 }
-</code></pre></div><p>The fully documented source and associated example build.xml file are
+</code></pre></div>
+<p>The fully documented source and associated example build.xml file are
 available to download: <a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMessageTask.zip
 (2.6kb)</a></p>
 

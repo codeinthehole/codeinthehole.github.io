@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,18 +75,25 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Here's a few tips for using a <a href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git pre-commit
+            
+
+<p>Here&rsquo;s a few tips for using a <a href="http://git-scm.com/book/en/v2/Customizing-Git-Git-Hooks">Git pre-commit
 hook</a>.</p>
+
 <h3 id="keep-your-hook-script-in-source-control">Keep your hook script in source control</h3>
+
 <p>Commit your hook script (say <code>pre-commit.sh</code>) at the root of your
 project and include the installation instructions in your
 README/documentation to encourage all developers use it.</p>
+
 <p>Installation is nothing more than:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s ../../pre-commit.sh .git/hooks/pre-commit
-</code></pre></div><p>Then everyone benefits from running the same set of tests before
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s ../../pre-commit.sh .git/hooks/pre-commit</code></pre></div>
+<p>Then everyone benefits from running the same set of tests before
 committing and updates are picked up automatically.</p>
+
 <h3 id="stash-unstaged-changes-before-running-tests">Stash unstaged changes before running tests</h3>
-<p>Ensure that code that isn't part of the prospective commit isn't tested
+
+<p>Ensure that code that isn&rsquo;t part of the prospective commit isn&rsquo;t tested
 within your pre-commit script. This is missed by many sample pre-commit
 scripts but is easily acheived with <code>git stash</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
@@ -99,12 +106,15 @@ git stash save -q --keep-index $STASH_NAME
 STASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git stash list<span style="color:#66d9ef">)</span>
 <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span><span style="color:#f92672">[</span> $STASHES <span style="color:#f92672">=</span><span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span>$STASH_NAME<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span><span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
   git stash pop -q
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><p>The <code>-q</code> flags specify quiet mode.</p>
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>The <code>-q</code> flags specify quiet mode.</p>
+
 <h3 id="run-your-test-suite-before-each-commit">Run your test suite before each commit</h3>
+
 <p>Obviously.</p>
-<p>It's best to have a script (say <code>run_tests.sh</code>) that encapsulates the
-standard arguments to your test runner so your pre-commit script doesn't
+
+<p>It&rsquo;s best to have a script (say <code>run_tests.sh</code>) that encapsulates the
+standard arguments to your test runner so your pre-commit script doesn&rsquo;t
 fall out of date. Something like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
 git stash -q --keep-index
@@ -112,33 +122,37 @@ git stash -q --keep-index
 RESULT<span style="color:#f92672">=</span>$?
 git stash pop -q
 <span style="color:#f92672">[</span> $RESULT -ne <span style="color:#ae81ff">0</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span>
-exit <span style="color:#ae81ff">0</span>
-</code></pre></div><p>where a sample <code>run_tests.sh</code> implementation for a Django project may
+exit <span style="color:#ae81ff">0</span></code></pre></div>
+<p>where a sample <code>run_tests.sh</code> implementation for a Django project may
 look like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># run_tests.sh</span>
-<span style="color:#f92672">.</span><span style="color:#f92672">/</span>manage<span style="color:#f92672">.</span>py test <span style="color:#f92672">-</span><span style="color:#f92672">-</span>settings<span style="color:#f92672">=</span>settings_test <span style="color:#f92672">-</span>v <span style="color:#ae81ff">2</span>
-</code></pre></div><h3 id="skip-the-pre-commit-hook-sometimes">Skip the pre-commit hook sometimes</h3>
+<span style="color:#f92672">.</span><span style="color:#f92672">/</span>manage<span style="color:#f92672">.</span>py test <span style="color:#f92672">-</span><span style="color:#f92672">-</span>settings<span style="color:#f92672">=</span>settings_test <span style="color:#f92672">-</span>v <span style="color:#ae81ff">2</span></code></pre></div>
+<h3 id="skip-the-pre-commit-hook-sometimes">Skip the pre-commit hook sometimes</h3>
+
 <p>Be aware of the <code>--no-verify</code> option to <code>git commit</code>. This bypasses the
 pre-commit hook when committing, which is useful if you have just
-manually run your test suite and don't need to see it run again when
+manually run your test suite and don&rsquo;t need to see it run again when
 committing.</p>
+
 <p>I use git aliases to make this easy:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bash_aliases</span>
 alias gc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit&#39;</span>
-alias gcv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --no-verify&#39;</span>
-</code></pre></div><h3 id="search-yo-code-for-debugging-code">Search yo.. code for debugging code</h3>
+alias gcv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --no-verify&#39;</span></code></pre></div>
+<h3 id="search-yo-code-for-debugging-code">Search yo.. code for debugging code</h3>
+
 <p>At some point, someone will try and commit a file containing</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">import pdb; pdb.set_trace<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
-</code></pre></div><p>or some other debugging code. This can be easily avoided using the
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">import pdb; pdb.set_trace<span style="color:#f92672">(</span><span style="color:#f92672">)</span></code></pre></div>
+<p>or some other debugging code. This can be easily avoided using the
 <code>pre-commit.sh</code> file to grep the staged codebase and abort the commit if
 forbidden strings are found.</p>
-<p>Here's an example that looks for <code>console.log</code>:</p>
+
+<p>Here&rsquo;s an example that looks for <code>console.log</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">FILES_PATTERN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\.(js|coffee)(\..+)?$&#39;</span>
 FORBIDDEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;console.log&#39;</span>
 git diff --cached --name-only | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    grep -E $FILES_PATTERN | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    GREP_COLOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n $FORBIDDEN <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#39;COMMIT REJECTED Found &#34;$FORBIDDEN&#34; references. Please remove them before commiting&#39;</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span>
-</code></pre></div><p>It's straightforward to extend this code block to search for other
+</span><span style="color:#ae81ff"></span>    GREP_COLOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n $FORBIDDEN <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#39;COMMIT REJECTED Found &#34;$FORBIDDEN&#34; references. Please remove them before commiting&#39;</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span></code></pre></div>
+<p>It&rsquo;s straightforward to extend this code block to search for other
 terms.</p>
 
         </div>

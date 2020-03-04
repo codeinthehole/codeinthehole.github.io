@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,10 +78,12 @@ if (!doNotTrack) {
             <p>I am totally reliant on my bash aliases and readline configuration. When
 working on a new server, the first thing I do is copy over my local Bash
 (<code>~/.bashrc</code>) and Readline (<code>~/.inputrc</code>) configuration files.</p>
-<p>One mildly annoying issue is when you update a config file, it's a pain
+
+<p>One mildly annoying issue is when you update a config file, it&rsquo;s a pain
 to copy it onto all your remote hosts. To scratch this itch, I wrote a
 simple node.js executable for copying a file to all the defined hosts in
 your <code>~/.ssh/config</code> file</p>
+
 <p>Usage is trivial:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ multi-scp ~/.bashrc
 Starting sync of <span style="color:#e6db74">&#39;~/.bashrc&#39;</span> to all hosts in /home/david/.ssh/config
@@ -90,14 +92,16 @@ Starting sync of <span style="color:#e6db74">&#39;~/.bashrc&#39;</span> to all h
 -&gt; Copying to jupiter
 &lt;- Successful copy to mars
 &lt;- Successful copy to venus
-&lt;- Successful copy to jupiter
-</code></pre></div><p>Using node.js seems an odd choice as this could trivially be done in
+&lt;- Successful copy to jupiter</code></pre></div>
+<p>Using node.js seems an odd choice as this could trivially be done in
 another scripting language. However, I wanted to use node as:</p>
+
 <ul>
 <li>it allows the copy operation to run asynchronously in a child
 process with a callback to handle completion and error;</li>
-<li>it's fashionable.</li>
+<li>it&rsquo;s fashionable.</li>
 </ul>
+
 <p>The <a href="https://github.com/codeinthehole/node-multi-scp">code is on Github</a>
 as usual.</p>
 

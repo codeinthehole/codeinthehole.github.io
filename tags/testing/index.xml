@@ -17,11 +17,11 @@
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/a-mnemonic-for-mocks/</guid>
-      <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&#39;s not always clear what order arguments are being injected.
+      <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&amp;rsquo;s not always clear what order arguments are being injected.
 For instance, which of these is right? This:
 @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
 @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass I&#39;ve wasted considerable time using PDB to work out what is being injected where.</description>
+@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
     </item>
     
     <item>
@@ -52,7 +52,7 @@ URI templates in purl The newly released purl 0.8 (a URL library of mine) suppor
       
       <guid>https://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</guid>
       <description>Consider this curio:
-import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;#34;Using the database is not permitted&amp;#34;))) This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&#39;re a puritan about true unit tests.
+import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;#34;Using the database is not permitted&amp;#34;))) This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
 Use by wrapping a TestCase subclass:
 from django.test import TestCase @no_database() class UnitTestCase(TestCase): ... or method:</description>
     </item>
@@ -63,9 +63,9 @@ from django.test import TestCase @no_database() class UnitTestCase(TestCase): ..
       <pubDate>Sun, 09 Sep 2012 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</guid>
-      <description>Since watching Carl Meyer&#39;s superb &amp;lsquo;Testing and Django&amp;rsquo; talk, I&#39;ve been using Ian Bicking&#39;s WebTest library for functional tests, via django-webtest. I&#39;ve been really impressed and I&#39;d like to stress one of Carl&#39;s points - that using WebTest for functional tests is superior to using the Django client.
-Why? Several reasons - here&#39;s a few:
- WebTest allows you to model a user&#39;s experience much more closely as it is smart about mark-up.</description>
+      <description>Since watching Carl Meyer&amp;rsquo;s superb &amp;lsquo;Testing and Django&amp;rsquo; talk, I&amp;rsquo;ve been using Ian Bicking&amp;rsquo;s WebTest library for functional tests, via django-webtest. I&amp;rsquo;ve been really impressed and I&amp;rsquo;d like to stress one of Carl&amp;rsquo;s points - that using WebTest for functional tests is superior to using the Django client.
+Why? Several reasons - here&amp;rsquo;s a few:
+ WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
     </item>
     
     <item>
@@ -97,7 +97,7 @@ from django.test.client import Client client = Client() response = client.get(ur
       <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
-      <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&#39;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&#39;s a small chance it may be useful to others.
+      <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.
 Sample Usage Enable the additional assert methods using a mixin:
 import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ... Now suppose that the expected XML from some SUT1 is:</description>
     </item>
@@ -108,9 +108,9 @@ import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.
       <pubDate>Wed, 20 Apr 2011 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</guid>
-      <description>I&#39;m a big fan of using PHPUnit with console colours turned on (using the --colors option). Eg:
+      <description>I&amp;rsquo;m a big fan of using PHPUnit with console colours turned on (using the --colors option). Eg:
 It helps gets into the natural &amp;ldquo;red, green, refactor&amp;rdquo; rhythm.
-I&#39;m currently totally immersed in Django, and greatly miss the lack of colour support within the &amp;ldquo;test&amp;rdquo; management command. A simple workaround for this is to use Fabric with a few modified color commands. Your fabric file should include the following:
+I&amp;rsquo;m currently totally immersed in Django, and greatly miss the lack of colour support within the &amp;ldquo;test&amp;rdquo; management command. A simple workaround for this is to use Fabric with a few modified color commands. Your fabric file should include the following:
 from fabric.colors import _wrap_with green_bg = _wrap_with(&amp;#39;42&amp;#39;) red_bg = _wrap_with(&amp;#39;41&amp;#39;) # Set the list of apps to test env.</description>
     </item>
     

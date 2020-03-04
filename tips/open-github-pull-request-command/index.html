@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -78,16 +78,18 @@ if (!doNotTrack) {
             <p>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding
 both commits and comments. As such I often want to quickly jump from a terminal window
 to the pull request detail page to check previous comments or add new.</p>
-<p>Even with the excellent <a href="https://hub.github.com/">hub</a> git wrapper, there's no easy way to do this. I can
+
+<p>Even with the excellent <a href="https://hub.github.com/">hub</a> git wrapper, there&rsquo;s no easy way to do this. I can
 jump to the pull request <em>list</em> page with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git pulls
-</code></pre></div><p>where <code>pulls</code> is aliased in <code>~/.gitconfig</code> as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">pulls</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!hub browse -- pulls</span>
-</code></pre></div><p>but there's no easy way to jump to the pull request <em>detail</em> page in one
-command<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git pulls</code></pre></div>
+<p>where <code>pulls</code> is aliased in <code>~/.gitconfig</code> as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">pulls</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!hub browse -- pulls</span></code></pre></div>
+<p>but there&rsquo;s no easy way to jump to the pull request <em>detail</em> page in one
+command<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>.</p>
+
 <p>So we use a bash script that makes a HTTP call to the Github API and
-parses the response with <code>jq</code>. Here's the source to <code>open-github-pr-page.sh</code>
-which just needs to be somewhere on your path<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
+parses the response with <code>jq</code>. Here&rsquo;s the source to <code>open-github-pr-page.sh</code>
+which just needs to be somewhere on your path<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>#
 <span style="color:#75715e"># Open the Github pull request detail page for the current branch</span> 
@@ -123,32 +125,33 @@ main<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <sp
     <span style="color:#66d9ef">fi</span>
 <span style="color:#f92672">}</span>
 
-main
-</code></pre></div><p>For this to work, you need to create a personal API token and export it as an
+main</code></pre></div>
+<p>For this to work, you need to create a personal API token and export it as an
 <code>GITHUB_AUTH_TOKEN</code> env var in your <code>~/.bashrc</code>.</p>
+
 <p>Alias this to something memorable, such as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">openpr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!f() { open-github-pr-page.sh; }; f&#34;</span>
-</code></pre></div><p>I would use <code>git pr</code> but I've already got that aliased to <em>create</em> a new pull
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">openpr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!f() { open-github-pr-page.sh; }; f&#34;</span></code></pre></div>
+<p>I would use <code>git pr</code> but I&rsquo;ve already got that aliased to <em>create</em> a new pull
 request:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">pr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!git publish &amp;&amp; hub pull-request</span>
-</code></pre></div><p>where</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">pr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!git publish &amp;&amp; hub pull-request</span></code></pre></div>
+<p>where</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">publish</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!git push -u origin $(git branchname)</span>
-<span style="color:#a6e22e">branchname</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!git rev-parse --abbrev-ref HEAD</span>
-</code></pre></div><p>Works a treat.</p>
-<section class="footnotes" role="doc-endnotes">
-<hr>
+<span style="color:#a6e22e">branchname</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!git rev-parse --abbrev-ref HEAD</span></code></pre></div>
+<p>Works a treat.</p>
+<div class="footnotes">
+
+<hr />
+
 <ol>
-<li id="fn:1" role="doc-endnote">
-<p>Although you can get there with a command <em>and</em> a click using the hub
+<li id="fn:1"><p>Although you can get there with a command <em>and</em> a click using the hub
 command:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git compare
-</code></pre></div><p>which opens a page with a link to the pull request detail page, if one exists. <a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-<li id="fn:2" role="doc-endnote">
-<p>I use <code>~/Dropbox/bin/</code> for this kind of thing. <a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git compare</code></pre></div>
+<p>which opens a page with a link to the pull request detail page, if one exists.</p>
+ <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:2">I use <code>~/Dropbox/bin/</code> for this kind of thing.
+ <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
 </ol>
-</section>
+</div>
 
         </div>
 

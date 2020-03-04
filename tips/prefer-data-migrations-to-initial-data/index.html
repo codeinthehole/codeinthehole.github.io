@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,61 +75,76 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Django provides several mechanisms for <a href="https://docs.djangoproject.com/en/dev/howto/initial-data/">loading initial data for
+            
+
+<p>Django provides several mechanisms for <a href="https://docs.djangoproject.com/en/dev/howto/initial-data/">loading initial data for
 models</a>, such
 as leveraging JSON fixtures or files of raw SQL - James Bennett offers a
 <a href="http://www.b-list.org/weblog/2007/nov/21/install-time/">good overview</a>.</p>
+
 <p>Each documented method involves initialising data as part of the syncdb
 event, either by loading a fixture file or by hooking into the syncdb
 signal. However, there is a serious pitfall with these techniques, as
 described in the <a href="https://docs.djangoproject.com/en/dev/howto/initial-data/#automatically-loading-initial-data-fixtures">Django
 docs</a>:</p>
+
 <blockquote>
 <p>This is extremely convenient, but be careful: remember that the data
-will be refreshed every time you run syncdb. So don't use
-initial_data for data you'll want to edit.</p>
+will be refreshed every time you run syncdb. So don&rsquo;t use
+initial_data for data you&rsquo;ll want to edit.</p>
 </blockquote>
-<p>Storing data in a database that you don't want to edit seems like an
-anti-pattern to me. If it never changes, a database probably isn't the
+
+<p>Storing data in a database that you don&rsquo;t want to edit seems like an
+anti-pattern to me. If it never changes, a database probably isn&rsquo;t the
 right place to store it.</p>
+
 <p>That aside, there are certainly times when you want to seed a new
 database with data that can be edited. In these circumstances, the
 documented methods fall down as you can accidentally clobber live data
 if you run syncdb again.</p>
+
 <p>You might argue that you should only run syncdb once but in my
 experience, it is useful to run syncdb as part of your deployment script
 so that any newly added apps have their tables created automatically.</p>
+
 <h3 id="south-data-migrations">South data migrations</h3>
+
 <p>A better way to provide initial data is to use the database migration
 library <a href="http://south.aeracode.org/docs/index.html">South</a> to create
 <a href="http://south.aeracode.org/docs/tutorial/part3.html">data migrations</a>.
 The advantages are:</p>
+
 <ul>
-<li>Data migrations will only run once and so they won't clobber any
+<li>Data migrations will only run once and so they won&rsquo;t clobber any
 data.</li>
 <li>They will run automatically in all environments - no manual
 deployment steps required.</li>
 </ul>
+
 <p>The only disadvantage is that you need to use South, which most sensible
 Django projects already do.</p>
+
 <h3 id="simple-example">Simple example</h3>
+
 <p>Create a blank data migration:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py datamigration myapp mymigrationname
-</code></pre></div><p>then implement the <code>forward</code> method to create the appropriate initial
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py datamigration myapp mymigrationname</code></pre></div>
+<p>then implement the <code>forward</code> method to create the appropriate initial
 data:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
     <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Foo</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Bar</span><span style="color:#e6db74">&#39;</span>):
-        orm<span style="color:#f92672">.</span>Frob<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>name)
-</code></pre></div><p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked
-example</a> in South's
+        orm<span style="color:#f92672">.</span>Frob<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>name)</code></pre></div>
+<p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked
+example</a> in South&rsquo;s
 docs for further details on writing data migrations.</p>
+
 <h3 id="using-fixture-files">Using fixture files</h3>
-<p>It's possible to use JSON fixture files with data migrations, by
+
+<p>It&rsquo;s possible to use JSON fixture files with data migrations, by
 utilising the <code>call_command</code> function.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
     <span style="color:#f92672">from</span> django.core.management <span style="color:#f92672">import</span> call_command
-    call_command(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">loaddata</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">countries.json</span><span style="color:#e6db74">&#39;</span>)
-</code></pre></div><p>I had thought this was very useful feature as you can use the <code>dumpdata</code>
+    call_command(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">loaddata</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">countries.json</span><span style="color:#e6db74">&#39;</span>)</code></pre></div>
+<p>I had thought this was very useful feature as you can use the <code>dumpdata</code>
 command to produce your initial fixtures, and you will have them
 available to be used by unit tests.</p>
 

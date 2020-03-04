@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,60 +75,81 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>I rewrote this blog recently with the following aims:</p>
+            
+
+<p>I rewrote this blog recently with the following aims:</p>
+
 <ul>
 <li>to make it as easy as possible to create a new article, using
 <a href="http://docutils.sourceforge.net/rst.html">reStructuredText</a> (RST);</li>
 <li>to clean up and simplify the design, focussing on the readability of
 articles that include code snippets.</li>
 </ul>
+
 <p>I knew that there were various static blogs out there, with many
 supporting RST, but I still fancied the challenge of crafting something
-specific to my needs. There's nothing wrong with wheel re-invention if
+specific to my needs. There&rsquo;s nothing wrong with wheel re-invention if
 you want to learn about wheels.</p>
+
 <p>This article is a short summary.</p>
+
 <h3 id="technology">Technology</h3>
+
 <p>Django, Fabric and pygments - the <a href="http://github.com/codeinthehole/codeinthehole.com">source is on
 github</a>. I intend to
 pull out the generic blogging code into a separate library,
 reStructuredBlog, at some point, hence the &ldquo;rsb&rdquo; acronym used in the
 codebase.</p>
+
 <h3 id="writing-a-post">Writing a post</h3>
+
 <p>My ideal for writing a blog post is:</p>
+
 <ol>
 <li>Use vim to create a <code>.rst</code> file for the article;</li>
 <li>Preview the article locally;</li>
 <li>Publish to the remote server</li>
 </ol>
+
 <p>This translates to:</p>
+
 <h4 id="write">Write</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim posts/my-new-article.rst 
-</code></pre></div><h4 id="preview">Preview</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim posts/my-new-article.rst </code></pre></div>
+<h4 id="preview">Preview</h4>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py rsb_article posts/my-new-article.rst
-./manage.py runserver
-</code></pre></div><p>This converts the RST file into a instance of <code>rsb.models.Article</code>,
+./manage.py runserver</code></pre></div>
+<p>This converts the RST file into a instance of <code>rsb.models.Article</code>,
 plucking out the title, subtitle and any tags in the process.</p>
+
 <p>Rinse and repeat the write and preview steps until happy.</p>
+
 <h4 id="publish">Publish</h4>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">fab prod publish posts/0036-my-new-article.rst
-</code></pre></div><p>This copies the RST file up to the remote server and re-runs the
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">fab prod publish posts/0036-my-new-article.rst</code></pre></div>
+<p>This copies the RST file up to the remote server and re-runs the
 <code>rsb_article</code> management command to create the article in the production
 database.</p>
+
 <h3 id="design">Design</h3>
-<p><!-- raw HTML omitted --></p>
+
+<p><img src="/images/bookcovers/9781119998952.jpg" class="align-right" /></p>
+
 <p>I recently read the excellent &ldquo;Design for Hackers&rdquo; by David Kadavy. Duly
 inspired, I attempted to rework the design to be clean and pleasing on
 the eye. The color scheme is deliberately kept simple; the fonts used
 are Verdana, <a href="http://www.google.com/webfonts/specimen/Droid+Serif">Droid
 Serif</a> and
 <a href="http://www.google.com/webfonts/specimen/Inconsolata">Inconsolata</a>.</p>
+
 <p>I was also influenced by the clean look of the personal sites of <a href="http://stevelosh.com/">Steve
 Losh</a>, <a href="http://zachholman.com/">Zach Holman</a> and
 <a href="http://lucumr.pocoo.org/">Armin Ronacher</a>.</p>
+
 <h3 id="overall">Overall</h3>
-<p>I'm pleased that:</p>
+
+<p>I&rsquo;m pleased that:</p>
+
 <ul>
-<li>The site isn't painfully ugly like the old;</li>
+<li>The site isn&rsquo;t painfully ugly like the old;</li>
 <li>I can write articles easily and using my favourite tools (vim +
 RST);</li>
 <li>I can write articles on the tube on the way home;</li>
@@ -136,8 +157,9 @@ RST);</li>
 can <a href="https://raw.github.com/codeinthehole/codeinthehole.com/master/www/posts/0038-restructured-blog.rst">view the source of this
 article</a>.</li>
 </ul>
+
 <p>Since I switched to Disqus for comments, I decided to drop all the old
-ones (not that were that many), since I wasn't sure it was possible to
+ones (not that were that many), since I wasn&rsquo;t sure it was possible to
 migrate Apologies to the comment authors.</p>
 
         </div>

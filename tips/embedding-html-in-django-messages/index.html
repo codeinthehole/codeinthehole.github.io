@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,15 +75,22 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <h3 id="problem">Problem</h3>
-<p>You want to embed HTML within a message using <a href="https://docs.djangoproject.com/en/dev/ref/contrib/messages/">Django's messages
+            
+
+<h3 id="problem">Problem</h3>
+
+<p>You want to embed HTML within a message using <a href="https://docs.djangoproject.com/en/dev/ref/contrib/messages/">Django&rsquo;s messages
 framework</a>.</p>
-<p>This is a reasonably common requirement - for instance, it's common to
+
+<p>This is a reasonably common requirement - for instance, it&rsquo;s common to
 want to include a link within the message, perhaps pointing the user
 towards a sign-in or registration page.</p>
+
 <p>This problem exists as of Django 1.4 but may be solved within the
 framework in later versions.</p>
+
 <h3 id="solution">Solution</h3>
+
 <p>Use the <code>extra_tags</code> <a href="https://code.djangoproject.com/browser/django/branches/releases/1.4.X/django/contrib/messages/api.py#L15">keyword
 argument</a>
 to pass a flag indicating that the message is safe for rendering without
@@ -95,34 +102,36 @@ escaping. For example:</p>
     messages<span style="color:#f92672">.</span>success(request, 
                      <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Here is a &lt;a href=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&gt;link&lt;/a&gt;.</span><span style="color:#e6db74">&#39;</span>,
                      extra_tags<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">safe</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-</code></pre></div><p>Then use some simple template logic to determine whether to use the
+    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
+<p>Then use some simple template logic to determine whether to use the
 <code>safe</code> filter:</p>
-<pre><code class="language-html+django" data-lang="html+django">&lt;ul&gt;
+<pre><code class="language-html+django" data-lang="html+django"><ul>
     {% for message in messages %}
-    &lt;li class=&quot;{{ message.tags }}&quot;&gt;
+    <li class="{{ message.tags }}">
         {% if 'safe' in message.tags %}
             {{ message|safe }}
         {% else %}
             {{ message }}
         {% endif %}
-    &lt;/li&gt;
+    </li>
     {% endfor %}
-&lt;/ul&gt;
-</code></pre><h3 id="discussion">Discussion</h3>
-<p>It's tempting to use the <code>safe</code> filter for all messages but this opens
-up a XSS security hole if you are not careful as it's easy to include
+</ul></code></pre>
+<h3 id="discussion">Discussion</h3>
+
+<p>It&rsquo;s tempting to use the <code>safe</code> filter for all messages but this opens
+up a XSS security hole if you are not careful as it&rsquo;s easy to include
 user input verbatim in the message. For instance:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> messages
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_view</span>(request):
     code <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>GET[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">code</span><span style="color:#e6db74">&#39;</span>]
     <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-    messages<span style="color:#f92672">.</span>success(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> is not valid voucher code</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> code)
-</code></pre></div><p>leads to an XSS hole if the <code>safe</code> filter is used on all messages as the
-contents of <code>request.GET['code']</code> cannot be trusted. It's better to
+    messages<span style="color:#f92672">.</span>success(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> is not valid voucher code</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> code)</code></pre></div>
+<p>leads to an XSS hole if the <code>safe</code> filter is used on all messages as the
+contents of <code>request.GET['code']</code> cannot be trusted. It&rsquo;s better to
 explicitly indicate which messages can be safely rendered without
 escaping.</p>
+
 <p>Taken from a <a href="http://stackoverflow.com/questions/2053258/how-do-i-output-html-in-a-message-in-the-new-django-messages-framework">Stack Overflow
 answer</a>.</p>
 

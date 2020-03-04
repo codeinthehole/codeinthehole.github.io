@@ -18,10 +18,10 @@
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
-  Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
-  If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&#39;t assume anything about the incoming request.
+ Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
+ If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
   On tools:
-  Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+ Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
     
     <item>
@@ -30,10 +30,10 @@
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iwfrom ciw(&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a(neumonic: &amp;ldquo;a&amp;quot;n) or i(neumonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a (neumonic: &amp;ldquo;a&amp;rdquo;n) or i (neumonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w→ a word W→ a WORD t→ a HTML/XML tag s→ a sentence p→ a paragraph  From the (highly recommended) wellle/targets.</description>
+ w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
@@ -42,8 +42,8 @@ From core Vim:
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/debugging-vim-by-example/</guid>
-      <description>There&#39;s only so far you can get by cargo-culting other people&#39;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&#39;s slow or misbehaving. Learn how to scratch things that itch.
-This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&#39;ve recently investigated, diagnosed and resolved. There&#39;s very little to copy into your ~/.vimrc but hopefully some useful techniques that you can use.</description>
+      <description>There&amp;rsquo;s only so far you can get by cargo-culting other people&amp;rsquo;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&amp;rsquo;s slow or misbehaving. Learn how to scratch things that itch.
+This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.</description>
     </item>
     
     <item>
@@ -52,9 +52,9 @@ This post illustrates a range of debugging and profiling approaches for Vim by w
       <pubDate>Fri, 08 Mar 2019 09:22:04 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
-      <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;lsquo;s fixer functionality.
-&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1If you&#39;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
-let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endifFurther, if you don&#39;t want these fixers applied on save, set</description>
+      <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.
+&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
+let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif Further, if you don&amp;rsquo;t want these fixers applied on save, set</description>
     </item>
     
     <item>
@@ -63,10 +63,10 @@ let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(
       <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
-      <description>Here is my title If you&#39;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
-It&#39;s easily installed - on OSX, run:
+      <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
+It&amp;rsquo;s easily installed - on OSX, run:
 $ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
+if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif :grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -80,8 +80,7 @@ When you have a lot of templates, this gets pretty tedious.
 Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
 &amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
-&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro
-vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</description>
+&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro</description>
     </item>
     
   </channel>

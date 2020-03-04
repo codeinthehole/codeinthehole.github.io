@@ -19,7 +19,7 @@
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
       <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
 Migrating from PHP to Python and Django Abstract:
- Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&#39;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+ Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@ Migrating from PHP to Python and Django Abstract:
       
       <guid>https://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</guid>
       <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.
-The slides are written in Eric Meyer&#39;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
+The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
     </item>
     
   </channel>

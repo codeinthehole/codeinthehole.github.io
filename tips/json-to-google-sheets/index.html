@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -80,25 +80,23 @@ if (!doNotTrack) {
 I often create reports from JSON files using
 <a href="https://stedolan.github.io/jq/">JQ</a>. This post is a note-to-self on how to do
 this.</p>
-<p>Here's a command to create a tab-separated report from a JSON events file exported from
+
+<p>Here&rsquo;s a command to create a tab-separated report from a JSON events file exported from
 Loggly:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat loggly_events.json | <span style="color:#ae81ff">\ </span>
     jq -r <span style="color:#e6db74">&#39;.events[].event.json | 
 </span><span style="color:#e6db74">           select(.params | has(&#34;payment_day&#34;)) | 
 </span><span style="color:#e6db74">           [.timestamp, .account, .params.payment_day] | 
-</span><span style="color:#e6db74">           @tsv&#39;</span> | clipboard
-</code></pre></div><p>Note:</p>
+</span><span style="color:#e6db74">           @tsv&#39;</span> | clipboard</code></pre></div>
+<p>Note:</p>
+
 <ul>
-<li>
-<p>The <code>-r</code> option instructs JQ to output raw strings, not quoted JSON strings.</p>
-</li>
-<li>
-<p><code>@tsv</code> is a JQ format string for <a href="https://stedolan.github.io/jq/manual/#Formatstringsandescaping">outputting tab-separated values</a>.</p>
-</li>
-<li>
-<p>The <code>clipboard</code> command is an alias for <code>pbcopy</code>, the system clipboard on
-OS-X.</p>
-</li>
+<li><p>The <code>-r</code> option instructs JQ to output raw strings, not quoted JSON strings.</p></li>
+
+<li><p><code>@tsv</code> is a JQ format string for <a href="https://stedolan.github.io/jq/manual/#Formatstringsandescaping">outputting tab-separated values</a>.</p></li>
+
+<li><p>The <code>clipboard</code> command is an alias for <code>pbcopy</code>, the system clipboard on
+OS-X.</p></li>
 </ul>
 
         </div>

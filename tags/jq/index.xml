@@ -18,7 +18,7 @@
       
       <guid>https://codeinthehole.com/tips/open-github-pull-request-command/</guid>
       <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
-Even with the excellent hub git wrapper, there&#39;s no easy way to do this. I can jump to the pull request list page with:
+Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
 $ git pulls where pulls is aliased in ~/.</description>
     </item>
     
@@ -29,7 +29,7 @@ $ git pulls where pulls is aliased in ~/.</description>
       
       <guid>https://codeinthehole.com/tips/json-to-google-sheets/</guid>
       <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
-Here&#39;s a command to create a tab-separated report from a JSON events file exported from Loggly:
+Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
 $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</description>
     </item>
     

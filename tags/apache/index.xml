@@ -37,7 +37,7 @@ url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use
       <pubDate>Fri, 07 Nov 2008 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</guid>
-      <description>The Apache module mod_rewite is capable of some very cool stuff. One neat trick is to use the time and date variables to control redirects and URL rewriting. This is useful if you have a URL that you don&#39;t want to be exposed to the world until a certain date has passed - this could be the case with special offers and competitions which have a one-off static page that isn&#39;t to be revealed until a specified date.</description>
+      <description>The Apache module mod_rewite is capable of some very cool stuff. One neat trick is to use the time and date variables to control redirects and URL rewriting. This is useful if you have a URL that you don&amp;rsquo;t want to be exposed to the world until a certain date has passed - this could be the case with special offers and competitions which have a one-off static page that isn&amp;rsquo;t to be revealed until a specified date.</description>
     </item>
     
   </channel>

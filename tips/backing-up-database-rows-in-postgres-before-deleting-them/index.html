@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -79,13 +79,14 @@ if (!doNotTrack) {
 <p>Hmmm, this delete statement is taking longer than I thought it
 would&hellip;</p>
 </blockquote>
+
 <p>If you ever have to manually run a SQL delete statement in <code>psql</code>, you
-can back-up the rows you're about to delete:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> ( <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">in</span> ( <span style="color:#ae81ff">.</span><span style="color:#ae81ff">.</span><span style="color:#ae81ff">.</span> ) ) <span style="color:#66d9ef">to</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/tmp/backup.csv</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><p>and, if you've got your filter clause wrong (we've all done it), restore
+can back-up the rows you&rsquo;re about to delete:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> ( <span style="color:#66d9ef">select</span> <span style="color:#f92672">*</span> <span style="color:#66d9ef">from</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">where</span> id <span style="color:#66d9ef">in</span> ( <span style="color:#ae81ff">.</span><span style="color:#ae81ff">.</span><span style="color:#ae81ff">.</span> ) ) <span style="color:#66d9ef">to</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/tmp/backup.csv</span><span style="color:#e6db74">&#39;</span></code></pre></div>
+<p>and, if you&rsquo;ve got your filter clause wrong (we&rsquo;ve all done it), restore
 them with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/tmp/backup.csv</span><span style="color:#e6db74">&#39;</span>
-</code></pre></div><p>Moderately useful.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#66d9ef">copy</span> <span style="color:#960050;background-color:#1e0010">$</span><span style="color:#66d9ef">table</span> <span style="color:#66d9ef">from</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/tmp/backup.csv</span><span style="color:#e6db74">&#39;</span></code></pre></div>
+<p>Moderately useful.</p>
 
         </div>
 

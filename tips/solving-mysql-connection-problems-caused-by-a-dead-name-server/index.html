@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,14 +75,20 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>A client site went down today. This is what happened and how it was
+            
+
+<p>A client site went down today. This is what happened and how it was
 fixed.</p>
+
 <h3 id="symptoms">Symptoms</h3>
-<p>The immediate symptom is that your application servers can't connect to
+
+<p>The immediate symptom is that your application servers can&rsquo;t connect to
 your database servers. Attempted connections get an error message:</p>
+
 <blockquote>
-<p>Can't connect to MySQL server on &lsquo;10.10.110.11&rsquo; (111)</p>
+<p>Can&rsquo;t connect to MySQL server on &lsquo;10.10.110.11&rsquo; (111)</p>
 </blockquote>
+
 <p>The relevant MySQL process list reveals a long list of attempted
 connections in state <code>login</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@server-db1:~ $ mysqladmin processlist
@@ -95,27 +101,30 @@ connections in state <code>login</code>:</p>
 | <span style="color:#ae81ff">263</span> | unauthenticated user | 10.20.115.19:43420 |    | Connect |      | login |
 | <span style="color:#ae81ff">264</span> | unauthenticated user | 10.20.115.19:43429 |    | Connect |      | login |
 | <span style="color:#ae81ff">265</span> | unauthenticated user | 10.20.115.4:55297  |    | Connect |      | login |
-...
-</code></pre></div><p>Your site is probably down as no request can connect to the database -
+...</code></pre></div>
+<p>Your site is probably down as no request can connect to the database -
 people are starting to get upset.</p>
+
 <h3 id="problem">Problem</h3>
+
 <p>When a client connects to MySQL, the newly spawned thread attempts to
-resolve the host name (see <a href="http://dev.mysql.com/doc/refman/5.0/en/dns.html">MySQL's documentation on
+resolve the host name (see <a href="http://dev.mysql.com/doc/refman/5.0/en/dns.html">MySQL&rsquo;s documentation on
 DNS</a>). This problem is
 caused by the first name server in <code>/etc/resolv.conf</code> being down,
 causing the DNS request to time-out. Hence, every connection to MySQL
 sits for a minute waiting for the timeout to occur. Within a few
 seconds, no client will be able to connect.</p>
+
 <p>You can verify this using the <code>dig</code> command to exercise the name servers
-in <code>/etc/resolv.conf</code>. Here's the broken one (you'll have to wait for
+in <code>/etc/resolv.conf</code>. Here&rsquo;s the broken one (you&rsquo;ll have to wait for
 the time-out):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dig @180.179.39.80 www.google.com
 
 ; &lt;&lt;&gt;&gt; DiG 9.7.0-P1 &lt;&lt;&gt;&gt; @180.179.39.80 www.google.com
 ; <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> server found<span style="color:#f92672">)</span>
 ;; global options: +cmd
-;; connection timed out; no servers could be reached
-</code></pre></div><p>A working name server would return something like:</p>
+;; connection timed out; no servers could be reached</code></pre></div>
+<p>A working name server would return something like:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dig @180.179.39.81 www.google.com
 
 ; &lt;&lt;&gt;&gt; DiG 9.7.0-P1 &lt;&lt;&gt;&gt; @180.179.39.81 www.google.com
@@ -151,24 +160,31 @@ ns1.google.com.com      <span style="color:#ae81ff">76667</span>   IN  A       2
 ;; Query time: <span style="color:#ae81ff">13</span> msec
 ;; SERVER: 180.179.39.81#53<span style="color:#f92672">(</span>180.179.39.81<span style="color:#f92672">)</span>
 ;; WHEN: Thu Feb  <span style="color:#ae81ff">2</span> 16:18:38 <span style="color:#ae81ff">2012</span>
-;; MSG SIZE  rcvd: <span style="color:#ae81ff">268</span>
-</code></pre></div><h3 id="solution">Solution</h3>
-<p>The root solution is to fix the name server, but sometimes that isn't in
+;; MSG SIZE  rcvd: <span style="color:#ae81ff">268</span></code></pre></div>
+<h3 id="solution">Solution</h3>
+
+<p>The root solution is to fix the name server, but sometimes that isn&rsquo;t in
 your control.</p>
+
 <p>You can work around the borked name server by restarting MySQL with the
 <code>--skip-name-resolve</code> option. This prevents MySQL trying to resolve the
 host name for each thread, bypassing the name server problem.</p>
+
 <p>Alternatively, you can remove the broken DNS server from your
 <code>/etc/resolv.conf</code>.</p>
+
 <h3 id="discussion">Discussion</h3>
-<p>Note that running MySQL with <code>--skip-name-resolve</code> means you can't use
+
+<p>Note that running MySQL with <code>--skip-name-resolve</code> means you can&rsquo;t use
 hostnames in your privileges table. Thus, you may have to reconfigure
 your client users to get your site back up. You can verify this by using
 the following SQL to inspect your configured users and hosts:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">user</span>, <span style="color:#66d9ef">host</span> <span style="color:#66d9ef">FROM</span> mysql.<span style="color:#66d9ef">user</span>;
-</code></pre></div><p>Check to see if the <code>host</code> column uses domain names.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">user</span>, <span style="color:#66d9ef">host</span> <span style="color:#66d9ef">FROM</span> mysql.<span style="color:#66d9ef">user</span>;</code></pre></div>
+<p>Check to see if the <code>host</code> column uses domain names.</p>
+
 <h3 id="credits">Credits</h3>
-<p>Thanks to Tangent's operations team
+
+<p>Thanks to Tangent&rsquo;s operations team
 <a href="https://twitter.com/#!/timbobsteve">@timbobsteve</a> and
 <a href="https://twitter.com/#!/kuramanga">@kuramanga</a> for their help in
 debugging and fixing this.</p>

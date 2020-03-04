@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,21 +75,22 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Getting <a href="http://www.commandlinefu.com">www.commandlinefu.com</a> off the ground has renewed my interest in
+            <p>Getting www.commandlinefu.com off the ground has renewed my interest in
 Bash, UNIX and all things command-line. Powerful one-liners are things
 of beauty and are worth collecting; however what I consider to be the
 most influential command-line tip I know covers four:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#e6db74">&#34;\e[A&#34;</span>: history-search-backward
 <span style="color:#e6db74">&#34;\e[B&#34;</span>: history-search-forward
 <span style="color:#e6db74">&#34;\e[C&#34;</span>: forward-char
-<span style="color:#e6db74">&#34;\e[D&#34;</span>: backward-char
-</code></pre></div><p>These lines need to be placed in your <code>~/.inputrc</code> file, the start-up
+<span style="color:#e6db74">&#34;\e[D&#34;</span>: backward-char</code></pre></div>
+<p>These lines need to be placed in your <code>~/.inputrc</code> file, the start-up
 script for the Readline utility used by Bash (as well as several other
 applications) and others). The important commands here are the first
 two, which bind your up and down cursor keys to incrementally search
 your history. (The second two ensure that left and right continue to
 work correctly).</p>
-<p>This is <em>incredibly useful</em> for retrieving commands you've used
+
+<p>This is <em>incredibly useful</em> for retrieving commands you&rsquo;ve used
 previously and makes a huge difference to your productivity. For
 instance, to find a previous SSH command from a few days ago, simply
 type &ldquo;ss&rdquo; and press up a few times. This will allow you to browse
@@ -97,36 +98,36 @@ through all your previous ssh… commands until you find the right one -
 you never need to use more than 4 or 5 keystrokes to retrieve any
 previous command. If your cycling through too many commands to find the
 right one, type in a few more characters to refine the search.</p>
+
 <p>As indicated above, this functionality is available in all applications
 that use Readline including MySQL, Python, IRB (interactive Ruby shell)
-and others. Once you're used to this feature, it's hard to live without</p>
-<ul>
-<li>the first thing I do once I've been set up as a user on a new server
+and others. Once you&rsquo;re used to this feature, it&rsquo;s hard to live without
+- the first thing I do once I&rsquo;ve been set up as a user on a new server
 is update my .inputrc file to contain these settings. The one place
 where I sorely wish this functionality existed is the Firebug Javascript
 commandline in Firefox (a ticket already exists requesting a similar
-feature).</li>
-</ul>
+feature).</p>
+
 <p>Another way of searching your history is to use CTRL+R, which
 essentially performs a full-text search on your history (keep pressing
 CTRL+R to cycle through results). In this case, searching for &ldquo;ssh&rdquo; will
 locate all commands that feature this string anywhere in the command.
 Although this is actually a more powerful feature than the incremental
-history search described above, I don't often use it as: (a) the
+history search described above, I don&rsquo;t often use it as: (a) the
 incremental search generally lets me jump to the desired command in
 fewer key-presses and (b) I find &ldquo;ssh&rdquo;, CTRL+R, CTRL+R slightly awkward
-to type and less intuitive than &ldquo;ssh&rdquo;, UP, UP. Horses for courses really</p>
-<ul>
-<li>you could probably be just as efficient with either one.</li>
-</ul>
+to type and less intuitive than &ldquo;ssh&rdquo;, UP, UP. Horses for courses really
+- you could probably be just as efficient with either one.</p>
+
 <p>» Hat-tip to the place where I first learnt this: <a href="http://www.ukuug.org/events/linux2003/papers/bash_tips/">Power Shell
 Usage</a> by Simon
 Myers</p>
+
 <p>One extra thing: this functionality can be neatly complimented by some
 choice history settings in your <code>~/.bashrc</code> file:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">export HISTSIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">1000000</span>
-export HISTFILESIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">1000000000</span>
-</code></pre></div><p>These simply set your history to be very large so that you have a huge
+export HISTFILESIZE<span style="color:#f92672">=</span><span style="color:#ae81ff">1000000000</span></code></pre></div>
+<p>These simply set your history to be very large so that you have a huge
 bank of commands to search.</p>
 
         </div>

@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,25 +75,34 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <h3 id="the-problem">The problem</h3>
-<p>It's common for UX professionals to design forms like the following:</p>
-<p><img src="/images/screenshots/radio-form-wire.png" alt="image"></p>
+            
+
+<h3 id="the-problem">The problem</h3>
+
+<p>It&rsquo;s common for UX professionals to design forms like the following:</p>
+
+<p><img src="/images/screenshots/radio-form-wire.png" alt="image" /></p>
+
 <p>where radio buttons are employed to split the form into sections, each
-of which can have it's own fields which are only mandatory if the parent
+of which can have it&rsquo;s own fields which are only mandatory if the parent
 radio button is checked. Thus the validation logic is conditional on the
 submitted form data.</p>
+
 <p>Such requirements are slightly tricky to capture in Django as they tread
 slightly outside the normal path of form validation. Specifically:</p>
+
 <ul>
-<li>It's not documented how to render radio buttons separately. The
+<li>It&rsquo;s not documented how to render radio buttons separately. The
 default behaviour is to render an unordered list. The <a href="https://docs.djangoproject.com/en/dev/ref/forms/widgets/#radioselect">guidance on
 fine-grained template
 control</a>
 only covers looping over the choices.</li>
-<li>It's not obvious how to change the validation properties of a form
+<li>It&rsquo;s not obvious how to change the validation properties of a form
 field dynamically, depending on the submitted data.</li>
 </ul>
+
 <h3 id="a-solution">A solution</h3>
+
 <p>Start with this form class:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
 
@@ -106,11 +115,12 @@ field dynamically, depending on the submitted data.</li>
     schedule <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>ChoiceField(
         choices<span style="color:#f92672">=</span>SCHEDULE_CHOICES, widget<span style="color:#f92672">=</span>forms<span style="color:#f92672">.</span>RadioSelect)
     send_date <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>DateTimeField(
-        label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, required<span style="color:#f92672">=</span>False)
-</code></pre></div><p>Note the <code>send_date</code> field has <code>required=False</code> as it is only mandatory
+        label<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#34;</span>, required<span style="color:#f92672">=</span>False)</code></pre></div>
+<p>Note the <code>send_date</code> field has <code>required=False</code> as it is only mandatory
 if the &lsquo;Send later&rsquo; radio button is selected. For simplicity, we are are
 only using a single datetime field for the send date rather than the
 split-widget field of the wire.</p>
+
 <p>We can render this as follows:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;post&#39;</span>&gt;
     {% csrf_token %}
@@ -131,14 +141,16 @@ split-widget field of the wire.</p>
     &lt;/<span style="color:#f92672">div</span>&gt;
 
     &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Save&lt;/<span style="color:#f92672">button</span>&gt;
-&lt;/<span style="color:#f92672">form</span>&gt;
-</code></pre></div><p>Observe that:</p>
+&lt;/<span style="color:#f92672">form</span>&gt;</code></pre></div>
+<p>Observe that:</p>
+
 <ul>
 <li>the radio buttons are rendered individually individually by
 referring to the index of each option (this works in Django 1.4+).</li>
-<li>we don't render the errors for the <code>schedule</code> next to one particular
+<li>we don&rsquo;t render the errors for the <code>schedule</code> next to one particular
 radio button, but above the container elements.</li>
 </ul>
+
 <p>Next we add conditional validation to the form class:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
 
@@ -158,17 +170,21 @@ radio button, but above the container elements.</li>
 
         <span style="color:#75715e"># If &#39;later&#39; is chosen, set send_date as required</span>
         <span style="color:#66d9ef">if</span> data <span style="color:#f92672">and</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">schedule</span><span style="color:#e6db74">&#39;</span>, None) <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>LATER:
-            self<span style="color:#f92672">.</span>fields[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send_date</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>required <span style="color:#f92672">=</span> True
-</code></pre></div><p>Here, we override <code>__init__</code> and inspect the raw submitted data so that
+            self<span style="color:#f92672">.</span>fields[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">send_date</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>required <span style="color:#f92672">=</span> True</code></pre></div>
+<p>Here, we override <code>__init__</code> and inspect the raw submitted data so that
 we can set <code>required=True</code> on the <code>send_date</code> field appropriately. This
 is the conventional way of adding conditional logic to form validation,
-although it's more common to use an additional argument to <code>__init__</code>
+although it&rsquo;s more common to use an additional argument to <code>__init__</code>
 to determine the field adjustments.</p>
+
 <h3 id="discussion">Discussion</h3>
-<p>This solution is not perfect. It's a little odd to use the raw form data
-to change validation rules. However, I'm not aware of a cleaner
+
+<p>This solution is not perfect. It&rsquo;s a little odd to use the raw form data
+to change validation rules. However, I&rsquo;m not aware of a cleaner
 alternative.</p>
+
 <p>Related links:</p>
+
 <ul>
 <li><a href="http://www.slideshare.net/pydanny/advanced-django-forms-usage">Advanced Django Form
 Usage</a> -

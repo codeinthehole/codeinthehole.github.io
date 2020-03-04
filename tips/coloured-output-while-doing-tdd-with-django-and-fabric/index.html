@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,11 +75,14 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>I'm a big fan of using PHPUnit with console colours turned on (using the
+            <p>I&rsquo;m a big fan of using PHPUnit with console colours turned on (using the
 <code>--colors</code> option). Eg:</p>
-<p><img src="/images/screenshots/phpunit.jpg" alt="image"></p>
+
+<p><img src="/images/screenshots/phpunit.jpg" alt="image" /></p>
+
 <p>It helps gets into the natural &ldquo;red, green, refactor&rdquo; rhythm.</p>
-<p>I'm currently totally immersed in Django, and greatly miss the lack of
+
+<p>I&rsquo;m currently totally immersed in Django, and greatly miss the lack of
 colour support within the &ldquo;test&rdquo; management command. A simple workaround
 for this is to use Fabric with a few modified color commands. Your
 fabric file should include the following:</p>
@@ -98,10 +101,12 @@ env<span style="color:#f92672">.</span>test_apps <span style="color:#f92672">=</
         <span style="color:#66d9ef">print</span> red_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Some tests failed</span><span style="color:#e6db74">&#34;</span>)
     <span style="color:#66d9ef">else</span>:
         <span style="color:#66d9ef">print</span>
-        <span style="color:#66d9ef">print</span> green_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">All tests passed - have a banana!</span><span style="color:#e6db74">&#34;</span>)
-</code></pre></div><p>You can choose your own success and failure messages.</p>
+        <span style="color:#66d9ef">print</span> green_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">All tests passed - have a banana!</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+<p>You can choose your own success and failure messages.</p>
+
 <p>Now we have lovely colours while doing TDD in Django:</p>
-<p><img src="/images/screenshots/fab.jpg" alt="image"></p>
+
+<p><img src="/images/screenshots/fab.jpg" alt="image" /></p>
 
         </div>
 

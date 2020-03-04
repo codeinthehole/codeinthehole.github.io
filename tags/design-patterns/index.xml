@@ -17,7 +17,7 @@
       <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
-      <description>At various PHP conferences and meetups over the last few weeks, I&#39;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:
+      <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:
  The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
     </item>
     

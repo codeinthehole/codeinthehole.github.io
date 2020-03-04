@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,22 +75,23 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>A quick <a href="http://phing.info/trac/">Phing</a> tip that's made my life easier
+            <p>A quick <a href="http://phing.info/trac/">Phing</a> tip that&rsquo;s made my life easier
 when deploying new versions of
 <a href="http://www.commandlinefu.com/">commandlinefu.com</a>.</p>
+
 <p>One of the <a href="http://stevesouders.com/hpws/rule-expires.php">key performance
 recommendations</a> from
 Steve Souders&rsquo; excellent &ldquo;High Performance Websites&rdquo; is to use Expires
 HTTP headers to set far-future expiration dates for your site components
 (such as images, Javascript files and CSS stylesheets). This way,
 browsers can cache the files between requests giving a performance boost
-to your site. Assuming you're using Apache for serving, the following
+to your site. Assuming you&rsquo;re using Apache for serving, the following
 settings can be used to set these headers for all Javascript and CSS
 files (there are a few alternative ways of achieving the same result):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;FilesMatch</span> <span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#960050;background-color:#1e0010">\</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">(</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">o</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">d</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">l</span><span style="color:#960050;background-color:#1e0010">v</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">j</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">j</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">e</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">p</span><span style="color:#960050;background-color:#1e0010">n</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">g</span><span style="color:#960050;background-color:#1e0010">i</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">j</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">c</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">|</span><span style="color:#960050;background-color:#1e0010">s</span><span style="color:#960050;background-color:#1e0010">w</span><span style="color:#960050;background-color:#1e0010">f</span><span style="color:#960050;background-color:#1e0010">)</span><span style="color:#960050;background-color:#1e0010">$</span><span style="color:#960050;background-color:#1e0010">&#34;</span><span style="color:#f92672">&gt;</span>
     Header set Expires &#34;Thu, 15 Apr 2010 20:00:00 GMT&#34;
-<span style="color:#f92672">&lt;/FilesMatch&gt;</span>
-</code></pre></div><p>The main issue to be aware of using this technique is that, when your
+<span style="color:#f92672">&lt;/FilesMatch&gt;</span></code></pre></div>
+<p>The main issue to be aware of using this technique is that, when your
 components change, you need to ensure your visitors are forced to
 download the latest version rather than using the one cached by their
 browser. The only way to ensure this happens is to use a different URL
@@ -100,10 +101,12 @@ string as part of the request URL (eg
 <code>&lt;script src=&quot;/js/behaviour.js?2009-03-15&quot; type=&quot;text/javascript&quot; /&gt;</code>).
 Then changing the query string component is sufficient to force browsers
 to make a full request for the new component.</p>
+
 <p>This works well but is an easy-to-forget overhead for deployment.
 However, this substitution can be automated by making use of the Filters
 that Phing provides. Doing so is trivial: simply insert a tokenised
 string as the query string after your asset URLs. That is:</p>
+
 <p><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;/css/styles.css?~~CACHEBUSTER~~&quot; type=&quot;text/css&quot; /&gt;</code>
 where the <code>~~</code> delimiter indicates the token. Then include something
 like the following snippet in your Phing deployment script.</p>
@@ -121,15 +124,15 @@ like the following snippet in your Phing deployment script.</p>
         <span style="color:#f92672">&lt;/filterchain&gt;</span>
         <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">refid=</span><span style="color:#e6db74">&#34;deployment-files&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/copy&gt;</span>
-<span style="color:#f92672">&lt;/target&gt;</span>
-</code></pre></div><p>The filterchain component of the copy task parses the given fileset for
+<span style="color:#f92672">&lt;/target&gt;</span></code></pre></div>
+<p>The filterchain component of the copy task parses the given fileset for
 matching tokens that match and replaces them with the given value. In
-this example, I'm using timestamps as the replacements as these will
+this example, I&rsquo;m using timestamps as the replacements as these will
 ensure a different query string on each deployment. Doing so ensures
 that the deployed HTML includes the lines:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">link</span> <span style="color:#a6e22e">rel</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;stylesheet&#34;</span> <span style="color:#a6e22e">href</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/css/styles.css?2008-03-15-21-51&#34;</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/css&#34;</span> /&gt;
-&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/js/site-behaviour.js?2008-03-15-21-51&#34;</span>&gt;
-</code></pre></div><p>which then ensure that all subsequent visitors download the latest
+&lt;<span style="color:#f92672">script</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;text/javascript&#34;</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/js/site-behaviour.js?2008-03-15-21-51&#34;</span>&gt;</code></pre></div>
+<p>which then ensure that all subsequent visitors download the latest
 versions of the CSS and javascript files. The above target is taken from
 a deployment script I use which creates a temporary snapshot of the
 codebase that I want to deploy, but the basic principle of using the

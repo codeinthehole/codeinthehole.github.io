@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,13 +75,15 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><!-- raw HTML omitted --></p>
+            <p><img src="/images/bookcovers/9780596102357.jpg" class="align-right" /></p>
+
 <p>Following some server monitoring advice from the excellent &lsquo;Building
-Scalable Web Sites&rsquo; by Cal Henderson, I've recently been experimenting
+Scalable Web Sites&rsquo; by Cal Henderson, I&rsquo;ve recently been experimenting
 with <a href="http://ganglia.info/">Ganglia</a> on a cluster of servers at Tangent
 Labs. It has proved to be deeply impressive and has given us a great
 tool for keeping an eye on how our servers are performing, as well as
 providing an invaluable diagnostic tool should things go wrong.</p>
+
 <p>In essence, Ganglia is a distributed monitoring application that allows
 statistics on a cluster of servers to be aggregated in a single place.
 Moreover, an excellent web front-end is also provided to view charts of
@@ -89,51 +91,53 @@ the statistics being collected. You can view a <a href="http://monitor.millenniu
 monitoring application for the UC Berkeley Millennium
 Project</a> which shows exactly
 what Ganglia can provide.</p>
+
 <p>Out of the box, Ganglia collects basic server stats on load, memory,
 CPU, network and disk. However, what makes it great is that it can be
 easily extended to collect statistics on anything that you can measure
 from the command line. There is a <a href="http://ganglia.sourceforge.net/gmetric/">repository of user-contributed
-scripts</a> although it's not that
+scripts</a> although it&rsquo;s not that
 extensive. In this post, I detail a script that can used to feed
 statistics about MySQL into Ganglia for monitoring - something important
 to any LAMP-stack application.</p>
+
 <p>A few technical details first: Ganglia utilises three utilities to run
 each with a distinct responsibility:</p>
+
 <dl>
 <dt>gmond</dt>
-<dd>
-<p>A daemon responsible for collecting monitoring stats and sharing
+<dd><p>A daemon responsible for collecting monitoring stats and sharing
 them using XML over TCP. The gmond daemon runs on all nodes that you
-want to monitor.</p>
-</dd>
+want to monitor.</p></dd>
 <dt>gmetad</dt>
-<dd>
-<p>A daemon responsible for collecting and storing data from other
+<dd><p>A daemon responsible for collecting and storing data from other
 gmetad and gmomd services. This only needs to be running on a
-single, central node.</p>
-</dd>
+single, central node.</p></dd>
 <dt>gmetric</dt>
-<dd>
-<p>A command-line application used for using Ganglia to monitor custom
-metrics.</p>
-</dd>
+<dd><p>A command-line application used for using Ganglia to monitor custom
+metrics.</p></dd>
 </dl>
+
 <p>All very simple really - see the
 <a href="http://ganglia.wiki.sourceforge.net/ganglia_documents">docs</a> for the
-nitty gritty. Ok, enough intro -here's my script for MySQL:</p>
+nitty gritty. Ok, enough intro -here&rsquo;s my script for MySQL:</p>
+
 <p>» <a href="/downloads/gmetric-mysql.sh">gmetric-mysql.sh (3.1kb)</a></p>
-<p>It's written in Bash and uses a temporary file to read the MySQL stats
+
+<p>It&rsquo;s written in Bash and uses a temporary file to read the MySQL stats
 into before parsing and submitting to gmetric. This is done as many of
 the MySQL stats of interest are cumulative counts rather than rates (eg
 SELECTs per second) which are generally of more interest. Hence, the
 script estimates the rate of change by dividing the value delta by the
 timestamp delta.</p>
+
 <p>To use this script, simply copy it into a convenient location, ensure it
 is executable and add the following line to your crontab.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">* * * * * /path/to/gmetric-mysql.sh &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
-</code></pre></div><p>As soon as this is done, your Ganglia web front-end should start
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">* * * * * /path/to/gmetric-mysql.sh &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span></code></pre></div>
+<p>As soon as this is done, your Ganglia web front-end should start
 plotting the new metrics.</p>
-<p><img src="/images/ganglia-snapshot.jpeg" alt="image"></p>
+
+<p><img src="/images/ganglia-snapshot.jpeg" alt="image" /></p>
 
         </div>
 

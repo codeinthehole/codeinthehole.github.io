@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,36 +75,40 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <h1 id="here-is-my-title">Here is my title</h1>
-<p>If you're not doing this already, then you should use the <a href="http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/">Silver
+            
+
+<h1 id="here-is-my-title">Here is my title</h1>
+
+<p>If you&rsquo;re not doing this already, then you should use the <a href="http://geoff.greer.fm/2011/12/27/the-silver-searcher-better-than-ack/">Silver
 Searcher</a>
 within Vim for rapid, convenient file searching. In a nutshell, <code>ag</code>
 offers similar functionality to <code>ack</code> but with much better performance.</p>
-<p>It's easily installed - on OSX, run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install the_silver_searcher
-</code></pre></div><p>Urge Vim to use it for <code>:grep</code> commands by adding the following to
+
+<p>It&rsquo;s easily installed - on OSX, run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install the_silver_searcher</code></pre></div>
+<p>Urge Vim to use it for <code>:grep</code> commands by adding the following to
 <code>~/.vimrc</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">executable</span>(<span style="color:#e6db74">&#39;ag&#39;</span>) <span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">    &#34; Note we extract the column as well as the file and line number</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">grepprg</span>=<span style="color:#a6e22e">ag</span>\ --<span style="color:#a6e22e">nogroup</span>\ --<span style="color:#a6e22e">nocolor</span>\ --<span style="color:#a6e22e">column</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">grepformat</span>=%<span style="color:#a6e22e">f</span>:%<span style="color:#a6e22e">l</span>:%<span style="color:#a6e22e">c</span>%<span style="color:#a6e22e">m</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p><code>:grep</code> searches are now lightning-fast and respectful of your
-<code>~/.gitignore</code> patterns. It's genuinely impressive.</p>
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span></code></pre></div>
+<p><code>:grep</code> searches are now lightning-fast and respectful of your
+<code>~/.gitignore</code> patterns. It&rsquo;s genuinely impressive.</p>
+
 <p>Improve your efficiency further by remapping the keys for jumping
 through search matches (stored in the &ldquo;quickfix&rdquo; list):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">silent</span>&gt; &lt;<span style="color:#a6e22e">RIGHT</span>&gt; :<span style="color:#a6e22e">cnext</span>&lt;<span style="color:#a6e22e">CR</span>&gt;<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">silent</span>&gt; &lt;<span style="color:#a6e22e">LEFT</span>&gt; :<span style="color:#a6e22e">cprev</span>&lt;<span style="color:#a6e22e">CR</span>&gt;<span style="color:#960050;background-color:#1e0010">
-</span></code></pre></div><p>I'm using the cursor keys since I normally have them disabled.</p>
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">nmap</span> &lt;<span style="color:#a6e22e">silent</span>&gt; &lt;<span style="color:#a6e22e">LEFT</span>&gt; :<span style="color:#a6e22e">cprev</span>&lt;<span style="color:#a6e22e">CR</span>&gt;</code></pre></div>
+<p>I&rsquo;m using the cursor keys since I normally have them disabled.</p>
+
 <p>See also:</p>
+
 <ul>
-<li>
-<p><a href="http://robots.thoughtbot.com/faster-grepping-in-vim">Faster Grepping in Vim</a> by Dan
-Croak - this shows how to use the Silver searcher with the <a href="https://github.com/kien/ctrlp.vim">CtrlP</a> plugin.</p>
-</li>
-<li>
-<p>The Vim plugin <a href="https://github.com/rking/ag.vim">ag.vim</a>.</p>
-</li>
+<li><p><a href="http://robots.thoughtbot.com/faster-grepping-in-vim">Faster Grepping in Vim</a> by Dan
+Croak - this shows how to use the Silver searcher with the <a href="https://github.com/kien/ctrlp.vim">CtrlP</a> plugin.</p></li>
+
+<li><p>The Vim plugin <a href="https://github.com/rking/ag.vim">ag.vim</a>.</p></li>
 </ul>
 
         </div>

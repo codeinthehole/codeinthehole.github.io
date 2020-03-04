@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583359108" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583359342" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -75,16 +75,21 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <h3 id="problem">Problem</h3>
+            
+
+<h3 id="problem">Problem</h3>
+
 <p>You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).</p>
+
 <h3 id="solution">Solution</h3>
+
 <p>With pip already installed, install the required development packages:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
-</code></pre></div><p>and symlink the three image libraries into <code>/usr/lib</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev</code></pre></div>
+<p>and symlink the three image libraries into <code>/usr/lib</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libfreetype.so /usr/lib/
 $ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libjpeg.so /usr/lib/
-$ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libz.so /usr/lib/
-</code></pre></div><p>PIL should now install with support for JPEGs, PNGs and FreeType, as
+$ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libz.so /usr/lib/</code></pre></div>
+<p>PIL should now install with support for JPEGs, PNGs and FreeType, as
 indicated by the compilation output:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--------------------------------------------------------------------
 PIL 1.1.7 SETUP SUMMARY
@@ -98,11 +103,13 @@ platform      linux2 2.7.3 <span style="color:#f92672">(</span>default, Apr <spa
 --- ZLIB <span style="color:#f92672">(</span>PNG/ZIP<span style="color:#f92672">)</span> support available
 --- FREETYPE2 support available
 *** LITTLECMS support not available
---------------------------------------------------------------------
-</code></pre></div><h3 id="common-problems">Common problems</h3>
+--------------------------------------------------------------------</code></pre></div>
+<h3 id="common-problems">Common problems</h3>
+
 <h4 id="missing-image-libraries">Missing image libraries</h4>
+
 <p>If the image libraries are not installed and available in <code>/usr/lib</code>,
-you'll see something like this:</p>
+you&rsquo;ll see something like this:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--------------------------------------------------------------------
 PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
@@ -118,9 +125,10 @@ platform      linux2 2.7.3 <span style="color:#f92672">(</span>default, Apr <spa
 --------------------------------------------------------------------
 To add a missing option, make sure you have the required
 library, and set the corresponding ROOT variable in the
-setup.py script.
-</code></pre></div><h4 id="missing-python-headers">Missing python headers</h4>
-<p>Without <code>python-dev</code>, you'll see something that ends with the following:</p>
+setup.py script.</code></pre></div>
+<h4 id="missing-python-headers">Missing python headers</h4>
+
+<p>Without <code>python-dev</code>, you&rsquo;ll see something that ends with the following:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">...
 
 running build_ext
@@ -137,11 +145,13 @@ _imaging.c:75:20: fatal error: Python.h: No such file or directory
 
 compilation terminated.
 
-error: command <span style="color:#e6db74">&#39;gcc&#39;</span> failed with exit status <span style="color:#ae81ff">1</span>
-</code></pre></div><h3 id="discussion">Discussion</h3>
+error: command <span style="color:#e6db74">&#39;gcc&#39;</span> failed with exit status <span style="color:#ae81ff">1</span></code></pre></div>
+<h3 id="discussion">Discussion</h3>
+
 <p>Yes, this has been written about before. This is just my note-to-self
 that I can refer others to - I also wanted to include the common error
 messages that people will search for.</p>
+
 <ul>
 <li><a href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">Installing PIL in a virtualenv on Ubuntu 12.04 Precise
 Pangolin</a></li>
