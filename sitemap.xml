@@ -4,7 +4,27 @@
   
   <url>
     <loc>https://codeinthehole.com/</loc>
-    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/git/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/guides/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -14,11 +34,6 @@
   
   <url>
     <loc>https://codeinthehole.com/tips/software-development-tips-part1/</loc>
-    <lastmod>2020-02-26T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tags/</loc>
     <lastmod>2020-02-26T10:04:16+00:00</lastmod>
   </url>
   
@@ -134,11 +149,6 @@
   
   <url>
     <loc>https://codeinthehole.com/tips/advanced-pull-request-crafting/</loc>
-    <lastmod>2018-06-03T12:30:05+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/tags/git/</loc>
     <lastmod>2018-06-03T12:30:05+01:00</lastmod>
   </url>
   
@@ -850,11 +860,6 @@
   <url>
     <loc>https://codeinthehole.com/tips/following-log-files-with-tail-f/</loc>
     <lastmod>2008-10-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://codeinthehole.com/guides/</loc>
-    <lastmod>2005-11-10T00:00:00+00:00</lastmod>
   </url>
   
   <url>

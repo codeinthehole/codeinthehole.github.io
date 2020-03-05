@@ -1,0 +1,487 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1583444707" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Resolving conflicts during a Git rebase - David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Some collected tips from over the years">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Resolving conflicts during a Git rebase</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 5 March 2020</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Thursday, 5 March 2020</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<!--
+INTRODUCTION
+
+Not really anything new - just an article I can point team members to who are
+having problem rebasing.
+
+Broadly steps are:
+
+1. Understand the purpose of YOUR commit that can't be applied (hence the
+   conflict)
+
+2. Understand the changes made to each conflicted file from the TARGET BRANCH
+   (either just a simple diff or commit-by-commit)
+
+3. Apply your changes carefully
+
+LIT REVIEW
+----------
+
+Nothing notable:
+- https://clubmate.fi/git-rebasing-workflow-and-resolving-merge-conflicts/
+- https://docs.openstack.org/doc-contrib-guide/additional-git-workflow/rebase.html
+- https://dev.to/jacqueline/another-conflict-resolving-conflicts-in-git-that-occur-when-using-rebase-3dho
+- https://guides.codechewing.com/git/rebase-merge-conflicts
+
+http://gitforteams.com/resources/rebasing.html
+- A walkthrough of the conflict resolution journey
+
+-->
+
+<p>Resolving conflicts from a Git rebase can be tricky. But don&rsquo;t worry &ndash; here&rsquo;s a
+comprehensive guide to how to resolve them.</p>
+
+<p>There&rsquo;s three phases:</p>
+
+<ol>
+<li><a href="#which-commit-of-mine-is-conflicting">Which commit of mine is conflicting?</a></li>
+<li><a href="http://localhost:1313/tips/resolving-git-conflicts/#what-changes-were-made-in-the-target-branch-that-conflict-with-my-commit">What changes were made in the target branch that conflict with my commit?</a></li>
+<li><a href="#resolve-conflicts-safely">Resolve conflicts safely</a></li>
+</ol>
+
+<p>These are accurate as of Git v2.23 and are for resolving conflicts using the
+command line.</p>
+
+<p>Let&rsquo;s walk through the process.</p>
+
+<h2 id="a-conflict-happens">A conflict happens</h2>
+
+<p>On your working branch, you run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rebase origin/master</code></pre></div>
+<p>and are faced with a wall-of-text:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Applying: Improve naming around create-import-process end-point
+Recorded resolution for &#39;src/octoenergy/interfaces/apisite/data_import/views.py&#39;.
+Applying: Extract serializer creation into own method
+Using index info to reconstruct a base tree...
+M	src/octoenergy/interfaces/apisite/data_import/views.py
+Falling back to patching base and 3-way merge...
+Auto-merging src/octoenergy/interfaces/apisite/data_import/views.py
+Applying: Group tests into classes for Account data-import serializer
+Using index info to reconstruct a base tree...
+M	src/tests/unit/common/domain/data_import/validation/test_accounts.py
+Falling back to patching base and 3-way merge...
+Auto-merging src/tests/unit/common/domain/data_import/validation/test_accounts.py
+CONFLICT (content): Merge conflict in src/tests/unit/common/domain/data_import/validation/test_accounts.py
+Recorded preimage for &#39;src/tests/unit/common/domain/data_import/validation/test_accounts.py&#39;
+error: Failed to merge in the changes.
+Patch failed at 0003 Group tests into classes for Account data-import serializer
+hint: Use &#39;git am --show-current-patch&#39; to see the failed patch
+Resolve all conflicts manually, mark them as resolved with
+&#34;git add/rm &lt;conflicted_files&gt;&#34;, then run &#34;git rebase --continue&#34;.
+You can instead skip this commit: run &#34;git rebase --skip&#34;.
+To abort and get back to the state before &#34;git rebase&#34;, run &#34;git rebase --abort&#34;.</code></pre></div>
+<p>Conflicts? Conflicts!</p>
+
+<p>Often the conflicts are simple and easily resolved by eye-balling the
+files in question. If that&rsquo;s true, good for you: resolve the
+commits using your favourite editor and move on via:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rebase --continue</code></pre></div>
+<p>However, if the conflicts are not trivially resolved, start by asking yourself this:</p>
+
+<h2 id="which-commit-of-mine-is-conflicting">Which commit of mine is conflicting?</h2>
+
+<p>We can identify the conflicting commit in several ways:</p>
+
+<ul>
+<li><p>Look for the <code>Patch failed at XXXX</code> line in the rebase output. This prints the
+subject of the commit that couldn&rsquo;t be applied. In the above example, the offending commit has
+subject <code>Group tests into class for Account data-import serializer</code>.</p></li>
+
+<li><p>Alternatively, follow the advice in the rebase output and run:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git am --show-current-patch</code></pre></div>
+<p>which is equivalent to running <code>git show</code> on the conflicting commit.</p></li>
+
+<li><p>As of Git v2.17, this option can be used with <code>git rebase</code> too:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rebase --show-current-patch</code></pre></div></li>
+
+<li><p>Best of all, there is a <code>REBASE_HEAD</code> pseudo-ref that points to the conflicting commit,
+so you can do:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git show REBASE_HEAD</code></pre></div>
+<p>to view the commit, or:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rev-parse REBASE_HEAD</code></pre></div>
+<p>to see the commit SHA.</p></li>
+</ul>
+
+<p>It can be useful to open the Github detail page for the offending commit to
+allow a quick glance at the diff in another window. If you use <code>hub</code> (and
+Github), this can done with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hub browse -- commit/<span style="color:#66d9ef">$(</span>git rev-parse REBASE_HEAD<span style="color:#66d9ef">)</span></code></pre></div>
+<p>which, if you find it useful, could be alised as:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[alias]</span>
+<span style="color:#a6e22e">openconflict</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;!f() { hub browse -- commit/$(git rev-parse REBASE_HEAD); }; f&#34;</span></code></pre></div>
+<p>in <code>~/.gitconfig</code>.</p>
+
+<p>Now for the trickier question.</p>
+
+<h2 id="what-changes-were-made-in-the-target-branch-that-conflict-with-my-commit">What changes were made in the target branch that conflict with my commit?</h2>
+
+<!--
+
+Should it be default? Probably, yes.
+https://stackoverflow.com/questions/27417656/should-diff3-be-default-conflictstyle-on-git
+
+http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
+Another recommendation for diff3 - also recommends enabling rerere with
+$ git config --global rerere.enabled 1
+to auto apply previous resolutions.
+
+https://blog.nilbus.com/take-the-pain-out-of-git-conflict-resolution-use-diff3/
+Good example/explanation
+
+Sometimes hard to determine if a rename is involved.
+
+-->
+
+<p>We understand what <em>we</em> were trying to do, but we need to understand what
+changes were made in the target branch that conflict. Two tips:</p>
+
+<h3 id="use-the-diff3-format-to-see-common-ancestor-code-in-diff-blocks">Use the <code>diff3</code> format to see common ancestor code in diff blocks</h3>
+
+<p>Globally enable this with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global merge.conflictstyle diff3</code></pre></div>
+<p>and then conflict blocks will be formatted like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:path/to/file
+content from target branch
+|||||||| merged common ancestors:path/to/file
+common ancestor content
+========
+content from your working branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Commit message:path/to/file
+</code></pre></div>
+<p>where the default conflict block has been extended with a new section, delimited
+by <code>||||||||</code> and <code>========</code>, which reveals the <em>common ancester code</em>.</p>
+
+<p>Comparing the <code>HEAD</code> block to the common ancestor block will often reveal the
+nature of the target-branch changes, allowing a straight-forward resolution.</p>
+
+<p>For instance, breath easy if the common ancester block is empty:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:path/to/file
+content from target branch
+|||||||| merged common ancestors:path/to/file
+========
+content from your working branch
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; Commit message:path/to/file
+</code></pre></div>
+<p>as this means both branches have added lines; they haven&rsquo;t tried to update the
+same lines. You can simply delete the merge conflict markers to resolve.</p>
+
+<p>If eyeballing the conflicts is not sufficient to safely resolve, we need to dig
+deeper.</p>
+
+<h3 id="examine-the-target-branch-changes-in-detail">Examine the target branch changes in detail</h3>
+
+<p>Sometimes the conflicted blocks are large and you can&rsquo;t understand at a glance
+what changes have been made in the target branch.
+In this situation, we may need to examine the individual changes made to each conflicted
+<code>$FILEPATH</code> in order to understand how to resolve safely.</p>
+
+<p>We can examine the overall diff:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git diff REBASE_HEAD...origin/master $FILEPATH</code></pre></div>
+<p>or list the commits from the target branch that updated <code>$FILEPATH</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git log REBASE_HEAD..origin/master $FILEPATH</code></pre></div>
+<p>and review how each modified <code>$FILEPATH</code> with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git show $COMMIT_SHA -- $FILEPATH</code></pre></div>
+<p>Note the <code>git diff</code> command uses three dots while the <code>git log</code> command uses two.</p>
+
+<p>If there are lots of commits that modified <code>$FILEPATH</code>, it can be helpful to run
+<code>git blame</code> and see which commits updated the conflicting block and focus your
+attention on those.</p>
+
+<p>This should provide enough information to understand the changes from the target
+branch so you can resolve the conflicts.</p>
+
+<h2 id="resolve-conflicts-safely">Resolve conflicts safely</h2>
+
+<p>A couple of things:</p>
+
+<h3 id="apply-your-changes-to-the-target-branch-code">Apply your changes to the target branch code</h3>
+
+<p>When manually editing conflicted files, always resolve conflicts by applying your
+changes to the target branch block (labelled <code>HEAD</code>) as you understand your changes better and are
+less likely to inadvertently break something.</p>
+
+<p>For example: in the following diff:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+I like apples and pears 
+|||||||| merged common ancestors
+I like apples
+========
+I love apples
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-a
+</code></pre></div>
+<p>Apply your change (replacing &ldquo;like&rdquo; with &ldquo;love&rdquo;) to the <code>HEAD</code> block to give:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+I love apples and pears 
+|||||||| merged common ancestors
+I like apples
+========
+I love apples
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; working-branch
+</code></pre></div>
+<p>then remove the superceded lines and merge conflict markers to give:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">I love apples and pears 
+</code></pre></div>
+<h3 id="wholesale-accept-changes">Wholesale accept changes</h3>
+
+<!-- Refs:
+
+https://til.hashrocket.com/posts/ce7bff8134-accept-your-own-changes-during-git-rebase
+- Gets the ours/theirs thing the wrong way round!
+
+https://demisx.github.io/git/rebase/2015/07/02/git-rebase-keep-my-branch-changes.html
+- Talks about `git rebase -Xtheirs`
+
+-->
+
+<p>Occassionally, you might know that the changes from one branch should be
+accepted. This can be done using <code>git checkout</code> with a merge
+&ldquo;strategy-option&rdquo;. Beware that, when rebasing, the terminology is counter-intuitive.</p>
+
+<p>To accept the changes from the <em>target branch</em>, use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git checkout --ours -- $FILEPATH</code></pre></div>
+<p>To accept the changes made on your <em>working branch</em>, use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git checkout --theirs -- $FILEPATH</code></pre></div>
+<p>As a rebase involves replaying your commits to the tip of the target branch, each
+replayed commit is treated as &ldquo;theirs&rdquo; (even though you are the author) while
+the existing target branch commits are &ldquo;ours&rdquo;.</p>
+
+<p>Even more sweepingly, you can auto-resolve conflicts using a specified strategy
+when doing the rebase. Eg:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rebase -Xtheirs origin/master</code></pre></div>
+<p>I&rsquo;ve never used this much in practice though.</p>
+
+<h3 id="re-use-recorded-resolutions-aka-rerere">Re-use recorded resolutions (aka <code>rerere</code>)</h3>
+
+<!--
+https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67
+- Good article
+
+https://stackoverflow.com/questions/49500943/what-is-git-rerere-and-how-does-it-work
+- Decent explanation here.
+
+Records the conflicted diff hunks
+Record resolution
+-->
+
+<p>If you set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global rerere.enabled <span style="color:#ae81ff">1</span></code></pre></div>
+<p>then Git will record how you resolve conflicts and, if it sees the same conflict
+during a future rebase (eg if you <code>--abort</code> then retry), it will automatically
+resolve the conflict for you.</p>
+
+<p>You can see evidence of <code>rerere</code> in action in the <code>git rebase</code> output. You&rsquo;ll see:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Recorded preimage <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;...&#39;</span></code></pre></div>
+<p>when Git detects a conflicted file, then:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Recorded resolution <span style="color:#66d9ef">for</span> <span style="color:#e6db74">&#39;...&#39;</span></code></pre></div>
+<p>when Git records the resolution (to <code>.git/rr-cache/</code>), and finally:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Resolved <span style="color:#e6db74">&#39;...&#39;</span> using previous resolution.</code></pre></div>
+<p>when Git re-uses the saved resolution.</p>
+
+<p>You should enable this &ndash; there&rsquo;s no downside.</p>
+
+<h2 id="summary">Summary</h2>
+
+<p>Hopefully the above is useful.</p>
+
+<p>Resolving rebase conflicts is much easier if commits are &ldquo;atomic&rdquo;, with each
+change motivated by a single reason (similar to the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>).
+For instance, never mix file-system changes (ie moving files
+around) with core logic changes. Such commits are likely to attract conflicts
+and are hard to resolve.</p>
+
+<p>Don&rsquo;t worry if the rebase gets away from you; you can always abort with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rebase --abort</code></pre></div>
+<p>if things become too hairy.</p>
+
+<h2 id="further-reading">Further reading</h2>
+
+<p>Here&rsquo;s some additional resources on the topic:</p>
+
+<ul>
+<li><p><a href="https://help.github.com/en/github/using-git/resolving-merge-conflicts-after-a-git-rebase">Github: Resolving merge conflicts after a Git rebase</a></p></li>
+
+<li><p><a href="Resolving a merge conflict using the command line">Github: Resolving a merge conflict using the command line</a></p></li>
+
+<li><p><a href="https://git-scm.com/docs/git-rebase"><code>git-rebase</code> docs</a></p></li>
+
+<li><p><a href="https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67">Fix conflicts once with git rerere</a>
+<em>by Christophe Porteneuve</em>. Good detailed examination of how to use <code>git rerere</code>.</p></li>
+</ul>
+
+<!-- General reserach on rebase conflicts
+
+`git rerere`
+
+`git mergetool`
+https://git-scm.com/docs/git-mergetool
+https://git-scm.com/docs/git-rebase
+
+https://stackoverflow.com/questions/11709885/git-rebase-merge-conflict
+mentions mergetool
+
+Note on rebase options:
+
+[rebase]
+    instructionFormat = %s [%an]
+    autosquash = true
+    stat = true
+
+Quite hard to generate a GH diff view for a single file
+https://stackoverflow.com/questions/14500240/how-can-i-generate-a-diff-for-a-single-file-between-two-branches-in-github
+
+Sometimes diff block and hard to see what difference is:
+
+-> use merge tool??
+
+Easy case: updated in both branches -> markers
+
+Things are fiddlier when one branch has moved/deleted a file.
+
+    Unmerged paths:
+    (use "git restore --staged <file>..." to unstage)
+    (use "git add/rm <file>..." as appropriate to mark resolution)
+        deleted by us:   octoenergy/domain/accounts/affexit.py
+
+Delete in master! (not by us)
+
+No conflict markers in file.
+
+What changes happened to that file on master?
+
+Which commit removed it?
+gh aqs/cleanup-p1..origin/master -- octoenergy/domain/accounts/affexit.py
+Note two dots
+
+Conflict happens while trying to apply a commit/patch
+-->
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/guides/resolving-conflicts-during-a-git-rebase.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Resolving%20conflicts%20during%20a%20Git%20rebase%22&body=Article:%20Resolving%20conflicts%20during%20a%20Git%20rebase%0AURL:%20https%3a%2f%2fcodeinthehole.com%2fguides%2fresolving-conflicts-during-a-git-rebase%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/guides/resolving-conflicts-during-a-git-rebase.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/git">git</a>
+                <br/>
+            
+            
+                Filed in: <a href="/guides/">guides</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/software-development-tips-part1/">Software development tips - part 1</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+

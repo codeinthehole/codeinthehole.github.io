@@ -6,10 +6,22 @@
     <description>Recent content in Guides on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Nov 2005 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 05 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://codeinthehole.com/guides/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Resolving conflicts during a Git rebase</title>
+      <link>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</link>
+      <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</guid>
+      <description>Resolving conflicts from a Git rebase can be tricky. But don&amp;rsquo;t worry &amp;ndash; here&amp;rsquo;s a comprehensive guide to how to resolve them.
+There&amp;rsquo;s three phases:
+ Which commit of mine is conflicting? What changes were made in the target branch that conflict with my commit? Resolve conflicts safely  These are accurate as of Git v2.23 and are for resolving conflicts using the command line.
+Let&amp;rsquo;s walk through the process.</description>
+    </item>
     
     <item>
       <title>Writing a Thesis in LaTeX</title>
