@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583444707" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -153,7 +153,7 @@ To abort and get back to the state before &#34;git rebase&#34;, run &#34;git reb
 
 <p>Often the conflicts are simple and easily resolved by eye-balling the
 files in question. If that&rsquo;s true, good for you: resolve the
-commits using your favourite editor and move on via:</p>
+conflicts using your favourite editor and move on via:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git rebase --continue</code></pre></div>
 <p>However, if the conflicts are not trivially resolved, start by asking yourself this:</p>
 
@@ -162,7 +162,7 @@ commits using your favourite editor and move on via:</p>
 <p>We can identify the conflicting commit in several ways:</p>
 
 <ul>
-<li><p>Look for the <code>Patch failed at XXXX</code> line in the rebase output. This prints the
+<li><p>Look for the <code>Patch failed at $NUMBER $SUBJECT</code> line in the rebase output. This prints the
 subject of the commit that couldn&rsquo;t be applied. In the above example, the offending commit has
 subject <code>Group tests into class for Account data-import serializer</code>.</p></li>
 
@@ -214,7 +214,7 @@ Sometimes hard to determine if a rename is involved.
 <p>We understand what <em>we</em> were trying to do, but we need to understand what
 changes were made in the target branch that conflict. Two tips:</p>
 
-<h3 id="use-the-diff3-format-to-see-common-ancestor-code-in-diff-blocks">Use the <code>diff3</code> format to see common ancestor code in diff blocks</h3>
+<h3 id="use-the-diff3-format-to-see-common-ancestor-code-in-conflict-blocks">Use the <code>diff3</code> format to see common ancestor code in conflict blocks</h3>
 
 <p>Globally enable this with:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global merge.conflictstyle diff3</code></pre></div>
@@ -250,7 +250,7 @@ deeper.</p>
 <h3 id="examine-the-target-branch-changes-in-detail">Examine the target branch changes in detail</h3>
 
 <p>Sometimes the conflicted blocks are large and you can&rsquo;t understand at a glance
-what changes have been made in the target branch.
+what changes have been made in the target branch and why they were made.
 In this situation, we may need to examine the individual changes made to each conflicted
 <code>$FILEPATH</code> in order to understand how to resolve safely.</p>
 
@@ -384,19 +384,10 @@ and are hard to resolve.</p>
 <li><p><a href="https://git-scm.com/docs/git-rebase"><code>git-rebase</code> docs</a></p></li>
 
 <li><p><a href="https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67">Fix conflicts once with git rerere</a>
-<em>by Christophe Porteneuve</em>. Good detailed examination of how to use <code>git rerere</code>.</p></li>
+by <em>Christophe Porteneuve</em> (2014). Good detailed examination of how to use <code>git rerere</code>.</p></li>
 </ul>
 
 <!-- General reserach on rebase conflicts
-
-`git rerere`
-
-`git mergetool`
-https://git-scm.com/docs/git-mergetool
-https://git-scm.com/docs/git-rebase
-
-https://stackoverflow.com/questions/11709885/git-rebase-merge-conflict
-mentions mergetool
 
 Note on rebase options:
 
@@ -409,21 +400,6 @@ Quite hard to generate a GH diff view for a single file
 https://stackoverflow.com/questions/14500240/how-can-i-generate-a-diff-for-a-single-file-between-two-branches-in-github
 
 Sometimes diff block and hard to see what difference is:
-
--> use merge tool??
-
-Easy case: updated in both branches -> markers
-
-Things are fiddlier when one branch has moved/deleted a file.
-
-    Unmerged paths:
-    (use "git restore --staged <file>..." to unstage)
-    (use "git add/rm <file>..." as appropriate to mark resolution)
-        deleted by us:   octoenergy/domain/accounts/affexit.py
-
-Delete in master! (not by us)
-
-No conflict markers in file.
 
 What changes happened to that file on master?
 
