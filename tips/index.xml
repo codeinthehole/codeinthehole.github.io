@@ -6,10 +6,23 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Feb 2020 10:04:16 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Apr 2020 10:04:16 +0000</lastBuildDate>
     
 	<atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Software development tips - part 2</title>
+      <link>https://codeinthehole.com/tips/software-development-tips-part2/</link>
+      <pubDate>Fri, 24 Apr 2020 10:04:16 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/software-development-tips-part2/</guid>
+      <description>On code smells:
+ If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
+ Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
+  On good things I always tell team members about:
+ The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
+    </item>
     
     <item>
       <title>Software development tips - part 1</title>
