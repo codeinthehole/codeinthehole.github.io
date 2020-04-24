@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -227,7 +227,7 @@ the <code>fancyhdr</code> package:</p>
 <span style="color:#66d9ef">\lhead</span>{<span style="color:#66d9ef">\nouppercase</span>{<span style="color:#66d9ef">\textsc</span>{<span style="color:#66d9ef">\leftmark</span>}}}
 <span style="color:#66d9ef">\renewcommand</span>{<span style="color:#66d9ef">\headrulewidth</span>}{0pt}
 <span style="color:#66d9ef">\makeatletter</span>
-<span style="color:#66d9ef">\renewcommand</span>{<span style="color:#66d9ef">\chaptermark</span>}[1]{<span style="color:#66d9ef">\markboth</span>{<span style="color:#66d9ef">\textsc</span>{<span style="color:#66d9ef">\@</span>chapapp}<span style="color:#66d9ef">\ </span><span style="color:#66d9ef">\thechapter</span>:<span style="color:#66d9ef">\ </span>#1}{}}
+<span style="color:#66d9ef">\renewcommand</span>{<span style="color:#66d9ef">\chaptermark</span>}[1]{<span style="color:#66d9ef">\markboth</span>{<span style="color:#66d9ef">\textsc</span>{<span style="color:#66d9ef">\@</span>chapapp}<span style="color:#66d9ef">\ \thechapter</span>:<span style="color:#66d9ef">\ </span>#1}{}}
 <span style="color:#66d9ef">\makeatother</span></code></pre></div>
 <p>The final complicated-looking three lines simply ensure that the
 headings for appendices are formatted correctly. (Without these lines,
@@ -238,7 +238,7 @@ what should read &ldquo;Appendix A&rdquo; is set as &ldquo;Chapter A&rdquo;.)</p
 <p>We now make use of several customisation options that are bundled with
 the sectsty package.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\usepackage</span>{sectsty}
-<span style="color:#66d9ef">\chapterfont</span>{<span style="color:#66d9ef">\large</span><span style="color:#66d9ef">\sc</span><span style="color:#66d9ef">\centering</span>}
+<span style="color:#66d9ef">\chapterfont</span>{<span style="color:#66d9ef">\large\sc\centering</span>}
 <span style="color:#66d9ef">\chaptertitlefont</span>{<span style="color:#66d9ef">\centering</span>}
 <span style="color:#66d9ef">\subsubsectionfont</span>{<span style="color:#66d9ef">\centering</span>}</code></pre></div>
 <p>These alter the appearance of the first page of each chapter to have a
@@ -273,9 +273,9 @@ exciting.</p>
 <p>Things get a little messy now as a hack is required to ensure the
 hyperlinks actually jump to the right place.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\makeatletter</span>
-<span style="color:#66d9ef">\newcommand</span><span style="color:#66d9ef">\org</span>@hypertarget{}
-<span style="color:#66d9ef">\let</span><span style="color:#66d9ef">\org</span>@hypertarget<span style="color:#66d9ef">\hypertarget</span>
-<span style="color:#66d9ef">\renewcommand</span><span style="color:#66d9ef">\hypertarget</span><span style="color:#a6e22e">[2]</span>{<span style="color:#75715e">%
+<span style="color:#66d9ef">\newcommand\org</span>@hypertarget{}
+<span style="color:#66d9ef">\let\org</span>@hypertarget<span style="color:#66d9ef">\hypertarget</span>
+<span style="color:#66d9ef">\renewcommand\hypertarget</span><span style="color:#a6e22e">[2]</span>{<span style="color:#75715e">%
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">\Hy</span>@raisedlink{<span style="color:#66d9ef">\org</span>@hypertarget{#1}{}}#2<span style="color:#75715e">%
 </span><span style="color:#75715e"></span>} <span style="color:#66d9ef">\makeatother</span></code></pre></div>
 <p>No need to worry about this code, let&rsquo;s just move straight on.</p>
@@ -321,7 +321,7 @@ for the degree of Doctor of Philosophy} <span style="color:#66d9ef">\\</span><sp
 <span style="color:#66d9ef">\pdfbookmark</span><span style="color:#a6e22e">[0]</span>{Titlepage}{title} <span style="color:#75715e">% Sets a PDF bookmark for the title page
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">\maketitle</span></code></pre></div>
 <p>followed by a dedication:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\newpage</span> <span style="color:#66d9ef">\vspace</span><span style="color:#66d9ef">*</span>{8cm}
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\newpage</span> <span style="color:#66d9ef">\vspace*</span>{8cm}
 <span style="color:#66d9ef">\pdfbookmark</span><span style="color:#a6e22e">[0]</span>{Dedication}{dedication} <span style="color:#75715e">% Sets a PDF bookmark for the dedication
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">\begin</span>{center}
 <span style="color:#66d9ef">\large</span> Dedicated to the steel workers of America
@@ -329,11 +329,11 @@ for the degree of Doctor of Philosophy} <span style="color:#66d9ef">\\</span><sp
 <p>We now construct an abstract:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\newpage</span>
 <span style="color:#66d9ef">\pdfbookmark</span><span style="color:#a6e22e">[0]</span>{Abstract}{abstract} <span style="color:#75715e">% Sets a PDF bookmark for the abstract
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">\chapter</span><span style="color:#66d9ef">*</span>{Abstract}
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">\chapter*</span>{Abstract}
 <span style="color:#66d9ef">\textsc</span>{The celebrated number} -17 was discovered in Manchester in 1989 ...</code></pre></div>
 <p>some acknowledgements:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\pdfbookmark</span><span style="color:#a6e22e">[0]</span>{Acknowledgements}{acknowledgements} <span style="color:#75715e">% Sets a PDF bookmark for the acknowledements
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">\chapter</span><span style="color:#66d9ef">*</span>{Acknowledgements}
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">\chapter*</span>{Acknowledgements}
 I would like to thank Rambo, my pet fishfinger...</code></pre></div>
 <p>and a contents page:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-latex" data-lang="latex"><span style="color:#66d9ef">\pdfbookmark</span><span style="color:#a6e22e">[0]</span>{Contents}{contents} <span style="color:#75715e">% Sets a PDF bookmark for the contents page

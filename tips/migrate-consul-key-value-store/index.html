@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -99,7 +99,7 @@ something like that):</p>
 set -e  <span style="color:#75715e"># Exit on error</span>
 
 <span style="color:#75715e"># Emit &#34;key value&#34; lines for all keys in Consul&#39;s KV store</span>
-keys_and_values<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+keys_and_values<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#75715e"># Recursively fetch all values from Consul but exclude:</span>
     <span style="color:#75715e"># (a) those that end in / (as these are folders)</span>
     <span style="color:#75715e"># (b) those that start with WEBSERVER/ (as that&#39;s where we are migrating</span>
@@ -119,16 +119,16 @@ keys_and_values<span style="color:#f92672">(</span><span style="color:#f92672">)
 <span style="color:#f92672">}</span>
 
 <span style="color:#75715e"># Set a new value in Consul&#39;s KV store</span>
-set_key<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+set_key<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     key<span style="color:#f92672">=</span>$1
     value<span style="color:#f92672">=</span>$2
-    curl -s -X PUT -d <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">localhost/v1/kv/</span>$key<span style="color:#e6db74">&#34;</span> &gt; /dev/null
+    curl -s -X PUT -d <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;localhost/v1/kv/</span>$key<span style="color:#e6db74">&#34;</span> &gt; /dev/null
 <span style="color:#f92672">}</span>
 
-migrate_to_webserver_namespace<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+migrate_to_webserver_namespace<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     keys_and_values | <span style="color:#66d9ef">while</span> read key value
     <span style="color:#66d9ef">do</span>
-        set_key <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">WEBSERVER/</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span>
+        set_key <span style="color:#e6db74">&#34;WEBSERVER/</span>$key<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$value<span style="color:#e6db74">&#34;</span>
     <span style="color:#66d9ef">done</span> 
 <span style="color:#f92672">}</span>
 

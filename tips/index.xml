@@ -100,7 +100,7 @@ The main thing the future maintainer of your code (i.e. you) cares about is whet
       <guid>https://codeinthehole.com/tips/listing-google-groups/</guid>
       <description>Oddly, you can&amp;rsquo;t pull a report of all groups from G-Suite like you can for users. The only option is to use the API. Here&amp;rsquo;s how.
 Follow steps 1 and 2 from the quickstart guide but instead of the sample Python script, use this:
-from httplib2 import Http from googleapiclient.discovery import build from oauth2client import file, client, tools def main(): _print_all_groups() def _print_all_groups(): for group in _all_groups(): print(group[&amp;#39;email&amp;#39;]) def _all_groups(): &amp;#34;&amp;#34;&amp;#34;Return a list of all group dicts.</description>
+from httplib2 import Http from googleapiclient.discovery import build from oauth2client import file, client, tools def main(): _print_all_groups() def _print_all_groups(): for group in _all_groups(): print(group[&amp;#39;email&amp;#39;]) def _all_groups(): &amp;#34;&amp;#34;&amp;#34; Return a list of all group dicts.</description>
     </item>
     
     <item>
@@ -241,7 +241,7 @@ $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</de
       <guid>https://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
       <description>I often need to grab information from a Postgres database and paste it into a spreadsheet for sharing with others. Google Sheets needs the pasted data to be tab-separated in order to be correctly split into columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to configure psql&amp;rsquo;s output to get it.
 At a psql prompt, switch to unaligned output
-= \a set the field separator to a tab character:</description>
+=&amp;gt; \a set the field separator to a tab character:</description>
     </item>
     
     <item>

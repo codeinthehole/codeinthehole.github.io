@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -101,11 +101,11 @@ Running setup.py egg_info <span style="color:#66d9ef">for</span> package MySQL-p
     Traceback <span style="color:#f92672">(</span>most recent call last<span style="color:#f92672">)</span>:
     File <span style="color:#e6db74">&#34;&lt;string&gt;&#34;</span>, line 14, in &lt;module&gt;
     File <span style="color:#e6db74">&#34;/home/vagrant/build/MySQL-python/setup.py&#34;</span>, line 15, in &lt;module&gt;
-        metadata, options <span style="color:#f92672">=</span> get_config<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+        metadata, options <span style="color:#f92672">=</span> get_config<span style="color:#f92672">()</span>
     File <span style="color:#e6db74">&#34;setup_posix.py&#34;</span>, line 43, in get_config
         libs <span style="color:#f92672">=</span> mysql_config<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;libs_r&#34;</span><span style="color:#f92672">)</span>
     File <span style="color:#e6db74">&#34;setup_posix.py&#34;</span>, line 24, in mysql_config
-        raise EnvironmentError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%s not found&#34;</span> % <span style="color:#f92672">(</span>mysql_config.path,<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+        raise EnvironmentError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%s not found&#34;</span> % <span style="color:#f92672">(</span>mysql_config.path,<span style="color:#f92672">))</span>
     EnvironmentError: mysql_config not found
     Complete output from command python setup.py egg_info:
     sh: mysql_config: not found
@@ -116,7 +116,7 @@ File <span style="color:#e6db74">&#34;&lt;string&gt;&#34;</span>, line 14, in &l
 
 File <span style="color:#e6db74">&#34;/home/vagrant/build/MySQL-python/setup.py&#34;</span>, line 15, in &lt;module&gt;
 
-    metadata, options <span style="color:#f92672">=</span> get_config<span style="color:#f92672">(</span><span style="color:#f92672">)</span>
+    metadata, options <span style="color:#f92672">=</span> get_config<span style="color:#f92672">()</span>
 
 File <span style="color:#e6db74">&#34;setup_posix.py&#34;</span>, line 43, in get_config
 
@@ -124,7 +124,7 @@ File <span style="color:#e6db74">&#34;setup_posix.py&#34;</span>, line 43, in ge
 
 File <span style="color:#e6db74">&#34;setup_posix.py&#34;</span>, line 24, in mysql_config
 
-    raise EnvironmentError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%s not found&#34;</span> % <span style="color:#f92672">(</span>mysql_config.path,<span style="color:#f92672">)</span><span style="color:#f92672">)</span>
+    raise EnvironmentError<span style="color:#f92672">(</span><span style="color:#e6db74">&#34;%s not found&#34;</span> % <span style="color:#f92672">(</span>mysql_config.path,<span style="color:#f92672">))</span>
 
 EnvironmentError: mysql_config not found</code></pre></div>
 <p>Without <code>python-dev</code>, you&rsquo;ll see something that ends with the following:</p>

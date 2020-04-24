@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -143,7 +143,7 @@ export $PATH</code></pre></div>
 the <code>executable</code> check and so doesn&rsquo;t find the <code>terraform</code> binary.</p>
 
 <p>The fix was to update <code>~/.bashrc</code> to use <code>$HOME</code> instead of the <code>~</code> shorthand:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">HASHICORP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/hashicorp</span><span style="color:#e6db74">&#34;</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">HASHICORP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HOME<span style="color:#e6db74">/hashicorp&#34;</span>
 PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$HASHICORP<span style="color:#e6db74">:</span>$PATH<span style="color:#e6db74">&#34;</span>
 export $PATH</code></pre></div>
 <p>After that, saving a Terraform file ran <code>terraform fmt</code> automatically. Phew.</p>
@@ -175,7 +175,7 @@ cmd edit sample.tf
 <span style="color:#e6db74">&#34;sample.tf&#34;</span> <span style="color:#f92672">[</span>New File<span style="color:#f92672">]</span>
 Breakpoint in <span style="color:#e6db74">&#34;~/.vim/bundle/vim-polyglot/ftplugin/terraform.vim&#34;</span> line <span style="color:#ae81ff">1</span>
 ~/.vim/bundle/vim-polyglot/ftplugin/terraform.vim
-line 1: <span style="color:#66d9ef">if</span> !exists<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;g:polyglot_disabled&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">||</span> index<span style="color:#f92672">(</span>g:polyglot_disabled, <span style="color:#e6db74">&#39;terraform&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">=</span><span style="color:#f92672">=</span> -1
+line 1: <span style="color:#66d9ef">if</span> !exists<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;g:polyglot_disabled&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">||</span> index<span style="color:#f92672">(</span>g:polyglot_disabled, <span style="color:#e6db74">&#39;terraform&#39;</span><span style="color:#f92672">)</span> <span style="color:#f92672">==</span> -1
 &gt;</code></pre></div>
 <p>you can run each Ex expression individually to pinpoint the problem:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">&gt;<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">exists</span>(<span style="color:#e6db74">&#39;terraform&#39;</span>)<span style="color:#960050;background-color:#1e0010">
@@ -335,13 +335,13 @@ is also opened):</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#a6e22e">times</span> <span style="color:#a6e22e">in</span> <span style="color:#a6e22e">msec</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">clock</span>   <span style="color:#a6e22e">self</span>+<span style="color:#a6e22e">sourced</span>   <span style="color:#a6e22e">self</span>:  <span style="color:#a6e22e">sourced</span> <span style="color:#a6e22e">script</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">clock</span>   <span style="color:#a6e22e">elapsed</span>:              <span style="color:#a6e22e">other</span> <span style="color:#a6e22e">lines</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">010</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">010</span>: --- <span style="color:#a6e22e">VIM</span> <span style="color:#a6e22e">STARTING</span> ---<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">152</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">142</span>: <span style="color:#a6e22e">Allocated</span> <span style="color:#a6e22e">generic</span> <span style="color:#a6e22e">buffers</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">001</span>.<span style="color:#ae81ff">230</span>  <span style="color:#ae81ff">001</span>.<span style="color:#ae81ff">078</span>: <span style="color:#a6e22e">locale</span> <span style="color:#a6e22e">set</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">800</span>  <span style="color:#ae81ff">002</span>.<span style="color:#ae81ff">201</span>: <span style="color:#a6e22e">VimEnter</span> <span style="color:#a6e22e">autocommands</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">802</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">002</span>: <span style="color:#a6e22e">before</span> <span style="color:#a6e22e">starting</span> <span style="color:#a6e22e">main</span> <span style="color:#a6e22e">loop</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">276</span>.<span style="color:#ae81ff">957</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">155</span>: <span style="color:#a6e22e">first</span> <span style="color:#a6e22e">screen</span> <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
@@ -355,9 +355,9 @@ Vim with no custom config:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">007</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">007</span>: --- <span style="color:#a6e22e">VIM</span> <span style="color:#a6e22e">STARTING</span> ---<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">108</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">101</span>: <span style="color:#a6e22e">Allocated</span> <span style="color:#a6e22e">generic</span> <span style="color:#a6e22e">buffers</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">530</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">422</span>: <span style="color:#a6e22e">locale</span> <span style="color:#a6e22e">set</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>...<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">016</span>.<span style="color:#ae81ff">709</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">129</span>: <span style="color:#a6e22e">VimEnter</span> <span style="color:#a6e22e">autocommands</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">016</span>.<span style="color:#ae81ff">717</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">008</span>: <span style="color:#a6e22e">before</span> <span style="color:#a6e22e">starting</span> <span style="color:#a6e22e">main</span> <span style="color:#a6e22e">loop</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#ae81ff">017</span>.<span style="color:#ae81ff">167</span>  <span style="color:#ae81ff">000</span>.<span style="color:#ae81ff">450</span>: <span style="color:#a6e22e">first</span> <span style="color:#a6e22e">screen</span> <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
@@ -413,9 +413,9 @@ causing it?</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml">:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">start</span> <span style="color:#a6e22e">profile</span>.<span style="color:#a6e22e">log</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">func</span> *<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">file</span> *<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>{<span style="color:#a6e22e">SLOW</span> <span style="color:#a6e22e">ACTIONS</span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">profile</span> <span style="color:#a6e22e">pause</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">wqall</span>  <span style="color:#75715e">&#34; Quit Vim (required)</span></code></pre></div>
 <p>which profiles all files and functions<sup class="footnote-ref" id="fnref:profile-args"><a href="#fn:profile-args">1</a></sup> executed during the slow actions.</p>

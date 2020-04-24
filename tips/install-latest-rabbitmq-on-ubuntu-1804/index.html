@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -93,11 +93,11 @@ if (!doNotTrack) {
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">mod</span> <span style="color:#e6db74">&#39;puppet-rabbitmq&#39;</span>, <span style="color:#e6db74">&#34;9.0.0&#34;</span></code></pre></div>
 <p>and something like this in your manifest code:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-puppet" data-lang="puppet"><span style="color:#66d9ef">include</span> <span style="color:#e6db74">&#34;erlang&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">packagecloud</span>::<span style="color:#a6e22e">repo</span> { <span style="color:#e6db74">&#34;rabbitmq/rabbitmq-server&#34;</span>:<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">type</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#34;deb&#34;</span>,<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>}<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">class</span> { <span style="color:#e6db74">&#34;rabbitmq&#34;</span>:<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">require</span> <span style="color:#f92672">=&gt;</span> [<span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">Packagecloud</span>::<span style="color:#a6e22e">Repo</span>[<span style="color:#e6db74">&#34;rabbitmq/rabbitmq-server&#34;</span>],<span style="color:#960050;background-color:#1e0010">

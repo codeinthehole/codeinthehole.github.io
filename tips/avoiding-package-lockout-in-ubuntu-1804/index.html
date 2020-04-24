@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -102,7 +102,7 @@ package management. You can do that with a shell script like this:</p>
 </span><span style="color:#75715e"></span>
 set -e
 
-<span style="color:#66d9ef">function</span> killService<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> killService<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     service<span style="color:#f92672">=</span>$1
     sudo systemctl stop $service
     sudo systemctl kill --kill-who<span style="color:#f92672">=</span>all $service
@@ -114,18 +114,18 @@ set -e
     <span style="color:#66d9ef">done</span>
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">function</span> disableTimers<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> disableTimers<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     sudo systemctl disable apt-daily.timer
     sudo systemctl disable apt-daily-upgrade.timer
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">function</span> killServices<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> killServices<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     killService unattended-upgrades.service
     killService apt-daily.service
     killService apt-daily-upgrade.service
 <span style="color:#f92672">}</span>
 
-<span style="color:#66d9ef">function</span> main<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+<span style="color:#66d9ef">function</span> main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     disableTimers
     killServices
 <span style="color:#f92672">}</span>
@@ -139,13 +139,13 @@ re-enabled.</p>
 
 <p>Here&rsquo;s a snippet from a Packer JSON configuration template:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">.</span>
+    <span style="color:#960050;background-color:#1e0010">...</span>
     <span style="color:#f92672">&#34;provisioners&#34;</span>: [
         {
             <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;shell&#34;</span>,
             <span style="color:#f92672">&#34;script&#34;</span>: <span style="color:#e6db74">&#34;shutdown-apt-services.sh&#34;</span>
         },
-        <span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">.</span><span style="color:#960050;background-color:#1e0010">.</span>
+        <span style="color:#960050;background-color:#1e0010">...</span>
         {
             <span style="color:#f92672">&#34;type&#34;</span>: <span style="color:#e6db74">&#34;shell&#34;</span>,
             <span style="color:#f92672">&#34;inline&#34;</span>: [

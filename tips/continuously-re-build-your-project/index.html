@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -139,20 +139,20 @@ and the fixtures load (which is where we&rsquo;ve historically had pain).</p>
 
 <p>We use <a href="https://travis-ci.com/">Travis</a> for CI and our template
 <code>.travis.yml</code> looks a little like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">language: python
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">language</span>: python
 
-python:
+<span style="color:#66d9ef">python</span>:
   - <span style="color:#e6db74">&#39;2.7&#39;</span>
 
-install:
+<span style="color:#66d9ef">install</span>:
   - make virtualenv
 
 <span style="color:#75715e"># Use the same database as used in production</span>
-before_script:
+<span style="color:#66d9ef">before_script</span>:
   - psql -c <span style="color:#e6db74">&#39;CREATE ROLE test_role login createdb superuser;&#39;</span> -U postgres
   - psql -c <span style="color:#e6db74">&#39;CREATE DATABASE test_db OWNER test_role;&#39;</span> -U postgres
 
-script:
+<span style="color:#66d9ef">script</span>:
   - make ci</code></pre></div>
 <p>which means that, <em>by default</em>, all new projects will be built from
 scratch as part of continuous integration. You should do this.</p>

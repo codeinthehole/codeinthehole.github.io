@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -103,13 +103,13 @@ GITHUB_ORG<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</sp
 GITHUB_REPO<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git config --local remote.origin.url | cut -d/ -f2 | cut -d. -f1<span style="color:#66d9ef">)</span>
 BRANCH<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git rev-parse --abbrev-ref HEAD<span style="color:#66d9ef">)</span>
 
-fetch_pr_detail_url<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+fetch_pr_detail_url<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     http https://api.github.com/repos/$GITHUB_ORG/$GITHUB_REPO/pulls <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        head<span style="color:#f92672">=</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$GITHUB_ORG<span style="color:#e6db74">:</span>$BRANCH<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        Authorization:<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">token </span>$GITHUB_AUTH_TOKEN<span style="color:#e6db74">&#34;</span> | jq -r <span style="color:#e6db74">&#39;.[].html_url&#39;</span>
+</span><span style="color:#ae81ff"></span>        head<span style="color:#f92672">==</span><span style="color:#e6db74">&#34;</span>$GITHUB_ORG<span style="color:#e6db74">:</span>$BRANCH<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>        Authorization:<span style="color:#e6db74">&#34;token </span>$GITHUB_AUTH_TOKEN<span style="color:#e6db74">&#34;</span> | jq -r <span style="color:#e6db74">&#39;.[].html_url&#39;</span>
 <span style="color:#f92672">}</span>
 
-main<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <span style="color:#f92672">{</span>
+main<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$GITHUB_AUTH_TOKEN<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
         echo <span style="color:#e6db74">&#34;A GITHUB_AUTH_TOKEN env var is required&#34;</span>
         exit <span style="color:#ae81ff">1</span>
@@ -118,7 +118,7 @@ main<span style="color:#f92672">(</span><span style="color:#f92672">)</span> <sp
     GITHUB_PULL_URL<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>fetch_pr_detail_url<span style="color:#66d9ef">)</span>
 
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$GITHUB_PULL_URL<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-        echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">No pull request found from branch </span>$BRANCH<span style="color:#e6db74">&#34;</span>
+        echo <span style="color:#e6db74">&#34;No pull request found from branch </span>$BRANCH<span style="color:#e6db74">&#34;</span>
         exit <span style="color:#ae81ff">1</span>
     <span style="color:#66d9ef">else</span>
         open <span style="color:#e6db74">&#34;</span>$GITHUB_PULL_URL<span style="color:#e6db74">&#34;</span>

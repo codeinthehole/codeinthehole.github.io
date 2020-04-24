@@ -19,8 +19,9 @@
       <guid>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</guid>
       <description>A curated1 collection of words-of-the-day from @qikipedia:
 Word of the day: ARSLE - to move backwards.
-&amp;mdash; Quite Interesting Facts (@qikipedia) May 14, 2017  Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better
-&amp;mdash; Quite Interesting Facts (@qikipedia) July 3, 2017  Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.</description>
+&amp;mdash; Quite Interesting (@qikipedia) May 14, 2017  Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better
+&amp;mdash; Quite Interesting (@qikipedia) July 3, 2017  Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.
+&amp;mdash; Quite Interesting (@qikipedia) October 21, 2017  Word of the day : FANKLE (Scottish) - to tangle or entangle something.</description>
     </item>
     
     <item>
@@ -33,8 +34,7 @@ Word of the day: ARSLE - to move backwards.
  You moved everything out of the views.py modules when you heard fat controllers were bad.
  And you&amp;rsquo;ve read that fat models are a good idea1.
  You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-The current balance is {{ account.get_balance_via_three_network_calls_lol }}
- You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+&amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt; You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>

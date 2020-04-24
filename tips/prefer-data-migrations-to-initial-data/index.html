@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -131,7 +131,7 @@ Django projects already do.</p>
 <p>then implement the <code>forward</code> method to create the appropriate initial
 data:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
-    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Foo</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Bar</span><span style="color:#e6db74">&#39;</span>):
+    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;Foo&#39;</span>, <span style="color:#e6db74">&#39;Bar&#39;</span>):
         orm<span style="color:#f92672">.</span>Frob<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>name)</code></pre></div>
 <p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked
 example</a> in South&rsquo;s
@@ -143,7 +143,7 @@ docs for further details on writing data migrations.</p>
 utilising the <code>call_command</code> function.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
     <span style="color:#f92672">from</span> django.core.management <span style="color:#f92672">import</span> call_command
-    call_command(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">loaddata</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">countries.json</span><span style="color:#e6db74">&#39;</span>)</code></pre></div>
+    call_command(<span style="color:#e6db74">&#39;loaddata&#39;</span>, <span style="color:#e6db74">&#39;countries.json&#39;</span>)</code></pre></div>
 <p>I had thought this was very useful feature as you can use the <code>dumpdata</code>
 command to produce your initial fixtures, and you will have them
 available to be used by unit tests.</p>

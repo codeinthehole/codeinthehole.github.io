@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -97,7 +97,7 @@ constraints on the join.</p>
 <span style="color:#66d9ef">FROM</span> t1 
 <span style="color:#66d9ef">JOIN</span> t2 <span style="color:#66d9ef">ON</span> (
     t1.t2_id <span style="color:#f92672">=</span> t2.id <span style="color:#66d9ef">AND</span>
-    t1.date_field <span style="color:#f92672">=</span> (t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Europe/London</span><span style="color:#e6db74">&#39;</span>)::DATE
+    t1.date_field <span style="color:#f92672">=</span> (t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;Europe/London&#39;</span>)::DATE
 )</code></pre></div>
 <p>Here we convert the datetime values to the <code>Europe/London</code> time zone before
 casting to date.</p>
@@ -107,7 +107,7 @@ casting to date.</p>
 <span style="color:#66d9ef">FROM</span> t1 
 <span style="color:#66d9ef">JOIN</span> t2 <span style="color:#66d9ef">ON</span> (
     t1.t2_id <span style="color:#f92672">=</span> t2.id <span style="color:#66d9ef">AND</span>
-    t1.date_field::<span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#f92672">=</span> t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Europe/London</span><span style="color:#e6db74">&#39;</span>
+    t1.date_field::<span style="color:#66d9ef">TIMESTAMP</span> <span style="color:#f92672">=</span> t2.datetime_field <span style="color:#66d9ef">AT</span> TIME <span style="color:#66d9ef">ZONE</span> <span style="color:#e6db74">&#39;Europe/London&#39;</span>
 )</code></pre></div>
 <p>Here we use the fact that <a href="https://www.postgresql.org/docs/9.1/static/sql-expressions.html#SQL-SYNTAX-TYPE-CASTS">type-casting</a> a <code>date</code> field with <code>::TIMESTAMP</code> converts it to the midnight timestamp of the date.</p>
 <div class="footnotes">

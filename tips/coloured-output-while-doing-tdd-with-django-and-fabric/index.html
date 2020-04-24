@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -88,20 +88,20 @@ for this is to use Fabric with a few modified color commands. Your
 fabric file should include the following:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> fabric.colors <span style="color:#f92672">import</span> _wrap_with
 
-green_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">42</span><span style="color:#e6db74">&#39;</span>)
-red_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">41</span><span style="color:#e6db74">&#39;</span>)
+green_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db74">&#39;42&#39;</span>)
+red_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db74">&#39;41&#39;</span>)
 
 <span style="color:#75715e"># Set the list of apps to test</span>
-env<span style="color:#f92672">.</span>test_apps <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">app1 app2</span><span style="color:#e6db74">&#34;</span>
+env<span style="color:#f92672">.</span>test_apps <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;app1 app2&#34;</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>():
     <span style="color:#66d9ef">with</span> settings(warn_only<span style="color:#f92672">=</span>True):
-        result <span style="color:#f92672">=</span> local(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">./manage.py test </span><span style="color:#e6db74">%(test_apps)s</span><span style="color:#e6db74"> --settings=settings_test -v 2 --failfast</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> env, capture<span style="color:#f92672">=</span>False)
+        result <span style="color:#f92672">=</span> local(<span style="color:#e6db74">&#39;./manage.py test </span><span style="color:#e6db74">%(test_apps)s</span><span style="color:#e6db74"> --settings=settings_test -v 2 --failfast&#39;</span> <span style="color:#f92672">%</span> env, capture<span style="color:#f92672">=</span>False)
     <span style="color:#66d9ef">if</span> result<span style="color:#f92672">.</span>failed:
-        <span style="color:#66d9ef">print</span> red_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Some tests failed</span><span style="color:#e6db74">&#34;</span>)
+        <span style="color:#66d9ef">print</span> red_bg(<span style="color:#e6db74">&#34;Some tests failed&#34;</span>)
     <span style="color:#66d9ef">else</span>:
         <span style="color:#66d9ef">print</span>
-        <span style="color:#66d9ef">print</span> green_bg(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">All tests passed - have a banana!</span><span style="color:#e6db74">&#34;</span>)</code></pre></div>
+        <span style="color:#66d9ef">print</span> green_bg(<span style="color:#e6db74">&#34;All tests passed - have a banana!&#34;</span>)</code></pre></div>
 <p>You can choose your own success and failure messages.</p>
 
 <p>Now we have lovely colours while doing TDD in Django:</p>

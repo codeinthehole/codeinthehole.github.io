@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -90,9 +90,9 @@ confirmation email:</p>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register_for_newsletter</span>(request):
     current_site <span style="color:#f92672">=</span> Site<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get_current()
     send_mail(
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Thanks for subscribing to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> alerts</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Thanks for your subscription. We appreciate it.</span><span style="color:#ae81ff">\n</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">-The </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> team.</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">editor@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>domain,
+        <span style="color:#e6db74">&#39;Thanks for subscribing to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> alerts&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
+        <span style="color:#e6db74">&#39;Thanks for your subscription. We appreciate it.</span><span style="color:#ae81ff">\n\n</span><span style="color:#e6db74">-The </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> team.&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>name,
+        <span style="color:#e6db74">&#39;editor@</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> current_site<span style="color:#f92672">.</span>domain,
         [user<span style="color:#f92672">.</span>email]
     )</code></pre></div>
 <p>Here the domain for the email sender is taken from the &lsquo;current site&rsquo;
@@ -148,7 +148,7 @@ available to the migration.</p>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Migration</span>(DataMigration):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
-        Site <span style="color:#f92672">=</span> orm[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">sites.Site</span><span style="color:#e6db74">&#39;</span>]
+        Site <span style="color:#f92672">=</span> orm[<span style="color:#e6db74">&#39;sites.Site&#39;</span>]
         site <span style="color:#f92672">=</span> Site<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>settings<span style="color:#f92672">.</span>SITE_ID)
         site<span style="color:#f92672">.</span>domain <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>DOMAIN_NAME
         site<span style="color:#f92672">.</span>name <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>SITE_NAME

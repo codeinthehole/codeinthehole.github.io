@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -108,8 +108,8 @@ no debug information.</p>
 handling using <code>trap</code>:.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> print_error <span style="color:#f92672">{</span>
     read line file <span style="color:#f92672">&lt;&lt;&lt;</span><span style="color:#66d9ef">$(</span>caller<span style="color:#66d9ef">)</span>
-    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">An error occurred in line </span>$line<span style="color:#e6db74"> of file </span>$file<span style="color:#e6db74">:</span><span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
-    sed <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">q;d</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    echo <span style="color:#e6db74">&#34;An error occurred in line </span>$line<span style="color:#e6db74"> of file </span>$file<span style="color:#e6db74">:&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    sed <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">q;d&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
 <span style="color:#f92672">}</span>
 trap print_error ERR</code></pre></div>
 <p>Here we bind the <code>print_error</code> function to the <code>ERR</code> event and print out an
@@ -125,8 +125,8 @@ assign the line and filename of the error.</p>
 
 <span style="color:#66d9ef">function</span> print_error <span style="color:#f92672">{</span>
     read line file <span style="color:#f92672">&lt;&lt;&lt;</span><span style="color:#66d9ef">$(</span>caller<span style="color:#66d9ef">)</span>
-    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">An error occurred in line </span>$line<span style="color:#e6db74"> of file </span>$file<span style="color:#e6db74">:</span><span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
-    sed <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">q;d</span><span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    echo <span style="color:#e6db74">&#34;An error occurred in line </span>$line<span style="color:#e6db74"> of file </span>$file<span style="color:#e6db74">:&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    sed <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>line<span style="color:#e6db74">}</span><span style="color:#e6db74">q;d&#34;</span> <span style="color:#e6db74">&#34;</span>$file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
 <span style="color:#f92672">}</span>
 trap print_error ERR
 

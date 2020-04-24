@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -137,16 +137,16 @@ the file itself).</p>
 <p>This is probably best illustrated with a sample phing script which takes
 the build name (eg &ldquo;development&rdquo;) as a parameter:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;xml</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span> <span style="color:#a6e22e">encoding=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#f92672">&gt;</span>
-<span style="color:#f92672">&lt;project</span><span style="color:#f92672">&gt;</span>
+<span style="color:#f92672">&lt;project&gt;</span>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
         ...
-        <span style="color:#f92672">&lt;delete</span><span style="color:#f92672">&gt;</span>
+        <span style="color:#f92672">&lt;delete&gt;</span>
             <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span>
                 <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;appname-${build.name}-*&#34;</span> <span style="color:#f92672">/&gt;</span>
             <span style="color:#f92672">&lt;/fileset&gt;</span>
         <span style="color:#f92672">&lt;/delete&gt;</span>
         <span style="color:#f92672">&lt;copy</span> <span style="color:#a6e22e">todir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span> 
-            <span style="color:#f92672">&lt;filterchain</span><span style="color:#f92672">&gt;</span>
+            <span style="color:#f92672">&lt;filterchain&gt;</span>
                 <span style="color:#f92672">&lt;replacetokens</span> <span style="color:#a6e22e">begintoken=</span><span style="color:#e6db74">&#34;__&#34;</span> <span style="color:#a6e22e">endtoken=</span><span style="color:#e6db74">&#34;__&#34;</span><span style="color:#f92672">&gt;</span>
                     <span style="color:#f92672">&lt;token</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;BUILD&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${build.name}&#34;</span> <span style="color:#f92672">/&gt;</span>
                 <span style="color:#f92672">&lt;/replacetokens&gt;</span>

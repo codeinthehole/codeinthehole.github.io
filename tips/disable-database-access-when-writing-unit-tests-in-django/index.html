@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -80,8 +80,8 @@ if (!doNotTrack) {
 <span style="color:#f92672">from</span> django.utils.functional <span style="color:#f92672">import</span> curry
 
 no_database <span style="color:#f92672">=</span> curry(
-    mock<span style="color:#f92672">.</span>patch, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">django.db.backends.util.CursorWrapper</span><span style="color:#e6db74">&#39;</span>,
-    Mock(side_effect<span style="color:#f92672">=</span><span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Using the database is not permitted</span><span style="color:#e6db74">&#34;</span>)))</code></pre></div>
+    mock<span style="color:#f92672">.</span>patch, <span style="color:#e6db74">&#39;django.db.backends.util.CursorWrapper&#39;</span>,
+    Mock(side_effect<span style="color:#f92672">=</span><span style="color:#a6e22e">RuntimeError</span>(<span style="color:#e6db74">&#34;Using the database is not permitted&#34;</span>)))</code></pre></div>
 <p>This snippet creates a decorator that can wrap a test case or method and
 raises an exception if the database is accessed. This can be useful if
 you&rsquo;re a puritan about <em>true</em> unit tests.</p>
@@ -91,7 +91,7 @@ you&rsquo;re a puritan about <em>true</em> unit tests.</p>
 
 <span style="color:#a6e22e">@no_database</span>()
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnitTestCase</span>(TestCase):
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>or method:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
 
@@ -99,7 +99,7 @@ you&rsquo;re a puritan about <em>true</em> unit tests.</p>
 
     <span style="color:#a6e22e">@no_database</span>()
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something</span>(self):
-        <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
+        <span style="color:#f92672">...</span></code></pre></div>
 <p>This snippet is a reformulation of one from Carl Meyer&rsquo;s excellent
 <a href="http://pyvideo.org/video/699/testing-and-django">&lsquo;Testing and Django&rsquo;</a>
 (about 24 minutes in).</p>

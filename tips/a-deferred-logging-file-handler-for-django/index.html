@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -101,21 +101,21 @@ argument to each <code>FileHandler</code> in the <code>LOGGING</code> setting:</
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
 
 LOGGING <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">version</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>: {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">error_file</span><span style="color:#e6db74">&#39;</span>: {
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">level</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">INFO</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging.FileHandler</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{log_root}errors.log</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">formatter</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">verbose</span><span style="color:#e6db74">&#39;</span>
+    <span style="color:#e6db74">&#39;version&#39;</span>: <span style="color:#ae81ff">1</span>,
+    <span style="color:#f92672">...</span>
+    <span style="color:#e6db74">&#39;handlers&#39;</span>: {
+        <span style="color:#e6db74">&#39;error_file&#39;</span>: {
+            <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;INFO&#39;</span>,
+            <span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;logging.FileHandler&#39;</span>,
+            <span style="color:#e6db74">&#39;filename&#39;</span>: <span style="color:#e6db74">&#39;{log_root}errors.log&#39;</span>,
+            <span style="color:#e6db74">&#39;formatter&#39;</span>: <span style="color:#e6db74">&#39;verbose&#39;</span>
         },
     },
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">loggers</span><span style="color:#e6db74">&#39;</span>: {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">django.request</span><span style="color:#e6db74">&#39;</span>: {
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>: [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">error_file</span><span style="color:#e6db74">&#39;</span>],
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">level</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERROR</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">propagate</span><span style="color:#e6db74">&#39;</span>: False,
+    <span style="color:#e6db74">&#39;loggers&#39;</span>: {
+        <span style="color:#e6db74">&#39;django.request&#39;</span>: {
+            <span style="color:#e6db74">&#39;handlers&#39;</span>: [<span style="color:#e6db74">&#39;error_file&#39;</span>],
+            <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;ERROR&#39;</span>,
+            <span style="color:#e6db74">&#39;propagate&#39;</span>: False,
         },
     }
 }</code></pre></div>
@@ -125,10 +125,10 @@ settings and formatting each filename with the correct path:</p>
 
 <span style="color:#f92672">from</span> conf.default <span style="color:#f92672">import</span> LOGGING
 
-LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/var/log/project/test/</span><span style="color:#e6db74">&#39;</span>
-<span style="color:#66d9ef">for</span> handler <span style="color:#f92672">in</span> LOGGING[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>values():
-    <span style="color:#66d9ef">if</span> handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">logging.FileHandler</span><span style="color:#e6db74">&#39;</span>:
-        handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> handler[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>]<span style="color:#f92672">.</span>format(log_root<span style="color:#f92672">=</span>LOG_ROOT)</code></pre></div>
+LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/var/log/project/test/&#39;</span>
+<span style="color:#66d9ef">for</span> handler <span style="color:#f92672">in</span> LOGGING[<span style="color:#e6db74">&#39;handlers&#39;</span>]<span style="color:#f92672">.</span>values():
+    <span style="color:#66d9ef">if</span> handler[<span style="color:#e6db74">&#39;class&#39;</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;logging.FileHandler&#39;</span>:
+        handler[<span style="color:#e6db74">&#39;filename&#39;</span>] <span style="color:#f92672">=</span> handler[<span style="color:#e6db74">&#39;filename&#39;</span>]<span style="color:#f92672">.</span>format(log_root<span style="color:#f92672">=</span>LOG_ROOT)</code></pre></div>
 <p>This works but is rather clunky. For instance, the default <code>LOGGING</code>
 setting (without an environmental override) will lead to an error .</p>
 
@@ -143,10 +143,10 @@ record.</p>
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DeferredFileHandler</span>(BaseFileHandler):
 
-    <span style="color:#66d9ef">def</span> __init__(self, filename, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs):
+    <span style="color:#66d9ef">def</span> __init__(self, filename, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>filename <span style="color:#f92672">=</span> filename
-        kwargs[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">delay</span><span style="color:#e6db74">&#39;</span>] <span style="color:#f92672">=</span> True
-        BaseFileHandler<span style="color:#f92672">.</span>__init__(self, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/dev/null</span><span style="color:#e6db74">&#34;</span>, <span style="color:#f92672">*</span>args, <span style="color:#f92672">*</span><span style="color:#f92672">*</span>kwargs)
+        kwargs[<span style="color:#e6db74">&#39;delay&#39;</span>] <span style="color:#f92672">=</span> True
+        BaseFileHandler<span style="color:#f92672">.</span>__init__(self, <span style="color:#e6db74">&#34;/dev/null&#34;</span>, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_open</span>(self):
         <span style="color:#75715e"># We import settings here to avoid a circular reference as this module</span>
@@ -158,28 +158,28 @@ record.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
 
 LOGGING <span style="color:#f92672">=</span> {
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">version</span><span style="color:#e6db74">&#39;</span>: <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>: {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">error_file</span><span style="color:#e6db74">&#39;</span>: {
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">level</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">INFO</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">class</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">deferred_filelogger.DeferredFilehandler</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">filename</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">errors.log</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">formatter</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">verbose</span><span style="color:#e6db74">&#39;</span>
+    <span style="color:#e6db74">&#39;version&#39;</span>: <span style="color:#ae81ff">1</span>,
+    <span style="color:#f92672">...</span>
+    <span style="color:#e6db74">&#39;handlers&#39;</span>: {
+        <span style="color:#e6db74">&#39;error_file&#39;</span>: {
+            <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;INFO&#39;</span>,
+            <span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;deferred_filelogger.DeferredFilehandler&#39;</span>,
+            <span style="color:#e6db74">&#39;filename&#39;</span>: <span style="color:#e6db74">&#39;errors.log&#39;</span>,
+            <span style="color:#e6db74">&#39;formatter&#39;</span>: <span style="color:#e6db74">&#39;verbose&#39;</span>
         },
     },
-    <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">loggers</span><span style="color:#e6db74">&#39;</span>: {
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">django.request</span><span style="color:#e6db74">&#39;</span>: {
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">handlers</span><span style="color:#e6db74">&#39;</span>: [<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">error_file</span><span style="color:#e6db74">&#39;</span>],
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">level</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">ERROR</span><span style="color:#e6db74">&#39;</span>,
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">propagate</span><span style="color:#e6db74">&#39;</span>: False,
+    <span style="color:#e6db74">&#39;loggers&#39;</span>: {
+        <span style="color:#e6db74">&#39;django.request&#39;</span>: {
+            <span style="color:#e6db74">&#39;handlers&#39;</span>: [<span style="color:#e6db74">&#39;error_file&#39;</span>],
+            <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;ERROR&#39;</span>,
+            <span style="color:#e6db74">&#39;propagate&#39;</span>: False,
         },
     }
 }</code></pre></div>
 <p>and specify a <code>LOG_ROOT</code> setting for each environment:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
 
-LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/var/log/project/test/</span><span style="color:#e6db74">&#39;</span></code></pre></div>
+LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/var/log/project/test/&#39;</span></code></pre></div>
 <p>Such a logger is part of
 <a href="https://github.com/tangentlabs/django-oscar/blob/master/oscar/core/logging/handlers.py">django-oscar</a>,
 but I&rsquo;ve packaged it up separately so it can be used in non-Oscar

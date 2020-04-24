@@ -121,7 +121,7 @@ The main thing the future maintainer of your code (i.e. you) cares about is whet
       <guid>https://codeinthehole.com/tips/listing-google-groups/</guid>
       <description>Oddly, you can&amp;rsquo;t pull a report of all groups from G-Suite like you can for users. The only option is to use the API. Here&amp;rsquo;s how.
 Follow steps 1 and 2 from the quickstart guide but instead of the sample Python script, use this:
-from httplib2 import Http from googleapiclient.discovery import build from oauth2client import file, client, tools def main(): _print_all_groups() def _print_all_groups(): for group in _all_groups(): print(group[&amp;#39;email&amp;#39;]) def _all_groups(): &amp;#34;&amp;#34;&amp;#34;Return a list of all group dicts.</description>
+from httplib2 import Http from googleapiclient.discovery import build from oauth2client import file, client, tools def main(): _print_all_groups() def _print_all_groups(): for group in _all_groups(): print(group[&amp;#39;email&amp;#39;]) def _all_groups(): &amp;#34;&amp;#34;&amp;#34; Return a list of all group dicts.</description>
     </item>
     
     <item>
@@ -166,8 +166,9 @@ To illustrate, assume we have two tables:
       <guid>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</guid>
       <description>A curated1 collection of words-of-the-day from @qikipedia:
 Word of the day: ARSLE - to move backwards.
-&amp;mdash; Quite Interesting Facts (@qikipedia) May 14, 2017  Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better
-&amp;mdash; Quite Interesting Facts (@qikipedia) July 3, 2017  Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.</description>
+&amp;mdash; Quite Interesting (@qikipedia) May 14, 2017  Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better
+&amp;mdash; Quite Interesting (@qikipedia) July 3, 2017  Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.
+&amp;mdash; Quite Interesting (@qikipedia) October 21, 2017  Word of the day : FANKLE (Scottish) - to tangle or entangle something.</description>
     </item>
     
     <item>
@@ -189,8 +190,7 @@ Word of the day: ARSLE - to move backwards.
  You moved everything out of the views.py modules when you heard fat controllers were bad.
  And you&amp;rsquo;ve read that fat models are a good idea1.
  You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-The current balance is {{ account.get_balance_via_three_network_calls_lol }}
- You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+&amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt; You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>
@@ -358,7 +358,7 @@ Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
       <guid>https://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
       <description>I often need to grab information from a Postgres database and paste it into a spreadsheet for sharing with others. Google Sheets needs the pasted data to be tab-separated in order to be correctly split into columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to configure psql&amp;rsquo;s output to get it.
 At a psql prompt, switch to unaligned output
-= \a set the field separator to a tab character:</description>
+=&amp;gt; \a set the field separator to a tab character:</description>
     </item>
     
     <item>

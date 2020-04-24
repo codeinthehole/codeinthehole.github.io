@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -105,24 +105,24 @@ steps are generally:</p>
 
 <p>For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_upload</span>(request):
-    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">POST</span><span style="color:#e6db74">&#39;</span>:
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
         form <span style="color:#f92672">=</span> UploadFileForm(request<span style="color:#f92672">.</span>POST, request<span style="color:#f92672">.</span>FILES)
         <span style="color:#66d9ef">if</span> form<span style="color:#f92672">.</span>is_valid():
-            handle_uploaded_file(request<span style="color:#f92672">.</span>FILES[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file</span><span style="color:#e6db74">&#39;</span>])
-            <span style="color:#66d9ef">return</span> HttpResponseRedirect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/success/url/</span><span style="color:#e6db74">&#39;</span>)
+            handle_uploaded_file(request<span style="color:#f92672">.</span>FILES[<span style="color:#e6db74">&#39;file&#39;</span>])
+            <span style="color:#66d9ef">return</span> HttpResponseRedirect(<span style="color:#e6db74">&#39;/success/url/&#39;</span>)
     <span style="color:#66d9ef">else</span>:
         form <span style="color:#f92672">=</span> UploadFileForm()
-    <span style="color:#66d9ef">return</span> render_to_response(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upload.html</span><span style="color:#e6db74">&#39;</span>, {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">form</span><span style="color:#e6db74">&#39;</span>: form})
+    <span style="color:#66d9ef">return</span> render_to_response(<span style="color:#e6db74">&#39;upload.html&#39;</span>, {<span style="color:#e6db74">&#39;form&#39;</span>: form})
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(f):
-    filepath <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/tmp/somefile.txt</span><span style="color:#e6db74">&#39;</span>
-    <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wb+</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> dest:
+    filepath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/somefile.txt&#39;</span>
+    <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;wb+&#39;</span>) <span style="color:#66d9ef">as</span> dest:
         <span style="color:#66d9ef">for</span> chunk <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>chunks():
             dest<span style="color:#f92672">.</span>write(chunk)
     process_file(filepath)
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_file</span>(filepath):
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>This works fine.</p>
 
 <p>However, it&rsquo;s often desirable to collect audit information about which
@@ -131,8 +131,8 @@ them. Of course, this can be addressed by logging but a more elegant
 solution to use a simple audit model as well. Consider an alternative
 implementation of <code>handle_uploaded_file</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(user, f):
-    filepath <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/tmp/somefile.txt</span><span style="color:#e6db74">&#39;</span>
-    <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wb+</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> dest:
+    filepath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/somefile.txt&#39;</span>
+    <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;wb+&#39;</span>) <span style="color:#66d9ef">as</span> dest:
         <span style="color:#66d9ef">for</span> chunk <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>chunks():
             dest<span style="color:#f92672">.</span>write(chunk)
     upload <span style="color:#f92672">=</span> StockUpload<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(
@@ -151,11 +151,11 @@ implementation of <code>handle_uploaded_file</code>:</p>
     filepath <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">255</span>)
 
     <span style="color:#75715e"># Upload audit information</span>
-    uploaded_by <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">auth.User</span><span style="color:#e6db74">&#39;</span>)
+    uploaded_by <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(<span style="color:#e6db74">&#39;auth.User&#39;</span>)
     date_uploaded <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(auto_now_add<span style="color:#f92672">=</span>True)
 
     <span style="color:#75715e"># Processing audit information</span>
-    PENDING, PROCESSED, FAILED <span style="color:#f92672">=</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Pending</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Processed</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Failed</span><span style="color:#e6db74">&#39;</span>
+    PENDING, PROCESSED, FAILED <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Pending&#39;</span>, <span style="color:#e6db74">&#39;Processed&#39;</span>, <span style="color:#e6db74">&#39;Failed&#39;</span>
     STATUSES <span style="color:#f92672">=</span> (
         (PENDING, _(PENDING)),
         (PROCESSED, _(PROCESSED)),
@@ -171,7 +171,7 @@ implementation of <code>handle_uploaded_file</code>:</p>
         self<span style="color:#f92672">.</span>date_start_processing <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
         <span style="color:#66d9ef">try</span>:
             <span style="color:#75715e"># process upload data, </span>
-            <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+            <span style="color:#f92672">...</span>
         <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>, e:
             self<span style="color:#f92672">.</span>_mark_failed(unicode(e))
         <span style="color:#66d9ef">else</span>:
@@ -205,7 +205,7 @@ the filepath generation is removed from the view:</p>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_from_stream</span>(self, user, f):
         filepath <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>generate_filename()
-        <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">wb+</span><span style="color:#e6db74">&#39;</span>) <span style="color:#66d9ef">as</span> dest:
+        <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;wb+&#39;</span>) <span style="color:#66d9ef">as</span> dest:
             <span style="color:#66d9ef">for</span> chunk <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>chunks():
                 dest<span style="color:#f92672">.</span>write(chunk)
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>create(
@@ -233,30 +233,30 @@ to send a message back to the user who uploaded the file:</p>
     <span style="color:#66d9ef">if</span> upload<span style="color:#f92672">.</span>was_processing_successful():
         message_user(
             upload<span style="color:#f92672">.</span>uploaded_by, 
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Your upload </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> was processed successfully, </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> records imported</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (
+            <span style="color:#e6db74">&#34;Your upload </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> was processed successfully, </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> records imported&#34;</span> <span style="color:#f92672">%</span> (
                 upload<span style="color:#f92672">.</span>filename,
                 upload<span style="color:#f92672">.</span>num_records))
     <span style="color:#66d9ef">else</span>:
         message_user(
             upload<span style="color:#f92672">.</span>uploaded_by, 
-            <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">Your upload </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> could not be processed, error message: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (
+            <span style="color:#e6db74">&#34;Your upload </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> could not be processed, error message: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (
                 upload<span style="color:#f92672">.</span>filename,
                 upload<span style="color:#f92672">.</span>processing_description,))
 
 <span style="color:#75715e"># views.py</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_upload</span>(request):
-    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">POST</span><span style="color:#e6db74">&#39;</span>:
+    <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
         form <span style="color:#f92672">=</span> UploadFileForm(request<span style="color:#f92672">.</span>POST, request<span style="color:#f92672">.</span>FILES)
         <span style="color:#66d9ef">if</span> form<span style="color:#f92672">.</span>is_valid():
             upload <span style="color:#f92672">=</span> StockUpload<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create_from_stream(
-                request<span style="color:#f92672">.</span>user, request<span style="color:#f92672">.</span>FILES[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">file</span><span style="color:#e6db74">&#39;</span>])
+                request<span style="color:#f92672">.</span>user, request<span style="color:#f92672">.</span>FILES[<span style="color:#e6db74">&#39;file&#39;</span>])
             process_upload<span style="color:#f92672">.</span>delay(upload<span style="color:#f92672">.</span>id)
-            <span style="color:#66d9ef">return</span> HttpResponseRedirect(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">/success/url/</span><span style="color:#e6db74">&#39;</span>)
+            <span style="color:#66d9ef">return</span> HttpResponseRedirect(<span style="color:#e6db74">&#39;/success/url/&#39;</span>)
     <span style="color:#66d9ef">else</span>:
         form <span style="color:#f92672">=</span> UploadFileForm()
     <span style="color:#66d9ef">return</span> render_to_response(
-        <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">upload.html</span><span style="color:#e6db74">&#39;</span>, {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">form</span><span style="color:#e6db74">&#39;</span>: form}, 
+        <span style="color:#e6db74">&#39;upload.html&#39;</span>, {<span style="color:#e6db74">&#39;form&#39;</span>: form}, 
         context_instance<span style="color:#f92672">=</span>RequestContext(request))</code></pre></div>
 <h3 id="discussion">Discussion</h3>
 

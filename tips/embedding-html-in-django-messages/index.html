@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -98,24 +98,24 @@ escaping. For example:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> messages
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_view</span>(request):
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+    <span style="color:#f92672">...</span>
     messages<span style="color:#f92672">.</span>success(request, 
-                     <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">Here is a &lt;a href=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">/</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&gt;link&lt;/a&gt;.</span><span style="color:#e6db74">&#39;</span>,
-                     extra_tags<span style="color:#f92672">=</span><span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">safe</span><span style="color:#e6db74">&#39;</span>)
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
+                     <span style="color:#e6db74">&#39;Here is a &lt;a href=&#34;/&#34;&gt;link&lt;/a&gt;.&#39;</span>,
+                     extra_tags<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;safe&#39;</span>)
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>Then use some simple template logic to determine whether to use the
 <code>safe</code> filter:</p>
-<pre><code class="language-html+django" data-lang="html+django"><ul>
+<pre><code class="language-html+django" data-lang="html+django">&lt;ul&gt;
     {% for message in messages %}
-    <li class="{{ message.tags }}">
-        {% if 'safe' in message.tags %}
+    &lt;li class=&#34;{{ message.tags }}&#34;&gt;
+        {% if &#39;safe&#39; in message.tags %}
             {{ message|safe }}
         {% else %}
             {{ message }}
         {% endif %}
-    </li>
+    &lt;/li&gt;
     {% endfor %}
-</ul></code></pre>
+&lt;/ul&gt;</code></pre>
 <h3 id="discussion">Discussion</h3>
 
 <p>It&rsquo;s tempting to use the <code>safe</code> filter for all messages but this opens
@@ -124,9 +124,9 @@ user input verbatim in the message. For instance:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib <span style="color:#f92672">import</span> messages
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">some_view</span>(request):
-    code <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>GET[<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">code</span><span style="color:#e6db74">&#39;</span>]
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
-    messages<span style="color:#f92672">.</span>success(request, <span style="color:#e6db74"></span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74"> is not valid voucher code</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> code)</code></pre></div>
+    code <span style="color:#f92672">=</span> request<span style="color:#f92672">.</span>GET[<span style="color:#e6db74">&#39;code&#39;</span>]
+    <span style="color:#f92672">...</span>
+    messages<span style="color:#f92672">.</span>success(request, <span style="color:#e6db74">&#34;&#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39; is not valid voucher code&#34;</span> <span style="color:#f92672">%</span> code)</code></pre></div>
 <p>leads to an XSS hole if the <code>safe</code> filter is used on all messages as the
 contents of <code>request.GET['code']</code> cannot be trusted. It&rsquo;s better to
 explicitly indicate which messages can be safely rendered without

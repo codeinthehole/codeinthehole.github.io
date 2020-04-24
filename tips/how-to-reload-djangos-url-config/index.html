@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -112,7 +112,7 @@ reloaded.</p>
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 <span style="color:#f92672">from</span> django.utils.importlib <span style="color:#f92672">import</span> import_module
 
-<span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span>
+<span style="color:#f92672">...</span>
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EnabledAnonymousCheckoutViewsTests</span>(ClientTestCase, CheckoutMixin):
 
@@ -124,7 +124,7 @@ reloaded.</p>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_shipping_address_requires_session_email_address</span>(self):
         <span style="color:#66d9ef">with</span> patch_settings(OSCAR_ALLOW_ANON_CHECKOUT<span style="color:#f92672">=</span>True):
             self<span style="color:#f92672">.</span>reload_urlconf()
-            response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">checkout:shipping-address</span><span style="color:#e6db74">&#39;</span>))
+            response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;checkout:shipping-address&#39;</span>))
             self<span style="color:#f92672">.</span>assertIsRedirect(response)</code></pre></div>
 <p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
 me when working on this problem today.</p>

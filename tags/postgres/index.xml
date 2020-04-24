@@ -43,7 +43,7 @@ $ pgbadger -f stderr -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope th
       <guid>https://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</guid>
       <description>I often need to grab information from a Postgres database and paste it into a spreadsheet for sharing with others. Google Sheets needs the pasted data to be tab-separated in order to be correctly split into columns. This isn&amp;rsquo;t the default behaviour for psql but here&amp;rsquo;s how to configure psql&amp;rsquo;s output to get it.
 At a psql prompt, switch to unaligned output
-= \a set the field separator to a tab character:</description>
+=&amp;gt; \a set the field separator to a tab character:</description>
     </item>
     
     <item>

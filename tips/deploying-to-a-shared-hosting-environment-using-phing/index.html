@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -108,7 +108,7 @@ that uses the FtpDeploy task:</p>
     <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/public_html/&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.mode&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;ascii&#34;</span> <span style="color:#f92672">/&gt;</span>
 
-    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> FILESETS </span><span style="color:#75715e">--&gt;</span>
+    <span style="color:#75715e">&lt;!-- FILESETS --&gt;</span>
     <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.images&#34;</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;images/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;favicon.ico&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -126,7 +126,7 @@ that uses the FtpDeploy task:</p>
         <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;.htaccess&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/fileset&gt;</span>
 
-    <span style="color:#75715e">&lt;!--</span><span style="color:#75715e"> DEPLOYMENT TARGETS </span><span style="color:#75715e">--&gt;</span>
+    <span style="color:#75715e">&lt;!-- DEPLOYMENT TARGETS --&gt;</span>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;Copying fileset &#39;${deploy.fileset.refid}&#39; to ${ftp.host} in ${ftp.mode} mode&#34;</span> <span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;ftpdeploy</span> 

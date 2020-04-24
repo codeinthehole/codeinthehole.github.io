@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1583485337" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1587715440" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -90,27 +90,27 @@ a small chance it may be useful to others.</p>
 
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SampleTestCase</span>(unittest<span style="color:#f92672">.</span>TestCase, XMLAssertions):
-    <span style="color:#f92672">.</span><span style="color:#f92672">.</span><span style="color:#f92672">.</span></code></pre></div>
+    <span style="color:#f92672">...</span></code></pre></div>
 <p>Now suppose that the expected XML from some SUT<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> is:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34; ?&gt;</span>
-<span style="color:#f92672">&lt;Response</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;CardTxn</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;authcode</span><span style="color:#f92672">&gt;</span>060642<span style="color:#f92672">&lt;/authcode&gt;</span>
-        <span style="color:#f92672">&lt;card_scheme</span><span style="color:#f92672">&gt;</span>Switch<span style="color:#f92672">&lt;/card_scheme&gt;</span>
+<span style="color:#f92672">&lt;Response&gt;</span>
+    <span style="color:#f92672">&lt;CardTxn&gt;</span>
+        <span style="color:#f92672">&lt;authcode&gt;</span>060642<span style="color:#f92672">&lt;/authcode&gt;</span>
+        <span style="color:#f92672">&lt;card_scheme&gt;</span>Switch<span style="color:#f92672">&lt;/card_scheme&gt;</span>
         <span style="color:#f92672">&lt;issuer</span> <span style="color:#a6e22e">country=</span><span style="color:#e6db74">&#34;UK&#34;</span><span style="color:#f92672">&gt;</span>HSBC<span style="color:#f92672">&lt;/issuer&gt;</span>
     <span style="color:#f92672">&lt;/CardTxn&gt;</span>
-    <span style="color:#f92672">&lt;reference</span><span style="color:#f92672">&gt;</span>3000000088888888<span style="color:#f92672">&lt;/reference&gt;</span>
-    <span style="color:#f92672">&lt;merchantreference</span><span style="color:#f92672">&gt;</span>1000001<span style="color:#f92672">&lt;/merchantreference&gt;</span>
-    <span style="color:#f92672">&lt;mode</span><span style="color:#f92672">&gt;</span>LIVE<span style="color:#f92672">&lt;/mode&gt;</span>
-    <span style="color:#f92672">&lt;reason</span><span style="color:#f92672">&gt;</span>ACCEPTED<span style="color:#f92672">&lt;/reason&gt;</span>
-    <span style="color:#f92672">&lt;status</span><span style="color:#f92672">&gt;</span>1<span style="color:#f92672">&lt;/status&gt;</span>
-    <span style="color:#f92672">&lt;time</span><span style="color:#f92672">&gt;</span>1071567305<span style="color:#f92672">&lt;/time&gt;</span>
+    <span style="color:#f92672">&lt;reference&gt;</span>3000000088888888<span style="color:#f92672">&lt;/reference&gt;</span>
+    <span style="color:#f92672">&lt;merchantreference&gt;</span>1000001<span style="color:#f92672">&lt;/merchantreference&gt;</span>
+    <span style="color:#f92672">&lt;mode&gt;</span>LIVE<span style="color:#f92672">&lt;/mode&gt;</span>
+    <span style="color:#f92672">&lt;reason&gt;</span>ACCEPTED<span style="color:#f92672">&lt;/reason&gt;</span>
+    <span style="color:#f92672">&lt;status&gt;</span>1<span style="color:#f92672">&lt;/status&gt;</span>
+    <span style="color:#f92672">&lt;time&gt;</span>1071567305<span style="color:#f92672">&lt;/time&gt;</span>
 <span style="color:#f92672">&lt;/Response&gt;</span></code></pre></div>
 <p>then you can make assertions about the document using 3 additional
 assertions methods.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>assertXPathNodeCount(RESPONSE, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CardTxn/authcode</span><span style="color:#e6db74">&#39;</span>)
-self<span style="color:#f92672">.</span>assertXPathNodeText(RESPONSE, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">LIVE</span><span style="color:#e6db74">&#39;</span>, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">mode</span><span style="color:#e6db74">&#39;</span>)
-self<span style="color:#f92672">.</span>assertXPathNodeAttributes(RESPONSE, {<span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">country</span><span style="color:#e6db74">&#39;</span>: <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">UK</span><span style="color:#e6db74">&#39;</span>}, <span style="color:#e6db74"></span><span style="color:#e6db74">&#39;</span><span style="color:#e6db74">CardTxn/issuer</span><span style="color:#e6db74">&#39;</span>)</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">self<span style="color:#f92672">.</span>assertXPathNodeCount(RESPONSE, <span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;CardTxn/authcode&#39;</span>)
+self<span style="color:#f92672">.</span>assertXPathNodeText(RESPONSE, <span style="color:#e6db74">&#39;LIVE&#39;</span>, <span style="color:#e6db74">&#39;mode&#39;</span>)
+self<span style="color:#f92672">.</span>assertXPathNodeAttributes(RESPONSE, {<span style="color:#e6db74">&#39;country&#39;</span>: <span style="color:#e6db74">&#39;UK&#39;</span>}, <span style="color:#e6db74">&#39;CardTxn/issuer&#39;</span>)</code></pre></div>
 <p>The first argument to each method is the XML string, the second is the
 expected value, while the third is the XPath query.</p>
 
