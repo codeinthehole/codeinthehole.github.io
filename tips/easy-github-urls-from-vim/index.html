@@ -35,10 +35,10 @@ if (!doNotTrack) {
 
         
         
-        <title>Testing for missing migrations in Django - David Winterbottom</title>
+        <title>Easy Github URLs from Vim - David Winterbottom</title>
 
         <meta name="author" content="David Winterbottom">
-        <meta name="description" content="A post on the new Octopus Energy tech blog">
+        <meta name="description" content="A super-useful Vim mapping for grabbing Github URLs">
 
     </head>
 
@@ -63,20 +63,40 @@ if (!doNotTrack) {
 
     <div id="content" class="article">
 
-        <h1 id="article_title" class="entry-title">Testing for missing migrations in Django</h1>
+        <h1 id="article_title" class="entry-title">Easy Github URLs from Vim</h1>
 
         <div class="byline desktop_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a>
-            on <time class="published" datetime="">Thursday, 21 January 2016</time>
+            on <time class="published" datetime="">Tuesday, 23 June 2020</time>
         </div>
         <div class="byline mobile_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
-            <span class="article_date">on <time class="published" datetime="">Thursday, 21 January 2016</time></span>
+            <span class="article_date">on <time class="published" datetime="">Tuesday, 23 June 2020</time></span>
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Octopus Energy has a <a href="http://tech.octopus.energy">tech blog</a>. I wrote an article
-on <a href="http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migrations-in-django.html">Testing for missing migrations in Django</a>.</p>
+            <p>URLs are great aren&rsquo;t they?</p>
+
+<p>You include them in your Slack messages and your
+co-workers can see <em>exactly</em> what you&rsquo;re talking about in a single click. I wish
+people would use them more (and design apps that support them properly).</p>
+
+<p>Anyway, a super-useful Vim mapping I use is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;<span style="color:#a6e22e">gb</span> :<span style="color:#a6e22e">GBrowse</span>! <span style="color:#a6e22e">master</span>:%&lt;<span style="color:#a6e22e">cr</span>&gt; </code></pre></div>
+<p>which, after visually selecting a block of code, grabs its Github URL from the
+<code>HEAD</code> of <code>master</code> and copies it to the clipboard. I use this several times
+daily.</p>
+
+<p>If you want the URL for the code block from your <em>current branch</em>, use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">GBrowse</span>!</code></pre></div>
+<p>although you have to have pushed your branch for the URL to resolve.</p>
+
+<p>Various other &ldquo;fugitive-objects&rdquo; can be passed to <code>:GBrowse</code> to
+open or copy URLs for other objects &ndash; see the <a href="https://github.com/tpope/vim-fugitive/blob/27a5c3abd211c2784513dab4db082fa414ad0967/doc/fugitive.txt#L212-L235">help file</a>
+for more details.</p>
+
+<p>The <code>:Gbrowse</code> function is provided by the excellent <a href="https://github.com/tpope/vim-fugitive"><code>vim-fugitive</code></a> and requires the
+<a href="https://github.com/tpope/vim-rhubarb"><code>vim-rhubarb</code></a> plugin for Github support.</p>
 
         </div>
 
@@ -84,28 +104,26 @@ on <a href="http://tech.octopus.energy/news/2016/01/21/testing-for-missing-migra
             <span class="hr">----</span>
             <p>
             Something wrong? 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/news/oe-tech-missing-migrations.md">Suggest an improvement</a>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/easy-github-urls-from-vim.md">Suggest an improvement</a>
             or 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Testing%20for%20missing%20migrations%20in%20Django%22&body=Article:%20Testing%20for%20missing%20migrations%20in%20Django%0AURL:%20https%3a%2f%2fcodeinthehole.com%2fnews%2foe-tech-missing-migrations%2f">add a comment</a>
-            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/news/oe-tech-missing-migrations.md">article history</a>)<br/>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Easy%20Github%20URLs%20from%20Vim%22&body=Article:%20Easy%20Github%20URLs%20from%20Vim%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2feasy-github-urls-from-vim%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/easy-github-urls-from-vim.md">article history</a>)<br/>
 
             
                 Tagged with:
                 
-                 <a href="/tags/django">django</a>, <a href="/tags/octopus-energy">octopus energy</a>
+                 <a href="/tags/github">github</a>, <a href="/tags/vim">vim</a>
                 <br/>
             
             
-                Filed in: <a href="/news/">news</a>
+                Filed in: <a href="/tips/">tips</a>
             
             </p>
 
             <p>
             
-                Previous: <a href="/news/octopus-energy/">Octopus Energy</a><br/>
+                Previous: <a href="/tips/software-development-tips-part2/">Software development tips – part 2</a><br/>
             
-            
-                Next: <a href="/news/oe-tech-elb-health-checks/">Django, ELB health checks and continuous delivery</a>
             
             </p>
 

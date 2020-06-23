@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1588291663" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1592924979" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -256,6 +256,12 @@ In this situation, we may need to examine the individual changes made to each co
 
 <p>We can examine the overall diff:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git diff REBASE_HEAD...origin/master $FILEPATH</code></pre></div>
+<!-- 
+
+We can determine the "onto" value dynamically from .git/rebase-apply/onto
+
+-->
+
 <p>or list the commits from the target branch that updated <code>$FILEPATH</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git log REBASE_HEAD..origin/master $FILEPATH</code></pre></div>
 <p>and review how each modified <code>$FILEPATH</code> with:</p>
