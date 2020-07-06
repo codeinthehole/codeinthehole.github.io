@@ -12,15 +12,6 @@
     
     
     <item>
-      <title>git</title>
-      <link>https://codeinthehole.com/tags/git/</link>
-      <pubDate>Tue, 23 Jun 2020 15:49:58 +0100</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/git/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>github</title>
       <link>https://codeinthehole.com/tags/github/</link>
       <pubDate>Tue, 23 Jun 2020 15:49:58 +0100</pubDate>
@@ -62,6 +53,15 @@
       <pubDate>Fri, 24 Apr 2020 10:04:16 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tags/writing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>git</title>
+      <link>https://codeinthehole.com/tags/git/</link>
+      <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/git/</guid>
       <description></description>
     </item>
     
@@ -354,15 +354,6 @@
     </item>
     
     <item>
-      <title>node</title>
-      <link>https://codeinthehole.com/tags/node/</link>
-      <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/node/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>node.js</title>
       <link>https://codeinthehole.com/tags/node.js/</link>
       <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
@@ -404,6 +395,15 @@
       <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tags/javascript/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>node</title>
+      <link>https://codeinthehole.com/tags/node/</link>
+      <pubDate>Wed, 10 Nov 2010 00:00:00 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/node/</guid>
       <description></description>
     </item>
     

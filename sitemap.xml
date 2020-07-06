@@ -13,11 +13,6 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/git/</loc>
-    <lastmod>2020-06-23T15:49:58+01:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://codeinthehole.com/tags/github/</loc>
     <lastmod>2020-06-23T15:49:58+01:00</lastmod>
   </url>
@@ -55,6 +50,11 @@
   <url>
     <loc>https://codeinthehole.com/tags/writing/</loc>
     <lastmod>2020-04-24T10:04:16+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/git/</loc>
+    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -668,11 +668,6 @@
   </url>
   
   <url>
-    <loc>https://codeinthehole.com/tags/node/</loc>
-    <lastmod>2011-05-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://codeinthehole.com/tags/node.js/</loc>
     <lastmod>2011-05-22T00:00:00+00:00</lastmod>
   </url>
@@ -714,6 +709,11 @@
   
   <url>
     <loc>https://codeinthehole.com/tags/javascript/</loc>
+    <lastmod>2010-11-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://codeinthehole.com/tags/node/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
   </url>
   
