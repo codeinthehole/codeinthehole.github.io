@@ -24,7 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1594035677" type="text/css" />
+        <link rel="stylesheet" href="/css/styles.css?1594200666" type="text/css" />
         <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
 
         
@@ -35,7 +35,7 @@ if (!doNotTrack) {
 
         
         
-        <title>Enhancing your git commit editor - David Winterbottom</title>
+        <title>Enhancing your Git commit editor - David Winterbottom</title>
 
         <meta name="author" content="David Winterbottom">
         <meta name="description" content="Commit message pedantry taken to a new level">
@@ -63,7 +63,7 @@ if (!doNotTrack) {
 
     <div id="content" class="article">
 
-        <h1 id="article_title" class="entry-title">Enhancing your git commit editor</h1>
+        <h1 id="article_title" class="entry-title">Enhancing your Git commit editor</h1>
 
         <div class="byline desktop_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a>
@@ -80,32 +80,44 @@ if (!doNotTrack) {
 <p>I often find myself writing very similar commit messages (like &ldquo;Bump
 version to 0.4.3&rdquo;) and want to ensure I use the same wording each time.
 Thanks to <a href="https://twitter.com/LuRsT">@LuRsT</a>, I learnt how to employ
-git&rsquo;s
-<a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks#Client-Side-Hooks">prepare-commit-msg</a>
+Git&rsquo;s <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks#Client-Side-Hooks">prepare-commit-msg</a>
 hook to display the last 5 commit messages when I&rsquo;m editing a commit
 message.</p>
 
 <p>Use the following <code>.git/hooks/prepare-commit-msg</code> hook:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>
-BRANCH_NAME<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git branch | grep <span style="color:#e6db74">&#39;*&#39;</span> | sed <span style="color:#e6db74">&#39;s/* //&#39;</span><span style="color:#66d9ef">)</span>
-<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $BRANCH_NAME !<span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;(no branch)&#39;</span> <span style="color:#f92672">]</span>
-<span style="color:#66d9ef">then</span>
-    echo <span style="color:#e6db74">&#34;#&#34;</span> &gt;&gt; $1
-    echo <span style="color:#e6db74">&#34;# Last 5 commit messages&#34;</span> &gt;&gt; $1
-    echo <span style="color:#e6db74">&#34;# ----------------------&#34;</span> &gt;&gt; $1
-    COMMITS<span style="color:#f92672">=</span><span style="color:#e6db74">`</span>git log --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#34;# %h %s [%an]&#34;</span> -5<span style="color:#e6db74">`</span>
-    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt;&gt; $1
-<span style="color:#66d9ef">fi</span></code></pre></div>
+NUM_COMMITS<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+FORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;# %h %s [%an]&#34;</span>
+COMMITS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>git log --pretty<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>FORMAT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -<span style="color:#e6db74">${</span>NUM_COMMITS<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+HEADER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#
+</span><span style="color:#e6db74"># Last </span><span style="color:#e6db74">${</span>NUM_COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74"> commits
+</span><span style="color:#e6db74"># ----------------------&#34;</span>
+
+recent_commits<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HEADER<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+<span style="color:#f92672">}</span>
+
+COMMIT_FILE<span style="color:#f92672">=</span>$1
+SOURCE<span style="color:#f92672">=</span>$2
+SHA<span style="color:#f92672">=</span>$3
+
+<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span>$SOURCE<span style="color:#e6db74">&#34;</span> in
+merge|squash|message<span style="color:#f92672">)</span>
+    ;;
+<span style="color:#e6db74">&#34;&#34;</span>|commit|template<span style="color:#f92672">)</span> 
+    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$SHA<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+        recent_commits &gt;&gt; $COMMIT_FILE
+    <span style="color:#66d9ef">fi</span>
+    ;;
+*<span style="color:#f92672">)</span> 
+    echo <span style="color:#e6db74">&#34;Unexpected type &#39;</span>$SOURCE<span style="color:#e6db74">&#39; in prepare-commit-msg hook&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    exit <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">esac</span></code></pre></div>
 <p>then your default commit template looks like this:</p>
 
 <p><img src="/images/screenshots/git-commit-editor.png" alt="image" /></p>
-
-<p>Note, using <code>echo &quot;${COMMITS}&quot;</code> (instead of <code>echo $COMMITS</code>) ensures
-newlines are preserved (which I learnt in <a href="http://stackoverflow.com/questions/754395/losing-newline-after-assigning-grep-result-to-a-shell-variable">this Stack Overflow
-answer</a>).
-Also we don&rsquo;t echo commit messages while rebasing as it has <a href="http://gmurphey.com/2013/02/02/ignoring-git-hooks-when-rebasing.html">strange
-side-effects</a>.</p>
 
         </div>
 
@@ -115,7 +127,7 @@ side-effects</a>.</p>
             Something wrong? 
             <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/show-previous-commits-in-commit-editor.md">Suggest an improvement</a>
             or 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Enhancing%20your%20git%20commit%20editor%22&body=Article:%20Enhancing%20your%20git%20commit%20editor%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fenhancing-your-git-commit-editor%2f">add a comment</a>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Enhancing%20your%20Git%20commit%20editor%22&body=Article:%20Enhancing%20your%20Git%20commit%20editor%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fenhancing-your-git-commit-editor%2f">add a comment</a>
             (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/show-previous-commits-in-commit-editor.md">article history</a>)<br/>
 
             

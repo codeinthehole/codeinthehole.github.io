@@ -378,15 +378,15 @@ $ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresq
     </item>
     
     <item>
-      <title>Enhancing your git commit editor</title>
+      <title>Enhancing your Git commit editor</title>
       <link>https://codeinthehole.com/tips/enhancing-your-git-commit-editor/</link>
       <pubDate>Thu, 08 Aug 2013 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/enhancing-your-git-commit-editor/</guid>
       <description>Confession: I am a pedant, especially around commit messages.
-I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
+I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ Git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
 Use the following .git/hooks/prepare-commit-msg hook:
-#!/bin/sh  BRANCH_NAME=$(git branch | grep &amp;#39;*&amp;#39; | sed &amp;#39;s/* //&amp;#39;) if [ $BRANCH_NAME !</description>
+#!/bin/sh  NUM_COMMITS=5 FORMAT=&amp;#34;# %h %s [%an]&amp;#34; COMMITS=&amp;#34;$(git log --pretty=&amp;#34;${FORMAT}&amp;#34; -${NUM_COMMITS})&amp;#34; HEADER=&amp;#34;# # Last ${NUM_COMMITS}commits # ----------------------&amp;#34; recent_commits() { echo &amp;#34;${HEADER}&amp;#34; echo &amp;#34;${COMMITS}&amp;#34; } COMMIT_FILE=$1 SOURCE=$2 SHA=$3 case &amp;#34;$SOURCE&amp;#34; in merge|squash|message) ;; &amp;#34;&amp;#34;|commit|template) if [ -z &amp;#34;$SHA&amp;#34; ]; then recent_commits &amp;gt;&amp;gt; $COMMIT_FILE fi ;; *) echo &amp;#34;Unexpected type &amp;#39;$SOURCE&amp;#39; in prepare-commit-msg hook&amp;#34; &amp;gt;&amp;amp;2 exit 1 esac then your default commit template looks like this:</description>
     </item>
     
     <item>
