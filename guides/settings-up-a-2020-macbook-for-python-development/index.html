@@ -1,0 +1,359 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="/css/styles.css?1595165327" type="text/css" />
+        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Setting up a 2020 MacBook Pro for Python development - David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A note to self.">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Setting up a 2020 MacBook Pro for Python development</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 19 July 2020</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Sunday, 19 July 2020</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<!-- Introduction -->
+
+<p>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for
+Python development. I imagine it will all be out-of-date by the time I set-up my
+next laptop but it&rsquo;s possible it might be useful to someone in the meantime.</p>
+
+<!-- Main content -->
+
+<h2 id="applications">Applications</h2>
+
+<p>I don&rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing
+them from the App Store or downloading <code>.dmg</code> files and dragging them into
+<code>/Applications</code>.</p>
+
+<h2 id="from-the-app-store">From the App Store</h2>
+
+<p>There&rsquo;s only a few of these that I use:</p>
+
+<ul>
+<li><a href="https://apps.apple.com/gb/app/bear/id1016366447">Bear</a> &mdash; my Bear notes are now my most valuable possession.</li>
+<li><a href="https://apps.apple.com/gb/app/trello-organize-anything/id461504587">Trello</a> &mdash; by far my favourite workflow management app.</li>
+<li><a href="https://apps.apple.com/gb/app/microsoft-to-do/id1212616790">Microsoft To Do</a> &mdash; successor to Wunderlist.</li>
+<li><a href="https://apps.apple.com/gb/app/slack/id618783545">Slack</a></li>
+<li><a href="https://apps.apple.com/us/app/outline-app/id1356177741">Outline VPN client</a></li>
+</ul>
+
+<h2 id="downloaded-and-dragged-into-applications">Downloaded and dragged into <code>/Applications</code></h2>
+
+<p>In rough order of usefulness:</p>
+
+<ul>
+<li><a href="https://www.alfredapp.com/">Alfred</a> &mdash; install this <a href="https://github.com/drgrib/alfred-bear">Bear workflow</a> and ensure it&rsquo;s configured to
+search Chrome bookmarks.</li>
+<li><a href="https://github.com/macvim-dev/macvim/releases/">MacVim</a> &mdash; install from Github to get the latest version.</li>
+<li><a href="https://www.iterm2.com/">iTerm2</a></li>
+<li><a href="https://www.google.co.uk/chrome/">Chrome</a></li>
+<li><a href="https://1password.com/">1Password</a> (deliberately not from the App Store as such versions don&rsquo;t support the QR code reader
+functionality)</li>
+<li><a href="https://www.spectacleapp.com/">Spectacle</a></li>
+<li><a href="https://www.spotify.com/uk/download/other/">Spotify</a></li>
+<li><a href="https://www.docker.com/products/docker-desktop">Docker Desktop</a></li>
+<li><a href="https://postgresapp.com/downloads.html">Postgres.app</a></li>
+<li><a href="https://zoom.us/">Zoom</a></li>
+<li><a href="https://www.dropbox.com/">Dropbox</a></li>
+<li><a href="https://basecamp.com/via">Basecamp</a></li>
+<li><a href="https://www.vagrantup.com/">Vagrant</a></li>
+</ul>
+
+<h2 id="homebrew-formulae">Homebrew formulae</h2>
+
+<p>Homebrew is best reserved for core system packages, where running the
+latest version is desirable. It&rsquo;s less appropriate for project
+dependencies which require pinned versions &mdash; Docker is a better for
+that.</p>
+
+<p>Start by installing Xcode&rsquo;s command-line tools:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo xcode-select --install</code></pre></div>
+<p>then <a href="https://brew.sh/">install Homebrew</a> and a core set of formulae. The
+following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_core_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    local packages<span style="color:#f92672">=(</span>
+        bash
+        bash-completion
+        coreutils
+        ctags
+        fd
+        fzf
+        git
+        graphviz
+        htop
+        httpie
+        hub
+        hugo
+        imagemagick
+        jq
+        pgbadger
+        pv
+        rename
+        ripgrep
+        terminal_notifier
+        the_silver_searcher
+    <span style="color:#f92672">)</span>
+    brew install <span style="color:#e6db74">${</span>packages[@]<span style="color:#e6db74">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>plus some packages that require a separate <code>tap</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_tap_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    brew tap heroku/brew <span style="color:#f92672">&amp;&amp;</span> brew install heroku
+
+    brew tap homebrew/cask-fonts
+    local fonts<span style="color:#f92672">=(</span>
+        font-inconsolata
+        font-clear-sans
+        font-source-code-pro
+        font-anonymous-pro
+    <span style="color:#f92672">)</span>
+    brew cask install <span style="color:#e6db74">${</span>fonts[@]<span style="color:#e6db74">}</span>
+<span style="color:#f92672">}</span></code></pre></div>
+<p>Ensure your <code>~/.bash_profile</code> has shell completion enabled for
+Homebrew-installs packages by following the <a href="https://docs.brew.sh/Shell-Completion">documented instructions</a>.</p>
+
+<h2 id="macos-configuration">MacOS configuration</h2>
+
+<p>It&rsquo;s too dull to go through everything. Here are few notable changes:</p>
+
+<h3 id="non-breaking-spaces">Non-breaking spaces</h3>
+
+<p>Unbind <span class="keys">⌥</span> + <span class="keys">SPACE</span> from inserting a non-breaking space by setting the contents
+of <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-pl" data-lang="pl">{
+    <span style="color:#e6db74">&#34;~ &#34;</span> <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;insertText:&#34;</span>, <span style="color:#e6db74">&#34; &#34;</span>);
+}</code></pre></div>
+<p>This avoids a common annoyance when editing headers in markdown files (eg in Bear).</p>
+
+<h3 id="system-preferences">System preferences</h3>
+
+<p>Here&rsquo;s a <code>configurure_system_preferences.sh</code> script I use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
+</span><span style="color:#75715e"></span>#
+<span style="color:#75715e"># Configure MacOS settings.</span>
+
+set -e
+
+<span style="color:#66d9ef">function</span> configure_all<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    configure_keyboard
+    configure_screensaver
+    configure_screencapture
+    configure_touchpad
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> configure_keyboard<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Set fast key repeat rate.</span>
+    defaults write NSGlobalDomain KeyRepeat -int <span style="color:#ae81ff">2</span>
+    defaults write NSGlobalDomain InitialKeyRepeat -int <span style="color:#ae81ff">15</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> configure_screensaver<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Require password as soon as screen-saver or sleep mode starts.</span>
+    defaults write com.apple.screensaver askForPassword -int <span style="color:#ae81ff">1</span>
+    defaults write com.apple.screensaver askForPasswordDelay -int <span style="color:#ae81ff">0</span>
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> configure_screencapture<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    <span style="color:#75715e"># Disable shadow effect in screen capture.</span>
+    defaults write com.apple.screencapture disable-shadow -bool true
+<span style="color:#f92672">}</span>
+
+<span style="color:#66d9ef">function</span> configure_touchpad<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+    defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int <span style="color:#ae81ff">1</span>
+<span style="color:#f92672">}</span>
+
+configure_all</code></pre></div>
+<h3 id="further-reading">Further reading</h3>
+
+<ul>
+<li><a href="https://twitter.com/searls/status/1264547049032187910">How to set up a new Mac for development</a> - A 90 minute video walking through setting up a MacBook Pro.</li>
+<li><a href="https://gist.github.com/brandonb927/3195465"><code>osx-for-hackers.sh</code></a> &mdash; A
+large shell script with a lot of configuration options. This is the Yosemite/El Capitan edition &ndash; not everything works in Catalina. It&rsquo;s worth browsing though
+to see if anything takes your fancy.</li>
+</ul>
+
+<h2 id="python">Python</h2>
+
+<p>General principles:</p>
+
+<ul>
+<li><p>Use <code>pyenv</code> to manage multiple versions of Python locally, and to stay out of the
+way of the system Python.</p></li>
+
+<li><p>Keep everything in virtualenvs.</p></li>
+
+<li><p>Use <code>virtualenvwrapper</code> to provide convenience commands. Mainly as I like to
+switch to a project with <code>workon</code>. Indeed, I often create virtualenvs for non-Python
+projects just so I jump to them with <code>workon</code> and run some initialisation in
+the <code>postactivate</code> script (like changing to the project directory and setting
+the iTerm tab title).</p></li>
+
+<li><p>Use <code>pipx</code> to install command-line Python apps like <code>awscli</code> that I want
+available globally (i.e. can be run without activating a virtualenv first).</p></li>
+</ul>
+
+<h3 id="python-versions">Python versions</h3>
+
+<p>Install <code>pyenv</code> and <code>pyenv-virtualenvwrapper</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ brew install pyenv pyenv-virtualenvwrapper</code></pre></div>
+<p>and ensure these libraries are initialised by adding:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> which pyenv &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">then</span>
+    <span style="color:#75715e"># Pyenv (will add shims to front of $PATH)</span>
+    eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pyenv init -<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+
+    <span style="color:#75715e"># Ensure commands from virtualenvwrapper are available, no matter which</span>
+    <span style="color:#75715e"># Python version is active. This is equiv to sourcing virtualenvwrapper.sh</span>
+    pyenv virtualenvwrapper
+<span style="color:#66d9ef">fi</span></code></pre></div>
+<p>to <code>~/.bash_profile</code>.</p>
+
+<p>Install a modern Python as the global default:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pyenv install 3.8.3
+$ pyenv global 3.8.3</code></pre></div>
+<p>plus any other Python versions that projects require.</p>
+
+<h3 id="python-projects">Python projects</h3>
+
+<p>For each Python project, create a virtualenv by selecting the appropriate
+Python version using <code>pyenv</code> then using <code>mkvirtualenv</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cd $PATH_TO_PROJECT
+$ pyenv local 3.7.7  <span style="color:#75715e"># for example</span>  
+$ mkvirtualenv $PROJECT_NAME</code></pre></div>
+<p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always require a virtualenv to use pip</span>
+export PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>true</code></pre></div>
+<p>in <code>~/.bash_profile</code>. If you do want to run <code>pip</code> outside of a virtualenv, use something like:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list</code></pre></div>
+<h3 id="python-command-line-apps">Python command-line apps</h3>
+
+<p>Install <code>pipx</code> with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install pipx</code></pre></div>
+<p>and ensure <code>~/.local/bin</code> is on your <code>$PATH</code>.</p>
+
+<p>Install CLI apps:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pipx install awscli</code></pre></div>
+<h3 id="further-reading-1">Further reading</h3>
+
+<ul>
+<li><a href="https://jacobian.org/2019/nov/11/python-environment-2020/">My Python Development Environment, 2020 Edition</a> by
+Jacob Kaplan-Moss (2019).</li>
+</ul>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/guides/settings-up-a-2020-macbook-for-python-development.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Setting%20up%20a%202020%20MacBook%20Pro%20for%20Python%20development%22&body=Article:%20Setting%20up%20a%202020%20MacBook%20Pro%20for%20Python%20development%0AURL:%20https%3a%2f%2fcodeinthehole.com%2fguides%2fsettings-up-a-2020-macbook-for-python-development%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/guides/settings-up-a-2020-macbook-for-python-development.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/macos">macos</a>, <a href="/tags/python">python</a>
+                <br/>
+            
+            
+                Filed in: <a href="/guides/">guides</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/conditional-nested-blocks-in-terraform/">Conditional nested blocks in Terraform</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>macos on David Winterbottom</title>
+    <link>https://codeinthehole.com/tags/macos/</link>
+    <description>Recent content in macos on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 19 Jul 2020 00:00:00 +0100</lastBuildDate>
+    
+	<atom:link href="https://codeinthehole.com/tags/macos/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Setting up a 2020 MacBook Pro for Python development</title>
+      <link>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</link>
+      <pubDate>Sun, 19 Jul 2020 00:00:00 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</guid>
+      <description>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for Python development. I imagine it will all be out-of-date by the time I set-up my next laptop but it&amp;rsquo;s possible it might be useful to someone in the meantime.
+Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing them from the App Store or downloading .dmg files and dragging them into /Applications.</description>
+    </item>
+    
+  </channel>
+</rss>
