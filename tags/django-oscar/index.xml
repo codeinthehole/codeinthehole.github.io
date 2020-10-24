@@ -6,11 +6,7 @@
     <description>Recent content in django-oscar on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/django-oscar/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Mon, 10 Apr 2017 23:00:20 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/django-oscar/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Podcast.__init__ on Oscar</title>
       <link>https://codeinthehole.com/news/podcast-init/</link>

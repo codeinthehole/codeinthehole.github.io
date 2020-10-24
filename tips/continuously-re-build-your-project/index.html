@@ -24,8 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1597319549" type="text/css" />
-        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
         
         <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
@@ -140,21 +139,21 @@ and the fixtures load (which is where we&rsquo;ve historically had pain).</p>
 
 <p>We use <a href="https://travis-ci.com/">Travis</a> for CI and our template
 <code>.travis.yml</code> looks a little like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">language</span>: python
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
 
-<span style="color:#66d9ef">python</span>:
+<span style="color:#f92672">python</span>:
   - <span style="color:#e6db74">&#39;2.7&#39;</span>
 
-<span style="color:#66d9ef">install</span>:
-  - make virtualenv
+<span style="color:#f92672">install</span>:
+  - <span style="color:#ae81ff">make virtualenv</span>
 
 <span style="color:#75715e"># Use the same database as used in production</span>
-<span style="color:#66d9ef">before_script</span>:
-  - psql -c <span style="color:#e6db74">&#39;CREATE ROLE test_role login createdb superuser;&#39;</span> -U postgres
-  - psql -c <span style="color:#e6db74">&#39;CREATE DATABASE test_db OWNER test_role;&#39;</span> -U postgres
+<span style="color:#f92672">before_script</span>:
+  - <span style="color:#ae81ff">psql -c &#39;CREATE ROLE test_role login createdb superuser;&#39; -U postgres</span>
+  - <span style="color:#ae81ff">psql -c &#39;CREATE DATABASE test_db OWNER test_role;&#39; -U postgres</span>
 
-<span style="color:#66d9ef">script</span>:
-  - make ci</code></pre></div>
+<span style="color:#f92672">script</span>:
+  - <span style="color:#ae81ff">make ci</span></code></pre></div>
 <p>which means that, <em>by default</em>, all new projects will be built from
 scratch as part of continuous integration. You should do this.</p>
 

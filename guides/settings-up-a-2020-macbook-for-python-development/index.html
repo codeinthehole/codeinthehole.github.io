@@ -24,8 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1597319548" type="text/css" />
-        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
         
         <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
@@ -195,7 +194,7 @@ of <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> to:</p>
 
 <p>Here&rsquo;s a <code>configurure_system_preferences.sh</code> script I use:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
-</span><span style="color:#75715e"></span>#
+</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
 <span style="color:#75715e"># Configure MacOS settings.</span>
 
 set -e
@@ -285,7 +284,7 @@ $ pyenv global 3.8.3</code></pre></div>
 <p>For each Python project, create a virtualenv by selecting the appropriate
 Python version using <code>pyenv</code> then using <code>mkvirtualenv</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cd $PATH_TO_PROJECT
-$ pyenv local 3.7.7  <span style="color:#75715e"># for example</span>  
+$ pyenv local 3.7.7  <span style="color:#75715e"># for example  </span>
 $ mkvirtualenv $PROJECT_NAME</code></pre></div>
 <p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always require a virtualenv to use pip</span>

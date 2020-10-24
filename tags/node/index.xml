@@ -6,11 +6,7 @@
     <description>Recent content in node on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 10 Nov 2010 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/node/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 10 Nov 2010 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/node/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>nurl - an immutable URL object for node.js</title>
       <link>https://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</link>

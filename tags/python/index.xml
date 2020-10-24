@@ -6,11 +6,7 @@
     <description>Recent content in python on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Jul 2020 00:00:00 +0100</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 19 Jul 2020 00:00:00 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Setting up a 2020 MacBook Pro for Python development</title>
       <link>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</link>
@@ -63,7 +59,7 @@ For instance, which of these is right? This:
       
       <guid>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
       <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
+#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line  # will need to edited later if not.</description>
     </item>
     
     <item>

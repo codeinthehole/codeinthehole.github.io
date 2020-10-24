@@ -6,11 +6,7 @@
     <description>Recent content in node.js on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 May 2011 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 22 May 2011 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Multi-scp: copying a file to all hosts in your SSH config</title>
       <link>https://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</link>

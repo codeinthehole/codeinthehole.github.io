@@ -24,8 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1597319549" type="text/css" />
-        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
         
         <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
@@ -116,7 +115,7 @@ subclass of Mapper. This class provides the usual persistence methods
 such as save(), insert(), update(), delete() as well as some helper
 methods to make writing &ldquo;finder&rdquo; methods easier. Sample usage is as
 follows. First set up your classes to model your domain.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#75715e">// Create model class
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\BaseDomainModel</span>
 {
@@ -162,7 +161,7 @@ follows. First set up your classes to model your domain.</p>
     {
         $sql <span style="color:#f92672">=</span>
             <span style="color:#e6db74">&#34;SELECT * 
-</span><span style="color:#e6db74">            FROM `</span><span style="color:#e6db74">{</span>$this-&gt;tableName<span style="color:#e6db74">}</span><span style="color:#e6db74">`
+</span><span style="color:#e6db74">            FROM `</span><span style="color:#e6db74">{</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tableName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`
 </span><span style="color:#e6db74">            WHERE age = :age&#34;</span>;
         $bindings <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
             <span style="color:#e6db74">&#39;age&#39;</span> <span style="color:#f92672">=&gt;</span> $age
@@ -172,7 +171,7 @@ follows. First set up your classes to model your domain.</p>
 }
 </code></pre></div>
 <p>These can then used as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#75715e">// Create a new model
 </span><span style="color:#75715e"></span>$person <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
 $person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Alan&#39;</span>;
@@ -196,7 +195,7 @@ $mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">save<
 </code></pre></div>
 <p>Unit testing is now trivial as you can simply instantiate your model and
 use the <code>__load</code> method to populate it with data for testing.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 $model <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
 $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;  terry&#39;</span>;
 $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jones     &#39;</span>;

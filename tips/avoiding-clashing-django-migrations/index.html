@@ -24,8 +24,7 @@ if (!doNotTrack) {
 
 
         
-        <link rel="stylesheet" href="/css/styles.css?1597319549" type="text/css" />
-        <link rel="stylesheet" href="/css/pygments.css" type="text/css" />
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
         
         <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
@@ -89,17 +88,17 @@ part of our Travis continuous integration.</p>
 <p>This is done by calling a <code>makefile</code> target from <code>.travis.yml</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .travis.yml</span>
 
-<span style="color:#66d9ef">language</span>: python
+<span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
 
-<span style="color:#66d9ef">python</span>:
+<span style="color:#f92672">python</span>:
     - <span style="color:#ae81ff">2.7</span>
 
-<span style="color:#66d9ef">install</span>:
-    - make virtualenv
+<span style="color:#f92672">install</span>:
+    - <span style="color:#ae81ff">make virtualenv</span>
 
-script
-    - make test
-    - make migration_test</code></pre></div>
+<span style="color:#ae81ff">script</span>
+    - <span style="color:#ae81ff">make test</span>
+    - <span style="color:#ae81ff">make migration_test</span></code></pre></div>
 <p>where the <code>migration_test</code> target is:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># makefile
 </span><span style="color:#75715e"></span>

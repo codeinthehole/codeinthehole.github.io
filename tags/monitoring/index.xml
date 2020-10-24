@@ -6,11 +6,7 @@
     <description>Recent content in monitoring on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 22 Oct 2014 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 22 Oct 2014 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/monitoring/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Integrating Django application metrics into Zabbix</title>
       <link>https://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</link>

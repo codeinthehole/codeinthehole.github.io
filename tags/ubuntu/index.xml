@@ -6,11 +6,7 @@
     <description>Recent content in ubuntu on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 06 Mar 2019 15:49:53 +0000</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Wed, 06 Mar 2019 15:49:53 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/ubuntu/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Avoiding package lock-out when provisioning Ubuntu 18.04 machines</title>
       <link>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</link>

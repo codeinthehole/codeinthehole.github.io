@@ -6,11 +6,7 @@
     <description>Recent content in bash on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bash error reporting</title>
       <link>https://codeinthehole.com/tips/bash-error-reporting/</link>

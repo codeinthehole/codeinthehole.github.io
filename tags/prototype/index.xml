@@ -6,11 +6,7 @@
     <description>Recent content in prototype on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 08 Nov 2008 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/prototype/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 08 Nov 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/prototype/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Javascript cookie objects using Prototype and JSON</title>
       <link>https://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</link>

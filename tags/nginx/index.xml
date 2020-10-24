@@ -6,11 +6,7 @@
     <description>Recent content in nginx on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 05 May 2012 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://codeinthehole.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sat, 05 May 2012 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/nginx/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Django, Nginx, WSGI and encoded slashes</title>
       <link>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
