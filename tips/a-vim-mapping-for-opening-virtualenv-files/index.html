@@ -34,10 +34,10 @@ if (!doNotTrack) {
 
         
         
-        <title>A Vim abbreviation for easily opening virtualenv modules - David Winterbottom</title>
+        <title>A Vim mapping for opening virtualenv files - David Winterbottom</title>
 
         <meta name="author" content="David Winterbottom">
-        <meta name="description" content="">
+        <meta name="description" content="A useful `cnoremap` for Python development.">
 
     </head>
 
@@ -64,7 +64,7 @@ if (!doNotTrack) {
 
     <div id="content" class="article">
 
-        <h1 id="article_title" class="entry-title">A Vim abbreviation for easily opening virtualenv modules</h1>
+        <h1 id="article_title" class="entry-title">A Vim mapping for opening virtualenv files</h1>
 
         <div class="byline desktop_only">
             by <a href="/about/" class="author vcard">David Winterbottom</a>
@@ -92,9 +92,11 @@ if (!doNotTrack) {
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010">
 </span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">cnoremap</span> %<span style="color:#a6e22e">v</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">R</span>&gt;=<span style="color:#a6e22e">VirtualEnvSitePackagesFolder</span>()&lt;<span style="color:#a6e22e">cr</span>&gt;</code></pre></div>
-<p>This expands <code>%v</code> to the path of your virtualenv&rsquo;s <code>site-packages</code> folder in
-command-mode, which makes it easy to quickly open a third-party module. You
-type:</p>
+<p>In command-mode, <code>%v</code> will expand to the path of your virtualenv&rsquo;s
+<code>site-packages</code> folder in, which makes it easy to quickly open a third-party
+module.</p>
+
+<p>For example, you type:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">:e %v</code></pre></div>
 <p>and it expands to:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">:e /Users/jimmy/.virtualenvs/myproject/lib/python3.8/site-packages/</code></pre></div>
@@ -106,10 +108,10 @@ type:</p>
             <span class="hr">----</span>
             <p>
             Something wrong? 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/a-vim-abbreviation-for-your-virtualenv.md">Suggest an improvement</a>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/a-vim-mapping-for-opening-virtualenv-files.md">Suggest an improvement</a>
             or 
-            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22A%20Vim%20abbreviation%20for%20easily%20opening%20virtualenv%20modules%22&body=Article:%20A%20Vim%20abbreviation%20for%20easily%20opening%20virtualenv%20modules%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fa-vim-abbreviation-for-your-virtualenv%2f">add a comment</a>
-            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/a-vim-abbreviation-for-your-virtualenv.md">article history</a>)<br/>
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22A%20Vim%20mapping%20for%20opening%20virtualenv%20files%22&body=Article:%20A%20Vim%20mapping%20for%20opening%20virtualenv%20files%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fa-vim-mapping-for-opening-virtualenv-files%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/a-vim-mapping-for-opening-virtualenv-files.md">article history</a>)<br/>
 
             
                 Tagged with:
