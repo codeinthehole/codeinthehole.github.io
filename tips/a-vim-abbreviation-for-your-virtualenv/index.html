@@ -1,0 +1,153 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>A Vim abbreviation for easily opening virtualenv modules - David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="https://til.codeinthehole.com">TIL</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a> |
+            <a href="/now/">now</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">A Vim abbreviation for easily opening virtualenv modules</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 16 November 2020</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Monday, 16 November 2020</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <p>Here&rsquo;s a useful command-mode mapping for Python development:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#75715e">&#34; ~/.vim/ftplugin/python.vim</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">VirtualEnvSitePackagesFolder</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">    &#34; Try a few candidate Pythons to see which this virtualenv uses.</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">for</span> <span style="color:#a6e22e">python</span> <span style="color:#a6e22e">in</span> [<span style="color:#e6db74">&#34;python3.7&#34;</span>, <span style="color:#e6db74">&#34;python3.8&#34;</span>, <span style="color:#e6db74">&#34;python3.9&#34;</span>]<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">candidate</span> = $<span style="color:#a6e22e">VIRTUAL_ENV</span> . <span style="color:#e6db74">&#34;/lib/&#34;</span> . <span style="color:#a6e22e">python</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">isdirectory</span>(<span style="color:#a6e22e">candidate</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>            <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">candidate</span> . <span style="color:#e6db74">&#34;/site-packages/&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">endfor</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">return</span> <span style="color:#e6db74">&#34;&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">cnoremap</span> %<span style="color:#a6e22e">v</span> &lt;<span style="color:#a6e22e">C</span>-<span style="color:#a6e22e">R</span>&gt;=<span style="color:#a6e22e">VirtualEnvSitePackagesFolder</span>()&lt;<span style="color:#a6e22e">cr</span>&gt;</code></pre></div>
+<p>This expands <code>%v</code> to the path of your virtualenv&rsquo;s <code>site-packages</code> folder in
+command-mode, which makes it easy to quickly open a third-party module. You
+type:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">:e %v</code></pre></div>
+<p>and it expands to:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">:e /Users/jimmy/.virtualenvs/myproject/lib/python3.8/site-packages/</code></pre></div>
+<p>from which it&rsquo;s easy to open the third-party module you&rsquo;re interested in.</p>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">----</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/a-vim-abbreviation-for-your-virtualenv.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22A%20Vim%20abbreviation%20for%20easily%20opening%20virtualenv%20modules%22&body=Article:%20A%20Vim%20abbreviation%20for%20easily%20opening%20virtualenv%20modules%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fa-vim-abbreviation-for-your-virtualenv%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/a-vim-abbreviation-for-your-virtualenv.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/vim">Vim</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/guides/settings-up-a-2020-macbook-for-python-development/">Setting up a 2020 MacBook Pro for Python development</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2020 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+

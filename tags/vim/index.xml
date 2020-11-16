@@ -6,7 +6,17 @@
     <description>Recent content in Vim on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 23 Jun 2020 15:49:58 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 16 Nov 2020 15:45:30 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A Vim abbreviation for easily opening virtualenv modules</title>
+      <link>https://codeinthehole.com/tips/a-vim-abbreviation-for-your-virtualenv/</link>
+      <pubDate>Mon, 16 Nov 2020 15:45:30 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/a-vim-abbreviation-for-your-virtualenv/</guid>
+      <description>Here&amp;rsquo;s a useful command-mode mapping for Python development:
+&amp;#34; ~/.vim/ftplugin/python.vimfunction! VirtualEnvSitePackagesFolder()&amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34;endfunctioncnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt; This expands %v to the path of your virtualenv&amp;rsquo;s site-packages folder in command-mode, which makes it easy to quickly open a third-party module.</description>
+    </item>
+    
     <item>
       <title>Easy Github URLs from Vim</title>
       <link>https://codeinthehole.com/tips/easy-github-urls-from-vim/</link>
