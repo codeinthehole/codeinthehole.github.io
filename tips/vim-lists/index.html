@@ -1,0 +1,875 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+        
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Vim&#39;s useful lists — David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="A reference post of Vim&#39;s lists and tips on using them effectively.">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="https://til.codeinthehole.com">TIL</a> | 
+            <a href="http://twitter.com/codeinthehole" title="Occasionally I say something interesting">tweets</a> | 
+            <a href="/about/">about</a> |
+            <a href="/now/">now</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Vim&#39;s useful lists</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Monday, 3 May 2021</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Monday, 3 May 2021</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            
+
+<p>A good understanding of Vim&rsquo;s various lists is a massive productivity boost —
+it&rsquo;s taken me many years of Vim use to truly appreciate this.</p>
+
+<p>This post summarises <em>some</em> of Vim&rsquo;s lists, detailing their purpose and how to
+make the most of them.</p>
+
+<p>Contents:</p>
+<div class="toc">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#quickfix-list">Quickfix list</a>
+<ul>
+<li><a href="#tip-use-mappings-for-faster-browsing">Tip: Use mappings for faster browsing</a></li>
+<li><a href="#tip-define-a-mapping-to-grep-for-the-word-under-the-cursor">Tip: Define a mapping to <code>:grep</code> for the word under the cursor</a></li>
+<li><a href="#tip-custom-grepprg-programs">Tip: Custom <code>grepprg</code> programs</a></li>
+<li><a href="#tip-custom-makeprg-programs">Tip: Custom <code>makeprg</code> programs</a></li>
+<li><a href="#tip-operating-on-the-error-list">Tip: Operating on the error list</a></li>
+<li><a href="#tip-populate-the-quickfix-list-in-a-subshell">Tip: Populate the quickfix list in a subshell</a></li>
+</ul></li>
+<li><a href="#location-list">Location list</a></li>
+<li><a href="#jump-list">Jump list</a>
+<ul>
+<li><a href="#tip-jump-to-the-previous-location-where-insert-mode-was-used">Tip: Jump to the previous location where insert mode was used</a></li>
+</ul></li>
+<li><a href="#buffer-list">Buffer list</a>
+<ul>
+<li><a href="#tip-select-buffers-with-fzf">Tip: Select buffers with FZF</a></li>
+</ul></li>
+<li><a href="#argument-list">Argument list</a></li>
+<li><a href="#tag-match-list">Tag match list</a>
+<ul>
+<li><a href="#tip-use-universal-ctags">Tip: Use Universal Ctags</a></li>
+<li><a href="#tip-use-tjump-as-your-default-jump-to-tag-command">Tip: Use <code>:tjump</code> as your default &ldquo;jump to tag&rdquo; command</a></li>
+<li><a href="#tip-fzf-also-has-a-tag-searching-functionality">Tip: FZF also has a tag searching functionality&hellip;</a></li>
+</ul></li>
+<li><a href="#include-file-list-and-definition-lists">Include file list and definition lists</a></li>
+<li><a href="#summary">Summary</a>
+<ul>
+<li><a href="#i-need-to-jump-somewhere">I need to jump somewhere&hellip;</a></li>
+<li><a href="#i-need-to-apply-the-same-transformation-in-lots-of-places">I need to apply the same transformation in lots of places&hellip;</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav> 
+</div>
+
+
+<hr />
+
+<h2 id="quickfix-list">Quickfix list</h2>
+
+<!-- Summary of stdlib quickfix features -->
+
+<p>A <em>global</em> list of locations populated via one of these commands:</p>
+
+<ul>
+<li><code>:vim[grep]</code> &mdash; search using Vim&rsquo;s native functionality.</li>
+<li><code>:gr[ep]</code> &mdash; search via an external program specified by the <code>grepprg</code>
+setting.</li>
+<li><code>:helpgr[ep]</code> &mdash; search help text files.</li>
+<li><code>:mak[e]</code> &mdash; call the program specified by
+the <code>makeprg</code> setting (which defaults to <code>make</code>).</li>
+<li><code>:cex[pr] {expression}</code> &mdash; use <code>{expression}</code> to populate to list. This can
+be used to clear the quickfix list via <code>:cex []</code>.</li>
+</ul>
+
+<p>Quickfix list commands start <code>:c</code> &mdash; here&rsquo;s some useful ones:</p>
+
+<ul>
+<li><code>:cw[indow]</code> &mdash; Open the quickfix window if it&rsquo;s non-empty.</li>
+<li><code>:cn[ext]</code>, <code>:cp[rev]</code> &mdash; Jump to next/previous error.</li>
+<li><code>:cnf[ile]</code>, <code>:cpf[ile]</code> &mdash; Jump to first error in the next/previous file.</li>
+<li><code>:cab[ove]</code> <code>:cbel[ow]</code> &mdash; Jump to the error above/below the current line.</li>
+</ul>
+
+<p>Vim remembers the last ten quickfix lists; you can navigate between them with:</p>
+
+<ul>
+<li><code>:col[der]</code>, <code>:cnew[er]</code> &mdash; Go to the older/newer quickfix list.</li>
+<li><code>:chi[story]</code> &mdash; Show the list of quickfix lists.</li>
+</ul>
+
+<p>This is powerful: it allows building a tree of searches, which is a useful
+debugging pattern when exploring a codebase.</p>
+
+<p>More at <a href="https://vimhelp.org/quickfix.txt.html"><code>:help quickfix</code></a>.</p>
+
+<h3 id="tip-use-mappings-for-faster-browsing">Tip: Use mappings for faster browsing</h3>
+
+<p>Since you&rsquo;ll use them a lot, define convenient mappings for <code>:cnext</code> and
+<code>:cprev</code>. This can be achieved with
+<a href="https://github.com/tpope/vim-unimpaired"><code>tpope/vim-unimpaired</code></a>, which
+provides a slew of useful mapping pairs starting with <code>[</code> or <code>]</code>. E.g.</p>
+
+<ul>
+<li><code>[q</code>, <code>]q</code> — <code>:cprevious</code>, <code>:cnext</code></li>
+<li><code>[Q</code>, <code>]Q</code> — <code>:cfirst</code>, <code>:clast</code></li>
+<li><code>[&lt;C-Q&gt;</code>, <code>]&lt;C-Q&gt;</code> — <code>:cpfile</code>, <code>:cnfile</code></li>
+</ul>
+
+<p>There&rsquo;s a pair of <a href="https://github.com/tpope/vim-unimpaired"><code>tpope/vim-unimpaired</code></a>
+mappings for each list described in this post.</p>
+
+<h3 id="tip-define-a-mapping-to-grep-for-the-word-under-the-cursor">Tip: Define a mapping to <code>:grep</code> for the word under the cursor</h3>
+
+<p>I also recommend defining a mapping that runs <code>:grep</code> on the word under the
+cursor. This makes it trivial to answer the question &ldquo;where else is this
+function used?&rdquo;</p>
+
+<p>I use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">gw</span> :<span style="color:#a6e22e">grep</span> &lt;<span style="color:#a6e22e">cword</span>&gt; . &lt;<span style="color:#a6e22e">cr</span>&gt;</code></pre></div>
+<p>although this does clobber a built-in formatting operator.</p>
+
+<h3 id="tip-custom-grepprg-programs">Tip: Custom <code>grepprg</code> programs</h3>
+
+<p>Use <a href="https://github.com/BurntSushi/ripgrep"><code>ripgrep</code></a> as your default search program:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-viml" data-lang="viml"><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">executable</span>(<span style="color:#e6db74">&#39;rg&#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">grepprg</span>=<span style="color:#a6e22e">rg</span>\ --<span style="color:#a6e22e">vimgrep</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">grepformat</span>=%<span style="color:#a6e22e">f</span>:%<span style="color:#a6e22e">l</span>:%<span style="color:#a6e22e">c</span>:%<span style="color:#a6e22e">m</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span></code></pre></div>
+<p>Keep your <code>ripgrep</code> configuration in a global <code>~/.ripgreprc</code> file so
+<code>:grep</code> behaves the same as <code>rg</code> at the command-line. Recommended settings:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#75715e"># ~/.ripgreprc</span>
+<span style="color:#a6e22e">--smart-case</span>
+<span style="color:#a6e22e">--hidden</span>
+<span style="color:#a6e22e">--glob</span>
+<span style="color:#a6e22e">!.git</span></code></pre></div>
+<h3 id="tip-custom-makeprg-programs">Tip: Custom <code>makeprg</code> programs</h3>
+
+<p>The default <code>makeprg</code> is <code>make</code> but any command that prints locations to
+STDOUT can be used — most static analysis tools are viable candidates.</p>
+
+<p>For instance, I occasionally use it for <a href="https://pypi.org/project/bandit/">Bandit</a> security
+analysis via:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">makeprg</span>=<span style="color:#a6e22e">bandit</span>\ -<span style="color:#a6e22e">r</span>\ -<span style="color:#a6e22e">f</span>\ <span style="color:#a6e22e">custom</span></code></pre></div>
+<p>or to work though all Python linting errors in a new project:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">makeprg</span>=<span style="color:#a6e22e">flake8</span></code></pre></div>
+<h3 id="tip-operating-on-the-error-list">Tip: Operating on the error list</h3>
+
+<p>A powerful editing technique is to apply an operation or macro to each location
+or file in the quickfix list. This is done with <code>:cdo</code> or <code>:cfdo</code> respectively.
+Here are some examples where we populate the quickfix list using <code>:grep</code> (using
+<code>ripgrep</code> options) then perform a batch edit using <code>:cdo</code> or <code>:cfdo</code>.</p>
+
+<p>Replace &ldquo;foo&rdquo; with &ldquo;bar&rdquo; in all Python files containing the string &ldquo;baz&rdquo;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">baz</span> -<span style="color:#a6e22e">t</span> <span style="color:#a6e22e">py</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">cfdo</span> %<span style="color:#a6e22e">s</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">bar</span>/<span style="color:#a6e22e">g</span> | <span style="color:#a6e22e">update</span></code></pre></div>
+<p>Delete lines containing &ldquo;foo&rdquo; from all files called <code>urls.py</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">foo</span> -<span style="color:#a6e22e">g</span> <span style="color:#a6e22e">urls</span>.<span style="color:#a6e22e">py</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">cfdo</span> <span style="color:#a6e22e">g</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">d</span> | <span style="color:#a6e22e">update</span></code></pre></div>
+<p>Run macro <code>q</code> on all lines containing &ldquo;foo&rdquo;:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">foo</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">cdo</span> <span style="color:#a6e22e">normal</span> @<span style="color:#a6e22e">q</span></code></pre></div>
+<p>I sometimes write a custom function to run on each quickfix location. This is a
+useful way of performing complex batch changes that are too complex for a single
+Ex command or macro:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">FixQuickfixEntry</span>()<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">    &#34; Example the line of the error to determine what fix is required.</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">line</span> = <span style="color:#a6e22e">getline</span>(<span style="color:#e6db74">&#39;.&#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">line</span> =~ <span style="color:#e6db74">&#39;as e:$&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">        &#34; Handle scenario of unused exception variable</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">s</span><span style="color:#e6db74">/ as e:/</span>:/<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">elseif</span> <span style="color:#a6e22e">line</span> =~ <span style="color:#e6db74">&#39;^\s\+\w\+ = factory&#39;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">        &#34; Handle scenario of unused test factory variable</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">normal</span> <span style="color:#a6e22e">_</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">normal</span> <span style="color:#ae81ff">2</span>dw<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">else</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">echom</span> <span style="color:#e6db74">&#34;Unable to fix&#34;</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span></code></pre></div>
+<p>then use:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">cdo</span> <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">FixQuickfixEntry</span>()</code></pre></div>
+<p>This is good technique for quickly performing sophisticated refactoring across a
+whole codebase.</p>
+
+<h3 id="tip-populate-the-quickfix-list-in-a-subshell">Tip: Populate the quickfix list in a subshell</h3>
+
+<p>When running <code>:grep</code> or <code>:make</code>, Vim executes the program in Vim&rsquo;s parent shell.
+This suspends Vim while results are printed then requires you to hit enter to
+return.</p>
+
+<p>There&rsquo;s <a href="https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3">a brilliant gist from Romain Lafourcade</a>
+that shows how to avoid this woes by using <code>:cgetexpr</code> (or <code>:cexpr</code>) to populate the quickfix list in a subshell.
+There&rsquo;s a few variants you can use depending on whether you regularly search for
+multi-word queries. I do, so I use this version:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">Grep</span>(...)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">cmd</span> = <span style="color:#a6e22e">join</span>([&amp;<span style="color:#a6e22e">grepprg</span>] + [<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">a</span>:<span style="color:#ae81ff">000</span>, <span style="color:#e6db74">&#39; &#39;</span>)], <span style="color:#e6db74">&#39; &#39;</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">cmd</span>)<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">command</span>! -<span style="color:#a6e22e">nargs</span>=+ -<span style="color:#a6e22e">complete</span>=<span style="color:#a6e22e">file_in_path</span> <span style="color:#a6e22e">Grep</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">Grep</span>(&lt;<span style="color:#a6e22e">f</span>-<span style="color:#a6e22e">args</span>&gt;)</code></pre></div>
+<p>To complement this, you can use a command-line abbreviation to automatically switch <code>:grep</code> to
+<code>:Grep</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">cnoreabbrev</span> &lt;<span style="color:#a6e22e">expr</span>&gt; <span style="color:#a6e22e">grep</span> (<span style="color:#a6e22e">getcmdtype</span>() ==# <span style="color:#e6db74">&#39;:&#39;</span> &amp;&amp; <span style="color:#a6e22e">getcmdline</span>() ==# <span style="color:#e6db74">&#39;grep&#39;</span>) ? <span style="color:#e6db74">&#39;Grep&#39;</span> : <span style="color:#e6db74">&#39;grep&#39;</span></code></pre></div>
+<p>and an autocommand to open the quickfix window when there are results:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">quickfix</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#a6e22e">autocmd</span>!<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span>	<span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">QuickFixCmdPost</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">cwindow</span><span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">END</span></code></pre></div>
+<p>This is life changing.</p>
+
+<!--
+Other quickfix tips
+
+https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+Write a custom :Grep command that avoids running the external command in the
+parent shell (which clogs up shell and requires hitting enter)
+
+https://noahfrederick.com/log/vim-streamlining-grep
+Use a cnoreabbrev to map grep to 'silent grep'
+
+https://stackoverflow.com/questions/1747091/how-do-you-use-vims-quickfix-feature
+Highlights vim-impaired
+Mentions syntastic uses location list
+
+https://medium.com/usevim/vim-101-quickfix-and-grep-c782cb65e524
+Nothing I didn't know already
+
+https://tldp.org/HOWTO/C-editing-with-VIM-HOWTO/quickfix.html
+Notes on C work
+
+https://vimways.org/2018/colder-quickfix-lists/
+- great intro
+- quickfix buffer has file-type qf which we can target
+
+to research:
+
+https://github.com/romainl/vim-qf
+- not recommended to syntastic/ale users
+
+Prior art:
+
+https://www.reddit.com/r/vim/comments/ebdp8d/how_do_i_apply_a_macro_to_all_files_under_a_folder/
+https://github.com/tpope/vim-unimpaired
+
+-->
+
+<hr />
+
+<h2 id="location-list">Location list</h2>
+
+<!-- Summary of stdlib quickfix features -->
+
+<p>A <em>window-local</em> equivalent of the quickfix list — a similar set of commands exists but now
+prefixed <code>:l</code> (e.g. <code>:lwindow</code> to open the location list if it has entries).</p>
+
+<!-- Tips -->
+
+<!-- Personal take -->
+
+<p>Personally, I don&rsquo;t use it much directly but it&rsquo;s good to be aware of. Popular plugins
+like <a href="https://github.com/dense-analysis/ale">Ale</a> and
+<a href="https://github.com/vim-syntastic/syntastic">Syntastic</a> populate the location
+list.</p>
+
+<p>More at <a href="https://vimhelp.org/quickfix.txt.html#location-list"><code>:help location-list</code></a>.</p>
+
+<hr />
+
+<h2 id="jump-list">Jump list</h2>
+
+<!-- Useful to for quick jumping but sometimes confusing — best to use change
+list when jumping back to previous edit locations.
+
+Relevant literature:
+--------------------
+
+https://medium.com/breathe-publication/understanding-vims-jump-list-7e1bfc72cdf0
+https://kadekillary.work/post/vim-jumplist/ (dupe?)
+- Refers to useful Romainl Reddit comment about using searches
+- Mixs up changelist
+
+https://medium.com/usevim/vim-101-the-jump-and-change-lists-ef15cfb22c30
+- A decent summary
+
+https://developpaper.com/use-vims-jump-list-to-see-the-code/
+- Another decent summary
+-->
+
+<!-- Summary of stdlib quickfix features -->
+
+<p>A <em>window-local</em> list of the last one hundred cursor positions:</p>
+
+<ul>
+<li><code>CTRL-O</code>, <code>CTRL-I</code> — Go to previous/next cursor position in jump list.</li>
+<li><code>:jumps</code> &mdash; View the jump list.</li>
+<li><code>:clearjumps</code> &mdash; Clear the jump list.</li>
+</ul>
+
+<p>The following commands as considered &ldquo;jumps&rdquo; and will append an entry to the
+jump list:</p>
+
+<ul>
+<li><code>(</code>, <code>)</code> &mdash; Jump backward/forward a sentence;</li>
+<li><code>{</code>, <code>}</code> &mdash; Jump backward/forward a paragraph;</li>
+<li><code>/</code>, <code>?</code> &mdash; Search forward/backward in current buffer;</li>
+<li><code>n</code>, <code>N</code> &mdash; Repeat the last <code>/</code> or <code>?</code> jump in conventional/opposite direction;</li>
+<li><code>:s</code> &mdash; Substitution;</li>
+<li><code>G</code> &mdash; Go to line;</li>
+<li><code>%</code> &mdash; Jump to matching parenthesis/bracket/brace/&hellip;</li>
+<li><code>'</code>,<code>`</code> &mdash; Jump to a mark in the current buffer;</li>
+<li><code>H</code>, <code>M</code>, <code>L</code> &mdash; Jump to the top/middle/bottom of the current window
+(adjusting for <code>scrolloff</code> offset).</li>
+<li><code>:tag</code>, <code>^]</code> &mdash; Jump to tag definition;</li>
+<li><code>[[</code>, <code>]]</code> &mdash; Move one &ldquo;section&rdquo; backward/forward, or to the previous <code>{</code> in the first
+column. Note &ldquo;sections&rdquo; in Vim <a href="https://learnvimscriptthehardway.stevelosh.com/chapters/50.html">come from Nroff files</a> and are generally not that
+useful.</li>
+</ul>
+
+<p>Further, commands that start editing files like <code>:edit</code> append to the <code>jumplist</code>.</p>
+
+<p>When you split a window, its jump list is duplicated and jump lists are saved
+between sessions (in the <code>viminfo</code> file) if the <code>'viminfo'</code> option includes a
+<code>'</code> character.</p>
+
+<p>More at:</p>
+
+<ul>
+<li><a href="https://vimhelp.org/motion.txt.html#jumplist"><code>:help jumplist</code></a></li>
+</ul>
+
+<p>Like the jump list, the change list is persisted for each file if your <code>viminfo</code>
+setting value contains a <code>'</code>.</p>
+
+<h3 id="tip-jump-to-the-previous-location-where-insert-mode-was-used">Tip: Jump to the previous location where insert mode was used</h3>
+
+<p>Not strictly to do with the change list but the <code>gi</code> command is similar to <code>g;</code>.
+It will enter insert mode in the current buffer in the last insert mode
+location. If you made a change when last in insert mode, this will be
+equivalent to <code>g;</code> but will also put you into
+insert mode. The same effect can be achieved with marks via <code>'^</code>.</p>
+
+<p>More at:</p>
+
+<ul>
+<li><a href="https://vimhelp.org/motion.html#changelist"><code>:help changelist</code></a></li>
+<li><a href="https://vim.fandom.com/wiki/List_changes_to_the_current_file">Vim tips wiki: List changes to the current file</a></li>
+</ul>
+
+<hr />
+
+<h2 id="buffer-list">Buffer list</h2>
+
+<!-- Summary of stdlib quickfix features -->
+
+<p>A <em>global</em>, append-only list of buffers (including cursor location and state)
+for the current editing session. Each opened file will be appended to the
+list which can be viewed with any of <code>:buffers</code>, <code>:files</code> or most succinctly <code>:ls</code>.</p>
+
+<p>There are many ways to navigate the buffer list, including:</p>
+
+<ul>
+<li><code>:b[uffer] {number}</code> &mdash; Jump to buffer by number.</li>
+<li><code>:bp[rev]</code>, <code>:bn[ext]</code> &mdash; Jump to previous/next buffer (will wrap at end of list).</li>
+<li><code>:bf[irst]</code>, <code>:br[ewind]</code> &mdash; Jump to first/last buffer.</li>
+</ul>
+
+<p>or from <a href="https://github.com/tpope/vim-unimpaired"><code>tpope/vim-unimpaired</code></a>:</p>
+
+<ul>
+<li><code>[b</code>, <code>]b</code> &mdash; Jump to previous/next buffer.</li>
+<li><code>[B</code>, <code>]B</code> &mdash; Jump to first/last buffer.</li>
+</ul>
+
+<p>Some other useful buffer list commands to know:</p>
+
+<ul>
+<li><code>:ba[ll]</code> &mdash; Rearrange windows to show a window for each buffer in the buffer list.</li>
+<li><code>:bufdo {cmd}</code> &mdash; Execute <code>{cmd}</code> in each buffer in the list. For example,
+apply macro <code>q</code> to each buffer with <code>:bufdo normal @q</code>.</li>
+</ul>
+
+<p>More at:</p>
+
+<ul>
+<li><a href="https://vimhelp.org/windows.html#buffers"><code>:help buffers</code></a></li>
+<li><a href="https://vimhelp.org/windows.html#buffer-list"><code>:help buffer-list</code></a></li>
+<li><a href="https://vim.fandom.com/wiki/Vim_buffer_FAQ">Vim tips wiki: Vim buffer FAQ</a></li>
+</ul>
+
+<h3 id="tip-select-buffers-with-fzf">Tip: Select buffers with FZF</h3>
+
+<p>I recommend the <code>:Buffers</code> command from the excellent
+<a href="https://github.com/junegunn/fzf.vim"><code>junegunn/fzf.vim</code></a> to jump to a buffer
+using fuzzy matching. For easy access I map <code>:Buffers</code> to <code>,b</code> and <code>:Files</code> to
+<code>,f</code>.</p>
+
+<!--
+https://vim.fandom.com/wiki/Vim_buffer_FAQ
+- Some useful buffer tips, nothing interesting
+
+https://hashrocket.com/blog/posts/understanding-the-buffer-list-in-vim-part-1
+- Good solid introduction to understanding the buffer list.
+
+https://www.reddit.com/r/vim/comments/u3nv6/buffer_list_vs_arguments_list/c4s6gml/
+- Commend from Drew on difference between buffer-list and arg-list. Key point is
+  the buffer-list is less organised but the arg-list is curated.
+
+-->
+
+<hr />
+
+<h2 id="argument-list">Argument list</h2>
+
+<p>The buffer list tends to become cluttered over time, making it awkward to use
+<code>:bufdo</code>. This is where the argument list comes in &mdash; it allows you to <em>curate</em> a
+list of files to act on with the equivalent <code>:argdo</code>.</p>
+
+<p>The name is misleading: the argument list is not simply the list of files that Vim
+was opened with. It&rsquo;s a global, <em>mutable</em> list that can be edited within your Vim
+session to select exactly the files that you want to operate on.</p>
+
+<!-- Ways of populating the argument list -->
+
+<p>There are several ways of populating the argument list, listed here in
+order of increasing usefulness:</p>
+
+<ol>
+<li><p>Manually add and remove files from the argument list with
+<code>:arga[dd]</code> and <code>:argd[elete]</code>.</p></li>
+
+<li><p>Pass files as arguments when opening Vim:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim file1 file2</code></pre></div>
+<p>or using a file finder like <a href="https://github.com/sharkdp/fd"><code>fd</code></a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim <span style="color:#66d9ef">$(</span>fd -e py<span style="color:#66d9ef">)</span>  <span style="color:#75715e"># open files with .py extension</span></code></pre></div></li>
+
+<li><p>Pipe a list of files to <code>xargs</code> to provide an initial argument list:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ fd -e py | xargs -o vim</code></pre></div>
+<p>The <code>-o</code> option for <code>xargs</code> re-opens <code>stdin</code> for the Vim process
+— without this, Vim can <a href="https://superuser.com/questions/336016/invoking-vi-through-find-xargs-breaks-my-terminal-why">break your terminal</a>.</p></li>
+
+<li><p>Within a Vim session, use the <code>:args</code> command:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">args</span> <span style="color:#a6e22e">file1</span> <span style="color:#a6e22e">file2</span></code></pre></div>
+<p>This approach is powerful as not only does wildcard expansion work:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">args</span> *.<span style="color:#a6e22e">c</span></code></pre></div>
+<p>but so does shelling out:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">args</span> `<span style="color:#a6e22e">fd</span> -<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">py</span>`</code></pre></div>
+<p><a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a particularly good tool to use to populate the argument list.</p></li>
+</ol>
+
+<!-- Navigating the argument list -->
+
+<p>You can check the contents of the argument list with <code>:ar[gs]</code> and traverse with:</p>
+
+<ul>
+<li><code>:p[revious]</code>, <code>:n[ext]</code>  — Edit the previous/next file in the argument list.</li>
+<li><code>:fir[st]</code>, <code>:la[st]</code>  — Edit the first/last file in the argument list.</li>
+</ul>
+
+<p>Or via <a href="https://github.com/tpope/vim-unimpaired"><code>tpope/vim-unimpaired</code></a>:</p>
+
+<ul>
+<li><code>[a</code>, <code>]a</code> — <code>:previous</code>, <code>:next</code></li>
+<li><code>[A</code>, <code>]A</code> — <code>:first</code>, <code>:last</code></li>
+</ul>
+
+<!-- Operating on the argument list -->
+
+<p>It&rsquo;s now possible to apply batch operations on each file in the argument list
+using <code>:argdo {cmd}</code>. An example workflow is:</p>
+
+<ol>
+<li><p>Select all HTML files beneath current directory:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">args</span> `<span style="color:#a6e22e">fd</span> -<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">html</span>`</code></pre></div></li>
+
+<li><p>Run a search-and-replace-then-save operation on each file:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">argdo</span> %<span style="color:#a6e22e">s</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">bar</span>/<span style="color:#a6e22e">g</span> | <span style="color:#a6e22e">update</span></code></pre></div></li>
+</ol>
+
+<p>More at:</p>
+
+<ul>
+<li><a href="https://vimhelp.org/editing.txt.html#argument-list"><code>:help argument-list</code></a></li>
+<li><a href="https://vimhelp.org/editing.txt.html#argdo"><code>:help :argdo</code></a></li>
+</ul>
+
+<hr />
+
+<h2 id="tag-match-list">Tag match list</h2>
+
+<!-- What are tags? -->
+
+<p>A &ldquo;tag&rdquo; is an identifier &mdash; like a function, class or variable name &mdash; that
+appears in a &ldquo;tags file&rdquo; generated by an external program like
+<code>ctags</code>. The tags file is effectively an index mapping identifiers to
+locations in your codebase.</p>
+
+<!-- How Vim finds your tag files -->
+
+<p>Use the <code>tags</code> setting to tell Vim where to find tag files. A common value is:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">tags</span>=./<span style="color:#a6e22e">tags</span>;,<span style="color:#a6e22e">tags</span></code></pre></div>
+<p>which tells Vim to look for tags file in the directory of the current file, in
+the working directory and in every parent directory, recursively.</p>
+
+<p>You can check which tag files have been loaded with:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">tagfiles</span>()</code></pre></div>
+<!-- Using the tags file to explore code -->
+
+<p>You can jump to a tag definition with:</p>
+
+<ul>
+<li><code>CTRL-]</code> &mdash; Look-up the keyword under the cursor. Useful for jumping to a
+function&rsquo;s definition.</li>
+<li><code>:ta[g] {query}</code> &mdash; Find the tag(s) matching <code>{query}</code>. This command also
+supports command-line completion and regular expression queries like <code>:tag
+/foobar/</code>.</li>
+</ul>
+
+<p>If you want to open the tag in a split or the preview window, there are
+analogues of the above commands starting <code>:s</code> and <code>:p</code>.</p>
+
+<!-- When there are multiple matches -->
+
+<p>If there are multiple tag matches, <code>CTRL-]</code> and <code>:tag</code> will jump to the first
+one. The &ldquo;tag match list&rdquo; can be opened with
+<code>:ts[elect]</code> and traversed via <code>:tf[irst]</code>, <code>:tn[ext]</code>, <code>:tp[rev]</code>, <code>:tl[ast]</code>.</p>
+
+<p>As ever, there are useful bindings from <a href="https://github.com/tpope/vim-unimpaired"><code>tpope/vim-unimpaired</code></a>:</p>
+
+<ul>
+<li><code>[t</code>, <code>]t</code> — <code>:tprevious</code>, <code>:tnext</code></li>
+<li><code>[T</code>, <code>]T</code> — <code>:tfirst</code>, <code>:tlast</code></li>
+</ul>
+
+<p>If you want to show the tag match list when there are multiple
+matches but jump straight to the tag if a single match, use <code>:tj[ump]</code> or <code>g
+CTRL-]</code>.</p>
+
+<!-- Tag stack -->
+
+<p>Vim stores the twenty most recent tag match lists in a stack which you can view with
+<code>:tags</code>. This allows you to descend into a call graph by repeatedly jumping to
+function definitions then popping the stack to return to the previous location
+with <code>CTRL-T</code> or <code>:po[p]</code>. This is analogous to the nested quickfix lists we saw
+earlier and is a powerful code exploration technique.</p>
+
+<p>More at:</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/tagsrch.txt.html#tag-commands"><code>:help tag-commands</code></a></li>
+<li><a href="https://vim.fandom.com/wiki/Browsing_programs_with_tags">Vim tips wiki: Browsing programs with tags</a></li>
+<li><a href="https://gist.github.com/romainl/f2d0727bdb9bde063531cd237f47775f">A Github Gist on tags by Romain Lafourcade</a></li>
+</ul>
+
+<!-- Tips -->
+
+<h3 id="tip-use-universal-ctags">Tip: Use Universal Ctags</h3>
+
+<p><a href="https://github.com/universal-ctags/ctags">Universal Ctags</a> is the successor to
+<a href="http://ctags.sourceforge.net/">Exuberant Ctags</a>; it&rsquo;s actively maintained and
+supports a wider array of languages. It&rsquo;s worth installing to build tags files
+for your projects.</p>
+
+<p>There are various ways of ensuring your tag files are kept up-to-date.
+Since it takes a few seconds to generate the tags file in some projects I work
+on, I do it manually with a <code>,ct</code> mapping.</p>
+
+<h3 id="tip-use-tjump-as-your-default-jump-to-tag-command">Tip: Use <code>:tjump</code> as your default &ldquo;jump to tag&rdquo; command</h3>
+
+<p>If it&rsquo;s common for your codebase to have multiple matches for identifiers (which
+is true of Python), consider using <code>:tjump</code> (<code>g CTRL-]</code>) instead of <code>CTRL-]</code> as your
+default &ldquo;jump to tag&rdquo; command&rdquo;.</p>
+
+<p>I swap the meanings of <code>CTRL-]</code> and <code>g CTRL-]</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">nnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt; &lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
+</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">vnoremap</span> <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt; &lt;<span style="color:#a6e22e">c</span>-]&gt;</code></pre></div>
+<h3 id="tip-fzf-also-has-a-tag-searching-functionality">Tip: FZF also has a tag searching functionality&hellip;</h3>
+
+<p>The <a href="https://github.com/junegunn/fzf.vim">junegunn/fzf.vim</a> plugin provides two
+commands for quickly finding tags using the <a href="https://github.com/junegunn/fzf"><code>fzf</code></a> fuzzy file finder:</p>
+
+<ul>
+<li><code>:Tags</code> &mdash; List tags in project.</li>
+<li><code>:BTags</code> &mdash; List tags in current buffer.</li>
+</ul>
+
+<!--
+
+Literature around using the tag stack.
+
+https://vim.fandom.com/wiki/Browsing_programs_with_tags
+Really good - lots of good tips.
+
+https://gist.github.com/romainl/f2d0727bdb9bde063531cd237f47775f
+Good notes on interesting ways of working with tags.
+
+https://robertodealmeida.posthaven.com/using-ctags-in-vim-with-a-python-virtualenv
+- Example mapping for generating virtualenv ctags
+
+https://andrew.stwrt.ca/posts/vim-ctags/
+- Some basics on using Vim with ctags
+
+https://linuxhint.com/vim_ctags/
+-->
+
+<hr />
+
+<h2 id="include-file-list-and-definition-lists">Include file list and definition lists</h2>
+
+<p>There are a couple of other lesser-known lists from Vim&rsquo;s C-language heritage.</p>
+
+<p>The include file list is populated by commands that look for a keyword in the
+current buffer and all &ldquo;included&rdquo; files. Which files are searched depends on:</p>
+
+<ul>
+<li><p>The <code>'include'</code> option, which identifies lines that include another file — this
+defaults to <code>^\s*#\s*include</code>.</p></li>
+
+<li><p>The <code>'path'</code> option which tells Vim where to find said included files.</p></li>
+</ul>
+
+<p>Search with:</p>
+
+<ul>
+<li><code>:il[ist] {pattern}</code> &mdash; search in [range] or file for <code>pattern</code>.</li>
+</ul>
+
+<p>There&rsquo;s also the definition list.</p>
+
+<ul>
+<li><code>:dl[ist] {pattern}</code> &mdash; search in [range] or file for <code>pattern</code>.</li>
+</ul>
+
+<p>Since I primarily program in Python, this isn&rsquo;t that useful; I use tag search
+(and the tag match list) to jump to symbol definitions. However I&rsquo;ve learnt over time to
+never write-off Vim&rsquo;s features — I&rsquo;m sure this could be useful as a more
+focussed tag search when working in languages that use filepath includes.</p>
+
+<p>More at <a href="https://vimhelp.org/tagsrch.txt.html#include-search"><code>:help include-search</code></a></p>
+
+<!-- Research on other lists
+
+- `:ol[dfiles]` --- List the files that have marks stored in the `viminfo` file
+- `:undolist` --- List the files that have marks stored in the `viminfo` file
+- `:marks` --- List the files that have marks stored in the `viminfo` file
+
+https://www.reddit.com/r/vim/comments/d08llo/a_list_of_vims_lists/
+
+Could note on how to jump to an item from the list
+https://www.reddit.com/r/vim/comments/d08llo/a_list_of_vims_lists/ez8nr4s/
+
+-->
+
+<hr />
+
+<h2 id="summary">Summary</h2>
+
+<p>The above is intended as a reference for myself, but hopefully it will be useful
+to others. The act of compiling this post has been incredibly useful; I&rsquo;ve
+learnt many new things<sup class="footnote-ref" id="fnref:tils"><a href="#fn:tils">1</a></sup> just fleshing out each section.</p>
+
+<p>There&rsquo;s a couple of key usage patterns that are worth calling out:</p>
+
+<h3 id="i-need-to-jump-somewhere">I need to jump somewhere&hellip;</h3>
+
+<p>When editing code, you often need to jump to another location.</p>
+
+<ul>
+<li><p>To jump to <em>the definition of a function or class</em>, use the tag list
+via <code>:tag</code>, <code>:tjump</code> or <code>g CTRL-]</code>.</p></li>
+
+<li><p>To examine <em>everywhere that a function or class is being called</em> or <em>everywhere that matches a regex</em> use
+the quickfix list via <code>:grep</code> (or, better, <code>:Grep</code>).</p></li>
+
+<li><p>To jump to <em>where you last were</em>, use the jump list via <code>CTRL-O</code>.</p></li>
+
+<li><p>To jump to <em>where you last made a change</em>, use the change list via <code>g;</code>.</p></li>
+</ul>
+
+<h3 id="i-need-to-apply-the-same-transformation-in-lots-of-places">I need to apply the same transformation in lots of places&hellip;</h3>
+
+<p>A powerful editing pattern comprises building a list of files or locations
+then applying the same editing operation to each entry.</p>
+
+<p>The best approach depends on how you want to build your list of files or
+locations:</p>
+
+<ul>
+<li><p>If you want to select <em>code locations</em>, populate the quickfix list with <code>:grep</code> and apply the batch changes with <code>:cdo</code>.</p></li>
+
+<li><p>If you want to select <em>files by their content</em>, populate the quickfix list
+with <code>:grep</code> and apply the batch changes with <code>:cfdo</code>.</p></li>
+
+<li><p>If you want to select <em>files by their filepath</em>, populate the argument list with <code>:args `fd $PATTERN`</code> and apply the batch changes with <code>:argdo</code>.</p></li>
+
+<li><p>If you want to select <em>files manually</em>, use <code>:argadd</code> and <code>:argdelete</code> to
+populate the argument list then use <code>:argdo</code> (this is generally preferable to using
+the buffer list and <code>:bufdo</code> although that might suffice in some situations).</p></li>
+</ul>
+
+<p>The editing operation could be an Ex command (e.g. <code>%s/foo/bar/g | update</code>),
+applying a macro (e.g. <code>normal @q</code>) or calling a bespoke Vimscript function
+(e.g. <code>call MyBespokeFunction</code>).</p>
+
+<!--
+
+## Literature
+
+Related articles:
+
+- [A list of Vim's lists](https://noahfrederick.com/log/a-list-of-vims-lists).
+  Pretty much what this post is but without the notes on how to apply commands
+  to the list args.
+
+- [Vim 101: The Jump and Change Lists](https://medium.com/usevim/vim-101-the-jump-and-change-lists-ef15cfb22c30) by Alex R. Young.
+
+- [The quickfix and location lists in Vim](https://freshman.tech/vim-quickfix-and-location-list/) by Ayooluwa Isaiah. There's some great advice
+  in the [associated Reddit thread by Romain Lafourcade](https://www.reddit.com/r/vim/comments/hbcx5d/the_quickfix_and_location_lists_in_vim/).
+
+- [Lists, Vim and You](https://thoughtbot.com/blog/lists-vim-and-you) by Teo Ljungberg.
+    - Demonstrates how the `arglist` can be
+      used to perform a search and replace over a list of files specified when
+      starting Vim.
+    - Can use `:cdo` and `:cfodo` to operate over the quickfix list rather than
+      the arglist.
+    - Populate quickfix list using `:grep`
+
+- https://stackoverflow.com/questions/1747091/how-do-you-use-vims-quickfix-feature - useful guide to quickfix commands
+
+-->
+<div class="footnotes">
+
+<hr />
+
+<ol>
+<li id="fn:tils"><p>Here the <em>some</em> of the things learnt while researching this post:</p>
+
+<ul>
+<li><a href="https://til.codeinthehole.com/posts/how-to-use-custom-functions-with-cdo/">TIL how to use custom functions with <code>:cdo</code></a></li>
+<li><a href="https://til.codeinthehole.com/posts/how-to-add-project-specific-vim-settings/">TIL how to add project-specific Vim settings</a></li>
+<li><a href="https://til.codeinthehole.com/posts/universal-ctags-can-index-more-things-than-i-realised/">TIL Universal Ctags can index more things than I realised</a></li>
+<li><a href="https://til.codeinthehole.com/posts/how-to-configure-ctags-to-parse-terraform-files/">TIL how to configure <code>ctags</code> to parse Terraform files</a></li>
+<li><a href="https://til.codeinthehole.com/posts/you-can-run-grep-without-using-parent-shell-process/">TIL you can run <code>:grep</code> without using the parent shell process</a></li>
+<li><a href="https://til.codeinthehole.com/posts/theres-a-quickfixcmdpost-event-in-vim/">TIL there’s a <code>QuickFixCmdPost</code> event in Vim</a></li>
+<li><a href="https://til.codeinthehole.com/posts/you-can-jump-to-previous-quickfix-lists-in-vim/">TIL you can jump to previous quickfix lists in Vim</a></li>
+</ul>
+ <a class="footnote-return" href="#fnref:tils"><sup>[return]</sup></a></li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">——————</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/vim-lists.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Vim%27s%20useful%20lists%22&body=Article:%20Vim%27s%20useful%20lists%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fvim-lists%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/vim-lists.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/vim">Vim</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/a-vim-mapping-for-opening-virtualenv-files/">A Vim mapping for opening virtualenv files</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+

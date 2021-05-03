@@ -1,962 +1,579 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
-  <url>
-    <loc>https://codeinthehole.com/tips/a-vim-mapping-for-opening-virtualenv-files/</loc>
-    <lastmod>2020-11-16T15:45:30+00:00</lastmod>
-  </url>
-  
   <url>
     <loc>https://codeinthehole.com/</loc>
-    <lastmod>2020-11-16T15:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-03T09:27:17+01:00</lastmod>
+  </url><url>
     <loc>https://codeinthehole.com/tags/</loc>
-    <lastmod>2020-11-16T15:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-03T09:27:17+01:00</lastmod>
+  </url><url>
     <loc>https://codeinthehole.com/tips/</loc>
-    <lastmod>2020-11-16T15:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
+    <lastmod>2021-05-03T09:27:17+01:00</lastmod>
+  </url><url>
     <loc>https://codeinthehole.com/tags/vim/</loc>
+    <lastmod>2021-05-03T09:27:17+01:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tips/vim-lists/</loc>
+    <lastmod>2021-05-03T09:27:17+01:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tips/a-vim-mapping-for-opening-virtualenv-files/</loc>
     <lastmod>2020-11-16T15:45:30+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/guides/</loc>
     <lastmod>2020-07-19T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/macos/</loc>
     <lastmod>2020-07-19T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/python/</loc>
     <lastmod>2020-07-19T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</loc>
     <lastmod>2020-07-19T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/conditional-nested-blocks-in-terraform/</loc>
     <lastmod>2020-07-14T22:05:23+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/terraform/</loc>
     <lastmod>2020-07-14T22:05:23+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/terraform-cidrs/</loc>
     <lastmod>2020-07-08T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/easy-github-urls-from-vim/</loc>
     <lastmod>2020-06-23T15:49:58+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/github/</loc>
     <lastmod>2020-06-23T15:49:58+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/productivity/</loc>
     <lastmod>2020-04-24T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/software-development-tips-part2/</loc>
     <lastmod>2020-04-24T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/teams/</loc>
     <lastmod>2020-04-24T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/writing/</loc>
     <lastmod>2020-04-24T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/git/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/software-development-tips-part1/</loc>
     <lastmod>2020-02-26T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/tools/</loc>
     <lastmod>2020-02-26T10:04:16+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/django/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/vim-text-objects/</loc>
     <lastmod>2019-06-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/debugging-vim-by-example/</loc>
     <lastmod>2019-03-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/oe-related-name-outage/</loc>
     <lastmod>2019-03-18T17:05:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/</loc>
     <lastmod>2019-03-18T17:05:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/octopus-energy/</loc>
     <lastmod>2019-03-18T17:05:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</loc>
     <lastmod>2019-03-08T09:22:04+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/packer/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/puppet/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/ubuntu/</loc>
     <lastmod>2019-03-06T15:49:53+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</loc>
     <lastmod>2019-02-21T12:51:47+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/rabbitmq/</loc>
     <lastmod>2019-02-21T12:51:47+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/easy-to-change/</loc>
     <lastmod>2018-12-24T11:51:36+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/software/</loc>
     <lastmod>2018-12-24T11:51:36+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/gsuite/</loc>
     <lastmod>2018-10-27T12:53:24+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/listing-google-groups/</loc>
     <lastmod>2018-10-27T12:53:24+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/advanced-pull-request-crafting/</loc>
     <lastmod>2018-06-03T12:30:05+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</loc>
     <lastmod>2017-11-27T12:27:45+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</loc>
     <lastmod>2017-11-16T15:50:04+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/postgres/</loc>
     <lastmod>2017-11-16T15:50:04+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/lists/</loc>
     <lastmod>2017-11-07T22:41:21+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</loc>
     <lastmod>2017-11-07T22:41:21+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/words/</loc>
     <lastmod>2017-11-07T22:41:21+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/oe-tech-custom-sentry-client/</loc>
     <lastmod>2017-10-16T16:33:45+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/lists/why-your-models-are-fat/</loc>
     <lastmod>2017-10-04T10:30:02+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/bash/</loc>
     <lastmod>2017-09-30T22:44:03+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/bash-error-reporting/</loc>
     <lastmod>2017-09-30T22:44:03+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/aws/</loc>
     <lastmod>2017-08-29T14:08:08+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</loc>
     <lastmod>2017-08-29T14:08:08+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/a-mnemonic-for-mocks/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/testing/</loc>
     <lastmod>2017-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/your-codebase-is-your-/</loc>
     <lastmod>2017-06-30T11:26:39+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/open-github-pull-request-command/</loc>
     <lastmod>2017-06-06T21:30:36+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/jq/</loc>
     <lastmod>2017-06-06T21:30:36+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/json-to-google-sheets/</loc>
     <lastmod>2017-05-16T21:52:21+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/loggly/</loc>
     <lastmod>2017-05-16T21:52:21+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/django-oscar/</loc>
     <lastmod>2017-04-10T23:00:20+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/podcast-init/</loc>
     <lastmod>2017-04-10T23:00:20+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/consul/</loc>
     <lastmod>2017-03-27T15:25:05+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/migrate-consul-key-value-store/</loc>
     <lastmod>2017-03-27T15:25:05+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/lists/lies/</loc>
     <lastmod>2017-03-21T11:54:01+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/hugo/</loc>
     <lastmod>2017-03-16T10:30:02+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/hugo/</loc>
     <lastmod>2017-03-16T10:30:02+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/oe-tech-elb-health-checks/</loc>
     <lastmod>2016-05-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/oe-tech-missing-migrations/</loc>
     <lastmod>2016-01-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/career/</loc>
     <lastmod>2015-11-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/octopus-energy/</loc>
     <lastmod>2015-11-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/a-useful-template-for-commit-messages/</loc>
     <lastmod>2015-10-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/copying-postgres-output-into-a-spreadsheet/</loc>
     <lastmod>2015-09-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</loc>
     <lastmod>2015-05-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/commandlinefu/</loc>
     <lastmod>2015-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/commandlinefucom-is-in-new-hands/</loc>
     <lastmod>2015-04-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</loc>
     <lastmod>2015-03-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/avoiding-clashing-django-migrations/</loc>
     <lastmod>2015-01-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</loc>
     <lastmod>2014-10-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</loc>
     <lastmod>2014-10-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/monitoring/</loc>
     <lastmod>2014-10-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/linking-to-github/</loc>
     <lastmod>2014-07-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/continuously-re-build-your-project/</loc>
     <lastmod>2014-06-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</loc>
     <lastmod>2014-06-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/</loc>
     <lastmod>2014-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/the-road-to-oscar-10/</loc>
     <lastmod>2014-05-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</loc>
     <lastmod>2014-01-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</loc>
     <lastmod>2013-10-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/enhancing-your-git-commit-editor/</loc>
     <lastmod>2013-08-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</loc>
     <lastmod>2013-07-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/geodjango/</loc>
     <lastmod>2013-07-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</loc>
     <lastmod>2013-07-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</loc>
     <lastmod>2013-06-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/conditional-logic-in-django-forms/</loc>
     <lastmod>2013-06-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/pypi-readme-badges/</loc>
     <lastmod>2013-05-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/a-useful-git-post-checkout-hook-for-python-repos/</loc>
     <lastmod>2013-04-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</loc>
     <lastmod>2013-04-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</loc>
     <lastmod>2013-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/pil/</loc>
     <lastmod>2013-04-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</loc>
     <lastmod>2013-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/altering-postgres-table-columns-with-south/</loc>
     <lastmod>2013-02-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/configuring-logging-for-postgresapp/</loc>
     <lastmod>2013-01-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tidbits/mathematics-and-engineering/</loc>
     <lastmod>2012-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/quotes/</loc>
     <lastmod>2012-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tidbits/</loc>
     <lastmod>2012-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</loc>
     <lastmod>2012-10-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-chroot-a-user-in-ubuntu-1204/</loc>
     <lastmod>2012-10-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</loc>
     <lastmod>2012-09-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</loc>
     <lastmod>2012-09-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/use-models-for-uploads/</loc>
     <lastmod>2012-07-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</loc>
     <lastmod>2012-07-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/a-data-migration-for-every-django-project/</loc>
     <lastmod>2012-06-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/apache/</loc>
     <lastmod>2012-05-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</loc>
     <lastmod>2012-05-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/nginx/</loc>
     <lastmod>2012-05-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</loc>
     <lastmod>2012-04-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/embedding-html-in-django-messages/</loc>
     <lastmod>2012-04-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</loc>
     <lastmod>2012-04-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-reload-djangos-url-config/</loc>
     <lastmod>2012-03-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/validating-international-postcodes-in-django/</loc>
     <lastmod>2012-03-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-sync-pycon-videos-to-your-iphone/</loc>
     <lastmod>2012-03-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/tips-for-using-a-git-pre-commit-hook/</loc>
     <lastmod>2012-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/talks/confoo-2012-presentations/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/talks/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/talks/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/testing-https-handling-in-django/</loc>
     <lastmod>2012-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/deployment/</loc>
     <lastmod>2012-02-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</loc>
     <lastmod>2012-02-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</loc>
     <lastmod>2012-02-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/fabric/</loc>
     <lastmod>2012-02-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/mysql/</loc>
     <lastmod>2012-02-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</loc>
     <lastmod>2012-02-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</loc>
     <lastmod>2012-01-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</loc>
     <lastmod>2012-01-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/news/rewriting-codeintheholecom/</loc>
     <lastmod>2012-01-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</loc>
     <lastmod>2012-01-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</loc>
     <lastmod>2011-08-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/console-logging-to-stdout-in-django/</loc>
     <lastmod>2011-08-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</loc>
     <lastmod>2011-08-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</loc>
     <lastmod>2011-05-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/node.js/</loc>
     <lastmod>2011-05-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</loc>
     <lastmod>2011-04-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/design-patterns/</loc>
     <lastmod>2011-03-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</loc>
     <lastmod>2011-03-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/php/</loc>
     <lastmod>2011-03-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</loc>
     <lastmod>2011-03-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/presentations/</loc>
     <lastmod>2011-03-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</loc>
     <lastmod>2011-02-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/javascript/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/node/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/nurl-an-immutable-url-object-for-nodejs/</loc>
     <lastmod>2010-11-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/mysqldump-with-wildcard-table-matching/</loc>
     <lastmod>2010-11-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/how-to-sync-a-mysql-table-between-two-remote-databases/</loc>
     <lastmod>2010-09-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/phing/</loc>
     <lastmod>2010-08-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</loc>
     <lastmod>2010-08-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/return-false-with-prudence/</loc>
     <lastmod>2010-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/javascript-refactoring-for-customising-shared-libraries/</loc>
     <lastmod>2009-10-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</loc>
     <lastmod>2009-07-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/recruitment/</loc>
     <lastmod>2009-07-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</loc>
     <lastmod>2009-05-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</loc>
     <lastmod>2009-05-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/inspecting-javascript-objects/</loc>
     <lastmod>2009-05-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/phing-xinc-and-nabaztags/</loc>
     <lastmod>2009-05-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</loc>
     <lastmod>2009-04-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</loc>
     <lastmod>2009-03-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/</loc>
     <lastmod>2009-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/current-pet-project-command-line-fu/</loc>
     <lastmod>2009-01-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/phing-task-to-create-an-unfuddle-message/</loc>
     <lastmod>2009-01-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/phing-task-to-update-twitter-status/</loc>
     <lastmod>2009-01-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/deploying-to-a-shared-hosting-environment-using-phing/</loc>
     <lastmod>2009-01-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/ganglia/</loc>
     <lastmod>2008-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</loc>
     <lastmod>2008-12-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/books/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/books/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</loc>
     <lastmod>2008-12-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/checking-all-mysql-tables/</loc>
     <lastmod>2008-11-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/javascript-cookie-objects-using-prototype-and-json/</loc>
     <lastmod>2008-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/prototype/</loc>
     <lastmod>2008-11-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/date-conditional-redirects-with-mod_rewrite/</loc>
     <lastmod>2008-11-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/creating-large-xml-files-with-php/</loc>
     <lastmod>2008-10-31T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/monitoring-mysql/</loc>
     <lastmod>2008-10-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tips/following-log-files-with-tail-f/</loc>
     <lastmod>2008-10-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/latex/</loc>
     <lastmod>2005-11-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/guides/writing-a-thesis-in-latex/</loc>
     <lastmod>2005-11-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tags/maths/</loc>
     <lastmod>2005-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/projects/ginzburg-landau-tutorial/</loc>
     <lastmod>2005-02-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/about/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/code/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/music/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/now/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/tweets/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/videos/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://codeinthehole.com/writing/</loc>
   </url>
-  
 </urlset>
