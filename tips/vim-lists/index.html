@@ -102,6 +102,10 @@ make the most of them.</p>
 <li><a href="#location-list">Location list</a></li>
 <li><a href="#jump-list">Jump list</a>
 <ul>
+<li><a href="#tip-use-jump-commands-to-navigate">Tip: Use jump commands to navigate</a></li>
+</ul></li>
+<li><a href="#change-list">Change list</a>
+<ul>
 <li><a href="#tip-jump-to-the-previous-location-where-insert-mode-was-used">Tip: Jump to the previous location where insert mode was used</a></li>
 </ul></li>
 <li><a href="#buffer-list">Buffer list</a>
@@ -401,8 +405,37 @@ between sessions (in the <code>viminfo</code> file) if the <code>'viminfo'</code
 <li><a href="https://vimhelp.org/motion.txt.html#jumplist"><code>:help jumplist</code></a></li>
 </ul>
 
-<p>Like the jump list, the change list is persisted for each file if your <code>viminfo</code>
-setting value contains a <code>'</code>.</p>
+<h3 id="tip-use-jump-commands-to-navigate">Tip: Use jump commands to navigate</h3>
+
+<p>The motions <code>j</code>, <code>k</code>, <code>CTRL-U</code>, <code>CTRL-D</code> are not counted as jumps and so don&rsquo;t
+create an entry in the jump list. Hence it&rsquo;s preferable to navigate
+within a buffer using the above jump commands as this builds a history that you
+can walk back through (see <a href="https://www.reddit.com/r/vim/comments/72481y/learning_vim_what_i_wish_i_knew/dnfyahf/">this Reddit
+comment</a>).</p>
+
+<hr />
+
+<h2 id="change-list">Change list</h2>
+
+<p>A <em>buffer-local</em> list of the last one hundred <em>undo-able</em> changes:</p>
+
+<ul>
+<li><p><code>g;</code>, <code>g,</code>  &mdash; Jump to the previous/next change. These can be prefixed with a
+count to determine which change to jump back/forward to.</p></li>
+
+<li><p><code>:changes</code> &mdash; View the change list. The output enumerates each change making
+it easy to determine the <code>count</code> value to use with <code>g;</code> or <code>g,</code>.</p></li>
+</ul>
+
+<p>Like the <code>jumplist</code>, the <code>changelist</code> is persisted for each file if your <code>viminfo</code>
+setting contains a <code>'</code>.</p>
+
+<p>More at:</p>
+
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#changelist"><code>:help changelist</code></a></li>
+<li><a href="https://vim.fandom.com/wiki/List_changes_to_the_current_file">Vim tips wiki: List changes to the current file</a></li>
+</ul>
 
 <h3 id="tip-jump-to-the-previous-location-where-insert-mode-was-used">Tip: Jump to the previous location where insert mode was used</h3>
 
@@ -411,13 +444,6 @@ It will enter insert mode in the current buffer in the last insert mode
 location. If you made a change when last in insert mode, this will be
 equivalent to <code>g;</code> but will also put you into
 insert mode. The same effect can be achieved with marks via <code>'^</code>.</p>
-
-<p>More at:</p>
-
-<ul>
-<li><a href="https://vimhelp.org/motion.html#changelist"><code>:help changelist</code></a></li>
-<li><a href="https://vim.fandom.com/wiki/List_changes_to_the_current_file">Vim tips wiki: List changes to the current file</a></li>
-</ul>
 
 <hr />
 
