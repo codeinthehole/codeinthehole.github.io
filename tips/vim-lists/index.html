@@ -633,10 +633,6 @@ earlier and is a powerful code exploration technique.</p>
 supports a wider array of languages. It&rsquo;s worth installing to build tags files
 for your projects.</p>
 
-<p>There are various ways of ensuring your tag files are kept up-to-date.
-Since it takes a few seconds to generate the tags file in some projects I work
-on, I do it manually with a <code>,ct</code> mapping.</p>
-
 <h3 id="tip-use-tjump-as-your-default-jump-to-tag-command">Tip: Use <code>:tjump</code> as your default &ldquo;jump to tag&rdquo; command</h3>
 
 <p>If it&rsquo;s common for your codebase to have multiple matches for identifiers (which
@@ -749,12 +745,15 @@ the quickfix list via <code>:grep</code> (or, better, <code>:Grep</code>).</p></
 <li><p>To jump to <em>where you last were</em>, use the jump list via <code>CTRL-O</code>.</p></li>
 
 <li><p>To jump to <em>where you last made a change</em>, use the change list via <code>g;</code>.</p></li>
+
+<li><p>To jump to <em>where you were last in insert mode</em>, use <code>gi</code>.</p></li>
 </ul>
 
 <h3 id="i-need-to-apply-the-same-transformation-in-lots-of-places">I need to apply the same transformation in lots of places&hellip;</h3>
 
 <p>A powerful editing pattern comprises building a list of files or locations
-then applying the same editing operation to each entry.</p>
+then applying the same editing operation to each entry. This is great for
+applying refactorings across a large codebase.</p>
 
 <p>The best approach depends on how you want to build your list of files or
 locations:</p>
@@ -769,7 +768,7 @@ with <code>:grep</code> and apply the batch changes with <code>:cfdo</code>.</p>
 
 <li><p>If you want to select <em>files manually</em>, use <code>:argadd</code> and <code>:argdelete</code> to
 populate the argument list then use <code>:argdo</code> (this is generally preferable to using
-the buffer list and <code>:bufdo</code> although that might suffice in some situations).</p></li>
+the buffer list and <code>:bufdo</code>, although that might suffice in some situations).</p></li>
 </ul>
 
 <p>The editing operation could be an Ex command (e.g. <code>%s/foo/bar/g | update</code>),
@@ -807,7 +806,7 @@ Related articles:
 <hr />
 
 <ol>
-<li id="fn:tils"><p>Here the <em>some</em> of the things learnt while researching this post:</p>
+<li id="fn:tils"><p>Here are <em>some</em> of the things learnt while researching this post:</p>
 
 <ul>
 <li><a href="https://til.codeinthehole.com/posts/how-to-use-custom-functions-with-cdo/">TIL how to use custom functions with <code>:cdo</code></a></li>
