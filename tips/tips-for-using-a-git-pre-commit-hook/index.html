@@ -96,7 +96,7 @@ committing and updates are picked up automatically.</p>
 
 <p>Ensure that code that isn&rsquo;t part of the prospective commit isn&rsquo;t tested
 within your pre-commit script. This is missed by many sample pre-commit
-scripts but is easily acheived with <code>git stash</code>:</p>
+scripts but is easily achieved with <code>git stash</code>:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
 STASH_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pre-commit-</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 git stash save -q --keep-index $STASH_NAME

@@ -158,7 +158,7 @@ object will always be returned.</p>
         <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveOrder</span>($orderNumber);
 } <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">OrderCreationException</span> $e) {
     <span style="color:#75715e">// Rollback transaction, return friendly error message
-</span><span style="color:#75715e"></span>} 
+</span><span style="color:#75715e"></span>}
 </code></pre></div>
 <p>instead of</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
@@ -177,7 +177,7 @@ this separation).</p>
 
 <h3 id="return-null-null-object-or-an-empty-collection">Return <code>null</code>, Null object or an empty collection</h3>
 
-<p>Many objects will emply &ldquo;finder&rdquo; or factory methods responsible for
+<p>Many objects will employ &ldquo;finder&rdquo; or factory methods responsible for
 looking up and then constructing an object:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 $book <span style="color:#f92672">=</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">::</span><span style="color:#a6e22e">findByIsbn</span>($isbn);

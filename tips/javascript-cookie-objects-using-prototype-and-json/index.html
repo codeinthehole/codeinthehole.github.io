@@ -163,12 +163,12 @@ the cookie by using JSON.</p>
         <span style="color:#66d9ef">switch</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span>) {
             <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;undefined&#39;</span><span style="color:#f92672">:</span>
             <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;function&#39;</span><span style="color:#f92672">:</span>
-            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;unknown&#39;</span><span style="color:#f92672">:</span> 
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;unknown&#39;</span><span style="color:#f92672">:</span>
                 <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid value type&#34;</span>;
                 <span style="color:#66d9ef">break</span>;
-            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;boolean&#39;</span><span style="color:#f92672">:</span> 
-            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;string&#39;</span><span style="color:#f92672">:</span> 
-            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;number&#39;</span><span style="color:#f92672">:</span> 
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;boolean&#39;</span><span style="color:#f92672">:</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;string&#39;</span><span style="color:#f92672">:</span>
+            <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;number&#39;</span><span style="color:#f92672">:</span>
                 <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">toString</span>());
             <span style="color:#66d9ef">break</span>;
         }
@@ -244,7 +244,7 @@ the unit tests directly, using the JSUnit test runner.</p>
 </code></pre></div>
 <p>One minor shortcoming of the present version of JSUnit is that it is
 difficult to test equality of arrays and objects. The simple work-around
-used above is to test equality of their JSON encodings, which acheives
+used above is to test equality of their JSON encodings, which achieves
 the same end without resorting to looping through comparing property by
 property.</p>
 

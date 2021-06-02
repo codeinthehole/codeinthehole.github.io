@@ -194,7 +194,7 @@ addresses that only exist in the latest release:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ comm -13 &lt;<span style="color:#f92672">(</span>git log 0.5 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq<span style="color:#f92672">)</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    &lt;<span style="color:#f92672">(</span>git log 0.5..0.6 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq<span style="color:#f92672">)</span></code></pre></div>
 <p>Note the first input is all contributors up to release 0.5, while the
-second is contibutors to the 0.6 release only.</p>
+second is contributors to the 0.6 release only.</p>
 
 <p><code>comm</code> is an extremely useful command for selecting lines common between
 two files, or exclusive to one. The <code>-13</code> options indicate to exclude
@@ -215,7 +215,7 @@ David Winterbottom <span style="color:#f92672">(</span>661<span style="color:#f9
       Add link to stores page in footer
 ...</code></pre></div>
 <p>You can even use <code>--format</code> to provide links to Github commits:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git shortlog 0.3.4..0.4 --no-merges --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&#34;</span> </code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git shortlog 0.3.4..0.4 --no-merges --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&#34;</span></code></pre></div>
 <p>This won&rsquo;t always be appropriate if your release if there are thousands
 of commits.</p>
 

@@ -229,12 +229,12 @@ content from your working branch
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; Commit message:path/to/file
 </code></pre></div>
 <p>where the default conflict block has been extended with a new section, delimited
-by <code>||||||||</code> and <code>========</code>, which reveals the <em>common ancester code</em>.</p>
+by <code>||||||||</code> and <code>========</code>, which reveals the <em>common ancestor code</em>.</p>
 
 <p>Comparing the <code>HEAD</code> block to the common ancestor block will often reveal the
 nature of the target-branch changes, allowing a straight-forward resolution.</p>
 
-<p>For instance, breath easy if the common ancester block is empty:</p>
+<p>For instance, breath easy if the common ancestor block is empty:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD:path/to/file
 content from target branch
 |||||||| merged common ancestors:path/to/file
@@ -257,7 +257,7 @@ In this situation, we may need to examine the individual changes made to each co
 
 <p>We can examine the overall diff:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git diff REBASE_HEAD...origin/master $FILEPATH</code></pre></div>
-<!-- 
+<!--
 
 We can determine the "onto" value dynamically from .git/rebase-apply/onto
 
@@ -288,7 +288,7 @@ less likely to inadvertently break something.</p>
 
 <p>For example: in the following diff:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-I like apples and pears 
+I like apples and pears
 |||||||| merged common ancestors
 I like apples
 ========
@@ -297,7 +297,7 @@ I love apples
 </code></pre></div>
 <p>Apply your change (replacing &ldquo;like&rdquo; with &ldquo;love&rdquo;) to the <code>HEAD</code> block to give:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-I love apples and pears 
+I love apples and pears
 |||||||| merged common ancestors
 I like apples
 ========
@@ -305,7 +305,7 @@ I love apples
 &gt;&gt;&gt;&gt;&gt;&gt;&gt; working-branch
 </code></pre></div>
 <p>then remove the superceded lines and merge conflict markers to give:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">I love apples and pears 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-diff" data-lang="diff">I love apples and pears
 </code></pre></div>
 <h3 id="wholesale-accept-changes">Wholesale accept changes</h3>
 
