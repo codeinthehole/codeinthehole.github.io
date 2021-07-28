@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -108,7 +107,7 @@ LOGGING <span style="color:#f92672">=</span> {
         <span style="color:#e6db74">&#39;error_file&#39;</span>: {
             <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;INFO&#39;</span>,
             <span style="color:#e6db74">&#39;class&#39;</span>: <span style="color:#e6db74">&#39;logging.FileHandler&#39;</span>,
-            <span style="color:#e6db74">&#39;filename&#39;</span>: <span style="color:#e6db74">&#39;{log_root}errors.log&#39;</span>,
+            <span style="color:#e6db74">&#39;filename&#39;</span>: <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{log_root}</span><span style="color:#e6db74">errors.log&#39;</span>,
             <span style="color:#e6db74">&#39;formatter&#39;</span>: <span style="color:#e6db74">&#39;verbose&#39;</span>
         },
     },
@@ -116,7 +115,7 @@ LOGGING <span style="color:#f92672">=</span> {
         <span style="color:#e6db74">&#39;django.request&#39;</span>: {
             <span style="color:#e6db74">&#39;handlers&#39;</span>: [<span style="color:#e6db74">&#39;error_file&#39;</span>],
             <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;ERROR&#39;</span>,
-            <span style="color:#e6db74">&#39;propagate&#39;</span>: False,
+            <span style="color:#e6db74">&#39;propagate&#39;</span>: <span style="color:#66d9ef">False</span>,
         },
     }
 }</code></pre></div>
@@ -146,7 +145,7 @@ record.</p>
 
     <span style="color:#66d9ef">def</span> __init__(self, filename, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
         self<span style="color:#f92672">.</span>filename <span style="color:#f92672">=</span> filename
-        kwargs[<span style="color:#e6db74">&#39;delay&#39;</span>] <span style="color:#f92672">=</span> True
+        kwargs[<span style="color:#e6db74">&#39;delay&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
         BaseFileHandler<span style="color:#f92672">.</span>__init__(self, <span style="color:#e6db74">&#34;/dev/null&#34;</span>, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_open</span>(self):
@@ -173,7 +172,7 @@ LOGGING <span style="color:#f92672">=</span> {
         <span style="color:#e6db74">&#39;django.request&#39;</span>: {
             <span style="color:#e6db74">&#39;handlers&#39;</span>: [<span style="color:#e6db74">&#39;error_file&#39;</span>],
             <span style="color:#e6db74">&#39;level&#39;</span>: <span style="color:#e6db74">&#39;ERROR&#39;</span>,
-            <span style="color:#e6db74">&#39;propagate&#39;</span>: False,
+            <span style="color:#e6db74">&#39;propagate&#39;</span>: <span style="color:#66d9ef">False</span>,
         },
     }
 }</code></pre></div>

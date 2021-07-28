@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -153,7 +152,7 @@ implementation of <code>handle_uploaded_file</code>:</p>
 
     <span style="color:#75715e"># Upload audit information</span>
     uploaded_by <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>ForeignKey(<span style="color:#e6db74">&#39;auth.User&#39;</span>)
-    date_uploaded <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(auto_now_add<span style="color:#f92672">=</span>True)
+    date_uploaded <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(auto_now_add<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 
     <span style="color:#75715e"># Processing audit information</span>
     PENDING, PROCESSED, FAILED <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Pending&#39;</span>, <span style="color:#e6db74">&#39;Processed&#39;</span>, <span style="color:#e6db74">&#39;Failed&#39;</span>
@@ -163,10 +162,10 @@ implementation of <code>handle_uploaded_file</code>:</p>
         (FAILED, _(FAILED)),
     )
     status <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>CharField(max_length<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, choices<span style="color:#f92672">=</span>STATUSES, default<span style="color:#f92672">=</span>PENDING)
-    processing_description <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>TextField(blank<span style="color:#f92672">=</span>True, null<span style="color:#f92672">=</span>True)
+    processing_description <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>TextField(blank<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>, null<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
     num_records <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>PositiveIntegerField()
-    date_start_processing <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(null<span style="color:#f92672">=</span>True)
-    date_end_processing <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(null<span style="color:#f92672">=</span>True)
+    date_start_processing <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(null<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+    date_end_processing <span style="color:#f92672">=</span> models<span style="color:#f92672">.</span>DateTimeField(null<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process</span>(self):
         self<span style="color:#f92672">.</span>date_start_processing <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
@@ -178,7 +177,7 @@ implementation of <code>handle_uploaded_file</code>:</p>
         <span style="color:#66d9ef">else</span>:
             self<span style="color:#f92672">.</span>_mark_processed(num_records)
 
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_mark_processed</span>(self, num_records, description<span style="color:#f92672">=</span>None):
+    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">_mark_processed</span>(self, num_records, description<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
         self<span style="color:#f92672">.</span>status <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>PROCESSED
         self<span style="color:#f92672">.</span>date_end_processing <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
         self<span style="color:#f92672">.</span>num_records <span style="color:#f92672">=</span> num_records

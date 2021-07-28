@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -121,7 +120,7 @@ API</a>:</p>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username):
     tweets <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(username)
-    <span style="color:#66d9ef">if</span> tweets <span style="color:#f92672">is</span> None:
+    <span style="color:#66d9ef">if</span> tweets <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
         tweets <span style="color:#f92672">=</span> fetch_tweets(username)
         cache<span style="color:#f92672">.</span>set(username, tweets, <span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>)
     <span style="color:#66d9ef">return</span> tweets</code></pre></div>
@@ -162,10 +161,10 @@ repopulate the cache.</p>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username, lifetime<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>):
     item <span style="color:#f92672">=</span> cache<span style="color:#f92672">.</span>get(username)
-    <span style="color:#66d9ef">if</span> item <span style="color:#f92672">is</span> None:
+    <span style="color:#66d9ef">if</span> item <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
         <span style="color:#75715e"># Scenario 1: Cache miss - return empty result set and trigger a refresh</span>
         update_tweets<span style="color:#f92672">.</span>delay(username, lifetime)
-        tweets <span style="color:#f92672">=</span> None
+        tweets <span style="color:#f92672">=</span> <span style="color:#66d9ef">None</span>
     <span style="color:#66d9ef">else</span>:
         tweets, expiry <span style="color:#f92672">=</span> item
         <span style="color:#66d9ef">if</span> expiry <span style="color:#f92672">&lt;</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now():
@@ -216,7 +215,7 @@ function:</p>
 <span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    fetch_cached_tweets <span style="color:#f92672">=</span> cacheback(<span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>, fetch_on_miss<span style="color:#f92672">=</span>False)(fetch_tweets)
+    fetch_cached_tweets <span style="color:#f92672">=</span> cacheback(<span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>, fetch_on_miss<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)(fetch_tweets)
     <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
                   {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})</code></pre></div>
 <p>The <code>cacheback</code> function provides a wrapper function for the

@@ -618,7 +618,7 @@ A problem One tricky issue with this arrangement is logging to file. Ideally, we
       
       <guid>https://codeinthehole.com/tips/conditional-logic-in-django-forms/</guid>
       <description>The problem It&amp;rsquo;s common for UX professionals to design forms like the following:
-where radio buttons are employed to split the form into sections, each of which can have it&amp;rsquo;s own fields which are only mandatory if the parent radio button is checked. Thus the validation logic is conditional on the submitted form data.
+where radio buttons are employed to split the form into sections, each of which can have its own fields which are only mandatory if the parent radio button is checked. Thus the validation logic is conditional on the submitted form data.
 Such requirements are slightly tricky to capture in Django as they tread slightly outside the normal path of form validation.</description>
     </item>
     

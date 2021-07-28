@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -132,8 +131,7 @@ along these lines:</p>
 <span style="color:#a6e22e">test</span><span style="color:#f92672">:</span>
     cd www <span style="color:#f92672">&amp;&amp;</span> py.test
 
-<span style="color:#a6e22e">ci</span><span style="color:#f92672">:</span> test database
-</code></pre></div>
+<span style="color:#a6e22e">ci</span><span style="color:#f92672">:</span> test database</code></pre></div>
 <p>Witness the <code>ci</code> target which runs the test suite <em>and</em> builds the
 database, effectively smoke-testing that the migrations apply correctly
 and the fixtures load (which is where we&rsquo;ve historically had pain).</p>

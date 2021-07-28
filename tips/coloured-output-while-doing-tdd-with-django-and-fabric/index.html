@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -96,13 +95,13 @@ red_bg <span style="color:#f92672">=</span> _wrap_with(<span style="color:#e6db7
 env<span style="color:#f92672">.</span>test_apps <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;app1 app2&#34;</span>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test</span>():
-    <span style="color:#66d9ef">with</span> settings(warn_only<span style="color:#f92672">=</span>True):
-        result <span style="color:#f92672">=</span> local(<span style="color:#e6db74">&#39;./manage.py test </span><span style="color:#e6db74">%(test_apps)s</span><span style="color:#e6db74"> --settings=settings_test -v 2 --failfast&#39;</span> <span style="color:#f92672">%</span> env, capture<span style="color:#f92672">=</span>False)
+    <span style="color:#66d9ef">with</span> settings(warn_only<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>):
+        result <span style="color:#f92672">=</span> local(<span style="color:#e6db74">&#39;./manage.py test </span><span style="color:#e6db74">%(test_apps)s</span><span style="color:#e6db74"> --settings=settings_test -v 2 --failfast&#39;</span> <span style="color:#f92672">%</span> env, capture<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
     <span style="color:#66d9ef">if</span> result<span style="color:#f92672">.</span>failed:
-        <span style="color:#66d9ef">print</span> red_bg(<span style="color:#e6db74">&#34;Some tests failed&#34;</span>)
+        print red_bg(<span style="color:#e6db74">&#34;Some tests failed&#34;</span>)
     <span style="color:#66d9ef">else</span>:
-        <span style="color:#66d9ef">print</span>
-        <span style="color:#66d9ef">print</span> green_bg(<span style="color:#e6db74">&#34;All tests passed - have a banana!&#34;</span>)</code></pre></div>
+        print
+        print green_bg(<span style="color:#e6db74">&#34;All tests passed - have a banana!&#34;</span>)</code></pre></div>
 <p>You can choose your own success and failure messages.</p>
 
 <p>Now we have lovely colours while doing TDD in Django:</p>

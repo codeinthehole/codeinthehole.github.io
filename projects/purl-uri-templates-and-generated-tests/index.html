@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -88,7 +87,7 @@ URL library of mine) supports URI templates as per <a href="http://tools.ietf.or
 6570</a>. These allow new URL instances
 to be created by passing bindings to a template instance.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> purl
-<span style="color:#f92672">&gt;&gt;&gt;</span> tpl <span style="color:#f92672">=</span> purl<span style="color:#f92672">.</span>Template(<span style="color:#e6db74">&#39;http://www.google.com{path}&#39;</span>)
+<span style="color:#f92672">&gt;&gt;&gt;</span> tpl <span style="color:#f92672">=</span> purl<span style="color:#f92672">.</span>Template(<span style="color:#e6db74">&#39;http://www.google.com</span><span style="color:#e6db74">{path}</span><span style="color:#e6db74">&#39;</span>)
 <span style="color:#f92672">&gt;&gt;&gt;</span> tpl<span style="color:#f92672">.</span>expand({<span style="color:#e6db74">&#39;path&#39;</span>: [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]})<span style="color:#f92672">.</span>as_string()
 <span style="color:#e6db74">&#39;http://www.google.com/a/b/c&#39;</span></code></pre></div>
 <p>Alternatively, you can expand template strings directly:</p>
@@ -157,8 +156,8 @@ level1_vars <span style="color:#f92672">=</span> {
 
 <span style="color:#75715e"># Tuples of (template, bindings, expected URI)</span>
 test_data <span style="color:#f92672">=</span> [
-    (<span style="color:#e6db74">&#39;{var}&#39;</span>, level1_vars, <span style="color:#e6db74">&#39;value&#39;</span>),
-    (<span style="color:#e6db74">&#39;{hello}&#39;</span>, level1_vars, <span style="color:#e6db74">&#39;Hello%20World%21&#39;</span>),
+    (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{var}</span><span style="color:#e6db74">&#39;</span>, level1_vars, <span style="color:#e6db74">&#39;value&#39;</span>),
+    (<span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{hello}</span><span style="color:#e6db74">&#39;</span>, level1_vars, <span style="color:#e6db74">&#39;Hello%20World%21&#39;</span>),
 ]
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">assert_expansion</span>(template, fields, expected):
@@ -221,7 +220,7 @@ creating parameterised or generated tests.</p>
 we can rewrite the above example as:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 
-<span style="color:#a6e22e">@pytest.mark.parametrize</span>((<span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74">&#34;expected&#34;</span>), data)
+<span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>mark<span style="color:#f92672">.</span>parametrize((<span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74">&#34;expected&#34;</span>), data)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expand</span>(template, fields, expected):
     <span style="color:#66d9ef">assert</span> expand(template, fields) <span style="color:#f92672">==</span>  expected</code></pre></div>
 <p>with verbose output:</p>

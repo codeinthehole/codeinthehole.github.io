@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -110,7 +109,7 @@ specify how to compute the new value from the old.</p>
 <p>We need to modify the migration file to execute raw SQL with
 <code>db.execute</code> instead of using <code>db.alter_table</code> to generate the SQL. So
 we change:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>alter_column(<span style="color:#e6db74">&#39;stores_openingperiod&#39;</span>, <span style="color:#e6db74">&#39;end&#39;</span>, self<span style="color:#f92672">.</span>gf(<span style="color:#e6db74">&#39;django.db.models.fields.TimeField&#39;</span>)(null<span style="color:#f92672">=</span>True))</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>alter_column(<span style="color:#e6db74">&#39;stores_openingperiod&#39;</span>, <span style="color:#e6db74">&#39;end&#39;</span>, self<span style="color:#f92672">.</span>gf(<span style="color:#e6db74">&#39;django.db.models.fields.TimeField&#39;</span>)(null<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))</code></pre></div>
 <p>to:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>execute(
     <span style="color:#e6db74">&#39;ALTER TABLE &#34;stores_openingperiod&#34; &#39;</span>

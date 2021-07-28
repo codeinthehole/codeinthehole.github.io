@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -131,8 +130,8 @@ customers.</p>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAnAdmin</span>(WebTest):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        self<span style="color:#f92672">.</span>staff <span style="color:#f92672">=</span> G(User, is_staff<span style="color:#f92672">=</span>True)
-        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span>False)
+        self<span style="color:#f92672">.</span>staff <span style="color:#f92672">=</span> G(User, is_staff<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_can_upload_a_csv_to_create_allocations</span>(self):
         index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;credits-index&#39;</span>), user<span style="color:#f92672">=</span>staff)

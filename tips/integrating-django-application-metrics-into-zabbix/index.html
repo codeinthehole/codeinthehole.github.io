@@ -22,7 +22,6 @@ if (!doNotTrack) {
 }
 </script>
 
-
         
         <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
 
@@ -95,12 +94,12 @@ command suffices:</p>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle</span>(self, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>options):
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> args:
-            <span style="color:#66d9ef">print</span> self<span style="color:#f92672">.</span>usage()
+            print self<span style="color:#f92672">.</span>usage()
             <span style="color:#66d9ef">return</span>
         method_name <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;fetch__</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> <span style="color:#f92672">%</span> args[<span style="color:#ae81ff">0</span>]
         <span style="color:#66d9ef">if</span> <span style="color:#f92672">not</span> hasattr(self, method_name):
             <span style="color:#66d9ef">raise</span> CommandError(<span style="color:#e6db74">&#34;No method found with name &#39;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;&#34;</span> <span style="color:#f92672">%</span> method_name)
-        <span style="color:#66d9ef">print</span> getattr(self, method_name)(<span style="color:#f92672">*</span>args[<span style="color:#ae81ff">1</span>:])
+        print getattr(self, method_name)(<span style="color:#f92672">*</span>args[<span style="color:#ae81ff">1</span>:])
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">usage</span>(self):
         fetchers <span style="color:#f92672">=</span> [m <span style="color:#66d9ef">for</span> m <span style="color:#f92672">in</span> dir(self) <span style="color:#66d9ef">if</span> m<span style="color:#f92672">.</span>startswith(<span style="color:#e6db74">&#39;fetch&#39;</span>)]
