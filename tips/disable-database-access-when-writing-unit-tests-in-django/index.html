@@ -76,7 +76,7 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Consider this curio:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> mock
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> mock
 <span style="color:#f92672">from</span> django.utils.functional <span style="color:#f92672">import</span> curry
 
 no_database <span style="color:#f92672">=</span> curry(
@@ -87,13 +87,13 @@ raises an exception if the database is accessed. This can be useful if
 you&rsquo;re a puritan about <em>true</em> unit tests.</p>
 
 <p>Use by wrapping a <code>TestCase</code> subclass:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
 
 <span style="color:#a6e22e">@no_database</span>()
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnitTestCase</span>(TestCase):
     <span style="color:#f92672">...</span></code></pre></div>
 <p>or method:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.test <span style="color:#f92672">import</span> TestCase
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnitTestCase</span>(TestCase):
 

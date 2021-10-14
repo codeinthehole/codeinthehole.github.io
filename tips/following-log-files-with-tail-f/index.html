@@ -81,14 +81,14 @@ Today&rsquo;s was the &lsquo;follow&rsquo; option of the tail command.</p>
 
 <p>It&rsquo;s commonplace to use tail for viewing the recent entries to a log
 file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail /var/log/apache2/error.log</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail /var/log/apache2/error.log</code></pre></div>
 <p>Much more useful is set the &lsquo;follow&rsquo; option so that, rather than echoing
 to STDOUT and returning control to the prompt - tail continues to watch
 the file in question and echos additional lines to the terminal. This
 can be very useful during development - I often leave a terminal open
 watching the error logs while I develop - so that I can quickly pounce
 on any errors that pop up.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f my-app-error.log</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f my-app-error.log</code></pre></div>
 <p>Return control to the command prompt using CTRL+C (or run as a
 background process using &amp;). This can be quite useful for monitoring the
 error logs of production sites where echoing error messages and warnings

@@ -86,12 +86,12 @@ and py.test support them.</p>
 URL library of mine) supports URI templates as per <a href="http://tools.ietf.org/html/rfc6570">RFC
 6570</a>. These allow new URL instances
 to be created by passing bindings to a template instance.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> purl
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> <span style="color:#f92672">import</span> purl
 <span style="color:#f92672">&gt;&gt;&gt;</span> tpl <span style="color:#f92672">=</span> purl<span style="color:#f92672">.</span>Template(<span style="color:#e6db74">&#39;http://www.google.com</span><span style="color:#e6db74">{path}</span><span style="color:#e6db74">&#39;</span>)
 <span style="color:#f92672">&gt;&gt;&gt;</span> tpl<span style="color:#f92672">.</span>expand({<span style="color:#e6db74">&#39;path&#39;</span>: [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]})<span style="color:#f92672">.</span>as_string()
 <span style="color:#e6db74">&#39;http://www.google.com/a/b/c&#39;</span></code></pre></div>
 <p>Alternatively, you can expand template strings directly:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> purl<span style="color:#f92672">.</span>expand(<span style="color:#e6db74">&#39;{?list*}&#39;</span>, {<span style="color:#e6db74">&#39;list&#39;</span>: [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]})
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> purl<span style="color:#f92672">.</span>expand(<span style="color:#e6db74">&#39;{?list*}&#39;</span>, {<span style="color:#e6db74">&#39;list&#39;</span>: [<span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#e6db74">&#39;b&#39;</span>, <span style="color:#e6db74">&#39;c&#39;</span>]})
 <span style="color:#e6db74">&#39;/a/b/c&#39;</span></code></pre></div>
 <p>There&rsquo;s a plethora of ways template URLs can be used - see the
 <a href="http://tools.ietf.org/html/rfc6570">RFC</a> for details.</p>
@@ -146,7 +146,7 @@ the test fails.</p>
 
 <p>Consider the above snippet from section 3.2.2 of the RFC: tests for this
 section can be constructed as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> purl
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> purl
 <span style="color:#f92672">from</span> nose.tools <span style="color:#f92672">import</span> eq_
 
 level1_vars <span style="color:#f92672">=</span> {
@@ -167,7 +167,7 @@ test_data <span style="color:#f92672">=</span> [
     <span style="color:#66d9ef">for</span> template, fields, expected <span style="color:#f92672">in</span> test_data:
         <span style="color:#66d9ef">yield</span> assert_expansion, template, fields, expected</code></pre></div>
 <p>which executes each example as a single test:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nosetests tests/expansion_tests.py
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nosetests tests/expansion_tests.py
 tests.expansion_tests.test_expansion<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;{var}&#39;</span>, <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;var&#39;</span>: <span style="color:#e6db74">&#39;value&#39;</span>, <span style="color:#e6db74">&#39;hello&#39;</span>: <span style="color:#e6db74">&#39;Hello World!&#39;</span><span style="color:#f92672">}</span>, <span style="color:#e6db74">&#39;value&#39;</span><span style="color:#f92672">)</span> ... ok
 tests.expansion_tests.test_expansion<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;{hello}&#39;</span>, <span style="color:#f92672">{</span><span style="color:#e6db74">&#39;var&#39;</span>: <span style="color:#e6db74">&#39;value&#39;</span>, <span style="color:#e6db74">&#39;hello&#39;</span>: <span style="color:#e6db74">&#39;Hello World!&#39;</span><span style="color:#f92672">}</span>, <span style="color:#e6db74">&#39;Hello%20World%21&#39;</span><span style="color:#f92672">)</span> ... ok
 
@@ -186,12 +186,12 @@ check from Nose&rsquo;s test tools.</p>
 <p>The default verbose output is a little too verbose for my tastes. It can
 be cleaned up by providing a <code>description</code> attribute on the yielded
 callable:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expansion</span>():
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expansion</span>():
     <span style="color:#66d9ef">for</span> template, fields, expected <span style="color:#f92672">in</span> test_data:
         assert_expansion<span style="color:#f92672">.</span>description <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> expands to </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (template, expected)
         <span style="color:#66d9ef">yield</span> assert_expansion, template, fields, expected</code></pre></div>
 <p>which looks like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nosetests tests/expansion_tests.py
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ nosetests tests/expansion_tests.py
 <span style="color:#f92672">{</span>var<span style="color:#f92672">}</span> expands to value ... ok
 <span style="color:#f92672">{</span>hello<span style="color:#f92672">}</span> expands to Hello%20World%21 ... ok
 
@@ -218,13 +218,13 @@ creating parameterised or generated tests.</p>
 <p>Using py.test&rsquo;s <code>@pytest.mark.parameterize</code>
 <a href="http://pytest.org/latest/parametrize.html#pytest-mark-parametrize">decorator</a>,
 we can rewrite the above example as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> pytest
 
 <span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>mark<span style="color:#f92672">.</span>parametrize((<span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74">&#34;expected&#34;</span>), data)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expand</span>(template, fields, expected):
     <span style="color:#66d9ef">assert</span> expand(template, fields) <span style="color:#f92672">==</span>  expected</code></pre></div>
 <p>with verbose output:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ py.test -v tests/pytest_tests.py
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ py.test -v tests/pytest_tests.py
 platform darwin -- Python 2.7.2 -- pytest-2.3.5 -- /Users/dwinterbottom/.virtualenvs/purl/bin/python
 collected <span style="color:#ae81ff">2</span> items
 

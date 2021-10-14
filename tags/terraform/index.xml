@@ -23,7 +23,7 @@ Define a boolean maintenance_mode variable:
     <item>
       <title>Maintainable Terraform CIDR lists</title>
       <link>https://codeinthehole.com/tips/terraform-cidrs/</link>
-      <pubDate>Wed, 08 Jul 2020 00:00:00 +0100</pubDate>
+      <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/terraform-cidrs/</guid>
       <description>Problem Your Terraform config requires managing many CIDRs that control firewall ingress rules. You&amp;rsquo;ve been storing these in a CSV string:

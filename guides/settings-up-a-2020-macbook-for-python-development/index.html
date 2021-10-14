@@ -133,10 +133,10 @@ dependencies which require pinned versions &mdash; Docker is a better for
 that.</p>
 
 <p>Start by installing Xcode&rsquo;s command-line tools:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo xcode-select --install</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo xcode-select --install</code></pre></div>
 <p>then <a href="https://brew.sh/">install Homebrew</a> and a core set of formulae. The
 following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_core_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_core_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     local packages<span style="color:#f92672">=(</span>
         bash
         bash-completion
@@ -162,7 +162,7 @@ following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
     brew install <span style="color:#e6db74">${</span>packages[@]<span style="color:#e6db74">}</span>
 <span style="color:#f92672">}</span></code></pre></div>
 <p>plus some packages that require a separate <code>tap</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_tap_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_tap_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     brew tap heroku/brew <span style="color:#f92672">&amp;&amp;</span> brew install heroku
 
     brew tap homebrew/cask-fonts
@@ -185,7 +185,7 @@ Homebrew-installs packages by following the <a href="https://docs.brew.sh/Shell-
 
 <p>Unbind <span class="keys">⌥</span> + <span class="keys">SPACE</span> from inserting a non-breaking space by setting the contents
 of <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-pl" data-lang="pl">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-pl" data-lang="pl">{
     <span style="color:#e6db74">&#34;~ &#34;</span> <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;insertText:&#34;</span>, <span style="color:#e6db74">&#34; &#34;</span>);
 }</code></pre></div>
 <p>This avoids a common annoyance when editing headers in markdown files (eg in Bear).</p>
@@ -193,7 +193,7 @@ of <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> to:</p>
 <h3 id="system-preferences">System preferences</h3>
 
 <p>Here&rsquo;s a <code>configurure_system_preferences.sh</code> script I use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
 <span style="color:#75715e"># Configure MacOS settings.</span>
 
@@ -261,9 +261,9 @@ available globally (i.e. can be run without activating a virtualenv first).</p><
 <h3 id="python-versions">Python versions</h3>
 
 <p>Install <code>pyenv</code> and <code>pyenv-virtualenvwrapper</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ brew install pyenv pyenv-virtualenvwrapper</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ brew install pyenv pyenv-virtualenvwrapper</code></pre></div>
 <p>and ensure these libraries are initialised by adding:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> which pyenv &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> which pyenv &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">then</span>
     <span style="color:#75715e"># Pyenv (will add shims to front of $PATH)</span>
     eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pyenv init -<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
@@ -275,7 +275,7 @@ available globally (i.e. can be run without activating a virtualenv first).</p><
 <p>to <code>~/.bash_profile</code>.</p>
 
 <p>Install a modern Python as the global default:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pyenv install 3.8.3
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pyenv install 3.8.3
 $ pyenv global 3.8.3</code></pre></div>
 <p>plus any other Python versions that projects require.</p>
 
@@ -283,22 +283,22 @@ $ pyenv global 3.8.3</code></pre></div>
 
 <p>For each Python project, create a virtualenv by selecting the appropriate
 Python version using <code>pyenv</code> then using <code>mkvirtualenv</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cd $PATH_TO_PROJECT
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cd $PATH_TO_PROJECT
 $ pyenv local 3.7.7  <span style="color:#75715e"># for example  </span>
 $ mkvirtualenv $PROJECT_NAME</code></pre></div>
 <p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always require a virtualenv to use pip</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always require a virtualenv to use pip</span>
 export PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>true</code></pre></div>
 <p>in <code>~/.bash_profile</code>. If you do want to run <code>pip</code> outside of a virtualenv, use something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list</code></pre></div>
 <h3 id="python-command-line-apps">Python command-line apps</h3>
 
 <p>Install <code>pipx</code> with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install pipx</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install pipx</code></pre></div>
 <p>and ensure <code>~/.local/bin</code> is on your <code>$PATH</code>.</p>
 
 <p>Install CLI apps:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pipx install awscli</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pipx install awscli</code></pre></div>
 <h3 id="further-reading-1">Further reading</h3>
 
 <ul>

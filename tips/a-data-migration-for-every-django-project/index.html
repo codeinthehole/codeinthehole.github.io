@@ -84,7 +84,7 @@ from example.com.</p>
 
 <p>Consider the following snippet from Django&rsquo;s docs<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> for sending a
 confirmation email:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib.sites.models <span style="color:#f92672">import</span> Site
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.contrib.sites.models <span style="color:#f92672">import</span> Site
 <span style="color:#f92672">from</span> django.core.mail <span style="color:#f92672">import</span> send_mail
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">register_for_newsletter</span>(request):
@@ -115,7 +115,7 @@ domain and display name correctly in each environment.</p>
 
 <p>First, ensure that each environment has settings for the domain and site
 name.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># conf/test.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># conf/test.py</span>
 ...
 DOMAIN_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test.project.client.tangentlabs.co.uk&#39;</span>
 SITE_NAME <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;project - client (test)&#39;</span>
@@ -140,9 +140,9 @@ data migrations that alter 3rd party apps.</p>
 <p>Since we&rsquo;re not using the actual app where the <code>Site</code> model is defined,
 we must employ South&rsquo;s <code>--freeze</code> option to ensure the <code>Site</code> model is
 available to the migration.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py datamigration &lt;appname&gt; create_domains --freeze<span style="color:#f92672">=</span>sites</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">python manage.py datamigration &lt;appname&gt; create_domains --freeze<span style="color:#f92672">=</span>sites</code></pre></div>
 <p>Finally implement the <code>forwards</code> method:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> south.v2 <span style="color:#f92672">import</span> DataMigration
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> south.v2 <span style="color:#f92672">import</span> DataMigration
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Migration</span>(DataMigration):

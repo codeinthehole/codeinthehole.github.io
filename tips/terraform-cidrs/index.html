@@ -81,7 +81,7 @@ if (!doNotTrack) {
 
 <p>Your Terraform config requires managing many CIDRs that control firewall ingress rules.
 You&rsquo;ve been storing these in a CSV string:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;client_cidrs&#34;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;client_cidrs&#34;</span> {
     <span style="color:#a6e22e">default</span>=<span style="color:#e6db74">&#34;50.1.1.1/32,44.2.1.0/32&#34;</span>, 
 }</code></pre></div>
 <p>which is fed to a <code>aws_security_group</code> somewhere in your configuration.</p>
@@ -93,7 +93,7 @@ as it&rsquo;s hard to track where each individual CIDR came from.</p>
 
 <p>Use a HCL list variable which allows each entry to have an associated comment
 explaining what the CIDR corresponds to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;client_cidrs&#34;</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;client_cidrs&#34;</span> {
     type<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;list&#34;</span>,
     default<span style="color:#f92672">=</span>[
         <span style="color:#e6db74">&#34;1.1.1.1/32&#34;</span>,<span style="color:#75715e"> # London office
@@ -102,7 +102,7 @@ explaining what the CIDR corresponds to:</p>
 }</code></pre></div>
 <p>If you need to pass these values around as a CSV string, use <code>locals</code> to join
 the list entries:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">locals</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-hcl" data-lang="hcl"><span style="color:#66d9ef">locals</span> {
     ingress_cidrs <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;${join(&#34;,&#34;, var.client_cidrs)}&#34;</span>
 }</code></pre></div>
 <p>but prefer to pass <code>list</code>-type variables around instead.</p>

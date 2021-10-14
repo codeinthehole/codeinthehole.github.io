@@ -88,7 +88,7 @@ new type.</p>
 
 <p>For instance, I recently changed a <code>CharField</code> to a <code>TimeField</code> but the
 corresponding migration lead to:</p>
-<pre><code>Running migrations for stores:
+<pre tabindex="0"><code>Running migrations for stores:
 - Migrating forwards to 0009_auto__chg_field_openingperiod_start__chg_field_openingperiod_end.
 &gt; stores:0008_auto__del_unique_store_slug
 &gt; stores:0009_auto__chg_field_openingperiod_start__chg_field_openingperiod_end
@@ -102,16 +102,16 @@ The error was: column &#34;start&#34; cannot be cast to type time without time z
 specify how to compute the new value from the old.</p>
 
 <p>For the above example, the correct SQL to use is:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#e6db74">&#34;stores_openingperiod&#34;</span> 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#e6db74">&#34;stores_openingperiod&#34;</span> 
     <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#e6db74">&#34;end&#34;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">DEFAULT</span>, 
     <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#e6db74">&#34;end&#34;</span> <span style="color:#66d9ef">DROP</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span>, 
     <span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">COLUMN</span> <span style="color:#e6db74">&#34;end&#34;</span> <span style="color:#66d9ef">TYPE</span> time <span style="color:#66d9ef">USING</span> to_timestamp(<span style="color:#e6db74">&#34;end&#34;</span>, <span style="color:#e6db74">&#39;HHam&#39;</span>)</code></pre></div>
 <p>We need to modify the migration file to execute raw SQL with
 <code>db.execute</code> instead of using <code>db.alter_table</code> to generate the SQL. So
 we change:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>alter_column(<span style="color:#e6db74">&#39;stores_openingperiod&#39;</span>, <span style="color:#e6db74">&#39;end&#39;</span>, self<span style="color:#f92672">.</span>gf(<span style="color:#e6db74">&#39;django.db.models.fields.TimeField&#39;</span>)(null<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>alter_column(<span style="color:#e6db74">&#39;stores_openingperiod&#39;</span>, <span style="color:#e6db74">&#39;end&#39;</span>, self<span style="color:#f92672">.</span>gf(<span style="color:#e6db74">&#39;django.db.models.fields.TimeField&#39;</span>)(null<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>))</code></pre></div>
 <p>to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>execute(
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">db<span style="color:#f92672">.</span>execute(
     <span style="color:#e6db74">&#39;ALTER TABLE &#34;stores_openingperiod&#34; &#39;</span>
     <span style="color:#e6db74">&#39;ALTER COLUMN &#34;end&#34; DROP DEFAULT, &#39;</span>
     <span style="color:#e6db74">&#39;ALTER COLUMN &#34;end&#34; DROP NOT NULL, &#39;</span>

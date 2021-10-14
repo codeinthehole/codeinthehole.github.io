@@ -98,7 +98,7 @@ stage goes to a file in <code>/var/log/project/stage</code>.</p>
 
 <p>This can be solved by using a string template for the <code>filename</code>
 argument to each <code>FileHandler</code> in the <code>LOGGING</code> setting:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
 
 LOGGING <span style="color:#f92672">=</span> {
     <span style="color:#e6db74">&#39;version&#39;</span>: <span style="color:#ae81ff">1</span>,
@@ -121,7 +121,7 @@ LOGGING <span style="color:#f92672">=</span> {
 }</code></pre></div>
 <p>then importing the default <code>LOGGING</code> dict into your environment-specific
 settings and formatting each filename with the correct path:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
 
 <span style="color:#f92672">from</span> conf.default <span style="color:#f92672">import</span> LOGGING
 
@@ -137,7 +137,7 @@ setting (without an environmental override) will lead to an error .</p>
 <p>Another, possibly more elegant, solution is to use a specialisd logging
 handler that defers evaluation of the filepath until it tries to log a
 record.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> logging <span style="color:#f92672">import</span> FileHandler <span style="color:#66d9ef">as</span> BaseFileHandler
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> logging <span style="color:#f92672">import</span> FileHandler <span style="color:#66d9ef">as</span> BaseFileHandler
 <span style="color:#f92672">import</span> os
 
 
@@ -155,7 +155,7 @@ record.</p>
         self<span style="color:#f92672">.</span>baseFilename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(settings<span style="color:#f92672">.</span>LOG_ROOT, self<span style="color:#f92672">.</span>filename)
         <span style="color:#66d9ef">return</span> BaseFileHandler<span style="color:#f92672">.</span>_open(self)</code></pre></div>
 <p>Now, all we need to do is use the new handler in our <code>LOGGING</code> dict:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/default.py</span>
 
 LOGGING <span style="color:#f92672">=</span> {
     <span style="color:#e6db74">&#39;version&#39;</span>: <span style="color:#ae81ff">1</span>,
@@ -177,7 +177,7 @@ LOGGING <span style="color:#f92672">=</span> {
     }
 }</code></pre></div>
 <p>and specify a <code>LOG_ROOT</code> setting for each environment:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># conf/test.py</span>
 
 LOG_ROOT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/var/log/project/test/&#39;</span></code></pre></div>
 <p>Such a logger is part of
@@ -186,7 +186,7 @@ but I&rsquo;ve packaged it up separately so it can be used in non-Oscar
 projects. The package is called
 <a href="https://github.com/codeinthehole/django-deferred-filelogger">django-deferred-filelogger</a>
 and can be installed from PyPI using:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pip install django-deferred-filelogger</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pip install django-deferred-filelogger</code></pre></div>
         </div>
 
         <div id="article_meta">

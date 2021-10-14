@@ -132,7 +132,7 @@ various attributes mirror those from the API docs.</p>
 locally, export the file to a local phing tasks folder (I use
 <code>/usr/share/php/phing/tasks/my</code> on my Ubuntu machine). Having done that,
 a simple example build.xml file to exercise the task would be:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Nabaztag update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
     <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;nabaztag&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.NabaztagTask&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;build-failure&#34;</span><span style="color:#f92672">&gt;</span>
@@ -141,7 +141,7 @@ a simple example build.xml file to exercise the task would be:</p>
 <span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
 <p>To use this with Xinc, you simply need to called the appropriate target
 from your project configuration file. Another toy example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
 <span style="color:#f92672">&lt;xinc&gt;</span>
     <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Toy example&#34;</span><span style="color:#f92672">&gt;</span>
         <span style="color:#f92672">&lt;configuration&gt;</span>
@@ -172,7 +172,7 @@ fails or not. This makes it a touch tricky to handle failed updates.</p>
 
 <p>Nabaztags are also useful for general reminders - I have the following
 line in my crontab:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&#34;</span> </code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&#34;</span> </code></pre></div>
         </div>
 
         <div id="article_meta">

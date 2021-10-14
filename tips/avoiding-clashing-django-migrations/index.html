@@ -86,7 +86,7 @@ what we do at <a href="http://justyoyo.com/">Yoyo</a> is test for such clashes a
 part of our Travis continuous integration.</p>
 
 <p>This is done by calling a <code>makefile</code> target from <code>.travis.yml</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .travis.yml</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .travis.yml</span>
 
 <span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
 
@@ -100,7 +100,7 @@ part of our Travis continuous integration.</p>
     - <span style="color:#ae81ff">make test</span>
     - <span style="color:#ae81ff">make migration_test</span></code></pre></div>
 <p>where the <code>migration_test</code> target is:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># makefile
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># makefile
 </span><span style="color:#75715e"></span>
 MIGRATION_CLASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell find . -type f -name <span style="color:#e6db74">&#34;*.py&#34;</span> | grep -o <span style="color:#e6db74">&#34;.*/migrations/[0-9]\+&#34;</span> | sort | uniq -c | awk <span style="color:#e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color:#66d9ef">)</span>
 <span style="color:#a6e22e">migration_test</span><span style="color:#f92672">:</span>

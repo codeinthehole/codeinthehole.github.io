@@ -97,7 +97,7 @@ explained with an &hellip;</p>
 <h3 id="example">Example</h3>
 
 <p>Consider a view that renders a user&rsquo;s tweets:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
@@ -110,7 +110,7 @@ round-trip and is slow. Enter caching.</p>
 
 <p>Performance can be improved using Django&rsquo;s <a href="https://docs.djangoproject.com/en/dev/topics/cache/?from=olddocs#the-low-level-cache-api">low-level cache
 API</a>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
@@ -150,7 +150,7 @@ stampedes.</p>
 
 <p>Consider an alternative implementation that uses a Celery task to
 repopulate the cache.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.tasks <span style="color:#f92672">import</span> update_tweets
@@ -172,7 +172,7 @@ repopulate the cache.</p>
             update_tweets<span style="color:#f92672">.</span>delay(username, lifetime)
     <span style="color:#66d9ef">return</span> tweets</code></pre></div>
 <p>where the <code>myproject.tasks.update_tweets</code> task is implemented as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">from</span> celery <span style="color:#f92672">import</span> task
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
@@ -209,7 +209,7 @@ Indeed it is the basic of the Cacheback package.</p>
 
 <p>Here&rsquo;s the same functionality implemented using the <code>cacheback</code>
 function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 <span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
@@ -226,14 +226,14 @@ it will serialise the function and its args so it can be executed
 asynchronously by a Celery task.</p>
 
 <p>The <code>cacheback</code> function can also be used as a decorator:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
 
 <span style="color:#a6e22e">@cacheback</span>(<span style="color:#ae81ff">15</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_tweets</span>(username):
     <span style="color:#f92672">...</span></code></pre></div>
 <p>Or for more fine-grained control: using a subclass of
 <code>cacheback.base.Job</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 <span style="color:#f92672">from</span> cacheback.base <span style="color:#f92672">import</span> Job

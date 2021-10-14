@@ -82,13 +82,13 @@ co-workers can see <em>exactly</em> what you&rsquo;re talking about in a single 
 people would use them more (and design apps that support them properly).</p>
 
 <p>Anyway, a super-useful Vim mapping I use is:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;<span style="color:#a6e22e">gb</span> :<span style="color:#a6e22e">GBrowse</span>! <span style="color:#a6e22e">master</span>:%&lt;<span style="color:#a6e22e">cr</span>&gt; </code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;<span style="color:#a6e22e">gb</span> :<span style="color:#a6e22e">GBrowse</span>! <span style="color:#a6e22e">master</span>:%&lt;<span style="color:#a6e22e">cr</span>&gt; </code></pre></div>
 <p>which, after visually selecting a block of code, grabs its Github URL from the
 <code>HEAD</code> of <code>master</code> and copies it to the clipboard. I use this several times
 daily.</p>
 
 <p>If you want the URL for the code block from your <em>current branch</em>, use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">GBrowse</span>!</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">GBrowse</span>!</code></pre></div>
 <p>although you have to have pushed your branch for the URL to resolve.</p>
 
 <p>Various other &ldquo;fugitive-objects&rdquo; can be passed to <code>:GBrowse</code> to

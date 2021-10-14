@@ -85,7 +85,7 @@ the client side.</p>
 
 <p>To this end, I use the following simple Cookies object, build on top of
 the Prototype Javascript library (version &gt; 1.5):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>({
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>({
     <span style="color:#a6e22e">initialize</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">path</span>, <span style="color:#a6e22e">domain</span>) {
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#39;/&#39;</span>;
         <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">domain</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">null</span>;
@@ -145,7 +145,7 @@ parameter for setting the expiry time in days if you want the data
 persisted longer than the current session.</p>
 
 <p>Cookies can now be interacted with in the following manner:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">biscuits</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Cookies</span>();
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">biscuits</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Cookies</span>();
 <span style="color:#a6e22e">biscuits</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;show_nav&#39;</span>, <span style="color:#e6db74">&#39;yes&#39;</span>);
 <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">biscuits</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;show_nav&#39;</span>) {
     <span style="color:#75715e">// Show the navigation...
@@ -153,7 +153,7 @@ persisted longer than the current session.</p>
 <p>The above object is useful for storing simple string data, but we can
 easily extend the above to allow arrays and objects to be persisted in
 the cookie by using JSON.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">JsonCookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">Cookies</span>, {});
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">JsonCookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">Cookies</span>, {});
 <span style="color:#a6e22e">JsonCookies</span>.<span style="color:#a6e22e">addMethods</span>({
     <span style="color:#75715e">// Overridden set method to JSON-encode value
 </span><span style="color:#75715e"></span>    <span style="color:#a6e22e">set</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$super</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">days</span>) {
@@ -178,7 +178,7 @@ the cookie by using JSON.</p>
     }
 });</code></pre></div>
 <p>As we&rsquo;re overriding the set and get methods, the API remains the same:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Persist some array data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Persist some array data
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hobnobs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
 <span style="color:#a6e22e">hobnobs</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;selectedIds&#39;</span>, [<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">46</span>,<span style="color:#ae81ff">32</span>], <span style="color:#ae81ff">7</span>)
 
@@ -192,7 +192,7 @@ the cookie by using JSON.</p>
 testable as it requires little in the way of fixtures. What follows is
 set of unit tests that work with the JSUnit testing suite. You can run
 the unit tests directly, using the JSUnit test runner.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myKey</span>    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hereismykey&#39;</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myKey</span>    <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hereismykey&#39;</span>;
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myValue</span>  <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;hereismyvalue&#39;</span>;
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myCookies</span>;
 <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUp</span>() {

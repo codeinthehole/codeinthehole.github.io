@@ -76,7 +76,7 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>If your Consul key-value store is structured as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">/
     A/
         X <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
         Z <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
@@ -85,7 +85,7 @@ if (!doNotTrack) {
     D</code></pre></div>
 <p>but you now realise you should have namespaced everything within <code>WEBSERVER/</code> (or
 something like that):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/
     WEBSERVER/
         A/
             X <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>
@@ -94,7 +94,7 @@ something like that):</p>
         C
         D</code></pre></div>
 <p>then this Bash script will help you migrate:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 set -e  <span style="color:#75715e"># Exit on error</span>
 

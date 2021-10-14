@@ -89,7 +89,7 @@ depending on certain parameters.</p>
 <h3 id="solution">Solution</h3>
 
 <p>You can reload the URL config using the following snippet:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">reload_urlconf</span>(urlconf<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>):
@@ -108,7 +108,7 @@ set-up for a test.</p>
 <p>This was achieved in the following way, where the setting
 <code>OSCAR_ALLOW_ANON_CHECKOUT</code> is set to <code>True</code> and the URL config is
 reloaded.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 <span style="color:#f92672">from</span> django.utils.importlib <span style="color:#f92672">import</span> import_module
 

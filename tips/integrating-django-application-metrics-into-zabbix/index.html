@@ -85,7 +85,7 @@ note-to-self on how to configure application monitoring.</p>
 
 <p>You need a script that prints out a value to STDOUT. A simple management
 command suffices:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.core.management.base <span style="color:#f92672">import</span> BaseCommand, CommandError
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.core.management.base <span style="color:#f92672">import</span> BaseCommand, CommandError
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Command</span>(BaseCommand):
 
@@ -113,15 +113,15 @@ command suffices:</p>
 <p>This uses dynamic dispatch to call &ldquo;fetcher&rdquo; methods with name
 <code>fetch_%s</code> where the first argument defines the format variable. Eg, a
 method:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_num_users</span>(self):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_num_users</span>(self):
     <span style="color:#e6db74">&#34;&#34;&#34;
 </span><span style="color:#e6db74">    Fetch number of users
 </span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
     <span style="color:#66d9ef">return</span> User<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>all()<span style="color:#f92672">.</span>count()</code></pre></div>
 <p>is called via:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./manage.py application_metric num_users</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./manage.py application_metric num_users</code></pre></div>
 <p>Without arguments, a list of fetchers is shown:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./manage.py application_metric
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./manage.py application_metric
 Available fetchers:
  - num_users : Fetch number of users</code></pre></div>
 <p>It&rsquo;s trivial to add more <code>fetch__*</code> methods to emit additional metrics.</p>
@@ -130,13 +130,13 @@ Available fetchers:
 
 <p>Hook this up to Zabbix by first creating a plugin script which calls the
 management command, passing on an arg:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/zabbix/plugins/application
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/zabbix/plugins/application
 <span style="color:#75715e">#!/bin/bash</span>
 
 source /path/to/virtualenv/bin/activate <span style="color:#f92672">&amp;&amp;</span> /path/to/project/manage.py application_metric $1</code></pre></div>
 <p>then create the Zabbix &ldquo;UserParameter&rdquo; declaration which calls the
 plugin script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/zabbix/zabbix_agentd.conf.d/application.conf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat /etc/zabbix/zabbix_agentd.conf.d/application.conf
 UserParameter<span style="color:#f92672">=</span>application<span style="color:#f92672">[</span>*<span style="color:#f92672">]</span>,/etc/zabbix/plugins/application $1</code></pre></div>
 <p>The <code>application[*]</code> syntax means that you can configure various &ldquo;Items&rdquo;
 in Zabbix like <code>application[num_orders]</code> and <code>application[num_users]</code>
@@ -144,7 +144,7 @@ and the bracketed string will get passed all the way through to the
 management command.</p>
 
 <p>Now restart Zabbix to pick up the new conf file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /etc/init.d/zabbix-agent restart</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /etc/init.d/zabbix-agent restart</code></pre></div>
 <h3 id="zabbix-dashboard">Zabbix dashboard</h3>
 
 <p>In the Zabbix web dashboard add new &ldquo;Items&rdquo; that use this new

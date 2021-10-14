@@ -93,7 +93,7 @@ constraints on the join.</p>
 <p>Assume the date values in <code>t1</code> correspond to the <code>Europe/London</code> time zone.</p>
 
 <h2 id="join-rows-where-a-timestamp-value-is-within-the-date">Join rows where a timestamp value is <em>within</em> the date</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> t1.<span style="color:#f92672">*</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> t1.<span style="color:#f92672">*</span>
 <span style="color:#66d9ef">FROM</span> t1 
 <span style="color:#66d9ef">JOIN</span> t2 <span style="color:#66d9ef">ON</span> (
     t1.t2_id <span style="color:#f92672">=</span> t2.id <span style="color:#66d9ef">AND</span>
@@ -103,7 +103,7 @@ constraints on the join.</p>
 casting to date.</p>
 
 <h2 id="join-rows-where-a-timestamp-value-is-equal-to-midnight-of-the-date">Join rows where a timestamp value is equal to midnight of the date</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> t1.<span style="color:#f92672">*</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span> t1.<span style="color:#f92672">*</span>
 <span style="color:#66d9ef">FROM</span> t1 
 <span style="color:#66d9ef">JOIN</span> t2 <span style="color:#66d9ef">ON</span> (
     t1.t2_id <span style="color:#f92672">=</span> t2.id <span style="color:#66d9ef">AND</span>

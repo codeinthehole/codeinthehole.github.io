@@ -87,7 +87,7 @@ for management commands that run as cronjobs.</p>
 
 <p>For Python 2.6, use the following LOGGING config in your settings to
 specify a different output stream:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 LOGGING <span style="color:#f92672">=</span> {
     <span style="color:#e6db74">&#39;handlers&#39;</span>: {
         <span style="color:#e6db74">&#39;console&#39;</span>:{
@@ -107,7 +107,7 @@ the right version.</p>
 <p><a href="https://docs.djangoproject.com/en/dev/topics/logging/#an-example">Django&rsquo;s logging
 docs</a>
 detail the following logging configuration for a console handler:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">LOGGING <span style="color:#f92672">=</span> {
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">LOGGING <span style="color:#f92672">=</span> {
     <span style="color:#f92672">...</span>
     <span style="color:#e6db74">&#39;handlers&#39;</span>: {
         <span style="color:#e6db74">&#39;console&#39;</span>:{
@@ -126,7 +126,7 @@ to use STDOUT.</p>
 root. A more desirable behaviour is for only genuine errors to trigger
 emails, while normal output can be logged to file. Hence, a sensible
 cronjob file would look something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SHELL<span style="color:#f92672">=</span>/bin/bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SHELL<span style="color:#f92672">=</span>/bin/bash
 MAILTO<span style="color:#f92672">=</span>alerts.someproject@yourcompany.co.uk
 
 */10 * * * * app source /venv/bin/activate <span style="color:#f92672">&amp;&amp;</span> /app/manage.py do_something &gt; /dev/null  </code></pre></div>

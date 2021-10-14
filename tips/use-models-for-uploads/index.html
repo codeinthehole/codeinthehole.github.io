@@ -87,7 +87,7 @@ why.</p>
 <p>Suppose your e-commerce application allows admins to upload CSV files to
 update product stock levels (a common requirement). A typical file may
 comprise a SKU and a stock level:</p>
-<pre><code>9781231231999,0
+<pre tabindex="0"><code>9781231231999,0
 9781231231999,4
 9781231231999,2
 ...</code></pre>
@@ -104,7 +104,7 @@ steps are generally:</p>
 </ol>
 
 <p>For example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_upload</span>(request):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_upload</span>(request):
     <span style="color:#66d9ef">if</span> request<span style="color:#f92672">.</span>method <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;POST&#39;</span>:
         form <span style="color:#f92672">=</span> UploadFileForm(request<span style="color:#f92672">.</span>POST, request<span style="color:#f92672">.</span>FILES)
         <span style="color:#66d9ef">if</span> form<span style="color:#f92672">.</span>is_valid():
@@ -130,7 +130,7 @@ files have been processed, how long processing took and who uploaded
 them. Of course, this can be addressed by logging but a more elegant
 solution to use a simple audit model as well. Consider an alternative
 implementation of <code>handle_uploaded_file</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(user, f):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(user, f):
     filepath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/somefile.txt&#39;</span>
     <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;wb+&#39;</span>) <span style="color:#66d9ef">as</span> dest:
         <span style="color:#66d9ef">for</span> chunk <span style="color:#f92672">in</span> f<span style="color:#f92672">.</span>chunks():
@@ -143,7 +143,7 @@ implementation of <code>handle_uploaded_file</code>:</p>
 <p>where we&rsquo;re now passing the logged-in user too.</p>
 
 <p>The model definition for <code>StockUpload</code> may look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">from</span> django.db <span style="color:#f92672">import</span> models
 <span style="color:#f92672">from</span> django.utils.translation <span style="color:#f92672">import</span> ugettext_lazy <span style="color:#66d9ef">as</span> _
 
@@ -197,11 +197,11 @@ implementation of <code>handle_uploaded_file</code>:</p>
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>status <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>PROCESSED</code></pre></div>
 <p>You can go further and push the file creation into a manager method so
 the filepath generation is removed from the view:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(f):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(f):
     upload <span style="color:#f92672">=</span> StockUpload<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create_from_stream(user, f)
     upload<span style="color:#f92672">.</span>process()</code></pre></div>
 <p>where <code>create_from_stream</code> could be implemented as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StockUploadManager</span>(models<span style="color:#f92672">.</span>Manager):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StockUploadManager</span>(models<span style="color:#f92672">.</span>Manager):
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">create_from_stream</span>(self, user, f):
         filepath <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>generate_filename()
@@ -213,7 +213,7 @@ the filepath generation is removed from the view:</p>
             uploaded_by<span style="color:#f92672">=</span>user
         )</code></pre></div>
 <p>and, if processing takes a while, push the work into Celery:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@task</span>()
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@task</span>()
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_upload</span>(upload_id):
     upload <span style="color:#f92672">=</span> StockUpload<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>get(id<span style="color:#f92672">=</span>upload_id)
     upload<span style="color:#f92672">.</span>process()
@@ -224,7 +224,7 @@ the filepath generation is removed from the view:</p>
 <p>Here&rsquo;s a more complete implementation that uses a library of mine,
 <a href="https://github.com/codeinthehole/django-async-messages/">django-async-messages</a>,
 to send a message back to the user who uploaded the file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># tasks.py</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># tasks.py</span>
 
 <span style="color:#a6e22e">@task</span>()
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_upload</span>(upload_id):

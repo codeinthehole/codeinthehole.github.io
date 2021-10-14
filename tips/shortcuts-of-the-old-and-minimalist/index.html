@@ -121,9 +121,9 @@ is something like this:</p>
 
 <p>Scratch files live somewhere less visually intrusive (like, say, <code>~/Scratch</code>). Let the
 macOS screen-capture program know of this decision with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.screencapture location ~/Scratch</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.screencapture location ~/Scratch</code></pre></div>
 <p>Digression: any files in <code>~/Desktop</code> can be hidden by enabling the &ldquo;Quit&rdquo; menu item for Finder:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.finder QuitMenuItem -bool true
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.finder QuitMenuItem -bool true
 $ killall Finder</code></pre></div>
 <p>then quitting: <span class="keys">⌘</span>&nbsp;+&nbsp;<span
 class="keys">Q</span>. This is worth doing if only to remove Finder from the

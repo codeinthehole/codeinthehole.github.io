@@ -90,7 +90,7 @@ project. This is making you unhappy.</p>
 <p>Use your <code>postactivate</code><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> script to set the terminal title when you
 activate a virtual environment. Add something similar to the following
 to your <code>postactivate</code> script:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;codeinthehole.com&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;codeinthehole.com&#34;</span>
 echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$TITLE<span style="color:#e6db74">\007&#34;</span></code></pre></div>
 <p>Then whenever you start working on a project (using <code>workon</code>), your tab
 title will be labelled correctly.</p>

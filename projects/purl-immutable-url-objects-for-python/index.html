@@ -85,7 +85,7 @@ write is often cumbersome and unclear.</p>
 
 <p>For instance, here&rsquo;s a typical test method that makes an assertion about
 a query parameter:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> urlparse
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> urlparse
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_url_has_correct_query_parameter</span>(self):
     url <span style="color:#f92672">=</span> get_url_from_somewhere()
@@ -93,7 +93,7 @@ a query parameter:</p>
     query_params <span style="color:#f92672">=</span> urlparse<span style="color:#f92672">.</span>parse_qs(parse_result<span style="color:#f92672">.</span>query)
     self<span style="color:#f92672">.</span>assertEqual(<span style="color:#e6db74">&#39;testing&#39;</span>, query_params[<span style="color:#e6db74">&#39;q&#39;</span>][<span style="color:#ae81ff">0</span>])</code></pre></div>
 <p>Not terrible, but could be more concise. I would prefer something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> somelibrary <span style="color:#f92672">import</span> URL
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> somelibrary <span style="color:#f92672">import</span> URL
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_url_has_correct_query_parameter</span>(self):
     url <span style="color:#f92672">=</span> URL<span style="color:#f92672">.</span>from_string(get_url_from_somewhere())
@@ -101,13 +101,13 @@ a query parameter:</p>
 <p>Further, when working with webservices, you often need to build URLs
 programmatically but it just isn&rsquo;t easy enough in python. You often end
 up using string formatting:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> urllib
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> urllib
 
 URL_TEMPLATE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://github.com/</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">?w=</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#39;</span> 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_github_url</span>(username):
     <span style="color:#66d9ef">return</span> URL_TEMPLATE <span style="color:#f92672">%</span> (urllib<span style="color:#f92672">.</span>quote(username), <span style="color:#e6db74">&#39;0&#39;</span>)</code></pre></div>
 <p>A preferable API might look something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> somelibrary <span style="color:#f92672">import</span> URL
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> somelibrary <span style="color:#f92672">import</span> URL
 
 BASE_URL <span style="color:#f92672">=</span> URL<span style="color:#f92672">.</span>from_string(<span style="color:#e6db74">&#39;https://github.com/&#39;</span>) 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_github_url</span>(username):
@@ -128,9 +128,9 @@ complicated URLs.</p>
 to be both accessors and mutators.</p>
 
 <p>Install with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install purl</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">pip install purl</code></pre></div>
 <p>Construct URL instances as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> purl <span style="color:#f92672">import</span> URL
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> purl <span style="color:#f92672">import</span> URL
 
 <span style="color:#75715e"># Explicit constructor</span>
 u <span style="color:#f92672">=</span> URL(scheme<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;https&#39;</span>, host<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;www.google.com&#39;</span>, path<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;/search&#39;</span>, query<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;q=testing&#39;</span>)
@@ -145,7 +145,7 @@ u <span style="color:#f92672">=</span> URL()<span style="color:#f92672">.</span>
 u <span style="color:#f92672">=</span> URL<span style="color:#f92672">.</span>from_string(<span style="color:#e6db74">&#39;https://www.google.com&#39;</span>)<span style="color:#f92672">.</span>path(<span style="color:#e6db74">&#39;search&#39;</span>) \
                                              <span style="color:#f92672">.</span>query_param(<span style="color:#e6db74">&#39;q&#39;</span>, <span style="color:#e6db74">&#39;testing&#39;</span>)</code></pre></div>
 <p>There&rsquo;s a full range of inspection methods:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Simple attributes</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># Simple attributes</span>
 u<span style="color:#f92672">.</span>scheme()      <span style="color:#75715e"># &#39;https&#39;</span>
 u<span style="color:#f92672">.</span>host()        <span style="color:#75715e"># &#39;www.google.com&#39; </span>
 u<span style="color:#f92672">.</span>domain()      <span style="color:#75715e"># &#39;www.google.com&#39; - alias of host</span>
@@ -167,7 +167,7 @@ u<span style="color:#f92672">.</span>subdomain(<span style="color:#ae81ff">0</sp
 <p>Each accessor method is overloaded to be a mutator method too, similar
 to the jQuery API. Since the URL class is immutable, any mutation will
 return a new URL instance.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">u <span style="color:#f92672">=</span> URL<span style="color:#f92672">.</span>from_string(<span style="color:#e6db74">&#39;https://github.com/codeinthehole&#39;</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">u <span style="color:#f92672">=</span> URL<span style="color:#f92672">.</span>from_string(<span style="color:#e6db74">&#39;https://github.com/codeinthehole&#39;</span>)
 
 <span style="color:#75715e"># Access</span>
 u<span style="color:#f92672">.</span>path_segment(<span style="color:#ae81ff">0</span>) <span style="color:#75715e"># returns &#39;codeinthehole&#39;</span>
@@ -175,7 +175,7 @@ u<span style="color:#f92672">.</span>path_segment(<span style="color:#ae81ff">0<
 <span style="color:#75715e"># Mutate (creates a new instance)</span>
 new_url <span style="color:#f92672">=</span> u<span style="color:#f92672">.</span>path_segment(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;tangentlabs&#39;</span>) <span style="color:#75715e"># returns new URL object</span></code></pre></div>
 <p>Here&rsquo;s a fancier example of building a URL:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">u <span style="color:#f92672">=</span> URL()<span style="color:#f92672">.</span>scheme(<span style="color:#e6db74">&#39;https&#39;</span>)\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">u <span style="color:#f92672">=</span> URL()<span style="color:#f92672">.</span>scheme(<span style="color:#e6db74">&#39;https&#39;</span>)\
          <span style="color:#f92672">.</span>host(<span style="color:#e6db74">&#39;github.com&#39;</span>)<span style="color:#960050;background-color:#1e0010">`</span>\
          <span style="color:#f92672">.</span>path_segment(<span style="color:#ae81ff">0</span>, <span style="color:#e6db74">&#39;codeinthehole&#39;</span>)\
          <span style="color:#f92672">.</span>path_segment(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;purl&#39;</span>)\

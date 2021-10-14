@@ -91,9 +91,9 @@ handle quoting and escaping which are common in CSVs.</p>
 I&rsquo;ve put together.</p>
 
 <p>Install with:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install csvfilter</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pip install csvfilter</code></pre></div>
 <p>Sample usage:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pluck columns 2, 5 and 6</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Pluck columns 2, 5 and 6</span>
 cat in.csv | csvfilter -f 2,5,6 &gt; out.csv
 
 <span style="color:#75715e"># Pluck all columns except 4</span>
@@ -106,9 +106,9 @@ cat in.csv | csvfilter -s <span style="color:#ae81ff">1</span> &gt; out.csv
 cat in.csv | csvfilter -s 1,3 --delimiter<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;|&#34;</span> &gt; out.csv</code></pre></div>
 <p>The above examples show <code>csvfilter</code> processing <code>sys.STDIN</code> but it can
 also act directly on a file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">csvfilter -f 2,5,6 in.csv  &gt; out.csv</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">csvfilter -f 2,5,6 in.csv  &gt; out.csv</code></pre></div>
 <p>Help:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ csvfilter --help
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ csvfilter --help
 Usage: csvfilter <span style="color:#f92672">[</span>options<span style="color:#f92672">]</span>
 
 Options:
@@ -125,7 +125,7 @@ Options:
                         Quote character to use <span style="color:#66d9ef">for</span> output</code></pre></div>
 <p>There is also a simple python API that allows you to add validators to
 determine which rows are filtered out:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> csvfilter <span style="color:#f92672">import</span> Processor
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> csvfilter <span style="color:#f92672">import</span> Processor
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">contains_cheese</span>(row):
     <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#39;cheese&#39;</span> <span style="color:#f92672">in</span> row
@@ -140,9 +140,9 @@ generator <span style="color:#f92672">=</span> processor<span style="color:#f926
 
 <p>It&rsquo;s possible to do basic CSV manipulation from the command-line using
 <code>cut</code> or <code>awk</code> - for example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat in.csv | cut -d <span style="color:#e6db74">&#34;,&#34;</span> -f 0,1,2 &gt; out.csv</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat in.csv | cut -d <span style="color:#e6db74">&#34;,&#34;</span> -f 0,1,2 &gt; out.csv</code></pre></div>
 <p>or :</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat in.csv | awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;,&#34;} {print $1,$2,$3}&#39;</span> &gt; out.csv</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cat in.csv | awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;,&#34;} {print $1,$2,$3}&#39;</span> &gt; out.csv</code></pre></div>
 <p>However neither <code>cut</code> or <code>awk</code> make it easy to handle CSVs with escaped
 characters - hence the motivation for this tool.</p>
 

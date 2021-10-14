@@ -79,7 +79,7 @@ if (!doNotTrack) {
 Phing can be used to make such deployments easy - here&rsquo;s how&hellip;</p>
 
 <p>Consider an application folder structure as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/builds
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/builds
     /development
     /test
     /stage
@@ -118,7 +118,7 @@ user&rsquo;s crontab automatically.</p>
 <p>A much better way is to create a number of scripts which specify the
 cron tasks and are deployed to the /etc/cron.d folder. In the above
 example, these are stored in /src/cron.d and would look something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
 <span style="color:#ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log</code></pre></div>
 <p>(Note that, for some reason, a blank line is required at the end of this
 file in order for the script to be run by cron.) Here, the <code>__BUILD__</code>
@@ -136,7 +136,7 @@ the file itself).</p>
 
 <p>This is probably best illustrated with a sample phing script which takes
 the build name (eg &ldquo;development&rdquo;) as a parameter:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;xml</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span> <span style="color:#a6e22e">encoding=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;xml</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span> <span style="color:#a6e22e">encoding=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#f92672">&gt;</span>
 <span style="color:#f92672">&lt;project&gt;</span>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
         ...
@@ -166,14 +166,14 @@ removing a system file). Copies the new scripts into <code>/etc/cron.d</code> wh
 replacing the token <code>__BUILD__</code> with the build name in both the file
 contents and file names. After separate deployments for dev and stage,
 we should find the following:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc
     /cron.d
         appname-development-order-processing
         appname-stage-order-processing
         ...</code></pre></div>
 <p>where, for instance, the contents of
 <code>/etc/cron.d/appname-development-order-processing</code> would be:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-ready-to-ship-orders.php
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-ready-to-ship-orders.php
 * * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-cancellations.php
 ...</code></pre></div>
 <p>Having automatic and reliable deployment of cron-jobs in place is quite

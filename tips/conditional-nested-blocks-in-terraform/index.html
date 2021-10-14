@@ -94,7 +94,7 @@ is set.</p>
 can be upgraded.</p>
 
 <p>Define a boolean <code>maintenance_mode</code> variable:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#75715e"># variables.tf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#75715e"># variables.tf
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">
 </span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;maintenance_mode&#34;</span> {
   <span style="color:#a6e22e">type</span>    = <span style="color:#a6e22e">bool</span>
@@ -102,7 +102,7 @@ can be upgraded.</p>
 }</code></pre></div>
 <p>and use it to create conditional <code>default_action</code> blocks in an <code>aws_lb_listener</code>
 resource.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#75715e"># main.tf
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#75715e"># main.tf
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">
 </span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_lb_listener&#34;</span> <span style="color:#e6db74">&#34;this&#34;</span> {
   <span style="color:#a6e22e">load_balancer_arn</span> = <span style="color:#a6e22e">aws_lb</span>.<span style="color:#a6e22e">this</span>.<span style="color:#a6e22e">arn</span>

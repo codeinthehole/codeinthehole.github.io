@@ -85,7 +85,7 @@ keywords.</p>
 
 <p>For example, you may want to edit some attribute of the page at URL <code>/</code>;
 hence, you want to use a URL regex of the form:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/edit/page/(?P&lt;page_url&gt;.*)/$&#39;</span>, <span style="color:#f92672">...</span>)</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url(<span style="color:#e6db74">r</span><span style="color:#e6db74">&#39;/edit/page/(?P&lt;page_url&gt;.*)/$&#39;</span>, <span style="color:#f92672">...</span>)</code></pre></div>
 <p>and use the URL <code>/edit/page/%2F/</code> to edit this page, where the third
 path segment is URL-encoded.</p>
 
@@ -98,13 +98,13 @@ the above request path as <code>/edit/path</code>.</p>
 
 <p>First, in order to get django to encode slashes, you need to pass an
 empty string to the <code>urlencode</code> template filter.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> url edit<span style="color:#f92672">-</span>page url<span style="color:#f92672">|</span>urlencode:<span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">%</span>}</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">{<span style="color:#f92672">%</span> url edit<span style="color:#f92672">-</span>page url<span style="color:#f92672">|</span>urlencode:<span style="color:#e6db74">&#34;&#34;</span> <span style="color:#f92672">%</span>}</code></pre></div>
 <p>Next ensure Nginx&rsquo;s <code>proxy_pass</code> configuration is transmitting the URL
 in &lsquo;unprocessed form&rsquo; by omitting the path on the proxied server
 argmenent. That is, use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">proxy_pass</span> <span style="color:#e6db74">http://localhost:80</span>;</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">proxy_pass</span> <span style="color:#e6db74">http://localhost:80</span>;</code></pre></div>
 <p>instead of:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">proxy_pass</span> <span style="color:#e6db74">http://localhost:80/</span>;</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">proxy_pass</span> <span style="color:#e6db74">http://localhost:80/</span>;</code></pre></div>
 <p>The only different between these two examples is the trailing slash. See
 the <a href="http://wiki.nginx.org/HttpProxyModule">nginx documentation for
 proxy_pass</a> for more details on
@@ -112,7 +112,7 @@ what &lsquo;unprocessed&rsquo; means.</p>
 
 <p>Next, alter your Apache config to include the <code>AllowEncodedSlashes</code>
 directive to ensure Apache recognises encoded slashes:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">\*</span><span style="color:#f92672">&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;VirtualHost</span> <span style="color:#e6db74">\*</span><span style="color:#f92672">&gt;</span>
     ...
     AllowEncodedSlashes <span style="color:#66d9ef">On</span>
     ...
@@ -120,7 +120,7 @@ directive to ensure Apache recognises encoded slashes:</p>
 <p>Finally modify your WSGI script to ensure Django gets the slashes in its
 <code>PATH_INFO</code> environmental variable which it uses for resolving the URL
 to a view function:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># ... other WSGI stuff: setting up path, virtualenv etc</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># ... other WSGI stuff: setting up path, virtualenv etc</span>
 
 os<span style="color:#f92672">.</span>environ[<span style="color:#e6db74">&#39;DJANGO_SETTINGS_MODULE&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;settings&#39;</span>
 <span style="color:#f92672">import</span> django.core.handlers.wsgi

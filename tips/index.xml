@@ -6,7 +6,19 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 May 2021 09:27:17 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Oct 2021 16:29:42 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Explaining</title>
+      <link>https://codeinthehole.com/tips/writing-an-explanation/</link>
+      <pubDate>Thu, 14 Oct 2021 16:29:42 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/writing-an-explanation/</guid>
+      <description>Someone has asked a question (in Slack or Github) and you&amp;rsquo;re about to write an explanation. But before you start typing, ask yourself this:
+ Is this the best place to answer this question?
+ Because the place where the question is asked is generally not the best place to write a detailed answer.
+&amp;ldquo;Why did you do it that way?&amp;rdquo; Imagine you&amp;rsquo;ve requested a review on a Github pull request and one of the reviewers has questiond why something is done the way it is.</description>
+    </item>
+    
     <item>
       <title>Vim&#39;s useful lists</title>
       <link>https://codeinthehole.com/tips/vim-lists/</link>
@@ -45,7 +57,7 @@ Define a boolean maintenance_mode variable:
     <item>
       <title>Maintainable Terraform CIDR lists</title>
       <link>https://codeinthehole.com/tips/terraform-cidrs/</link>
-      <pubDate>Wed, 08 Jul 2020 00:00:00 +0100</pubDate>
+      <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/terraform-cidrs/</guid>
       <description>Problem Your Terraform config requires managing many CIDRs that control firewall ingress rules. You&amp;rsquo;ve been storing these in a CSV string:

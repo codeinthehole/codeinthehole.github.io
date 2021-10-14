@@ -89,27 +89,27 @@ that an external party can upload data to your application securely.</p>
 <h3 id="user-set-up">User set-up</h3>
 
 <p>Create user with a dummy shell:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ adduser --shell<span style="color:#f92672">=</span>/bin/false barry</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ adduser --shell<span style="color:#f92672">=</span>/bin/false barry</code></pre></div>
 <p>and alter the ownership and permissions of their home folder:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ chown root:barry /home/barry
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ chown root:barry /home/barry
 $ chmod <span style="color:#ae81ff">755</span> /home/barry</code></pre></div>
 <p>Now create a folder to upload to:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir /home/barry/uploads
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ mkdir /home/barry/uploads
 $ chown barry:barry /home/barry/uploads
 $ chmod <span style="color:#ae81ff">755</span> /home/barry/uploads</code></pre></div>
 <h3 id="ssh-config">SSH config</h3>
 
 <p>Edit <code>/etc/ssh/sshd_config</code> and comment out the line:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp /usr/lib/openssh/sftp-server</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp /usr/lib/openssh/sftp-server</code></pre></div>
 <p>and add the following at the bottom of the file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp internal-sftp
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Subsystem sftp internal-sftp
 Match User barry
     ChrootDirectory %h
     ForceCommand internal-sftp
     X11Forwarding no
     AllowTCPForwarding no</code></pre></div>
 <p>then restart SSH:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /etc/init.d/ssh restart</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ /etc/init.d/ssh restart</code></pre></div>
 <p>The new user should now be able to sFTP.</p>
 
 <h3 id="further-reading">Further reading</h3>

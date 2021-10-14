@@ -87,7 +87,7 @@ project and include the installation instructions in your
 README/documentation to encourage all developers use it.</p>
 
 <p>Installation is nothing more than:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s ../../pre-commit.sh .git/hooks/pre-commit</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ln -s ../../pre-commit.sh .git/hooks/pre-commit</code></pre></div>
 <p>Then everyone benefits from running the same set of tests before
 committing and updates are picked up automatically.</p>
 
@@ -96,7 +96,7 @@ committing and updates are picked up automatically.</p>
 <p>Ensure that code that isn&rsquo;t part of the prospective commit isn&rsquo;t tested
 within your pre-commit script. This is missed by many sample pre-commit
 scripts but is easily achieved with <code>git stash</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
 STASH_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pre-commit-</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 git stash save -q --keep-index $STASH_NAME
 
@@ -116,7 +116,7 @@ STASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>
 <p>It&rsquo;s best to have a script (say <code>run_tests.sh</code>) that encapsulates the
 standard arguments to your test runner so your pre-commit script doesn&rsquo;t
 fall out of date. Something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># pre-commit.sh</span>
 git stash -q --keep-index
 ./run_tests.sh
 RESULT<span style="color:#f92672">=</span>$?
@@ -125,7 +125,7 @@ git stash pop -q
 exit <span style="color:#ae81ff">0</span></code></pre></div>
 <p>where a sample <code>run_tests.sh</code> implementation for a Django project may
 look like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># run_tests.sh</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># run_tests.sh</span>
 <span style="color:#f92672">./</span>manage<span style="color:#f92672">.</span>py test <span style="color:#f92672">--</span>settings<span style="color:#f92672">=</span>settings_test <span style="color:#f92672">-</span>v <span style="color:#ae81ff">2</span></code></pre></div>
 <h3 id="skip-the-pre-commit-hook-sometimes">Skip the pre-commit hook sometimes</h3>
 
@@ -135,19 +135,19 @@ manually run your test suite and don&rsquo;t need to see it run again when
 committing.</p>
 
 <p>I use git aliases to make this easy:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bash_aliases</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bash_aliases</span>
 alias gc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit&#39;</span>
 alias gcv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --no-verify&#39;</span></code></pre></div>
 <h3 id="search-yo-code-for-debugging-code">Search yo.. code for debugging code</h3>
 
 <p>At some point, someone will try and commit a file containing</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">import pdb; pdb.set_trace<span style="color:#f92672">()</span></code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">import pdb; pdb.set_trace<span style="color:#f92672">()</span></code></pre></div>
 <p>or some other debugging code. This can be easily avoided using the
 <code>pre-commit.sh</code> file to grep the staged codebase and abort the commit if
 forbidden strings are found.</p>
 
 <p>Here&rsquo;s an example that looks for <code>console.log</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">FILES_PATTERN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\.(js|coffee)(\..+)?$&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">FILES_PATTERN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;\.(js|coffee)(\..+)?$&#39;</span>
 FORBIDDEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;console.log&#39;</span>
 git diff --cached --name-only | <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    grep -E $FILES_PATTERN | <span style="color:#ae81ff">\

@@ -88,7 +88,7 @@ be local or on the destination server.</p>
 docs</a>, you can
 create local dump of a table by using the <code>--execute</code> option to output
 the results of a <code>SELECT ...</code> statement into a local file.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -D database_name -e <span style="color:#e6db74">&#34;SELECT ... &#34;</span> &gt; /path/to/file.txt</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -D database_name -e <span style="color:#e6db74">&#34;SELECT ... &#34;</span> &gt; /path/to/file.txt</code></pre></div>
 <p>This works but has two downsides:</p>
 
 <ol>
@@ -109,7 +109,7 @@ database connection.</p>
 <p>Now that we&rsquo;ve got our data locally, we load it into the remote database
 using <code>LOAD DATA INFILE</code> and make use of the <code>LOCAL</code> keyword which lets
 us use a local data file:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -h x.x.x.x -u user -D database_name --password<span style="color:#f92672">=</span>... -e <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -h x.x.x.x -u user -D database_name --password<span style="color:#f92672">=</span>... -e <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span><span style="color:#e6db74">&#34;LOAD DATA LOCAL INFILE &#39;/path/to/file.txt&#39; \
 </span><span style="color:#e6db74">REPLACE INTO TABLE table_name \
 </span><span style="color:#e6db74">IGNORE 1 LINES&#34;</span></code></pre></div>
@@ -119,7 +119,7 @@ sense to load the data into a temporary copy of the table, and then
 perform a <code>RENAME TABLE</code> operation to swap in the new table.</p>
 
 <p>Here&rsquo;s a quick and dirty PHP implementation:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 $tableName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;some_table&#39;</span>;
 $sql <span style="color:#f92672">=</span>
    <span style="color:#e6db74">&#34;SELECT * 

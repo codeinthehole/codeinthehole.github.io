@@ -88,7 +88,7 @@ runtime.</p>
 suite of &ldquo;localflavor&rdquo; form fields using the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
 3166-1</a> two character
 country code.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_postcode_validator</span>(country_code):
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_postcode_validator</span>(country_code):
     <span style="color:#75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
     <span style="color:#66d9ef">if</span> country_code <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;GB&#39;</span>:
         country_code <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;UK&#39;</span>
@@ -111,7 +111,7 @@ country code.</p>
 <p>As these validators are from forms, they will raise
 <code>django.forms.ValidationError</code> if the passed postcode is invalid. Hence
 your client code should look something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> ValidationError
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> ValidationError
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_postcode_valid</span>(postcode, country_code):
     <span style="color:#66d9ef">try</span>:

@@ -101,14 +101,14 @@ cloning the repo.</p>
 <a href="http://www.tangentsnowball.com/">Tangent</a>, projects use a <code>makefile</code>
 for common tasks. Setting up a working version of the project is as
 simple as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make </code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make </code></pre></div>
 <p>It&rsquo;s helpful if you can template new projects to embed good practices
 like this. We frequently use Django and maintain a <a href="https://github.com/tangentlabs/tangent-django-boilerplate/">boilerplate Django
 project</a> for
 this purpose. It includes a
 <a href="https://github.com/tangentlabs/tangent-django-boilerplate/blob/master/makefile">makefile</a>
 along these lines:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># Build a working version of the project
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># Build a working version of the project
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">build</span><span style="color:#f92672">:</span> clean virtualenv database
 
 <span style="color:#75715e"># Delete all temporary or untracked files
@@ -138,7 +138,7 @@ and the fixtures load (which is where we&rsquo;ve historically had pain).</p>
 
 <p>We use <a href="https://travis-ci.com/">Travis</a> for CI and our template
 <code>.travis.yml</code> looks a little like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
 
 <span style="color:#f92672">python</span>:
   - <span style="color:#e6db74">&#39;2.7&#39;</span>

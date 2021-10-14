@@ -79,12 +79,12 @@ if (!doNotTrack) {
 
 <p>Cloud computing and immutable infrastructure deployments have changed
 the way I use SSH. I miss the days when I could run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh app1-prod</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh app1-prod</code></pre></div>
 <p>to jump onto a machine and investigate an issue. This would work as,
 back in the days of yore, your web servers didn&rsquo;t change IP address
 several times a week so I could create a helpful alias in
 <code>~/.ssh/config</code>:</p>
-<pre><code>Host app1-prod
+<pre tabindex="0"><code>Host app1-prod
     User example_user
     HostName 74.207.251.29</code></pre>
 <p>This circumvented the labour-intensive act of typing in the remote
@@ -118,7 +118,7 @@ entire auto-scale group with the new AMI. (I&rsquo;m happy to accept this is
 an regrettable practice and I need to raise my automation game.)</p>
 
 <p>In such circumstances, I want to be able to run:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh ip-10-5-8-179.eu-west-1.compute.internal</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh ip-10-5-8-179.eu-west-1.compute.internal</code></pre></div>
 <p>jumping straight onto an AWS EC2 instance using only its internal DNS
 name, plucked from the AWS console or a <code>boto</code> command.</p>
 
@@ -127,20 +127,20 @@ name, plucked from the AWS console or a <code>boto</code> command.</p>
 <h3 id="proxycommand-and-a-wildcard-ssh-alias">ProxyCommand and a wildcard SSH alias</h3>
 
 <p>Add an alias to <code>~/.ssh/config</code> for your bastion server. Something like:</p>
-<pre><code>Host bastion-prod
+<pre tabindex="0"><code>Host bastion-prod
     User example_user
     Hostname bastion.example.com
     IdentityFile ~/.ssh/bastion-prod.key
     LogLevel Quiet</code></pre>
 <p>then you can route SSH traffic through the bastion server using
 <code>ProxyCommand</code>:</p>
-<pre><code>Host *.compute.internal
+<pre tabindex="0"><code>Host *.compute.internal
     User ubuntu
     IdentityFile ~/.ssh/aws-prod.key
     ProxyCommand ssh bastion-prod -W %h:%p
     StrictHostKeyChecking no</code></pre>
 <p>and that&rsquo;s sufficient for commands like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh ip-10-5-8-179.eu-west-1.compute.internal</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh ip-10-5-8-179.eu-west-1.compute.internal</code></pre></div>
 <p>to work.</p>
 
 <p>Note, disabling <code>StrictHostKeyChecking</code> suppresses the confirmation

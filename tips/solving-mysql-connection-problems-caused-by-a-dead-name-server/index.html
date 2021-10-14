@@ -91,7 +91,7 @@ your database servers. Attempted connections get an error message:</p>
 
 <p>The relevant MySQL process list reveals a long list of attempted
 connections in state <code>login</code>:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@server-db1:~ $ mysqladmin processlist
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">root@server-db1:~ $ mysqladmin processlist
 +-----+----------------------+--------------------+----+---------+------+-------+
 | Id  | User                 | Host               | db | Command | Time | State |
 +-----+----------------------+--------------------+----+---------+------+-------+
@@ -118,14 +118,14 @@ seconds, no client will be able to connect.</p>
 <p>You can verify this using the <code>dig</code> command to exercise the name servers
 in <code>/etc/resolv.conf</code>. Here&rsquo;s the broken one (you&rsquo;ll have to wait for
 the time-out):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dig @180.179.39.80 www.google.com
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dig @180.179.39.80 www.google.com
 
 ; &lt;&lt;&gt;&gt; DiG 9.7.0-P1 &lt;&lt;&gt;&gt; @180.179.39.80 www.google.com
 ; <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> server found<span style="color:#f92672">)</span>
 ;; global options: +cmd
 ;; connection timed out; no servers could be reached</code></pre></div>
 <p>A working name server would return something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dig @180.179.39.81 www.google.com
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">dig @180.179.39.81 www.google.com
 
 ; &lt;&lt;&gt;&gt; DiG 9.7.0-P1 &lt;&lt;&gt;&gt; @180.179.39.81 www.google.com
 ; <span style="color:#f92672">(</span><span style="color:#ae81ff">1</span> server found<span style="color:#f92672">)</span>
@@ -179,7 +179,7 @@ host name for each thread, bypassing the name server problem.</p>
 hostnames in your privileges table. Thus, you may have to reconfigure
 your client users to get your site back up. You can verify this by using
 the following SQL to inspect your configured users and hosts:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">user</span>, <span style="color:#66d9ef">host</span> <span style="color:#66d9ef">FROM</span> mysql.<span style="color:#66d9ef">user</span>;</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">mysql<span style="color:#f92672">&gt;</span> <span style="color:#66d9ef">SELECT</span> <span style="color:#66d9ef">user</span>, <span style="color:#66d9ef">host</span> <span style="color:#66d9ef">FROM</span> mysql.<span style="color:#66d9ef">user</span>;</code></pre></div>
 <p>Check to see if the <code>host</code> column uses domain names.</p>
 
 <h3 id="credits">Credits</h3>

@@ -100,7 +100,7 @@ commit</li>
 
 <p>The following function can be used as part of Fabric build script. It&rsquo;s
 purpose is to determine the git reference to deploy from.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">determine_refspec_to_deploy_from</span>(is_test<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">determine_refspec_to_deploy_from</span>(is_test<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
     local(<span style="color:#e6db74">&#39;git fetch --tags&#39;</span>)
 
     <span style="color:#66d9ef">if</span> is_test:
@@ -166,13 +166,13 @@ the tagged releases.</p>
 
 <p>This snippet shows the latest 5 tags, making it easy to determine the
 next tag to use:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag | sort -V | tail -5 </code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag | sort -V | tail -5 </code></pre></div>
 <h4 id="constructing-a-build-name">Constructing a build name</h4>
 
 <p>For builds to test that aren&rsquo;t tagged, it&rsquo;s still useful to give them a
 build number that indicates what the latest tagged release was. This can
 be done with <code>git describe</code>, which will output something like:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">0.1.3-149-g1a48a5a</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">0.1.3-149-g1a48a5a</code></pre></div>
 <p>which indicates that the build came from the 149th commit after tag
 <code>0.1.3</code>.</p>
 

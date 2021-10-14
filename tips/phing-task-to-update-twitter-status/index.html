@@ -109,7 +109,7 @@ following attributes:</p>
   checkreturn   Boolean   Whether to check the request return code   false     No</p>
 
 <p>A simple example build.xml file using this task is as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Simple Twitter update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;tweet&#34;</span><span style="color:#f92672">&gt;</span>
     <span style="color:#f92672">&lt;tstamp&gt;</span>
         <span style="color:#f92672">&lt;format</span> <span style="color:#a6e22e">property=</span><span style="color:#e6db74">&#34;build.time&#34;</span> <span style="color:#a6e22e">pattern=</span><span style="color:#e6db74">&#34;%Y-%m-%d %H:%I&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -125,7 +125,7 @@ following attributes:</p>
 A more useful means of using this task is to parameterise the Twitter
 target to take a specified message so that it can be called from
 different deployment targets:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Twitter update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;deploy-to-test&#34;</span><span style="color:#f92672">&gt;</span>
     <span style="color:#f92672">&lt;tstamp&gt;</span>
         <span style="color:#f92672">&lt;format</span> <span style="color:#a6e22e">property=</span><span style="color:#e6db74">&#34;build.time&#34;</span> <span style="color:#a6e22e">pattern=</span><span style="color:#e6db74">&#34;%Y-%m-%d %H:%I&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -164,7 +164,7 @@ metrics.</p>
 
 <p>The source code for TwitterUpdateTask.php is as follows (with docblocks
 stripped out for brevity):</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">require_once</span> <span style="color:#e6db74">&#34;phing/Task.php&#34;</span>;
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TwitterUpdateTask</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Task</span> 
 {

@@ -104,7 +104,7 @@ field dynamically, depending on the submitted data.</li>
 <h3 id="a-solution">A solution</h3>
 
 <p>Start with this form class:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleForm</span>(forms<span style="color:#f92672">.</span>Form):
     NOW, LATER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;now&#39;</span>, <span style="color:#e6db74">&#39;later&#39;</span>
@@ -120,7 +120,7 @@ only using a single datetime field for the send date rather than the
 split-widget field of the wireframe.</p>
 
 <p>We can render this as follows:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;post&#39;</span>&gt;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;post&#39;</span>&gt;
     {% csrf_token %}
     {{ form.non_field_errors }}
 
@@ -151,7 +151,7 @@ radio button, but above the container elements.</p></li>
 </ul>
 
 <p>Next we add conditional validation to the form class:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleForm</span>(forms<span style="color:#f92672">.</span>Form):
     NOW, LATER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;now&#39;</span>, <span style="color:#e6db74">&#39;later&#39;</span>

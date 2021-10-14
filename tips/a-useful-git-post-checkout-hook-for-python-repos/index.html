@@ -85,7 +85,7 @@ removed.</p>
 <p>This can be neatly addressed through a &lsquo;post checkout&rsquo; hook which
 deletes all such files. Here is such a script, which also removes empty
 folders and prints a summary:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e"># Delete .pyc files and empty directories from root of project</span>
 cd ./<span style="color:#66d9ef">$(</span>git rev-parse --show-cdup<span style="color:#66d9ef">)</span>

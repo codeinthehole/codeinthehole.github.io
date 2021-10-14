@@ -98,7 +98,7 @@ given a glance through the source code
 
 <p>Here&rsquo;s a simple build.xml deployment script for a CodeIgniter project
 that uses the FtpDeploy task:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Shared hosting deployment&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
 
     <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.host&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;ftp.example.com&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -180,12 +180,12 @@ an argument.</p>
 
 <p>With the above build.xml in the root of your project, deploying to
 production is now as simple as:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing deploy-all</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing deploy-all</code></pre></div>
 <p>although most of the time the following suffices:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing</code></pre></div>
 <p>Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp
 which can be trivially installed in the usual manner:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pear install Net_FTP</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pear install Net_FTP</code></pre></div>
 <p>Of course, this script is overly simplistic and only works well with a
 single developer. However, it would be easy to extend to team
 development by integrating with SVN so that the latest revision (or

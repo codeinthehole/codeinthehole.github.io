@@ -107,7 +107,7 @@ is useful here:</p>
 <h4 id="work">Work</h4>
 
 <p>Create a feature branch to work on this issue:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b issue/472/django1.5</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b issue/472/django1.5</code></pre></div>
 <p>I find it helpful to include the issue number in the branch name but
 that might not be to your taste.</p>
 
@@ -116,10 +116,10 @@ that might not be to your taste.</p>
 <h4 id="review">Review</h4>
 
 <p>Now push to the remote:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ git push -u origin issue/472/django1.5</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ git push -u origin issue/472/django1.5</code></pre></div>
 <p>and attach your commits to the original issue, thereby converting it
 into a pull request.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ hub pull-request -i <span style="color:#ae81ff">472</span> -h tangentlabs:issue/472/django1.5</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ hub pull-request -i <span style="color:#ae81ff">472</span> -h tangentlabs:issue/472/django1.5</code></pre></div>
 <p>where <code>tangentlabs</code> is the Github username of the owner of the <code>origin</code>
 remote.</p>
 
@@ -138,7 +138,7 @@ into <code>master</code>.</p>
 <p>Hub&rsquo;s <code>pull-request</code> command is useful yet relatively unknown. The <code>-i</code>
 flag indicates the Github issue number while <code>-h</code> specifies the source
 branch for the pull request. Here&rsquo;s the relevant help snippet:</p>
-<pre><code>git pull-request [-f] [TITLE|-i ISSUE|ISSUE-URL] [-b BASE] [-h HEAD]
+<pre tabindex="0"><code>git pull-request [-f] [TITLE|-i ISSUE|ISSUE-URL] [-b BASE] [-h HEAD]
        Opens a pull request on GitHub for the project that the &#34;origin&#34;
        remote points to. The default head of the pull  request  is  the
        current  branch.  Both  base and head of the pull request can be
