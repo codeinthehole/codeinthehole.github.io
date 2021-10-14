@@ -6,7 +6,19 @@
     <description>Recent content in writing on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Apr 2020 10:04:16 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 14 Oct 2021 16:29:42 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/writing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Explaining</title>
+      <link>https://codeinthehole.com/tips/explaining/</link>
+      <pubDate>Thu, 14 Oct 2021 16:29:42 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/explaining/</guid>
+      <description>Someone has asked a question (in Slack or Github) and you&amp;rsquo;re about to write an explanation. But before you start typing, ask yourself this:
+ Is this the best place to answer this question?
+ Because the place where the question is asked is generally not the best place to write a detailed answer.
+&amp;ldquo;Why did you do it that way?&amp;rdquo; Imagine you&amp;rsquo;ve requested a review on a Github pull request and one of the reviewers has questiond why something is done the way it is.</description>
+    </item>
+    
     <item>
       <title>Software development tips – part 2</title>
       <link>https://codeinthehole.com/tips/software-development-tips-part2/</link>

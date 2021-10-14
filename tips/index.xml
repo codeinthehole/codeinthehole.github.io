@@ -9,10 +9,10 @@
     <lastBuildDate>Thu, 14 Oct 2021 16:29:42 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Explaining</title>
-      <link>https://codeinthehole.com/tips/writing-an-explanation/</link>
+      <link>https://codeinthehole.com/tips/explaining/</link>
       <pubDate>Thu, 14 Oct 2021 16:29:42 +0100</pubDate>
       
-      <guid>https://codeinthehole.com/tips/writing-an-explanation/</guid>
+      <guid>https://codeinthehole.com/tips/explaining/</guid>
       <description>Someone has asked a question (in Slack or Github) and you&amp;rsquo;re about to write an explanation. But before you start typing, ask yourself this:
  Is this the best place to answer this question?
  Because the place where the question is asked is generally not the best place to write a detailed answer.
