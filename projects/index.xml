@@ -60,7 +60,7 @@ The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
 pip install csvfilter Sample usage:
-# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
+# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.csv # Pluck all columns except 4 cat in.</description>
     </item>
     
     <item>

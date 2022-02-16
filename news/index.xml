@@ -31,8 +31,7 @@
       <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
       
       <guid>https://codeinthehole.com/news/podcast-init/</guid>
-      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.
- </description>
+      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.</description>
     </item>
     
     <item>
@@ -91,7 +90,7 @@ Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
       
       <guid>https://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
       <description>I rewrote this blog recently with the following aims:
- to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs.</description>
+ to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
     </item>
     
   </channel>

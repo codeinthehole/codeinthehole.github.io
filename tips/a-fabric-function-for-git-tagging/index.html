@@ -75,29 +75,21 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>Listed below is a <a href="http://docs.fabfile.org/en/1.3.4/index.html">Fabric</a>
+            <p>Listed below is a <a href="http://docs.fabfile.org/en/1.3.4/index.html">Fabric</a>
 function for determining the appropriate git reference to deploy during
 a deployment. It works well with projects run using the
 <a href="http://nvie.com/posts/a-successful-git-branching-model/">git-flow</a>
 development model.</p>
-
 <h3 id="set-up">Set-up</h3>
-
 <p>Assume there is a test environment where:</p>
-
 <ul>
 <li>the QA team to assess release candidates</li>
 <li>developers to run integration tests</li>
 <li>developers can deploy &lsquo;debug&rsquo; builds from a specific (untagged)
 commit</li>
 </ul>
-
 <p>There will also be stage and production environments.</p>
-
 <h3 id="fabric-function">Fabric function</h3>
-
 <p>The following function can be used as part of Fabric build script. It&rsquo;s
 purpose is to determine the git reference to deploy from.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">determine_refspec_to_deploy_from</span>(is_test<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
@@ -127,11 +119,9 @@ purpose is to determine the git reference to deploy from.</p>
         <span style="color:#75715e"># Check this is valid</span>
         local(<span style="color:#e6db74">&#39;git tag | grep &#34;</span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;&#39;</span> <span style="color:#f92672">%</span> refspec)
 
-    <span style="color:#66d9ef">return</span> refspec</code></pre></div>
-<h3 id="building-to-test">Building to test</h3>
-
+    <span style="color:#66d9ef">return</span> refspec
+</code></pre></div><h3 id="building-to-test">Building to test</h3>
 <p>When building to test, the script allows you to:</p>
-
 <ol>
 <li>Tag a release. This is for creating release candidates for the QA
 team.</li>
@@ -144,36 +134,27 @@ error messages that can&rsquo;t be re-created locally. A simple bisection
 approach works well here, building from specific commits to find the
 commit that broke the build.</li>
 </ol>
-
 <p>You can build to test from any branch which is often the case with
 git-flow, where your next release candidate could come from <code>develop</code> or
 a release branch <code>releases/1.4</code>.</p>
-
 <h3 id="building-to-stage-and-production">Building to stage and production</h3>
-
 <p>Nothing fancy - builds to stage and production must use an existing tag
 to ensure they go through the QA process.</p>
-
 <h3 id="interesting-bits">Interesting bits</h3>
-
 <h4 id="keeping-everyone-in-sync">Keeping everyone in sync</h4>
-
 <p>The script fetches tags at the start and, if a new one is created,
 pushes it back to the remote. This ensures that all users have access to
 the tagged releases.</p>
-
-<h4 id="what-s-the-next-tag">What&rsquo;s the next tag?</h4>
-
+<h4 id="whats-the-next-tag">What&rsquo;s the next tag?</h4>
 <p>This snippet shows the latest 5 tags, making it easy to determine the
 next tag to use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag | sort -V | tail -5 </code></pre></div>
-<h4 id="constructing-a-build-name">Constructing a build name</h4>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git tag | sort -V | tail -5 
+</code></pre></div><h4 id="constructing-a-build-name">Constructing a build name</h4>
 <p>For builds to test that aren&rsquo;t tagged, it&rsquo;s still useful to give them a
 build number that indicates what the latest tagged release was. This can
 be done with <code>git describe</code>, which will output something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">0.1.3-149-g1a48a5a</code></pre></div>
-<p>which indicates that the build came from the 149th commit after tag
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">0.1.3-149-g1a48a5a
+</code></pre></div><p>which indicates that the build came from the 149th commit after tag
 <code>0.1.3</code>.</p>
 
         </div>
@@ -208,7 +189,7 @@ be done with <code>git describe</code>, which will output something like:</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

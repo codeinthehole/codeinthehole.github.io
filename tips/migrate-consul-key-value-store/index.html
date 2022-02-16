@@ -82,8 +82,8 @@ if (!doNotTrack) {
         Z <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
         Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
     C 
-    D</code></pre></div>
-<p>but you now realise you should have namespaced everything within <code>WEBSERVER/</code> (or
+    D
+</code></pre></div><p>but you now realise you should have namespaced everything within <code>WEBSERVER/</code> (or
 something like that):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/
     WEBSERVER/
@@ -92,8 +92,8 @@ something like that):</p>
             Z <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>
             Y <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>
         C
-        D</code></pre></div>
-<p>then this Bash script will help you migrate:</p>
+        D
+</code></pre></div><p>then this Bash script will help you migrate:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span>
 set -e  <span style="color:#75715e"># Exit on error</span>
@@ -132,20 +132,19 @@ migrate_to_webserver_namespace<span style="color:#f92672">()</span> <span style=
     <span style="color:#66d9ef">done</span> 
 <span style="color:#f92672">}</span>
 
-migrate_to_webserver_namespace</code></pre></div>
-<p>This script uses <a href="https://www.consul.io/docs/agent/http/kv.html">Consul&rsquo;s REST API</a> and filters the results using
-<a href="https://stedolan.github.io/jq/"><code>jq</code></a><sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>. It&rsquo;s easily
+migrate_to_webserver_namespace
+</code></pre></div><p>This script uses <a href="https://www.consul.io/docs/agent/http/kv.html">Consul&rsquo;s REST API</a> and filters the results using
+<a href="https://stedolan.github.io/jq/"><code>jq</code></a><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. It&rsquo;s easily
 adapted to migrate key-value pairs between different namespaces.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1"><p>I can never remember jq&rsquo;s <code>select</code> syntax so this post is intended largely
-  as a personal reference on how to do this.</p>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>I can never remember jq&rsquo;s <code>select</code> syntax so this post is intended largely
+as a personal reference on how to do this.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -179,7 +178,7 @@ adapted to migrate key-value pairs between different namespaces.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

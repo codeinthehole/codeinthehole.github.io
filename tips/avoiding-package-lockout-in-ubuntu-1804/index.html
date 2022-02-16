@@ -75,27 +75,20 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem
+            <p>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem
 if being unable to install packages since another process is holding a lock (eg
 on <code>/var/lib/dpkg/lock-frontend</code>).</p>
-
 <p>This happens as Ubuntu VMs typically start several package-management programs &mdash; <a href="https://help.ubuntu.com/lts/serverguide/automatic-updates.html.en">unattended-upgrades</a>
 and its associated <code>apt.daily</code> service &mdash; on boot, and these will block
 your provisioning scripts.</p>
-
 <p>You&rsquo;ll see an error like this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</code></pre></div>
-<p>There&rsquo;s lots of internet advice on possible remedies, but it&rsquo;s still a deep well
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
+</code></pre></div><p>There&rsquo;s lots of internet advice on possible remedies, but it&rsquo;s still a deep well
 of frustration. In my case, I was using <a href="https://www.packer.io/">Packer</a> and <a href="https://puppet.com/docs/puppet/5.4/index.html">Puppet 5.4</a> to provision an AWS AMI, building
 from a clean Ubuntu 18.04 image but spent several hours trying to script a way
 past the lock-out problem. I was this close, 👉👈, to using a <code>sleep</code> statement.</p>
-
 <p>To help others suffering in this situation, here&rsquo;s a solution.</p>
-
 <h2 id="solution">Solution</h2>
-
 <p>Before you start provisioning, you need to stop and disable all services that use
 package management. You can do that with a shell script like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
@@ -130,13 +123,11 @@ set -e
     killServices
 <span style="color:#f92672">}</span>
 
-main</code></pre></div>
-<p>Here we first disable the <code>systemd</code> timers, then stop the services themselves.</p>
-
+main
+</code></pre></div><p>Here we first disable the <code>systemd</code> timers, then stop the services themselves.</p>
 <p>Once this has run, you can run your provisioning software without fear of
 locking problems. But once your provisioning is complete, the <code>apt-daily</code> timers should be
 re-enabled.</p>
-
 <p>Here&rsquo;s a snippet from a Packer JSON configuration template:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
     <span style="color:#960050;background-color:#1e0010">...</span>
@@ -154,8 +145,8 @@ re-enabled.</p>
             ]
         }
     ]
-}</code></pre></div>
-<p>Hope that&rsquo;s useful.</p>
+}
+</code></pre></div><p>Hope that&rsquo;s useful.</p>
 
         </div>
 
@@ -189,7 +180,7 @@ re-enabled.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

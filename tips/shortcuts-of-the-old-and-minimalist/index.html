@@ -75,139 +75,116 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>As I get older and grumpier, I increasingly value clean, uncluttered working environments.
+            <p>As I get older and grumpier, I increasingly value clean, uncluttered working environments.
 I&rsquo;m sure I&rsquo;m not the only one, so here&rsquo;s a few useful practices and shortcuts that help me avoid
 using the mouse and satisfy my need for productivity micro-optimisation.</p>
-
 <p>They are mainly for macOS users.</p>
-
 <h2 id="hide-everything">Hide everything</h2>
-
 <p>Adjust your system preferences to automatically hide the Dock and
 menu bar (there&rsquo;s a checkbox in &ldquo;General&rdquo;).</p>
-
 <p>With these two changes, a maximised
 window is effectively full-screen. Hit
-<span class="keys">CTRL</span>&nbsp;+&nbsp;<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">F</span>
+<!-- raw HTML omitted -->CTRL<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->F<!-- raw HTML omitted -->
 to <em>officially</em> enter full-screen mode and you&rsquo;ll barely notice the difference.</p>
-
 <p>Beware though: hiding the menu bar has a couple of downsides:</p>
-
 <ul>
-<li><p>It&rsquo;s not obvious at a glance which application has focus, nor what the time is (I don&rsquo;t wear a watch).</p></li>
-
-<li><p>The
-<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">\</span> shortcut to open the 1Password
-desktop widget <em>sometimes</em> fails to work when the menu bar is hidden<sup class="footnote-ref" id="fnref:1password"><a href="#fn:1password">1</a></sup>.</p></li>
+<li>
+<p>It&rsquo;s not obvious at a glance which application has focus, nor what the time is (I don&rsquo;t wear a watch).</p>
+</li>
+<li>
+<p>The
+<!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->\<!-- raw HTML omitted --> shortcut to open the 1Password
+desktop widget <em>sometimes</em> fails to work when the menu bar is hidden<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
+</li>
 </ul>
-
 <p>It&rsquo;s still worth it.</p>
-
 <p>Hiding the Dock has no downsides assuming you use <a href="https://www.alfredapp.com/">Alfred</a> to open
 applications.</p>
-
 <h2 id="a-blank-desktop">A blank desktop</h2>
-
 <p>Keep <code>~/Desktop</code> clear so that, combined with the above tips, your default view
 is something like this:</p>
-
 <figure><img src="/images/shortcuts/desktop.png"/><figcaption>
             <h4>My default view: no menu-bar, no Dock: just an empty felt-table.</h4>
         </figcaption>
 </figure>
 
-
 <p>Scratch files live somewhere less visually intrusive (like, say, <code>~/Scratch</code>). Let the
 macOS screen-capture program know of this decision with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.screencapture location ~/Scratch</code></pre></div>
-<p>Digression: any files in <code>~/Desktop</code> can be hidden by enabling the &ldquo;Quit&rdquo; menu item for Finder:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.screencapture location ~/Scratch
+</code></pre></div><p>Digression: any files in <code>~/Desktop</code> can be hidden by enabling the &ldquo;Quit&rdquo; menu item for Finder:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ defaults write com.apple.finder QuitMenuItem -bool true
-$ killall Finder</code></pre></div>
-<p>then quitting: <span class="keys">⌘</span>&nbsp;+&nbsp;<span
-class="keys">Q</span>. This is worth doing if only to remove Finder from the
-list of running applications seen with <span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">TAB</span>.</p>
-
+$ killall Finder
+</code></pre></div><p>then quitting: <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->Q<!-- raw HTML omitted -->. This is worth doing if only to remove Finder from the
+list of running applications seen with <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->TAB<!-- raw HTML omitted -->.</p>
 <h2 id="marshalling-windows">Marshalling windows</h2>
-
 <p>Using the <a href="https://www.spectacleapp.com/">Spectacle</a> window manager, you can
 use
-<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">C</span>
+<!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->C<!-- raw HTML omitted -->
 to centre a window,
 then
-<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">H</span>
-to hide all others<sup class="footnote-ref" id="fnref:butnotappwindows"><a href="#fn:butnotappwindows">2</a></sup>.</p>
-
+<!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->H<!-- raw HTML omitted -->
+to hide all others<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
 <p>This allows a clean context switch: dropping all clutter in favour of rapidly
 focussing on one app &mdash; generally Chrome (for email), Trello or Slack &mdash;
 <em>very</em> useful.</p>
-
 <p>There&rsquo;s also:</p>
-
 <ul>
-<li><p><span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">→</span>
+<li>
+<p><!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->→<!-- raw HTML omitted -->
 and
-<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">←</span> for
-shunting windows between the left- and right-hand half of a display, and;</p></li>
-
-<li><p><span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">↑</span>
+<!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->←<!-- raw HTML omitted --> for
+shunting windows between the left- and right-hand half of a display, and;</p>
+</li>
+<li>
+<p><!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->↑<!-- raw HTML omitted -->
 and
-<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">↓</span> for
-bumping windows between displays.</p></li>
+<!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->↓<!-- raw HTML omitted --> for
+bumping windows between displays.</p>
+</li>
 </ul>
-
 <p>Memorise the equivalents for your favourite window manager.</p>
-
 <h2 id="marshalling-tabs">Marshalling tabs</h2>
-
 <p>A verging-on-OCD minimalist like myself minimises both the number of
-applications open<sup class="footnote-ref" id="fnref:applications"><a href="#fn:applications">3</a></sup> and, within a browser, the number of open tabs.</p>
-
+applications open<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup> and, within a browser, the number of open tabs.</p>
 <p>For the latter, there&rsquo;s a <a href="https://chrome.google.com/webstore/detail/keyboard-shortcuts-to-clo/dkoadhojigekhckndaehenfbhcgfeepl/reviews?hl=en">useful Chrome extension</a>
 that adds two crucial missing keyboard shortcuts.</p>
-
-<p>First: <span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">⇧</span>&nbsp;+&nbsp;<span class="keys">O</span>
-to &ldquo;Close Other Tabs&rdquo;<sup class="footnote-ref" id="fnref:chrometabs"><a href="#fn:chrometabs">4</a></sup>.
+<p>First: <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⇧<!-- raw HTML omitted --> + <!-- raw HTML omitted -->O<!-- raw HTML omitted -->
+to &ldquo;Close Other Tabs&rdquo;<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup>.
 Fortunately, this doesn&rsquo;t close <em>pinned</em> tabs so you can protect your
 core web-apps (eg Gmail, Calendar, <a href="https://rain.today">rain noise</a>) with
 the second shortcut this extension provides:
-<span class="keys">⌥</span>&nbsp;+&nbsp;<span class="keys">⇧</span>&nbsp;+&nbsp;<span class="keys">P</span>, which pins the current tab.</p>
-
+<!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⇧<!-- raw HTML omitted --> + <!-- raw HTML omitted -->P<!-- raw HTML omitted -->, which pins the current tab.</p>
 <p>Finally it&rsquo;s sometimes useful to full-screen an individual tab for the complete
 &ldquo;zen&rdquo;-mode experience. Do this with
-<span class="keys">CTRL</span>&nbsp;+&nbsp;<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">F</span>
+<!-- raw HTML omitted -->CTRL<!-- raw HTML omitted --> + <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->F<!-- raw HTML omitted -->
 (to full-screen the window) followed by
-<span class="keys">⇧</span>&nbsp;+<span class="keys">⌘</span>&nbsp;+&nbsp;<span class="keys">F</span>.
+<!-- raw HTML omitted -->⇧<!-- raw HTML omitted --> +<!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->F<!-- raw HTML omitted -->.
 A good use-case for this is reviewing Github pull requests but any site that
 uses a fixed-width container would work well.</p>
-
-<p><br/></p>
-
+<!-- raw HTML omitted -->
 <p>Further reading: <a href="https://www.theonion.com/area-man-knows-all-the-shortcut-keys-1819566989">Area Man Knows All The Shortcut Keys</a>.</p>
-<div class="footnotes">
-
-<hr />
-
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1password">As of v6.8.3: I&rsquo;ve been unable to determine the exact steps to recreate this.
- <a class="footnote-return" href="#fnref:1password"><sup>[return]</sup></a></li>
-
-<li id="fn:butnotappwindows"><p>Annoyingly, this doesn&rsquo;t shut windows from the same
-application &mdash; which would be better.</p>
- <a class="footnote-return" href="#fnref:butnotappwindows"><sup>[return]</sup></a></li>
-
-<li id="fn:applications"><p>This is a minimal set from those unenlightened days before I realised
+<li id="fn:1" role="doc-endnote">
+<p>As of v6.8.3: I&rsquo;ve been unable to determine the exact steps to recreate this.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>Annoyingly, this doesn&rsquo;t shut windows from the same
+application &mdash; which would be better.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:3" role="doc-endnote">
+<p>This is a minimal set from those unenlightened days before I realised
 you could quit Finder: <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Work <a href="https://t.co/PwL1LpRG55">pic.twitter.com/PwL1LpRG55</a></p>&mdash; David Winterbottom (@codeinthehole) <a href="https://twitter.com/codeinthehole/status/914965638321405952?ref_src=twsrc%5Etfw">October 2, 2017</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-</p>
- <a class="footnote-return" href="#fnref:applications"><sup>[return]</sup></a></li>
-
-<li id="fn:chrometabs"><p>There&rsquo;s no native shortcut for this and using the mouse/trackpad to
-right-click on the tab is too labour-intensive.</p>
- <a class="footnote-return" href="#fnref:chrometabs"><sup>[return]</sup></a></li>
+&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:4" role="doc-endnote">
+<p>There&rsquo;s no native shortcut for this and using the mouse/trackpad to
+right-click on the tab is too labour-intensive.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -241,7 +218,7 @@ right-click on the tab is too labour-intensive.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

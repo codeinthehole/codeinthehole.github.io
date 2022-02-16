@@ -28,7 +28,7 @@
       <description>A good understanding of Vim&amp;rsquo;s various lists is a massive productivity boost — it&amp;rsquo;s taken me many years of Vim use to truly appreciate this.
 This post summarises some of Vim&amp;rsquo;s lists, detailing their purpose and how to make the most of them.
 Contents:
-   Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell  Location list Jump list  Tip: Use jump commands to navigate  Change list  Tip: Jump to the previous location where insert mode was used  Buffer list  Tip: Select buffers with FZF  Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality&amp;hellip;  Include file list and definition lists Summary  I need to jump somewhere&amp;hellip; I need to apply the same transformation in lots of places&amp;hellip;      Quickfix list A global list of locations populated via one of these commands:</description>
+ Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell   Location list Jump list  Tip: Use jump commands to navigate   Change list  Tip: Jump to the previous location where insert mode was used   Buffer list  Tip: Select buffers with FZF   Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality&amp;hellip;   Include file list and definition lists Summary  I need to jump somewhere&amp;hellip; I need to apply the same transformation in lots of places&amp;hellip;       Quickfix list A global list of locations populated via one of these commands:</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@ Contents:
       
       <guid>https://codeinthehole.com/tips/a-vim-mapping-for-opening-virtualenv-files/</guid>
       <description>Here&amp;rsquo;s a useful command-mode mapping for Python development:
-&amp;#34; ~/.vim/ftplugin/python.vimfunction! VirtualEnvSitePackagesFolder()&amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34;endfunctioncnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt; In command-mode, %v will expand to the path of your virtualenv&amp;rsquo;s site-packages folder in, which makes it easy to quickly open a third-party module.</description>
+&amp;#34; ~/.vim/ftplugin/python.vimfunction! VirtualEnvSitePackagesFolder()&amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34;endfunctioncnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt;In command-mode, %v will expand to the path of your virtualenv&amp;rsquo;s site-packages folder in, which makes it easy to quickly open a third-party module.</description>
     </item>
     
     <item>
@@ -61,7 +61,7 @@ Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignit
 Maintenance mode As an example, let&amp;rsquo;s create a &amp;ldquo;maintenance mode&amp;rdquo; for a service which allows a &amp;ldquo;under maintenance&amp;rdquo; holding page to be served when a Terraform variable is set.
 This is useful if you need to stop all traffic to a RDS database server so it can be upgraded.
 Define a boolean maintenance_mode variable:
-# variables.</description>
+# variables.tf variable &amp;#34;maintenance_mode&amp;#34; { type = bool default = false } and use it to create conditional default_action blocks in an aws_lb_listener resource.</description>
     </item>
     
     <item>
@@ -85,7 +85,7 @@ Solution Use a HCL list variable which allows each entry to have an associated c
       <description>URLs are great aren&amp;rsquo;t they?
 You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
 Anyway, a super-useful Vim mapping I use is:
-vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;  which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
+vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
     
     <item>
@@ -95,10 +95,10 @@ vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;  which, a
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part2/</guid>
       <description>On code smells:
- If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
- Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
+  If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
+  Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
   On good things I always tell team members about:
- The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
+  The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
     </item>
     
     <item>
@@ -120,10 +120,10 @@ Let&amp;rsquo;s walk through the process.</description>
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
- Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
- If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
+  Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
+  If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
   On tools:
- Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+  Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
     
     <item>
@@ -132,10 +132,10 @@ Let&amp;rsquo;s walk through the process.</description>
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;rdquo;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
+      <description>Text objects, as in the iwfrom ciw(&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a(mnemonic: &amp;ldquo;a&amp;quot;n) or i(mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.</description>
+ w→ a word W→ a WORD t→ a HTML/XML tag s→ a sentence p→ a paragraph  From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
@@ -145,7 +145,7 @@ From core Vim:
       
       <guid>https://codeinthehole.com/tips/debugging-vim-by-example/</guid>
       <description>There&amp;rsquo;s only so far you can get by cargo-culting other people&amp;rsquo;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&amp;rsquo;s slow or misbehaving. Learn how to scratch things that itch.
-This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.</description>
+This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.vimrc but hopefully some useful techniques that you can use.</description>
     </item>
     
     <item>
@@ -164,8 +164,8 @@ This post illustrates a range of debugging and profiling approaches for Vim by w
       
       <guid>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
       <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.
-&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
-let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endif Further, if you don&amp;rsquo;t want these fixers applied on save, set</description>
+&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
+let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endifFurther, if you don&amp;rsquo;t want these fixers applied on save, set</description>
     </item>
     
     <item>
@@ -188,7 +188,7 @@ E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is an
       <guid>https://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</guid>
       <description>I wasted a morning trying to install RabbitMQ v3.7.12 (the latest version as of Feb 2019) on an Ubuntu 18.04 machine using Puppet. This as tricky as:
  Only RabbitMQ version 3.6.10 is available from the default repositories; Getting Puppet to install packages from custom locations can be painful.  Solution Use these Puppet modules in your Puppetfile:
-mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39;mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39;mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34; and something like this in your manifest code:</description>
+mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39;mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39;mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34;and something like this in your manifest code:</description>
     </item>
     
     <item>
@@ -222,7 +222,7 @@ from httplib2 import Http from googleapiclient.discovery import build from oauth
       <guid>https://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
 Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
- Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
+  Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
     </item>
     
     <item>
@@ -277,10 +277,10 @@ Word of the day: ARSLE - to move backwards.
       
       <guid>https://codeinthehole.com/lists/why-your-models-are-fat/</guid>
       <description>Because:
- You moved everything out of the views.py modules when you heard fat controllers were bad.
- And you&amp;rsquo;ve read that fat models are a good idea1.
- You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-&amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt; You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+  You moved everything out of the views.py modules when you heard fat controllers were bad.
+  And you&amp;rsquo;ve read that fat models are a good idea1.
+  You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
+  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>
@@ -363,8 +363,7 @@ $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</de
       <pubDate>Mon, 10 Apr 2017 23:00:20 +0100</pubDate>
       
       <guid>https://codeinthehole.com/news/podcast-init/</guid>
-      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.
- </description>
+      <description>I was interviewed, along with Michael van Tellingen, on the &amp;ldquo;Podcast.__init__&amp;rdquo; Python podcast to talk about Oscar.</description>
     </item>
     
     <item>
@@ -386,8 +385,8 @@ $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</de
       
       <guid>https://codeinthehole.com/lists/lies/</guid>
       <description>In approximate chronological order:
- &amp;ldquo;Sorry I missed stand-up this morning&amp;rdquo; &amp;ldquo;I didn&amp;rsquo;t see that email&amp;rdquo; &amp;ldquo;I&amp;rsquo;ll get back to you shortly&amp;rdquo; &amp;ldquo;Sounds easy - should only take a couple of days&amp;rdquo; &amp;ldquo;It&amp;rsquo;s nearly finished&amp;rdquo; &amp;ldquo;I didn&amp;rsquo;t have time to write tests&amp;rdquo; &amp;ldquo;We&amp;rsquo;ll clean this up later&amp;rdquo; 1 &amp;ldquo;Lessons have been learnt&amp;rdquo;   Remember: &amp;quot;Later equals never.&amp;quot; - Le Blanc&amp;#39;s law
-&amp;mdash; Programming Wisdom (@CodeWisdom) March 20, 2017  [return]   </description>
+ &amp;ldquo;Sorry I missed stand-up this morning&amp;rdquo; &amp;ldquo;I didn&amp;rsquo;t see that email&amp;rdquo; &amp;ldquo;I&amp;rsquo;ll get back to you shortly&amp;rdquo; &amp;ldquo;Sounds easy - should only take a couple of days&amp;rdquo; &amp;ldquo;It&amp;rsquo;s nearly finished&amp;rdquo; &amp;ldquo;I didn&amp;rsquo;t have time to write tests&amp;rdquo; &amp;ldquo;We&amp;rsquo;ll clean this up later&amp;rdquo; 1 &amp;ldquo;Lessons have been learnt&amp;rdquo;    Remember: &amp;quot;Later equals never.&amp;quot; - Le Blanc&amp;#39;s law
+&amp;mdash; Programming Wisdom (@CodeWisdom) March 20, 2017  &amp;#160;&amp;#x21a9;&amp;#xfe0e;</description>
     </item>
     
     <item>
@@ -543,7 +542,7 @@ This is a particular menace in agencies (or anywhere with lots of small projects
       <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
 $ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif :grep searches are now lightning-fast and respectful of your ~/.</description>
+if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -575,7 +574,7 @@ This article is largely a note-to-self in case I have to repeat the process. How
       <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
 Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
 $ export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; $ export LANG=&amp;#34;en_US.UTF-8&amp;#34; $ export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
-$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis  PostgreSQL should now be installed and running with UTF8 encodings.</description>
+$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings.</description>
     </item>
     
     <item>
@@ -644,8 +643,8 @@ Such requirements are slightly tricky to capture in Django as they tread slightl
 
 This screenshot is taken from django-oscar&amp;rsquo;s README.
 Embed these badges in your own repo as Restructured text:
-.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version.. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:
-[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
+.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version.. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloadsor Markdown:
+[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [![PyPi downloads](https://pypip.</description>
     </item>
     
     <item>
@@ -713,7 +712,7 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       <guid>https://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
       <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
 ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
-Solution Turn on Postgres&amp;rsquo; logging and watch the log files when the error is generated.
+Solution Turn on Postgres&#39; logging and watch the log files when the error is generated.
 This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
     </item>
     
@@ -779,7 +778,8 @@ It provides a simple API for wrapping expensive read operations that caches resu
       
       <guid>https://codeinthehole.com/tips/use-models-for-uploads/</guid>
       <description>All Django developers will deal with file uploads at some point. I contend that it&amp;rsquo;s a good practice to use models to capture the upload metadata and to track processing status. This article explains how and why.
-An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:</description>
+An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:
+9781231231999,0 9781231231999,4 9781231231999,2 .</description>
     </item>
     
     <item>
@@ -793,7 +793,8 @@ When you have a lot of templates, this gets pretty tedious.
 Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
 &amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
-&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro</description>
+&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro
+vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</description>
     </item>
     
     <item>
@@ -852,7 +853,7 @@ The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
 pip install csvfilter Sample usage:
-# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
+# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.csv # Pluck all columns except 4 cat in.</description>
     </item>
     
     <item>
@@ -886,7 +887,7 @@ def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39;
       <guid>https://codeinthehole.com/tips/how-to-sync-pycon-videos-to-your-iphone/</guid>
       <description>Problem You want to all the PyCon videos on your iPhone for offline viewing.
 Solution Use the following Python script to fetch pycon videos from YouTube and convert them to M4V format so they can be imported to iTunes.
- This gist is stale now - the code for downloading videos has been expanding into a [Github repository](https://github.com/codeinthehole/pyvideo2quicktime).  To run the script:
+To run the script:
  Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script  Run this script using:</description>
     </item>
     
@@ -967,7 +968,7 @@ root@server-db1:~ $ mysqladmin processlist +-----+----------------------+-------
       
       <guid>https://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</guid>
       <description>Problem You&amp;rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&amp;rsquo;s difficult to remember which tab is for which project. This is making you unhappy.
-Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment.</description>
+Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment. Add something similar to the following to your postactivate script:</description>
     </item>
     
     <item>
@@ -988,7 +989,7 @@ import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.
       
       <guid>https://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
       <description>I rewrote this blog recently with the following aims:
- to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs.</description>
+ to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
     </item>
     
     <item>
@@ -1024,7 +1025,7 @@ $ pip freeze | grep oscar -e git://github.com/tangentlabs/django-oscar.git@d636b
       <guid>https://codeinthehole.com/tips/console-logging-to-stdout-in-django/</guid>
       <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.
 Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:
-import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.</description>
+import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.7+, the keyword argument to the constructor of logging.</description>
     </item>
     
     <item>
@@ -1086,7 +1087,7 @@ The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and J
       
       <guid>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
       <description>A bad joke told in Python:
-def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.</description>
+def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper()) </description>
     </item>
     
     <item>
@@ -1221,7 +1222,7 @@ irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This ret
       
       <guid>https://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</guid>
       <description>A quick Phing tip that&amp;rsquo;s made my life easier when deploying new versions of commandlinefu.com.
-One of the key performance recommendations from Steve Souders&amp;rsquo; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
+One of the key performance recommendations from Steve Souders&#39; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
     </item>
     
     <item>
@@ -1411,10 +1412,9 @@ Oscar Oscar is an open-source e-commerce framework for Django. I was the origina
       
       <guid>https://codeinthehole.com/now/</guid>
       <description>September 2021 Culture:
- Reading Iain Banks&amp;rsquo; The Crow Road as part of my mission to read more of his non-sci-fi work.
- Recently read Colson Whitehead&amp;rsquo;s The Nickel Boys and Margaret Atwood&amp;rsquo;s The Testaments; both of which are excellent.
- Haven&amp;rsquo;t watched much TV in recent months. Haven&amp;rsquo;t even finished Band of Brothers yet but am also part way through Fargo: Season 4 and White Lotus.
- Haven&amp;rsquo;t been to the cinema this year.</description>
+  Reading Iain Banks&#39; The Crow Road as part of my mission to read more of his non-sci-fi work.
+  Recently read Colson Whitehead&amp;rsquo;s The Nickel Boys and Margaret Atwood&amp;rsquo;s The Testaments; both of which are excellent.
+  Haven&amp;rsquo;t watched much TV in recent months. Haven&amp;rsquo;t even finished Band of Brothers yet but am also part way through Fargo: Season 4 and White Lotus.</description>
     </item>
     
     <item>
@@ -1440,8 +1440,8 @@ On your first day at the new job, squash every commit from the repo into a singl
       <guid>https://codeinthehole.com/videos/</guid>
       <description>Good technical talks that I can refer people to.
 Misc:
- Inventing on Principle by Brett Victor. An inspiring talk demonstrating new UI concepts for creation.  All talks (and articles) by James Mickens are essential:
- Computers are a Sadness, I am the Cure by James Mickens. &amp;ldquo;Say word count one more time&amp;hellip;&amp;rdquo;  </description>
+ Inventing on Principle by Brett Victor.An inspiring talk demonstrating new UI concepts for creation.  All talks (and articles) by James Mickens are essential:
+ Computers are a Sadness, I am the Cure by James Mickens.&amp;ldquo;Say word count one more time&amp;hellip;&amp;rdquo;  </description>
     </item>
     
     <item>

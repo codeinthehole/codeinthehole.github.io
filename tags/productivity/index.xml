@@ -14,10 +14,10 @@
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part2/</guid>
       <description>On code smells:
- If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
- Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
+  If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
+  Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
   On good things I always tell team members about:
- The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
+  The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
     </item>
     
     <item>
@@ -27,10 +27,10 @@
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
- Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
- If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
+  Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
+  If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
   On tools:
- Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+  Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
     
     <item>

@@ -80,7 +80,6 @@ seen attention drawn to the <a href="http://martinfowler.com/eaaCatalog/dataMapp
 pattern</a>. This is an
 elegant pattern that splits the responsibilities of business logic and
 persistence. In the words of pattern supremo Martin Fowler:</p>
-
 <blockquote>
 <p>The Data Mapper is a layer of software that separates the in-memory
 objects from the database. Its responsibility is to transfer data
@@ -89,7 +88,6 @@ Mapper the in-memory objects needn&rsquo;t know even that there&rsquo;s a databa
 present; they need no SQL interface code, and certainly no knowledge
 of the database schema</p>
 </blockquote>
-
 <p>This is a cleaner separation of concerns than that found in the
 ubiquitous Active Record pattern which, while a useful construct,
 conflates business logic with persistence. This can make a big
@@ -99,7 +97,6 @@ This has been something I&rsquo;ve found slightly difficult with Django where
 the emphasis is more on writing integration tests that use fixtures to
 set up the test environmentl; writing unit tests without using a
 database is hard when foreign key constraints are involved.</p>
-
 <p>Anyhow, it&rsquo;s a favourite pattern of mine and I&rsquo;ve recently pushed to
 Github a small library for PHP 5.3 which provides data mapper
 functionality. The extended details are in the
@@ -168,8 +165,8 @@ follows. First set up your classes to model your domain.</p>
         );
         <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetchCollection</span>($sql, $bindings);
     }
-}</code></pre></div>
-<p>These can then used as follows:</p>
+}
+</code></pre></div><p>These can then used as follows:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#75715e">// Create a new model
 </span><span style="color:#75715e"></span>$person <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
@@ -190,18 +187,17 @@ $mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">save<
 <span style="color:#66d9ef">echo</span> $person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">person_id</span>; <span style="color:#75715e">// 1
 </span><span style="color:#75715e"></span>
 <span style="color:#75715e">// Load a collection
-</span><span style="color:#75715e"></span>$twentyYearOlds <span style="color:#f92672">=</span> $mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">findByAge</span>(<span style="color:#ae81ff">20</span>);</code></pre></div>
-<p>Unit testing is now trivial as you can simply instantiate your model and
+</span><span style="color:#75715e"></span>$twentyYearOlds <span style="color:#f92672">=</span> $mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">findByAge</span>(<span style="color:#ae81ff">20</span>);
+</code></pre></div><p>Unit testing is now trivial as you can simply instantiate your model and
 use the <code>__load</code> method to populate it with data for testing.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 $model <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
 $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;  terry&#39;</span>;
 $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jones     &#39;</span>;
-$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertSame</span>(<span style="color:#e6db74">&#39;terry jones&#39;</span>, $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getName</span>());</code></pre></div>
-<p>Relationships between models are not a feature of the package at the
+$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertSame</span>(<span style="color:#e6db74">&#39;terry jones&#39;</span>, $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getName</span>());
+</code></pre></div><p>Relationships between models are not a feature of the package at the
 moment. The best way to handle this is to use a &ldquo;repository&rdquo; object
 which composes several mappers.</p>
-
 <p>The <a href="https://github.com/codeinthehole/domain-model-mapper">code is on
 github</a> if you are
 interested.</p>
@@ -238,7 +234,7 @@ interested.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

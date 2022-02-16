@@ -93,25 +93,20 @@ echo <span style="color:#e6db74">&#34;title </span>$NAME<span style="color:#e6db
 echo <span style="color:#e6db74">&#34;cd </span>$PWD<span style="color:#e6db74">&#34;</span> &gt;&gt; $VIRTUAL_ENV/bin/postactivate
 
 <span style="color:#75715e"># Run postactivate now to get the title set</span>
-source $VIRTUAL_ENV/bin/postactivate</code></pre></div>
-<p>This ensures that a new virtualenv has a <code>postactivate</code> script which:</p>
-
+source $VIRTUAL_ENV/bin/postactivate
+</code></pre></div><p>This ensures that a new virtualenv has a <code>postactivate</code> script which:</p>
 <ol>
 <li>Sets the terminal title to that of the virtualenv</li>
 <li>Changes directory to the root of the project</li>
 </ol>
-
 <p>By convention, such a script lives in <code>~/.virtualenvs/postmkvirtualenv</code>.</p>
-
 <p>Note that the <code>title</code> function is defined in my <code>~/.bashrc</code> as:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> title<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$1<span style="color:#e6db74">\007&#34;</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>As someone who develops in iTerm and Terminal, automatically setting the
+<span style="color:#f92672">}</span>
+</code></pre></div><p>As someone who develops in iTerm and Terminal, automatically setting the
 tab titles is a useful navigation aid.</p>
-
-<p><img src="/images/screenshots/terminal-titles.png" alt="image" /></p>
-
+<p><img src="/images/screenshots/terminal-titles.png" alt="image"></p>
 <p>There are more <a href="http://virtualenvwrapper.readthedocs.org/en/latest/tips.html">tips and
 tricks</a>
 available in the virtualenvwrapper docs.</p>
@@ -148,7 +143,7 @@ available in the virtualenvwrapper docs.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

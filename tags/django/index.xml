@@ -13,10 +13,10 @@
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;rdquo;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
+      <description>Text objects, as in the iwfrom ciw(&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a(mnemonic: &amp;ldquo;a&amp;quot;n) or i(mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph  From the (highly recommended) wellle/targets.</description>
+ w→ a word W→ a WORD t→ a HTML/XML tag s→ a sentence p→ a paragraph  From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
@@ -44,10 +44,10 @@ From core Vim:
       
       <guid>https://codeinthehole.com/lists/why-your-models-are-fat/</guid>
       <description>Because:
- You moved everything out of the views.py modules when you heard fat controllers were bad.
- And you&amp;rsquo;ve read that fat models are a good idea1.
- You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-&amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt; You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+  You moved everything out of the views.py modules when you heard fat controllers were bad.
+  And you&amp;rsquo;ve read that fat models are a good idea1.
+  You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
+  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>
@@ -128,7 +128,7 @@ This article is largely a note-to-self in case I have to repeat the process. How
       <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
 Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
 $ export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; $ export LANG=&amp;#34;en_US.UTF-8&amp;#34; $ export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
-$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis  PostgreSQL should now be installed and running with UTF8 encodings.</description>
+$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings.</description>
     </item>
     
     <item>
@@ -204,7 +204,8 @@ It provides a simple API for wrapping expensive read operations that caches resu
       
       <guid>https://codeinthehole.com/tips/use-models-for-uploads/</guid>
       <description>All Django developers will deal with file uploads at some point. I contend that it&amp;rsquo;s a good practice to use models to capture the upload metadata and to track processing status. This article explains how and why.
-An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:</description>
+An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:
+9781231231999,0 9781231231999,4 9781231231999,2 .</description>
     </item>
     
     <item>
@@ -218,7 +219,8 @@ When you have a lot of templates, this gets pretty tedious.
 Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
 &amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
-&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro</description>
+&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro
+vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</description>
     </item>
     
     <item>
@@ -318,7 +320,7 @@ Each documented method involves initialising data as part of the syncdb event, e
       
       <guid>https://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
       <description>I rewrote this blog recently with the following aims:
- to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs.</description>
+ to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
     </item>
     
     <item>
@@ -329,7 +331,7 @@ Each documented method involves initialising data as part of the syncdb event, e
       <guid>https://codeinthehole.com/tips/console-logging-to-stdout-in-django/</guid>
       <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.
 Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:
-import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.</description>
+import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.7+, the keyword argument to the constructor of logging.</description>
     </item>
     
     <item>

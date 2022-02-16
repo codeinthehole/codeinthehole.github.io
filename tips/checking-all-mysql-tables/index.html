@@ -79,19 +79,17 @@ if (!doNotTrack) {
 be regularly checked and repaired. Moreover, in a production
 environment, it can be beneficial to run a daily check of all tables and
 mail news of any errors to an appropriate developer/DBA.</p>
-
 <p>There are two options for checking MySQL tables. The most effective
 method is to run the <a href="http://dev.mysql.com/doc/refman/5.0/en/myisamchk.html">myisamchk
 utility</a> directly
 on the index files (<code>.MYI</code>) of the tables in question (some simple shell
 expansion makes this easy):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">myisamchk --silent --fast /path/to/datadir/*/*.MYI</code></pre></div>
-<p>However, this proses a problem in that you must ensure that no other
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">myisamchk --silent --fast /path/to/datadir/*/*.MYI
+</code></pre></div><p>However, this proses a problem in that you must ensure that no other
 programs are accessing the tables while they are being checked. Hence
 they must be locked, or better still, the MySQL daemon stopped before
 running any checks. Perversely, if this is not done, the act of checking
 the tables can corrupt them.</p>
-
 <p>Another option is to use the <code>CHECK TABLE</code> syntax in SQL (which does not
 pose a risk of corruption). There are various scripts (written in PHP
 and bash) posted on the <code>CHECK TABLE</code> <a href="http://dev.mysql.com/doc/refman/5.0/en/check-table.html">manual
@@ -99,16 +97,15 @@ page</a> but this
 operation can be done easily through a single line:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color:#e6db74">&#34;SHOW TABLES&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>| awk <span style="color:#e6db74">&#39;{print &#34;CHECK TABLE &#34;$1&#34;;&#34;}&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;</code></pre></div>
-<p>This dynamically creates a list of <code>CHECK TABLE ...</code> commands which is
+</span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;
+</code></pre></div><p>This dynamically creates a list of <code>CHECK TABLE ...</code> commands which is
 piped into MySQL for execution.</p>
-
 <p>For checking a selection of tables rather than all, use the LIKE
 operator when selecting the tables to check:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color:#e6db74">&#34;SHOW TABLES LIKE &#39;User%&#39;&#34;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>| awk <span style="color:#e6db74">&#39;NR != 1 {print &#34;CHECK TABLE &#34;$1&#34;;&#34;}&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;</code></pre></div>
-<p>This only checks the tables that start &lsquo;User&rsquo;. Note that the awk program
+</span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;
+</code></pre></div><p>This only checks the tables that start &lsquo;User&rsquo;. Note that the awk program
 has an extra clause to ensure that the first line of MySQL output is
 skipped.</p>
 
@@ -144,7 +141,7 @@ skipped.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

@@ -75,26 +75,17 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<!-- Introduction -->
-
+            <!-- raw HTML omitted -->
 <p>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for
 Python development. I imagine it will all be out-of-date by the time I set-up my
 next laptop but it&rsquo;s possible it might be useful to someone in the meantime.</p>
-
-<!-- Main content -->
-
+<!-- raw HTML omitted -->
 <h2 id="applications">Applications</h2>
-
 <p>I don&rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing
 them from the App Store or downloading <code>.dmg</code> files and dragging them into
 <code>/Applications</code>.</p>
-
 <h2 id="from-the-app-store">From the App Store</h2>
-
 <p>There&rsquo;s only a few of these that I use:</p>
-
 <ul>
 <li><a href="https://apps.apple.com/gb/app/bear/id1016366447">Bear</a> &mdash; my Bear notes are now my most valuable possession.</li>
 <li><a href="https://apps.apple.com/gb/app/trello-organize-anything/id461504587">Trello</a> &mdash; by far my favourite workflow management app.</li>
@@ -102,11 +93,8 @@ them from the App Store or downloading <code>.dmg</code> files and dragging them
 <li><a href="https://apps.apple.com/gb/app/slack/id618783545">Slack</a></li>
 <li><a href="https://apps.apple.com/us/app/outline-app/id1356177741">Outline VPN client</a></li>
 </ul>
-
 <h2 id="downloaded-and-dragged-into-applications">Downloaded and dragged into <code>/Applications</code></h2>
-
 <p>In rough order of usefulness:</p>
-
 <ul>
 <li><a href="https://www.alfredapp.com/">Alfred</a> &mdash; install this <a href="https://github.com/drgrib/alfred-bear">Bear workflow</a> and ensure it&rsquo;s configured to
 search Chrome bookmarks.</li>
@@ -124,17 +112,14 @@ functionality)</li>
 <li><a href="https://basecamp.com/via">Basecamp</a></li>
 <li><a href="https://www.vagrantup.com/">Vagrant</a></li>
 </ul>
-
 <h2 id="homebrew-formulae">Homebrew formulae</h2>
-
 <p>Homebrew is best reserved for core system packages, where running the
 latest version is desirable. It&rsquo;s less appropriate for project
 dependencies which require pinned versions &mdash; Docker is a better for
 that.</p>
-
 <p>Start by installing Xcode&rsquo;s command-line tools:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo xcode-select --install</code></pre></div>
-<p>then <a href="https://brew.sh/">install Homebrew</a> and a core set of formulae. The
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo xcode-select --install
+</code></pre></div><p>then <a href="https://brew.sh/">install Homebrew</a> and a core set of formulae. The
 following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_core_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     local packages<span style="color:#f92672">=(</span>
@@ -160,8 +145,8 @@ following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
         the_silver_searcher
     <span style="color:#f92672">)</span>
     brew install <span style="color:#e6db74">${</span>packages[@]<span style="color:#e6db74">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>plus some packages that require a separate <code>tap</code>:</p>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>plus some packages that require a separate <code>tap</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_tap_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
     brew tap heroku/brew <span style="color:#f92672">&amp;&amp;</span> brew install heroku
 
@@ -173,25 +158,19 @@ following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
         font-anonymous-pro
     <span style="color:#f92672">)</span>
     brew cask install <span style="color:#e6db74">${</span>fonts[@]<span style="color:#e6db74">}</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>Ensure your <code>~/.bash_profile</code> has shell completion enabled for
+<span style="color:#f92672">}</span>
+</code></pre></div><p>Ensure your <code>~/.bash_profile</code> has shell completion enabled for
 Homebrew-installs packages by following the <a href="https://docs.brew.sh/Shell-Completion">documented instructions</a>.</p>
-
 <h2 id="macos-configuration">MacOS configuration</h2>
-
 <p>It&rsquo;s too dull to go through everything. Here are few notable changes:</p>
-
 <h3 id="non-breaking-spaces">Non-breaking spaces</h3>
-
-<p>Unbind <span class="keys">⌥</span> + <span class="keys">SPACE</span> from inserting a non-breaking space by setting the contents
+<p>Unbind <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->SPACE<!-- raw HTML omitted --> from inserting a non-breaking space by setting the contents
 of <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> to:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-pl" data-lang="pl">{
     <span style="color:#e6db74">&#34;~ &#34;</span> <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;insertText:&#34;</span>, <span style="color:#e6db74">&#34; &#34;</span>);
-}</code></pre></div>
-<p>This avoids a common annoyance when editing headers in markdown files (eg in Bear).</p>
-
+}
+</code></pre></div><p>This avoids a common annoyance when editing headers in markdown files (eg in Bear).</p>
 <h3 id="system-preferences">System preferences</h3>
-
 <p>Here&rsquo;s a <code>configurure_system_preferences.sh</code> script I use:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
@@ -228,41 +207,40 @@ set -e
     defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int <span style="color:#ae81ff">1</span>
 <span style="color:#f92672">}</span>
 
-configure_all</code></pre></div>
-<h3 id="further-reading">Further reading</h3>
-
+configure_all
+</code></pre></div><h3 id="further-reading">Further reading</h3>
 <ul>
 <li><a href="https://twitter.com/searls/status/1264547049032187910">How to set up a new Mac for development</a> - A 90 minute video walking through setting up a MacBook Pro.</li>
 <li><a href="https://gist.github.com/brandonb927/3195465"><code>osx-for-hackers.sh</code></a> &mdash; A
 large shell script with a lot of configuration options. This is the Yosemite/El Capitan edition &ndash; not everything works in Catalina. It&rsquo;s worth browsing though
 to see if anything takes your fancy.</li>
 </ul>
-
 <h2 id="python">Python</h2>
-
 <p>General principles:</p>
-
 <ul>
-<li><p>Use <code>pyenv</code> to manage multiple versions of Python locally, and to stay out of the
-way of the system Python.</p></li>
-
-<li><p>Keep everything in virtualenvs.</p></li>
-
-<li><p>Use <code>virtualenvwrapper</code> to provide convenience commands. Mainly as I like to
+<li>
+<p>Use <code>pyenv</code> to manage multiple versions of Python locally, and to stay out of the
+way of the system Python.</p>
+</li>
+<li>
+<p>Keep everything in virtualenvs.</p>
+</li>
+<li>
+<p>Use <code>virtualenvwrapper</code> to provide convenience commands. Mainly as I like to
 switch to a project with <code>workon</code>. Indeed, I often create virtualenvs for non-Python
 projects just so I jump to them with <code>workon</code> and run some initialisation in
 the <code>postactivate</code> script (like changing to the project directory and setting
-the iTerm tab title).</p></li>
-
-<li><p>Use <code>pipx</code> to install command-line Python apps like <code>awscli</code> that I want
-available globally (i.e. can be run without activating a virtualenv first).</p></li>
+the iTerm tab title).</p>
+</li>
+<li>
+<p>Use <code>pipx</code> to install command-line Python apps like <code>awscli</code> that I want
+available globally (i.e. can be run without activating a virtualenv first).</p>
+</li>
 </ul>
-
 <h3 id="python-versions">Python versions</h3>
-
 <p>Install <code>pyenv</code> and <code>pyenv-virtualenvwrapper</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ brew install pyenv pyenv-virtualenvwrapper</code></pre></div>
-<p>and ensure these libraries are initialised by adding:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ brew install pyenv pyenv-virtualenvwrapper
+</code></pre></div><p>and ensure these libraries are initialised by adding:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> which pyenv &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">then</span>
     <span style="color:#75715e"># Pyenv (will add shims to front of $PATH)</span>
@@ -271,36 +249,30 @@ available globally (i.e. can be run without activating a virtualenv first).</p><
     <span style="color:#75715e"># Ensure commands from virtualenvwrapper are available, no matter which</span>
     <span style="color:#75715e"># Python version is active. This is equiv to sourcing virtualenvwrapper.sh</span>
     pyenv virtualenvwrapper
-<span style="color:#66d9ef">fi</span></code></pre></div>
-<p>to <code>~/.bash_profile</code>.</p>
-
+<span style="color:#66d9ef">fi</span>
+</code></pre></div><p>to <code>~/.bash_profile</code>.</p>
 <p>Install a modern Python as the global default:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pyenv install 3.8.3
-$ pyenv global 3.8.3</code></pre></div>
-<p>plus any other Python versions that projects require.</p>
-
+$ pyenv global 3.8.3
+</code></pre></div><p>plus any other Python versions that projects require.</p>
 <h3 id="python-projects">Python projects</h3>
-
 <p>For each Python project, create a virtualenv by selecting the appropriate
 Python version using <code>pyenv</code> then using <code>mkvirtualenv</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ cd $PATH_TO_PROJECT
 $ pyenv local 3.7.7  <span style="color:#75715e"># for example  </span>
-$ mkvirtualenv $PROJECT_NAME</code></pre></div>
-<p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
+$ mkvirtualenv $PROJECT_NAME
+</code></pre></div><p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always require a virtualenv to use pip</span>
-export PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>true</code></pre></div>
-<p>in <code>~/.bash_profile</code>. If you do want to run <code>pip</code> outside of a virtualenv, use something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list</code></pre></div>
-<h3 id="python-command-line-apps">Python command-line apps</h3>
-
+export PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>true
+</code></pre></div><p>in <code>~/.bash_profile</code>. If you do want to run <code>pip</code> outside of a virtualenv, use something like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list
+</code></pre></div><h3 id="python-command-line-apps">Python command-line apps</h3>
 <p>Install <code>pipx</code> with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install pipx</code></pre></div>
-<p>and ensure <code>~/.local/bin</code> is on your <code>$PATH</code>.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ brew install pipx
+</code></pre></div><p>and ensure <code>~/.local/bin</code> is on your <code>$PATH</code>.</p>
 <p>Install CLI apps:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pipx install awscli</code></pre></div>
-<h3 id="further-reading-1">Further reading</h3>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pipx install awscli
+</code></pre></div><h3 id="further-reading-1">Further reading</h3>
 <ul>
 <li><a href="https://jacobian.org/2019/nov/11/python-environment-2020/">My Python Development Environment, 2020 Edition</a> by
 Jacob Kaplan-Moss (2019).</li>
@@ -338,7 +310,7 @@ Jacob Kaplan-Moss (2019).</li>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

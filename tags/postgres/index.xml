@@ -86,7 +86,7 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       <guid>https://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
       <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
 ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
-Solution Turn on Postgres&amp;rsquo; logging and watch the log files when the error is generated.
+Solution Turn on Postgres&#39; logging and watch the log files when the error is generated.
 This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
     </item>
     

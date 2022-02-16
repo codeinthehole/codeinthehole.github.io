@@ -86,7 +86,6 @@ Test</a> for
 writing better code (highly recommended). Get deployment right at the
 start and making major changes to your application becomes trivial
 rather than a complete nightmare.</p>
-
 <p><a href="http://phing.info/">Phing</a> is great for deploying PHP applications.
 It&rsquo;s well documented, easy to use and extend, and works well with other
 libraries such as PHPunit. Although it&rsquo;s not inthe current docs for
@@ -95,7 +94,6 @@ version 2.3.x there is a useful FTP task (<code>FtpDeployTask.php</code>) in Phi
 shared hosting environments using FTP. Syntax and usage are trivial
 given a glance through the source code
 (<code>/usr/share/php/phing/tasks/ext/FtpDeployTask.php</code> on Ubuntu systems).</p>
-
 <p>Here&rsquo;s a simple build.xml deployment script for a CodeIgniter project
 that uses the FtpDeploy task:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
@@ -163,8 +161,8 @@ that uses the FtpDeploy task:</p>
         <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span> <span style="color:#f92672">/&gt;</span>
         <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-system-files&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span></code></pre></div>
-<p>As we&rsquo;re forced into using clumsy, out-dated FTP (rather than the
+<span style="color:#f92672">&lt;/project&gt;</span>
+</code></pre></div><p>As we&rsquo;re forced into using clumsy, out-dated FTP (rather than the
 wonderful rsync) to copy the files onto the production server, each
 deployment overwrites existing files with the selected fileset and this
 can be quite time-consuming for large filesets as it often moves across
@@ -177,16 +175,15 @@ only want to move the &ldquo;files.application&rdquo; fileset across. These targ
 make use of the extremely useful &ldquo;phingcall&rdquo; target which allows a
 parameterised &ldquo;deploy&rdquo; target to be created which takes a fileset id as
 an argument.</p>
-
 <p>With the above build.xml in the root of your project, deploying to
 production is now as simple as:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing deploy-all</code></pre></div>
-<p>although most of the time the following suffices:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing</code></pre></div>
-<p>Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing deploy-all
+</code></pre></div><p>although most of the time the following suffices:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing
+</code></pre></div><p>Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp
 which can be trivially installed in the usual manner:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pear install Net_FTP</code></pre></div>
-<p>Of course, this script is overly simplistic and only works well with a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pear install Net_FTP
+</code></pre></div><p>Of course, this script is overly simplistic and only works well with a
 single developer. However, it would be easy to extend to team
 development by integrating with SVN so that the latest revision (or
 designated tag/branch) is checked out into a temporary directory before
@@ -224,7 +221,7 @@ being copied over to the production server.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

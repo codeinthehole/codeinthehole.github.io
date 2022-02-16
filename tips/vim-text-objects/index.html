@@ -75,77 +75,60 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">Text objects</a>, as in the <span class="keys">iw</span> from <span class="keys">ciw</span>
-(&ldquo;change inner word&rdquo;), form an important part of your Vim mentalese<sup class="footnote-ref" id="fnref:verbs"><a href="#fn:verbs">1</a></sup>. This post details those that I find most useful for Python and Django
+            <p><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">Text objects</a>, as in the <!-- raw HTML omitted -->iw<!-- raw HTML omitted --> from <!-- raw HTML omitted -->ciw<!-- raw HTML omitted -->
+(&ldquo;change inner word&rdquo;), form an important part of your Vim mentalese<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. This post details those that I find most useful for Python and Django
 development.</p>
-
-<p>For brevity, the leading <span class="keys">a</span> (mnemonic: &ldquo;a&rdquo;n) or <span class="keys">i</span> (mnemonic: &ldquo;inner&rdquo;), that you combine with the following commands to form the full text-object, are omitted.</p>
-
+<p>For brevity, the leading <!-- raw HTML omitted -->a<!-- raw HTML omitted --> (mnemonic: &ldquo;a&quot;n) or <!-- raw HTML omitted -->i<!-- raw HTML omitted --> (mnemonic: &ldquo;inner&rdquo;), that you combine with the following commands to form the full text-object, are omitted.</p>
 <p>From core Vim:</p>
-
 <ul>
-<li><span class="keys">w</span> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#word">word</a></li>
-<li><span class="keys">W</span> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#WORD">WORD</a></li>
-<li><span class="keys">t</span> → a HTML/XML tag</li>
-<li><span class="keys">s</span> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#sentence">sentence</a></li>
-<li><span class="keys">p</span> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#paragraph">paragraph</a></li>
+<li><!-- raw HTML omitted -->w<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#word">word</a></li>
+<li><!-- raw HTML omitted -->W<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#WORD">WORD</a></li>
+<li><!-- raw HTML omitted -->t<!-- raw HTML omitted --> → a HTML/XML tag</li>
+<li><!-- raw HTML omitted -->s<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#sentence">sentence</a></li>
+<li><!-- raw HTML omitted -->p<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#paragraph">paragraph</a></li>
 </ul>
-
 <p>From the (highly recommended)  <a href="https://github.com/wellle/targets.vim"><code>wellle/targets.vim</code></a> plugin:</p>
-
 <ul>
-<li><span class="keys">,</span> <span class="keys">.</span> <span class="keys">;</span> <span class="keys">:</span> <span class="keys">+</span> <span class="keys">-</span> <span class="keys">=</span> <span class="keys">~</span> <span class="keys">_</span> <span class="keys">*</span> <span class="keys">#</span> <span class="keys">/</span> <span class="keys">|</span>
-<span class="keys">\</span> <span class="keys">&amp;</span> <span class="keys">$</span> → an area of text delimited by
+<li><!-- raw HTML omitted -->,<!-- raw HTML omitted --> <!-- raw HTML omitted -->.<!-- raw HTML omitted --> <!-- raw HTML omitted -->;<!-- raw HTML omitted --> <!-- raw HTML omitted -->:<!-- raw HTML omitted --> <!-- raw HTML omitted -->+<!-- raw HTML omitted --> <!-- raw HTML omitted -->-<!-- raw HTML omitted --> <!-- raw HTML omitted -->=<!-- raw HTML omitted --> <!-- raw HTML omitted -->~<!-- raw HTML omitted --> <!-- raw HTML omitted -->_<!-- raw HTML omitted --> <!-- raw HTML omitted -->*<!-- raw HTML omitted --> <!-- raw HTML omitted -->#<!-- raw HTML omitted --> <!-- raw HTML omitted -->/<!-- raw HTML omitted --> <!-- raw HTML omitted -->|<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->\<!-- raw HTML omitted --> <!-- raw HTML omitted -->&amp;<!-- raw HTML omitted --> <!-- raw HTML omitted -->$<!-- raw HTML omitted --> → an area of text delimited by
 the given character (super useful).</li>
-<li><span class="keys">a</span> → a function argument.</li>
+<li><!-- raw HTML omitted -->a<!-- raw HTML omitted --> → a function argument.</li>
 </ul>
-
 <p>Furthermore <a href="https://github.com/wellle/targets.vim"><code>wellle/targets.vim</code></a> overrides the built-in text objects to <em>seek to the next
 occurence</em> of the text-object if the cursor isn&rsquo;t already within one. This is
 useful.</p>
-
 <p>From other language-agnostic, third-party text objects:</p>
-
 <ul>
-<li><span class="keys">l</span> → a line (via <a href="https://github.com/kana/vim-textobj-line"><code>kana/vim-textobj-line</code></a>)</li>
-<li><span class="keys">e</span> → the entire buffer (via <a href="https://github.com/kana/vim-textobj-entire"><code>kana/vim-textobj-entire</code></a>) so you can, say,
-indent the entire buffer with <span class="keys">=ae</span>.</li>
-<li><span class="keys">i</span> → an indented block (via <a href="https://github.com/kana/vim-textobj-indent"><code>kana/vim-textobj-indent</code></a>). This
+<li><!-- raw HTML omitted -->l<!-- raw HTML omitted --> → a line (via <a href="https://github.com/kana/vim-textobj-line"><code>kana/vim-textobj-line</code></a>)</li>
+<li><!-- raw HTML omitted -->e<!-- raw HTML omitted --> → the entire buffer (via <a href="https://github.com/kana/vim-textobj-entire"><code>kana/vim-textobj-entire</code></a>) so you can, say,
+indent the entire buffer with <!-- raw HTML omitted -->=ae<!-- raw HTML omitted -->.</li>
+<li><!-- raw HTML omitted -->i<!-- raw HTML omitted --> → an indented block (via <a href="https://github.com/kana/vim-textobj-indent"><code>kana/vim-textobj-indent</code></a>). This
 isn&rsquo;t quite as useful as it sounds for Python work as it stops at a blank line
 within an indented block &ndash; still worth having to hand.</li>
-<li><span class="keys">c</span> → a comment block (via <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>).</li>
+<li><!-- raw HTML omitted -->c<!-- raw HTML omitted --> → a comment block (via <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>).</li>
 </ul>
-
 <p><a href="https://github.com/jeetsukumaran/vim-pythonsense"><code>jeetsukumaran/vim-pythonsense</code></a> provides some Python text objects:</p>
-
 <ul>
-<li><span class="keys">f</span> → a Python function</li>
-<li><span class="keys">c</span> → a Python class<sup class="footnote-ref" id="fnref:clash"><a href="#fn:clash">2</a></sup></li>
-<li><span class="keys">d</span> → a Python docstring</li>
+<li><!-- raw HTML omitted -->f<!-- raw HTML omitted --> → a Python function</li>
+<li><!-- raw HTML omitted -->c<!-- raw HTML omitted --> → a Python class<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
+<li><!-- raw HTML omitted -->d<!-- raw HTML omitted --> → a Python docstring</li>
 </ul>
-
 <p>For editing Django templates (via <a href="https://github.com/mjbrownie/django-template-textobjects"><code>mjbrownie/django-template-textobjects</code></a>):</p>
-
 <ul>
-<li><span class="keys">db</span> → a <code>{% block ... %}...{% endblock %}</code> block</li>
-<li><span class="keys">di</span> → a <code>{% if ... %}...{% endif %}</code> conditional block</li>
-<li><span class="keys">df</span> → a <code>{% for ... %}...{% endfor %}</code> for loop block</li>
-<li><span class="keys">dv</span> → a <code>{{ ... }}</code> variable</li>
-<li><span class="keys">dt</span> → a <code>{% tagname ... %}</code> tag</li>
+<li><!-- raw HTML omitted -->db<!-- raw HTML omitted --> → a <code>{% block ... %}...{% endblock %}</code> block</li>
+<li><!-- raw HTML omitted -->di<!-- raw HTML omitted --> → a <code>{% if ... %}...{% endif %}</code> conditional block</li>
+<li><!-- raw HTML omitted -->df<!-- raw HTML omitted --> → a <code>{% for ... %}...{% endfor %}</code> for loop block</li>
+<li><!-- raw HTML omitted -->dv<!-- raw HTML omitted --> → a <code>{{ ... }}</code> variable</li>
+<li><!-- raw HTML omitted -->dt<!-- raw HTML omitted --> → a <code>{% tagname ... %}</code> tag</li>
 </ul>
-
 <p>Several of the above plugins are built using <a href="https://github.com/kana/vim-textobj-user"><code>kana/vim-textobj-user</code></a>,
 which provides a simple framework for building your own text-objects.</p>
-
 <p>Useful references:</p>
-
 <ul>
 <li><a href="https://github.com/wellle/targets.vim/blob/master/cheatsheet.md">Cheatsheet for <code>wellle/targets.vim</code></a></li>
 <li><a href="https://github.com/kana/vim-textobj-user/wiki">A list of all text-object plugins built with <code>kana/vim-textobj-user</code></a></li>
 </ul>
-
 <p>Related articles:</p>
-
 <ul>
 <li><a href="https://blog.carbonfive.com/2011/10/17/vim-text-objects-the-definitive-guide/">Vim Text Objects: The Definitive Guide</a>
 by <em>Jared Carroll</em> (2011).</li>
@@ -154,25 +137,23 @@ by <em>Cody Veal</em> (2013).</li>
 <li><a href="http://owen.cymru/vim-text-objects-extend-vims-natural-language-2/">Vim text objects, extend Vim&rsquo;s natural language!</a>
 by <em>Owen Garland</em> (2017).</li>
 </ul>
-
-<!-- Write own one for Python import or arg assign (, and _ delimited)
-
--->
-<div class="footnotes">
-
-<hr />
-
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:verbs"><p>In the sense that you combine them with <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#operator">operators</a>
-(eg <span class="keys">c</span>, <span class="keys">d</span>, <span class="keys">gU</span>) to build describe what you want to do.</p>
- <a class="footnote-return" href="#fnref:verbs"><sup>[return]</sup></a></li>
-
-<li id="fn:clash"><p>To avoid clashing with the comment text-object binding from <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>, you
-can rebind the class text object to, say, <span class="keys">C</span> with:</p>
+<li id="fn:1" role="doc-endnote">
+<p>In the sense that you combine them with <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#operator">operators</a>
+(eg <!-- raw HTML omitted -->c<!-- raw HTML omitted -->, <!-- raw HTML omitted -->d<!-- raw HTML omitted -->, <!-- raw HTML omitted -->gU<!-- raw HTML omitted -->) to build describe what you want to do.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>To avoid clashing with the comment text-object binding from <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>, you
+can rebind the class text object to, say, <!-- raw HTML omitted -->C<!-- raw HTML omitted --> with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt;</span> aC <span style="color:#f92672">&lt;</span>Plug<span style="color:#f92672">&gt;</span>(PythonsenseOuterClassTextObject)
-map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt;</span> iC <span style="color:#f92672">&lt;</span>Plug<span style="color:#f92672">&gt;</span>(PythonsenseInnerClassTextObject)</code></pre></div> <a class="footnote-return" href="#fnref:clash"><sup>[return]</sup></a></li>
+map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt;</span> iC <span style="color:#f92672">&lt;</span>Plug<span style="color:#f92672">&gt;</span>(PythonsenseInnerClassTextObject)
+</code></pre></div>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -206,7 +187,7 @@ map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

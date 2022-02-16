@@ -78,28 +78,26 @@ if (!doNotTrack) {
             <p>There&rsquo;s two non-obvious things to know when starting to use
 <a href="http://dalibo.github.io/pgbadger/">pgbadger</a> with AWS
 RDS.</p>
-
 <p>First, set:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">log_statement</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">None </span></code></pre></div>
-<p>Don&rsquo;t set this to <em>all</em> as the <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html">AWS docs</a> suggest.</p>
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">log_statement</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">None </span>
+</code></pre></div><p>Don&rsquo;t set this to <em>all</em> as the <a href="http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_LogAccess.Concepts.PostgreSQL.html">AWS docs</a> suggest.</p>
 <p>Further, don&rsquo;t waste your time trying to add a DB parameter to set <code>log_line_prefix</code>
-to pgbadger&rsquo;s recommended value: it&rsquo;s not possible<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup>. Instead tell
+to pgbadger&rsquo;s recommended value: it&rsquo;s not possible<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. Instead tell
 pgbadger about the log format that RDS insists on:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pgbadger -f stderr -p <span style="color:#e6db74">&#39;%t:%r:%u@%d:[%p]:&#39;</span> postgres.log</code></pre></div>
-<p>Hope that saves you some time. Note that the <code>-f stderr</code> is required for
-pgbadger v10 and above<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>:</p>
-<div class="footnotes">
-
-<hr />
-
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ pgbadger -f stderr -p <span style="color:#e6db74">&#39;%t:%r:%u@%d:[%p]:&#39;</span> postgres.log
+</code></pre></div><p>Hope that saves you some time. Note that the <code>-f stderr</code> is required for
+pgbadger v10 and above<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
 <ol>
-<li id="fn:1">See <a href="https://forums.aws.amazon.com/thread.jspa?threadID=145342">https://forums.aws.amazon.com/thread.jspa?threadID=145342</a>
- <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">See <a href="https://github.com/darold/pgbadger/issues/443">https://github.com/darold/pgbadger/issues/443</a>
- <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
+<li id="fn:1" role="doc-endnote">
+<p>See <a href="https://forums.aws.amazon.com/thread.jspa?threadID=145342">https://forums.aws.amazon.com/thread.jspa?threadID=145342</a>&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+<li id="fn:2" role="doc-endnote">
+<p>See <a href="https://github.com/darold/pgbadger/issues/443">https://github.com/darold/pgbadger/issues/443</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
 </ol>
-</div>
+</section>
 
         </div>
 
@@ -133,7 +131,7 @@ pgbadger v10 and above<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

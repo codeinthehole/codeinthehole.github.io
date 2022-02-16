@@ -58,7 +58,7 @@ The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;
 Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
 Install with:
 pip install csvfilter Sample usage:
-# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.</description>
+# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.csv # Pluck all columns except 4 cat in.</description>
     </item>
     
     <item>
@@ -68,7 +68,7 @@ pip install csvfilter Sample usage:
       
       <guid>https://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</guid>
       <description>Problem You&amp;rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&amp;rsquo;s difficult to remember which tab is for which project. This is making you unhappy.
-Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment.</description>
+Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment. Add something similar to the following to your postactivate script:</description>
     </item>
     
     <item>

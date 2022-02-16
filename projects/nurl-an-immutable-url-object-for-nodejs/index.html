@@ -78,14 +78,12 @@ if (!doNotTrack) {
             <p>I&rsquo;m a big fan of <a href="http://c2.com/cgi/wiki?ValueObject">Value Objects</a> -
 some of the most useful classes I&rsquo;ve ever written have been lightweight
 wrappers around strings.</p>
-
 <p>For my first contribution to the <a href="http://nodejs.org/">node.js</a>
 ecosystem, I&rsquo;ve published a simple, immutable URL object to the Node
 package manager (npm) directory. It provides a light-weight, immutable
 URL object that encapsulates the functionality of the existing &lsquo;url&rsquo; and
 &lsquo;querystring&rsquo; modules in a single object as well as offering various
 extension methods that make working with URLs easy.</p>
-
 <p>Source and detailed docs available at
 <a href="http://github.com/codeinthehole/nurl">http://github.com/codeinthehole/nurl</a> -but here&rsquo;s some sample usage for
 dynamically building a URL:</p>
@@ -95,18 +93,15 @@ dynamically building a URL:</p>
                               .<span style="color:#a6e22e">setPathname</span>(<span style="color:#e6db74">&#39;search&#39;</span>);
 <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">searchUrl</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">baseUrl</span>.<span style="color:#a6e22e">setPathSegment</span>(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;my search term&#39;</span>);
 <span style="color:#a6e22e">searchUrl</span>.<span style="color:#a6e22e">toString</span>() <span style="color:#75715e">// =&gt; &#39;http://api.example.com/search/my%20search%20term
-</span></code></pre></div>
-<p>All components of a URL are exposed as read-only properties as well as
+</span></code></pre></div><p>All components of a URL are exposed as read-only properties as well as
 through getter functions.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">u</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">nurl</span>.<span style="color:#a6e22e">parse</span>(<span style="color:#e6db74">&#39;http://www.example.com/path/to/somewhere?q=node.js&#39;</span>);
 <span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">getSubdomains</span>() <span style="color:#75715e">// [&#39;www&#39;, &#39;example&#39;, &#39;com&#39;]
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">getPathSegment</span>(<span style="color:#ae81ff">0</span>) <span style="color:#75715e">// &#39;path&#39;
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">getQueryParam</span>(<span style="color:#e6db74">&#39;q&#39;</span>) <span style="color:#75715e">// &#39;node.js&#39;
 </span><span style="color:#75715e"></span><span style="color:#a6e22e">u</span>.<span style="color:#a6e22e">getQueryParam</span>(<span style="color:#e6db74">&#39;p&#39;</span>, <span style="color:#e6db74">&#39;a default value&#39;</span>) <span style="color:#75715e">// &#39;a default value&#39;
-</span></code></pre></div>
-<p>All very simple but potentially quite useful thanks to the ubiquity of
+</span></code></pre></div><p>All very simple but potentially quite useful thanks to the ubiquity of
 the humble URL.</p>
-
 <p>Writing this module introduced me to some of the excellent software
 already available for node.js. Firstly, the package management system
 <a href="http://github.com/isaacs/npm">npm</a> is brilliantly simple to get started
@@ -116,9 +111,7 @@ offers some cunning possibilities such as dynamically building
 test-suites at run-time - this is great for this package as I can create
 a fixture object of URL strings and their decomposition into components,
 then build the context dynamically.</p>
-
-<p><img src="/images/screenshots/vows.png" alt="Screenshot of vows in action" /></p>
-
+<p><img src="/images/screenshots/vows.png" alt="Screenshot of vows in action"></p>
 <p>All feedback, forks and pull requests gratefully accepted.</p>
 
         </div>
@@ -153,7 +146,7 @@ then build the context dynamically.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

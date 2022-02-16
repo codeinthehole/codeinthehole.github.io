@@ -75,9 +75,7 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<p>Since watching Carl Meyer&rsquo;s superb &lsquo;<a href="http://pyvideo.org/video/699/testing-and-django">Testing and
+            <p>Since watching Carl Meyer&rsquo;s superb &lsquo;<a href="http://pyvideo.org/video/699/testing-and-django">Testing and
 Django</a>&rsquo; talk, I&rsquo;ve
 been using Ian Bicking&rsquo;s
 <a href="http://webtest.pythonpaste.org/en/latest/index.html">WebTest</a> library
@@ -86,11 +84,8 @@ for functional tests, via
 really impressed and I&rsquo;d like to stress one of Carl&rsquo;s points - that
 using WebTest for functional tests is superior to using the Django
 client.</p>
-
 <h3 id="why">Why?</h3>
-
 <p>Several reasons - here&rsquo;s a few:</p>
-
 <ul>
 <li>WebTest allows you to model a user&rsquo;s experience much more closely as
 it is smart about mark-up. Instead of hand-crafting GET and POST
@@ -106,18 +101,13 @@ response
 HTML</a>,
 making it easy to make complicated assertions about the response.</li>
 </ul>
-
 <p>Watch from 29:48 in Carl&rsquo;s talk for further details.</p>
-
 <h3 id="example-functional-test">Example functional test</h3>
-
 <p>Consider this story from a functional spec:</p>
-
 <blockquote>
 <p>A staff member can upload a CSV to create new credit allocations for
 customers.</p>
 </blockquote>
-
 <p>Here&rsquo;s a WebTest for this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django_webtest <span style="color:#f92672">import</span> WebTest
 <span style="color:#f92672">from</span> django.core.urlresolvers <span style="color:#f92672">import</span> reverse
@@ -145,17 +135,14 @@ customers.</p>
 
         <span style="color:#75715e"># Check that an allocation has been created</span>
         self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">250</span>, api<span style="color:#f92672">.</span>balance(customer))
-        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())</code></pre></div>
-<p>As you can see, using WebTest allows the story to be captured in a
+        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())
+</code></pre></div><p>As you can see, using WebTest allows the story to be captured in a
 simple and readable test. This is based on a real functional test from a
 current project of mine. Writing the above test took about 2 minutes.</p>
-
 <h4 id="other-useful-testing-libraries">Other useful testing libraries</h4>
-
 <p>The example test uses
 <a href="http://paulocheque.github.com/django-dynamic-fixture/">django_dynamic_fixture</a>
 to create users, specifying only the attributes relevant to the test.</p>
-
 <p>Note also the mildly unusual naming convention of the example TestCase
 and method are because I use
 <a href="https://github.com/jbalogh/django-nose">django_nose</a> with the &lsquo;spec&rsquo;
@@ -171,14 +158,12 @@ An admin
 - can upload a csv to create allocations
 
 ----------------------------------------------------------------------
-Ran <span style="color:#ae81ff">1</span> tests in 0.269s</code></pre></div>
-<p>This is a useful way of running functional tests. It also pushes you
+Ran <span style="color:#ae81ff">1</span> tests in 0.269s
+</code></pre></div><p>This is a useful way of running functional tests. It also pushes you
 towards splitting your tests suites into more carefully named,
 tightly-focussed test cases - rather than bundling disparate tests into
 the same test case.</p>
-
 <h3 id="summary">Summary</h3>
-
 <p>Use WebTest for your functional tests - you won&rsquo;t regret it.</p>
 
         </div>
@@ -213,7 +198,7 @@ the same test case.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

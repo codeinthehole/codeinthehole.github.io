@@ -80,14 +80,13 @@ into a spreadsheet for sharing with others. Google Sheets needs the
 pasted data to be tab-separated in order to be correctly split into
 columns. This isn&rsquo;t the default behaviour for psql but here&rsquo;s how to
 configure psql&rsquo;s output to get it.</p>
-
 <p>At a psql prompt, switch to unaligned output</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>a</code></pre></div>
-<p>set the field separator to a tab character:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>f <span style="color:#e6db74">&#39;\t&#39;</span></code></pre></div>
-<p>and turn the pager off:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>pset pager <span style="color:#66d9ef">off</span></code></pre></div>
-<p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>a
+</code></pre></div><p>set the field separator to a tab character:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>f <span style="color:#e6db74">&#39;\t&#39;</span>
+</code></pre></div><p>and turn the pager off:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>pset pager <span style="color:#66d9ef">off</span>
+</code></pre></div><p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
 pasted into your Google Doc.</p>
 
         </div>
@@ -122,7 +121,7 @@ pasted into your Google Doc.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

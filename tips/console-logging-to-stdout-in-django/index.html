@@ -75,16 +75,11 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<h3 id="problem">Problem</h3>
-
+            <h3 id="problem">Problem</h3>
 <p>By default in Python (and Django), the documented console handler emits
 to STDERR, but you want it to use STDOUT instead. This is often desired
 for management commands that run as cronjobs.</p>
-
 <h3 id="solution">Solution</h3>
-
 <p>For Python 2.6, use the following LOGGING config in your settings to
 specify a different output stream:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
@@ -97,13 +92,11 @@ LOGGING <span style="color:#f92672">=</span> {
         },
         <span style="color:#f92672">...</span>
     }
-}</code></pre></div>
-<p>For Python 2.7+, the keyword argument to the constructor of
+}
+</code></pre></div><p>For Python 2.7+, the keyword argument to the constructor of
 <code>logging.StreamHandler</code> is <code>stream</code> rather than <code>strm</code>. Ensure you use
 the right version.</p>
-
 <h3 id="discussion">Discussion</h3>
-
 <p><a href="https://docs.djangoproject.com/en/dev/topics/logging/#an-example">Django&rsquo;s logging
 docs</a>
 detail the following logging configuration for a console handler:</p>
@@ -117,11 +110,10 @@ detail the following logging configuration for a console handler:</p>
         },
     },
     <span style="color:#f92672">...</span>
-}</code></pre></div>
-<p>however, the default output stream for <code>logging.StreamHandler</code> is
+}
+</code></pre></div><p>however, the default output stream for <code>logging.StreamHandler</code> is
 STDERR. The extra keyword argument in the solution alter this behaviour
 to use STDOUT.</p>
-
 <p>Logging to STDERR means that any output from cron jobs is emailed to
 root. A more desirable behaviour is for only genuine errors to trigger
 emails, while normal output can be logged to file. Hence, a sensible
@@ -129,7 +121,8 @@ cronjob file would look something like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SHELL<span style="color:#f92672">=</span>/bin/bash
 MAILTO<span style="color:#f92672">=</span>alerts.someproject@yourcompany.co.uk
 
-*/10 * * * * app source /venv/bin/activate <span style="color:#f92672">&amp;&amp;</span> /app/manage.py do_something &gt; /dev/null  </code></pre></div>
+*/10 * * * * app source /venv/bin/activate <span style="color:#f92672">&amp;&amp;</span> /app/manage.py do_something &gt; /dev/null  
+</code></pre></div>
         </div>
 
         <div id="article_meta">
@@ -162,7 +155,7 @@ MAILTO<span style="color:#f92672">=</span>alerts.someproject@yourcompany.co.uk
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>

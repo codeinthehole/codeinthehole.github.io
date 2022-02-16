@@ -24,7 +24,7 @@
       
       <guid>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
       <description>A bad joke told in Python:
-def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.</description>
+def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper()) </description>
     </item>
     
     <item>

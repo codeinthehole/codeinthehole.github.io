@@ -75,19 +75,13 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            
-
-<h3 id="problem">Problem</h3>
-
+            <h3 id="problem">Problem</h3>
 <p>For some reason, you need to reload your Django URL config.</p>
-
 <p>Normally, the root URL config will be imported and stored in memory when
 your server process starts up. Occasionally though, you may want to
 reload it. This can be the case if your URL configuration changes
 depending on certain parameters.</p>
-
 <h3 id="solution">Solution</h3>
-
 <p>You can reload the URL config using the following snippet:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
@@ -96,15 +90,13 @@ depending on certain parameters.</p>
     <span style="color:#66d9ef">if</span> urlconf <span style="color:#f92672">is</span> <span style="color:#66d9ef">None</span>:
         urlconf <span style="color:#f92672">=</span> settings<span style="color:#f92672">.</span>ROOT_URLCONF
     <span style="color:#66d9ef">if</span> urlconf <span style="color:#f92672">in</span> sys<span style="color:#f92672">.</span>modules:
-        reload(sys<span style="color:#f92672">.</span>modules[urlconf])</code></pre></div>
-<h3 id="discussion">Discussion</h3>
-
+        reload(sys<span style="color:#f92672">.</span>modules[urlconf])
+</code></pre></div><h3 id="discussion">Discussion</h3>
 <p>This was a problem I needed to solve while testing the checkout process
 for <a href="https://github.com/tangentlabs/django-oscar">django-oscar</a>. Oscar
 uses a setting flag to optionally add decorators to certain URLs, and
 hence I needed to patch the setting and reload the URLs as part of the
 set-up for a test.</p>
-
 <p>This was achieved in the following way, where the setting
 <code>OSCAR_ALLOW_ANON_CHECKOUT</code> is set to <code>True</code> and the URL config is
 reloaded.</p>
@@ -125,8 +117,8 @@ reloaded.</p>
         <span style="color:#66d9ef">with</span> patch_settings(OSCAR_ALLOW_ANON_CHECKOUT<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>):
             self<span style="color:#f92672">.</span>reload_urlconf()
             response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;checkout:shipping-address&#39;</span>))
-            self<span style="color:#f92672">.</span>assertIsRedirect(response)</code></pre></div>
-<p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
+            self<span style="color:#f92672">.</span>assertIsRedirect(response)
+</code></pre></div><p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
 me when working on this problem today.</p>
 
         </div>
@@ -161,7 +153,7 @@ me when working on this problem today.</p>
             </p>
 
             <p>
-            Copyright &copy; 2005-2021 <a href="/about/">David Winterbottom</a><br/>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
             Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
             </p>
         </div>
