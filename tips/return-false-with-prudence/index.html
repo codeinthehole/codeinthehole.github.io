@@ -77,62 +77,57 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <p>From &ldquo;Javascript: the good parts&rdquo;:</p>
 <blockquote>
-<p>It is rarely possible for standards comittees to remove imperfections
-from a language because doing so would cause the breakdage of all of
-the bad programs that depend on those bad parts. They are usually
-powerless to do anything except heap more features on top of the
-existing pile of imperfections.</p>
+<p>It is rarely possible for standards comittees to remove imperfections from a
+language because doing so would cause the breakdage of all of the bad programs
+that depend on those bad parts. They are usually powerless to do anything
+except heap more features on top of the existing pile of imperfections.</p>
 </blockquote>
-<p>Douglas Crockford&rsquo;s terse yet lucid javascript primer makes some
-excellent points on writing in a language with more than its fair of
-share of shortcomings. The advice is manyfold: constituting
-functionality or design decisions to avoid (the &ldquo;bad&rdquo; and &ldquo;awful&rdquo; parts)
-as well as patterns and practices making use of the strongest parts of
-the language. Essentially, one is guided to programming within a subset
-of the language, avoiding the poor quality and outright dangerous
-components. This chimes in well with the notation of &ldquo;programming <em>into</em>
-a language&rdquo; rather than within in it - stressed by the seminal &ldquo;Code
-Complete&rdquo; by Steve McConnell.</p>
+<p>Douglas Crockford&rsquo;s terse yet lucid javascript primer makes some excellent
+points on writing in a language with more than its fair of share of
+shortcomings. The advice is manyfold: constituting functionality or design
+decisions to avoid (the &ldquo;bad&rdquo; and &ldquo;awful&rdquo; parts) as well as patterns and
+practices making use of the strongest parts of the language. Essentially, one is
+guided to programming within a subset of the language, avoiding the poor quality
+and outright dangerous components. This chimes in well with the notation of
+&ldquo;programming <em>into</em> a language&rdquo; rather than within in it - stressed by the
+seminal &ldquo;Code Complete&rdquo; by Steve McConnell.</p>
 <blockquote>
-<p>Don&rsquo;t limit your programming thinking only to the concepts that are
-supported automatically by your language. The best programmers think
-of what they want to do, and then they assess how to accomplish their
-objectives with the programming tools at their disposal.</p>
+<p>Don&rsquo;t limit your programming thinking only to the concepts that are supported
+automatically by your language. The best programmers think of what they want
+to do, and then they assess how to accomplish their objectives with the
+programming tools at their disposal.</p>
 </blockquote>
-<p>Both these concepts are relevant to programmers of PHP - a language
-carrying just as much baggage as javascript. In my experience,
-developers who have only known PHP are prone to employing of a variety
-of bad practices and anti-patterns. Such things are fostered by several
-influences, including the forgiving nature of the language, the
-veritable wealth of bad advice within the comments on the PHP manual,
-and a general lack of understanding of the art of object-oriented
-programming. Indeed, I think it&rsquo;s essential that PHP developers learn to
-program (and hence <em>think</em>) in other languages: python and java in
-particular. Reading the work of Martin Fowler is a good place to start
-but that&rsquo;s a topic for another time.</p>
+<p>Both these concepts are relevant to programmers of PHP - a language carrying
+just as much baggage as javascript. In my experience, developers who have only
+known PHP are prone to employing of a variety of bad practices and
+anti-patterns. Such things are fostered by several influences, including the
+forgiving nature of the language, the veritable wealth of bad advice within the
+comments on the PHP manual, and a general lack of understanding of the art of
+object-oriented programming. Indeed, I think it&rsquo;s essential that PHP developers
+learn to program (and hence <em>think</em>) in other languages: python and java in
+particular. Reading the work of Martin Fowler is a good place to start but
+that&rsquo;s a topic for another time.</p>
 <p><img src="/images/screenshots/php-manual-returning-false.jpg" alt="image"></p>
-<p>One irritating programming idiom &ndash; especially common to PHP programmers
-&ndash; is to use a return value of <code>FALSE</code> to indicate that something has
-gone wrong, or that no valid return value could be found. Unless the
-only other possible return value is <code>TRUE</code>, this is almost always wrong.</p>
-<p>Of course, many programmers pick up this nasty habit from the PHP
-standard library itself, which employs this practice frequently.
-Further, it is similar to the C and UNIX convention of returning
-non-zero values as error codes (and sometimes vice-versa). The language
-writers of PHP have the excuse that this was the only mechanism
-available back in the dark days of PHP before version 5, before the
-introduction of exceptions - programmers coding today do not have that
-excuse. Indeed, employing this technique betrays a lack of understanding
-of what it means to program into a language rather than within it.</p>
+<p>One irritating programming idiom &ndash; especially common to PHP programmers &ndash; is
+to use a return value of <code>FALSE</code> to indicate that something has gone wrong, or
+that no valid return value could be found. Unless the only other possible return
+value is <code>TRUE</code>, this is almost always wrong.</p>
+<p>Of course, many programmers pick up this nasty habit from the PHP standard
+library itself, which employs this practice frequently. Further, it is similar
+to the C and UNIX convention of returning non-zero values as error codes (and
+sometimes vice-versa). The language writers of PHP have the excuse that this was
+the only mechanism available back in the dark days of PHP before version 5,
+before the introduction of exceptions - programmers coding today do not have
+that excuse. Indeed, employing this technique betrays a lack of understanding of
+what it means to program into a language rather than within it.</p>
 <p>Instead, please consider doing one of the following:</p>
 <h3 id="throw-an-exception">Throw an exception</h3>
-<p>When an error has occurred, a thrown exception is a clean and
-intent-revealing means of handing control over to a component of your
-program that can deal with the error. This saves cluttering up the
-normal execution path with checks for error codes and generally leads to
-concise and readable code. This leads to shorter, cleaner methods and
-allows the use of fluent interfaces - safe in the knowledge that a valid
-object will always be returned.</p>
+<p>When an error has occurred, a thrown exception is a clean and intent-revealing
+means of handing control over to a component of your program that can deal with
+the error. This saves cluttering up the normal execution path with checks for
+error codes and generally leads to concise and readable code. This leads to
+shorter, cleaner methods and allows the use of fluent interfaces - safe in the
+knowledge that a valid object will always be returned.</p>
 <p>So use:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">try</span> {
@@ -155,26 +150,25 @@ $billingAddressSavedOk <span style="color:#f92672">=</span> $this<span style="co
 <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$billingAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
 <span style="color:#f92672">...</span>
 </code></pre></div><p>Using exceptions to indicate errors obeys the Command-query separation
-principle, where (broadly speaking) only &ldquo;getter&rdquo; methods should return
-a value (using fluent interfaces is a mild but acceptable violation of
-this separation).</p>
+principle, where (broadly speaking) only &ldquo;getter&rdquo; methods should return a value
+(using fluent interfaces is a mild but acceptable violation of this separation).</p>
 <h3 id="return-null-null-object-or-an-empty-collection">Return <code>null</code>, Null object or an empty collection</h3>
-<p>Many objects will employ &ldquo;finder&rdquo; or factory methods responsible for
-looking up and then constructing an object:</p>
+<p>Many objects will employ &ldquo;finder&rdquo; or factory methods responsible for looking up
+and then constructing an object:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 $book <span style="color:#f92672">=</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">::</span><span style="color:#a6e22e">findByIsbn</span>($isbn);
-</code></pre></div><p>In this case, when no book is found, FALSE is not the appropriate return
-value - either return NULL (to indicate the absence of a valid book), or
-employ the Null Object pattern and return an null book object. It just
-feels so wrong returning multiple types from a function. Alarm bells
-should ring as soon as you see the pipe:</p>
+</code></pre></div><p>In this case, when no book is found, FALSE is not the appropriate return value -
+either return NULL (to indicate the absence of a valid book), or employ the Null
+Object pattern and return an null book object. It just feels so wrong returning
+multiple types from a function. Alarm bells should ring as soon as you see the
+pipe:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#e6db74">/**
 </span><span style="color:#e6db74">* @param string $isbn
 </span><span style="color:#e6db74">* @return Book|false
 </span><span style="color:#e6db74">*/</span>
-</code></pre></div><p>A neat idiom for finder methods is to always return a iterable
-collection of objects, which is simply empty when no object is found:</p>
+</code></pre></div><p>A neat idiom for finder methods is to always return a iterable collection of
+objects, which is simply empty when no object is found:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span>
 {
@@ -188,14 +182,13 @@ collection of objects, which is simply empty when no object is found:</p>
         <span style="color:#66d9ef">return</span> $books;
     }
 }
-</code></pre></div><p>Client code can then simply iterate over the returned value - it doesn&rsquo;t
-have to check for the presence of an item. JQuery employs this pattern
-extensively with its <code>$</code> CSS selector and it works wonderfully. The only
-downside for this is mental discomfort involved in selecting an element
-where there can only ever be one: such as an element with a unique id
-(<code>$('#my_element')</code>).</p>
-<p>Ultimately, there&rsquo;s only really one place where returning false is
-appropriate: that&rsquo;s in a method that only returns boolean values.</p>
+</code></pre></div><p>Client code can then simply iterate over the returned value - it doesn&rsquo;t have to
+check for the presence of an item. JQuery employs this pattern extensively with
+its <code>$</code> CSS selector and it works wonderfully. The only downside for this is
+mental discomfort involved in selecting an element where there can only ever be
+one: such as an element with a unique id (<code>$('#my_element')</code>).</p>
+<p>Ultimately, there&rsquo;s only really one place where returning false is appropriate:
+that&rsquo;s in a method that only returns boolean values.</p>
 
         </div>
 
@@ -236,6 +229,17 @@ appropriate: that&rsquo;s in a method that only returns boolean values.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/javascript-refactoring-for-customising-shared-libraries\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/phing-trick-for-avoiding-deploying-debug-code\/"); })
+    
+</script>
 
         </article>
     </body>

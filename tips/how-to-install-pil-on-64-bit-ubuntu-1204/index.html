@@ -79,13 +79,13 @@ if (!doNotTrack) {
 <p>You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).</p>
 <h3 id="solution">Solution</h3>
 <p>With pip already installed, install the required development packages:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev
 </code></pre></div><p>and symlink the three image libraries into <code>/usr/lib</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libfreetype.so /usr/lib/
-$ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libjpeg.so /usr/lib/
-$ sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libz.so /usr/lib/
-</code></pre></div><p>PIL should now install with support for JPEGs, PNGs and FreeType, as
-indicated by the compilation output:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libfreetype.so /usr/lib/
+sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libjpeg.so /usr/lib/
+sudo ln -s /usr/lib/<span style="color:#e6db74">`</span>uname -i<span style="color:#e6db74">`</span>-linux-gnu/libz.so /usr/lib/
+</code></pre></div><p>PIL should now install with support for JPEGs, PNGs and FreeType, as indicated
+by the compilation output:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--------------------------------------------------------------------
 PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
@@ -101,8 +101,8 @@ platform      linux2 2.7.3 <span style="color:#f92672">(</span>default, Apr <spa
 --------------------------------------------------------------------
 </code></pre></div><h3 id="common-problems">Common problems</h3>
 <h4 id="missing-image-libraries">Missing image libraries</h4>
-<p>If the image libraries are not installed and available in <code>/usr/lib</code>,
-you&rsquo;ll see something like this:</p>
+<p>If the image libraries are not installed and available in <code>/usr/lib</code>, you&rsquo;ll see
+something like this:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">--------------------------------------------------------------------
 PIL 1.1.7 SETUP SUMMARY
 --------------------------------------------------------------------
@@ -139,16 +139,13 @@ compilation terminated.
 
 error: command <span style="color:#e6db74">&#39;gcc&#39;</span> failed with exit status <span style="color:#ae81ff">1</span>
 </code></pre></div><h3 id="discussion">Discussion</h3>
-<p>Yes, this has been written about before. This is just my note-to-self
-that I can refer others to - I also wanted to include the common error
-messages that people will search for.</p>
+<p>Yes, this has been written about before. This is just my note-to-self that I can
+refer others to - I also wanted to include the common error messages that people
+will search for.</p>
 <ul>
-<li><a href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">Installing PIL in a virtualenv on Ubuntu 12.04 Precise
-Pangolin</a></li>
-<li><a href="http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/">Install PIL with JPEG support on Ubuntu Oneric
-64bit</a></li>
-<li><a href="http://www.saltycrane.com/blog/2010/10/how-install-pil-ubuntu/">How to install PIL on
-Ubuntu</a></li>
+<li><a href="http://www.sandersnewmedia.com/why/2012/04/16/installing-pil-virtualenv-ubuntu-1204-precise-pangolin/">Installing PIL in a virtualenv on Ubuntu 12.04 Precise Pangolin</a></li>
+<li><a href="http://jj.isgeek.net/2011/09/install-pil-with-jpeg-support-on-ubuntu-oneiric-64bits/">Install PIL with JPEG support on Ubuntu Oneric 64bit</a></li>
+<li><a href="http://www.saltycrane.com/blog/2010/10/how-install-pil-ubuntu/">How to install PIL on Ubuntu</a></li>
 </ul>
 
         </div>
@@ -190,6 +187,17 @@ Ubuntu</a></li>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/converting-github-issues-into-pull-requests\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/disable-database-access-when-writing-unit-tests-in-django\/"); })
+    
+</script>
 
         </article>
     </body>

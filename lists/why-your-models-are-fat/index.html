@@ -78,28 +78,30 @@ if (!doNotTrack) {
             <p>Because:</p>
 <ul>
 <li>
-<p>You moved everything out of the <code>views.py</code> modules when you heard fat controllers
-were bad.</p>
+<p>You moved everything out of the <code>views.py</code> modules when you heard fat
+controllers were bad.</p>
 </li>
 <li>
 <p>And you&rsquo;ve read that fat models are a good idea<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</p>
 </li>
 <li>
-<p>You need some extra functionality in a template and this is the easiest way
-to shoehorn it in. Eg:</p>
-</li>
-</ul>
-<pre tabindex="0"><code class="language-html+django" data-lang="html+django">&lt;p&gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&lt;/p&gt;
-</code></pre><ul>
+<p>You need some extra functionality in a template and this is the easiest way to
+shoehorn it in. Eg:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">p</span>&gt;
+  The current balance is {{ account.get_balance_via_three_network_calls_lol }}
+&lt;/<span style="color:#f92672">p</span>&gt;
+</code></pre></div></li>
 <li>
-<p>You can quickly solve your current problem by adding <em>n</em> more lines to that method (repeat <em>ad infinitum</em>)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
+<p>You can quickly solve your current problem by adding <em>n</em> more lines to that
+method (repeat <em>ad infinitum</em>)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
 </li>
 <li>
 <p>You&rsquo;re scared people will ignore your crucial wrapper function if it&rsquo;s not
 directly on the model<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role="doc-noteref">3</a></sup>.</p>
 </li>
 <li>
-<p>Are you even allowed to put application logic anywhere but a <code>models.py</code>?<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
+<p>Are you even allowed to put application logic anywhere but a
+<code>models.py</code>?<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
 </li>
 </ul>
 <section class="footnotes" role="doc-endnotes">
@@ -110,25 +112,24 @@ directly on the model<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role
 <ul>
 <li><a href="https://hackerfall.com/story/fat-models--a-django-code-organization-strategy">Fat Models - A Django Code Organization Strategy</a></li>
 <li><a href="http://django-best-practices.readthedocs.io/en/latest/applications.html#make-em-fat">Django Best Practices: Make &lsquo;em Fat</a></li>
-<li><a href="https://ultimatedjango.com/learn-django/lessons/adding-business-logic-to-models/">Ultimate Django: Adding Business Logic to Models</a></li>
+<li><a href="https://ultimatedjango.com/learn-django/lessons/adding-business-logic-to-models/">Ultimate Django: Adding Business Logic to Models</a>
+However, in practice, they&rsquo;re a bad idea (although this sometimes takes a
+few months to become apparent).</li>
 </ul>
-<p>However, in practice, they&rsquo;re a bad idea (although this sometimes takes a
-few months to become apparent).&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
 <li id="fn:2" role="doc-endnote">
-<p>Requires a poor-quality test suite and diligent ignorance of the <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single
-Responsibility Principle</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Requires a poor-quality test suite and diligent ignorance of the
+<a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:3" role="doc-endnote">
-<p>A legitimate problem with a liberal language like Python where it&rsquo;s
-hard to enforce calling conventions as nothing is truly private.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>A legitimate problem with a liberal language like Python where it&rsquo;s hard to
+enforce calling conventions as nothing is truly private.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:4" role="doc-endnote">
-<p>You are: your web framework is not your boss.</p>
-<p>As a rule-of-thumb, your application logic should live in modules that aren&rsquo;t
-Django-specific modules (eg not in <code>views.py</code>, <code>models.py</code> or <code>forms.py</code>).
-If I had my way, Django would create an empty <code>business_logic.py</code> in each
-new app to encourage this.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>You are: your web framework is not your boss. As a rule-of-thumb, your
+application logic should live in modules that aren&rsquo;t Django-specific modules
+(eg not in <code>views.py</code>, <code>models.py</code> or <code>forms.py</code>). If I had my way, Django
+would create an empty <code>business_logic.py</code> in each new app to encourage this.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -172,6 +173,17 @@ new app to encourage this.&#160;<a href="#fnref:4" class="footnote-backref" role
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/bash-error-reporting\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/news\/oe-tech-custom-sentry-client\/"); })
+    
+</script>
 
         </article>
     </body>

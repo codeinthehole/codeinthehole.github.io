@@ -76,18 +76,17 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Inspired by <a href="http://jacobian.org/">Jacob Kaplan-Moss</a>&rsquo;s excellent talk
-&ldquo;<a href="http://www.oscon.com/oscon2012/public/schedule/detail/24030">Django doesn&rsquo;t scale</a>&rdquo; at
-this year&rsquo;s OSCon, I&rsquo;ve put together a Django package for re-populating
+&ldquo;<a href="http://www.oscon.com/oscon2012/public/schedule/detail/24030">Django doesn&rsquo;t scale</a>&rdquo;
+at this year&rsquo;s OSCon, I&rsquo;ve put together a Django package for re-populating
 caches asynchronously.</p>
-<p>It provides a simple API for wrapping expensive read operations that
-caches results and uses <a href="http://celeryproject.org/">Celery</a> to
-repopulate items when they become stale. It can be used as a decorator
-for simple cases but provides an extensible class for more fine-grained
-control. It also provides helper classes for working with querysets.</p>
+<p>It provides a simple API for wrapping expensive read operations that caches
+results and uses <a href="http://celeryproject.org/">Celery</a> to repopulate items when
+they become stale. It can be used as a decorator for simple cases but provides
+an extensible class for more fine-grained control. It also provides helper
+classes for working with querysets.</p>
 <p>The package is MIT-licensed, published to
-<a href="http://pypi.python.org/pypi/django-cacheback">PyPI</a> and the source is
-available on
-<a href="https://github.com/codeinthehole/django-cacheback">Github</a>. It&rsquo;s best
+<a href="http://pypi.python.org/pypi/django-cacheback">PyPI</a> and the source is available
+on <a href="https://github.com/codeinthehole/django-cacheback">Github</a>. It&rsquo;s best
 explained with an &hellip;</p>
 <h3 id="example">Example</h3>
 <p>Consider a view that renders a user&rsquo;s tweets:</p>
@@ -95,19 +94,19 @@ explained with an &hellip;</p>
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>,
                   {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_tweets(username)})
-</code></pre></div><p>This works fine but the <code>fetch_tweets</code> function involves a HTTP
-round-trip and is slow. Enter caching.</p>
+</code></pre></div><p>This works fine but the <code>fetch_tweets</code> function involves a HTTP round-trip and
+is slow. Enter caching.</p>
 <h4 id="basic-caching">Basic caching</h4>
-<p>Performance can be improved using Django&rsquo;s <a href="https://docs.djangoproject.com/en/dev/topics/cache/?from=olddocs#the-low-level-cache-api">low-level cache
-API</a>:</p>
+<p>Performance can be improved using Django&rsquo;s
+<a href="https://docs.djangoproject.com/en/dev/topics/cache/?from=olddocs#the-low-level-cache-api">low-level cache API</a>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>,
                   {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username):
@@ -116,34 +115,33 @@ API</a>:</p>
         tweets <span style="color:#f92672">=</span> fetch_tweets(username)
         cache<span style="color:#f92672">.</span>set(username, tweets, <span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>)
     <span style="color:#66d9ef">return</span> tweets
-</code></pre></div><p>Now tweets are cached for 15 minutes after they are first fetched, using
-the twitter username as a key. This is obviously a performance
-improvement but the shortcomings of this approach are:</p>
+</code></pre></div><p>Now tweets are cached for 15 minutes after they are first fetched, using the
+twitter username as a key. This is obviously a performance improvement but the
+shortcomings of this approach are:</p>
 <ul>
-<li>For a cache miss, the tweets are fetched synchronously, blocking
-code execution and leading to a slow response time.</li>
-<li>This in turn exposes exposes the view to a &lsquo;<a href="http://en.wikipedia.org/wiki/Cache_stampede">cache
-stampede</a>&rsquo; where
-multiple expensive reads run simultaneously when the cached item
-expires. Under heavy load, this can bring your site down.</li>
+<li>For a cache miss, the tweets are fetched synchronously, blocking code
+execution and leading to a slow response time.</li>
+<li>This in turn exposes exposes the view to a
+&lsquo;<a href="http://en.wikipedia.org/wiki/Cache_stampede">cache stampede</a>&rsquo; where multiple
+expensive reads run simultaneously when the cached item expires. Under heavy
+load, this can bring your site down.</li>
 </ul>
 <h4 id="procrastinate-instead">Procrastinate instead</h4>
-<p>For most applications, it&rsquo;s not actually essential that the cache is
-refreshed immediately - it&rsquo;s acceptable to return stale results and
-update the cache asynchronously (so-called <a href="http://en.wikipedia.org/wiki/Eventual_consistency">&lsquo;Eventual
-Consistency&rsquo;</a>). This
-is desirable as it means all reads are fast and prevents cache
-stampedes.</p>
+<p>For most applications, it&rsquo;s not actually essential that the cache is refreshed
+immediately - it&rsquo;s acceptable to return stale results and update the cache
+asynchronously (so-called
+<a href="http://en.wikipedia.org/wiki/Eventual_consistency">&lsquo;Eventual Consistency&rsquo;</a>).
+This is desirable as it means all reads are fast and prevents cache stampedes.</p>
 <h4 id="using-celery">Using Celery</h4>
-<p>Consider an alternative implementation that uses a Celery task to
-repopulate the cache.</p>
+<p>Consider an alternative implementation that uses a Celery task to repopulate the
+cache.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> datetime
 <span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.tasks <span style="color:#f92672">import</span> update_tweets
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>,
                   {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_cached_tweets</span>(username, lifetime<span style="color:#f92672">=</span><span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>):
@@ -168,30 +166,27 @@ repopulate the cache.</p>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">update_tweets</span>(username, ttl):
     tweets <span style="color:#f92672">=</span> fetch_tweets(username)
     now <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
-    cache<span style="color:#f92672">.</span>set(username, (tweets, now<span style="color:#f92672">+</span>ttl), <span style="color:#ae81ff">2592000</span>) 
+    cache<span style="color:#f92672">.</span>set(username, (tweets, now<span style="color:#f92672">+</span>ttl), <span style="color:#ae81ff">2592000</span>)
 </code></pre></div><p>Some things to note:</p>
 <ul>
-<li>Items are stored in the cache as tuples <code>(data, expiry_timestamp)</code>
-using Memcache&rsquo;s maximum expiry setting (2592000 seconds). By using
-this value, we are effectively bypassing memcache&rsquo;s replacement
-policy in favour of our own.</li>
-<li>As the comments indicate, there are two replacements scenarios to
-consider:
+<li>Items are stored in the cache as tuples <code>(data, expiry_timestamp)</code> using
+Memcache&rsquo;s maximum expiry setting (2592000 seconds). By using this value, we
+are effectively bypassing memcache&rsquo;s replacement policy in favour of our own.</li>
+<li>As the comments indicate, there are two replacements scenarios to consider:
 <ol>
-<li>Cache miss. In this case, we don&rsquo;t have any data (stale or
-otherwise) to return. In the example above, we trigger an
-asynchronous refresh and return an empty result set. In other
-scenarios, it may make sense to perform a synchronous refresh.</li>
-<li>Cache hit but with stale data. Here we return the stale data but
-trigger a Celery task to refresh the cached item.</li>
+<li>Cache miss. In this case, we don&rsquo;t have any data (stale or otherwise) to
+return. In the example above, we trigger an asynchronous refresh and return
+an empty result set. In other scenarios, it may make sense to perform a
+synchronous refresh.</li>
+<li>Cache hit but with stale data. Here we return the stale data but trigger a
+Celery task to refresh the cached item.</li>
 </ol>
 </li>
 </ul>
-<p>This pattern of re-populating the cache asynchronously works well.
-Indeed it is the basic of the Cacheback package.</p>
+<p>This pattern of re-populating the cache asynchronously works well. Indeed it is
+the basic of the Cacheback package.</p>
 <h4 id="using-cacheback">Using Cacheback</h4>
-<p>Here&rsquo;s the same functionality implemented using the <code>cacheback</code>
-function:</p>
+<p>Here&rsquo;s the same functionality implemented using the <code>cacheback</code> function:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
@@ -199,29 +194,27 @@ function:</p>
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
     fetch_cached_tweets <span style="color:#f92672">=</span> cacheback(<span style="color:#ae81ff">60</span><span style="color:#f92672">*</span><span style="color:#ae81ff">15</span>, fetch_on_miss<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)(fetch_tweets)
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>,
                   {<span style="color:#e6db74">&#39;tweets&#39;</span>: fetch_cached_tweets(username)})
-</code></pre></div><p>The <code>cacheback</code> function provides a wrapper function for the
-<code>fetch_tweets</code> function. When called, the wrapper will generate a cache
-key based on the module path of the wrapped function and the passed args
-and kwargs. It then checks the cache and if there isn&rsquo;t a valid result
-it will serialise the function and its args so it can be executed
-asynchronously by a Celery task.</p>
+</code></pre></div><p>The <code>cacheback</code> function provides a wrapper function for the <code>fetch_tweets</code>
+function. When called, the wrapper will generate a cache key based on the module
+path of the wrapped function and the passed args and kwargs. It then checks the
+cache and if there isn&rsquo;t a valid result it will serialise the function and its
+args so it can be executed asynchronously by a Celery task.</p>
 <p>The <code>cacheback</code> function can also be used as a decorator:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> cacheback.decorators <span style="color:#f92672">import</span> cacheback
 
 <span style="color:#a6e22e">@cacheback</span>(<span style="color:#ae81ff">15</span><span style="color:#f92672">*</span><span style="color:#ae81ff">60</span>)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch_tweets</span>(username):
     <span style="color:#f92672">...</span>
-</code></pre></div><p>Or for more fine-grained control: using a subclass of
-<code>cacheback.base.Job</code>:</p>
+</code></pre></div><p>Or for more fine-grained control: using a subclass of <code>cacheback.base.Job</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.shortcuts <span style="color:#f92672">import</span> render
 <span style="color:#f92672">from</span> django.cache <span style="color:#f92672">import</span> cache
 <span style="color:#f92672">from</span> myproject.twitter <span style="color:#f92672">import</span> fetch_tweets
 <span style="color:#f92672">from</span> cacheback.base <span style="color:#f92672">import</span> Job
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">show_tweets</span>(request, username):
-    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>, 
+    <span style="color:#66d9ef">return</span> render(request, <span style="color:#e6db74">&#39;tweets.html&#39;</span>,
                   {<span style="color:#e6db74">&#39;tweets&#39;</span>: FetchTweets()<span style="color:#f92672">.</span>get(username)})
 
 <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FetchTweets</span>(Job):
@@ -229,13 +222,13 @@ asynchronously by a Celery task.</p>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">fetch</span>(self, username):
         <span style="color:#66d9ef">return</span> fetch_tweets(username)
-</code></pre></div><p>While only the <code>fetch</code> method must be implemented, the <code>cacheback.Job</code>
-class provides several other overridable methods that provide
-fine-grained control of the caching process.</p>
+</code></pre></div><p>While only the <code>fetch</code> method must be implemented, the <code>cacheback.Job</code> class
+provides several other overridable methods that provide fine-grained control of
+the caching process.</p>
 <h3 id="interested">Interested?</h3>
 <p>Check-out the
-<a href="http://django-cacheback.readthedocs.org/en/latest/">documentation</a> for
-more information. Comments and feedback welcome.</p>
+<a href="http://django-cacheback.readthedocs.org/en/latest/">documentation</a> for more
+information. Comments and feedback welcome.</p>
 
         </div>
 
@@ -276,6 +269,17 @@ more information. Comments and feedback welcome.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/use-models-for-uploads\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/prefer-webtest-to-djangos-test-client-for-functional-tests\/"); })
+    
+</script>
 
         </article>
     </body>

@@ -75,23 +75,21 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>One difficulty working with a shared in-house framework is it is
-difficult to maintain a common javascript file that is valid across
-multiple applications. This is currently an issue we face at Tangent,
-where we run a generic e-commerce platform which we customise to the
-needs of each client. Most of these e-commerce applications have a
-javascript-rich checkout page whose functionality differs in small yet
-significant ways such as the required and optional fields within a
-delivery address, or the range of delivery options available. Ideally,
-you would have a single javascript file to work for all these checkouts,
-but these differences make such a file impracticle due to the changes in
-DOM structure and business logic between applications.</p>
-<p>For instance, one problem that arose recently was a requirement to
-remove the javascript messaging from within certain parts of the
-checkout for one appliation. The shared checkout.js file features a
-method which reloads the order totals within the page after a new
-delivery option has been chosen and displays a message to notify the
-user:</p>
+            <p>One difficulty working with a shared in-house framework is it is difficult to
+maintain a common javascript file that is valid across multiple applications.
+This is currently an issue we face at Tangent, where we run a generic e-commerce
+platform which we customise to the needs of each client. Most of these
+e-commerce applications have a javascript-rich checkout page whose functionality
+differs in small yet significant ways such as the required and optional fields
+within a delivery address, or the range of delivery options available. Ideally,
+you would have a single javascript file to work for all these checkouts, but
+these differences make such a file impracticle due to the changes in DOM
+structure and business logic between applications.</p>
+<p>For instance, one problem that arose recently was a requirement to remove the
+javascript messaging from within certain parts of the checkout for one
+appliation. The shared checkout.js file features a method which reloads the
+order totals within the page after a new delivery option has been chosen and
+displays a message to notify the user:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// [checkout.js]
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">shop</span> <span style="color:#f92672">=</span> {
     <span style="color:#a6e22e">checkout</span><span style="color:#f92672">:</span> {
@@ -100,26 +98,25 @@ user:</p>
 </span><span style="color:#75715e"></span>            <span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">notify</span>(<span style="color:#e6db74">&#34;Order totals recalculating...&#34;</span>);
         }
 }
-</code></pre></div><p>Unfortunately, another client required the same functionality to reload
-the order totals but without the notification call. One option would
-have been to create a local version of the checkout.js file and remove
-the offending line, but this would have created a larger maintenance
-overhead going forward due to the large amount of duplicate code.</p>
+</code></pre></div><p>Unfortunately, another client required the same functionality to reload the
+order totals but without the notification call. One option would have been to
+create a local version of the checkout.js file and remove the offending line,
+but this would have created a larger maintenance overhead going forward due to
+the large amount of duplicate code.</p>
 <p>A neater option would have been to dynamically override the
 shop.checkout.reloadOrderTotals method in an application-specific file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// [application.js]
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">reloadOrderTotals</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
-    <span style="color:#75715e">// Reload order totals but without a notification call
-</span><span style="color:#75715e"></span>}
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">reloadOrderTotals</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {
+  <span style="color:#75715e">// Reload order totals but without a notification call
+</span><span style="color:#75715e"></span>};
 </code></pre></div><p>However, again this leads to most of the the body of the
-<code>shop.checkout.reloadOrderTotals</code> method being duplicated just to remove
-one line.</p>
-<p>Instead, drawing inspiration from the excellent Working with Legacy Code
-by Michael Flowers, a neater solution is to perform a dynamic-language
-version of the Extract method refactoring to isolate the functionality
-that we wanted to override into it&rsquo;s own method. Hence, we alter
-checkout.js to split the reloading and notification functionality into
-two methods:</p>
+<code>shop.checkout.reloadOrderTotals</code> method being duplicated just to remove one
+line.</p>
+<p>Instead, drawing inspiration from the excellent Working with Legacy Code by
+Michael Flowers, a neater solution is to perform a dynamic-language version of
+the Extract method refactoring to isolate the functionality that we wanted to
+override into it&rsquo;s own method. Hence, we alter checkout.js to split the
+reloading and notification functionality into two methods:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// [checkout.js]
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">shop</span> <span style="color:#f92672">=</span> {
     <span style="color:#a6e22e">checkout</span><span style="color:#f92672">:</span> {
@@ -129,16 +126,16 @@ two methods:</p>
         },
         <span style="color:#a6e22e">displayOrderTotalNotification</span>(<span style="color:#a6e22e">message</span>) {
             <span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">display</span>.<span style="color:#a6e22e">notify</span>(<span style="color:#a6e22e">message</span>);
-        } 
+        }
 }
 </code></pre></div><p>Now in the local project javascript file, we can null out the messaging
 behaviour:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// [application.js]
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">displayOrderTotalNotification</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>(){}
-</code></pre></div><p>This neat trick allows us to customise our core javascript functionality
-in a way that does not lead to code duplication. The only thing required
-to make this work is to ensure that the shared checkout file is loaded
-before the application-specific one.</p>
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">shop</span>.<span style="color:#a6e22e">checkout</span>.<span style="color:#a6e22e">displayOrderTotalNotification</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span> () {};
+</code></pre></div><p>This neat trick allows us to customise our core javascript functionality in a
+way that does not lead to code duplication. The only thing required to make this
+work is to ensure that the shared checkout file is loaded before the
+application-specific one.</p>
 
         </div>
 
@@ -179,6 +176,17 @@ before the application-specific one.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tidbits\/a-pseudo-code-job-advert-and-its-discontents\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/return-false-with-prudence\/"); })
+    
+</script>
 
         </article>
     </body>

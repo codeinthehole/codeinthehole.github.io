@@ -77,10 +77,10 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <h3 id="problem">Problem</h3>
 <p>For some reason, you need to reload your Django URL config.</p>
-<p>Normally, the root URL config will be imported and stored in memory when
-your server process starts up. Occasionally though, you may want to
-reload it. This can be the case if your URL configuration changes
-depending on certain parameters.</p>
+<p>Normally, the root URL config will be imported and stored in memory when your
+server process starts up. Occasionally though, you may want to reload it. This
+can be the case if your URL configuration changes depending on certain
+parameters.</p>
 <h3 id="solution">Solution</h3>
 <p>You can reload the URL config using the following snippet:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
@@ -92,14 +92,12 @@ depending on certain parameters.</p>
     <span style="color:#66d9ef">if</span> urlconf <span style="color:#f92672">in</span> sys<span style="color:#f92672">.</span>modules:
         reload(sys<span style="color:#f92672">.</span>modules[urlconf])
 </code></pre></div><h3 id="discussion">Discussion</h3>
-<p>This was a problem I needed to solve while testing the checkout process
-for <a href="https://github.com/tangentlabs/django-oscar">django-oscar</a>. Oscar
-uses a setting flag to optionally add decorators to certain URLs, and
-hence I needed to patch the setting and reload the URLs as part of the
-set-up for a test.</p>
+<p>This was a problem I needed to solve while testing the checkout process for
+<a href="https://github.com/tangentlabs/django-oscar">django-oscar</a>. Oscar uses a
+setting flag to optionally add decorators to certain URLs, and hence I needed to
+patch the setting and reload the URLs as part of the set-up for a test.</p>
 <p>This was achieved in the following way, where the setting
-<code>OSCAR_ALLOW_ANON_CHECKOUT</code> is set to <code>True</code> and the URL config is
-reloaded.</p>
+<code>OSCAR_ALLOW_ANON_CHECKOUT</code> is set to <code>True</code> and the URL config is reloaded.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">import</span> sys
 <span style="color:#f92672">from</span> django.conf <span style="color:#f92672">import</span> settings
 <span style="color:#f92672">from</span> django.utils.importlib <span style="color:#f92672">import</span> import_module
@@ -118,8 +116,8 @@ reloaded.</p>
             self<span style="color:#f92672">.</span>reload_urlconf()
             response <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>client<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;checkout:shipping-address&#39;</span>))
             self<span style="color:#f92672">.</span>assertIsRedirect(response)
-</code></pre></div><p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to
-me when working on this problem today.</p>
+</code></pre></div><p>There&rsquo;s probably a better way of doing this, but it wasn&rsquo;t apparent to me when
+working on this problem today.</p>
 
         </div>
 
@@ -160,6 +158,17 @@ me when working on this problem today.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/validating-international-postcodes-in-django\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/projects\/csvfilter-a-python-command-line-tool-for-manipulating-csv-data\/"); })
+    
+</script>
 
         </article>
     </body>

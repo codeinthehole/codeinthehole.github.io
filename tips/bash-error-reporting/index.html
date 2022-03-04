@@ -78,7 +78,8 @@ if (!doNotTrack) {
             <p>Two tips:</p>
 <h2 id="fail-fast">Fail fast</h2>
 <p>You probably already know that you can force Bash scripts to exit immediately if
-there&rsquo;s an error (that is, if any command exits with a non-zero exit code) using:</p>
+there&rsquo;s an error (that is, if any command exits with a non-zero exit code)
+using:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span>set -e
 </code></pre></div><p>but it&rsquo;s even better to use:</p>
@@ -90,10 +91,10 @@ there&rsquo;s an error (that is, if any command exits with a non-zero exit code)
 <li>exits on an error in piped-together commands (<code>-o pipefail</code>)<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.</li>
 </ul>
 <p>You can learn more about these built-ins with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ help set
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">help set
 </code></pre></div><h2 id="fail-noisy">Fail noisy</h2>
-<p>Failing fast is all very well but, by default scripts fail silently offering
-no debug information.</p>
+<p>Failing fast is all very well but, by default scripts fail silently offering no
+debug information.</p>
 <p>You can add:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">set -x
 </code></pre></div><p>to print each command before execution but it&rsquo;s easy to add simple error
@@ -107,8 +108,8 @@ trap print_error ERR
 </code></pre></div><p>Here we bind the <code>print_error</code> function to the <code>ERR</code> event and print out an
 error message and offending line of the script (extracted using <code>sed</code>) to
 STDERR.</p>
-<p>Note the use of a <code>&lt;&lt;&lt;</code> <em>here string</em> and the <code>caller</code> built-in to
-assign the line and filename of the error.</p>
+<p>Note the use of a <code>&lt;&lt;&lt;</code> <em>here string</em> and the <code>caller</code> built-in to assign the
+line and filename of the error.</p>
 <p>So running the script:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
 </span><span style="color:#75715e"></span>set -eu -o pipefail
@@ -125,18 +126,21 @@ false
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./script.sh
 An error occurred in line <span style="color:#ae81ff">11</span> of file ./test.sh:
 false
-</code></pre></div><p>There are more sophisticated ways to handle errors in Bash scripts<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup> but
-this is a concise, simple option to have to hand.</p>
+</code></pre></div><p>There are more sophisticated ways to handle errors in Bash scripts<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>
+but this is a concise, simple option to have to hand.</p>
 
 
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>Without this <code>pg_dump ... | gzip</code> would not be treated as an error even if <code>pg_dump</code> exited with a non-zero exit code.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>Without this <code>pg_dump ... | gzip</code> would not be treated as an error even if
+<code>pg_dump</code> exited with a non-zero exit code.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>See the <a href="https://invent.life/project/bash-infinity-framework">Bash infinity framework</a> for example.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>See the
+<a href="https://invent.life/project/bash-infinity-framework">Bash infinity framework</a>
+for example.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -180,6 +184,17 @@ this is a concise, simple option to have to hand.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/using-pgbadger-with-aws-rds\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/lists\/why-your-models-are-fat\/"); })
+    
+</script>
 
         </article>
     </body>

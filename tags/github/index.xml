@@ -16,7 +16,7 @@
       <description>URLs are great aren&amp;rsquo;t they?
 You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
 Anyway, a super-useful Vim mapping I use is:
-vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
+vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
     
     <item>

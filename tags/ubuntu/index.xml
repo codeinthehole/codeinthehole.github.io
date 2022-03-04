@@ -14,7 +14,7 @@
       
       <guid>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
       <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).
-This happens as Ubuntu VMs typically start several package-management programs &amp;mdash; unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
+This happens as Ubuntu VMs typically start several package-management programs unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
 You&amp;rsquo;ll see an error like this:
 E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</description>
     </item>
@@ -38,8 +38,8 @@ mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39;mod &amp;
       <guid>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
       <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
 Solution With pip already installed, install the required development packages:
-$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
-$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
+sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     
     <item>
@@ -52,7 +52,7 @@ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s
 This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.
 This is mainly for my own reference.
 User set-up Create user with a dummy shell:
-$ adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
+adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
     </item>
     
     <item>

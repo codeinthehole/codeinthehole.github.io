@@ -25,7 +25,7 @@ From core Vim:
       <pubDate>Mon, 18 Mar 2019 17:05:53 +0000</pubDate>
       
       <guid>https://codeinthehole.com/news/oe-related-name-outage/</guid>
-      <description>I wrote up a lesson on the dangers of renaming the related_name of a Django model field  over on the Octopus Energy tech blog.</description>
+      <description>I wrote up a lesson on the dangers of renaming the related_name of a Django model field over on the Octopus Energy tech blog.</description>
     </item>
     
     <item>
@@ -47,7 +47,7 @@ From core Vim:
   You moved everything out of the views.py modules when you heard fat controllers were bad.
   And you&amp;rsquo;ve read that fat models are a good idea1.
   You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+&amp;lt;p&amp;gt; The current balance is {{ account.get_balance_via_three_network_calls_lol }} &amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>
@@ -127,8 +127,8 @@ This article is largely a note-to-self in case I have to repeat the process. How
       <guid>https://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
       <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
 Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
-$ export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; $ export LANG=&amp;#34;en_US.UTF-8&amp;#34; $ export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
-$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings.</description>
+export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; export LANG=&amp;#34;en_US.UTF-8&amp;#34; export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
+sudo apt-get update sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings. Verify this with:</description>
     </item>
     
     <item>

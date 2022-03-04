@@ -76,21 +76,23 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>URLs are great aren&rsquo;t they?</p>
-<p>You include them in your Slack messages and your
-co-workers can see <em>exactly</em> what you&rsquo;re talking about in a single click. I wish
-people would use them more (and design apps that support them properly).</p>
+<p>You include them in your Slack messages and your co-workers can see <em>exactly</em>
+what you&rsquo;re talking about in a single click. I wish people would use them more
+(and design apps that support them properly).</p>
 <p>Anyway, a super-useful Vim mapping I use is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;<span style="color:#a6e22e">gb</span> :<span style="color:#a6e22e">GBrowse</span>! <span style="color:#a6e22e">master</span>:%&lt;<span style="color:#a6e22e">cr</span>&gt; <span style="color:#960050;background-color:#1e0010">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim"><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">leader</span>&gt;<span style="color:#a6e22e">gb</span> :<span style="color:#a6e22e">GBrowse</span>! <span style="color:#a6e22e">master</span>:%&lt;<span style="color:#a6e22e">cr</span>&gt;<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>which, after visually selecting a block of code, grabs its Github URL from the
 <code>HEAD</code> of <code>master</code> and copies it to the clipboard. I use this several times
 daily.</p>
 <p>If you want the URL for the code block from your <em>current branch</em>, use:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-vim" data-lang="vim">:<span style="color:#a6e22e">GBrowse</span>!<span style="color:#960050;background-color:#1e0010">
 </span></code></pre></div><p>although you have to have pushed your branch for the URL to resolve.</p>
-<p>Various other &ldquo;fugitive-objects&rdquo; can be passed to <code>:GBrowse</code> to
-open or copy URLs for other objects &ndash; see the <a href="https://github.com/tpope/vim-fugitive/blob/27a5c3abd211c2784513dab4db082fa414ad0967/doc/fugitive.txt#L212-L235">help file</a>
+<p>Various other &ldquo;fugitive-objects&rdquo; can be passed to <code>:GBrowse</code> to open or copy
+URLs for other objects &ndash; see the
+<a href="https://github.com/tpope/vim-fugitive/blob/27a5c3abd211c2784513dab4db082fa414ad0967/doc/fugitive.txt#L212-L235">help file</a>
 for more details.</p>
-<p>The <code>:Gbrowse</code> function is provided by the excellent <a href="https://github.com/tpope/vim-fugitive"><code>vim-fugitive</code></a> and requires the
+<p>The <code>:Gbrowse</code> function is provided by the excellent
+<a href="https://github.com/tpope/vim-fugitive"><code>vim-fugitive</code></a> and requires the
 <a href="https://github.com/tpope/vim-rhubarb"><code>vim-rhubarb</code></a> plugin for Github support.</p>
 
         </div>
@@ -132,6 +134,17 @@ for more details.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/software-development-tips-part2\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/terraform-cidrs\/"); })
+    
+</script>
 
         </article>
     </body>

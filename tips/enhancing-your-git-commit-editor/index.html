@@ -76,12 +76,11 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <p>Confession: I am a pedant, especially around commit messages.</p>
-<p>I often find myself writing very similar commit messages (like &ldquo;Bump
-version to 0.4.3&rdquo;) and want to ensure I use the same wording each time.
-Thanks to <a href="https://twitter.com/LuRsT">@LuRsT</a>, I learnt how to employ
-Git&rsquo;s <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks#Client-Side-Hooks">prepare-commit-msg</a>
-hook to display the last 5 commit messages when I&rsquo;m editing a commit
-message.</p>
+<p>I often find myself writing very similar commit messages (like &ldquo;Bump version to
+0.4.3&rdquo;) and want to ensure I use the same wording each time. Thanks to
+<a href="https://twitter.com/LuRsT">@LuRsT</a>, I learnt how to employ Git&rsquo;s
+<a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks#Client-Side-Hooks">prepare-commit-msg</a>
+hook to display the last 5 commit messages when I&rsquo;m editing a commit message.</p>
 <p>Use the following <code>.git/hooks/prepare-commit-msg</code> hook:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>
@@ -104,12 +103,12 @@ SHA<span style="color:#f92672">=</span>$3
 <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span>$SOURCE<span style="color:#e6db74">&#34;</span> in
 merge|squash|message<span style="color:#f92672">)</span>
     ;;
-<span style="color:#e6db74">&#34;&#34;</span>|commit|template<span style="color:#f92672">)</span> 
+<span style="color:#e6db74">&#34;&#34;</span>|commit|template<span style="color:#f92672">)</span>
     <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$SHA<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
         recent_commits &gt;&gt; $COMMIT_FILE
     <span style="color:#66d9ef">fi</span>
     ;;
-*<span style="color:#f92672">)</span> 
+*<span style="color:#f92672">)</span>
     echo <span style="color:#e6db74">&#34;Unexpected type &#39;</span>$SOURCE<span style="color:#e6db74">&#39; in prepare-commit-msg hook&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
     exit <span style="color:#ae81ff">1</span>
 <span style="color:#66d9ef">esac</span>
@@ -155,6 +154,17 @@ merge|squash|message<span style="color:#f92672">)</span>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/dumping-and-restoring-a-postgis-database\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/how-to-install-postgis-and-geodjango-on-ubuntu\/"); })
+    
+</script>
 
         </article>
     </body>

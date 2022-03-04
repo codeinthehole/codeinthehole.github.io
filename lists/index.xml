@@ -30,7 +30,7 @@ Word of the day: ARSLE - to move backwards.
   You moved everything out of the views.py modules when you heard fat controllers were bad.
   And you&amp;rsquo;ve read that fat models are a good idea1.
   You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-  &amp;lt;p&amp;gt;The current balance is {{ account.get_balance_via_three_network_calls_lol }}&amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+&amp;lt;p&amp;gt; The current balance is {{ account.get_balance_via_three_network_calls_lol }} &amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>

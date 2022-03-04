@@ -75,31 +75,34 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Have just been writing an FAQ page for commandlinefu.com. Documenting is
-always tiresome, but FAQs particularly so when hand-coding the HTML
-links between each question and the summary table at the top of the
-page.</p>
-<p>Javascript to the rescue: I cobbled together a quick Prototype script
-which automatically generates the FAQ summary links by parsing the DOM
-for the appropriate links:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">document.<span style="color:#a6e22e">observe</span>(<span style="color:#e6db74">&#39;dom:loaded&#39;</span>, <span style="color:#66d9ef">function</span>(){
-    <span style="color:#a6e22e">$$</span>(<span style="color:#e6db74">&#39;a.question&#39;</span>).<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">ele</span>){
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ele</span>.<span style="color:#a6e22e">innerHTML</span>.<span style="color:#a6e22e">unescapeHTML</span>().<span style="color:#a6e22e">gsub</span>(<span style="color:#e6db74">/[^\w- ]/</span>, <span style="color:#e6db74">&#39;&#39;</span>).<span style="color:#a6e22e">gsub</span>(<span style="color:#e6db74">/[\s-]+/</span>, <span style="color:#e6db74">&#39;-&#39;</span>).<span style="color:#a6e22e">toLowerCase</span>();
-        <span style="color:#a6e22e">ele</span>.<span style="color:#a6e22e">writeAttribute</span>({<span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">id</span>});
-        <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">link</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Element</span>(<span style="color:#e6db74">&#39;a&#39;</span>, {<span style="color:#a6e22e">href</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;#&#39;</span><span style="color:#f92672">+</span><span style="color:#a6e22e">id</span>})
-            .<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">ele</span>.<span style="color:#a6e22e">innerHTML</span>)
-            .<span style="color:#a6e22e">observe</span>(<span style="color:#e6db74">&#39;click&#39;</span>, <span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">event</span>){
-                <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">stop</span>();
-                <span style="color:#a6e22e">Effect</span>.<span style="color:#a6e22e">ScrollTo</span>(<span style="color:#a6e22e">ele</span>); 
-            });
-        <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#39;questions&#39;</span>).<span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Element</span>(<span style="color:#e6db74">&#39;li&#39;</span>).<span style="color:#a6e22e">insert</span>(<span style="color:#a6e22e">link</span>));
-    });
+            <p>Have just been writing an FAQ page for commandlinefu.com. Documenting is always
+tiresome, but FAQs particularly so when hand-coding the HTML links between each
+question and the summary table at the top of the page.</p>
+<p>Javascript to the rescue: I cobbled together a quick Prototype script which
+automatically generates the FAQ summary links by parsing the DOM for the
+appropriate links:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript">document.<span style="color:#a6e22e">observe</span>(<span style="color:#e6db74">&#34;dom:loaded&#34;</span>, <span style="color:#66d9ef">function</span> () {
+  <span style="color:#a6e22e">$$</span>(<span style="color:#e6db74">&#34;a.question&#34;</span>).<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">ele</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">id</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">ele</span>.<span style="color:#a6e22e">innerHTML</span>
+      .<span style="color:#a6e22e">unescapeHTML</span>()
+      .<span style="color:#a6e22e">gsub</span>(<span style="color:#e6db74">/[^\w- ]/</span>, <span style="color:#e6db74">&#34;&#34;</span>)
+      .<span style="color:#a6e22e">gsub</span>(<span style="color:#e6db74">/[\s-]+/</span>, <span style="color:#e6db74">&#34;-&#34;</span>)
+      .<span style="color:#a6e22e">toLowerCase</span>();
+    <span style="color:#a6e22e">ele</span>.<span style="color:#a6e22e">writeAttribute</span>({ <span style="color:#a6e22e">id</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">id</span> });
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">link</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Element</span>(<span style="color:#e6db74">&#34;a&#34;</span>, { <span style="color:#a6e22e">href</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;#&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">id</span> })
+      .<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">ele</span>.<span style="color:#a6e22e">innerHTML</span>)
+      .<span style="color:#a6e22e">observe</span>(<span style="color:#e6db74">&#34;click&#34;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">event</span>) {
+        <span style="color:#a6e22e">event</span>.<span style="color:#a6e22e">stop</span>();
+        <span style="color:#a6e22e">Effect</span>.<span style="color:#a6e22e">ScrollTo</span>(<span style="color:#a6e22e">ele</span>);
+      });
+    <span style="color:#a6e22e">$</span>(<span style="color:#e6db74">&#34;questions&#34;</span>).<span style="color:#a6e22e">insert</span>(<span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Element</span>(<span style="color:#e6db74">&#34;li&#34;</span>).<span style="color:#a6e22e">insert</span>(<span style="color:#a6e22e">link</span>));
+  });
 });
-</code></pre></div><p>Now, all I have to do is write my FAQ ensuring the questions live in
-anchor tags with the class &ldquo;question&rdquo; and there is an empty list tag at
-the top of the page to house the summary block.</p>
-<p>Here&rsquo;s two snapshots the relevant section of the DOM before and after
-the dom:loaded event has fired. Before:</p>
+</code></pre></div><p>Now, all I have to do is write my FAQ ensuring the questions live in anchor tags
+with the class &ldquo;question&rdquo; and there is an empty list tag at the top of the page
+to house the summary block.</p>
+<p>Here&rsquo;s two snapshots the relevant section of the DOM before and after the
+dom:loaded event has fired. Before:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#f92672">&lt;</span><span style="color:#a6e22e">ul</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;questions&#34;</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#960050;background-color:#1e0010">/ul&gt;</span>
 <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dl</span><span style="color:#f92672">&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dt</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;question&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">What</span> <span style="color:#a6e22e">is</span> <span style="color:#66d9ef">this</span> <span style="color:#a6e22e">site</span><span style="color:#f92672">?&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;&lt;/dt&gt;</span>
@@ -118,10 +121,10 @@ the dom:loaded event has fired. Before:</p>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dt</span><span style="color:#f92672">&gt;&lt;</span><span style="color:#a6e22e">a</span> <span style="color:#66d9ef">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;question&#34;</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;who-created-this-site&#34;</span><span style="color:#f92672">&gt;</span><span style="color:#a6e22e">Who</span> <span style="color:#a6e22e">created</span> <span style="color:#66d9ef">this</span> <span style="color:#a6e22e">site</span><span style="color:#f92672">?&lt;</span><span style="color:#960050;background-color:#1e0010">/a&gt;&lt;/dt&gt;</span>
     <span style="color:#f92672">&lt;</span><span style="color:#a6e22e">dd</span><span style="color:#f92672">&gt;</span>...<span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dd&gt;</span>
 <span style="color:#f92672">&lt;</span><span style="color:#960050;background-color:#1e0010">/dl&gt;</span>
-</code></pre></div><p>As you can see, the javascript simply extracts the relevant content from
-the questions and inserts the appropriate identities and links into the
-DOM to form the quick-links. Using the <code>Effect.ScrollTo</code> function also
-gives a pleasant user experience.</p>
+</code></pre></div><p>As you can see, the javascript simply extracts the relevant content from the
+questions and inserts the appropriate identities and links into the DOM to form
+the quick-links. Using the <code>Effect.ScrollTo</code> function also gives a pleasant user
+experience.</p>
 
         </div>
 
@@ -162,6 +165,17 @@ gives a pleasant user experience.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/inspecting-javascript-objects\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/deploying-cron-jobs-using-phing\/"); })
+    
+</script>
 
         </article>
     </body>

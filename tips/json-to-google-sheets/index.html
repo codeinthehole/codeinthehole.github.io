@@ -75,17 +75,18 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Like many people, I use Google Sheets to quickly create and share tabular data. As well as
+            <p>Like many people, I use Google Sheets to quickly create and share tabular data.
+As well as
 <a href="/tips/copying-postgres-output-into-a-spreadsheet/">creating spreadsheets by pasting results generated in <code>psql</code></a>,
 I often create reports from JSON files using
 <a href="https://stedolan.github.io/jq/">JQ</a>. This post is a note-to-self on how to do
 this.</p>
-<p>Here&rsquo;s a command to create a tab-separated report from a JSON events file exported from
-Loggly:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat loggly_events.json | <span style="color:#ae81ff">\ </span>
-    jq -r <span style="color:#e6db74">&#39;.events[].event.json | 
-</span><span style="color:#e6db74">           select(.params | has(&#34;payment_day&#34;)) | 
-</span><span style="color:#e6db74">           [.timestamp, .account, .params.payment_day] | 
+<p>Here&rsquo;s a command to create a tab-separated report from a JSON events file
+exported from Loggly:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cat loggly_events.json | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    jq -r <span style="color:#e6db74">&#39;.events[].event.json |
+</span><span style="color:#e6db74">           select(.params | has(&#34;payment_day&#34;)) |
+</span><span style="color:#e6db74">           [.timestamp, .account, .params.payment_day] |
 </span><span style="color:#e6db74">           @tsv&#39;</span> | clipboard
 </code></pre></div><p>Note:</p>
 <ul>
@@ -93,7 +94,8 @@ Loggly:</p>
 <p>The <code>-r</code> option instructs JQ to output raw strings, not quoted JSON strings.</p>
 </li>
 <li>
-<p><code>@tsv</code> is a JQ format string for <a href="https://stedolan.github.io/jq/manual/#Formatstringsandescaping">outputting tab-separated values</a>.</p>
+<p><code>@tsv</code> is a JQ format string for
+<a href="https://stedolan.github.io/jq/manual/#Formatstringsandescaping">outputting tab-separated values</a>.</p>
 </li>
 <li>
 <p>The <code>clipboard</code> command is an alias for <code>pbcopy</code>, the system clipboard on
@@ -140,6 +142,17 @@ OS-X.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/news\/podcast-init\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/open-github-pull-request-command\/"); })
+    
+</script>
 
         </article>
     </body>

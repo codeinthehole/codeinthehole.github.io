@@ -75,19 +75,18 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>It was rightly <a href="http://andrew.yurisich.com/work/2014/07/16/dont-link-that-line-number/">pointed out
-yesterday</a>
+            <p>It was rightly
+<a href="http://andrew.yurisich.com/work/2014/07/16/dont-link-that-line-number/">pointed out yesterday</a>
 that it&rsquo;s dangerous to link to lines or blocks of code on Github without
-explicitly specifying the commit hash in the URL. On this theme,
-consider this git command:</p>
+explicitly specifying the commit hash in the URL. On this theme, consider this
+git command:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git browse -u -- commit/<span style="color:#66d9ef">$(</span>git rev-parse HEAD<span style="color:#66d9ef">)</span>
 https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db
-</code></pre></div><p>This emits the Github URL to the <code>HEAD</code> commit on the current branch,
-specifying the commit hash in the URL. Note that the <code>browse</code> subcommand
-is provided by the excellent <a href="https://hub.github.com/">hub</a> library.</p>
-<p>Pasting links to commits is common, both for mailing list posts and
-within discussion on Github itself. Getting the correct URL quickly is
-useful.</p>
+</code></pre></div><p>This emits the Github URL to the <code>HEAD</code> commit on the current branch, specifying
+the commit hash in the URL. Note that the <code>browse</code> subcommand is provided by the
+excellent <a href="https://hub.github.com/">hub</a> library.</p>
+<p>Pasting links to commits is common, both for mailing list posts and within
+discussion on Github itself. Getting the correct URL quickly is useful.</p>
 <p>We can streamline further using an alias:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.gitconfig</span>
 
@@ -166,6 +165,17 @@ settings <span style="color:#f92672">=</span> !hub browse -- settings
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/continuously-re-build-your-project\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/integrating-django-application-metrics-into-zabbix\/"); })
+    
+</script>
 
         </article>
     </body>

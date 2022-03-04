@@ -16,7 +16,7 @@
       <description>A good understanding of Vim&amp;rsquo;s various lists is a massive productivity boost — it&amp;rsquo;s taken me many years of Vim use to truly appreciate this.
 This post summarises some of Vim&amp;rsquo;s lists, detailing their purpose and how to make the most of them.
 Contents:
- Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell   Location list Jump list  Tip: Use jump commands to navigate   Change list  Tip: Jump to the previous location where insert mode was used   Buffer list  Tip: Select buffers with FZF   Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality&amp;hellip;   Include file list and definition lists Summary  I need to jump somewhere&amp;hellip; I need to apply the same transformation in lots of places&amp;hellip;       Quickfix list A global list of locations populated via one of these commands:</description>
+ Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell   Location list Jump list  Tip: Use jump commands to navigate   Change list  Tip: Jump to the previous location where insert mode was used   Buffer list  Tip: Select buffers with FZF   Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality   Include file list and definition lists Summary  I need to jump somewhere I need to apply the same transformation in lots of places       Quickfix list A global list of locations populated via one of these commands:</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@ Contents:
       <description>URLs are great aren&amp;rsquo;t they?
 You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
 Anyway, a super-useful Vim mapping I use is:
-vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
+vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
     
     <item>
@@ -93,10 +93,10 @@ let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(
       <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
-      <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
+      <description>If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
-$ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
+brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
+if executable(&amp;#39;ag&amp;#39;)&amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>

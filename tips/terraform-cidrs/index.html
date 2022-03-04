@@ -76,14 +76,14 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <h2 id="problem">Problem</h2>
-<p>Your Terraform config requires managing many CIDRs that control firewall ingress rules.
-You&rsquo;ve been storing these in a CSV string:</p>
+<p>Your Terraform config requires managing many CIDRs that control firewall ingress
+rules. You&rsquo;ve been storing these in a CSV string:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;client_cidrs&#34;</span> {
-    <span style="color:#a6e22e">default</span>=<span style="color:#e6db74">&#34;50.1.1.1/32,44.2.1.0/32&#34;</span>, 
+    <span style="color:#a6e22e">default</span>=<span style="color:#e6db74">&#34;50.1.1.1/32,44.2.1.0/32&#34;</span>,
 }
 </code></pre></div><p>which is fed to a <code>aws_security_group</code> somewhere in your configuration.</p>
-<p>The CIDRs change frequently and maintaining this variable is difficult
-as it&rsquo;s hard to track where each individual CIDR came from.</p>
+<p>The CIDRs change frequently and maintaining this variable is difficult as it&rsquo;s
+hard to track where each individual CIDR came from.</p>
 <h2 id="solution">Solution</h2>
 <p>Use a HCL list variable which allows each entry to have an associated comment
 explaining what the CIDR corresponds to:</p>
@@ -140,6 +140,17 @@ the list entries:</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/easy-github-urls-from-vim\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/conditional-nested-blocks-in-terraform\/"); })
+    
+</script>
 
         </article>
     </body>

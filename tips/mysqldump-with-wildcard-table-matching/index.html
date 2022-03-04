@@ -75,9 +75,9 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Ever wanted to use <code>mysqldump</code> to dump tables that match a wildcard
-pattern? I have. It&rsquo;s not currently supported as an option but can be
-achieved with a little bash magic. Here&rsquo;s how:</p>
+            <p>Ever wanted to use <code>mysqldump</code> to dump tables that match a wildcard pattern? I
+have. It&rsquo;s not currently supported as an option but can be achieved with a
+little bash magic. Here&rsquo;s how:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/bash
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> $# -lt <span style="color:#ae81ff">2</span> <span style="color:#f92672">]</span>
 <span style="color:#66d9ef">then</span>
@@ -88,10 +88,10 @@ achieved with a little bash magic. Here&rsquo;s how:</p>
 database<span style="color:#f92672">=</span>$1
 pattern<span style="color:#f92672">=</span>$2
 mysqldump $database <span style="color:#e6db74">`</span>mysql -ND $database -e <span style="color:#e6db74">&#34;SHOW TABLES LIKE &#39;</span>$pattern<span style="color:#e6db74">&#39;&#34;</span> | awk <span style="color:#e6db74">&#39;{printf $1&#34; &#34;}&#39;</span><span style="color:#e6db74">`</span>
-</code></pre></div><p>This uses a simple SQL query to extract all the table names that match
-the pattern and concatenate them in the format that mysqldump expects.
-Note that you&rsquo;ll need your <code>~/.my.cnf</code> set up correctly to allow the
-connections to MySQL to happen without a authentication prompt.</p>
+</code></pre></div><p>This uses a simple SQL query to extract all the table names that match the
+pattern and concatenate them in the format that mysqldump expects. Note that
+you&rsquo;ll need your <code>~/.my.cnf</code> set up correctly to allow the connections to MySQL
+to happen without a authentication prompt.</p>
 
         </div>
 
@@ -132,6 +132,17 @@ connections to MySQL to happen without a authentication prompt.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/how-to-sync-a-mysql-table-between-two-remote-databases\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/projects\/nurl-an-immutable-url-object-for-nodejs\/"); })
+    
+</script>
 
         </article>
     </body>

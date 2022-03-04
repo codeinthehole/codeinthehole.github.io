@@ -76,12 +76,11 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <h3 id="problem">Problem</h3>
-<p>You want to validate a post/zip-code when you only know the country at
-runtime.</p>
+<p>You want to validate a post/zip-code when you only know the country at runtime.</p>
 <h3 id="solution">Solution</h3>
-<p>Use this snippet to dynamically fetch a validation method from Django&rsquo;s
-suite of &ldquo;localflavor&rdquo; form fields using the <a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
-3166-1</a> two character
+<p>Use this snippet to dynamically fetch a validation method from Django&rsquo;s suite of
+&ldquo;localflavor&rdquo; form fields using the
+<a href="http://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO 3166-1</a> two character
 country code.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">get_postcode_validator</span>(country_code):
     <span style="color:#75715e"># Django 1.3 uses &#39;UK&#39; instead of GB - this changes in 1.4</span>
@@ -101,11 +100,11 @@ country code.</p>
     <span style="color:#66d9ef">for</span> variant <span style="color:#f92672">in</span> fieldname_variants:
         fieldname <span style="color:#f92672">=</span> variant <span style="color:#f92672">%</span> country_code<span style="color:#f92672">.</span>upper()
         <span style="color:#66d9ef">if</span> hasattr(module<span style="color:#f92672">.</span>forms, fieldname):
-            <span style="color:#66d9ef">return</span> getattr(module<span style="color:#f92672">.</span>forms, fieldname)()<span style="color:#f92672">.</span>clean 
+            <span style="color:#66d9ef">return</span> getattr(module<span style="color:#f92672">.</span>forms, fieldname)()<span style="color:#f92672">.</span>clean
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">lambda</span> x: x
 </code></pre></div><p>As these validators are from forms, they will raise
-<code>django.forms.ValidationError</code> if the passed postcode is invalid. Hence
-your client code should look something like:</p>
+<code>django.forms.ValidationError</code> if the passed postcode is invalid. Hence your
+client code should look something like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django.forms <span style="color:#f92672">import</span> ValidationError
 
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">is_postcode_valid</span>(postcode, country_code):
@@ -118,9 +117,9 @@ your client code should look something like:</p>
 <p>As you can see, this is a touch messy as:</p>
 <ul>
 <li>Django 1.3 uses the incorrect code for the UK (it should be &lsquo;GB&rsquo;)</li>
-<li>There are a variety of different class names used for the
-appropriate field. We simply iterate over the possibilities and test
-to see if the class exists in the forms module.</li>
+<li>There are a variety of different class names used for the appropriate field.
+We simply iterate over the possibilities and test to see if the class exists
+in the forms module.</li>
 </ul>
 <p>This code is used within an internal Tangent geocoding webservice.</p>
 
@@ -163,6 +162,17 @@ to see if the class exists in the forms module.</li>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/how-to-sync-pycon-videos-to-your-iphone\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/how-to-reload-djangos-url-config\/"); })
+    
+</script>
 
         </article>
     </body>

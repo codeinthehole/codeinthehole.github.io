@@ -75,54 +75,77 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">Text objects</a>, as in the <!-- raw HTML omitted -->iw<!-- raw HTML omitted --> from <!-- raw HTML omitted -->ciw<!-- raw HTML omitted -->
-(&ldquo;change inner word&rdquo;), form an important part of your Vim mentalese<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. This post details those that I find most useful for Python and Django
+            <p><a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#text-objects">Text objects</a>,
+as in the <!-- raw HTML omitted -->iw<!-- raw HTML omitted --> from <!-- raw HTML omitted -->ciw<!-- raw HTML omitted -->
+(&ldquo;change inner word&rdquo;), form an important part of your Vim mentalese<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>.
+This post details those that I find most useful for Python and Django
 development.</p>
-<p>For brevity, the leading <!-- raw HTML omitted -->a<!-- raw HTML omitted --> (mnemonic: &ldquo;a&quot;n) or <!-- raw HTML omitted -->i<!-- raw HTML omitted --> (mnemonic: &ldquo;inner&rdquo;), that you combine with the following commands to form the full text-object, are omitted.</p>
+<p>For brevity, the leading <!-- raw HTML omitted -->a<!-- raw HTML omitted --> (mnemonic: &ldquo;a&quot;n) or
+<!-- raw HTML omitted -->i<!-- raw HTML omitted --> (mnemonic: &ldquo;inner&rdquo;), that you combine with the
+following commands to form the full text-object, are omitted.</p>
 <p>From core Vim:</p>
 <ul>
-<li><!-- raw HTML omitted -->w<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#word">word</a></li>
-<li><!-- raw HTML omitted -->W<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#WORD">WORD</a></li>
+<li><!-- raw HTML omitted -->w<!-- raw HTML omitted --> → a
+<a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#word">word</a></li>
+<li><!-- raw HTML omitted -->W<!-- raw HTML omitted --> → a
+<a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#WORD">WORD</a></li>
 <li><!-- raw HTML omitted -->t<!-- raw HTML omitted --> → a HTML/XML tag</li>
-<li><!-- raw HTML omitted -->s<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#sentence">sentence</a></li>
-<li><!-- raw HTML omitted -->p<!-- raw HTML omitted --> → a <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#paragraph">paragraph</a></li>
+<li><!-- raw HTML omitted -->s<!-- raw HTML omitted --> → a
+<a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#sentence">sentence</a></li>
+<li><!-- raw HTML omitted -->p<!-- raw HTML omitted --> → a
+<a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#paragraph">paragraph</a></li>
 </ul>
-<p>From the (highly recommended)  <a href="https://github.com/wellle/targets.vim"><code>wellle/targets.vim</code></a> plugin:</p>
+<p>From the (highly recommended)
+<a href="https://github.com/wellle/targets.vim"><code>wellle/targets.vim</code></a> plugin:</p>
 <ul>
-<li><!-- raw HTML omitted -->,<!-- raw HTML omitted --> <!-- raw HTML omitted -->.<!-- raw HTML omitted --> <!-- raw HTML omitted -->;<!-- raw HTML omitted --> <!-- raw HTML omitted -->:<!-- raw HTML omitted --> <!-- raw HTML omitted -->+<!-- raw HTML omitted --> <!-- raw HTML omitted -->-<!-- raw HTML omitted --> <!-- raw HTML omitted -->=<!-- raw HTML omitted --> <!-- raw HTML omitted -->~<!-- raw HTML omitted --> <!-- raw HTML omitted -->_<!-- raw HTML omitted --> <!-- raw HTML omitted -->*<!-- raw HTML omitted --> <!-- raw HTML omitted -->#<!-- raw HTML omitted --> <!-- raw HTML omitted -->/<!-- raw HTML omitted --> <!-- raw HTML omitted -->|<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->\<!-- raw HTML omitted --> <!-- raw HTML omitted -->&amp;<!-- raw HTML omitted --> <!-- raw HTML omitted -->$<!-- raw HTML omitted --> → an area of text delimited by
-the given character (super useful).</li>
+<li><!-- raw HTML omitted -->,<!-- raw HTML omitted --> <!-- raw HTML omitted -->.<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->;<!-- raw HTML omitted --> <!-- raw HTML omitted -->:<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->+<!-- raw HTML omitted --> <!-- raw HTML omitted -->-<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->=<!-- raw HTML omitted --> <!-- raw HTML omitted -->~<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->_<!-- raw HTML omitted --> <!-- raw HTML omitted -->*<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->#<!-- raw HTML omitted --> <!-- raw HTML omitted -->/<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->|<!-- raw HTML omitted --> <!-- raw HTML omitted -->\<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->&amp;<!-- raw HTML omitted --> <!-- raw HTML omitted -->$<!-- raw HTML omitted --> → an area of text
+delimited by the given character (super useful).</li>
 <li><!-- raw HTML omitted -->a<!-- raw HTML omitted --> → a function argument.</li>
 </ul>
-<p>Furthermore <a href="https://github.com/wellle/targets.vim"><code>wellle/targets.vim</code></a> overrides the built-in text objects to <em>seek to the next
-occurence</em> of the text-object if the cursor isn&rsquo;t already within one. This is
-useful.</p>
+<p>Furthermore <a href="https://github.com/wellle/targets.vim"><code>wellle/targets.vim</code></a>
+overrides the built-in text objects to <em>seek to the next occurence</em> of the
+text-object if the cursor isn&rsquo;t already within one. This is useful.</p>
 <p>From other language-agnostic, third-party text objects:</p>
 <ul>
-<li><!-- raw HTML omitted -->l<!-- raw HTML omitted --> → a line (via <a href="https://github.com/kana/vim-textobj-line"><code>kana/vim-textobj-line</code></a>)</li>
-<li><!-- raw HTML omitted -->e<!-- raw HTML omitted --> → the entire buffer (via <a href="https://github.com/kana/vim-textobj-entire"><code>kana/vim-textobj-entire</code></a>) so you can, say,
-indent the entire buffer with <!-- raw HTML omitted -->=ae<!-- raw HTML omitted -->.</li>
-<li><!-- raw HTML omitted -->i<!-- raw HTML omitted --> → an indented block (via <a href="https://github.com/kana/vim-textobj-indent"><code>kana/vim-textobj-indent</code></a>). This
+<li><!-- raw HTML omitted -->l<!-- raw HTML omitted --> → a line (via
+<a href="https://github.com/kana/vim-textobj-line"><code>kana/vim-textobj-line</code></a>)</li>
+<li><!-- raw HTML omitted -->e<!-- raw HTML omitted --> → the entire buffer (via
+<a href="https://github.com/kana/vim-textobj-entire"><code>kana/vim-textobj-entire</code></a>) so
+you can, say, indent the entire buffer with <!-- raw HTML omitted -->=ae<!-- raw HTML omitted -->.</li>
+<li><!-- raw HTML omitted -->i<!-- raw HTML omitted --> → an indented block (via
+<a href="https://github.com/kana/vim-textobj-indent"><code>kana/vim-textobj-indent</code></a>). This
 isn&rsquo;t quite as useful as it sounds for Python work as it stops at a blank line
 within an indented block &ndash; still worth having to hand.</li>
-<li><!-- raw HTML omitted -->c<!-- raw HTML omitted --> → a comment block (via <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>).</li>
+<li><!-- raw HTML omitted -->c<!-- raw HTML omitted --> → a comment block (via
+<a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>).</li>
 </ul>
-<p><a href="https://github.com/jeetsukumaran/vim-pythonsense"><code>jeetsukumaran/vim-pythonsense</code></a> provides some Python text objects:</p>
+<p><a href="https://github.com/jeetsukumaran/vim-pythonsense"><code>jeetsukumaran/vim-pythonsense</code></a>
+provides some Python text objects:</p>
 <ul>
 <li><!-- raw HTML omitted -->f<!-- raw HTML omitted --> → a Python function</li>
 <li><!-- raw HTML omitted -->c<!-- raw HTML omitted --> → a Python class<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup></li>
 <li><!-- raw HTML omitted -->d<!-- raw HTML omitted --> → a Python docstring</li>
 </ul>
-<p>For editing Django templates (via <a href="https://github.com/mjbrownie/django-template-textobjects"><code>mjbrownie/django-template-textobjects</code></a>):</p>
+<p>For editing Django templates (via
+<a href="https://github.com/mjbrownie/django-template-textobjects"><code>mjbrownie/django-template-textobjects</code></a>):</p>
 <ul>
 <li><!-- raw HTML omitted -->db<!-- raw HTML omitted --> → a <code>{% block ... %}...{% endblock %}</code> block</li>
-<li><!-- raw HTML omitted -->di<!-- raw HTML omitted --> → a <code>{% if ... %}...{% endif %}</code> conditional block</li>
+<li><!-- raw HTML omitted -->di<!-- raw HTML omitted --> → a <code>{% if ... %}...{% endif %}</code> conditional
+block</li>
 <li><!-- raw HTML omitted -->df<!-- raw HTML omitted --> → a <code>{% for ... %}...{% endfor %}</code> for loop block</li>
 <li><!-- raw HTML omitted -->dv<!-- raw HTML omitted --> → a <code>{{ ... }}</code> variable</li>
 <li><!-- raw HTML omitted -->dt<!-- raw HTML omitted --> → a <code>{% tagname ... %}</code> tag</li>
 </ul>
-<p>Several of the above plugins are built using <a href="https://github.com/kana/vim-textobj-user"><code>kana/vim-textobj-user</code></a>,
-which provides a simple framework for building your own text-objects.</p>
+<p>Several of the above plugins are built using
+<a href="https://github.com/kana/vim-textobj-user"><code>kana/vim-textobj-user</code></a>, which
+provides a simple framework for building your own text-objects.</p>
 <p>Useful references:</p>
 <ul>
 <li><a href="https://github.com/wellle/targets.vim/blob/master/cheatsheet.md">Cheatsheet for <code>wellle/targets.vim</code></a></li>
@@ -143,12 +166,16 @@ by <em>Owen Garland</em> (2017).</li>
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>In the sense that you combine them with <a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#operator">operators</a>
-(eg <!-- raw HTML omitted -->c<!-- raw HTML omitted -->, <!-- raw HTML omitted -->d<!-- raw HTML omitted -->, <!-- raw HTML omitted -->gU<!-- raw HTML omitted -->) to build describe what you want to do.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>In the sense that you combine them with
+<a href="http://vimdoc.sourceforge.net/htmldoc/motion.html#operator">operators</a> (eg
+<!-- raw HTML omitted -->c<!-- raw HTML omitted -->, <!-- raw HTML omitted -->d<!-- raw HTML omitted -->,
+<!-- raw HTML omitted -->gU<!-- raw HTML omitted -->) to build describe what you want to do.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>To avoid clashing with the comment text-object binding from <a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>, you
-can rebind the class text object to, say, <!-- raw HTML omitted -->C<!-- raw HTML omitted --> with:</p>
+<p>To avoid clashing with the comment text-object binding from
+<a href="https://github.com/glts/vim-textobj-comment"><code>glts/vim-textobj-comment</code></a>,
+you can rebind the class text object to, say, <!-- raw HTML omitted -->C<!-- raw HTML omitted -->
+with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt;</span> aC <span style="color:#f92672">&lt;</span>Plug<span style="color:#f92672">&gt;</span>(PythonsenseOuterClassTextObject)
 map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt;</span> iC <span style="color:#f92672">&lt;</span>Plug<span style="color:#f92672">&gt;</span>(PythonsenseInnerClassTextObject)
 </code></pre></div>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
@@ -194,6 +221,17 @@ map <span style="color:#f92672">&lt;</span>buffer<span style="color:#f92672">&gt
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/debugging-vim-by-example\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/software-development-tips-part1\/"); })
+    
+</script>
 
         </article>
     </body>

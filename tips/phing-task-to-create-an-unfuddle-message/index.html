@@ -75,45 +75,42 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Another day, another new Phing task; again integrating with project
-management software - this time the excellent
-<a href="http://unfuddle.com/">Unfuddle</a>.</p>
-<p>I&rsquo;ve been playing with Unfuddle for a few days now and it&rsquo;s very
-impressive. You get SVN and git hosting as well as superb issue
-tracking. It also supports simple project messages (which are displayed
-on the project dashboard) and so-called notebooks which are essentially
-project wikis that can be used to house documentation and manuals. One
-great feature of integrated project management software is the ability
-to merge news from a variety of sources (SVN commits, changes in ticket
-status, changes to notebooks) onto a single page that provides a
-snapshot of the latest activity on a project. Unfuddle does this on each
-project dashboard, where the latest messages are displayed along side
-news of the latest SVN and issue activity. The task detailed below
-provides a means for Phing to automatically add information to this
-dashboard page by creating a new message.</p>
-<p>This extension is very similar to my previous Phing task (for updating a
-Twitter status), making use of the <a href="http://uk2.php.net/curl">cURL
-library</a> to POST XML to Unfuddle. In this case
-though, the Unfuddle API for creating a message offers a few extra
-options such as categorising your messages. The task supports the
+            <p>Another day, another new Phing task; again integrating with project management
+software - this time the excellent <a href="http://unfuddle.com/">Unfuddle</a>.</p>
+<p>I&rsquo;ve been playing with Unfuddle for a few days now and it&rsquo;s very impressive. You
+get SVN and git hosting as well as superb issue tracking. It also supports
+simple project messages (which are displayed on the project dashboard) and
+so-called notebooks which are essentially project wikis that can be used to
+house documentation and manuals. One great feature of integrated project
+management software is the ability to merge news from a variety of sources (SVN
+commits, changes in ticket status, changes to notebooks) onto a single page that
+provides a snapshot of the latest activity on a project. Unfuddle does this on
+each project dashboard, where the latest messages are displayed along side news
+of the latest SVN and issue activity. The task detailed below provides a means
+for Phing to automatically add information to this dashboard page by creating a
+new message.</p>
+<p>This extension is very similar to my previous Phing task (for updating a Twitter
+status), making use of the <a href="http://uk2.php.net/curl">cURL library</a> to POST XML
+to Unfuddle. In this case though, the Unfuddle API for creating a message offers
+a few extra options such as categorising your messages. The task supports the
 following attributes:</p>
-<p>Unfuddle Name   Message   Description                                           Default   Required</p>
-<hr>
-<p>subdomain       String    Subdomain of Unfuddle account                                <br>
-(eg. &lsquo;example&rsquo; from <a href="http://example.unfuddle.com">http://example.unfuddle.com</a>).   n/a       Yes
-projectid       Integer   Project id (eg. 123                                          <br>
-from <a href="http://example.unfuddle.com/projects/123/">http://example.unfuddle.com/projects/123/</a>).    n/a       Yes
-username        String    Username.                                             n/a       Yes
-password        String    Password.                                             n/a       Yes
-title           String    Message title.                                        n/a       Yes
-body            String    Message body.                                         ''        No
-categoryid      Integer   The category id of the message.                       ''        No
-categoryids     String    A comma-separated list of category ids (eg. 1,2,3).   ''        No
-checkreturn     Boolean   Whether to check the return code of the request,             <br>
-throws a BuildException the update files.             false     No</p>
-<p>The only thing to note here is that you can choose whether you specify a
-single category id or a collection - it wouldn&rsquo;t make sense to specify
-both these attributes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">  Unfuddle Name   Message   Description                                           Default   Required
+  --------------- --------- ----------------------------------------------------- --------- ----------
+  subdomain       String    Subdomain of Unfuddle account
+                            (eg. &#39;example&#39; from &lt;http://example.unfuddle.com&gt;).   n/a       Yes
+  projectid       Integer   Project id (eg. 123
+                            from &lt;http://example.unfuddle.com/projects/123/&gt;).    n/a       Yes
+  username        String    Username.                                             n/a       Yes
+  password        String    Password.                                             n/a       Yes
+  title           String    Message title.                                        n/a       Yes
+  body            String    Message body.                                         &#39;&#39;        No
+  categoryid      Integer   The category id of the message.                       &#39;&#39;        No
+  categoryids     String    A comma-separated list of category ids (eg. 1,2,3).   &#39;&#39;        No
+  checkreturn     Boolean   Whether to check the return code of the request,
+                            throws a BuildException the update files.             false     No
+</code></pre></div><p>The only thing to note here is that you can choose whether you specify a single
+category id or a collection - it wouldn&rsquo;t make sense to specify both these
+attributes.</p>
 <p>An example build.xml using this task would be:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
 <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Unfuddle update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;message&#34;</span><span style="color:#f92672">&gt;</span>
@@ -122,29 +119,29 @@ both these attributes.</p>
     <span style="color:#f92672">&lt;/tstamp&gt;</span>
     <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;unfuddlemessage&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.UnfuddleMessageTask&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;message&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;unfuddlemessage</span> 
-            <span style="color:#a6e22e">subdomain=</span><span style="color:#e6db74">&#34;example&#34;</span> 
-            <span style="color:#a6e22e">projectid=</span><span style="color:#e6db74">&#34;12345&#34;</span> 
-            <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;exampleuser&#34;</span> 
-            <span style="color:#a6e22e">password=</span><span style="color:#e6db74">&#34;password&#34;</span> 
-            <span style="color:#a6e22e">title=</span><span style="color:#e6db74">&#34;Deploying to live site at ${build.time}&#34;</span> 
-            <span style="color:#a6e22e">body=</span><span style="color:#e6db74">&#34;&#34;</span> 
+        <span style="color:#f92672">&lt;unfuddlemessage</span>
+            <span style="color:#a6e22e">subdomain=</span><span style="color:#e6db74">&#34;example&#34;</span>
+            <span style="color:#a6e22e">projectid=</span><span style="color:#e6db74">&#34;12345&#34;</span>
+            <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;exampleuser&#34;</span>
+            <span style="color:#a6e22e">password=</span><span style="color:#e6db74">&#34;password&#34;</span>
+            <span style="color:#a6e22e">title=</span><span style="color:#e6db74">&#34;Deploying to live site at ${build.time}&#34;</span>
+            <span style="color:#a6e22e">body=</span><span style="color:#e6db74">&#34;&#34;</span>
             <span style="color:#a6e22e">categoryid=</span><span style="color:#e6db74">&#34;4&#34;</span> <span style="color:#f92672">/&gt;</span>
     <span style="color:#f92672">&lt;/target&gt;</span>
 <span style="color:#f92672">&lt;/project&gt;</span>
-</code></pre></div><p>This simply creates a new Unfuddle message with the time of the last
-build. This is an overly simplified example - see my previous post for a
-sample parameterised deployment target that would allow a dynamic
-message to be created by different targets within the deployment file.</p>
-<p>The source code for TwitterUpdateTask.php is as follows (with docblocks
-stripped out for brevity):</p>
+</code></pre></div><p>This simply creates a new Unfuddle message with the time of the last build. This
+is an overly simplified example - see my previous post for a sample
+parameterised deployment target that would allow a dynamic message to be created
+by different targets within the deployment file.</p>
+<p>The source code for TwitterUpdateTask.php is as follows (with docblocks stripped
+out for brevity):</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 <span style="color:#66d9ef">require_once</span> <span style="color:#e6db74">&#34;phing/Task.php&#34;</span>;
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnfuddleMessageTask</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Task</span> 
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UnfuddleMessageTask</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">Task</span>
 {
-    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">URL_TEMPLATE_UPDATE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://%s.unfuddle.com/api/v1/projects/%d/messages&#39;</span>; 
+    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">URL_TEMPLATE_UPDATE</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;http://%s.unfuddle.com/api/v1/projects/%d/messages&#39;</span>;
 
-    <span style="color:#75715e">// Twitter response codes 
+    <span style="color:#75715e">// Twitter response codes
 </span><span style="color:#75715e"></span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">HTTP_RESPONSE_OK</span>                  <span style="color:#f92672">=</span> <span style="color:#ae81ff">200</span>;
     <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">HTTP_RESPONSE_CREATED</span>             <span style="color:#f92672">=</span> <span style="color:#ae81ff">201</span>;
     <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">HTTP_RESPONSE_BAD_REQUEST</span>         <span style="color:#f92672">=</span> <span style="color:#ae81ff">400</span>;
@@ -171,38 +168,38 @@ stripped out for brevity):</p>
     <span style="color:#66d9ef">private</span> $password;
     <span style="color:#66d9ef">private</span> $title;
     <span style="color:#66d9ef">private</span> $body;
-    <span style="color:#66d9ef">private</span> $categoryIds;  
+    <span style="color:#66d9ef">private</span> $categoryIds;
     <span style="color:#66d9ef">private</span> $checkReturn <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setSubdomain</span>($subdomain) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setSubdomain</span>($subdomain)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">subdomain</span> <span style="color:#f92672">=</span> $subdomain;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setProjectId</span>($projectId) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setProjectId</span>($projectId)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">projectId</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">int</span>)$projectId;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUsername</span>($username) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUsername</span>($username)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">username</span> <span style="color:#f92672">=</span> $username;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setPassword</span>($password) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setPassword</span>($password)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">password</span> <span style="color:#f92672">=</span> $password;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setTitle</span>($title) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setTitle</span>($title)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">title</span> <span style="color:#f92672">=</span> $title;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setBody</span>($body) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setBody</span>($body)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">body</span> <span style="color:#f92672">=</span> $body;
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCategoryId</span>($categoryId) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCategoryId</span>($categoryId)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">categoryIds</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>((<span style="color:#a6e22e">int</span>)$categoryId);
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCategoryIds</span>($categoryIdList) 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setCategoryIds</span>($categoryIdList)
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">categoryIds</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">explode</span>(<span style="color:#e6db74">&#34;,&#34;</span>, $categoryIdList);
     }
@@ -211,13 +208,13 @@ stripped out for brevity):</p>
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkReturn</span> <span style="color:#f92672">=</span> (<span style="color:#a6e22e">boolean</span>)$checkReturn;
     }
 
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">init</span>() 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">init</span>()
     {
         <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#a6e22e">extension_loaded</span>(<span style="color:#e6db74">&#39;curl&#39;</span>)) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>(<span style="color:#e6db74">&#34;Cannot update Unfuddle&#34;</span>, <span style="color:#e6db74">&#34;The cURL extension is not installed&#34;</span>);
         }
     }
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>() 
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">main</span>()
     {
         $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">validateProperties</span>();
 
@@ -295,12 +292,12 @@ stripped out for brevity):</p>
         <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">true</span> <span style="color:#f92672">===</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">checkReturn</span>) {
             <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BuildException</span>($failureMessage);
         }
-        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;New Unfuddle message unsuccessful: </span><span style="color:#e6db74">$failureMessage</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);   
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;New Unfuddle message unsuccessful: </span><span style="color:#e6db74">$failureMessage</span><span style="color:#e6db74">&#34;</span>, <span style="color:#a6e22e">Project</span><span style="color:#f92672">::</span><span style="color:#a6e22e">MSG_WARN</span>);
     }
 }
-</code></pre></div><p>The fully documented source and associated example build.xml file are
-available to download: <a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMessageTask.zip
-(2.6kb)</a></p>
+</code></pre></div><p>The fully documented source and associated example build.xml file are available
+to download:
+<a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMessageTask.zip (2.6kb)</a></p>
 
         </div>
 
@@ -341,6 +338,17 @@ available to download: <a href="/downloads/UnfuddleMessageTask.zip">UnfuddleMess
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/phing-task-to-update-twitter-status\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/projects\/current-pet-project-command-line-fu\/"); })
+    
+</script>
 
         </article>
     </body>

@@ -28,7 +28,7 @@
       <description>A good understanding of Vim&amp;rsquo;s various lists is a massive productivity boost — it&amp;rsquo;s taken me many years of Vim use to truly appreciate this.
 This post summarises some of Vim&amp;rsquo;s lists, detailing their purpose and how to make the most of them.
 Contents:
- Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell   Location list Jump list  Tip: Use jump commands to navigate   Change list  Tip: Jump to the previous location where insert mode was used   Buffer list  Tip: Select buffers with FZF   Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality&amp;hellip;   Include file list and definition lists Summary  I need to jump somewhere&amp;hellip; I need to apply the same transformation in lots of places&amp;hellip;       Quickfix list A global list of locations populated via one of these commands:</description>
+ Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell   Location list Jump list  Tip: Use jump commands to navigate   Change list  Tip: Jump to the previous location where insert mode was used   Buffer list  Tip: Select buffers with FZF   Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality   Include file list and definition lists Summary  I need to jump somewhere I need to apply the same transformation in lots of places       Quickfix list A global list of locations populated via one of these commands:</description>
     </item>
     
     <item>
@@ -75,7 +75,7 @@ Solution Use a HCL list variable which allows each entry to have an associated c
       <description>URLs are great aren&amp;rsquo;t they?
 You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
 Anyway, a super-useful Vim mapping I use is:
-vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
+vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
     
     <item>
@@ -144,7 +144,7 @@ let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(
       
       <guid>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
       <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).
-This happens as Ubuntu VMs typically start several package-management programs &amp;mdash; unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
+This happens as Ubuntu VMs typically start several package-management programs unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
 You&amp;rsquo;ll see an error like this:
 E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</description>
     </item>
@@ -238,9 +238,9 @@ set -eu -o pipefail so that the script:
       <guid>https://codeinthehole.com/tips/using-pgbadger-with-aws-rds/</guid>
       <description>There&amp;rsquo;s two non-obvious things to know when starting to use pgbadger with AWS RDS.
 First, set:
-log_statement = None  Don&amp;rsquo;t set this to all as the AWS docs suggest.
+log_statement = None Don&amp;rsquo;t set this to all as the AWS docs suggest.
 Further, don&amp;rsquo;t waste your time trying to add a DB parameter to set log_line_prefix to pgbadger&amp;rsquo;s recommended value: it&amp;rsquo;s not possible1. Instead tell pgbadger about the log format that RDS insists on:
-$ pgbadger -f stderr -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
+pgbadger -f stderr -p &amp;#39;%t:%r:%u@%d:[%p]:&amp;#39; postgres.log Hope that saves you some time.</description>
     </item>
     
     <item>
@@ -277,7 +277,7 @@ Furthermore, the episode &amp;ldquo;Hurrican Neddy&amp;rdquo; from season 8 of T
       <guid>https://codeinthehole.com/tips/open-github-pull-request-command/</guid>
       <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
 Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
-$ git pulls where pulls is aliased in ~/.</description>
+git pulls where pulls is aliased in ~/.</description>
     </item>
     
     <item>
@@ -331,7 +331,7 @@ At a psql prompt, switch to unaligned output
       
       <guid>https://codeinthehole.com/tips/an-ssh-tip-for-modern-aws-patrons/</guid>
       <description>Cloud computing and immutable infrastructure deployments have changed the way I use SSH. I miss the days when I could run:
-$ ssh app1-prod to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&amp;rsquo;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
+ssh app1-prod to jump onto a machine and investigate an issue. This would work as, back in the days of yore, your web servers didn&amp;rsquo;t change IP address several times a week so I could create a helpful alias in ~/.ssh/config:
 Host app1-prod User example_user HostName 74.207.251.29 This circumvented the labour-intensive act of typing in the remote username and IP address when SSHing around town.</description>
     </item>
     
@@ -364,7 +364,7 @@ There are various techniques available for dealing with this2, but what we do at
       
       <guid>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
       <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line  # will need to edited later if not.</description>
+#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
     </item>
     
     <item>
@@ -404,10 +404,10 @@ This is a particular menace in agencies (or anywhere with lots of small projects
       <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
-      <description>Here is my title If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
+      <description>If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
-$ brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
+brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
+if executable(&amp;#39;ag&amp;#39;)&amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -428,8 +428,8 @@ This article is largely a note-to-self in case I have to repeat the process. How
       <guid>https://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
       <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
 Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
-$ export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; $ export LANG=&amp;#34;en_US.UTF-8&amp;#34; $ export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
-$ sudo apt-get update $ sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings.</description>
+export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; export LANG=&amp;#34;en_US.UTF-8&amp;#34; export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
+sudo apt-get update sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings. Verify this with:</description>
     </item>
     
     <item>
@@ -521,8 +521,8 @@ from django.test import TestCase @no_database() class UnitTestCase(TestCase): ..
       <guid>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
       <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
 Solution With pip already installed, install the required development packages:
-$ sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
-$ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ $ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
+sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     
     <item>
@@ -581,7 +581,7 @@ Use pull requests Pull requests are an excellent tool for fostering code review.
 This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.
 This is mainly for my own reference.
 User set-up Create user with a dummy shell:
-$ adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
+adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
     </item>
     
     <item>
@@ -780,7 +780,7 @@ Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see som
       
       <guid>https://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</guid>
       <description>Problem The python package installer pip can be used to install directly from Github, like so:
-$ pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
+pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
 $ pip freeze | grep oscar -e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg=django_oscar-dev Hence running pip install -r requirements.</description>
     </item>
     
@@ -888,7 +888,7 @@ Consider an application folder structure as follows:
       <guid>https://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</guid>
       <description>Have just been writing an FAQ page for commandlinefu.com. Documenting is always tiresome, but FAQs particularly so when hand-coding the HTML links between each question and the summary table at the top of the page.
 Javascript to the rescue: I cobbled together a quick Prototype script which automatically generates the FAQ summary links by parsing the DOM for the appropriate links:
-document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.question&amp;#39;).each(function(ele){ var id = ele.innerHTML.unescapeHTML().gsub(/[^\w- ]/, &amp;#39;&amp;#39;).gsub(/[\s-]+/, &amp;#39;-&amp;#39;).</description>
+document.observe(&amp;#34;dom:loaded&amp;#34;, function () { $$(&amp;#34;a.question&amp;#34;).each(function (ele) { var id = ele.</description>
     </item>
     
     <item>

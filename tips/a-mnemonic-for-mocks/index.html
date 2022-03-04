@@ -75,8 +75,9 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Using both <code>@mock.patch</code> decorators and <a href="https://docs.pytest.org/en/latest/fixture.html">py.test fixtures</a> can be confusing as it&rsquo;s not
-always clear what order arguments are being injected.</p>
+            <p>Using both <code>@mock.patch</code> decorators and
+<a href="https://docs.pytest.org/en/latest/fixture.html">py.test fixtures</a> can be
+confusing as it&rsquo;s not always clear what order arguments are being injected.</p>
 <p>For instance, which of these is right? This:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock</span><span style="color:#f92672">.</span>patch<span style="color:#f92672">.</span>object(module, <span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
 <span style="color:#a6e22e">@mock</span><span style="color:#f92672">.</span>patch<span style="color:#f92672">.</span>object(module, <span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
@@ -111,7 +112,8 @@ the second argument and so on. Like this:</p>
 <span style="color:#a6e22e">@mock</span><span style="color:#f92672">.</span>patch<span style="color:#f92672">.</span>object(module, <span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_something_in_module</span>(collaborator_1, collaborator_2, collaborator_3):
     <span style="color:#66d9ef">pass</span>
-</code></pre></div><p>The things to remember is that it&rsquo;s a <em>symmetrical</em> arrangement with the test function or method in the centre.</p>
+</code></pre></div><p>The things to remember is that it&rsquo;s a <em>symmetrical</em> arrangement with the test
+function or method in the centre.</p>
 <p>So the correct arrangement above is:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#a6e22e">@mock</span><span style="color:#f92672">.</span>patch<span style="color:#f92672">.</span>object(module, <span style="color:#e6db74">&#39;collaborator_2&#39;</span>)
 <span style="color:#a6e22e">@mock</span><span style="color:#f92672">.</span>patch<span style="color:#f92672">.</span>object(module, <span style="color:#e6db74">&#39;collaborator_1&#39;</span>)
@@ -159,6 +161,17 @@ the second argument and so on. Like this:</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/your-codebase-is-your-\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/using-pgbadger-with-aws-rds\/"); })
+    
+</script>
 
         </article>
     </body>

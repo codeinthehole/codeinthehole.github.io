@@ -15,7 +15,7 @@
       <guid>https://codeinthehole.com/tips/open-github-pull-request-command/</guid>
       <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
 Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
-$ git pulls where pulls is aliased in ~/.</description>
+git pulls where pulls is aliased in ~/.</description>
     </item>
     
     <item>

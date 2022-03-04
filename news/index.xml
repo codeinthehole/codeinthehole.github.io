@@ -13,7 +13,7 @@
       <pubDate>Mon, 18 Mar 2019 17:05:53 +0000</pubDate>
       
       <guid>https://codeinthehole.com/news/oe-related-name-outage/</guid>
-      <description>I wrote up a lesson on the dangers of renaming the related_name of a Django model field  over on the Octopus Energy tech blog.</description>
+      <description>I wrote up a lesson on the dangers of renaming the related_name of a Django model field over on the Octopus Energy tech blog.</description>
     </item>
     
     <item>

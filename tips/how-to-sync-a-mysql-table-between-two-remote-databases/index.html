@@ -78,53 +78,53 @@ if (!doNotTrack) {
             <p>Definitely tricker than you might think.</p>
 <p>Seems like it should be trivial using <code>SELECT ... INTO OUTFILE</code> and
 <code>LOAD DATA INFILE ...</code> to make the transfer via dumping the table into a
-temporary file. However, <code>SELECT ... INTO OUTFILE</code> creates a file on the
-remote server rather than locally. This prevents the use of
-<code>LOAD DATA INFILE</code> for the second step as the file being loaded has to
-be local or on the destination server.</p>
-<p>Following the <a href="http://dev.mysql.com/doc/refman/5.0/en/select.html">guidance in the
-docs</a>, you can
-create local dump of a table by using the <code>--execute</code> option to output
-the results of a <code>SELECT ...</code> statement into a local file.</p>
+temporary file. However, <code>SELECT ... INTO OUTFILE</code> creates a file on the remote
+server rather than locally. This prevents the use of <code>LOAD DATA INFILE</code> for the
+second step as the file being loaded has to be local or on the destination
+server.</p>
+<p>Following the
+<a href="http://dev.mysql.com/doc/refman/5.0/en/select.html">guidance in the docs</a>, you
+can create local dump of a table by using the <code>--execute</code> option to output the
+results of a <code>SELECT ...</code> statement into a local file.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -D database_name -e <span style="color:#e6db74">&#34;SELECT ... &#34;</span> &gt; /path/to/file.txt
 </code></pre></div><p>This works but has two downsides:</p>
 <ol>
-<li>First, running a shell command forces you to step outside the MySQL
-adapter of your progamming language which means it is a new place
-where the database credentials need to be passed. Shelling out
-commands always feels like you&rsquo;ve failed.</li>
-<li>Further, as far as I can tell, you can&rsquo;t control the field separator
-or line endings using this technique (in the same way as you can
-with <code>SELECT ... INTO OUTFILE ...</code>) and so the file includes an
-unwanted line with the field names and tab-separates the fields.</li>
+<li>First, running a shell command forces you to step outside the MySQL adapter
+of your progamming language which means it is a new place where the database
+credentials need to be passed. Shelling out commands always feels like you&rsquo;ve
+failed.</li>
+<li>Further, as far as I can tell, you can&rsquo;t control the field separator or line
+endings using this technique (in the same way as you can with
+<code>SELECT ... INTO OUTFILE ...</code>) and so the file includes an unwanted line with
+the field names and tab-separates the fields.</li>
 </ol>
-<p>It&rsquo;s worth noting the <code>mysqldump</code> isn&rsquo;t much help here, as the <code>--tab</code>
-option that allows CSV output to be generated only works with a local
-database connection.</p>
-<p>Now that we&rsquo;ve got our data locally, we load it into the remote database
-using <code>LOAD DATA INFILE</code> and make use of the <code>LOCAL</code> keyword which lets
-us use a local data file:</p>
+<p>It&rsquo;s worth noting the <code>mysqldump</code> isn&rsquo;t much help here, as the <code>--tab</code> option
+that allows CSV output to be generated only works with a local database
+connection.</p>
+<p>Now that we&rsquo;ve got our data locally, we load it into the remote database using
+<code>LOAD DATA INFILE</code> and make use of the <code>LOCAL</code> keyword which lets us use a local
+data file:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -h x.x.x.x -u user -D database_name --password<span style="color:#f92672">=</span>... -e <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span><span style="color:#e6db74">&#34;LOAD DATA LOCAL INFILE &#39;/path/to/file.txt&#39; \
 </span><span style="color:#e6db74">REPLACE INTO TABLE table_name \
 </span><span style="color:#e6db74">IGNORE 1 LINES&#34;</span>
-</code></pre></div><p>Of course, you may want to truncate the table first if you want a clean
-sync. As this operations locks the destination table, it often makes
-sense to load the data into a temporary copy of the table, and then
-perform a <code>RENAME TABLE</code> operation to swap in the new table.</p>
+</code></pre></div><p>Of course, you may want to truncate the table first if you want a clean sync. As
+this operations locks the destination table, it often makes sense to load the
+data into a temporary copy of the table, and then perform a <code>RENAME TABLE</code>
+operation to swap in the new table.</p>
 <p>Here&rsquo;s a quick and dirty PHP implementation:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
 $tableName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;some_table&#39;</span>;
 $sql <span style="color:#f92672">=</span>
-   <span style="color:#e6db74">&#34;SELECT * 
+   <span style="color:#e6db74">&#34;SELECT *
 </span><span style="color:#e6db74">    FROM </span><span style="color:#e6db74">$tableName</span><span style="color:#e6db74">&#34;</span>;
 $pathToCsv <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/some-file.csv&#39;</span>;
 $command <span style="color:#f92672">=</span> <span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;mysql -h %s -u %s  --password=%s -D %s -e &#39;%s&#39; &gt; %s&#34;</span>,
-    <span style="color:#e6db74">&#39;10.0.0.2&#39;</span>, 
-    <span style="color:#e6db74">&#39;db-user&#39;</span>, 
-    <span style="color:#e6db74">&#39;db-password&#39;</span>, 
-    <span style="color:#e6db74">&#39;database_name&#39;</span>, 
-    $sql, 
+    <span style="color:#e6db74">&#39;10.0.0.2&#39;</span>,
+    <span style="color:#e6db74">&#39;db-user&#39;</span>,
+    <span style="color:#e6db74">&#39;db-password&#39;</span>,
+    <span style="color:#e6db74">&#39;database_name&#39;</span>,
+    $sql,
     $pathToCsv);
 <span style="color:#a6e22e">exec</span>($command);
 
@@ -174,6 +174,17 @@ $db<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">execute</
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/phing-trick-for-avoiding-deploying-debug-code\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/mysqldump-with-wildcard-table-matching\/"); })
+    
+</script>
 
         </article>
     </body>

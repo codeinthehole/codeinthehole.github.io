@@ -77,11 +77,11 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <p>Just a quick tip on monitoring the queries that mysql is handling on a
 production site. You can use the mysqladmin tool to return a list of the
-processes currently being handled. Combining this with the UNIX watch
-command allows a real-time monitoring of what&rsquo;s going on.</p>
+processes currently being handled. Combining this with the UNIX watch command
+allows a real-time monitoring of what&rsquo;s going on.</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> mysqladmin processlist
-</code></pre></div><p>The <code>-n 1</code> specifies that mysqladmin executes every second. Depending on
-your set-up, you may need to specify a mysql user and password:</p>
+</code></pre></div><p>The <code>-n 1</code> specifies that mysqladmin executes every second. Depending on your
+set-up, you may need to specify a mysql user and password:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> mysqladmin --user<span style="color:#f92672">=</span>&lt;user&gt; --password<span style="color:#f92672">=</span>&lt;password&gt; processlist
 </code></pre></div>
         </div>
@@ -123,6 +123,17 @@ your set-up, you may need to specify a mysql user and password:</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/following-log-files-with-tail-f\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/creating-large-xml-files-with-php\/"); })
+    
+</script>
 
         </article>
     </body>

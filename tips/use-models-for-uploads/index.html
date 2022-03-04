@@ -75,23 +75,20 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>All Django developers will deal with file uploads at some point. I
-contend that it&rsquo;s a good practice to use models to capture the upload
-metadata and to track processing status. This article explains how and
-why.</p>
+            <p>All Django developers will deal with file uploads at some point. I contend that
+it&rsquo;s a good practice to use models to capture the upload metadata and to track
+processing status. This article explains how and why.</p>
 <h3 id="an-e-commerce-example">An e-commerce example</h3>
-<p>Suppose your e-commerce application allows admins to upload CSV files to
-update product stock levels (a common requirement). A typical file may
-comprise a SKU and a stock level:</p>
-<pre><code>9781231231999,0
-9781231231999,4
-9781231231999,2
-...
-</code></pre>
-<p><a href="https://docs.djangoproject.com/en/dev/topics/http/file-uploads/?from=olddocs">Django&rsquo;s
-docs</a>
-detail a common pattern for dealing with file uploads such as this. The
-steps are generally:</p>
+<p>Suppose your e-commerce application allows admins to upload CSV files to update
+product stock levels (a common requirement). A typical file may comprise a SKU
+and a stock level:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">    9781231231999,0
+    9781231231999,4
+    9781231231999,2
+    ...
+</code></pre></div><p><a href="https://docs.djangoproject.com/en/dev/topics/http/file-uploads/?from=olddocs">Django&rsquo;s docs</a>
+detail a common pattern for dealing with file uploads such as this. The steps
+are generally:</p>
 <ol>
 <li>Validate the form submission;</li>
 <li>Write upload data to permanent storage;</li>
@@ -119,11 +116,11 @@ steps are generally:</p>
 <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process_file</span>(filepath):
     <span style="color:#f92672">...</span>
 </code></pre></div><p>This works fine.</p>
-<p>However, it&rsquo;s often desirable to collect audit information about which
-files have been processed, how long processing took and who uploaded
-them. Of course, this can be addressed by logging but a more elegant
-solution to use a simple audit model as well. Consider an alternative
-implementation of <code>handle_uploaded_file</code>:</p>
+<p>However, it&rsquo;s often desirable to collect audit information about which files
+have been processed, how long processing took and who uploaded them. Of course,
+this can be addressed by logging but a more elegant solution to use a simple
+audit model as well. Consider an alternative implementation of
+<code>handle_uploaded_file</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(user, f):
     filepath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/somefile.txt&#39;</span>
     <span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#39;wb+&#39;</span>) <span style="color:#66d9ef">as</span> dest:
@@ -163,7 +160,7 @@ implementation of <code>handle_uploaded_file</code>:</p>
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">process</span>(self):
         self<span style="color:#f92672">.</span>date_start_processing <span style="color:#f92672">=</span> datetime<span style="color:#f92672">.</span>datetime<span style="color:#f92672">.</span>now()
         <span style="color:#66d9ef">try</span>:
-            <span style="color:#75715e"># process upload data, </span>
+            <span style="color:#75715e"># process upload data,</span>
             <span style="color:#f92672">...</span>
         <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span>, e:
             self<span style="color:#f92672">.</span>_mark_failed(unicode(e))
@@ -188,8 +185,8 @@ implementation of <code>handle_uploaded_file</code>:</p>
 
     <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">was_processing_successful</span>(self):
         <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>status <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>PROCESSED
-</code></pre></div><p>You can go further and push the file creation into a manager method so
-the filepath generation is removed from the view:</p>
+</code></pre></div><p>You can go further and push the file creation into a manager method so the
+filepath generation is removed from the view:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle_uploaded_file</span>(f):
     upload <span style="color:#f92672">=</span> StockUpload<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create_from_stream(user, f)
     upload<span style="color:#f92672">.</span>process()
@@ -225,13 +222,13 @@ to send a message back to the user who uploaded the file:</p>
     upload<span style="color:#f92672">.</span>process()
     <span style="color:#66d9ef">if</span> upload<span style="color:#f92672">.</span>was_processing_successful():
         message_user(
-            upload<span style="color:#f92672">.</span>uploaded_by, 
+            upload<span style="color:#f92672">.</span>uploaded_by,
             <span style="color:#e6db74">&#34;Your upload </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> was processed successfully, </span><span style="color:#e6db74">%d</span><span style="color:#e6db74"> records imported&#34;</span> <span style="color:#f92672">%</span> (
                 upload<span style="color:#f92672">.</span>filename,
                 upload<span style="color:#f92672">.</span>num_records))
     <span style="color:#66d9ef">else</span>:
         message_user(
-            upload<span style="color:#f92672">.</span>uploaded_by, 
+            upload<span style="color:#f92672">.</span>uploaded_by,
             <span style="color:#e6db74">&#34;Your upload </span><span style="color:#e6db74">%s</span><span style="color:#e6db74"> could not be processed, error message: </span><span style="color:#e6db74">%s</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> (
                 upload<span style="color:#f92672">.</span>filename,
                 upload<span style="color:#f92672">.</span>processing_description,))
@@ -249,25 +246,25 @@ to send a message back to the user who uploaded the file:</p>
     <span style="color:#66d9ef">else</span>:
         form <span style="color:#f92672">=</span> UploadFileForm()
     <span style="color:#66d9ef">return</span> render_to_response(
-        <span style="color:#e6db74">&#39;upload.html&#39;</span>, {<span style="color:#e6db74">&#39;form&#39;</span>: form}, 
+        <span style="color:#e6db74">&#39;upload.html&#39;</span>, {<span style="color:#e6db74">&#39;form&#39;</span>: form},
         context_instance<span style="color:#f92672">=</span>RequestContext(request))
 </code></pre></div><h3 id="discussion">Discussion</h3>
 <p>The advantages of using a model are:</p>
 <ul>
 <li>It keeps your view simple - all processing logic is extracted away.</li>
-<li>The file processing logic is re-usable. You could use a management
-command to process files specified at the commandline.</li>
+<li>The file processing logic is re-usable. You could use a management command to
+process files specified at the commandline.</li>
 <li>It&rsquo;s easy to defer processing to a Celery worker.</li>
-<li>You can gather metrics on processing speed and keep audit
-information on who is uploading what.</li>
-<li>You can write a simple <code>ListView</code> to show the audit information of
-uploaded files to admins.</li>
+<li>You can gather metrics on processing speed and keep audit information on who
+is uploading what.</li>
+<li>You can write a simple <code>ListView</code> to show the audit information of uploaded
+files to admins.</li>
 </ul>
-<p>The above is just a toy example - there are lots of variations that can
-be used. For instance, you may not want to keep the processing logic on
-the model itself, it may make sense to have a separate function for
-this. However the general notion of using a model to represent an
-uploaded file and to track its state is a useful one.</p>
+<p>The above is just a toy example - there are lots of variations that can be used.
+For instance, you may not want to keep the processing logic on the model itself,
+it may make sense to have a separate function for this. However the general
+notion of using a model to represent an uploaded file and to track its state is
+a useful one.</p>
 
         </div>
 
@@ -308,6 +305,17 @@ uploaded file and to track its state is a useful one.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/vim-macros-for-adding-i18n-support-to-django-templates\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/projects\/cacheback-asynchronous-cache-refreshing-for-django\/"); })
+    
+</script>
 
         </article>
     </body>

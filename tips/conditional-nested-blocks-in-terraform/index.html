@@ -76,13 +76,13 @@ if (!doNotTrack) {
 
         <div id="article_content" class="entry-content">
             <!-- raw HTML omitted -->
-<p>Here&rsquo;s a useful technique for using Terraform&rsquo;s <a href="https://www.terraform.io/docs/configuration/expressions.html#dynamic-blocks"><code>dynamic</code> blocks</a> to create
-conditional nested blocks.</p>
+<p>Here&rsquo;s a useful technique for using Terraform&rsquo;s
+<a href="https://www.terraform.io/docs/configuration/expressions.html#dynamic-blocks"><code>dynamic</code> blocks</a>
+to create conditional nested blocks.</p>
 <!-- raw HTML omitted -->
 <h2 id="maintenance-mode">Maintenance mode</h2>
 <p>As an example, let&rsquo;s create a &ldquo;maintenance mode&rdquo; for a service which allows a
-&ldquo;under maintenance&rdquo; holding page to be served when a Terraform variable
-is set.</p>
+&ldquo;under maintenance&rdquo; holding page to be served when a Terraform variable is set.</p>
 <p>This is useful if you need to stop all traffic to a RDS database server so it
 can be upgraded.</p>
 <p>Define a boolean <code>maintenance_mode</code> variable:</p>
@@ -129,8 +129,9 @@ a simple HTML payload.</p>
 page, which gives you time to perform whatever maintenance you need to do.</p>
 <p>Only downside is the <code>message_body</code> attribute must be 1024 bytes or fewer, so
 you need quite a minimal &ldquo;under maintenance&rdquo; page.</p>
-<p>Idea from <a href="https://github.com/hashicorp/terraform/issues/19853#issuecomment-589988711">this comment</a> from
-the Terraform Github repository.</p>
+<p>Idea from
+<a href="https://github.com/hashicorp/terraform/issues/19853#issuecomment-589988711">this comment</a>
+from the Terraform Github repository.</p>
 <p>Further reading:</p>
 <ul>
 <li>
@@ -180,6 +181,17 @@ the Terraform Github repository.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/terraform-cidrs\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/guides\/settings-up-a-2020-macbook-for-python-development\/"); })
+    
+</script>
 
         </article>
     </body>

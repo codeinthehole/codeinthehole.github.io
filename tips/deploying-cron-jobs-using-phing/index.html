@@ -75,8 +75,8 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Deploying applications that depend on cron-jobs can be a pain. However,
-Phing can be used to make such deployments easy - here&rsquo;s how&hellip;</p>
+            <p>Deploying applications that depend on cron-jobs can be a pain. However, Phing
+can be used to make such deployments easy - here&rsquo;s how&hellip;</p>
 <p>Consider an application folder structure as follows:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/builds
     /development
@@ -93,43 +93,39 @@ Phing can be used to make such deployments easy - here&rsquo;s how&hellip;</p>
     /public
     /classes
         ...
-</code></pre></div><p>All development work takes place within the <code>/src</code> folder while the
-<code>/builds/*</code> folders are used as targets in deployment. This system
-allows multiple builds to happily co-exist on the same server and the
-whole application infrastructure to be moved between servers easily as
-the structure in source control mirrors that of the server.</p>
-<p>In this example e-commerce app, we have a number of scripts (in
-<code>/src/scripts</code>) that handle order-processing which need to be called
-periodically by the cron daemon. A naive approach in deployment would be
-to export the codebase to an appropriate build folder but then edit the
-server&rsquo;s crontab by hand and add the appropriate lines to run these
-scripts.</p>
+</code></pre></div><p>All development work takes place within the <code>/src</code> folder while the <code>/builds/*</code>
+folders are used as targets in deployment. This system allows multiple builds to
+happily co-exist on the same server and the whole application infrastructure to
+be moved between servers easily as the structure in source control mirrors that
+of the server.</p>
+<p>In this example e-commerce app, we have a number of scripts (in <code>/src/scripts</code>)
+that handle order-processing which need to be called periodically by the cron
+daemon. A naive approach in deployment would be to export the codebase to an
+appropriate build folder but then edit the server&rsquo;s crontab by hand and add the
+appropriate lines to run these scripts.</p>
 <p>This isn&rsquo;t such a great idea though as it relies on that most unreliable
-facility, human memory, to ensure the build is fully deployed - this
-creates an unnecessary overhead which is bound to lead to mistakes.
-Furthermore, the overhead acts as a deterrent for using asynchronous
-jobs within an application, limiting the app in terms of what it can do.
-As far as I am aware, there is no easy way to automatically update a
-user&rsquo;s crontab automatically.</p>
-<p>A much better way is to create a number of scripts which specify the
-cron tasks and are deployed to the /etc/cron.d folder. In the above
-example, these are stored in /src/cron.d and would look something like:</p>
+facility, human memory, to ensure the build is fully deployed - this creates an
+unnecessary overhead which is bound to lead to mistakes. Furthermore, the
+overhead acts as a deterrent for using asynchronous jobs within an application,
+limiting the app in terms of what it can do. As far as I am aware, there is no
+easy way to automatically update a user&rsquo;s crontab automatically.</p>
+<p>A much better way is to create a number of scripts which specify the cron tasks
+and are deployed to the /etc/cron.d folder. In the above example, these are
+stored in /src/cron.d and would look something like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
 <span style="color:#ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
-</code></pre></div><p>(Note that, for some reason, a blank line is required at the end of this
-file in order for the script to be run by cron.) Here, the <code>__BUILD__</code>
-is a tokenised parameter which will be replaced during deployment to
-configure the path to the appropriate script - a phing trick I&rsquo;ve
-described previously.</p>
-<p>One further complication is that if both the dev, test and stage builds
-are running on the same server, then the scripts deployed to
-<code>/etc/cron.d</code> could clobber each other as they have the same name within
-each build. This can be neatly side-stepped using the Phing&rsquo;s glob
-mapper to replace the <code>__BUILD__</code> component of the file to be the
-appropriate build name (similar to how the paths are configured within
-the file itself).</p>
-<p>This is probably best illustrated with a sample phing script which takes
-the build name (eg &ldquo;development&rdquo;) as a parameter:</p>
+</code></pre></div><p>(Note that, for some reason, a blank line is required at the end of this file in
+order for the script to be run by cron.) Here, the <code>__BUILD__</code> is a tokenised
+parameter which will be replaced during deployment to configure the path to the
+appropriate script - a phing trick I&rsquo;ve described previously.</p>
+<p>One further complication is that if both the dev, test and stage builds are
+running on the same server, then the scripts deployed to <code>/etc/cron.d</code> could
+clobber each other as they have the same name within each build. This can be
+neatly side-stepped using the Phing&rsquo;s glob mapper to replace the <code>__BUILD__</code>
+component of the file to be the appropriate build name (similar to how the paths
+are configured within the file itself).</p>
+<p>This is probably best illustrated with a sample phing script which takes the
+build name (eg &ldquo;development&rdquo;) as a parameter:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;xml</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span> <span style="color:#a6e22e">encoding=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#f92672">&gt;</span>
 <span style="color:#f92672">&lt;project&gt;</span>
     <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
@@ -139,7 +135,7 @@ the build name (eg &ldquo;development&rdquo;) as a parameter:</p>
                 <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;appname-${build.name}-*&#34;</span> <span style="color:#f92672">/&gt;</span>
             <span style="color:#f92672">&lt;/fileset&gt;</span>
         <span style="color:#f92672">&lt;/delete&gt;</span>
-        <span style="color:#f92672">&lt;copy</span> <span style="color:#a6e22e">todir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span> 
+        <span style="color:#f92672">&lt;copy</span> <span style="color:#a6e22e">todir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span>
             <span style="color:#f92672">&lt;filterchain&gt;</span>
                 <span style="color:#f92672">&lt;replacetokens</span> <span style="color:#a6e22e">begintoken=</span><span style="color:#e6db74">&#34;__&#34;</span> <span style="color:#a6e22e">endtoken=</span><span style="color:#e6db74">&#34;__&#34;</span><span style="color:#f92672">&gt;</span>
                     <span style="color:#f92672">&lt;token</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;BUILD&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${build.name}&#34;</span> <span style="color:#f92672">/&gt;</span>
@@ -153,12 +149,11 @@ the build name (eg &ldquo;development&rdquo;) as a parameter:</p>
     <span style="color:#f92672">&lt;/target&gt;</span>
 <span style="color:#f92672">&lt;/project&gt;</span>
 </code></pre></div><p>The illustrated snippet does two things:</p>
-<p>Deletes any previous scripts for this build from <code>/etc/cron.d</code> (this is
-why we namespace the files with &ldquo;appname&rdquo; to prevent accidentally
-removing a system file). Copies the new scripts into <code>/etc/cron.d</code> while
-replacing the token <code>__BUILD__</code> with the build name in both the file
-contents and file names. After separate deployments for dev and stage,
-we should find the following:</p>
+<p>Deletes any previous scripts for this build from <code>/etc/cron.d</code> (this is why we
+namespace the files with &ldquo;appname&rdquo; to prevent accidentally removing a system
+file). Copies the new scripts into <code>/etc/cron.d</code> while replacing the token
+<code>__BUILD__</code> with the build name in both the file contents and file names. After
+separate deployments for dev and stage, we should find the following:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc
     /cron.d
         appname-development-order-processing
@@ -170,9 +165,9 @@ we should find the following:</p>
 * * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-cancellations.php
 ...
 </code></pre></div><p>Having automatic and reliable deployment of cron-jobs in place is quite
-liberating. Suddenly, lots of application processing can be done
-asynchronously without worrying about the overhead of maintaining the
-appropriate crontabs by hand.</p>
+liberating. Suddenly, lots of application processing can be done asynchronously
+without worrying about the overhead of maintaining the appropriate crontabs by
+hand.</p>
 
         </div>
 
@@ -213,6 +208,17 @@ appropriate crontabs by hand.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/auto-generating-an-faq-with-prototype\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tidbits\/a-pseudo-code-job-advert-and-its-discontents\/"); })
+    
+</script>
 
         </article>
     </body>

@@ -75,19 +75,18 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>I often need to grab information from a Postgres database and paste it
-into a spreadsheet for sharing with others. Google Sheets needs the
-pasted data to be tab-separated in order to be correctly split into
-columns. This isn&rsquo;t the default behaviour for psql but here&rsquo;s how to
-configure psql&rsquo;s output to get it.</p>
+            <p>I often need to grab information from a Postgres database and paste it into a
+spreadsheet for sharing with others. Google Sheets needs the pasted data to be
+tab-separated in order to be correctly split into columns. This isn&rsquo;t the
+default behaviour for psql but here&rsquo;s how to configure psql&rsquo;s output to get it.</p>
 <p>At a psql prompt, switch to unaligned output</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>a
 </code></pre></div><p>set the field separator to a tab character:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>f <span style="color:#e6db74">&#39;\t&#39;</span>
 </code></pre></div><p>and turn the pager off:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-postgres" data-lang="postgres"><span style="color:#f92672">=&gt;</span> <span style="color:#960050;background-color:#1e0010">\</span>pset pager <span style="color:#66d9ef">off</span>
-</code></pre></div><p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly
-pasted into your Google Doc.</p>
+</code></pre></div><p>then the output from subsequent <code>SELECT ...</code> statements can be cleanly pasted
+into your Google Doc.</p>
 
         </div>
 
@@ -128,6 +127,17 @@ pasted into your Google Doc.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/an-ssh-tip-for-modern-aws-patrons\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/a-useful-template-for-commit-messages\/"); })
+    
+</script>
 
         </article>
     </body>

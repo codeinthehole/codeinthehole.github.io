@@ -75,30 +75,27 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Since watching Carl Meyer&rsquo;s superb &lsquo;<a href="http://pyvideo.org/video/699/testing-and-django">Testing and
-Django</a>&rsquo; talk, I&rsquo;ve
-been using Ian Bicking&rsquo;s
-<a href="http://webtest.pythonpaste.org/en/latest/index.html">WebTest</a> library
-for functional tests, via
-<a href="http://pypi.python.org/pypi/django-webtest">django-webtest</a>. I&rsquo;ve been
-really impressed and I&rsquo;d like to stress one of Carl&rsquo;s points - that
-using WebTest for functional tests is superior to using the Django
-client.</p>
+            <p>Since watching Carl Meyer&rsquo;s superb
+&lsquo;<a href="http://pyvideo.org/video/699/testing-and-django">Testing and Django</a>&rsquo; talk,
+I&rsquo;ve been using Ian Bicking&rsquo;s
+<a href="http://webtest.pythonpaste.org/en/latest/index.html">WebTest</a> library for
+functional tests, via
+<a href="http://pypi.python.org/pypi/django-webtest">django-webtest</a>. I&rsquo;ve been really
+impressed and I&rsquo;d like to stress one of Carl&rsquo;s points - that using WebTest for
+functional tests is superior to using the Django client.</p>
 <h3 id="why">Why?</h3>
 <p>Several reasons - here&rsquo;s a few:</p>
 <ul>
-<li>WebTest allows you to model a user&rsquo;s experience much more closely as
-it is smart about mark-up. Instead of hand-crafting GET and POST
-requests, you can use the WebTest API to follow links and submit
-forms - this is what users actually do. As a result, your tests
-accurately capture user stories.</li>
-<li>A corollary to the last point is that writing functional tests with
-WebTest is both easier and quicker than using Django&rsquo;s test client.
-It&rsquo;s much simpler to fill in forms that construct complicated arrays
-of POST data - this is particularly noticable with formsets.</li>
-<li>The WebTest response object supports <a href="http://webtest.pythonpaste.org/en/latest/index.html#parsing-the-body">several ways of parsing the
-response
-HTML</a>,
+<li>WebTest allows you to model a user&rsquo;s experience much more closely as it is
+smart about mark-up. Instead of hand-crafting GET and POST requests, you can
+use the WebTest API to follow links and submit forms - this is what users
+actually do. As a result, your tests accurately capture user stories.</li>
+<li>A corollary to the last point is that writing functional tests with WebTest is
+both easier and quicker than using Django&rsquo;s test client. It&rsquo;s much simpler to
+fill in forms that construct complicated arrays of POST data - this is
+particularly noticable with formsets.</li>
+<li>The WebTest response object supports
+<a href="http://webtest.pythonpaste.org/en/latest/index.html#parsing-the-body">several ways of parsing the response HTML</a>,
 making it easy to make complicated assertions about the response.</li>
 </ul>
 <p>Watch from 29:48 in Carl&rsquo;s talk for further details.</p>
@@ -136,20 +133,18 @@ customers.</p>
         <span style="color:#75715e"># Check that an allocation has been created</span>
         self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">250</span>, api<span style="color:#f92672">.</span>balance(customer))
         self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())
-</code></pre></div><p>As you can see, using WebTest allows the story to be captured in a
-simple and readable test. This is based on a real functional test from a
-current project of mine. Writing the above test took about 2 minutes.</p>
+</code></pre></div><p>As you can see, using WebTest allows the story to be captured in a simple and
+readable test. This is based on a real functional test from a current project of
+mine. Writing the above test took about 2 minutes.</p>
 <h4 id="other-useful-testing-libraries">Other useful testing libraries</h4>
 <p>The example test uses
 <a href="http://paulocheque.github.com/django-dynamic-fixture/">django_dynamic_fixture</a>
 to create users, specifying only the attributes relevant to the test.</p>
-<p>Note also the mildly unusual naming convention of the example TestCase
-and method are because I use
-<a href="https://github.com/jbalogh/django-nose">django_nose</a> with the &lsquo;spec&rsquo;
-plugin from the
-<a href="http://darcs.idyll.org/~t/projects/pinocchio/doc/">pinocchio</a> library.
-This causes the nose output to read like the stories from your
-functional spec:</p>
+<p>Note also the mildly unusual naming convention of the example TestCase and
+method are because I use <a href="https://github.com/jbalogh/django-nose">django_nose</a>
+with the &lsquo;spec&rsquo; plugin from the
+<a href="http://darcs.idyll.org/~t/projects/pinocchio/doc/">pinocchio</a> library. This
+causes the nose output to read like the stories from your functional spec:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./manage.py test tests/functional/eshop/credits_tests.py
 
 nosetests --verbosity <span style="color:#ae81ff">1</span> tests/functional/eshop/credits_tests.py --with-spec -x -s
@@ -159,10 +154,9 @@ An admin
 
 ----------------------------------------------------------------------
 Ran <span style="color:#ae81ff">1</span> tests in 0.269s
-</code></pre></div><p>This is a useful way of running functional tests. It also pushes you
-towards splitting your tests suites into more carefully named,
-tightly-focussed test cases - rather than bundling disparate tests into
-the same test case.</p>
+</code></pre></div><p>This is a useful way of running functional tests. It also pushes you towards
+splitting your tests suites into more carefully named, tightly-focussed test
+cases - rather than bundling disparate tests into the same test case.</p>
 <h3 id="summary">Summary</h3>
 <p>Use WebTest for your functional tests - you won&rsquo;t regret it.</p>
 
@@ -205,6 +199,17 @@ the same test case.</p>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/projects\/cacheback-asynchronous-cache-refreshing-for-django\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/how-to-chroot-a-user-in-ubuntu-1204\/"); })
+    
+</script>
 
         </article>
     </body>

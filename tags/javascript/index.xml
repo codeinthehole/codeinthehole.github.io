@@ -34,7 +34,7 @@ For my first contribution to the node.js ecosystem, I&amp;rsquo;ve published a s
       <guid>https://codeinthehole.com/tips/auto-generating-an-faq-with-prototype/</guid>
       <description>Have just been writing an FAQ page for commandlinefu.com. Documenting is always tiresome, but FAQs particularly so when hand-coding the HTML links between each question and the summary table at the top of the page.
 Javascript to the rescue: I cobbled together a quick Prototype script which automatically generates the FAQ summary links by parsing the DOM for the appropriate links:
-document.observe(&amp;#39;dom:loaded&amp;#39;, function(){ $$(&amp;#39;a.question&amp;#39;).each(function(ele){ var id = ele.innerHTML.unescapeHTML().gsub(/[^\w- ]/, &amp;#39;&amp;#39;).gsub(/[\s-]+/, &amp;#39;-&amp;#39;).</description>
+document.observe(&amp;#34;dom:loaded&amp;#34;, function () { $$(&amp;#34;a.question&amp;#34;).each(function (ele) { var id = ele.</description>
     </item>
     
     <item>

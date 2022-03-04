@@ -78,20 +78,18 @@ if (!doNotTrack) {
             <h3 id="the-problem">The problem</h3>
 <p>It&rsquo;s common for UX professionals to design forms like the following:</p>
 <p><img src="/images/screenshots/radio-form-wire.png" alt="image"></p>
-<p>where radio buttons are employed to split the form into sections, each
-of which can have its own fields which are only mandatory if the parent
-radio button is checked. Thus the validation logic is conditional on the
-submitted form data.</p>
+<p>where radio buttons are employed to split the form into sections, each of which
+can have its own fields which are only mandatory if the parent radio button is
+checked. Thus the validation logic is conditional on the submitted form data.</p>
 <p>Such requirements are slightly tricky to capture in Django as they tread
 slightly outside the normal path of form validation. Specifically:</p>
 <ul>
-<li>It&rsquo;s not documented how to render radio buttons separately. The
-default behaviour is to render an unordered list. The <a href="https://docs.djangoproject.com/en/dev/ref/forms/widgets/#radioselect">guidance on
-fine-grained template
-control</a>
+<li>It&rsquo;s not documented how to render radio buttons separately. The default
+behaviour is to render an unordered list. The
+<a href="https://docs.djangoproject.com/en/dev/ref/forms/widgets/#radioselect">guidance on fine-grained template control</a>
 only covers looping over the choices.</li>
-<li>It&rsquo;s not obvious how to change the validation properties of a form
-field dynamically, depending on the submitted data.</li>
+<li>It&rsquo;s not obvious how to change the validation properties of a form field
+dynamically, depending on the submitted data.</li>
 </ul>
 <h3 id="a-solution">A solution</h3>
 <p>Start with this form class:</p>
@@ -105,40 +103,38 @@ field dynamically, depending on the submitted data.</li>
     )
     schedule <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>ChoiceField(choices<span style="color:#f92672">=</span>SCHEDULE_CHOICES, widget<span style="color:#f92672">=</span>forms<span style="color:#f92672">.</span>RadioSelect)
     send_dt <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>DateTimeField(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, required<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</code></pre></div><p>Note the <code>send_dt</code> field has <code>required=False</code> as it is only mandatory
-if the &lsquo;Send later&rsquo; radio button is selected. For simplicity, we are are
-only using a single datetime field for the send date rather than the
-split-widget field of the wireframe.</p>
+</code></pre></div><p>Note the <code>send_dt</code> field has <code>required=False</code> as it is only mandatory if the
+&lsquo;Send later&rsquo; radio button is selected. For simplicity, we are are only using a
+single datetime field for the send date rather than the split-widget field of
+the wireframe.</p>
 <p>We can render this as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;post&#39;</span>&gt;
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
+  {% csrf_token %} {{ form.non_field_errors }}
 
-    &lt;<span style="color:#f92672">h3</span>&gt;Send schedule&lt;/<span style="color:#f92672">h3</span>&gt;
-    {{ form.schedule.errors }}
+  &lt;<span style="color:#f92672">h3</span>&gt;Send schedule&lt;/<span style="color:#f92672">h3</span>&gt;
+  {{ form.schedule.errors }}
 
-    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
-        {{ form.schedule.0 }}&lt;<span style="color:#f92672">br</span>/&gt;
-        &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;help-text&#34;</span>&gt;(Once you&#39;ve checked out)&lt;/<span style="color:#f92672">span</span>&gt;
-    &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
+    {{ form.schedule.0 }}&lt;<span style="color:#f92672">br</span> /&gt;
+    &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;help-text&#34;</span>&gt;(Once you&#39;ve checked out)&lt;/<span style="color:#f92672">span</span>&gt;
+  &lt;/<span style="color:#f92672">div</span>&gt;
 
-    &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
-        {{ form.schedule.1 }}&lt;<span style="color:#f92672">br</span>/&gt;
-        {{ form.send_dt }}
-        {{ form.send_dt.errors }}
-    &lt;/<span style="color:#f92672">div</span>&gt;
+  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
+    {{ form.schedule.1 }}&lt;<span style="color:#f92672">br</span> /&gt;
+    {{ form.send_dt }} {{ form.send_dt.errors }}
+  &lt;/<span style="color:#f92672">div</span>&gt;
 
-    &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Save&lt;/<span style="color:#f92672">button</span>&gt;
+  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Save&lt;/<span style="color:#f92672">button</span>&gt;
 &lt;/<span style="color:#f92672">form</span>&gt;
 </code></pre></div><p>Note:</p>
 <ul>
 <li>
-<p>The radio buttons are rendered individually by
-referring to the index of each option (this works in Django 1.4+).</p>
+<p>The radio buttons are rendered individually by referring to the index of each
+option (this works in Django 1.4+).</p>
 </li>
 <li>
-<p>We don&rsquo;t render the errors for the <code>schedule</code> next to one particular
-radio button, but above the container elements.</p>
+<p>We don&rsquo;t render the errors for the <code>schedule</code> next to one particular radio
+button, but above the container elements.</p>
 </li>
 </ul>
 <p>Next we add conditional validation to the form class:</p>
@@ -159,23 +155,20 @@ radio button, but above the container elements.</p>
         <span style="color:#75715e"># If &#39;later&#39; is chosen, mark send_dt as required.</span>
         <span style="color:#66d9ef">if</span> data <span style="color:#f92672">and</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;schedule&#39;</span>, <span style="color:#66d9ef">None</span>) <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>LATER:
             self<span style="color:#f92672">.</span>fields[<span style="color:#e6db74">&#39;send_dt&#39;</span>]<span style="color:#f92672">.</span>required <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
-</code></pre></div><p>Here, we override <code>__init__</code> and inspect the raw submitted data so that
-we can set <code>required=True</code> on the <code>send_dt</code> field appropriately. This
-is the conventional way of adding conditional logic to form validation,
-although it&rsquo;s more common to use an additional argument to <code>__init__</code>
-to determine the field adjustments.</p>
+</code></pre></div><p>Here, we override <code>__init__</code> and inspect the raw submitted data so that we can
+set <code>required=True</code> on the <code>send_dt</code> field appropriately. This is the
+conventional way of adding conditional logic to form validation, although it&rsquo;s
+more common to use an additional argument to <code>__init__</code> to determine the field
+adjustments.</p>
 <h3 id="discussion">Discussion</h3>
-<p>This solution is not perfect. It&rsquo;s a little odd to use the raw form data
-to change validation rules. However, I&rsquo;m not aware of a cleaner
-alternative.</p>
-<p>You also want to use Javascript to hide form widgets that aren&rsquo;t relevant
-until their parent radio button has been checked.</p>
+<p>This solution is not perfect. It&rsquo;s a little odd to use the raw form data to
+change validation rules. However, I&rsquo;m not aware of a cleaner alternative.</p>
+<p>You also want to use Javascript to hide form widgets that aren&rsquo;t relevant until
+their parent radio button has been checked.</p>
 <p>Related links:</p>
 <ul>
-<li><a href="http://www.slideshare.net/pydanny/advanced-django-forms-usage">Advanced Django Form
-Usage</a> -
-A decent overview of various issues around forms from
-DjangoCon 2011.</li>
+<li><a href="http://www.slideshare.net/pydanny/advanced-django-forms-usage">Advanced Django Form Usage</a> -
+A decent overview of various issues around forms from DjangoCon 2011.</li>
 </ul>
 
         </div>
@@ -217,6 +210,17 @@ DjangoCon 2011.</li>
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/pypi-readme-badges\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/a-deferred-logging-file-handler-for-django\/"); })
+    
+</script>
 
         </article>
     </body>

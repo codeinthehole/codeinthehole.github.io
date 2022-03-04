@@ -75,14 +75,14 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p>Managing South migrations on a multi-developer Django project can be
-painful. Developers working on separate branches will often create
-migrations for the same app with the same migration number<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. When
-merged into master, these clashing migrations can cause deployment
-hiccups as South will complain if migrations are applied out of order.</p>
-<p>There are various techniques available for dealing with this<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, but
-what we do at <a href="http://justyoyo.com/">Yoyo</a> is test for such clashes as
-part of our Travis continuous integration.</p>
+            <p>Managing South migrations on a multi-developer Django project can be painful.
+Developers working on separate branches will often create migrations for the
+same app with the same migration number<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. When merged into master, these
+clashing migrations can cause deployment hiccups as South will complain if
+migrations are applied out of order.</p>
+<p>There are various techniques available for dealing with this<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>, but what we do
+at <a href="http://justyoyo.com/">Yoyo</a> is test for such clashes as part of our Travis
+continuous integration.</p>
 <p>This is done by calling a <code>makefile</code> target from <code>.travis.yml</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .travis.yml</span>
 
@@ -103,29 +103,27 @@ part of our Travis continuous integration.</p>
 MIGRATION_CLASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell find . -type f -name <span style="color:#e6db74">&#34;*.py&#34;</span> | grep -o <span style="color:#e6db74">&#34;.*/migrations/[0-9]\+&#34;</span> | sort | uniq -c | awk <span style="color:#e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color:#66d9ef">)</span>
 <span style="color:#a6e22e">migration_test</span><span style="color:#f92672">:</span>
     <span style="color:#f92672">[</span> -n <span style="color:#66d9ef">$(</span>MIGRATION_CLASHES<span style="color:#66d9ef">)</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> true
-</code></pre></div><p>Here the <code>$(shell ...)</code> call extracts the app name and migration number
-from all migration files then uses <code>awk</code> to look for clashes. If any are
-found, the Travis build will fail and the console output should reveal
-which apps have clashes.</p>
-<p>This works best if you only allow fast-forward commits into master
-(something we do at <a href="http://justyoyo.com/">Yoyo</a>). Doing this forces you
-to merge master back into your pull request branch and allows Travis to
-catch migration clashes before it is merged. Then any conflicts can be
-resolved by renumbering or recreating any migrations not yet merged to
-master.</p>
+</code></pre></div><p>Here the <code>$(shell ...)</code> call extracts the app name and migration number from all
+migration files then uses <code>awk</code> to look for clashes. If any are found, the
+Travis build will fail and the console output should reveal which apps have
+clashes.</p>
+<p>This works best if you only allow fast-forward commits into master (something we
+do at <a href="http://justyoyo.com/">Yoyo</a>). Doing this forces you to merge master back
+into your pull request branch and allows Travis to catch migration clashes
+before it is merged. Then any conflicts can be resolved by renumbering or
+recreating any migrations not yet merged to master.</p>
 <section class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
 <li id="fn:1" role="doc-endnote">
-<p>I&rsquo;m only talking about Django versions less than 1.7 - I&rsquo;m not
-sure if this is still an issue in more modern Django versions.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>I&rsquo;m only talking about Django versions less than 1.7 - I&rsquo;m not sure if this
+is still an issue in more modern Django versions.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 <li id="fn:2" role="doc-endnote">
-<p>As noted by the <a href="http://south.readthedocs.org/en/latest/tutorial/part5.html">South
-docs</a>,
-you can run the migrations with the <code>--merge</code> option although this
-generally means a manual intervention in your deployment process
-which isn&rsquo;t ideal.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+<p>As noted by the
+<a href="http://south.readthedocs.org/en/latest/tutorial/part5.html">South docs</a>,
+you can run the migrations with the <code>--merge</code> option although this generally
+means a manual intervention in your deployment process which isn&rsquo;t ideal.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
 </section>
@@ -169,6 +167,17 @@ which isn&rsquo;t ideal.&#160;<a href="#fnref:2" class="footnote-backref" role="
     </div>
 
 </div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/bootstrapped-virtualenvs\/"); })
+    
+
+    
+        Mousetrap.bind("right", function() { window.location.replace("\/tips\/backing-up-database-rows-in-postgres-before-deleting-them\/"); })
+    
+</script>
 
         </article>
     </body>
