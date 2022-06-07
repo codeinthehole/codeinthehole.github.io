@@ -75,7 +75,7 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><!-- raw HTML omitted --></p>
+            <!-- raw HTML omitted -->
 <p>High Performance Web Sites (HPWS) is essentially a book-length exposition of the
 <a href="http://developer.yahoo.com/yslow/">YSlow extension to Firebug</a> augmented with
 case studies of popular US websites. YSlow itself links to some
@@ -90,16 +90,16 @@ is an easy-win recommendation that prevents unnecessary requests once a
 browser&rsquo;s cache has been primed. This is something I&rsquo;ve used on several sites
 previously, employing the following Apache directives to add Expires headers to
 the HTTP:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-apache" data-lang="apache"><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
-    ExpiresActive <span style="color:#66d9ef">on</span>
-    ExpiresByType image/jpg “access plus <span style="color:#ae81ff">2</span> years”
-    ExpiresByType image/jpeg “access plus <span style="color:#ae81ff">2</span> years”
-    ExpiresByType image/gif “access plus <span style="color:#ae81ff">2</span> years”
-    ExpiresByType text/css “access plus <span style="color:#ae81ff">2</span> days”
-    ExpiresByType image/js “access plus <span style="color:#ae81ff">2</span> days”
-    ExpiresDefault ”access plus <span style="color:#ae81ff">1</span> days”
-<span style="color:#f92672">&lt;/IfModule&gt;</span>
-</code></pre></div><p>Additional areas where I found out something new include:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-apache" data-lang="apache"><span style="display:flex;"><span><span style="color:#f92672">&lt;IfModule</span> <span style="color:#e6db74">mod_expires.c</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    ExpiresActive <span style="color:#66d9ef">on</span>
+</span></span><span style="display:flex;"><span>    ExpiresByType image/jpg “access plus <span style="color:#ae81ff">2</span> years”
+</span></span><span style="display:flex;"><span>    ExpiresByType image/jpeg “access plus <span style="color:#ae81ff">2</span> years”
+</span></span><span style="display:flex;"><span>    ExpiresByType image/gif “access plus <span style="color:#ae81ff">2</span> years”
+</span></span><span style="display:flex;"><span>    ExpiresByType text/css “access plus <span style="color:#ae81ff">2</span> days”
+</span></span><span style="display:flex;"><span>    ExpiresByType image/js “access plus <span style="color:#ae81ff">2</span> days”
+</span></span><span style="display:flex;"><span>    ExpiresDefault ”access plus <span style="color:#ae81ff">1</span> days”
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/IfModule&gt;</span>
+</span></span></code></pre></div><p>Additional areas where I found out something new include:</p>
 <ul>
 <li>The performance hit that using @import directives within CSS files has.</li>
 <li>How the &ldquo;Cache control&rdquo; and &ldquo;Etags&rdquo; HTTP headers are often interpreted

@@ -83,39 +83,39 @@ million elements), these libraries are no longer useful as the size of the file
 then can create is memory-bound.</p>
 <p>For example, DOMDocument stores the XML tree in memory while it is being built -
 you then flush it out to file after all elements have been created:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-$dom <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DOMDocument</span>(<span style="color:#e6db74">&#39;1.0&#39;</span>);
-<span style="color:#66d9ef">for</span> ($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10000</span>; <span style="color:#f92672">++</span>$i) {
-    $root <span style="color:#f92672">=</span> $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;message&#39;</span>);
-    $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($root);
-    $content <span style="color:#f92672">=</span> $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;content&#39;</span>);
-    $root<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($content)
-    $content<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#39;Example content&#39;</span>));
-}
-<span style="color:#75715e">// Flush XML from memory to file in one go
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveXML</span>());
-</code></pre></div><p>However, this doesn&rsquo;t scale once your feed size starts exceeding the available
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$dom <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">DOMDocument</span>(<span style="color:#e6db74">&#39;1.0&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10000</span>; <span style="color:#f92672">++</span>$i) {
+</span></span><span style="display:flex;"><span>    $root <span style="color:#f92672">=</span> $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;message&#39;</span>);
+</span></span><span style="display:flex;"><span>    $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($root);
+</span></span><span style="display:flex;"><span>    $content <span style="color:#f92672">=</span> $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createElement</span>(<span style="color:#e6db74">&#39;content&#39;</span>);
+</span></span><span style="display:flex;"><span>    $root<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($content)
+</span></span><span style="display:flex;"><span>    $content<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">appendChild</span>($dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">createTextNode</span>(<span style="color:#e6db74">&#39;Example content&#39;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Flush XML from memory to file in one go
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $dom<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveXML</span>());
+</span></span></code></pre></div><p>However, this doesn&rsquo;t scale once your feed size starts exceeding the available
 memory (teaking memory settings in php.ini is only a short-term fix). A good
 solution to this is to use the XMLWriter library as this provides the ability to
 periodically flush the XML in memory out to file. By doing so, you reclaim the
 memory so you can keep building the XML tree without exceeding memory
 limitations.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-$xmlWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLWriter</span>();
-$xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">openMemory</span>();
-$xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">startDocument</span>(<span style="color:#e6db74">&#39;1.0&#39;</span>, <span style="color:#e6db74">&#39;UTF-8&#39;</span>);
-<span style="color:#66d9ef">for</span> ($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10000000</span>; <span style="color:#f92672">++</span>$i) {
-    $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">startElement</span>(<span style="color:#e6db74">&#39;message&#39;</span>);
-    $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">writeElement</span>(<span style="color:#e6db74">&#39;content&#39;</span>, <span style="color:#e6db74">&#39;Example content&#39;</span>);
-    $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">endElement</span>();
-    <span style="color:#75715e">// Flush XML in memory to file every 1000 iterations
-</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> $i<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>) {
-        <span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">FILE_APPEND</span>);
-    }
-}
-<span style="color:#75715e">// Final flush to make sure we haven&#39;t missed anything
-</span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">FILE_APPEND</span>);
-</code></pre></div><p>Here we flush the XML in memory to file every 1000 iterations. This ensures that
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$xmlWriter <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">XMLWriter</span>();
+</span></span><span style="display:flex;"><span>$xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">openMemory</span>();
+</span></span><span style="display:flex;"><span>$xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">startDocument</span>(<span style="color:#e6db74">&#39;1.0&#39;</span>, <span style="color:#e6db74">&#39;UTF-8&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> ($i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>; $i<span style="color:#f92672">&lt;=</span><span style="color:#ae81ff">10000000</span>; <span style="color:#f92672">++</span>$i) {
+</span></span><span style="display:flex;"><span>    $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">startElement</span>(<span style="color:#e6db74">&#39;message&#39;</span>);
+</span></span><span style="display:flex;"><span>    $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">writeElement</span>(<span style="color:#e6db74">&#39;content&#39;</span>, <span style="color:#e6db74">&#39;Example content&#39;</span>);
+</span></span><span style="display:flex;"><span>    $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">endElement</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Flush XML in memory to file every 1000 iterations
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> $i<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">FILE_APPEND</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Final flush to make sure we haven&#39;t missed anything
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#a6e22e">file_put_contents</span>(<span style="color:#e6db74">&#39;example.xml&#39;</span>, $xmlWriter<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">flush</span>(<span style="color:#66d9ef">true</span>), <span style="color:#a6e22e">FILE_APPEND</span>);
+</span></span></code></pre></div><p>Here we flush the XML in memory to file every 1000 iterations. This ensures that
 memory usage is capped and opens up the possiblity of creating very large XML
 files.</p>
 

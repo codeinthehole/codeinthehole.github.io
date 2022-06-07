@@ -129,60 +129,60 @@ error codes and generally leads to concise and readable code. This leads to
 shorter, cleaner methods and allows the use of fluent interfaces - safe in the
 knowledge that a valid object will always be returned.</p>
 <p>So use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#66d9ef">try</span> {
-    <span style="color:#75715e">// Place an order
-</span><span style="color:#75715e"></span>    $orderNumber <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">generateNewOrderNumber</span>();
-    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>()
-        <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveBillingAddress</span>()
-        <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveBatches</span>()
-        <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveOrder</span>($orderNumber);
-} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">OrderCreationException</span> $e) {
-    <span style="color:#75715e">// Rollback transaction, return friendly error message
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>instead of</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-$orderNumber <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">generateNewOrderNumber</span>();
-<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$orderNumber) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-$deliveryAddressSavedOk <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>();
-<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$deliveryAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-$billingAddressSavedOk <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>();
-<span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$billingAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
-<span style="color:#f92672">...</span>
-</code></pre></div><p>Using exceptions to indicate errors obeys the Command-query separation
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">try</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Place an order
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    $orderNumber <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">generateNewOrderNumber</span>();
+</span></span><span style="display:flex;"><span>    $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveBillingAddress</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveBatches</span>()
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveOrder</span>($orderNumber);
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">catch</span> (<span style="color:#a6e22e">OrderCreationException</span> $e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Rollback transaction, return friendly error message
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>instead of</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$orderNumber <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">generateNewOrderNumber</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$orderNumber) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>$deliveryAddressSavedOk <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$deliveryAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>$billingAddressSavedOk <span style="color:#f92672">=</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">saveDeliveryAddress</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>$billingAddressSavedOk) <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span><span style="color:#f92672">...</span>
+</span></span></code></pre></div><p>Using exceptions to indicate errors obeys the Command-query separation
 principle, where (broadly speaking) only &ldquo;getter&rdquo; methods should return a value
 (using fluent interfaces is a mild but acceptable violation of this separation).</p>
 <h3 id="return-null-null-object-or-an-empty-collection">Return <code>null</code>, Null object or an empty collection</h3>
 <p>Many objects will employ &ldquo;finder&rdquo; or factory methods responsible for looking up
 and then constructing an object:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-$book <span style="color:#f92672">=</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">::</span><span style="color:#a6e22e">findByIsbn</span>($isbn);
-</code></pre></div><p>In this case, when no book is found, FALSE is not the appropriate return value -
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$book <span style="color:#f92672">=</span> <span style="color:#a6e22e">Book</span><span style="color:#f92672">::</span><span style="color:#a6e22e">findByIsbn</span>($isbn);
+</span></span></code></pre></div><p>In this case, when no book is found, FALSE is not the appropriate return value -
 either return NULL (to indicate the absence of a valid book), or employ the Null
 Object pattern and return an null book object. It just feels so wrong returning
 multiple types from a function. Alarm bells should ring as soon as you see the
 pipe:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#e6db74">/**
-</span><span style="color:#e6db74">* @param string $isbn
-</span><span style="color:#e6db74">* @return Book|false
-</span><span style="color:#e6db74">*/</span>
-</code></pre></div><p>A neat idiom for finder methods is to always return a iterable collection of
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* @param string $isbn
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">* @return Book|false
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">*/</span>
+</span></span></code></pre></div><p>A neat idiom for finder methods is to always return a iterable collection of
 objects, which is simply empty when no object is found:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span>
-{
-    <span style="color:#f92672">...</span>
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findByIsbn</span>($isbn)
-    {
-        $books <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BookCollection</span>; <span style="color:#75715e">// An iterable collection object
-</span><span style="color:#75715e"></span>        <span style="color:#f92672">...</span>
-        <span style="color:#75715e">// Loop through database result set and add books to BookCollection
-</span><span style="color:#75715e"></span>        <span style="color:#f92672">...</span>
-        <span style="color:#66d9ef">return</span> $books;
-    }
-}
-</code></pre></div><p>Client code can then simply iterate over the returned value - it doesn&rsquo;t have to
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Book</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findByIsbn</span>($isbn)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $books <span style="color:#f92672">=</span>  <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">BookCollection</span>; <span style="color:#75715e">// An iterable collection object
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Loop through database result set and add books to BookCollection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#f92672">...</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $books;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Client code can then simply iterate over the returned value - it doesn&rsquo;t have to
 check for the presence of an item. JQuery employs this pattern extensively with
 its <code>$</code> CSS selector and it works wonderfully. The only downside for this is
 mental discomfort involved in selecting an element where there can only ever be

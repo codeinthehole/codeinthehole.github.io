@@ -87,10 +87,10 @@ controllers were bad.</p>
 <li>
 <p>You need some extra functionality in a template and this is the easiest way to
 shoehorn it in. Eg:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">p</span>&gt;
-  The current balance is {{ account.get_balance_via_three_network_calls_lol }}
-&lt;/<span style="color:#f92672">p</span>&gt;
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">p</span>&gt;
+</span></span><span style="display:flex;"><span>  The current balance is {{ account.get_balance_via_three_network_calls_lol }}
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">p</span>&gt;
+</span></span></code></pre></div></li>
 <li>
 <p>You can quickly solve your current problem by adding <em>n</em> more lines to that
 method (repeat <em>ad infinitum</em>)<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>.</p>
@@ -104,35 +104,35 @@ directly on the model<sup id="fnref:3"><a href="#fn:3" class="footnote-ref" role
 <code>models.py</code>?<sup id="fnref:4"><a href="#fn:4" class="footnote-ref" role="doc-noteref">4</a></sup></p>
 </li>
 </ul>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>For example:</p>
 <ul>
 <li><a href="https://hackerfall.com/story/fat-models--a-django-code-organization-strategy">Fat Models - A Django Code Organization Strategy</a></li>
-<li><a href="http://django-best-practices.readthedocs.io/en/latest/applications.html#make-em-fat">Django Best Practices: Make &lsquo;em Fat</a></li>
+<li><a href="http://django-best-practices.readthedocs.io/en/latest/applications.html#make-em-fat">Django Best Practices: Make &rsquo;em Fat</a></li>
 <li><a href="https://ultimatedjango.com/learn-django/lessons/adding-business-logic-to-models/">Ultimate Django: Adding Business Logic to Models</a>
 However, in practice, they&rsquo;re a bad idea (although this sometimes takes a
 few months to become apparent).</li>
 </ul>
 &#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Requires a poor-quality test suite and diligent ignorance of the
 <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle">Single Responsibility Principle</a>.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>A legitimate problem with a liberal language like Python where it&rsquo;s hard to
 enforce calling conventions as nothing is truly private.&#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>You are: your web framework is not your boss. As a rule-of-thumb, your
 application logic should live in modules that aren&rsquo;t Django-specific modules
 (eg not in <code>views.py</code>, <code>models.py</code> or <code>forms.py</code>). If I had my way, Django
 would create an empty <code>business_logic.py</code> in each new app to encourage this.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
         </div>
 

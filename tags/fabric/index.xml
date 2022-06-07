@@ -15,7 +15,7 @@
       <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
       <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
 Set-up Assume there is a test environment where:
- the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit  There will also be stage and production environments.
+the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.
 Fabric function The following function can be used as part of Fabric build script.</description>
     </item>
     

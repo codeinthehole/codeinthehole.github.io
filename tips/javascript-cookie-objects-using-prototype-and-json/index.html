@@ -83,181 +83,181 @@ make your controller code simpler if this kind of simple display logic is
 contained entirely on the client side.</p>
 <p>To this end, I use the following simple Cookies object, build on top of the
 Prototype Javascript library (version &gt; 1.5):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>({
-  <span style="color:#a6e22e">initialize</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">path</span>, <span style="color:#a6e22e">domain</span>) {
-    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;/&#34;</span>;
-    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">domain</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">null</span>;
-  },
-  <span style="color:#75715e">// Sets a cookie
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">set</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">days</span>) {
-    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
-      <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid key&#34;</span>;
-    }
-    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;string&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>) {
-      <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid value&#34;</span>;
-    }
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">days</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">days</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>) {
-      <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid expiration time&#34;</span>;
-    }
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">escape</span>(<span style="color:#66d9ef">new</span> String(<span style="color:#a6e22e">value</span>));
-    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">days</span>) {
-      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">date</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date();
-      <span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">setTime</span>(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getTime</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">days</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
-      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setExpiration</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;; expires=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">toGMTString</span>();
-    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setExpiration</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setPath</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;; path=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">escape</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">path</span>);
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setDomain</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;; domain=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">escape</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span>) <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cookieString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setValue</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">setExpiration</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">setPath</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">setDomain</span>;
-    document.<span style="color:#a6e22e">cookie</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cookieString</span>;
-  },
-  <span style="color:#75715e">// Returns a cookie value or false
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">get</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">keyEquals</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span>;
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
-    document.<span style="color:#a6e22e">cookie</span>
-      .<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;;&#34;</span>)
-      .<span style="color:#a6e22e">invoke</span>(<span style="color:#e6db74">&#34;strip&#34;</span>)
-      .<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">s</span>) {
-        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#a6e22e">keyEquals</span>)) {
-          <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">unescape</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#a6e22e">keyEquals</span>.<span style="color:#a6e22e">length</span>, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>));
-          <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">$break</span>;
-        }
-      });
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>;
-  },
-  <span style="color:#75715e">// Clears a cookie
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">clear</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
-    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">key</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
-  },
-  <span style="color:#75715e">// Clears all cookies
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">clearAll</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
-    document.<span style="color:#a6e22e">cookie</span>
-      .<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;;&#34;</span>)
-      .<span style="color:#a6e22e">collect</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">s</span>) {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;=&#34;</span>).<span style="color:#a6e22e">first</span>().<span style="color:#a6e22e">strip</span>();
-      })
-      .<span style="color:#a6e22e">each</span>(
-        <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
-          <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">key</span>);
-        }.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)
-      );
-  },
-});
-</code></pre></div><p>The API is simple: cookie objects are created with optional path and domain
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">Cookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">initialize</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">path</span>, <span style="color:#a6e22e">domain</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">path</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">path</span> <span style="color:#f92672">||</span> <span style="color:#e6db74">&#34;/&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">domain</span> <span style="color:#f92672">||</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Sets a cookie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">set</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">days</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;string&#34;</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid key&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;string&#34;</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid value&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">days</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">days</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;number&#34;</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid expiration time&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setValue</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">escape</span>(<span style="color:#66d9ef">new</span> String(<span style="color:#a6e22e">value</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">days</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">date</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Date();
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">setTime</span>(<span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">getTime</span>() <span style="color:#f92672">+</span> <span style="color:#a6e22e">days</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">24</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">60</span> <span style="color:#f92672">*</span> <span style="color:#ae81ff">1000</span>);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setExpiration</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;; expires=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">date</span>.<span style="color:#a6e22e">toGMTString</span>();
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setExpiration</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setPath</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;; path=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">escape</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">path</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">setDomain</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;; domain=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">escape</span>(<span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">domain</span>) <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cookieString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">setValue</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">setExpiration</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">setPath</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">setDomain</span>;
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">cookie</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">cookieString</span>;
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Returns a cookie value or false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">get</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">keyEquals</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">key</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">cookie</span>
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;;&#34;</span>)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">invoke</span>(<span style="color:#e6db74">&#34;strip&#34;</span>)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">each</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">s</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">startsWith</span>(<span style="color:#a6e22e">keyEquals</span>)) {
+</span></span><span style="display:flex;"><span>          <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">unescape</span>(<span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">substring</span>(<span style="color:#a6e22e">keyEquals</span>.<span style="color:#a6e22e">length</span>, <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">length</span>));
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">throw</span> <span style="color:#a6e22e">$break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>      });
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span>;
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Clears a cookie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">clear</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">key</span>, <span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Clears all cookies
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">clearAll</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> () {
+</span></span><span style="display:flex;"><span>    document.<span style="color:#a6e22e">cookie</span>
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;;&#34;</span>)
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">collect</span>(<span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">s</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">s</span>.<span style="color:#a6e22e">split</span>(<span style="color:#e6db74">&#34;=&#34;</span>).<span style="color:#a6e22e">first</span>().<span style="color:#a6e22e">strip</span>();
+</span></span><span style="display:flex;"><span>      })
+</span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">each</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
+</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">key</span>);
+</span></span><span style="display:flex;"><span>        }.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)
+</span></span><span style="display:flex;"><span>      );
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>The API is simple: cookie objects are created with optional path and domain
 arguments to the constructor. The set(), get() and clear() methods are then used
 to define the name=value pairs that cookies comprise. In addition, the get()
 method takes an optional third parameter for setting the expiry time in days if
 you want the data persisted longer than the current session.</p>
 <p>Cookies can now be interacted with in the following manner:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">biscuits</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Cookies</span>();
-<span style="color:#a6e22e">biscuits</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;show_nav&#39;</span>, <span style="color:#e6db74">&#39;yes&#39;</span>);
-<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">biscuits</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;show_nav&#39;</span>) {
-    <span style="color:#75715e">// Show the navigation...
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>The above object is useful for storing simple string data, but we can easily
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">biscuits</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Cookies</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">biscuits</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#39;show_nav&#39;</span>, <span style="color:#e6db74">&#39;yes&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">biscuits</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#39;show_nav&#39;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Show the navigation...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>The above object is useful for storing simple string data, but we can easily
 extend the above to allow arrays and objects to be persisted in the cookie by
 using JSON.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">JsonCookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">Cookies</span>, {});
-<span style="color:#a6e22e">JsonCookies</span>.<span style="color:#a6e22e">addMethods</span>({
-  <span style="color:#75715e">// Overridden set method to JSON-encode value
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">set</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$super</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">days</span>) {
-    <span style="color:#66d9ef">switch</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span>) {
-      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;undefined&#34;</span><span style="color:#f92672">:</span>
-      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;function&#34;</span><span style="color:#f92672">:</span>
-      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;unknown&#34;</span><span style="color:#f92672">:</span>
-        <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid value type&#34;</span>;
-        <span style="color:#66d9ef">break</span>;
-      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;boolean&#34;</span><span style="color:#f92672">:</span>
-      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;string&#34;</span><span style="color:#f92672">:</span>
-      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;number&#34;</span><span style="color:#f92672">:</span>
-        <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">toString</span>());
-        <span style="color:#66d9ef">break</span>;
-    }
-    <span style="color:#a6e22e">$super</span>(<span style="color:#a6e22e">key</span>, Object.<span style="color:#a6e22e">toJSON</span>(<span style="color:#a6e22e">value</span>), <span style="color:#a6e22e">days</span>);
-  },
-  <span style="color:#75715e">// Overriden get method to JSON-decode the value
-</span><span style="color:#75715e"></span>  <span style="color:#a6e22e">get</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$super</span>, <span style="color:#a6e22e">key</span>) {
-    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$super</span>(<span style="color:#a6e22e">key</span>);
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">evalJSON</span>() <span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>;
-  },
-});
-</code></pre></div><p>As we&rsquo;re overriding the set and get methods, the API remains the same:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#75715e">// Persist some array data
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hobnobs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
-<span style="color:#a6e22e">hobnobs</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;selectedIds&#34;</span>, [<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">46</span>, <span style="color:#ae81ff">32</span>], <span style="color:#ae81ff">7</span>);
-
-<span style="color:#75715e">// On a different request, use the data
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hobnobs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">selectedIds</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hobnobs</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;selectedIds&#34;</span>);
-<span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">selectedIds</span>) {
-  <span style="color:#75715e">// Do something with the selected ids
-</span><span style="color:#75715e"></span>}
-</code></pre></div><p>As this object does not rely on the DOM in any way, it is easily testable as it
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">JsonCookies</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">Class</span>.<span style="color:#a6e22e">create</span>(<span style="color:#a6e22e">Cookies</span>, {});
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">JsonCookies</span>.<span style="color:#a6e22e">addMethods</span>({
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Overridden set method to JSON-encode value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">set</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$super</span>, <span style="color:#a6e22e">key</span>, <span style="color:#a6e22e">value</span>, <span style="color:#a6e22e">days</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (<span style="color:#66d9ef">typeof</span> <span style="color:#a6e22e">value</span>) {
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;undefined&#34;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;function&#34;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;unknown&#34;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">throw</span> <span style="color:#e6db74">&#34;Invalid value type&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;boolean&#34;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;string&#34;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;number&#34;</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> String(<span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">toString</span>());
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$super</span>(<span style="color:#a6e22e">key</span>, Object.<span style="color:#a6e22e">toJSON</span>(<span style="color:#a6e22e">value</span>), <span style="color:#a6e22e">days</span>);
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Overriden get method to JSON-decode the value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  <span style="color:#a6e22e">get</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">$super</span>, <span style="color:#a6e22e">key</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">$super</span>(<span style="color:#a6e22e">key</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">value</span> <span style="color:#f92672">?</span> <span style="color:#a6e22e">value</span>.<span style="color:#a6e22e">evalJSON</span>() <span style="color:#f92672">:</span> <span style="color:#66d9ef">false</span>;
+</span></span><span style="display:flex;"><span>  },
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>As we&rsquo;re overriding the set and get methods, the API remains the same:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#75715e">// Persist some array data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hobnobs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">hobnobs</span>.<span style="color:#a6e22e">set</span>(<span style="color:#e6db74">&#34;selectedIds&#34;</span>, [<span style="color:#ae81ff">12</span>, <span style="color:#ae81ff">46</span>, <span style="color:#ae81ff">32</span>], <span style="color:#ae81ff">7</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// On a different request, use the data
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">hobnobs</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">selectedIds</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">hobnobs</span>.<span style="color:#a6e22e">get</span>(<span style="color:#e6db74">&#34;selectedIds&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#a6e22e">selectedIds</span>) {
+</span></span><span style="display:flex;"><span>  <span style="color:#75715e">// Do something with the selected ids
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>As this object does not rely on the DOM in any way, it is easily testable as it
 requires little in the way of fixtures. What follows is set of unit tests that
 work with the JSUnit testing suite. You can run the unit tests directly, using
 the JSUnit test runner.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-javascript" data-lang="javascript"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismykey&#34;</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismyvalue&#34;</span>;
-<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myCookies</span>;
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUp</span>() {
-  <span style="color:#a6e22e">myCookies</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Cookies</span>();
-  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">myKey</span>, <span style="color:#a6e22e">myValue</span>);
-}
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testSet</span>() {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cookieString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">myKey</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">myValue</span>;
-  <span style="color:#a6e22e">assertTrue</span>(<span style="color:#e6db74">&#34;Cookies set&#34;</span>, document.<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">cookieString</span>) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
-}
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testGet</span>() {
-  <span style="color:#a6e22e">assertEquals</span>(<span style="color:#e6db74">&#34;Cookies get&#34;</span>, <span style="color:#a6e22e">myValue</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
-}
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testClear</span>() {
-  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">myKey</span>);
-  <span style="color:#a6e22e">assertFalse</span>(<span style="color:#e6db74">&#34;Cookies clear&#34;</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
-}
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testClearAll</span>() {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myNewKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismynewkey&#34;</span>;
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myNewValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismynewvalue&#34;</span>;
-  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">myNewKey</span>, <span style="color:#a6e22e">myNewValue</span>);
-  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">clearAll</span>();
-  <span style="color:#a6e22e">assertFalse</span>(<span style="color:#e6db74">&#34;Check cookie has been cleared for myKey&#34;</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
-  <span style="color:#a6e22e">assertFalse</span>(
-    <span style="color:#e6db74">&#34;Check cookie has been cleared for myNewKey&#34;</span>,
-    <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myNewValue</span>)
-  );
-}
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testArrayInJsonCookies</span>() {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test&#34;</span>;
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testValue</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>];
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jar</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
-  <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">testKey</span>, <span style="color:#a6e22e">testValue</span>);
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testReturn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">testKey</span>);
-  <span style="color:#a6e22e">assertTrue</span>(
-    <span style="color:#e6db74">&#34;Check length of array is the same&#34;</span>,
-    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>
-  );
-  <span style="color:#a6e22e">assertEquals</span>(
-    <span style="color:#e6db74">&#34;Checking arrays are the same&#34;</span>,
-    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testValue</span>).<span style="color:#a6e22e">toJSON</span>(),
-    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>()
-  );
-}
-<span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testObjectInJsonCookies</span>() {
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test&#34;</span>;
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testValue</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;barry&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">29</span> };
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jar</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
-  <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">testKey</span>, <span style="color:#a6e22e">testValue</span>);
-  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testReturn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">testKey</span>);
-  <span style="color:#a6e22e">assertTrue</span>(
-    <span style="color:#e6db74">&#34;Check length of array is the same&#34;</span>,
-    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>
-  );
-  <span style="color:#a6e22e">assertEquals</span>(
-    <span style="color:#e6db74">&#34;Checking objects are the same&#34;</span>,
-    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testValue</span>).<span style="color:#a6e22e">toJSON</span>(),
-    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>()
-  );
-}
-</code></pre></div><p>One minor shortcoming of the present version of JSUnit is that it is difficult
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismykey&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismyvalue&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myCookies</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUp</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">myCookies</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Cookies</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">myKey</span>, <span style="color:#a6e22e">myValue</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testSet</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cookieString</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">myKey</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;=&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">myValue</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertTrue</span>(<span style="color:#e6db74">&#34;Cookies set&#34;</span>, document.<span style="color:#a6e22e">cookie</span>.<span style="color:#a6e22e">indexOf</span>(<span style="color:#a6e22e">cookieString</span>) <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testGet</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertEquals</span>(<span style="color:#e6db74">&#34;Cookies get&#34;</span>, <span style="color:#a6e22e">myValue</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testClear</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">myKey</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertFalse</span>(<span style="color:#e6db74">&#34;Cookies clear&#34;</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testClearAll</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myNewKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismynewkey&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">myNewValue</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;hereismynewvalue&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">myNewKey</span>, <span style="color:#a6e22e">myNewValue</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">clearAll</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertFalse</span>(<span style="color:#e6db74">&#34;Check cookie has been cleared for myKey&#34;</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertFalse</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Check cookie has been cleared for myNewKey&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myNewValue</span>)
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testArrayInJsonCookies</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testValue</span> <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>];
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jar</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">testKey</span>, <span style="color:#a6e22e">testValue</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testReturn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">testKey</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertTrue</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Check length of array is the same&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertEquals</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Checking arrays are the same&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testValue</span>).<span style="color:#a6e22e">toJSON</span>(),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>()
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testObjectInJsonCookies</span>() {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testKey</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;test&#34;</span>;
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testValue</span> <span style="color:#f92672">=</span> { <span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;barry&#34;</span>, <span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">29</span> };
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">jar</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">JsonCookies</span>();
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">set</span>(<span style="color:#a6e22e">testKey</span>, <span style="color:#a6e22e">testValue</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testReturn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">testKey</span>);
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertTrue</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Check length of array is the same&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertEquals</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Checking objects are the same&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testValue</span>).<span style="color:#a6e22e">toJSON</span>(),
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>()
+</span></span><span style="display:flex;"><span>  );
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>One minor shortcoming of the present version of JSUnit is that it is difficult
 to test equality of arrays and objects. The simple work-around used above is to
 test equality of their JSON encodings, which achieves the same end without
 resorting to looping through comparing property by property.</p>

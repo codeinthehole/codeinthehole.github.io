@@ -82,37 +82,37 @@ if (!doNotTrack) {
 <a href="http://git-scm.com/book/en/Customizing-Git-Git-Hooks#Client-Side-Hooks">prepare-commit-msg</a>
 hook to display the last 5 commit messages when I&rsquo;m editing a commit message.</p>
 <p>Use the following <code>.git/hooks/prepare-commit-msg</code> hook:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/bin/sh
-</span><span style="color:#75715e"></span>
-NUM_COMMITS<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
-FORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;# %h %s [%an]&#34;</span>
-COMMITS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>git log --pretty<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>FORMAT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -<span style="color:#e6db74">${</span>NUM_COMMITS<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-HEADER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#
-</span><span style="color:#e6db74"># Last </span><span style="color:#e6db74">${</span>NUM_COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74"> commits
-</span><span style="color:#e6db74"># ----------------------&#34;</span>
-
-recent_commits<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HEADER<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
-<span style="color:#f92672">}</span>
-
-COMMIT_FILE<span style="color:#f92672">=</span>$1
-SOURCE<span style="color:#f92672">=</span>$2
-SHA<span style="color:#f92672">=</span>$3
-
-<span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span>$SOURCE<span style="color:#e6db74">&#34;</span> in
-merge|squash|message<span style="color:#f92672">)</span>
-    ;;
-<span style="color:#e6db74">&#34;&#34;</span>|commit|template<span style="color:#f92672">)</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$SHA<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
-        recent_commits &gt;&gt; $COMMIT_FILE
-    <span style="color:#66d9ef">fi</span>
-    ;;
-*<span style="color:#f92672">)</span>
-    echo <span style="color:#e6db74">&#34;Unexpected type &#39;</span>$SOURCE<span style="color:#e6db74">&#39; in prepare-commit-msg hook&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
-    exit <span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">esac</span>
-</code></pre></div><p>then your default commit template looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/sh
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>NUM_COMMITS<span style="color:#f92672">=</span><span style="color:#ae81ff">5</span>
+</span></span><span style="display:flex;"><span>FORMAT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;# %h %s [%an]&#34;</span>
+</span></span><span style="display:flex;"><span>COMMITS<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>git log --pretty<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>FORMAT<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> -<span style="color:#e6db74">${</span>NUM_COMMITS<span style="color:#e6db74">}</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>HEADER<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;#
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># Last </span><span style="color:#e6db74">${</span>NUM_COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74"> commits
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74"># ----------------------&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>recent_commits<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>HEADER<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>COMMITS<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>COMMIT_FILE<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>SOURCE<span style="color:#f92672">=</span>$2
+</span></span><span style="display:flex;"><span>SHA<span style="color:#f92672">=</span>$3
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span>$SOURCE<span style="color:#e6db74">&#34;</span> in
+</span></span><span style="display:flex;"><span>merge|squash|message<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    ;;
+</span></span><span style="display:flex;"><span><span style="color:#e6db74">&#34;&#34;</span>|commit|template<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -z <span style="color:#e6db74">&#34;</span>$SHA<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        recent_commits &gt;&gt; $COMMIT_FILE
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>    ;;
+</span></span><span style="display:flex;"><span>*<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Unexpected type &#39;</span>$SOURCE<span style="color:#e6db74">&#39; in prepare-commit-msg hook&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">esac</span>
+</span></span></code></pre></div><p>then your default commit template looks like this:</p>
 <p><img src="/images/screenshots/git-commit-editor.png" alt="image"></p>
 
         </div>

@@ -122,48 +122,48 @@ such versions don&rsquo;t support the QR code reader functionality)</li>
 version is desirable. It&rsquo;s less appropriate for project dependencies which
 require pinned versions &mdash; Docker is a better for that.</p>
 <p>Start by installing Xcode&rsquo;s command-line tools:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo xcode-select --install
-</code></pre></div><p>then <a href="https://brew.sh/">install Homebrew</a> and a core set of formulae. The
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo xcode-select --install
+</span></span></code></pre></div><p>then <a href="https://brew.sh/">install Homebrew</a> and a core set of formulae. The
 following is taken from a <code>setup_new_macbook.sh</code> script I use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_core_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    local packages<span style="color:#f92672">=(</span>
-        bash
-        bash-completion
-        coreutils
-        ctags
-        fd
-        fzf
-        git
-        graphviz
-        htop
-        httpie
-        hub
-        hugo
-        imagemagick
-        jq
-        pgbadger
-        pv
-        rename
-        ripgrep
-        terminal_notifier
-        the_silver_searcher
-    <span style="color:#f92672">)</span>
-    brew install <span style="color:#e6db74">${</span>packages[@]<span style="color:#e6db74">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>plus some packages that require a separate <code>tap</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">function</span> install_homebrew_tap_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    brew tap heroku/brew <span style="color:#f92672">&amp;&amp;</span> brew install heroku
-
-    brew tap homebrew/cask-fonts
-    local fonts<span style="color:#f92672">=(</span>
-        font-inconsolata
-        font-clear-sans
-        font-source-code-pro
-        font-anonymous-pro
-    <span style="color:#f92672">)</span>
-    brew cask install <span style="color:#e6db74">${</span>fonts[@]<span style="color:#e6db74">}</span>
-<span style="color:#f92672">}</span>
-</code></pre></div><p>Ensure your <code>~/.bash_profile</code> has shell completion enabled for Homebrew-installs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> install_homebrew_core_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    local packages<span style="color:#f92672">=(</span>
+</span></span><span style="display:flex;"><span>        bash
+</span></span><span style="display:flex;"><span>        bash-completion
+</span></span><span style="display:flex;"><span>        coreutils
+</span></span><span style="display:flex;"><span>        ctags
+</span></span><span style="display:flex;"><span>        fd
+</span></span><span style="display:flex;"><span>        fzf
+</span></span><span style="display:flex;"><span>        git
+</span></span><span style="display:flex;"><span>        graphviz
+</span></span><span style="display:flex;"><span>        htop
+</span></span><span style="display:flex;"><span>        httpie
+</span></span><span style="display:flex;"><span>        hub
+</span></span><span style="display:flex;"><span>        hugo
+</span></span><span style="display:flex;"><span>        imagemagick
+</span></span><span style="display:flex;"><span>        jq
+</span></span><span style="display:flex;"><span>        pgbadger
+</span></span><span style="display:flex;"><span>        pv
+</span></span><span style="display:flex;"><span>        rename
+</span></span><span style="display:flex;"><span>        ripgrep
+</span></span><span style="display:flex;"><span>        terminal_notifier
+</span></span><span style="display:flex;"><span>        the_silver_searcher
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    brew install <span style="color:#e6db74">${</span>packages[@]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>plus some packages that require a separate <code>tap</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">function</span> install_homebrew_tap_packages<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    brew tap heroku/brew <span style="color:#f92672">&amp;&amp;</span> brew install heroku
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    brew tap homebrew/cask-fonts
+</span></span><span style="display:flex;"><span>    local fonts<span style="color:#f92672">=(</span>
+</span></span><span style="display:flex;"><span>        font-inconsolata
+</span></span><span style="display:flex;"><span>        font-clear-sans
+</span></span><span style="display:flex;"><span>        font-source-code-pro
+</span></span><span style="display:flex;"><span>        font-anonymous-pro
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>    brew cask install <span style="color:#e6db74">${</span>fonts[@]<span style="color:#e6db74">}</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Ensure your <code>~/.bash_profile</code> has shell completion enabled for Homebrew-installs
 packages by following the
 <a href="https://docs.brew.sh/Shell-Completion">documented instructions</a>.</p>
 <h2 id="macos-configuration">MacOS configuration</h2>
@@ -172,50 +172,50 @@ packages by following the
 <p>Unbind <!-- raw HTML omitted -->⌥<!-- raw HTML omitted --> + <!-- raw HTML omitted -->SPACE<!-- raw HTML omitted --> from
 inserting a non-breaking space by setting the contents of
 <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-pl" data-lang="pl">{
-    <span style="color:#e6db74">&#34;~ &#34;</span> <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;insertText:&#34;</span>, <span style="color:#e6db74">&#34; &#34;</span>);
-}
-</code></pre></div><p>This avoids a common annoyance when editing headers in markdown files (eg in
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-pl" data-lang="pl"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;~ &#34;</span> <span style="color:#f92672">=</span> (<span style="color:#e6db74">&#34;insertText:&#34;</span>, <span style="color:#e6db74">&#34; &#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This avoids a common annoyance when editing headers in markdown files (eg in
 Bear).</p>
 <h3 id="system-preferences">System preferences</h3>
 <p>Here&rsquo;s a <code>configurure_system_preferences.sh</code> script I use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#!/usr/bin/env bash
-</span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
-<span style="color:#75715e"># Configure MacOS settings.</span>
-
-set -e
-
-<span style="color:#66d9ef">function</span> configure_all<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    configure_keyboard
-    configure_screensaver
-    configure_screencapture
-    configure_touchpad
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">function</span> configure_keyboard<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#75715e"># Set fast key repeat rate.</span>
-    defaults write NSGlobalDomain KeyRepeat -int <span style="color:#ae81ff">2</span>
-    defaults write NSGlobalDomain InitialKeyRepeat -int <span style="color:#ae81ff">15</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">function</span> configure_screensaver<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#75715e"># Require password as soon as screen-saver or sleep mode starts.</span>
-    defaults write com.apple.screensaver askForPassword -int <span style="color:#ae81ff">1</span>
-    defaults write com.apple.screensaver askForPasswordDelay -int <span style="color:#ae81ff">0</span>
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">function</span> configure_screencapture<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    <span style="color:#75715e"># Disable shadow effect in screen capture.</span>
-    defaults write com.apple.screencapture disable-shadow -bool true
-<span style="color:#f92672">}</span>
-
-<span style="color:#66d9ef">function</span> configure_touchpad<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
-    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
-    defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int <span style="color:#ae81ff">1</span>
-<span style="color:#f92672">}</span>
-
-configure_all
-</code></pre></div><h3 id="further-reading">Further reading</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configure MacOS settings.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set -e
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> configure_all<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    configure_keyboard
+</span></span><span style="display:flex;"><span>    configure_screensaver
+</span></span><span style="display:flex;"><span>    configure_screencapture
+</span></span><span style="display:flex;"><span>    configure_touchpad
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> configure_keyboard<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Set fast key repeat rate.</span>
+</span></span><span style="display:flex;"><span>    defaults write NSGlobalDomain KeyRepeat -int <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    defaults write NSGlobalDomain InitialKeyRepeat -int <span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> configure_screensaver<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Require password as soon as screen-saver or sleep mode starts.</span>
+</span></span><span style="display:flex;"><span>    defaults write com.apple.screensaver askForPassword -int <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    defaults write com.apple.screensaver askForPasswordDelay -int <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> configure_screencapture<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Disable shadow effect in screen capture.</span>
+</span></span><span style="display:flex;"><span>    defaults write com.apple.screencapture disable-shadow -bool true
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> configure_touchpad<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+</span></span><span style="display:flex;"><span>    defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>configure_all
+</span></span></code></pre></div><h3 id="further-reading">Further reading</h3>
 <ul>
 <li><a href="https://twitter.com/searls/status/1264547049032187910">How to set up a new Mac for development</a> -
 A 90 minute video walking through setting up a MacBook Pro.</li>
@@ -248,41 +248,41 @@ available globally (i.e. can be run without activating a virtualenv first).</p>
 </ul>
 <h3 id="python-versions">Python versions</h3>
 <p>Install <code>pyenv</code> and <code>pyenv-virtualenvwrapper</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">brew install pyenv pyenv-virtualenvwrapper
-</code></pre></div><p>and ensure these libraries are initialised by adding:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#66d9ef">if</span> which pyenv &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
-<span style="color:#66d9ef">then</span>
-    <span style="color:#75715e"># Pyenv (will add shims to front of $PATH)</span>
-    eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pyenv init -<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-
-    <span style="color:#75715e"># Ensure commands from virtualenvwrapper are available, no matter which</span>
-    <span style="color:#75715e"># Python version is active. This is equiv to sourcing virtualenvwrapper.sh</span>
-    pyenv virtualenvwrapper
-<span style="color:#66d9ef">fi</span>
-</code></pre></div><p>to <code>~/.bash_profile</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>brew install pyenv pyenv-virtualenvwrapper
+</span></span></code></pre></div><p>and ensure these libraries are initialised by adding:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> which pyenv &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Pyenv (will add shims to front of $PATH)</span>
+</span></span><span style="display:flex;"><span>    eval <span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>pyenv init -<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Ensure commands from virtualenvwrapper are available, no matter which</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Python version is active. This is equiv to sourcing virtualenvwrapper.sh</span>
+</span></span><span style="display:flex;"><span>    pyenv virtualenvwrapper
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>to <code>~/.bash_profile</code>.</p>
 <p>Install a modern Python as the global default:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pyenv install 3.8.3
-pyenv global 3.8.3
-</code></pre></div><p>plus any other Python versions that projects require.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pyenv install 3.8.3
+</span></span><span style="display:flex;"><span>pyenv global 3.8.3
+</span></span></code></pre></div><p>plus any other Python versions that projects require.</p>
 <h3 id="python-projects">Python projects</h3>
 <p>For each Python project, create a virtualenv by selecting the appropriate Python
 version using <code>pyenv</code> then using <code>mkvirtualenv</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd $PATH_TO_PROJECT
-pyenv local 3.7.7  <span style="color:#75715e"># for example</span>
-mkvirtualenv $PROJECT_NAME
-</code></pre></div><p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Always require a virtualenv to use pip</span>
-export PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>true
-</code></pre></div><p>in <code>~/.bash_profile</code>. If you do want to run <code>pip</code> outside of a virtualenv, use
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd $PATH_TO_PROJECT
+</span></span><span style="display:flex;"><span>pyenv local 3.7.7  <span style="color:#75715e"># for example</span>
+</span></span><span style="display:flex;"><span>mkvirtualenv $PROJECT_NAME
+</span></span></code></pre></div><p>To avoid accidentally installing packages outside of a virtualenv, set:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Always require a virtualenv to use pip</span>
+</span></span><span style="display:flex;"><span>export PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>true
+</span></span></code></pre></div><p>in <code>~/.bash_profile</code>. If you do want to run <code>pip</code> outside of a virtualenv, use
 something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list
-</code></pre></div><h3 id="python-command-line-apps">Python command-line apps</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>PIP_REQUIRE_VIRTUALENV<span style="color:#f92672">=</span>false pip list
+</span></span></code></pre></div><h3 id="python-command-line-apps">Python command-line apps</h3>
 <p>Install <code>pipx</code> with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">brew install pipx
-</code></pre></div><p>and ensure <code>~/.local/bin</code> is on your <code>$PATH</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>brew install pipx
+</span></span></code></pre></div><p>and ensure <code>~/.local/bin</code> is on your <code>$PATH</code>.</p>
 <p>Install CLI apps:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">pipx install awscli
-</code></pre></div><h3 id="further-reading-1">Further reading</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pipx install awscli
+</span></span></code></pre></div><h3 id="further-reading-1">Further reading</h3>
 <ul>
 <li><a href="https://jacobian.org/2019/nov/11/python-environment-2020/">My Python Development Environment, 2020 Edition</a>
 by Jacob Kaplan-Moss (2019).</li>

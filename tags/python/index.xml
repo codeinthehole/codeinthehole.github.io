@@ -23,10 +23,10 @@ Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignit
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iwfrom ciw(&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a(mnemonic: &amp;ldquo;a&amp;quot;n) or i(mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w→ a word W→ a WORD t→ a HTML/XML tag s→ a sentence p→ a paragraph  From the (highly recommended) wellle/targets.</description>
+w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
@@ -58,7 +58,7 @@ For instance, which of these is right? This:
       
       <guid>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
       <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
+#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
     </item>
     
     <item>
@@ -112,11 +112,10 @@ Such requirements are slightly tricky to capture in Django as they tread slightl
       
       <guid>https://codeinthehole.com/tips/pypi-readme-badges/</guid>
       <description>Thanks to @kuramanga, it&amp;rsquo;s now possible to add shiny PyPi badges to your Python project READMEs that indicate the latest released version on PyPI and the total number of downloads.
-
 This screenshot is taken from django-oscar&amp;rsquo;s README.
 Embed these badges in your own repo as Restructured text:
-.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version.. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloadsor Markdown:
-[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [![PyPi downloads](https://pypip.</description>
+.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:
+[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
     </item>
     
     <item>
@@ -172,7 +171,7 @@ An e-commerce example Suppose your e-commerce application allows admins to uploa
       <guid>https://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
       <description>How to use a South data migration to avoid accidentally sending emails from example.com.
 Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
-from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %salerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %steam.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
     </item>
     
     <item>
@@ -244,7 +243,7 @@ def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39;
       <description>Problem You want to all the PyCon videos on your iPhone for offline viewing.
 Solution Use the following Python script to fetch pycon videos from YouTube and convert them to M4V format so they can be imported to iTunes.
 To run the script:
- Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script  Run this script using:</description>
+Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script Run this script using:</description>
     </item>
     
     <item>
@@ -255,7 +254,7 @@ To run the script:
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
       <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
 Migrating from PHP to Python and Django Abstract:
- Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     
     <item>
@@ -266,7 +265,7 @@ Migrating from PHP to Python and Django Abstract:
       <guid>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
       <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.
 Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:
- This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
+This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
     </item>
     
     <item>
@@ -277,7 +276,7 @@ Each documented method involves initialising data as part of the syncdb event, e
       <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
       <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
 Set-up Assume there is a test environment where:
- the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit  There will also be stage and production environments.
+the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.
 Fabric function The following function can be used as part of Fabric build script.</description>
     </item>
     
@@ -377,8 +376,8 @@ def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: fore
       
       <guid>https://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</guid>
       <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:
- Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.
- Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
+Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.
+Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
     </item>
     
   </channel>

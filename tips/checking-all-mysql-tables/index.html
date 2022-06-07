@@ -84,8 +84,8 @@ run the
 <a href="http://dev.mysql.com/doc/refman/5.0/en/myisamchk.html">myisamchk utility</a>
 directly on the index files (<code>.MYI</code>) of the tables in question (some simple
 shell expansion makes this easy):</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">myisamchk --silent --fast /path/to/datadir/*/*.MYI
-</code></pre></div><p>However, this proses a problem in that you must ensure that no other programs
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>myisamchk --silent --fast /path/to/datadir/*/*.MYI
+</span></span></code></pre></div><p>However, this proses a problem in that you must ensure that no other programs
 are accessing the tables while they are being checked. Hence they must be
 locked, or better still, the MySQL daemon stopped before running any checks.
 Perversely, if this is not done, the act of checking the tables can corrupt
@@ -95,17 +95,17 @@ risk of corruption). There are various scripts (written in PHP and bash) posted
 on the <code>CHECK TABLE</code>
 <a href="http://dev.mysql.com/doc/refman/5.0/en/check-table.html">manual page</a> but this
 operation can be done easily through a single line:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color:#e6db74">&#34;SHOW TABLES&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>| awk <span style="color:#e6db74">&#39;{print &#34;CHECK TABLE &#34;$1&#34;;&#34;}&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;
-</code></pre></div><p>This dynamically creates a list of <code>CHECK TABLE ...</code> commands which is piped
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color:#e6db74">&#34;SHOW TABLES&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>| awk <span style="color:#e6db74">&#39;{print &#34;CHECK TABLE &#34;$1&#34;;&#34;}&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;
+</span></span></code></pre></div><p>This dynamically creates a list of <code>CHECK TABLE ...</code> commands which is piped
 into MySQL for execution.</p>
 <p>For checking a selection of tables rather than all, use the LIKE operator when
 selecting the tables to check:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color:#e6db74">&#34;SHOW TABLES LIKE &#39;User%&#39;&#34;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>| awk <span style="color:#e6db74">&#39;NR != 1 {print &#34;CHECK TABLE &#34;$1&#34;;&#34;}&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;
-</code></pre></div><p>This only checks the tables that start &lsquo;User&rsquo;. Note that the awk program has an
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>mysql -p&lt;password&gt; -D&lt;database&gt; -B -e <span style="color:#e6db74">&#34;SHOW TABLES LIKE &#39;User%&#39;&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>| awk <span style="color:#e6db74">&#39;NR != 1 {print &#34;CHECK TABLE &#34;$1&#34;;&#34;}&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>| mysql -p&lt;password&gt; -D&lt;database&gt;
+</span></span></code></pre></div><p>This only checks the tables that start &lsquo;User&rsquo;. Note that the awk program has an
 extra clause to ensure that the first line of MySQL output is skipped.</p>
 
         </div>

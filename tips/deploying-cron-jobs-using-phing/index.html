@@ -78,22 +78,22 @@ if (!doNotTrack) {
             <p>Deploying applications that depend on cron-jobs can be a pain. However, Phing
 can be used to make such deployments easy - here&rsquo;s how&hellip;</p>
 <p>Consider an application folder structure as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/builds
-    /development
-    /test
-    /stage
-/src
-    /cron.d
-        appname-__BUILD__-order-processing
-    /scripts
-        /order-processing
-            handle-ready-to-ship-orders.php
-            handle-cancellations.php
-            ...
-    /public
-    /classes
-        ...
-</code></pre></div><p>All development work takes place within the <code>/src</code> folder while the <code>/builds/*</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/builds
+</span></span><span style="display:flex;"><span>    /development
+</span></span><span style="display:flex;"><span>    /test
+</span></span><span style="display:flex;"><span>    /stage
+</span></span><span style="display:flex;"><span>/src
+</span></span><span style="display:flex;"><span>    /cron.d
+</span></span><span style="display:flex;"><span>        appname-__BUILD__-order-processing
+</span></span><span style="display:flex;"><span>    /scripts
+</span></span><span style="display:flex;"><span>        /order-processing
+</span></span><span style="display:flex;"><span>            handle-ready-to-ship-orders.php
+</span></span><span style="display:flex;"><span>            handle-cancellations.php
+</span></span><span style="display:flex;"><span>            ...
+</span></span><span style="display:flex;"><span>    /public
+</span></span><span style="display:flex;"><span>    /classes
+</span></span><span style="display:flex;"><span>        ...
+</span></span></code></pre></div><p>All development work takes place within the <code>/src</code> folder while the <code>/builds/*</code>
 folders are used as targets in deployment. This system allows multiple builds to
 happily co-exist on the same server and the whole application infrastructure to
 be moved between servers easily as the structure in source control mirrors that
@@ -112,9 +112,9 @@ easy way to automatically update a user&rsquo;s crontab automatically.</p>
 <p>A much better way is to create a number of scripts which specify the cron tasks
 and are deployed to the /etc/cron.d folder. In the above example, these are
 stored in /src/cron.d and would look something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
-<span style="color:#ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
-</code></pre></div><p>(Note that, for some reason, a blank line is required at the end of this file in
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ae81ff">15</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-ready-to-ship-orders.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">35</span> * * * *   root   /var/www/ecommerce.com/builds/__BUILD__/scripts/handle-cancellations.php &gt; /dev/null 2&gt;&gt; /var/log/cron.errors.log
+</span></span></code></pre></div><p>(Note that, for some reason, a blank line is required at the end of this file in
 order for the script to be run by cron.) Here, the <code>__BUILD__</code> is a tokenised
 parameter which will be replaced during deployment to configure the path to the
 appropriate script - a phing trick I&rsquo;ve described previously.</p>
@@ -126,45 +126,45 @@ component of the file to be the appropriate build name (similar to how the paths
 are configured within the file itself).</p>
 <p>This is probably best illustrated with a sample phing script which takes the
 build name (eg &ldquo;development&rdquo;) as a parameter:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#f92672">&lt;xml</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span> <span style="color:#a6e22e">encoding=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#f92672">&gt;</span>
-<span style="color:#f92672">&lt;project&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
-        ...
-        <span style="color:#f92672">&lt;delete&gt;</span>
-            <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span>
-                <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;appname-${build.name}-*&#34;</span> <span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;/fileset&gt;</span>
-        <span style="color:#f92672">&lt;/delete&gt;</span>
-        <span style="color:#f92672">&lt;copy</span> <span style="color:#a6e22e">todir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;filterchain&gt;</span>
-                <span style="color:#f92672">&lt;replacetokens</span> <span style="color:#a6e22e">begintoken=</span><span style="color:#e6db74">&#34;__&#34;</span> <span style="color:#a6e22e">endtoken=</span><span style="color:#e6db74">&#34;__&#34;</span><span style="color:#f92672">&gt;</span>
-                    <span style="color:#f92672">&lt;token</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;BUILD&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${build.name}&#34;</span> <span style="color:#f92672">/&gt;</span>
-                <span style="color:#f92672">&lt;/replacetokens&gt;</span>
-            <span style="color:#f92672">&lt;/filterchain&gt;</span>
-            <span style="color:#f92672">&lt;mapper</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;glob&#34;</span> <span style="color:#a6e22e">from=</span><span style="color:#e6db74">&#34;appname-__BUILD__-*&#34;</span> <span style="color:#a6e22e">to=</span><span style="color:#e6db74">&#34;appname-${build.name}-*&#34;</span> <span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;${path.to.build}/cron.d&#34;</span><span style="color:#f92672">&gt;</span>
-                <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;appname-__BUILD__-*&#34;</span> <span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;/fileset&gt;</span>
-        <span style="color:#f92672">&lt;/copy&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span>
-</code></pre></div><p>The illustrated snippet does two things:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#f92672">&lt;xml</span> <span style="color:#a6e22e">version=</span><span style="color:#e6db74">&#34;1.0&#34;</span> <span style="color:#a6e22e">encoding=</span><span style="color:#e6db74">&#34;UTF-8&#34;</span><span style="color:#960050;background-color:#1e0010">?</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;project&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        ...
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;delete&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;appname-${build.name}-*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/fileset&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/delete&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;copy</span> <span style="color:#a6e22e">todir=</span><span style="color:#e6db74">&#34;/etc/cron.d/&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;filterchain&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;replacetokens</span> <span style="color:#a6e22e">begintoken=</span><span style="color:#e6db74">&#34;__&#34;</span> <span style="color:#a6e22e">endtoken=</span><span style="color:#e6db74">&#34;__&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#f92672">&lt;token</span> <span style="color:#a6e22e">key=</span><span style="color:#e6db74">&#34;BUILD&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;${build.name}&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;/replacetokens&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/filterchain&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;mapper</span> <span style="color:#a6e22e">type=</span><span style="color:#e6db74">&#34;glob&#34;</span> <span style="color:#a6e22e">from=</span><span style="color:#e6db74">&#34;appname-__BUILD__-*&#34;</span> <span style="color:#a6e22e">to=</span><span style="color:#e6db74">&#34;appname-${build.name}-*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;${path.to.build}/cron.d&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;appname-__BUILD__-*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/fileset&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/copy&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/project&gt;</span>
+</span></span></code></pre></div><p>The illustrated snippet does two things:</p>
 <p>Deletes any previous scripts for this build from <code>/etc/cron.d</code> (this is why we
 namespace the files with &ldquo;appname&rdquo; to prevent accidentally removing a system
 file). Copies the new scripts into <code>/etc/cron.d</code> while replacing the token
 <code>__BUILD__</code> with the build name in both the file contents and file names. After
 separate deployments for dev and stage, we should find the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">/etc
-    /cron.d
-        appname-development-order-processing
-        appname-stage-order-processing
-        ...
-</code></pre></div><p>where, for instance, the contents of
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>/etc
+</span></span><span style="display:flex;"><span>    /cron.d
+</span></span><span style="display:flex;"><span>        appname-development-order-processing
+</span></span><span style="display:flex;"><span>        appname-stage-order-processing
+</span></span><span style="display:flex;"><span>        ...
+</span></span></code></pre></div><p>where, for instance, the contents of
 <code>/etc/cron.d/appname-development-order-processing</code> would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-ready-to-ship-orders.php
-* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-cancellations.php
-...
-</code></pre></div><p>Having automatic and reliable deployment of cron-jobs in place is quite
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-ready-to-ship-orders.php
+</span></span><span style="display:flex;"><span>* * * * *   root   /var/www/ecommerce.com/builds/development/scripts/handle-cancellations.php
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>Having automatic and reliable deployment of cron-jobs in place is quite
 liberating. Suddenly, lots of application processing can be done asynchronously
 without worrying about the overhead of maintaining the appropriate crontabs by
 hand.</p>

@@ -102,58 +102,58 @@ flexibility as it could then be used in deployment scripts elsewhere.</p>
 status, and interacting with the Unfuddle API. Creating a Nabaztag task was just
 a simple extension of these cURL-based tasks. The various attributes mirror
 those from the API docs.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">  Name                Type      Description                                         Default   Required
-  ------------------- --------- --------------------------------------------------- --------- ----------
-  serialNum           String    Serial number                                       n/a       Yes
-  token               Integer   Token number                                        n/a       Yes
-  leftEarPosition     String    Position of the left ear (0-16)                     n/a       No
-  rightEarPosition    String    Position of the right ear (0-16)                    n/a       No
-  message             String    Message.                                            n/a       No
-  messageId           Integer   Message id.                                         n/a       No
-  voice               Integer   Voice to use (use the API to fetch the full list)   n/a       No
-  choreography        String    A string which prescribes the choreography
-                                to use (see API docs)                               n/a       No
-  choreographyTitle   Boolean   Choreography title                                  n/a       No
-  urlList             Boolean   List of URLs to pass to the Nabaztag (can be
-                                used for playing audio files)                       n/a       No
-  checkReturn         Boolean   Whether to check the return code of the request,
-                                throws a BuildException if the update fails         false     No
-</code></pre></div><p>The code for this task can be found in my github repo - to install locally,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>  Name                Type      Description                                         Default   Required
+</span></span><span style="display:flex;"><span>  ------------------- --------- --------------------------------------------------- --------- ----------
+</span></span><span style="display:flex;"><span>  serialNum           String    Serial number                                       n/a       Yes
+</span></span><span style="display:flex;"><span>  token               Integer   Token number                                        n/a       Yes
+</span></span><span style="display:flex;"><span>  leftEarPosition     String    Position of the left ear (0-16)                     n/a       No
+</span></span><span style="display:flex;"><span>  rightEarPosition    String    Position of the right ear (0-16)                    n/a       No
+</span></span><span style="display:flex;"><span>  message             String    Message.                                            n/a       No
+</span></span><span style="display:flex;"><span>  messageId           Integer   Message id.                                         n/a       No
+</span></span><span style="display:flex;"><span>  voice               Integer   Voice to use (use the API to fetch the full list)   n/a       No
+</span></span><span style="display:flex;"><span>  choreography        String    A string which prescribes the choreography
+</span></span><span style="display:flex;"><span>                                to use (see API docs)                               n/a       No
+</span></span><span style="display:flex;"><span>  choreographyTitle   Boolean   Choreography title                                  n/a       No
+</span></span><span style="display:flex;"><span>  urlList             Boolean   List of URLs to pass to the Nabaztag (can be
+</span></span><span style="display:flex;"><span>                                used for playing audio files)                       n/a       No
+</span></span><span style="display:flex;"><span>  checkReturn         Boolean   Whether to check the return code of the request,
+</span></span><span style="display:flex;"><span>                                throws a BuildException if the update fails         false     No
+</span></span></code></pre></div><p>The code for this task can be found in my github repo - to install locally,
 export the file to a local phing tasks folder (I use
 <code>/usr/share/php/phing/tasks/my</code> on my Ubuntu machine). Having done that, a
 simple example build.xml file to exercise the task would be:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
-<span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Nabaztag update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
-    <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;nabaztag&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.NabaztagTask&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;build-failure&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;nabaztag</span> <span style="color:#a6e22e">serialNum=</span><span style="color:#e6db74">&#34;${nabaztag.serialNum}&#34;</span> <span style="color:#a6e22e">token=</span><span style="color:#e6db74">&#34;${nabaztag.token}&#34;</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;The build failed!&#34;</span> <span style="color:#a6e22e">voice=</span><span style="color:#e6db74">&#34;US-Liberty&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span>
-</code></pre></div><p>To use this with Xinc, you simply need to called the appropriate target from
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Example Nabaztag update&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;taskdef</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;nabaztag&#34;</span> <span style="color:#a6e22e">classname=</span><span style="color:#e6db74">&#34;phing.tasks.my.NabaztagTask&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;build-failure&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;nabaztag</span> <span style="color:#a6e22e">serialNum=</span><span style="color:#e6db74">&#34;${nabaztag.serialNum}&#34;</span> <span style="color:#a6e22e">token=</span><span style="color:#e6db74">&#34;${nabaztag.token}&#34;</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;The build failed!&#34;</span> <span style="color:#a6e22e">voice=</span><span style="color:#e6db74">&#34;US-Liberty&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/project&gt;</span>
+</span></span></code></pre></div><p>To use this with Xinc, you simply need to called the appropriate target from
 your project configuration file. Another toy example:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
-<span style="color:#f92672">&lt;xinc&gt;</span>
-    <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Toy example&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;configuration&gt;</span>
-                <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;loglevel&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">/&gt;</span>
-                <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;timezone&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Europe/London&#34;</span><span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/configuration&gt;</span>
-        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/var/xinc/projects/sample&#34;</span><span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;cron</span> <span style="color:#a6e22e">timer=</span><span style="color:#e6db74">&#34;*/15 * * * *&#34;</span><span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;modificationset&gt;</span>
-            <span style="color:#f92672">&lt;svn</span> <span style="color:#a6e22e">directory=</span><span style="color:#e6db74">&#34;${dir}&#34;</span> <span style="color:#a6e22e">update=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/modificationset&gt;</span>
-        <span style="color:#f92672">&lt;builders&gt;</span>
-                <span style="color:#f92672">&lt;phingBuilder</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-project&#34;</span><span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/builders&gt;</span>
-        <span style="color:#f92672">&lt;publishers&gt;</span>
-            <span style="color:#f92672">&lt;onfailure&gt;</span>
-                <span style="color:#f92672">&lt;phingpublisher</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-failure&#34;</span> <span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;/onfailure&gt;</span>
-        <span style="color:#f92672">&lt;/publishers&gt;</span>
-    <span style="color:#f92672">&lt;/project&gt;</span>
-<span style="color:#f92672">&lt;/xinc&gt;</span>
-</code></pre></div><p>Some of the options for controlling the Nabaztag are only available with the V2
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;xinc&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Toy example&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;configuration&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;loglevel&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;1&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;setting</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;timezone&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;Europe/London&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/configuration&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/var/xinc/projects/sample&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;cron</span> <span style="color:#a6e22e">timer=</span><span style="color:#e6db74">&#34;*/15 * * * *&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;modificationset&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;svn</span> <span style="color:#a6e22e">directory=</span><span style="color:#e6db74">&#34;${dir}&#34;</span> <span style="color:#a6e22e">update=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/modificationset&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;builders&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;phingBuilder</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-project&#34;</span><span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/builders&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;publishers&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;onfailure&gt;</span>
+</span></span><span style="display:flex;"><span>                <span style="color:#f92672">&lt;phingpublisher</span> <span style="color:#a6e22e">buildfile=</span><span style="color:#e6db74">&#34;${dir}/build.xml&#34;</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;build-failure&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;/onfailure&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/publishers&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/project&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/xinc&gt;</span>
+</span></span></code></pre></div><p>Some of the options for controlling the Nabaztag are only available with the V2
 version. The one on my desk is V1 and so I haven&rsquo;t tested every action, I&rsquo;ve
 just followed the instructions in the API docs. Unfortunately, the Nabaztag
 webservice isn&rsquo;t as RESTful as would be desired - it returns a 200 response code
@@ -161,8 +161,8 @@ for every request, whether it fails or not. This makes it a touch tricky to
 handle failed updates.</p>
 <p>Nabaztags are also useful for general reminders - I have the following line in
 my crontab:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&#34;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#ae81ff">15</span> <span style="color:#ae81ff">18</span> * * <span style="color:#ae81ff">5</span> curl <span style="color:#e6db74">&#34;http://api.nabaztag.com/vl/FR/api.jsp?sn=</span>$SERIAL<span style="color:#e6db74">&amp;token=</span>$TOKEN<span style="color:#e6db74">&amp;tts=It+is+now+time+to+go+to+the+pub&#34;</span>
+</span></span></code></pre></div>
         </div>
 
         <div id="article_meta">

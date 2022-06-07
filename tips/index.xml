@@ -14,8 +14,8 @@
       
       <guid>https://codeinthehole.com/tips/explaining/</guid>
       <description>Someone has asked a question (in Slack or Github) and you&amp;rsquo;re about to write an explanation. But before you start typing, ask yourself this:
- Is this the best place to answer this question?
- Because the place where the question is asked is generally not the best place to write a detailed answer.
+Is this the best place to answer this question?
+Because the place where the question is asked is generally not the best place to write a detailed answer.
 &amp;ldquo;Why did you do it that way?&amp;rdquo; Imagine you&amp;rsquo;ve requested a review on a Github pull request and one of the reviewers has questioned why something is done the way it is.</description>
     </item>
     
@@ -28,7 +28,7 @@
       <description>A good understanding of Vim&amp;rsquo;s various lists is a massive productivity boost — it&amp;rsquo;s taken me many years of Vim use to truly appreciate this.
 This post summarises some of Vim&amp;rsquo;s lists, detailing their purpose and how to make the most of them.
 Contents:
- Quickfix list  Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell   Location list Jump list  Tip: Use jump commands to navigate   Change list  Tip: Jump to the previous location where insert mode was used   Buffer list  Tip: Select buffers with FZF   Argument list Tag match list  Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality   Include file list and definition lists Summary  I need to jump somewhere I need to apply the same transformation in lots of places       Quickfix list A global list of locations populated via one of these commands:</description>
+Quickfix list Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell Location list Jump list Tip: Use jump commands to navigate Change list Tip: Jump to the previous location where insert mode was used Buffer list Tip: Select buffers with FZF Argument list Tag match list Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality Include file list and definition lists Summary I need to jump somewhere I need to apply the same transformation in lots of places Quickfix list A global list of locations populated via one of these commands:</description>
     </item>
     
     <item>
@@ -38,7 +38,7 @@ Contents:
       
       <guid>https://codeinthehole.com/tips/a-vim-mapping-for-opening-virtualenv-files/</guid>
       <description>Here&amp;rsquo;s a useful command-mode mapping for Python development:
-&amp;#34; ~/.vim/ftplugin/python.vimfunction! VirtualEnvSitePackagesFolder()&amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34;endfunctioncnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt;In command-mode, %v will expand to the path of your virtualenv&amp;rsquo;s site-packages folder in, which makes it easy to quickly open a third-party module.</description>
+&amp;#34; ~/.vim/ftplugin/python.vim function! VirtualEnvSitePackagesFolder() &amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34; endfunction cnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt; In command-mode, %v will expand to the path of your virtualenv&amp;rsquo;s site-packages folder in, which makes it easy to quickly open a third-party module.</description>
     </item>
     
     <item>
@@ -51,7 +51,7 @@ Contents:
 Maintenance mode As an example, let&amp;rsquo;s create a &amp;ldquo;maintenance mode&amp;rdquo; for a service which allows a &amp;ldquo;under maintenance&amp;rdquo; holding page to be served when a Terraform variable is set.
 This is useful if you need to stop all traffic to a RDS database server so it can be upgraded.
 Define a boolean maintenance_mode variable:
-# variables.tf variable &amp;#34;maintenance_mode&amp;#34; { type = bool default = false } and use it to create conditional default_action blocks in an aws_lb_listener resource.</description>
+# variables.</description>
     </item>
     
     <item>
@@ -75,7 +75,7 @@ Solution Use a HCL list variable which allows each entry to have an associated c
       <description>URLs are great aren&amp;rsquo;t they?
 You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
 Anyway, a super-useful Vim mapping I use is:
-vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
+vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
     
     <item>
@@ -85,10 +85,10 @@ vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, aft
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part2/</guid>
       <description>On code smells:
-  If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
-  Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
-  On good things I always tell team members about:
-  The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
+If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
+Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
+On good things I always tell team members about:
+The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
     </item>
     
     <item>
@@ -98,10 +98,10 @@ vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, aft
       
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
-  Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
-  If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
-  On tools:
-  Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
+If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
+On tools:
+Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
     
     <item>
@@ -110,10 +110,10 @@ vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt;which, aft
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iwfrom ciw(&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a(mnemonic: &amp;ldquo;a&amp;quot;n) or i(mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w→ a word W→ a WORD t→ a HTML/XML tag s→ a sentence p→ a paragraph  From the (highly recommended) wellle/targets.</description>
+w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
@@ -123,7 +123,7 @@ From core Vim:
       
       <guid>https://codeinthehole.com/tips/debugging-vim-by-example/</guid>
       <description>There&amp;rsquo;s only so far you can get by cargo-culting other people&amp;rsquo;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&amp;rsquo;s slow or misbehaving. Learn how to scratch things that itch.
-This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.vimrc but hopefully some useful techniques that you can use.</description>
+This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.</description>
     </item>
     
     <item>
@@ -133,8 +133,8 @@ This post illustrates a range of debugging and profiling approaches for Vim by w
       
       <guid>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
       <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.
-&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that)let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;]let b:ale_fix_on_save = 1If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
-let b:ale_fix_on_save = 0let filepath = expand(&amp;#39;%:p:h&amp;#39;)if match(filepath, &amp;#39;some-project-name&amp;#39;) != -1 let b:ale_fix_on_save = 1endifFurther, if you don&amp;rsquo;t want these fixers applied on save, set</description>
+&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that) let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;] let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
+let b:ale_fix_on_save = 0 let filepath = expand(&amp;#39;%:p:h&amp;#39;) if match(filepath, &amp;#39;some-project-name&amp;#39;) !</description>
     </item>
     
     <item>
@@ -156,8 +156,8 @@ E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is an
       
       <guid>https://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</guid>
       <description>I wasted a morning trying to install RabbitMQ v3.7.12 (the latest version as of Feb 2019) on an Ubuntu 18.04 machine using Puppet. This as tricky as:
- Only RabbitMQ version 3.6.10 is available from the default repositories; Getting Puppet to install packages from custom locations can be painful.  Solution Use these Puppet modules in your Puppetfile:
-mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39;mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39;mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34;and something like this in your manifest code:</description>
+Only RabbitMQ version 3.6.10 is available from the default repositories; Getting Puppet to install packages from custom locations can be painful. Solution Use these Puppet modules in your Puppetfile:
+mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39; mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39; mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34; and something like this in your manifest code:</description>
     </item>
     
     <item>
@@ -191,7 +191,7 @@ from httplib2 import Http from googleapiclient.discovery import build from oauth
       <guid>https://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
 Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
-  Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
+Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
     </item>
     
     <item>
@@ -214,7 +214,8 @@ With these two changes, a maximised window is effectively full-screen.</descript
       <guid>https://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</guid>
       <description>Joining tables on date and timestamp with timezone fields in Postgres1 needs careful handling because of time zones and daylight-saving time.
 To illustrate, assume we have two tables:
- t1 which has a field of type date and a foreign-key t2_id to t2 which has a field of timestamp with timezone.  We want to build SQL queries that join between these two tables with additional date constraints on the join.</description>
+t1 which has a field of type date and a foreign-key t2_id to t2 which has a field of timestamp with timezone. We want to build SQL queries that join between these two tables with additional date constraints on the join.
+Assume the date values in t1 correspond to the Europe/London time zone.</description>
     </item>
     
     <item>
@@ -227,7 +228,7 @@ To illustrate, assume we have two tables:
 Fail fast You probably already know that you can force Bash scripts to exit immediately if there&amp;rsquo;s an error (that is, if any command exits with a non-zero exit code) using:
 #!/usr/bin/env bash set -e but it&amp;rsquo;s even better to use:
 set -eu -o pipefail so that the script:
- exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
+exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
     </item>
     
     <item>
@@ -263,7 +264,7 @@ For instance, which of these is right? This:
       
       <guid>https://codeinthehole.com/tips/your-codebase-is-your-/</guid>
       <description>“Remember, code is your house, and you have to live in it.” - Michael Feathers 🏠
-&amp;mdash; Programming Wisdom (@CodeWisdom) April 19, 2017  This is the best metaphor I know for promoting or defending software quality.
+&amp;mdash; Programming Wisdom (@CodeWisdom) April 19, 2017 This is the best metaphor I know for promoting or defending software quality.
 We do live in our codebases: shoddy software engineering has direct, easily-visualised analogues from construction and house maintenance.
 For instance, I&amp;rsquo;m sure you&amp;rsquo;ve seen these pull requests before1:
 Furthermore, the episode &amp;ldquo;Hurrican Neddy&amp;rdquo; from season 8 of The Simpsons is a parable of a failed software project, where feature delivery is prioritised at the expense of maintainability.</description>
@@ -288,7 +289,7 @@ git pulls where pulls is aliased in ~/.</description>
       <guid>https://codeinthehole.com/tips/json-to-google-sheets/</guid>
       <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
 Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
-$ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</description>
+$ cat loggly_events.json | \ jq -r &amp;#39;.events[].event.json | select(.params | has(&amp;#34;payment_day&amp;#34;)) | [.</description>
     </item>
     
     <item>
@@ -300,7 +301,7 @@ $ cat loggly_events.json | \  jq -r &amp;#39;.events[].event.json | select(.</de
       <description>If your Consul key-value store is structured as:
 / A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
 / WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:
-#!/bin/bash  set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
+#!/bin/bash set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
     
     <item>
@@ -342,7 +343,7 @@ Host app1-prod User example_user HostName 74.207.251.29 This circumvented the la
       
       <guid>https://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
       <description>Hmmm, this delete statement is taking longer than I thought it would&amp;hellip;
- If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
+If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
 \copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39; and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
 \copy $table from &amp;#39;/tmp/backup.csv&amp;#39; Moderately useful.</description>
     </item>
@@ -364,7 +365,7 @@ There are various techniques available for dealing with this2, but what we do at
       
       <guid>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
       <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash  # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
+#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
     </item>
     
     <item>
@@ -407,7 +408,7 @@ This is a particular menace in agencies (or anywhere with lots of small projects
       <description>If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
 It&amp;rsquo;s easily installed - on OSX, run:
 brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;)&amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%mendif:grep searches are now lightning-fast and respectful of your ~/.</description>
+if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif :grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     
     <item>
@@ -441,7 +442,7 @@ sudo apt-get update sudo apt-get install postgresql-server-dev-9.1 postgresql-9.
       <description>Confession: I am a pedant, especially around commit messages.
 I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ Git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
 Use the following .git/hooks/prepare-commit-msg hook:
-#!/bin/sh  NUM_COMMITS=5 FORMAT=&amp;#34;# %h %s [%an]&amp;#34; COMMITS=&amp;#34;$(git log --pretty=&amp;#34;${FORMAT}&amp;#34; -${NUM_COMMITS})&amp;#34; HEADER=&amp;#34;# # Last ${NUM_COMMITS}commits # ----------------------&amp;#34; recent_commits() { echo &amp;#34;${HEADER}&amp;#34; echo &amp;#34;${COMMITS}&amp;#34; } COMMIT_FILE=$1 SOURCE=$2 SHA=$3 case &amp;#34;$SOURCE&amp;#34; in merge|squash|message) ;; &amp;#34;&amp;#34;|commit|template) if [ -z &amp;#34;$SHA&amp;#34; ]; then recent_commits &amp;gt;&amp;gt; $COMMIT_FILE fi ;; *) echo &amp;#34;Unexpected type &amp;#39;$SOURCE&amp;#39; in prepare-commit-msg hook&amp;#34; &amp;gt;&amp;amp;2 exit 1 esac then your default commit template looks like this:</description>
+#!/bin/sh NUM_COMMITS=5 FORMAT=&amp;#34;# %h %s [%an]&amp;#34; COMMITS=&amp;#34;$(git log --pretty=&amp;#34;${FORMAT}&amp;#34; -${NUM_COMMITS})&amp;#34; HEADER=&amp;#34;# # Last ${NUM_COMMITS} commits # ----------------------&amp;#34; recent_commits() { echo &amp;#34;${HEADER}&amp;#34; echo &amp;#34;${COMMITS}&amp;#34; } COMMIT_FILE=$1 SOURCE=$2 SHA=$3 case &amp;#34;$SOURCE&amp;#34; in merge|squash|message) ;; &amp;#34;&amp;#34;|commit|template) if [ -z &amp;#34;$SHA&amp;#34; ]; then recent_commits &amp;gt;&amp;gt; $COMMIT_FILE fi ;; *) echo &amp;#34;Unexpected type &amp;#39;$SOURCE&amp;#39; in prepare-commit-msg hook&amp;#34; &amp;gt;&amp;amp;2 exit 1 esac then your default commit template looks like this:</description>
     </item>
     
     <item>
@@ -484,11 +485,10 @@ Such requirements are slightly tricky to capture in Django as they tread slightl
       
       <guid>https://codeinthehole.com/tips/pypi-readme-badges/</guid>
       <description>Thanks to @kuramanga, it&amp;rsquo;s now possible to add shiny PyPi badges to your Python project READMEs that indicate the latest released version on PyPI and the total number of downloads.
-
 This screenshot is taken from django-oscar&amp;rsquo;s README.
 Embed these badges in your own repo as Restructured text:
-.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version.. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloadsor Markdown:
-[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [![PyPi downloads](https://pypip.</description>
+.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:
+[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
     </item>
     
     <item>
@@ -555,9 +555,9 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       
       <guid>https://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
       <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
-ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
-Solution Turn on Postgres&#39; logging and watch the log files when the error is generated.
-This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
+ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t useful: you want to know which query is generating the error.
+Solution Turn on Postgres logging and watch the log files when the error is generated.
+This is done by editing the postgresql.conf config file, whose location can be found from the &amp;ldquo;Server Settings&amp;rdquo; option in the Postgres.</description>
     </item>
     
     <item>
@@ -592,7 +592,7 @@ adduser --shell=/bin/false barry and alter the ownership and permissions of thei
       <guid>https://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</guid>
       <description>Since watching Carl Meyer&amp;rsquo;s superb &amp;lsquo;Testing and Django&amp;rsquo; talk, I&amp;rsquo;ve been using Ian Bicking&amp;rsquo;s WebTest library for functional tests, via django-webtest. I&amp;rsquo;ve been really impressed and I&amp;rsquo;d like to stress one of Carl&amp;rsquo;s points - that using WebTest for functional tests is superior to using the Django client.
 Why? Several reasons - here&amp;rsquo;s a few:
- WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
+WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
     </item>
     
     <item>
@@ -618,7 +618,7 @@ Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
 &amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
 &amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro
-vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</description>
+vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hp which breaks down as:</description>
     </item>
     
     <item>
@@ -629,7 +629,7 @@ vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</d
       <guid>https://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
       <description>How to use a South data migration to avoid accidentally sending emails from example.com.
 Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
-from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %salerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %steam.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
     </item>
     
     <item>
@@ -687,7 +687,7 @@ def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39;
       <description>Problem You want to all the PyCon videos on your iPhone for offline viewing.
 Solution Use the following Python script to fetch pycon videos from YouTube and convert them to M4V format so they can be imported to iTunes.
 To run the script:
- Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script  Run this script using:</description>
+Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script Run this script using:</description>
     </item>
     
     <item>
@@ -721,7 +721,7 @@ from django.test.client import Client client = Client() response = client.get(ur
       <guid>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
       <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.
 Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:
- This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
+This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
     </item>
     
     <item>
@@ -732,7 +732,7 @@ Each documented method involves initialising data as part of the syncdb event, e
       <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
       <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
 Set-up Assume there is a test environment where:
- the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit  There will also be stage and production environments.
+the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.
 Fabric function The following function can be used as part of Fabric build script.</description>
     </item>
     
@@ -744,8 +744,8 @@ Fabric function The following function can be used as part of Fabric build scrip
       <guid>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</guid>
       <description>A client site went down today. This is what happened and how it was fixed.
 Symptoms The immediate symptom is that your application servers can&amp;rsquo;t connect to your database servers. Attempted connections get an error message:
- Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)
- The relevant MySQL process list reveals a long list of attempted connections in state login:
+Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)
+The relevant MySQL process list reveals a long list of attempted connections in state login:
 root@server-db1:~ $ mysqladmin processlist +-----+----------------------+--------------------+----+---------+------+-------+ | Id | User | Host | db | Command | Time | State | +-----+----------------------+--------------------+----+---------+------+-------+ .</description>
     </item>
     
@@ -844,8 +844,8 @@ Seems like it should be trivial using SELECT ... INTO OUTFILE and LOAD DATA INFI
       
       <guid>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</guid>
       <description>As the saying goes:
- Fool me once, shame on you; fool me twice, shame on me
- Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
+Fool me once, shame on you; fool me twice, shame on me
+Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
 We had an issue recently where some debugging code got committed and wasn&amp;rsquo;t picked up during testing.</description>
     </item>
     
@@ -856,8 +856,8 @@ We had an issue recently where some debugging code got committed and wasn&amp;rs
       
       <guid>https://codeinthehole.com/tips/return-false-with-prudence/</guid>
       <description>From &amp;ldquo;Javascript: the good parts&amp;rdquo;:
- It is rarely possible for standards comittees to remove imperfections from a language because doing so would cause the breakdage of all of the bad programs that depend on those bad parts. They are usually powerless to do anything except heap more features on top of the existing pile of imperfections.
- Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excellent points on writing in a language with more than its fair of share of shortcomings.</description>
+It is rarely possible for standards comittees to remove imperfections from a language because doing so would cause the breakdage of all of the bad programs that depend on those bad parts. They are usually powerless to do anything except heap more features on top of the existing pile of imperfections.
+Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excellent points on writing in a language with more than its fair of share of shortcomings.</description>
     </item>
     
     <item>
@@ -918,7 +918,7 @@ irb(main):001:0&amp;gt;my_int = 1 irb(main):002:0&amp;gt;my_int.methods This ret
       
       <guid>https://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</guid>
       <description>A quick Phing tip that&amp;rsquo;s made my life easier when deploying new versions of commandlinefu.com.
-One of the key performance recommendations from Steve Souders&#39; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
+One of the key performance recommendations from Steve Souders&amp;rsquo; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
     </item>
     
     <item>

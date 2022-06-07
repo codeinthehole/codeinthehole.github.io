@@ -97,8 +97,8 @@ reviews what.</p>
 <p>Here&rsquo;s a sample workflow demonstrating the use of pull requests.</p>
 <h4 id="work-on-a-story">Work on a story</h4>
 <p>Create a new branch for the current story you are working on:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b feature/masquerading
-</code></pre></div><p>It&rsquo;s important to use a new branch for pull requests for several reasons:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b feature/masquerading
+</span></span></code></pre></div><p>It&rsquo;s important to use a new branch for pull requests for several reasons:</p>
 <ul>
 <li>It allows you to submit multiple pull requests without confusion. The
 classical Github gotcha is to continue committing to a pull request branch
@@ -114,33 +114,33 @@ discarded once the pull request is accepted and it doesn&rsquo;t matter that you
 history was rewritten.</li>
 </ul>
 <p>Make changes, run tests, commit etc.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ vim
-<span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
-</code></pre></div><h4 id="ask-for-feedback">Ask for feedback</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ vim
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
+</span></span></code></pre></div><h4 id="ask-for-feedback">Ask for feedback</h4>
 <p>If it&rsquo;s a significant or difficult story, you may be unsure if you&rsquo;re on the
 right track. You could ask for some feedback now by pushing your commits to the
 remote for others to review:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push -u origin feature/masquerading
-</code></pre></div><p>The <code>-u</code> option adds an upstream tracking reference to your local branch,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push -u origin feature/masquerading
+</span></span></code></pre></div><p>The <code>-u</code> option adds an upstream tracking reference to your local branch,
 meaning that you can run push subsequent commits using <code>git push</code> without having
 to specify the remote and branch names (and run <code>git pull</code> without additional
 arguments).</p>
 <p>Now ask for feedback on your project mailing list by circulating either a link
 to the branch, or a compare view URL. You can use the excellent
 <a href="http://defunkt.io/hub/">hub</a> to easily generate compare URLs for sharing:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git compare master..feature/masquerading
-</code></pre></div><p>This will open your default browser on the compare URL, which you can then copy
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git compare master..feature/masquerading
+</span></span></code></pre></div><p>This will open your default browser on the compare URL, which you can then copy
 into an email.</p>
 <p>Your fellow developers can now comment either on your commits at line-level, or
 make more general comments by replying to the mailing list thread.</p>
 <h4 id="submit-pull-request">Submit pull request</h4>
-<p>After digesting your co-workers' comments, you adjust your approach and make
+<p>After digesting your co-workers&rsquo; comments, you adjust your approach and make
 some further commits to your branch.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ vim
-<span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
-</code></pre></div><p>When the story is complete, push your new commits to the remote:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push
-</code></pre></div><p>and use the Github site to create a pull request. A couple of things to be aware
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ vim
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
+</span></span></code></pre></div><p>When the story is complete, push your new commits to the remote:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push
+</span></span></code></pre></div><p>and use the Github site to create a pull request. A couple of things to be aware
 of:</p>
 <ul>
 <li>Make sure the destination branch is correct, it may not always be &lsquo;master&rsquo;. If
@@ -160,37 +160,37 @@ pull request as a whole: the same process as when you pushed some commits for
 review earlier.</p>
 <p>It&rsquo;s also possible for others to add commits to the pull request by pushing to
 the same branch:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git fetch origin
-<span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout feature/masquerading
-<span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ vim
-<span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git add .
-<span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
-<span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push origin feature/masquerading
-</code></pre></div><p>Iterate this way until the branch is ready to be merged.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git fetch origin
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout feature/masquerading
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ vim
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git add .
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push origin feature/masquerading
+</span></span></code></pre></div><p>Iterate this way until the branch is ready to be merged.</p>
 <!-- raw HTML omitted -->
 <h4 id="cleaning-your-history-optional">Cleaning your history (optional)</h4>
 <p>When you&rsquo;re ready to merge, you should first clean up the feature branch.</p>
 <p>If there are any commits on the destination branch that aren&rsquo;t on your feature
 branch then you should rebase to avoid a merge commit. You can check for such
 commits using:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git log ..master
-</code></pre></div><p>This shows all commits on &lsquo;master&rsquo; that aren&rsquo;t in your current branch history.
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git log ..master
+</span></span></code></pre></div><p>This shows all commits on &lsquo;master&rsquo; that aren&rsquo;t in your current branch history.
 If you see any commits here, then rebase the feature branch using:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git rebase master
-</code></pre></div><p>This replays your commits on top of the new commits from the destination branch
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git rebase master
+</span></span></code></pre></div><p>This replays your commits on top of the new commits from the destination branch
 so that the merge can be a &lsquo;fast-forward&rsquo;.</p>
 <!-- raw HTML omitted -->
 <p>Next, it may be desirable to squash your commits into larger cohesive commits.
 You can do this using an &lsquo;interactive&rsquo; rebase:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git rebase -i master
-</code></pre></div><p>This will open <code>$EDITOR</code> with all commits since &lsquo;master&rsquo; listed. You can then
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git rebase -i master
+</span></span></code></pre></div><p>This will open <code>$EDITOR</code> with all commits since &lsquo;master&rsquo; listed. You can then
 reorder and squash these commits, as well as rewording the commit messages. Be
 careful, this can become quite addictive.</p>
 <p>One thing you can do is adjust the final commit message on your feature branch
 to close the pull request automatically. Simply add &lsquo;Fixes #123&rsquo; (using the ID
 from the pull request URL) at the bottom of the message.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit --amend
-</code></pre></div><p>Further reading:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit --amend
+</span></span></code></pre></div><p>Further reading:</p>
 <ul>
 <li><a href="https://github.com/blog/831-issues-2-0-the-next-generation">Github issues 2.0: The Next Generation</a> -
 An overview of Github issues with an explanation of how to close, reopen and
@@ -200,18 +200,18 @@ reference pull requests from within commit messages.</li>
 </ul>
 <h4 id="merging">Merging</h4>
 <p>Finally, you can merge your cleaned-up feature branch with a fast-forward merge:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git checkout master
-<span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git merge feature/masquerading
-</code></pre></div><p>Alternatively, you can force a merge commit to keep track of which commits came
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git checkout master
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git merge feature/masquerading
+</span></span></code></pre></div><p>Alternatively, you can force a merge commit to keep track of which commits came
 from the feature branch.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git checkout master
-<span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git merge --no-ff feature/masquerading
-</code></pre></div><p>When you view the your history as a graph, you will be able to tell which
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git checkout master
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git merge --no-ff feature/masquerading
+</span></span></code></pre></div><p>When you view the your history as a graph, you will be able to tell which
 commits were from the feature branch.</p>
 <p>Now delete the local and remote feature branches:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git branch -D feature/masquerading
-<span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git push origin :feature/masquerading
-</code></pre></div><p>Further reading:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git branch -D feature/masquerading
+</span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git push origin :feature/masquerading
+</span></span></code></pre></div><p>Further reading:</p>
 <ul>
 <li><a href="https://help.github.com/articles/using-pull-requests">Using pull requests</a></li>
 </ul>
@@ -261,13 +261,13 @@ this feature was discussed.</li>
 <h3 id="use-your-prompt">Use your prompt</h3>
 <p>Put relevant git information into your prompt - this will make your life easier.
 Here&rsquo;s a bash snippet for adding the current git branch to your prompt:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># ~/.bashrc</span>
-<span style="color:#66d9ef">function</span> parse_git_branch <span style="color:#f92672">{</span>
-    git branch --no-color 2&gt; /dev/null | sed -e <span style="color:#e6db74">&#39;/^[^*]/d&#39;</span> -e <span style="color:#e6db74">&#39;s/* \(.*\)/(\1) /&#39;</span>
-<span style="color:#f92672">}</span>
-PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]&#34;</span>
-export PS1
-</code></pre></div><h3 id="use-aliases-for-speed">Use aliases for speed</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># ~/.bashrc</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> parse_git_branch <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    git branch --no-color 2&gt; /dev/null | sed -e <span style="color:#e6db74">&#39;/^[^*]/d&#39;</span> -e <span style="color:#e6db74">&#39;s/* \(.*\)/(\1) /&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>PS1<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;\[\e[32m\]\$(parse_git_branch)\[\e[34m\]\h:\W \$ \[\e[m\]&#34;</span>
+</span></span><span style="display:flex;"><span>export PS1
+</span></span></code></pre></div><h3 id="use-aliases-for-speed">Use aliases for speed</h3>
 <p>Strive to be as productive as possible at the commandline. For me, that means
 minimising key strokes.</p>
 <p>With git, you can define both git- and bash-aliases to make your life easier. I
@@ -280,39 +280,39 @@ commit per line, but annotated with other useful information such as which
 commits other branches point to. See the definition of <code>git hist</code> below.</li>
 </ol>
 <p>Selected aliases from <code>~/.gitconfig</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[alias]</span>
-    <span style="color:#a6e22e">hist</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">log --color --pretty=format:\&#34;%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\&#34; --relative-date --decorate
-</span><span style="color:#e6db74">    unstage = reset HEAD --
-</span><span style="color:#e6db74">    restore = checkout --
-</span><span style="color:#e6db74">    cn = commit --no-verify
-</span><span style="color:#e6db74">    co = checkout
-</span><span style="color:#e6db74">    praise = blame
-</span><span style="color:#e6db74">    visualise = !gitk
-</span><span style="color:#e6db74">    graph = log --color --graph --pretty=format:\&#34;%h | %ad | %an | %s%d\&#34; --date=short</span>
-</code></pre></div><p>And from <code>~/.bash_aliases</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">alias git<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;hub&#39;</span>
-alias g<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git status -sb&#39;</span>
-alias gh<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git hist&#39;</span>
-alias gp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git pull&#39;</span>
-alias gpr<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git pull --rebase&#39;</span>
-alias gpp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git pull --rebase &amp;&amp; git push&#39;</span>
-alias gf<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git fetch&#39;</span>
-alias gb<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git branch&#39;</span>
-alias ga<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git add&#39;</span>
-alias gc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit&#39;</span>
-alias gca<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --amend&#39;</span>
-alias gcv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --no-verify&#39;</span>
-alias gd<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff --color-words&#39;</span>
-alias gdc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff --cached -w&#39;</span>
-alias gdw<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff --no-ext-diff --word-diff&#39;</span>
-alias gdv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff&#39;</span>
-alias gl<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git log --oneline --decorate&#39;</span>
-alias gt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git tag&#39;</span>
-alias grc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git rebase --continue&#39;</span>
-alias grs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git rebase --skip&#39;</span>
-alias gsl<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git stash list&#39;</span>
-alias gss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git stash save&#39;</span>
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#66d9ef">[alias]</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">hist</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">log --color --pretty=format:\&#34;%C(yellow)%h%C(reset) %s%C(bold red)%d%C(reset) %C(green)%ad%C(reset) %C(blue)[%an]%C(reset)\&#34; --relative-date --decorate
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    unstage = reset HEAD --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    restore = checkout --
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    cn = commit --no-verify
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    co = checkout
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    praise = blame
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    visualise = !gitk
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    graph = log --color --graph --pretty=format:\&#34;%h | %ad | %an | %s%d\&#34; --date=short</span>
+</span></span></code></pre></div><p>And from <code>~/.bash_aliases</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>alias git<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;hub&#39;</span>
+</span></span><span style="display:flex;"><span>alias g<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git status -sb&#39;</span>
+</span></span><span style="display:flex;"><span>alias gh<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git hist&#39;</span>
+</span></span><span style="display:flex;"><span>alias gp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git pull&#39;</span>
+</span></span><span style="display:flex;"><span>alias gpr<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git pull --rebase&#39;</span>
+</span></span><span style="display:flex;"><span>alias gpp<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git pull --rebase &amp;&amp; git push&#39;</span>
+</span></span><span style="display:flex;"><span>alias gf<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git fetch&#39;</span>
+</span></span><span style="display:flex;"><span>alias gb<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git branch&#39;</span>
+</span></span><span style="display:flex;"><span>alias ga<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git add&#39;</span>
+</span></span><span style="display:flex;"><span>alias gc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit&#39;</span>
+</span></span><span style="display:flex;"><span>alias gca<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --amend&#39;</span>
+</span></span><span style="display:flex;"><span>alias gcv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git commit --no-verify&#39;</span>
+</span></span><span style="display:flex;"><span>alias gd<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff --color-words&#39;</span>
+</span></span><span style="display:flex;"><span>alias gdc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff --cached -w&#39;</span>
+</span></span><span style="display:flex;"><span>alias gdw<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff --no-ext-diff --word-diff&#39;</span>
+</span></span><span style="display:flex;"><span>alias gdv<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git diff&#39;</span>
+</span></span><span style="display:flex;"><span>alias gl<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git log --oneline --decorate&#39;</span>
+</span></span><span style="display:flex;"><span>alias gt<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git tag&#39;</span>
+</span></span><span style="display:flex;"><span>alias grc<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git rebase --continue&#39;</span>
+</span></span><span style="display:flex;"><span>alias grs<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git rebase --skip&#39;</span>
+</span></span><span style="display:flex;"><span>alias gsl<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git stash list&#39;</span>
+</span></span><span style="display:flex;"><span>alias gss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;git stash save&#39;</span>
+</span></span></code></pre></div>
         </div>
 
         <div id="article_meta">

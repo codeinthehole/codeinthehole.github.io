@@ -75,7 +75,7 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <p><!-- raw HTML omitted --></p>
+            <!-- raw HTML omitted -->
 <p>Following some server monitoring advice from the excellent &lsquo;Building Scalable
 Web Sites&rsquo; by Cal Henderson, I&rsquo;ve recently been experimenting with
 <a href="http://ganglia.info/">Ganglia</a> on a cluster of servers at Tangent Labs. It has
@@ -125,8 +125,8 @@ second) which are generally of more interest. Hence, the script estimates the
 rate of change by dividing the value delta by the timestamp delta.</p>
 <p>To use this script, simply copy it into a convenient location, ensure it is
 executable and add the following line to your crontab.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">* * * * * /path/to/gmetric-mysql.sh &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
-</code></pre></div><p>As soon as this is done, your Ganglia web front-end should start plotting the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>* * * * * /path/to/gmetric-mysql.sh &gt; /dev/null 2&gt;&amp;<span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><p>As soon as this is done, your Ganglia web front-end should start plotting the
 new metrics.</p>
 <p><img src="/images/ganglia-snapshot.jpeg" alt="image"></p>
 

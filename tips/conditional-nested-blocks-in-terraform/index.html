@@ -86,43 +86,43 @@ to create conditional nested blocks.</p>
 <p>This is useful if you need to stop all traffic to a RDS database server so it
 can be upgraded.</p>
 <p>Define a boolean <code>maintenance_mode</code> variable:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#75715e"># variables.tf
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">
-</span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;maintenance_mode&#34;</span> {
-  <span style="color:#a6e22e">type</span>    = <span style="color:#a6e22e">bool</span>
-  <span style="color:#a6e22e">default</span> = <span style="color:#66d9ef">false</span>
-}
-</code></pre></div><p>and use it to create conditional <code>default_action</code> blocks in an <code>aws_lb_listener</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#75715e"># variables.tf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">variable</span> <span style="color:#e6db74">&#34;maintenance_mode&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">type</span>    = <span style="color:#a6e22e">bool</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">default</span> = <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>and use it to create conditional <code>default_action</code> blocks in an <code>aws_lb_listener</code>
 resource.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-terraform" data-lang="terraform"><span style="color:#75715e"># main.tf
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">
-</span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_lb_listener&#34;</span> <span style="color:#e6db74">&#34;this&#34;</span> {
-  <span style="color:#a6e22e">load_balancer_arn</span> = <span style="color:#a6e22e">aws_lb</span>.<span style="color:#a6e22e">this</span>.<span style="color:#a6e22e">arn</span>
-  <span style="color:#a6e22e">port</span>              = <span style="color:#ae81ff">443</span>
-  <span style="color:#a6e22e">protocol</span>          = <span style="color:#e6db74">&#34;HTTPS&#34;</span>
-  <span style="color:#a6e22e">ssl_policy</span>        = <span style="color:#e6db74">&#34;ELBSecurityPolicy-TLS-1-2-2017-01&#34;</span>
-
-  <span style="color:#a6e22e">dynamic</span> <span style="color:#e6db74">&#34;default_action&#34;</span> {
-    <span style="color:#a6e22e">for_each</span> = var.<span style="color:#a6e22e">maintenance_mode</span> <span style="color:#f92672">?</span> [] <span style="color:#f92672">:</span> [<span style="color:#ae81ff">1</span>]
-    <span style="color:#a6e22e">content</span> {
-      <span style="color:#a6e22e">type</span>             = <span style="color:#e6db74">&#34;forward&#34;</span>
-      <span style="color:#a6e22e">target_group_arn</span> = <span style="color:#a6e22e">aws_lb_target_group</span>.<span style="color:#a6e22e">this</span>.<span style="color:#a6e22e">arn</span>
-    }
-  }
-
-  <span style="color:#a6e22e">dynamic</span> <span style="color:#e6db74">&#34;default_action&#34;</span> {
-    <span style="color:#a6e22e">for_each</span> = var.<span style="color:#a6e22e">maintenance_mode</span> <span style="color:#f92672">?</span> [<span style="color:#ae81ff">1</span>] <span style="color:#f92672">:</span> []
-    <span style="color:#a6e22e">content</span> {
-      <span style="color:#a6e22e">type</span> = <span style="color:#e6db74">&#34;fixed-response&#34;</span>
-      <span style="color:#a6e22e">fixed_response</span> {
-        <span style="color:#a6e22e">content_type</span> = <span style="color:#e6db74">&#34;text/html&#34;</span>
-        <span style="color:#a6e22e">message_body</span> = file(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">path</span>.module<span style="color:#e6db74">}</span><span style="color:#e6db74">/pages/scheduled-maintenance.html&#34;</span>)
-        <span style="color:#a6e22e">status_code</span>  = <span style="color:#e6db74">&#34;503&#34;</span>
-      }
-    }
-  }
-}
-</code></pre></div><p>If <code>maintenance_mode</code> is <code>false</code>, the load balancer will forward traffic to the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-terraform" data-lang="terraform"><span style="display:flex;"><span><span style="color:#75715e"># main.tf
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">
+</span></span></span><span style="display:flex;"><span><span style="color:#66d9ef">resource</span> <span style="color:#e6db74">&#34;aws_lb_listener&#34;</span> <span style="color:#e6db74">&#34;this&#34;</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">load_balancer_arn</span> = <span style="color:#a6e22e">aws_lb</span>.<span style="color:#a6e22e">this</span>.<span style="color:#a6e22e">arn</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">port</span>              = <span style="color:#ae81ff">443</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">protocol</span>          = <span style="color:#e6db74">&#34;HTTPS&#34;</span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">ssl_policy</span>        = <span style="color:#e6db74">&#34;ELBSecurityPolicy-TLS-1-2-2017-01&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">dynamic</span> <span style="color:#e6db74">&#34;default_action&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">for_each</span> = var.<span style="color:#a6e22e">maintenance_mode</span> <span style="color:#f92672">?</span> [] <span style="color:#f92672">:</span> [<span style="color:#ae81ff">1</span>]
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">content</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">type</span>             = <span style="color:#e6db74">&#34;forward&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">target_group_arn</span> = <span style="color:#a6e22e">aws_lb_target_group</span>.<span style="color:#a6e22e">this</span>.<span style="color:#a6e22e">arn</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">dynamic</span> <span style="color:#e6db74">&#34;default_action&#34;</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">for_each</span> = var.<span style="color:#a6e22e">maintenance_mode</span> <span style="color:#f92672">?</span> [<span style="color:#ae81ff">1</span>] <span style="color:#f92672">:</span> []
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">content</span> {
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">type</span> = <span style="color:#e6db74">&#34;fixed-response&#34;</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#a6e22e">fixed_response</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">content_type</span> = <span style="color:#e6db74">&#34;text/html&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">message_body</span> = file(<span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span><span style="color:#a6e22e">path</span>.module<span style="color:#e6db74">}</span><span style="color:#e6db74">/pages/scheduled-maintenance.html&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">status_code</span>  = <span style="color:#e6db74">&#34;503&#34;</span>
+</span></span><span style="display:flex;"><span>      }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>If <code>maintenance_mode</code> is <code>false</code>, the load balancer will forward traffic to the
 target group as normal. But if <code>true</code>, a HTTP 503 response will be returned with
 a simple HTML payload.</p>
 <p>This allows you to easily adjust a load balancer to serve a temporary holding

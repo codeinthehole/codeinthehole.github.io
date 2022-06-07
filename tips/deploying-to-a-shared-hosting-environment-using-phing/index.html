@@ -95,73 +95,73 @@ Syntax and usage are trivial given a glance through the source code
 (<code>/usr/share/php/phing/tasks/ext/FtpDeployTask.php</code> on Ubuntu systems).</p>
 <p>Here&rsquo;s a simple build.xml deployment script for a CodeIgniter project that uses
 the FtpDeploy task:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-xml" data-lang="xml"><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
-<span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Shared hosting deployment&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
-
-    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.host&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;ftp.example.com&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.port&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;21&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.username&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;user&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.password&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/public_html/&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.mode&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;ascii&#34;</span> <span style="color:#f92672">/&gt;</span>
-
-    <span style="color:#75715e">&lt;!-- FILESETS --&gt;</span>
-    <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.images&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;images/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;favicon.ico&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/fileset&gt;</span>
-    <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.application&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;system/application/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;css/*&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;js/*&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/fileset&gt;</span>
-    <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.system&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;system/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;exclude</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;system/application/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;index.php&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;robots.txt&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;.htaccess&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/fileset&gt;</span>
-
-    <span style="color:#75715e">&lt;!-- DEPLOYMENT TARGETS --&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;Copying fileset &#39;${deploy.fileset.refid}&#39; to ${ftp.host} in ${ftp.mode} mode&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;ftpdeploy</span>
-            <span style="color:#a6e22e">host=</span><span style="color:#e6db74">&#34;${ftp.host}&#34;</span>
-            <span style="color:#a6e22e">port=</span><span style="color:#e6db74">&#34;${ftp.port}&#34;</span>
-            <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;${ftp.username}&#34;</span>
-            <span style="color:#a6e22e">password=</span><span style="color:#e6db74">&#34;${ftp.password}&#34;</span>
-            <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;${ftp.dir}&#34;</span>
-            <span style="color:#a6e22e">mode=</span><span style="color:#e6db74">&#34;${ftp.mode}&#34;</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">refid=</span><span style="color:#e6db74">&#34;${deploy.fileset.refid}&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/ftpdeploy&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-images&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Deploying image files&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy.fileset.refid&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;files.images&#34;</span> <span style="color:#f92672">/&gt;</span>
-            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.mode&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;binary&#34;</span> <span style="color:#a6e22e">override=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/phingcall&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Deploying application files&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy.fileset.refid&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;files.application&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/phingcall&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-system-files&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Deploying system files&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
-            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy.fileset.refid&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;files.system&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;/phingcall&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-all&#34;</span><span style="color:#f92672">&gt;</span>
-        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-images&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span> <span style="color:#f92672">/&gt;</span>
-        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-system-files&#34;</span> <span style="color:#f92672">/&gt;</span>
-    <span style="color:#f92672">&lt;/target&gt;</span>
-<span style="color:#f92672">&lt;/project&gt;</span>
-</code></pre></div><p>As we&rsquo;re forced into using clumsy, out-dated FTP (rather than the wonderful
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#75715e">&lt;?xml version=&#34;1.0&#34; ?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;project</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;Shared hosting deployment&#34;</span> <span style="color:#a6e22e">default=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span> <span style="color:#a6e22e">basedir=</span><span style="color:#e6db74">&#34;.&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.host&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;ftp.example.com&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.port&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;21&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.username&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;user&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.password&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;password&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.dir&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;/public_html/&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.mode&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;ascii&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!-- FILESETS --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.images&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;images/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;favicon.ico&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/fileset&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.application&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;system/application/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;css/*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;js/*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/fileset&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">id=</span><span style="color:#e6db74">&#34;files.system&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;system/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;exclude</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;system/application/**/*&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;index.php&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;robots.txt&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;include</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;.htaccess&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/fileset&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">&lt;!-- DEPLOYMENT TARGETS --&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">message=</span><span style="color:#e6db74">&#34;Copying fileset &#39;${deploy.fileset.refid}&#39; to ${ftp.host} in ${ftp.mode} mode&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;ftpdeploy</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">host=</span><span style="color:#e6db74">&#34;${ftp.host}&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">port=</span><span style="color:#e6db74">&#34;${ftp.port}&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">username=</span><span style="color:#e6db74">&#34;${ftp.username}&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">password=</span><span style="color:#e6db74">&#34;${ftp.password}&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">dir=</span><span style="color:#e6db74">&#34;${ftp.dir}&#34;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">mode=</span><span style="color:#e6db74">&#34;${ftp.mode}&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;fileset</span> <span style="color:#a6e22e">refid=</span><span style="color:#e6db74">&#34;${deploy.fileset.refid}&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/ftpdeploy&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-images&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Deploying image files&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy.fileset.refid&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;files.images&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;ftp.mode&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;binary&#34;</span> <span style="color:#a6e22e">override=</span><span style="color:#e6db74">&#34;true&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/phingcall&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Deploying application files&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy.fileset.refid&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;files.application&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/phingcall&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-system-files&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;echo</span> <span style="color:#a6e22e">msg=</span><span style="color:#e6db74">&#34;Deploying system files&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#f92672">&lt;property</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy.fileset.refid&#34;</span> <span style="color:#a6e22e">value=</span><span style="color:#e6db74">&#34;files.system&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;/phingcall&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;target</span> <span style="color:#a6e22e">name=</span><span style="color:#e6db74">&#34;deploy-all&#34;</span><span style="color:#f92672">&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-images&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-application-files&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&lt;phingcall</span> <span style="color:#a6e22e">target=</span><span style="color:#e6db74">&#34;deploy-system-files&#34;</span> <span style="color:#f92672">/&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&lt;/target&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">&lt;/project&gt;</span>
+</span></span></code></pre></div><p>As we&rsquo;re forced into using clumsy, out-dated FTP (rather than the wonderful
 rsync) to copy the files onto the production server, each deployment overwrites
 existing files with the selected fileset and this can be quite time-consuming
 for large filesets as it often moves across a load of files that haven&rsquo;t
@@ -174,13 +174,13 @@ make use of the extremely useful &ldquo;phingcall&rdquo; target which allows a p
 &ldquo;deploy&rdquo; target to be created which takes a fileset id as an argument.</p>
 <p>With the above build.xml in the root of your project, deploying to production is
 now as simple as:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing deploy-all
-</code></pre></div><p>although most of the time the following suffices:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing
-</code></pre></div><p>Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp which can
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing deploy-all
+</span></span></code></pre></div><p>although most of the time the following suffices:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>cd /path/to/application/ <span style="color:#f92672">&amp;&amp;</span> phing
+</span></span></code></pre></div><p>Note that FtpDeploy.php has a dependency on the PEAR package Net_Ftp which can
 be trivially installed in the usual manner:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo pear install Net_FTP
-</code></pre></div><p>Of course, this script is overly simplistic and only works well with a single
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>sudo pear install Net_FTP
+</span></span></code></pre></div><p>Of course, this script is overly simplistic and only works well with a single
 developer. However, it would be easy to extend to team development by
 integrating with SVN so that the latest revision (or designated tag/branch) is
 checked out into a temporary directory before being copied over to the

@@ -85,69 +85,69 @@ However, if you do find yourself in a similar position, here are a few
 command-line tricks for analysing your git history.</p>
 <h3 id="analysing-codebase-changes-since-a-tag">Analysing codebase changes since a tag</h3>
 <p>Basics: browse commits since the last tagged release</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git log 0.5..0.6
-</code></pre></div><p>The <code>--name-status</code> option for <code>git diff</code> is useful for analysing codebase
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log 0.5..0.6
+</span></span></code></pre></div><p>The <code>--name-status</code> option for <code>git diff</code> is useful for analysing codebase
 changes between two commits. For instance, you can view changes to a particular
 directory:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git diff --name-status 0.5..0.6 oscar/apps/address
-</code></pre></div><p>which can be useful if thousands of files have changed and you want to review
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff --name-status 0.5..0.6 oscar/apps/address
+</span></span></code></pre></div><p>which can be useful if thousands of files have changed and you want to review
 each package individually.</p>
 <p>Extensions include finding deleted files:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git diff --name-status 0.5..0.6 | grep <span style="color:#e6db74">&#34;^D&#34;</span>
-</code></pre></div><p>or all new migration files:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git diff --name-status 0.5..0.6 | grep <span style="color:#e6db74">&#34;^A.*migrations/[0-9]&#34;</span>
-</code></pre></div><p>which is important for projects like Oscar which ship with database migrations.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff --name-status 0.5..0.6 | grep <span style="color:#e6db74">&#34;^D&#34;</span>
+</span></span></code></pre></div><p>or all new migration files:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff --name-status 0.5..0.6 | grep <span style="color:#e6db74">&#34;^A.*migrations/[0-9]&#34;</span>
+</span></span></code></pre></div><p>which is important for projects like Oscar which ship with database migrations.</p>
 <h3 id="determine-changes-template-block-names">Determine changes template block names</h3>
 <p>Since Oscar allows customisation of templates and overriding template blocks, we
 try and document any changes to template block names. The process here is more
 involved and requires two temporary files generated with this command:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ grep -or <span style="color:#e6db74">&#34;{% block .* %}&#34;</span> oscar/templates/oscar | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;:&#34;} {split($2, parts, &#34; &#34;); print $1, parts[3]}&#39;</span>
-</code></pre></div><p>This writes out each pairs of filename and template block name:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">oscar/templates/oscar/403.html title
-oscar/templates/oscar/403.html error_heading
-oscar/templates/oscar/403.html error_message
-oscar/templates/oscar/404.html title
-oscar/templates/oscar/404.html error_heading
-oscar/templates/oscar/404.html error_message
-...
-</code></pre></div><p>To compare the template blocks from each release, we create two temporary files
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ grep -or <span style="color:#e6db74">&#34;{% block .* %}&#34;</span> oscar/templates/oscar | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;:&#34;} {split($2, parts, &#34; &#34;); print $1, parts[3]}&#39;</span>
+</span></span></code></pre></div><p>This writes out each pairs of filename and template block name:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>oscar/templates/oscar/403.html title
+</span></span><span style="display:flex;"><span>oscar/templates/oscar/403.html error_heading
+</span></span><span style="display:flex;"><span>oscar/templates/oscar/403.html error_message
+</span></span><span style="display:flex;"><span>oscar/templates/oscar/404.html title
+</span></span><span style="display:flex;"><span>oscar/templates/oscar/404.html error_heading
+</span></span><span style="display:flex;"><span>oscar/templates/oscar/404.html error_message
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>To compare the template blocks from each release, we create two temporary files
 and analyse the diff:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git checkout 0.5
-$ grep -or <span style="color:#e6db74">&#34;{% block .* %}&#34;</span> oscar/templates/oscar | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;:&#34;} {split($2, parts, &#34; &#34;); print $1, parts[3]}&#39;</span> &gt;
-    /tmp/templates-0.5.txt
-$ git checkout 0.6
-$ grep -or <span style="color:#e6db74">&#34;{% block .* %}&#34;</span> oscar/templates/oscar | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;:&#34;} {split($2, parts, &#34; &#34;); print $1, parts[3]}&#39;</span> &gt;
-    /tmp/templates-0.6.txt
-$ vimdiff /tmp/templates-0.<span style="color:#f92672">{</span>5,6<span style="color:#f92672">}</span>.txt
-</code></pre></div><p>I imagine there&rsquo;s a better way to do this but I couldn&rsquo;t find one.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git checkout 0.5
+</span></span><span style="display:flex;"><span>$ grep -or <span style="color:#e6db74">&#34;{% block .* %}&#34;</span> oscar/templates/oscar | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;:&#34;} {split($2, parts, &#34; &#34;); print $1, parts[3]}&#39;</span> &gt;
+</span></span><span style="display:flex;"><span>    /tmp/templates-0.5.txt
+</span></span><span style="display:flex;"><span>$ git checkout 0.6
+</span></span><span style="display:flex;"><span>$ grep -or <span style="color:#e6db74">&#34;{% block .* %}&#34;</span> oscar/templates/oscar | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    awk <span style="color:#e6db74">&#39;BEGIN {FS=&#34;:&#34;} {split($2, parts, &#34; &#34;); print $1, parts[3]}&#39;</span> &gt;
+</span></span><span style="display:flex;"><span>    /tmp/templates-0.6.txt
+</span></span><span style="display:flex;"><span>$ vimdiff /tmp/templates-0.<span style="color:#f92672">{</span>5,6<span style="color:#f92672">}</span>.txt
+</span></span></code></pre></div><p>I imagine there&rsquo;s a better way to do this but I couldn&rsquo;t find one.</p>
 <!-- raw HTML omitted -->
 <h3 id="updating-an-authors-files">Updating an <code>AUTHORS</code> files</h3>
 <p>Oscar&rsquo;s <code>AUTHORS</code> file contains all contributors with 15 or more commits in the
 master branch. We generate this file automatically.</p>
 <p>You can sort authors by number of commits:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git shortlog -sn master | head
-  <span style="color:#ae81ff">2992</span>  David Winterbottom
-   <span style="color:#ae81ff">355</span>  Maik Hoepfel
-   <span style="color:#ae81ff">167</span>  Sebastian Vetter
-   <span style="color:#ae81ff">166</span>  Jon Price
-   <span style="color:#ae81ff">120</span>  Andrew Ingram
-    <span style="color:#ae81ff">73</span>  Asia Biega
-    <span style="color:#ae81ff">65</span>  Oliver Randell
-    <span style="color:#ae81ff">49</span>  Eleni Lixourioti
-  ...
-</code></pre></div><p>and extend this to find authors with more than a certain number of commits</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">THRESHOLD<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>
-git shortlog -sn master | awk <span style="color:#e6db74">&#39;$1 &gt;= $THRESHOLD {$1=&#34;&#34;;print $0}&#39;</span> | cut -d<span style="color:#e6db74">&#34; &#34;</span> -f2-
-</code></pre></div><p>Note, <code>git shortlog</code> uses a <code>.mailmap</code> file to aggregate commits from the same
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git shortlog -sn master | head
+</span></span><span style="display:flex;"><span>  <span style="color:#ae81ff">2992</span>  David Winterbottom
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">355</span>  Maik Hoepfel
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">167</span>  Sebastian Vetter
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">166</span>  Jon Price
+</span></span><span style="display:flex;"><span>   <span style="color:#ae81ff">120</span>  Andrew Ingram
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">73</span>  Asia Biega
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">65</span>  Oliver Randell
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">49</span>  Eleni Lixourioti
+</span></span><span style="display:flex;"><span>  ...
+</span></span></code></pre></div><p>and extend this to find authors with more than a certain number of commits</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>THRESHOLD<span style="color:#f92672">=</span><span style="color:#ae81ff">15</span>
+</span></span><span style="display:flex;"><span>git shortlog -sn master | awk <span style="color:#e6db74">&#39;$1 &gt;= $THRESHOLD {$1=&#34;&#34;;print $0}&#39;</span> | cut -d<span style="color:#e6db74">&#34; &#34;</span> -f2-
+</span></span></code></pre></div><p>Note, <code>git shortlog</code> uses a <code>.mailmap</code> file to aggregate commits from the same
 committer where their name or email were different in the commit history.</p>
 <p>Using this command, we can create a new <code>AUTHORS</code> file containing all
 contributors with greater than 15 commits on the master branch:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git shortlog -ns master | awk <span style="color:#e6db74">&#39;$1 &gt;= $THRESHOLD {$1=&#34;&#34;;print $0}&#39;</span> | <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    cut -d<span style="color:#e6db74">&#34; &#34;</span> -f2- &gt; AUTHORS
-</code></pre></div><h3 id="notifying-contributors">Notifying contributors</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git shortlog -ns master | awk <span style="color:#e6db74">&#39;$1 &gt;= $THRESHOLD {$1=&#34;&#34;;print $0}&#39;</span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    cut -d<span style="color:#e6db74">&#34; &#34;</span> -f2- &gt; AUTHORS
+</span></span></code></pre></div><h3 id="notifying-contributors">Notifying contributors</h3>
 <p>If you have a patch accepted into a project, it&rsquo;s useful to know when a formal
 release has been cut that includes said patch. Before then, you might be linking
 your project to a fork and maintaining a work-around within your codebase.</p>
@@ -157,16 +157,16 @@ stream. However, there&rsquo;s a more thorough way to notify contributors that t
 patch is in a release: you can email them.</p>
 <p>To do this, extract the email addresses of committers whose patches are in the
 new release:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git log 0.5..0.6 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq
-</code></pre></div><p>and CC these addresses in your mailing list release announcement.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log 0.5..0.6 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq
+</span></span></code></pre></div><p>and CC these addresses in your mailing list release announcement.</p>
 <p>Even better, you can only grab the addresses of <em>new</em> contributors to the
 project, where the release is the first to contain one of their commits. We do
 this by extracting two lists of email addresses and employing the lovely but
 neglected <code>comm</code> command to pluck the email addresses that only exist in the
 latest release:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ comm -13 &lt;<span style="color:#f92672">(</span>git log 0.5 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq<span style="color:#f92672">)</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    &lt;<span style="color:#f92672">(</span>git log 0.5..0.6 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq<span style="color:#f92672">)</span>
-</code></pre></div><p>Note the first input is all contributors up to release 0.5, while the second is
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ comm -13 &lt;<span style="color:#f92672">(</span>git log 0.5 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq<span style="color:#f92672">)</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    &lt;<span style="color:#f92672">(</span>git log 0.5..0.6 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;%aE&#39;</span> | sort | uniq<span style="color:#f92672">)</span>
+</span></span></code></pre></div><p>Note the first input is all contributors up to release 0.5, while the second is
 contributors to the 0.6 release only.</p>
 <p><code>comm</code> is an extremely useful command for selecting lines common between two
 files, or exclusive to one. The <code>-13</code> options indicate to exclude lines
@@ -175,17 +175,17 @@ exclusive to the first file (<code>-1</code>) and lines common to both (<code>-3
 <p>If your release isn&rsquo;t large, your release notes could include a summary of the
 contained commits; this is useful for minor point releases. You can use
 <code>git shortlog</code> to do this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git shortlog 0.5..0.6 --no-merges
-David Winterbottom <span style="color:#f92672">(</span>661<span style="color:#f92672">)</span>:
-      Add defaults to the counts on the product summary dashboard page
-      Tidy up urls.py and settings.py
-      Use mirrors when pip installing the demo site
-      Install django-oscar-stores
-      Add link to stores page in footer
-...
-</code></pre></div><p>You can even use <code>--format</code> to provide links to Github commits:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git shortlog 0.3.4..0.4 --no-merges --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&#34;</span>
-</code></pre></div><p>This won&rsquo;t always be appropriate if your release if there are thousands of
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git shortlog 0.5..0.6 --no-merges
+</span></span><span style="display:flex;"><span>David Winterbottom <span style="color:#f92672">(</span>661<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>      Add defaults to the counts on the product summary dashboard page
+</span></span><span style="display:flex;"><span>      Tidy up urls.py and settings.py
+</span></span><span style="display:flex;"><span>      Use mirrors when pip installing the demo site
+</span></span><span style="display:flex;"><span>      Install django-oscar-stores
+</span></span><span style="display:flex;"><span>      Add link to stores page in footer
+</span></span><span style="display:flex;"><span>...
+</span></span></code></pre></div><p>You can even use <code>--format</code> to provide links to Github commits:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git shortlog 0.3.4..0.4 --no-merges --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%s (https://github.com/tangentlabs/django-oscar-stores/commit/%h)&#34;</span>
+</span></span></code></pre></div><p>This won&rsquo;t always be appropriate if your release if there are thousands of
 commits.</p>
 
         </div>

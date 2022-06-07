@@ -13,10 +13,10 @@
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iwfrom ciw(&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a(mnemonic: &amp;ldquo;a&amp;quot;n) or i(mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
+For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
 From core Vim:
- w→ a word W→ a WORD t→ a HTML/XML tag s→ a sentence p→ a paragraph  From the (highly recommended) wellle/targets.</description>
+w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
     </item>
     
     <item>
@@ -44,10 +44,10 @@ From core Vim:
       
       <guid>https://codeinthehole.com/lists/why-your-models-are-fat/</guid>
       <description>Because:
-  You moved everything out of the views.py modules when you heard fat controllers were bad.
-  And you&amp;rsquo;ve read that fat models are a good idea1.
-  You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
-&amp;lt;p&amp;gt; The current balance is {{ account.get_balance_via_three_network_calls_lol }} &amp;lt;/p&amp;gt;   You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
+You moved everything out of the views.py modules when you heard fat controllers were bad.
+And you&amp;rsquo;ve read that fat models are a good idea1.
+You need some extra functionality in a template and this is the easiest way to shoehorn it in. Eg:
+&amp;lt;p&amp;gt; The current balance is {{ account.get_balance_via_three_network_calls_lol }} &amp;lt;/p&amp;gt; You can quickly solve your current problem by adding n more lines to that method (repeat ad infinitum)2.</description>
     </item>
     
     <item>
@@ -184,7 +184,7 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       <guid>https://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</guid>
       <description>Since watching Carl Meyer&amp;rsquo;s superb &amp;lsquo;Testing and Django&amp;rsquo; talk, I&amp;rsquo;ve been using Ian Bicking&amp;rsquo;s WebTest library for functional tests, via django-webtest. I&amp;rsquo;ve been really impressed and I&amp;rsquo;d like to stress one of Carl&amp;rsquo;s points - that using WebTest for functional tests is superior to using the Django client.
 Why? Several reasons - here&amp;rsquo;s a few:
- WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
+WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
     </item>
     
     <item>
@@ -220,7 +220,7 @@ Solution Use Vim macros!
 Macro 1 - Convert tag text To convert
 &amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
 &amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro
-vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</description>
+vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hp which breaks down as:</description>
     </item>
     
     <item>
@@ -231,7 +231,7 @@ vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hpwhich breaks down as:</d
       <guid>https://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
       <description>How to use a South data migration to avoid accidentally sending emails from example.com.
 Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
-from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %salerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %steam.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
     </item>
     
     <item>
@@ -288,7 +288,7 @@ def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39;
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
       <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
 Migrating from PHP to Python and Django Abstract:
- Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     
     <item>
@@ -310,7 +310,7 @@ from django.test.client import Client client = Client() response = client.get(ur
       <guid>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
       <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.
 Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:
- This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
+This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
     </item>
     
     <item>
@@ -320,7 +320,7 @@ Each documented method involves initialising data as part of the syncdb event, e
       
       <guid>https://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
       <description>I rewrote this blog recently with the following aims:
- to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets.  I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
+to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets. I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
     </item>
     
     <item>

@@ -83,15 +83,15 @@ it onto all your remote hosts. To scratch this itch, I wrote a simple node.js
 executable for copying a file to all the defined hosts in your <code>~/.ssh/config</code>
 file</p>
 <p>Usage is trivial:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ multi-scp ~/.bashrc
-Starting sync of <span style="color:#e6db74">&#39;~/.bashrc&#39;</span> to all hosts in /home/david/.ssh/config
--&gt; Copying to mars
--&gt; Copying to venus
--&gt; Copying to jupiter
-&lt;- Successful copy to mars
-&lt;- Successful copy to venus
-&lt;- Successful copy to jupiter
-</code></pre></div><p>Using node.js seems an odd choice as this could trivially be done in another
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ multi-scp ~/.bashrc
+</span></span><span style="display:flex;"><span>Starting sync of <span style="color:#e6db74">&#39;~/.bashrc&#39;</span> to all hosts in /home/david/.ssh/config
+</span></span><span style="display:flex;"><span>-&gt; Copying to mars
+</span></span><span style="display:flex;"><span>-&gt; Copying to venus
+</span></span><span style="display:flex;"><span>-&gt; Copying to jupiter
+</span></span><span style="display:flex;"><span>&lt;- Successful copy to mars
+</span></span><span style="display:flex;"><span>&lt;- Successful copy to venus
+</span></span><span style="display:flex;"><span>&lt;- Successful copy to jupiter
+</span></span></code></pre></div><p>Using node.js seems an odd choice as this could trivially be done in another
 scripting language. However, I wanted to use node as:</p>
 <ul>
 <li>it allows the copy operation to run asynchronously in a child process with a

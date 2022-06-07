@@ -100,19 +100,19 @@ reStructuredBlog, at some point, hence the &ldquo;rsb&rdquo; acronym used in the
 </ol>
 <p>This translates to:</p>
 <h4 id="write">Write</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">vim posts/my-new-article.rst
-</code></pre></div><h4 id="preview">Preview</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py rsb_article posts/my-new-article.rst
-./manage.py runserver
-</code></pre></div><p>This converts the RST file into a instance of <code>rsb.models.Article</code>, plucking out
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>vim posts/my-new-article.rst
+</span></span></code></pre></div><h4 id="preview">Preview</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./manage.py rsb_article posts/my-new-article.rst
+</span></span><span style="display:flex;"><span>./manage.py runserver
+</span></span></code></pre></div><p>This converts the RST file into a instance of <code>rsb.models.Article</code>, plucking out
 the title, subtitle and any tags in the process.</p>
 <p>Rinse and repeat the write and preview steps until happy.</p>
 <h4 id="publish">Publish</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">fab prod publish posts/0036-my-new-article.rst
-</code></pre></div><p>This copies the RST file up to the remote server and re-runs the <code>rsb_article</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>fab prod publish posts/0036-my-new-article.rst
+</span></span></code></pre></div><p>This copies the RST file up to the remote server and re-runs the <code>rsb_article</code>
 management command to create the article in the production database.</p>
 <h3 id="design">Design</h3>
-<p><!-- raw HTML omitted --></p>
+<!-- raw HTML omitted -->
 <p>I recently read the excellent &ldquo;Design for Hackers&rdquo; by David Kadavy. Duly
 inspired, I attempted to rework the design to be clean and pleasing on the eye.
 The color scheme is deliberately kept simple; the fonts used are Verdana,

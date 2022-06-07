@@ -95,17 +95,17 @@ the requirements as user stories. Github&rsquo;s
 is useful here:</p>
 <h4 id="work">Work</h4>
 <p>Create a feature branch to work on this issue:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b issue/472/django1.5
-</code></pre></div><p>I find it helpful to include the issue number in the branch name but that might
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>master<span style="color:#f92672">)</span> $ git checkout -b issue/472/django1.5
+</span></span></code></pre></div><p>I find it helpful to include the issue number in the branch name but that might
 not be to your taste.</p>
 <p>Work and commit onto your branch as normal.</p>
 <h4 id="review">Review</h4>
 <p>Now push to the remote:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ git push -u origin issue/472/django1.5
-</code></pre></div><p>and attach your commits to the original issue, thereby converting it into a pull
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ git push -u origin issue/472/django1.5
+</span></span></code></pre></div><p>and attach your commits to the original issue, thereby converting it into a pull
 request.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ hub pull-request -i <span style="color:#ae81ff">472</span> -h tangentlabs:issue/472/django1.5
-</code></pre></div><p>where <code>tangentlabs</code> is the Github username of the owner of the <code>origin</code> remote.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>issue/472/django1.5<span style="color:#f92672">)</span> $ hub pull-request -i <span style="color:#ae81ff">472</span> -h tangentlabs:issue/472/django1.5
+</span></span></code></pre></div><p>where <code>tangentlabs</code> is the Github username of the owner of the <code>origin</code> remote.</p>
 <p>Note the issue branch was pushed to the <code>origin</code> remote rather than a fork. This
 is convenient as it lets other developers add commits to the pull request.</p>
 <h4 id="iterate">Iterate</h4>
@@ -115,25 +115,25 @@ process continues until the issue is resolved and can be merged into <code>maste
 <p>Hub&rsquo;s <code>pull-request</code> command is useful yet relatively unknown. The <code>-i</code> flag
 indicates the Github issue number while <code>-h</code> specifies the source branch for the
 pull request. Here&rsquo;s the relevant help snippet:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">git pull-request [-f] [TITLE|-i ISSUE|ISSUE-URL] [-b BASE] [-h HEAD]
-        Opens a pull request on GitHub for the project that the &#34;origin&#34;
-        remote points to. The default head of the pull  request  is  the
-        current  branch.  Both  base and head of the pull request can be
-        explicitly given in one  of  the  following  formats:  &#34;branch&#34;,
-        &#34;owner:branch&#34;,  &#34;owner/repo:branch&#34;.  This  command  will abort
-        operation if it detects that the current topic branch has  local
-        commits  that  are  not yet pushed to its upstream branch on the
-        remote. To skip this check, use -f.
-
-        If TITLE is omitted, a text editor will open in which title  and
-        body  of  the  pull request can be entered in the same manner as
-        git commit message.
-
-        If instead of normal TITLE an issue number is given with -i, the
-        pull  request  will  be  attached  to  an existing GitHub issue.
-        Alternatively, instead of title you can paste a full URL  to  an
-        issue on GitHub.
-</code></pre></div><p>Without this command, you would end up creating a separate pull-request and
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>git pull-request [-f] [TITLE|-i ISSUE|ISSUE-URL] [-b BASE] [-h HEAD]
+</span></span><span style="display:flex;"><span>        Opens a pull request on GitHub for the project that the &#34;origin&#34;
+</span></span><span style="display:flex;"><span>        remote points to. The default head of the pull  request  is  the
+</span></span><span style="display:flex;"><span>        current  branch.  Both  base and head of the pull request can be
+</span></span><span style="display:flex;"><span>        explicitly given in one  of  the  following  formats:  &#34;branch&#34;,
+</span></span><span style="display:flex;"><span>        &#34;owner:branch&#34;,  &#34;owner/repo:branch&#34;.  This  command  will abort
+</span></span><span style="display:flex;"><span>        operation if it detects that the current topic branch has  local
+</span></span><span style="display:flex;"><span>        commits  that  are  not yet pushed to its upstream branch on the
+</span></span><span style="display:flex;"><span>        remote. To skip this check, use -f.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        If TITLE is omitted, a text editor will open in which title  and
+</span></span><span style="display:flex;"><span>        body  of  the  pull request can be entered in the same manner as
+</span></span><span style="display:flex;"><span>        git commit message.
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        If instead of normal TITLE an issue number is given with -i, the
+</span></span><span style="display:flex;"><span>        pull  request  will  be  attached  to  an existing GitHub issue.
+</span></span><span style="display:flex;"><span>        Alternatively, instead of title you can paste a full URL  to  an
+</span></span><span style="display:flex;"><span>        issue on GitHub.
+</span></span></code></pre></div><p>Without this command, you would end up creating a separate pull-request and
 issue for the same piece of work.</p>
 <p>You can see this workflow in action via
 <a href="https://github.com/tangentlabs/django-oscar/pulls">Oscar&rsquo;s pull requests</a>.</p>

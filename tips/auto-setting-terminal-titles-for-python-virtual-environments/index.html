@@ -85,18 +85,18 @@ unhappy.</p>
 <p>Use your <code>postactivate</code><sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup> script to set the terminal title when you activate a
 virtual environment. Add something similar to the following to your
 <code>postactivate</code> script:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;codeinthehole.com&#34;</span>
-echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$TITLE<span style="color:#e6db74">\007&#34;</span>
-</code></pre></div><p>Then whenever you start working on a project (using <code>workon</code>), your tab title
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>TITLE<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;codeinthehole.com&#34;</span>
+</span></span><span style="display:flex;"><span>echo -ne <span style="color:#e6db74">&#34;\033]0;</span>$TITLE<span style="color:#e6db74">\007&#34;</span>
+</span></span></code></pre></div><p>Then whenever you start working on a project (using <code>workon</code>), your tab title
 will be labelled correctly.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>which will be somewhere like <code>~/.virtualenvs/yourproject/bin/postactivate</code>.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
         </div>
 

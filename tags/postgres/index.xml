@@ -15,7 +15,8 @@
       <guid>https://codeinthehole.com/tips/joining-between-date-and-datetime-fields-in-postgres/</guid>
       <description>Joining tables on date and timestamp with timezone fields in Postgres1 needs careful handling because of time zones and daylight-saving time.
 To illustrate, assume we have two tables:
- t1 which has a field of type date and a foreign-key t2_id to t2 which has a field of timestamp with timezone.  We want to build SQL queries that join between these two tables with additional date constraints on the join.</description>
+t1 which has a field of type date and a foreign-key t2_id to t2 which has a field of timestamp with timezone. We want to build SQL queries that join between these two tables with additional date constraints on the join.
+Assume the date values in t1 correspond to the Europe/London time zone.</description>
     </item>
     
     <item>
@@ -49,7 +50,7 @@ At a psql prompt, switch to unaligned output
       
       <guid>https://codeinthehole.com/tips/backing-up-database-rows-in-postgres-before-deleting-them/</guid>
       <description>Hmmm, this delete statement is taking longer than I thought it would&amp;hellip;
- If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
+If you ever have to manually run a SQL delete statement in psql, you can back-up the rows you&amp;rsquo;re about to delete:
 \copy ( select * from $table where id in ( ... ) ) to &amp;#39;/tmp/backup.csv&amp;#39; and, if you&amp;rsquo;ve got your filter clause wrong (we&amp;rsquo;ve all done it), restore them with:
 \copy $table from &amp;#39;/tmp/backup.csv&amp;#39; Moderately useful.</description>
     </item>
@@ -85,9 +86,9 @@ Running migrations for stores: - Migrating forwards to 0009_auto__chg_field_open
       
       <guid>https://codeinthehole.com/tips/configuring-logging-for-postgresapp/</guid>
       <description>Problem You&amp;rsquo;re using Postgres.app on a Mac for local development but are getting SQL errors from your application. You&amp;rsquo;re seeing an error message:
-ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t very useful: you want to know which query is generating the error.
-Solution Turn on Postgres&#39; logging and watch the log files when the error is generated.
-This is done by editing ~/Library/Application Support/Postgres/var/postgresql.</description>
+ERROR: current transaction is aborted, commands ignored until end of transaction block This isn&amp;rsquo;t useful: you want to know which query is generating the error.
+Solution Turn on Postgres logging and watch the log files when the error is generated.
+This is done by editing the postgresql.conf config file, whose location can be found from the &amp;ldquo;Server Settings&amp;rdquo; option in the Postgres.</description>
     </item>
     
   </channel>

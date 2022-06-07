@@ -17,7 +17,7 @@
 Maintenance mode As an example, let&amp;rsquo;s create a &amp;ldquo;maintenance mode&amp;rdquo; for a service which allows a &amp;ldquo;under maintenance&amp;rdquo; holding page to be served when a Terraform variable is set.
 This is useful if you need to stop all traffic to a RDS database server so it can be upgraded.
 Define a boolean maintenance_mode variable:
-# variables.tf variable &amp;#34;maintenance_mode&amp;#34; { type = bool default = false } and use it to create conditional default_action blocks in an aws_lb_listener resource.</description>
+# variables.</description>
     </item>
     
     <item>

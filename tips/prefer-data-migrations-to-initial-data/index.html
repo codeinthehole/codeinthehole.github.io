@@ -111,20 +111,20 @@ required.</li>
 projects already do.</p>
 <h3 id="simple-example">Simple example</h3>
 <p>Create a blank data migration:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./manage.py datamigration myapp mymigrationname
-</code></pre></div><p>then implement the <code>forward</code> method to create the appropriate initial data:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
-    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;Foo&#39;</span>, <span style="color:#e6db74">&#39;Bar&#39;</span>):
-        orm<span style="color:#f92672">.</span>Frob<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>name)
-</code></pre></div><p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked example</a> in
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>./manage.py datamigration myapp mymigrationname
+</span></span></code></pre></div><p>then implement the <code>forward</code> method to create the appropriate initial data:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> name <span style="color:#f92672">in</span> (<span style="color:#e6db74">&#39;Foo&#39;</span>, <span style="color:#e6db74">&#39;Bar&#39;</span>):
+</span></span><span style="display:flex;"><span>        orm<span style="color:#f92672">.</span>Frob<span style="color:#f92672">.</span>objects<span style="color:#f92672">.</span>create(name<span style="color:#f92672">=</span>name)
+</span></span></code></pre></div><p>See the <a href="http://south.aeracode.org/docs/tutorial/part3.html">worked example</a> in
 South&rsquo;s docs for further details on writing data migrations.</p>
 <h3 id="using-fixture-files">Using fixture files</h3>
 <p>It&rsquo;s possible to use JSON fixture files with data migrations, by utilising the
 <code>call_command</code> function.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
-    <span style="color:#f92672">from</span> django.core.management <span style="color:#f92672">import</span> call_command
-    call_command(<span style="color:#e6db74">&#39;loaddata&#39;</span>, <span style="color:#e6db74">&#39;countries.json&#39;</span>)
-</code></pre></div><p>I had thought this was very useful feature as you can use the <code>dumpdata</code> command
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forwards</span>(self, orm):
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">from</span> django.core.management <span style="color:#f92672">import</span> call_command
+</span></span><span style="display:flex;"><span>    call_command(<span style="color:#e6db74">&#39;loaddata&#39;</span>, <span style="color:#e6db74">&#39;countries.json&#39;</span>)
+</span></span></code></pre></div><p>I had thought this was very useful feature as you can use the <code>dumpdata</code> command
 to produce your initial fixtures, and you will have them available to be used by
 unit tests.</p>
 

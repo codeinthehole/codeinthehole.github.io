@@ -79,19 +79,29 @@ if (!doNotTrack) {
 <p>You&rsquo;re using <a href="http://postgresapp.com/">Postgres.app</a> on a Mac for local
 development but are getting SQL errors from your application. You&rsquo;re seeing an
 error message:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ERROR:  current transaction is aborted, commands ignored <span style="color:#66d9ef">until</span> end of
-transaction block
-</code></pre></div><p>This isn&rsquo;t very useful: you want to know which query is generating the error.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ERROR:  current transaction is aborted, commands ignored <span style="color:#66d9ef">until</span> end of
+</span></span><span style="display:flex;"><span>transaction block
+</span></span></code></pre></div><p>This isn&rsquo;t useful: you want to know which query is generating the error.</p>
 <h3 id="solution">Solution</h3>
-<p>Turn on Postgres' logging and watch the log files when the error is generated.</p>
-<p>This is done by editing
-<code>~/Library/Application Support/Postgres/var/postgresql.conf</code> and setting:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#a6e22e">logging_collector</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">on</span>
-<span style="color:#a6e22e">log_directory</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;pg_log&#39;</span>
-</code></pre></div><p>then restarting Postgres to pick up the new settings. You can then watch the log
-files to find out which queries are failing:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">tail -f ~/Library/Application<span style="color:#ae81ff">\ </span>Support/Postgres/var/pg_log/*
-</code></pre></div><h3 id="discussion">Discussion</h3>
+<p>Turn on Postgres logging and watch the log files when the error is generated.</p>
+<p>This is done by editing the <code>postgresql.conf</code> config file, whose location can be
+found from the &ldquo;Server Settings&rdquo; option in the Postgres.app window. It&rsquo;s
+normally somewhere like
+<code>~/Library/Application Support/Postgres/var-12/postgresql.conf</code>.</p>
+<p>Edit in these settings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># Collect logs printed to STDERR.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log_destination</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">stderr</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">logging_collector</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">on</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Log all statements.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log_statement</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">all</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Need to use somewhere writable by the Postgres process.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log_directory</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;/tmp/&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">log_filename</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;postgres.log&#39;</span>
+</span></span></code></pre></div><p>then restart Postgres. You can then watch the log file to find out which queries
+are failing.</p>
+<h3 id="discussion">Discussion</h3>
 <p>By default, Postgres.app does not have logging enabled which makes local
 debugging difficult.</p>
 

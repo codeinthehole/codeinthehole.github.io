@@ -79,30 +79,30 @@ if (!doNotTrack) {
 commands to run from cron is a little tricky. You need to activate the
 virtualenv before running the command and so you might think that the following
 would work:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate <span style="color:#f92672">&amp;&amp;</span> /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
-</code></pre></div><p>It doesn&rsquo;t, although it&rsquo;s tricky to spot why as <code>/var/log/syslog</code> doesn&rsquo;t give
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate <span style="color:#f92672">&amp;&amp;</span> /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
+</span></span></code></pre></div><p>It doesn&rsquo;t, although it&rsquo;s tricky to spot why as <code>/var/log/syslog</code> doesn&rsquo;t give
 much away (Debian-specific of course).</p>
 <p>A good trick for cronjob debugging is to alias yourself as root within
 <code>/etc/aliases</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">postmaster: root
-root: yourusername@gmail.com
-</code></pre></div><p>and run <code>sendmail -bi</code> to initialise the aliases. As errors from cronjobs are
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>postmaster: root
+</span></span><span style="display:flex;"><span>root: yourusername@gmail.com
+</span></span></code></pre></div><p>and run <code>sendmail -bi</code> to initialise the aliases. As errors from cronjobs are
 emailed to root, you will also get a copy. Doing this reveals the above cron
 file fails as the default shell for cron is <code>/bin/sh</code> which doesn&rsquo;t support the
 source command.</p>
 <p>The solution is to set the $SHELL variable within the cron file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">SHELL<span style="color:#f92672">=</span>/bin/bash
-*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate <span style="color:#f92672">&amp;&amp;</span> /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
-</code></pre></div><p>Update - have been informed of a much simpler technique that works for most
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>SHELL<span style="color:#f92672">=</span>/bin/bash
+</span></span><span style="display:flex;"><span>*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate <span style="color:#f92672">&amp;&amp;</span> /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
+</span></span></code></pre></div><p>Update - have been informed of a much simpler technique that works for most
 cases: simply run manage.py using the python executable of your virtualenv:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">*/10 * * * * root /var/www/mysite/virtualenvs/dev/bin/python /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
-</code></pre></div><p>I didn&rsquo;t spot this one to start with as our settings configuration required a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>*/10 * * * * root /var/www/mysite/virtualenvs/dev/bin/python /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
+</span></span></code></pre></div><p>I didn&rsquo;t spot this one to start with as our settings configuration required a
 environmental variable to be used to indicate which settings file to use. This
 variable was set within the activate script, hence why the source command was
 needed. It turns out that this can just be set in the cron file too:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">DJANGO_CONF<span style="color:#f92672">=</span>conf.dev
-*/10 * * * * root /var/www/mysite/virtualenvs/dev/bin/python /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
-</code></pre></div><p>Much simpler!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>DJANGO_CONF<span style="color:#f92672">=</span>conf.dev
+</span></span><span style="display:flex;"><span>*/10 * * * * root /var/www/mysite/virtualenvs/dev/bin/python /var/www/mysite/build/dev/manage.py some_custom_command &gt; /dev/null
+</span></span></code></pre></div><p>Much simpler!</p>
 
         </div>
 

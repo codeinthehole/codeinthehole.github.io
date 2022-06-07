@@ -84,26 +84,26 @@ migrations are applied out of order.</p>
 at <a href="http://justyoyo.com/">Yoyo</a> is test for such clashes as part of our Travis
 continuous integration.</p>
 <p>This is done by calling a <code>makefile</code> target from <code>.travis.yml</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># .travis.yml</span>
-
-<span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
-
-<span style="color:#f92672">python</span>:
-    - <span style="color:#ae81ff">2.7</span>
-
-<span style="color:#f92672">install</span>:
-    - <span style="color:#ae81ff">make virtualenv</span>
-
-<span style="color:#ae81ff">script</span>
-    - <span style="color:#ae81ff">make test</span>
-    - <span style="color:#ae81ff">make migration_test</span>
-</code></pre></div><p>where the <code>migration_test</code> target is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-make" data-lang="make"><span style="color:#75715e"># makefile
-</span><span style="color:#75715e"></span>
-MIGRATION_CLASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell find . -type f -name <span style="color:#e6db74">&#34;*.py&#34;</span> | grep -o <span style="color:#e6db74">&#34;.*/migrations/[0-9]\+&#34;</span> | sort | uniq -c | awk <span style="color:#e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color:#66d9ef">)</span>
-<span style="color:#a6e22e">migration_test</span><span style="color:#f92672">:</span>
-    <span style="color:#f92672">[</span> -n <span style="color:#66d9ef">$(</span>MIGRATION_CLASHES<span style="color:#66d9ef">)</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> true
-</code></pre></div><p>Here the <code>$(shell ...)</code> call extracts the app name and migration number from all
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#75715e"># .travis.yml</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">language</span>: <span style="color:#ae81ff">python</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">python</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">2.7</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">install</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">make virtualenv</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ae81ff">script</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">make test</span>
+</span></span><span style="display:flex;"><span>    - <span style="color:#ae81ff">make migration_test</span>
+</span></span></code></pre></div><p>where the <code>migration_test</code> target is:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-make" data-lang="make"><span style="display:flex;"><span><span style="color:#75715e"># makefile
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>MIGRATION_CLASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>shell find . -type f -name <span style="color:#e6db74">&#34;*.py&#34;</span> | grep -o <span style="color:#e6db74">&#34;.*/migrations/[0-9]\+&#34;</span> | sort | uniq -c | awk <span style="color:#e6db74">&#39;$$1 &gt; 1 {print $$0}&#39;</span><span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">migration_test</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">[</span> -n <span style="color:#66d9ef">$(</span>MIGRATION_CLASHES<span style="color:#66d9ef">)</span> <span style="color:#f92672">]</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> true
+</span></span></code></pre></div><p>Here the <code>$(shell ...)</code> call extracts the app name and migration number from all
 migration files then uses <code>awk</code> to look for clashes. If any are found, the
 Travis build will fail and the console output should reveal which apps have
 clashes.</p>
@@ -112,21 +112,21 @@ do at <a href="http://justyoyo.com/">Yoyo</a>). Doing this forces you to merge m
 into your pull request branch and allows Travis to catch migration clashes
 before it is merged. Then any conflicts can be resolved by renumbering or
 recreating any migrations not yet merged to master.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>I&rsquo;m only talking about Django versions less than 1.7 - I&rsquo;m not sure if this
 is still an issue in more modern Django versions.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>As noted by the
 <a href="http://south.readthedocs.org/en/latest/tutorial/part5.html">South docs</a>,
 you can run the migrations with the <code>--merge</code> option although this generally
 means a manual intervention in your deployment process which isn&rsquo;t ideal.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
         </div>
 

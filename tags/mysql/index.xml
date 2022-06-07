@@ -15,8 +15,8 @@
       <guid>https://codeinthehole.com/tips/solving-mysql-connection-problems-caused-by-a-dead-name-server/</guid>
       <description>A client site went down today. This is what happened and how it was fixed.
 Symptoms The immediate symptom is that your application servers can&amp;rsquo;t connect to your database servers. Attempted connections get an error message:
- Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)
- The relevant MySQL process list reveals a long list of attempted connections in state login:
+Can&amp;rsquo;t connect to MySQL server on &amp;lsquo;10.10.110.11&amp;rsquo; (111)
+The relevant MySQL process list reveals a long list of attempted connections in state login:
 root@server-db1:~ $ mysqladmin processlist +-----+----------------------+--------------------+----+---------+------+-------+ | Id | User | Host | db | Command | Time | State | +-----+----------------------+--------------------+----+---------+------+-------+ .</description>
     </item>
     

@@ -109,90 +109,90 @@ as a subclass of Mapper. This class provides the usual persistence methods such
 as save(), insert(), update(), delete() as well as some helper methods to make
 writing &ldquo;finder&rdquo; methods easier. Sample usage is as follows. First set up your
 classes to model your domain.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#75715e">// Create model class
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\BaseDomainModel</span>
-{
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct()
-    {
-        <span style="color:#75715e">// Specify field(s) that identify a model
-</span><span style="color:#75715e"></span>        <span style="color:#66d9ef">parent</span><span style="color:#f92672">::</span><span style="color:#a6e22e">__construct</span>(<span style="color:#e6db74">&#39;person_id&#39;</span>);
-
-        <span style="color:#75715e">// Optionally specify field names
-</span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">__setFieldNames</span>(<span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#39;first_name&#39;</span>, <span style="color:#e6db74">&#39;last_name&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>));
-    }
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getName</span>()
-    {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span>));
-    }
-}
-
-<span style="color:#75715e">// Create model collection class
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PersonCollection</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\ModelCollection</span>
-{
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTotalAge</span>()
-    {
-        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">array_sum</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pluckField</span>(<span style="color:#e6db74">&#39;age&#39;</span>));
-    }
-}
-
-<span style="color:#75715e">// Create mapper class
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PersonMapper</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\Mapper</span>
-{
-    <span style="color:#66d9ef">private</span> $tableName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;people&#39;</span>;
-    <span style="color:#66d9ef">private</span> $tablePrimaryKey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;person_id&#39;</span>;
-
-    <span style="color:#66d9ef">protected</span> $modelClass <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Person&#39;</span>;
-    <span style="color:#66d9ef">protected</span> $modelCollectionClass <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PersonCollection&#39;</span>;
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct(<span style="color:#a6e22e">PDO</span> $pdo)
-    {
-        <span style="color:#66d9ef">parent</span><span style="color:#f92672">::</span><span style="color:#a6e22e">__construct</span>($pdo, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tableName</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tablePrimaryKey</span>);
-    }
-
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findByAge</span>($age)
-    {
-        $sql <span style="color:#f92672">=</span>
-            <span style="color:#e6db74">&#34;SELECT *
-</span><span style="color:#e6db74">            FROM `</span><span style="color:#e6db74">{</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tableName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`
-</span><span style="color:#e6db74">            WHERE age = :age&#34;</span>;
-        $bindings <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
-            <span style="color:#e6db74">&#39;age&#39;</span> <span style="color:#f92672">=&gt;</span> $age
-        );
-        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetchCollection</span>($sql, $bindings);
-    }
-}
-</code></pre></div><p>These can then used as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#75715e">// Create a new model
-</span><span style="color:#75715e"></span>$person <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
-$person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Alan&#39;</span>;
-$person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Smith&#39;</span>;
-$person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">56</span>;
-
-<span style="color:#75715e">// or
-</span><span style="color:#75715e"></span>$otherPerson <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
-$otherPerson<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">__load</span>(<span style="color:#66d9ef">array</span>(
-    <span style="color:#e6db74">&#39;first_name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Barry&#39;</span>,
-    <span style="color:#e6db74">&#39;last_name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Smith&#39;</span>,
-    <span style="color:#e6db74">&#39;age&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">34</span>
-));
-
-$mapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PersonMapper</span>($pdo);
-$mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">save</span>($person);
-<span style="color:#66d9ef">echo</span> $person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">person_id</span>; <span style="color:#75715e">// 1
-</span><span style="color:#75715e"></span>
-<span style="color:#75715e">// Load a collection
-</span><span style="color:#75715e"></span>$twentyYearOlds <span style="color:#f92672">=</span> $mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">findByAge</span>(<span style="color:#ae81ff">20</span>);
-</code></pre></div><p>Unit testing is now trivial as you can simply instantiate your model and use the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Create model class
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Person</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\BaseDomainModel</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Specify field(s) that identify a model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">parent</span><span style="color:#f92672">::</span><span style="color:#a6e22e">__construct</span>(<span style="color:#e6db74">&#39;person_id&#39;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Optionally specify field names
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">__setFieldNames</span>(<span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#39;first_name&#39;</span>, <span style="color:#e6db74">&#39;last_name&#39;</span>, <span style="color:#e6db74">&#39;age&#39;</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getName</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">trim</span>(<span style="color:#a6e22e">sprintf</span>(<span style="color:#e6db74">&#34;%s %s&#34;</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Create model collection class
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PersonCollection</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\ModelCollection</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getTotalAge</span>()
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">array_sum</span>($this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">pluckField</span>(<span style="color:#e6db74">&#39;age&#39;</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Create mapper class
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PersonMapper</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">\DMM\Mapper</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> $tableName <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;people&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> $tablePrimaryKey <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;person_id&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> $modelClass <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Person&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">protected</span> $modelCollectionClass <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;PersonCollection&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> __construct(<span style="color:#a6e22e">PDO</span> $pdo)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">parent</span><span style="color:#f92672">::</span><span style="color:#a6e22e">__construct</span>($pdo, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tableName</span>, $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tablePrimaryKey</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">findByAge</span>($age)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        $sql <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#34;SELECT *
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            FROM `</span><span style="color:#e6db74">{</span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">tableName</span><span style="color:#e6db74">}</span><span style="color:#e6db74">`
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">            WHERE age = :age&#34;</span>;
+</span></span><span style="display:flex;"><span>        $bindings <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>            <span style="color:#e6db74">&#39;age&#39;</span> <span style="color:#f92672">=&gt;</span> $age
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">fetchCollection</span>($sql, $bindings);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>These can then used as follows:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Create a new model
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$person <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
+</span></span><span style="display:flex;"><span>$person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Alan&#39;</span>;
+</span></span><span style="display:flex;"><span>$person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;Smith&#39;</span>;
+</span></span><span style="display:flex;"><span>$person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">age</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">56</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// or
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$otherPerson <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
+</span></span><span style="display:flex;"><span>$otherPerson<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">__load</span>(<span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;first_name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Barry&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;last_name&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#e6db74">&#39;Smith&#39;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;age&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">34</span>
+</span></span><span style="display:flex;"><span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>$mapper <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PersonMapper</span>($pdo);
+</span></span><span style="display:flex;"><span>$mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">save</span>($person);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">echo</span> $person<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">person_id</span>; <span style="color:#75715e">// 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Load a collection
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>$twentyYearOlds <span style="color:#f92672">=</span> $mapper<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">findByAge</span>(<span style="color:#ae81ff">20</span>);
+</span></span></code></pre></div><p>Unit testing is now trivial as you can simply instantiate your model and use the
 <code>__load</code> method to populate it with data for testing.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-$model <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
-$model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;  terry&#39;</span>;
-$model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jones     &#39;</span>;
-$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertSame</span>(<span style="color:#e6db74">&#39;terry jones&#39;</span>, $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getName</span>());
-</code></pre></div><p>Relationships between models are not a feature of the package at the moment. The
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span>$model <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Person</span>;
+</span></span><span style="display:flex;"><span>$model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">first_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;  terry&#39;</span>;
+</span></span><span style="display:flex;"><span>$model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">last_name</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;jones     &#39;</span>;
+</span></span><span style="display:flex;"><span>$this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertSame</span>(<span style="color:#e6db74">&#39;terry jones&#39;</span>, $model<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getName</span>());
+</span></span></code></pre></div><p>Relationships between models are not a feature of the package at the moment. The
 best way to handle this is to use a &ldquo;repository&rdquo; object which composes several
 mappers.</p>
 <p>The <a href="https://github.com/codeinthehole/domain-model-mapper">code is on github</a> if

@@ -106,34 +106,34 @@ making it easy to make complicated assertions about the response.</li>
 customers.</p>
 </blockquote>
 <p>Here&rsquo;s a WebTest for this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django_webtest <span style="color:#f92672">import</span> WebTest
-<span style="color:#f92672">from</span> django.core.urlresolvers <span style="color:#f92672">import</span> reverse
-<span style="color:#f92672">from</span> django.contrib.auth.models <span style="color:#f92672">import</span> User
-<span style="color:#f92672">from</span> django_dynamic_fixture <span style="color:#f92672">import</span> G
-
-<span style="color:#f92672">from</span> myproject.credits <span style="color:#f92672">import</span> api
-
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAnAdmin</span>(WebTest):
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
-        self<span style="color:#f92672">.</span>staff <span style="color:#f92672">=</span> G(User, is_staff<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-
-    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_can_upload_a_csv_to_create_allocations</span>(self):
-        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;credits-index&#39;</span>), user<span style="color:#f92672">=</span>staff)
-
-        <span style="color:#75715e"># Specify the file content to upload and submit the form</span>
-        form <span style="color:#f92672">=</span> index<span style="color:#f92672">.</span>forms[<span style="color:#e6db74">&#39;upload_form&#39;</span>]
-        <span style="color:#75715e"># CSV content should be: username, credits, start_date, end_date</span>
-        content <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10000,250,2012-01-01,2013-01-01&#34;</span>
-        form[<span style="color:#e6db74">&#39;file&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;credits.csv&#39;</span>, content
-        form<span style="color:#f92672">.</span>submit()
-
-        <span style="color:#75715e"># Check that an allocation has been created</span>
-        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">250</span>, api<span style="color:#f92672">.</span>balance(customer))
-        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())
-</code></pre></div><p>As you can see, using WebTest allows the story to be captured in a simple and
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django_webtest <span style="color:#f92672">import</span> WebTest
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.core.urlresolvers <span style="color:#f92672">import</span> reverse
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django.contrib.auth.models <span style="color:#f92672">import</span> User
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> django_dynamic_fixture <span style="color:#f92672">import</span> G
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> myproject.credits <span style="color:#f92672">import</span> api
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestAnAdmin</span>(WebTest):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">setUp</span>(self):
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>staff <span style="color:#f92672">=</span> G(User, is_staff<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>customer <span style="color:#f92672">=</span> G(User, username<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;10000&#39;</span>, is_staff<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_can_upload_a_csv_to_create_allocations</span>(self):
+</span></span><span style="display:flex;"><span>        index <span style="color:#f92672">=</span> self<span style="color:#f92672">.</span>app<span style="color:#f92672">.</span>get(reverse(<span style="color:#e6db74">&#39;credits-index&#39;</span>), user<span style="color:#f92672">=</span>staff)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Specify the file content to upload and submit the form</span>
+</span></span><span style="display:flex;"><span>        form <span style="color:#f92672">=</span> index<span style="color:#f92672">.</span>forms[<span style="color:#e6db74">&#39;upload_form&#39;</span>]
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># CSV content should be: username, credits, start_date, end_date</span>
+</span></span><span style="display:flex;"><span>        content <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10000,250,2012-01-01,2013-01-01&#34;</span>
+</span></span><span style="display:flex;"><span>        form[<span style="color:#e6db74">&#39;file&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;credits.csv&#39;</span>, content
+</span></span><span style="display:flex;"><span>        form<span style="color:#f92672">.</span>submit()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Check that an allocation has been created</span>
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">250</span>, api<span style="color:#f92672">.</span>balance(customer))
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>assertEqual(<span style="color:#ae81ff">1</span>, api<span style="color:#f92672">.</span>allocations(customer)<span style="color:#f92672">.</span>count())
+</span></span></code></pre></div><p>As you can see, using WebTest allows the story to be captured in a simple and
 readable test. This is based on a real functional test from a current project of
 mine. Writing the above test took about 2 minutes.</p>
 <h4 id="other-useful-testing-libraries">Other useful testing libraries</h4>
@@ -145,16 +145,16 @@ method are because I use <a href="https://github.com/jbalogh/django-nose">django
 with the &lsquo;spec&rsquo; plugin from the
 <a href="http://darcs.idyll.org/~t/projects/pinocchio/doc/">pinocchio</a> library. This
 causes the nose output to read like the stories from your functional spec:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ./manage.py test tests/functional/eshop/credits_tests.py
-
-nosetests --verbosity <span style="color:#ae81ff">1</span> tests/functional/eshop/credits_tests.py --with-spec -x -s
-
-An admin
-- can upload a csv to create allocations
-
-----------------------------------------------------------------------
-Ran <span style="color:#ae81ff">1</span> tests in 0.269s
-</code></pre></div><p>This is a useful way of running functional tests. It also pushes you towards
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ./manage.py test tests/functional/eshop/credits_tests.py
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>nosetests --verbosity <span style="color:#ae81ff">1</span> tests/functional/eshop/credits_tests.py --with-spec -x -s
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>An admin
+</span></span><span style="display:flex;"><span>- can upload a csv to create allocations
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>----------------------------------------------------------------------
+</span></span><span style="display:flex;"><span>Ran <span style="color:#ae81ff">1</span> tests in 0.269s
+</span></span></code></pre></div><p>This is a useful way of running functional tests. It also pushes you towards
 splitting your tests suites into more carefully named, tightly-focussed test
 cases - rather than bundling disparate tests into the same test case.</p>
 <h3 id="summary">Summary</h3>

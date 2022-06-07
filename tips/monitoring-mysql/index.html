@@ -79,11 +79,11 @@ if (!doNotTrack) {
 production site. You can use the mysqladmin tool to return a list of the
 processes currently being handled. Combining this with the UNIX watch command
 allows a real-time monitoring of what&rsquo;s going on.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> mysqladmin processlist
-</code></pre></div><p>The <code>-n 1</code> specifies that mysqladmin executes every second. Depending on your
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>watch -n <span style="color:#ae81ff">1</span> mysqladmin processlist
+</span></span></code></pre></div><p>The <code>-n 1</code> specifies that mysqladmin executes every second. Depending on your
 set-up, you may need to specify a mysql user and password:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">watch -n <span style="color:#ae81ff">1</span> mysqladmin --user<span style="color:#f92672">=</span>&lt;user&gt; --password<span style="color:#f92672">=</span>&lt;password&gt; processlist
-</code></pre></div>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>watch -n <span style="color:#ae81ff">1</span> mysqladmin --user<span style="color:#f92672">=</span>&lt;user&gt; --password<span style="color:#f92672">=</span>&lt;password&gt; processlist
+</span></span></code></pre></div>
         </div>
 
         <div id="article_meta">

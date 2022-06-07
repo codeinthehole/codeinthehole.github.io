@@ -14,8 +14,8 @@
       
       <guid>https://codeinthehole.com/tips/phing-trick-for-avoiding-deploying-debug-code/</guid>
       <description>As the saying goes:
- Fool me once, shame on you; fool me twice, shame on me
- Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
+Fool me once, shame on you; fool me twice, shame on me
+Ensuring mistakes aren&amp;rsquo;t repeated is a commonplace activity for any development team. This can manifest itself in many ways such as writing regression tests, stepping up your code reviews, adding stories to a testing plan or humiliating the developer in question through use of an unusual (dunce&amp;rsquo;s) hat.
 We had an issue recently where some debugging code got committed and wasn&amp;rsquo;t picked up during testing.</description>
     </item>
     
@@ -46,7 +46,7 @@ Consider an application folder structure as follows:
       
       <guid>https://codeinthehole.com/tips/using-a-phing-filter-to-flush-browser-caches/</guid>
       <description>A quick Phing tip that&amp;rsquo;s made my life easier when deploying new versions of commandlinefu.com.
-One of the key performance recommendations from Steve Souders&#39; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
+One of the key performance recommendations from Steve Souders&amp;rsquo; excellent &amp;ldquo;High Performance Websites&amp;rdquo; is to use Expires HTTP headers to set far-future expiration dates for your site components (such as images, Javascript files and CSS stylesheets). This way, browsers can cache the files between requests giving a performance boost to your site. Assuming you&amp;rsquo;re using Apache for serving, the following settings can be used to set these headers for all Javascript and CSS files (there are a few alternative ways of achieving the same result):</description>
     </item>
     
     <item>

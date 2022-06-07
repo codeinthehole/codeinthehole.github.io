@@ -25,8 +25,9 @@ Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignit
       <guid>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</guid>
       <description>Resolving conflicts from a Git rebase can be tricky. But don&amp;rsquo;t worry &amp;ndash; here&amp;rsquo;s a comprehensive guide to how to resolve them.
 There&amp;rsquo;s three phases:
- Which commit of mine is conflicting? What changes were made in the target branch that conflict with my commit? Resolve conflicts safely  These are accurate as of Git v2.23 and are for resolving conflicts using the command line.
-Let&amp;rsquo;s walk through the process.</description>
+Which commit of mine is conflicting? What changes were made in the target branch that conflict with my commit? Resolve conflicts safely These are accurate as of Git v2.23 and are for resolving conflicts using the command line.
+Let&amp;rsquo;s walk through the process.
+A conflict happens On your working branch, you run:</description>
     </item>
     
     <item>

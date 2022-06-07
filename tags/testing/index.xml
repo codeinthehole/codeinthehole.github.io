@@ -61,7 +61,7 @@ from django.test import TestCase @no_database() class UnitTestCase(TestCase): ..
       <guid>https://codeinthehole.com/tips/prefer-webtest-to-djangos-test-client-for-functional-tests/</guid>
       <description>Since watching Carl Meyer&amp;rsquo;s superb &amp;lsquo;Testing and Django&amp;rsquo; talk, I&amp;rsquo;ve been using Ian Bicking&amp;rsquo;s WebTest library for functional tests, via django-webtest. I&amp;rsquo;ve been really impressed and I&amp;rsquo;d like to stress one of Carl&amp;rsquo;s points - that using WebTest for functional tests is superior to using the Django client.
 Why? Several reasons - here&amp;rsquo;s a few:
- WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
+WebTest allows you to model a user&amp;rsquo;s experience much more closely as it is smart about mark-up.</description>
     </item>
     
     <item>

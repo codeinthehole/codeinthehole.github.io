@@ -112,12 +112,12 @@ is something like this:</p>
 
 <p>Scratch files live somewhere less visually intrusive (like, say, <code>~/Scratch</code>).
 Let the macOS screen-capture program know of this decision with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">defaults write com.apple.screencapture location ~/Scratch
-</code></pre></div><p>Digression: any files in <code>~/Desktop</code> can be hidden by enabling the &ldquo;Quit&rdquo; menu
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>defaults write com.apple.screencapture location ~/Scratch
+</span></span></code></pre></div><p>Digression: any files in <code>~/Desktop</code> can be hidden by enabling the &ldquo;Quit&rdquo; menu
 item for Finder:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">defaults write com.apple.finder QuitMenuItem -bool true
-killall Finder
-</code></pre></div><p>then quitting: <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->Q<!-- raw HTML omitted -->. This is worth doing if only to remove Finder from the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>defaults write com.apple.finder QuitMenuItem -bool true
+</span></span><span style="display:flex;"><span>killall Finder
+</span></span></code></pre></div><p>then quitting: <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->Q<!-- raw HTML omitted -->. This is worth doing if only to remove Finder from the
 list of running applications seen with
 <!-- raw HTML omitted -->⌘<!-- raw HTML omitted --> + <!-- raw HTML omitted -->TAB<!-- raw HTML omitted -->.</p>
 <h2 id="marshalling-windows">Marshalling windows</h2>
@@ -169,29 +169,29 @@ uses a fixed-width container would work well.</p>
 <!-- raw HTML omitted -->
 <p>Further reading:
 <a href="https://www.theonion.com/area-man-knows-all-the-shortcut-keys-1819566989">Area Man Knows All The Shortcut Keys</a>.</p>
-<section class="footnotes" role="doc-endnotes">
+<div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>
-<li id="fn:1" role="doc-endnote">
+<li id="fn:1">
 <p>As of v6.8.3: I&rsquo;ve been unable to determine the exact steps to recreate
 this.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:2" role="doc-endnote">
+<li id="fn:2">
 <p>Annoyingly, this doesn&rsquo;t shut windows from the same application &mdash; which
 would be better.&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:3" role="doc-endnote">
+<li id="fn:3">
 <p>This is a minimal set from those unenlightened days before I realised you
 could quit Finder: <blockquote class="twitter-tweet"><p lang="en" dir="ltr">Work <a href="https://t.co/PwL1LpRG55">pic.twitter.com/PwL1LpRG55</a></p>&mdash; David Winterbottom (@codeinthehole) <a href="https://twitter.com/codeinthehole/status/914965638321405952?ref_src=twsrc%5Etfw">October 2, 2017</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 &#160;<a href="#fnref:3" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
-<li id="fn:4" role="doc-endnote">
+<li id="fn:4">
 <p>There&rsquo;s no native shortcut for this and using the mouse/trackpad to
 right-click on the tab is too labour-intensive.&#160;<a href="#fnref:4" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
 </li>
 </ol>
-</section>
+</div>
 
         </div>
 

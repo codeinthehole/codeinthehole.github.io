@@ -80,43 +80,43 @@ recently experimented with a similar approach for finding developers: a job ad
 written in PHP. Now I appreciate this is deeply lame, but the results of the
 campaign were quite surprising - more of which in a minute. First, hold your
 nose and parse the following:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TangentLabs</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">HoxtonWebCompany</span> <span style="color:#66d9ef">implements</span>
-    <span style="color:#a6e22e">InnovativeWebsites</span>, <span style="color:#a6e22e">WorldBeatingApplications</span>, <span style="color:#a6e22e">IngeniousECommerce</span>
-{
-    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">vacancyForBrilliantDevelopers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-    <span style="color:#66d9ef">public</span> $benefits <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
-        <span style="color:#e6db74">&#39;Smartest web agency in London&#39;</span>,
-        <span style="color:#e6db74">&#39;Working on inventive web apps, using cutting-edge technology&#39;</span>,
-        <span style="color:#e6db74">&#39;Super-friendly work environment, working within genuinely brilliant dev team&#39;</span>,
-    );
-    <span style="color:#66d9ef">public</span> $drawbacks <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
-    <span style="color:#66d9ef">public</span> $sampleProjects <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
-        <span style="color:#e6db74">&#39;http://www.borders.co.uk&#39;</span>,
-        <span style="color:#e6db74">&#39;http://www.labour.co.uk&#39;</span>,
-        <span style="color:#e6db74">&#39;http://www.sap.com/education&#39;</span>
-    );
-    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">offerJob</span>(<span style="color:#a6e22e">Developer</span> $you) {
-        <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hasTheSkills</span>($you) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hasWowFactor</span>($you));
-    }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasTheSkills</span>($developer) {
-        $desiredSkills <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#39;Object-oriented PHP 5&#39;</span>, <span style="color:#e6db74">&#39;Advanced MySQL&#39;</span>, <span style="color:#e6db74">&#39;Flex/AS3&#39;</span>);
-        <span style="color:#66d9ef">return</span> (
-            <span style="color:#a6e22e">count</span>(<span style="color:#a6e22e">array_intersect</span>($developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">skills</span>, $desiredSkills)) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span>
-            (<span style="color:#a6e22e">int</span>)$developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">loveForCoding</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">30</span>
-        );
-    }
-    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasWowFactor</span>($developer) {
-        <span style="color:#66d9ef">return</span> ($developer <span style="color:#a6e22e">instanceof</span> <span style="color:#a6e22e">creativeThinker</span> <span style="color:#f92672">&amp;&amp;</span>
-            <span style="color:#a6e22e">sizeof</span>($developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">brain</span>) <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">floatval</span>(<span style="color:#a6e22e">strpad</span>(<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">100</span>, <span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#f92672">&amp;&amp;</span>
-            <span style="color:#a6e22e">property_exists</span>($developer, <span style="color:#e6db74">&#39;hungerForNewTechnologies&#39;</span>));
-    }
-}
-$you <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Developer</span>;
-<span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">true</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">TangentLabs</span><span style="color:#f92672">::</span><span style="color:#a6e22e">offerJob</span>($you)) {
-    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Party</span>();
-}
-</code></pre></div><p>It&rsquo;s actually quite a fun challenge to write a decent job ad in PHP, conveying
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#f92672">&lt;?</span><span style="color:#a6e22e">php</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TangentLabs</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">HoxtonWebCompany</span> <span style="color:#66d9ef">implements</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">InnovativeWebsites</span>, <span style="color:#a6e22e">WorldBeatingApplications</span>, <span style="color:#a6e22e">IngeniousECommerce</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">vacancyForBrilliantDevelopers</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $benefits <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;Smartest web agency in London&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;Working on inventive web apps, using cutting-edge technology&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;Super-friendly work environment, working within genuinely brilliant dev team&#39;</span>,
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $drawbacks <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> $sampleProjects <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;http://www.borders.co.uk&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;http://www.labour.co.uk&#39;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#39;http://www.sap.com/education&#39;</span>
+</span></span><span style="display:flex;"><span>    );
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">offerJob</span>(<span style="color:#a6e22e">Developer</span> $you) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hasTheSkills</span>($you) <span style="color:#f92672">&amp;&amp;</span> <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">hasWowFactor</span>($you));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasTheSkills</span>($developer) {
+</span></span><span style="display:flex;"><span>        $desiredSkills <span style="color:#f92672">=</span> <span style="color:#66d9ef">array</span>(<span style="color:#e6db74">&#39;Object-oriented PHP 5&#39;</span>, <span style="color:#e6db74">&#39;Advanced MySQL&#39;</span>, <span style="color:#e6db74">&#39;Flex/AS3&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">count</span>(<span style="color:#a6e22e">array_intersect</span>($developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">skills</span>, $desiredSkills)) <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>            (<span style="color:#a6e22e">int</span>)$developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">loveForCoding</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">30</span>
+</span></span><span style="display:flex;"><span>        );
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">private</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">hasWowFactor</span>($developer) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ($developer <span style="color:#a6e22e">instanceof</span> <span style="color:#a6e22e">creativeThinker</span> <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">sizeof</span>($developer<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">brain</span>) <span style="color:#f92672">&gt;</span> <span style="color:#a6e22e">floatval</span>(<span style="color:#a6e22e">strpad</span>(<span style="color:#e6db74">&#39;1&#39;</span>, <span style="color:#ae81ff">100</span>, <span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#f92672">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a6e22e">property_exists</span>($developer, <span style="color:#e6db74">&#39;hungerForNewTechnologies&#39;</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>$you <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Developer</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">true</span> <span style="color:#f92672">===</span> <span style="color:#a6e22e">TangentLabs</span><span style="color:#f92672">::</span><span style="color:#a6e22e">offerJob</span>($you)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">throw</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Party</span>();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>It&rsquo;s actually quite a fun challenge to write a decent job ad in PHP, conveying
 both the requirements and writing PHP code that isn&rsquo;t hilariously convoluted.
 I&rsquo;d tried to do the same in Bash later on when we were hiring a sys-admin, but
 gave up after 5 minutes.</p>
@@ -136,10 +136,10 @@ pseudocode, which become a bit tiresome after the twentieth implementation of
 <code>Developer</code> - we were asking for it though.</p>
 <p>Strangely though, the clinching factor for several candidates was the following
 comment, left at the end of the ad:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">// If you have questions, just ask, and if you’re a recruitment consultant don’t even
-</span><span style="color:#75715e">// think about emailing – our board won’t let us use you, even though you may have our
-</span><span style="color:#75715e">// literal exact perfect candidate just waiting for an interview. Sorry.
-</span></code></pre></div><p>There&rsquo;s nothing like the mutual hatred of recruitment consultants to bring
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-php" data-lang="php"><span style="display:flex;"><span><span style="color:#75715e">// If you have questions, just ask, and if you’re a recruitment consultant don’t even
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// think about emailing – our board won’t let us use you, even though you may have our
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// literal exact perfect candidate just waiting for an interview. Sorry.
+</span></span></span></code></pre></div><p>There&rsquo;s nothing like the mutual hatred of recruitment consultants to bring
 people together.</p>
 
         </div>

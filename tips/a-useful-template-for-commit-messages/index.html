@@ -77,25 +77,25 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <p>Here&rsquo;s a useful heuristic for writing better commit messages. Set your commit
 message template to:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text"># If applied, this commit will...
-
-# Why is this change needed?
-Prior to this change,
-
-# How does it address the issue?
-This change
-
-# Provide links to any relevant tickets, articles or other resources
-</code></pre></div><p>and you&rsquo;ll be guided into writing concise commit subjects in the imperative
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># If applied, this commit will...
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Why is this change needed?
+</span></span><span style="display:flex;"><span>Prior to this change,
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># How does it address the issue?
+</span></span><span style="display:flex;"><span>This change
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Provide links to any relevant tickets, articles or other resources
+</span></span></code></pre></div><p>and you&rsquo;ll be guided into writing concise commit subjects in the imperative
 mood - a good practice. See rule 5 of Chris Beam&rsquo;s
 <a href="http://chris.beams.io/posts/git-commit/">&ldquo;How to write a commit message&rdquo;</a> for
 the inspiration of this tip and more reasoning on the use of the imperative
 mood.</p>
 <p>To do this in Git, save the above content in a file (eg <code>~/.git_commit_msg.txt</code>)
 and run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git config --global commit.template ~/.git_commit_msg.txt
-</code></pre></div><p>Here&rsquo;s what this looks like in practice:</p>
-<p><!-- raw HTML omitted --></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global commit.template ~/.git_commit_msg.txt
+</span></span></code></pre></div><p>Here&rsquo;s what this looks like in practice:</p>
+<!-- raw HTML omitted -->
 <p>Try it - it&rsquo;s genuinely useful.</p>
 
         </div>

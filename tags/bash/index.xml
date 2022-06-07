@@ -17,7 +17,7 @@
 Fail fast You probably already know that you can force Bash scripts to exit immediately if there&amp;rsquo;s an error (that is, if any command exits with a non-zero exit code) using:
 #!/usr/bin/env bash set -e but it&amp;rsquo;s even better to use:
 set -eu -o pipefail so that the script:
- exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
+exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
     </item>
     
     <item>
@@ -29,7 +29,7 @@ set -eu -o pipefail so that the script:
       <description>If your Consul key-value store is structured as:
 / A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
 / WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:
-#!/bin/bash  set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
+#!/bin/bash set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
     
     <item>

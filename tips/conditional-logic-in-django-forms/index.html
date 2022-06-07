@@ -93,40 +93,40 @@ dynamically, depending on the submitted data.</li>
 </ul>
 <h3 id="a-solution">A solution</h3>
 <p>Start with this form class:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleForm</span>(forms<span style="color:#f92672">.</span>Form):
-    NOW, LATER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;now&#39;</span>, <span style="color:#e6db74">&#39;later&#39;</span>
-    SCHEDULE_CHOICES <span style="color:#f92672">=</span> (
-        (NOW, <span style="color:#e6db74">&#39;Send immediately&#39;</span>),
-        (LATER, <span style="color:#e6db74">&#39;Send later&#39;</span>),
-    )
-    schedule <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>ChoiceField(choices<span style="color:#f92672">=</span>SCHEDULE_CHOICES, widget<span style="color:#f92672">=</span>forms<span style="color:#f92672">.</span>RadioSelect)
-    send_dt <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>DateTimeField(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, required<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-</code></pre></div><p>Note the <code>send_dt</code> field has <code>required=False</code> as it is only mandatory if the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleForm</span>(forms<span style="color:#f92672">.</span>Form):
+</span></span><span style="display:flex;"><span>    NOW, LATER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;now&#39;</span>, <span style="color:#e6db74">&#39;later&#39;</span>
+</span></span><span style="display:flex;"><span>    SCHEDULE_CHOICES <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>        (NOW, <span style="color:#e6db74">&#39;Send immediately&#39;</span>),
+</span></span><span style="display:flex;"><span>        (LATER, <span style="color:#e6db74">&#39;Send later&#39;</span>),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    schedule <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>ChoiceField(choices<span style="color:#f92672">=</span>SCHEDULE_CHOICES, widget<span style="color:#f92672">=</span>forms<span style="color:#f92672">.</span>RadioSelect)
+</span></span><span style="display:flex;"><span>    send_dt <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>DateTimeField(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, required<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span></code></pre></div><p>Note the <code>send_dt</code> field has <code>required=False</code> as it is only mandatory if the
 &lsquo;Send later&rsquo; radio button is selected. For simplicity, we are are only using a
 single datetime field for the send date rather than the split-widget field of
 the wireframe.</p>
 <p>We can render this as follows:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
-  {% csrf_token %} {{ form.non_field_errors }}
-
-  &lt;<span style="color:#f92672">h3</span>&gt;Send schedule&lt;/<span style="color:#f92672">h3</span>&gt;
-  {{ form.schedule.errors }}
-
-  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
-    {{ form.schedule.0 }}&lt;<span style="color:#f92672">br</span> /&gt;
-    &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;help-text&#34;</span>&gt;(Once you&#39;ve checked out)&lt;/<span style="color:#f92672">span</span>&gt;
-  &lt;/<span style="color:#f92672">div</span>&gt;
-
-  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
-    {{ form.schedule.1 }}&lt;<span style="color:#f92672">br</span> /&gt;
-    {{ form.send_dt }} {{ form.send_dt.errors }}
-  &lt;/<span style="color:#f92672">div</span>&gt;
-
-  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Save&lt;/<span style="color:#f92672">button</span>&gt;
-&lt;/<span style="color:#f92672">form</span>&gt;
-</code></pre></div><p>Note:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span>&lt;<span style="color:#f92672">form</span> <span style="color:#a6e22e">action</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;.&#34;</span> <span style="color:#a6e22e">method</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;post&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>  {% csrf_token %} {{ form.non_field_errors }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">h3</span>&gt;Send schedule&lt;/<span style="color:#f92672">h3</span>&gt;
+</span></span><span style="display:flex;"><span>  {{ form.schedule.errors }}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ form.schedule.0 }}&lt;<span style="color:#f92672">br</span> /&gt;
+</span></span><span style="display:flex;"><span>    &lt;<span style="color:#f92672">span</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;help-text&#34;</span>&gt;(Once you&#39;ve checked out)&lt;/<span style="color:#f92672">span</span>&gt;
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">class</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;span4&#34;</span>&gt;
+</span></span><span style="display:flex;"><span>    {{ form.schedule.1 }}&lt;<span style="color:#f92672">br</span> /&gt;
+</span></span><span style="display:flex;"><span>    {{ form.send_dt }} {{ form.send_dt.errors }}
+</span></span><span style="display:flex;"><span>  &lt;/<span style="color:#f92672">div</span>&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  &lt;<span style="color:#f92672">button</span> <span style="color:#a6e22e">type</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;submit&#34;</span>&gt;Save&lt;/<span style="color:#f92672">button</span>&gt;
+</span></span><span style="display:flex;"><span>&lt;/<span style="color:#f92672">form</span>&gt;
+</span></span></code></pre></div><p>Note:</p>
 <ul>
 <li>
 <p>The radio buttons are rendered individually by referring to the index of each
@@ -138,24 +138,24 @@ button, but above the container elements.</p>
 </li>
 </ul>
 <p>Next we add conditional validation to the form class:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
-
-<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleForm</span>(forms<span style="color:#f92672">.</span>Form):
-    NOW, LATER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;now&#39;</span>, <span style="color:#e6db74">&#39;later&#39;</span>
-    SCHEDULE_CHOICES <span style="color:#f92672">=</span> (
-        (NOW, <span style="color:#e6db74">&#39;Send immediately&#39;</span>),
-        (LATER, <span style="color:#e6db74">&#39;Send later&#39;</span>),
-    )
-    schedule <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>ChoiceField(choices<span style="color:#f92672">=</span>SCHEDULE_CHOICES, widget<span style="color:#f92672">=</span>forms<span style="color:#f92672">.</span>RadioSelect)
-    send_dt <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>DateTimeField(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, required<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
-
-    <span style="color:#66d9ef">def</span> __init__(self, data<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
-        super()<span style="color:#f92672">.</span>__init__(data, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
-
-        <span style="color:#75715e"># If &#39;later&#39; is chosen, mark send_dt as required.</span>
-        <span style="color:#66d9ef">if</span> data <span style="color:#f92672">and</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;schedule&#39;</span>, <span style="color:#66d9ef">None</span>) <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>LATER:
-            self<span style="color:#f92672">.</span>fields[<span style="color:#e6db74">&#39;send_dt&#39;</span>]<span style="color:#f92672">.</span>required <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
-</code></pre></div><p>Here, we override <code>__init__</code> and inspect the raw submitted data so that we can
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> django <span style="color:#f92672">import</span> forms
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">ScheduleForm</span>(forms<span style="color:#f92672">.</span>Form):
+</span></span><span style="display:flex;"><span>    NOW, LATER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;now&#39;</span>, <span style="color:#e6db74">&#39;later&#39;</span>
+</span></span><span style="display:flex;"><span>    SCHEDULE_CHOICES <span style="color:#f92672">=</span> (
+</span></span><span style="display:flex;"><span>        (NOW, <span style="color:#e6db74">&#39;Send immediately&#39;</span>),
+</span></span><span style="display:flex;"><span>        (LATER, <span style="color:#e6db74">&#39;Send later&#39;</span>),
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    schedule <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>ChoiceField(choices<span style="color:#f92672">=</span>SCHEDULE_CHOICES, widget<span style="color:#f92672">=</span>forms<span style="color:#f92672">.</span>RadioSelect)
+</span></span><span style="display:flex;"><span>    send_dt <span style="color:#f92672">=</span> forms<span style="color:#f92672">.</span>DateTimeField(label<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;&#34;</span>, required<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, data<span style="color:#f92672">=</span><span style="color:#66d9ef">None</span>, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs):
+</span></span><span style="display:flex;"><span>        super()<span style="color:#f92672">.</span>__init__(data, <span style="color:#f92672">*</span>args, <span style="color:#f92672">**</span>kwargs)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># If &#39;later&#39; is chosen, mark send_dt as required.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> data <span style="color:#f92672">and</span> data<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#39;schedule&#39;</span>, <span style="color:#66d9ef">None</span>) <span style="color:#f92672">==</span> self<span style="color:#f92672">.</span>LATER:
+</span></span><span style="display:flex;"><span>            self<span style="color:#f92672">.</span>fields[<span style="color:#e6db74">&#39;send_dt&#39;</span>]<span style="color:#f92672">.</span>required <span style="color:#f92672">=</span> <span style="color:#66d9ef">True</span>
+</span></span></code></pre></div><p>Here, we override <code>__init__</code> and inspect the raw submitted data so that we can
 set <code>required=True</code> on the <code>send_dt</code> field appropriately. This is the
 conventional way of adding conditional logic to form validation, although it&rsquo;s
 more common to use an additional argument to <code>__init__</code> to determine the field

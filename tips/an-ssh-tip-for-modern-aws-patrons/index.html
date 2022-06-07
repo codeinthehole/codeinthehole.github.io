@@ -77,14 +77,14 @@ if (!doNotTrack) {
         <div id="article_content" class="entry-content">
             <p>Cloud computing and immutable infrastructure deployments have changed the way I
 use SSH. I miss the days when I could run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh app1-prod
-</code></pre></div><p>to jump onto a machine and investigate an issue. This would work as, back in the
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh app1-prod
+</span></span></code></pre></div><p>to jump onto a machine and investigate an issue. This would work as, back in the
 days of yore, your web servers didn&rsquo;t change IP address several times a week so
 I could create a helpful alias in <code>~/.ssh/config</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Host app1-prod
-    User example_user
-    HostName 74.207.251.29
-</code></pre></div><p>This circumvented the labour-intensive act of typing in the remote username and
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Host app1-prod
+</span></span><span style="display:flex;"><span>    User example_user
+</span></span><span style="display:flex;"><span>    HostName 74.207.251.29
+</span></span></code></pre></div><p>This circumvented the labour-intensive act of typing in the remote username and
 IP address when SSHing around town.</p>
 <p>I can no longer do this as:</p>
 <ul>
@@ -107,26 +107,26 @@ onto one of the new machines and check for smoke before replacing the entire
 auto-scale group with the new AMI. (I&rsquo;m happy to accept this is an regrettable
 practice and I need to raise my automation game.)</p>
 <p>In such circumstances, I want to be able to run:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh ip-10-5-8-179.eu-west-1.compute.internal
-</code></pre></div><p>jumping straight onto an AWS EC2 instance using only its internal DNS name,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh ip-10-5-8-179.eu-west-1.compute.internal
+</span></span></code></pre></div><p>jumping straight onto an AWS EC2 instance using only its internal DNS name,
 plucked from the AWS console or a <code>boto</code> command.</p>
 <p>Here&rsquo;s how.</p>
 <h3 id="proxycommand-and-a-wildcard-ssh-alias">ProxyCommand and a wildcard SSH alias</h3>
 <p>Add an alias to <code>~/.ssh/config</code> for your bastion server. Something like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Host bastion-prod
-    User example_user
-    Hostname bastion.example.com
-    IdentityFile ~/.ssh/bastion-prod.key
-    LogLevel Quiet
-</code></pre></div><p>then you can route SSH traffic through the bastion server using <code>ProxyCommand</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-txt" data-lang="txt">Host *.compute.internal
-    User ubuntu
-    IdentityFile ~/.ssh/aws-prod.key
-    ProxyCommand ssh bastion-prod -W %h:%p
-    StrictHostKeyChecking no
-</code></pre></div><p>and that&rsquo;s sufficient for commands like:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh ip-10-5-8-179.eu-west-1.compute.internal
-</code></pre></div><p>to work.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Host bastion-prod
+</span></span><span style="display:flex;"><span>    User example_user
+</span></span><span style="display:flex;"><span>    Hostname bastion.example.com
+</span></span><span style="display:flex;"><span>    IdentityFile ~/.ssh/bastion-prod.key
+</span></span><span style="display:flex;"><span>    LogLevel Quiet
+</span></span></code></pre></div><p>then you can route SSH traffic through the bastion server using <code>ProxyCommand</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Host *.compute.internal
+</span></span><span style="display:flex;"><span>    User ubuntu
+</span></span><span style="display:flex;"><span>    IdentityFile ~/.ssh/aws-prod.key
+</span></span><span style="display:flex;"><span>    ProxyCommand ssh bastion-prod -W %h:%p
+</span></span><span style="display:flex;"><span>    StrictHostKeyChecking no
+</span></span></code></pre></div><p>and that&rsquo;s sufficient for commands like:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>ssh ip-10-5-8-179.eu-west-1.compute.internal
+</span></span></code></pre></div><p>to work.</p>
 <p>Note, disabling <code>StrictHostKeyChecking</code> suppresses the confirmation prompt when
 connecting to a new host for the first time. I&rsquo;m ignorant of whether this is a
 dreadful security misstep.</p>
