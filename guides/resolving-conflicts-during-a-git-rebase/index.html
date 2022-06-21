@@ -75,8 +75,35 @@ if (!doNotTrack) {
         </div>
 
         <div id="article_content" class="entry-content">
-            <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+            <!--
+INTRODUCTION
+
+Not really anything new - just an article I can point team members to who are
+having problem rebasing.
+
+Broadly steps are:
+
+1. Understand the purpose of YOUR commit that can't be applied (hence the
+   conflict)
+
+2. Understand the changes made to each conflicted file from the TARGET BRANCH
+   (either just a simple diff or commit-by-commit)
+
+3. Apply your changes carefully
+
+LIT REVIEW
+----------
+
+Nothing notable:
+- https://clubmate.fi/git-rebasing-workflow-and-resolving-merge-conflicts/
+- https://docs.openstack.org/doc-contrib-guide/additional-git-workflow/rebase.html
+- https://dev.to/jacqueline/another-conflict-resolving-conflicts-in-git-that-occur-when-using-rebase-3dho
+- https://guides.codechewing.com/git/rebase-merge-conflicts
+
+http://gitforteams.com/resources/rebasing.html
+- A walkthrough of the conflict resolution journey
+
+-->
 <p>Resolving conflicts from a Git rebase can be tricky. But don&rsquo;t worry &ndash; here&rsquo;s a
 comprehensive guide to how to resolve them.</p>
 <p>There&rsquo;s three phases:</p>
@@ -157,8 +184,22 @@ Github), this can done with:</p>
 </span></span></code></pre></div><p>in <code>~/.gitconfig</code>.</p>
 <p>Now for the trickier question.</p>
 <h2 id="what-changes-were-made-in-the-target-branch-that-conflict-with-my-commit">What changes were made in the target branch that conflict with my commit?</h2>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+
+Should it be default? Probably, yes.
+https://stackoverflow.com/questions/27417656/should-diff3-be-default-conflictstyle-on-git
+
+http://psung.blogspot.com/2011/02/reducing-merge-headaches-git-meets.html
+Another recommendation for diff3 - also recommends enabling rerere with
+$ git config --global rerere.enabled 1
+to auto apply previous resolutions.
+
+https://blog.nilbus.com/take-the-pain-out-of-git-conflict-resolution-use-diff3/
+Good example/explanation
+
+Sometimes hard to determine if a rename is involved.
+
+-->
 <p>We understand what <em>we</em> were trying to do, but we need to understand what
 changes were made in the target branch that conflict. Two tips:</p>
 <h3 id="use-the-diff3-format-to-see-common-ancestor-code-in-conflict-blocks">Use the <code>diff3</code> format to see common ancestor code in conflict blocks</h3>
@@ -194,8 +235,11 @@ situation, we may need to examine the individual changes made to each conflicted
 <code>$FILEPATH</code> in order to understand how to resolve safely.</p>
 <p>We can examine the overall diff:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff REBASE_HEAD...origin/master $FILEPATH
-</span></span></code></pre></div><!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+</span></span></code></pre></div><!--
+
+We can determine the "onto" value dynamically from .git/rebase-apply/onto
+
+-->
 <p>or list the commits from the target branch that updated <code>$FILEPATH</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log REBASE_HEAD..origin/master $FILEPATH
 </span></span></code></pre></div><p>and review how each modified <code>$FILEPATH</code> with:</p>
@@ -232,8 +276,15 @@ changes better and are less likely to inadvertently break something.</p>
 </span></span></code></pre></div><p>then remove the superceded lines and merge conflict markers to give:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-diff" data-lang="diff"><span style="display:flex;"><span>I love apples and pears
 </span></span></code></pre></div><h3 id="wholesale-accept-changes">Wholesale accept changes</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- Refs:
+
+https://til.hashrocket.com/posts/ce7bff8134-accept-your-own-changes-during-git-rebase
+- Gets the ours/theirs thing the wrong way round!
+
+https://demisx.github.io/git/rebase/2015/07/02/git-rebase-keep-my-branch-changes.html
+- Talks about `git rebase -Xtheirs`
+
+-->
 <p>Occassionally, you might know that the changes from one branch should be
 accepted. This can be done using <code>git checkout</code> with a merge &ldquo;strategy-option&rdquo;.
 Beware that, when rebasing, the terminology is counter-intuitive.</p>
@@ -249,8 +300,16 @@ when doing the rebase. Eg:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase -Xtheirs origin/master
 </span></span></code></pre></div><p>I&rsquo;ve never used this much in practice though.</p>
 <h3 id="re-use-recorded-resolutions-aka-rerere">Re-use recorded resolutions (aka <code>rerere</code>)</h3>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+https://medium.com/@porteneuve/fix-conflicts-only-once-with-git-rerere-7d116b2cec67
+- Good article
+
+https://stackoverflow.com/questions/49500943/what-is-git-rerere-and-how-does-it-work
+- Decent explanation here.
+
+Records the conflicted diff hunks
+Record resolution
+-->
 <p>If you set:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config --global rerere.enabled <span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><p>then Git will record how you resolve conflicts and, if it sees the same conflict
@@ -295,8 +354,28 @@ by <em>Christophe Porteneuve</em> (2014). Good detailed examination of how to us
 <code>git rerere</code>.</p>
 </li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- General reserach on rebase conflicts
+
+Note on rebase options:
+
+[rebase]
+    instructionFormat = %s [%an]
+	autosquash = true
+    stat = true
+
+Quite hard to generate a GH diff view for a single file
+https://stackoverflow.com/questions/14500240/how-can-i-generate-a-diff-for-a-single-file-between-two-branches-in-github
+
+Sometimes diff block and hard to see what difference is:
+
+What changes happened to that file on master?
+
+Which commit removed it?
+gh aqs/cleanup-p1..origin/master -- octoenergy/domain/accounts/affexit.py
+Note two dots
+
+Conflict happens while trying to apply a commit/patch
+-->
 
         </div>
 

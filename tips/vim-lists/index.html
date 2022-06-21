@@ -130,7 +130,7 @@ make the most of them.</p>
 
 <hr>
 <h2 id="quickfix-list">Quickfix list</h2>
-<!-- raw HTML omitted -->
+<!-- Summary of stdlib quickfix features -->
 <p>A <em>global</em> list of locations populated via one of these commands:</p>
 <ul>
 <li><code>:vim[grep]</code> &mdash; search using Vim&rsquo;s native functionality.</li>
@@ -259,16 +259,49 @@ switch <code>:grep</code> to <code>:Grep</code>:</p>
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">QuickFixCmdPost</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">cwindow</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">END</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>This is life changing.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+Other quickfix tips
+
+https://gist.github.com/romainl/56f0c28ef953ffc157f36cc495947ab3
+Write a custom :Grep command that avoids running the external command in the
+parent shell (which clogs up shell and requires hitting enter)
+
+https://noahfrederick.com/log/vim-streamlining-grep
+Use a cnoreabbrev to map grep to 'silent grep'
+
+https://stackoverflow.com/questions/1747091/how-do-you-use-vims-quickfix-feature
+Highlights vim-impaired
+Mentions syntastic uses location list
+
+https://medium.com/usevim/vim-101-quickfix-and-grep-c782cb65e524
+Nothing I didn't know already
+
+https://tldp.org/HOWTO/C-editing-with-VIM-HOWTO/quickfix.html
+Notes on C work
+
+https://vimways.org/2018/colder-quickfix-lists/
+- great intro
+- quickfix buffer has file-type qf which we can target
+
+to research:
+
+https://github.com/romainl/vim-qf
+- not recommended to syntastic/ale users
+
+Prior art:
+
+https://www.reddit.com/r/vim/comments/ebdp8d/how_do_i_apply_a_macro_to_all_files_under_a_folder/
+https://github.com/tpope/vim-unimpaired
+
+-->
 <hr>
 <h2 id="location-list">Location list</h2>
-<!-- raw HTML omitted -->
+<!-- Summary of stdlib quickfix features -->
 <p>A <em>window-local</em> equivalent of the quickfix list — a similar set of commands
 exists but now prefixed <code>:l</code> (e.g. <code>:lwindow</code> to open the location list if it
 has entries).</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- Tips -->
+<!-- Personal take -->
 <p>Personally, I don&rsquo;t use it much directly but it&rsquo;s good to be aware of. Popular
 plugins like <a href="https://github.com/dense-analysis/ale">Ale</a> and
 <a href="https://github.com/vim-syntastic/syntastic">Syntastic</a> populate the location
@@ -277,9 +310,24 @@ list.</p>
 <a href="https://vimhelp.org/quickfix.txt.html#location-list"><code>:help location-list</code></a>.</p>
 <hr>
 <h2 id="jump-list">Jump list</h2>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- Useful to for quick jumping but sometimes confusing — best to use change
+list when jumping back to previous edit locations.
+
+Relevant literature:
+--------------------
+
+https://medium.com/breathe-publication/understanding-vims-jump-list-7e1bfc72cdf0
+https://kadekillary.work/post/vim-jumplist/ (dupe?)
+- Refers to useful Romainl Reddit comment about using searches
+- Mixs up changelist
+
+https://medium.com/usevim/vim-101-the-jump-and-change-lists-ef15cfb22c30
+- A decent summary
+
+https://developpaper.com/use-vims-jump-list-to-see-the-code/
+- Another decent summary
+-->
+<!-- Summary of stdlib quickfix features -->
 <p>A <em>window-local</em> list of the last one hundred cursor positions:</p>
 <ul>
 <li><code>CTRL-O</code>, <code>CTRL-I</code> — Go to previous/next cursor position in jump list.</li>
@@ -349,7 +397,7 @@ to <code>g;</code> but will also put you into insert mode. The same effect can b
 with marks via <code>'^</code>.</p>
 <hr>
 <h2 id="buffer-list">Buffer list</h2>
-<!-- raw HTML omitted -->
+<!-- Summary of stdlib quickfix features -->
 <p>A <em>global</em>, append-only list of buffers (including cursor location and state)
 for the current editing session. Each opened file will be appended to the list
 which can be viewed with any of <code>:buffers</code>, <code>:files</code> or most succinctly <code>:ls</code>.</p>
@@ -383,8 +431,18 @@ apply macro <code>q</code> to each buffer with <code>:bufdo normal @q</code>.</l
 <a href="https://github.com/junegunn/fzf.vim"><code>junegunn/fzf.vim</code></a> to jump to a buffer
 using fuzzy matching. For easy access I map <code>:Buffers</code> to <code>,b</code> and <code>:Files</code> to
 <code>,f</code>.</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+https://vim.fandom.com/wiki/Vim_buffer_FAQ
+- Some useful buffer tips, nothing interesting
+
+https://hashrocket.com/blog/posts/understanding-the-buffer-list-in-vim-part-1
+- Good solid introduction to understanding the buffer list.
+
+https://www.reddit.com/r/vim/comments/u3nv6/buffer_list_vs_arguments_list/c4s6gml/
+- Commend from Drew on difference between buffer-list and arg-list. Key point is
+  the buffer-list is less organised but the arg-list is curated.
+
+-->
 <hr>
 <h2 id="argument-list">Argument list</h2>
 <p>The buffer list tends to become cluttered over time, making it awkward to use
@@ -393,7 +451,7 @@ a list of files to act on with the equivalent <code>:argdo</code>.</p>
 <p>The name is misleading: the argument list is not simply the list of files that
 Vim was opened with. It&rsquo;s a global, <em>mutable</em> list that can be edited within
 your Vim session to select exactly the files that you want to operate on.</p>
-<!-- raw HTML omitted -->
+<!-- Ways of populating the argument list -->
 <p>There are several ways of populating the argument list, listed here in order of
 increasing usefulness:</p>
 <ol>
@@ -425,7 +483,7 @@ this, Vim can
 populate the argument list.</p>
 </li>
 </ol>
-<!-- raw HTML omitted -->
+<!-- Navigating the argument list -->
 <p>You can check the contents of the argument list with <code>:ar[gs]</code> and traverse
 with:</p>
 <ul>
@@ -437,7 +495,7 @@ with:</p>
 <li><code>[a</code>, <code>]a</code> — <code>:previous</code>, <code>:next</code></li>
 <li><code>[A</code>, <code>]A</code> — <code>:first</code>, <code>:last</code></li>
 </ul>
-<!-- raw HTML omitted -->
+<!-- Operating on the argument list -->
 <p>It&rsquo;s now possible to apply batch operations on each file in the argument list
 using <code>:argdo {cmd}</code>. An example workflow is:</p>
 <ol>
@@ -457,18 +515,18 @@ using <code>:argdo {cmd}</code>. An example workflow is:</p>
 </ul>
 <hr>
 <h2 id="tag-match-list">Tag match list</h2>
-<!-- raw HTML omitted -->
+<!-- What are tags? -->
 <p>A &ldquo;tag&rdquo; is an identifier &mdash; like a function, class or variable name &mdash; that
 appears in a &ldquo;tags file&rdquo; generated by an external program like <code>ctags</code>. The tags
 file is effectively an index mapping identifiers to locations in your codebase.</p>
-<!-- raw HTML omitted -->
+<!-- How Vim finds your tag files -->
 <p>Use the <code>tags</code> setting to tell Vim where to find tag files. A common value is:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">tags</span>=./<span style="color:#a6e22e">tags</span>;,<span style="color:#a6e22e">tags</span><span style="color:#960050;background-color:#1e0010">
 </span></span></span></code></pre></div><p>which tells Vim to look for tags file in the directory of the current file, in
 the working directory and in every parent directory, recursively.</p>
 <p>You can check which tag files have been loaded with:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">tagfiles</span>()<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><!-- raw HTML omitted -->
+</span></span></span></code></pre></div><!-- Using the tags file to explore code -->
 <p>You can jump to a tag definition with:</p>
 <ul>
 <li><code>CTRL-]</code> &mdash; Look-up the keyword under the cursor. Useful for jumping to a
@@ -479,7 +537,7 @@ supports command-line completion and regular expression queries like
 </ul>
 <p>If you want to open the tag in a split or the preview window, there are
 analogues of the above commands starting <code>:s</code> and <code>:p</code>.</p>
-<!-- raw HTML omitted -->
+<!-- When there are multiple matches -->
 <p>If there are multiple tag matches, <code>CTRL-]</code> and <code>:tag</code> will jump to the first
 one. The &ldquo;tag match list&rdquo; can be opened with <code>:ts[elect]</code> and traversed via
 <code>:tf[irst]</code>, <code>:tn[ext]</code>, <code>:tp[rev]</code>, <code>:tl[ast]</code>.</p>
@@ -491,7 +549,7 @@ one. The &ldquo;tag match list&rdquo; can be opened with <code>:ts[elect]</code>
 </ul>
 <p>If you want to show the tag match list when there are multiple matches but jump
 straight to the tag if a single match, use <code>:tj[ump]</code> or <code>g CTRL-]</code>.</p>
-<!-- raw HTML omitted -->
+<!-- Tag stack -->
 <p>Vim stores the twenty most recent tag match lists in a stack which you can view
 with <code>:tags</code>. This allows you to descend into a call graph by repeatedly jumping
 to function definitions then popping the stack to return to the previous
@@ -503,7 +561,7 @@ lists we saw earlier and is a powerful code exploration technique.</p>
 <li><a href="https://vim.fandom.com/wiki/Browsing_programs_with_tags">Vim tips wiki: Browsing programs with tags</a></li>
 <li><a href="https://gist.github.com/romainl/f2d0727bdb9bde063531cd237f47775f">A Github Gist on tags by Romain Lafourcade</a></li>
 </ul>
-<!-- raw HTML omitted -->
+<!-- Tips -->
 <h3 id="tip-use-universal-ctags">Tip: Use Universal Ctags</h3>
 <p><a href="https://github.com/universal-ctags/ctags">Universal Ctags</a> is the successor to
 <a href="http://ctags.sourceforge.net/">Exuberant Ctags</a>; it&rsquo;s actively maintained and
@@ -526,8 +584,24 @@ commands for quickly finding tags using the
 <li><code>:Tags</code> &mdash; List tags in project.</li>
 <li><code>:BTags</code> &mdash; List tags in current buffer.</li>
 </ul>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+
+Literature around using the tag stack.
+
+https://vim.fandom.com/wiki/Browsing_programs_with_tags
+Really good - lots of good tips.
+
+https://gist.github.com/romainl/f2d0727bdb9bde063531cd237f47775f
+Good notes on interesting ways of working with tags.
+
+https://robertodealmeida.posthaven.com/using-ctags-in-vim-with-a-python-virtualenv
+- Example mapping for generating virtualenv ctags
+
+https://andrew.stwrt.ca/posts/vim-ctags/
+- Some basics on using Vim with ctags
+
+https://linuxhint.com/vim_ctags/
+-->
 <hr>
 <h2 id="include-file-list-and-definition-lists">Include file list and definition lists</h2>
 <p>There are a couple of other lesser-known lists from Vim&rsquo;s C-language heritage.</p>
@@ -556,8 +630,18 @@ time to never write-off Vim&rsquo;s features — I&rsquo;m sure this could be us
 focussed tag search when working in languages that use filepath includes.</p>
 <p>More at
 <a href="https://vimhelp.org/tagsrch.txt.html#include-search"><code>:help include-search</code></a></p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!-- Research on other lists
+
+- `:ol[dfiles]` --- List the files that have marks stored in the `viminfo` file
+- `:undolist` --- List the files that have marks stored in the `viminfo` file
+- `:marks` --- List the files that have marks stored in the `viminfo` file
+
+https://www.reddit.com/r/vim/comments/d08llo/a_list_of_vims_lists/
+
+Could note on how to jump to an item from the list
+https://www.reddit.com/r/vim/comments/d08llo/a_list_of_vims_lists/ez8nr4s/
+
+-->
 <hr>
 <h2 id="summary">Summary</h2>
 <p>The above is intended as a reference for myself, but hopefully it will be useful
@@ -615,8 +699,32 @@ situations).</p>
 <p>The editing operation could be an Ex command (e.g. <code>%s/foo/bar/g | update</code>),
 applying a macro (e.g. <code>normal @q</code>) or calling a bespoke Vimscript function
 (e.g. <code>call MyBespokeFunction</code>).</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<!--
+
+## Literature
+
+Related articles:
+
+- [A list of Vim's lists](https://noahfrederick.com/log/a-list-of-vims-lists).
+  Pretty much what this post is but without the notes on how to apply commands
+  to the list args.
+
+- [Vim 101: The Jump and Change Lists](https://medium.com/usevim/vim-101-the-jump-and-change-lists-ef15cfb22c30) by Alex R. Young.
+
+- [The quickfix and location lists in Vim](https://freshman.tech/vim-quickfix-and-location-list/) by Ayooluwa Isaiah. There's some great advice
+  in the [associated Reddit thread by Romain Lafourcade](https://www.reddit.com/r/vim/comments/hbcx5d/the_quickfix_and_location_lists_in_vim/).
+
+- [Lists, Vim and You](https://thoughtbot.com/blog/lists-vim-and-you) by Teo Ljungberg.
+    - Demonstrates how the `arglist` can be
+      used to perform a search and replace over a list of files specified when
+      starting Vim.
+    - Can use `:cdo` and `:cfodo` to operate over the quickfix list rather than
+      the arglist.
+    - Populate quickfix list using `:grep`
+
+- https://stackoverflow.com/questions/1747091/how-do-you-use-vims-quickfix-feature - useful guide to quickfix commands
+
+-->
 <div class="footnotes" role="doc-endnotes">
 <hr>
 <ol>

@@ -167,7 +167,10 @@ the same branch:</p>
 </span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git commit
 </span></span><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git push origin feature/masquerading
 </span></span></code></pre></div><p>Iterate this way until the branch is ready to be merged.</p>
-<!-- raw HTML omitted -->
+<div class="admonition warning">
+    Github easter egg: add <code>?w=0</code> to diff URLs (eg a commit, compare view or
+    pull request) to ignore whitespace.
+</div>
 <h4 id="cleaning-your-history-optional">Cleaning your history (optional)</h4>
 <p>When you&rsquo;re ready to merge, you should first clean up the feature branch.</p>
 <p>If there are any commits on the destination branch that aren&rsquo;t on your feature
@@ -179,7 +182,13 @@ If you see any commits here, then rebase the feature branch using:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git rebase master
 </span></span></code></pre></div><p>This replays your commits on top of the new commits from the destination branch
 so that the merge can be a &lsquo;fast-forward&rsquo;.</p>
-<!-- raw HTML omitted -->
+<div class="admonition warning">
+    Hang on! Aren't you rewriting history that has been pushed?
+    Yes - that's true. However, when the remote branch is <em>temporary</em> as for
+    a pull request, this is ok (as far as I can tell). The pull request
+    branch should be deleted once it has been merged and so it shouldn't
+    matter that its history is being rewritten before merging.
+</div>
 <p>Next, it may be desirable to squash your commits into larger cohesive commits.
 You can do this using an &lsquo;interactive&rsquo; rebase:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">(</span>feature/masquerading<span style="color:#f92672">)</span> $ git rebase -i master
