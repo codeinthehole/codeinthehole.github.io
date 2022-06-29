@@ -6,7 +6,18 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 14 Oct 2021 16:29:42 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 29 Jun 2022 21:00:01 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Auditing 1Password activity</title>
+      <link>https://codeinthehole.com/tips/auditing-1password-activity/</link>
+      <pubDate>Wed, 29 Jun 2022 21:00:01 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/auditing-1password-activity/</guid>
+      <description>As a 1Password admin, there are common audit questions you need to answer around who created various resources. The web dashboard is excellent but some questions are still fiddly to answer. Questions like:
+Who created this group? Who created this vault? Who created this item? Who has access to this item? This post is a note-to-self on how to find these answers1.
+Who created this group? If the group hasn&amp;rsquo;t had much activity, you can see the creator in the activity timeline section of the group detail page in the web dashboard.</description>
+    </item>
+    
     <item>
       <title>Explaining</title>
       <link>https://codeinthehole.com/tips/explaining/</link>

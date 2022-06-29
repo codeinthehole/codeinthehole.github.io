@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>1Password on David Winterbottom</title>
+    <link>https://codeinthehole.com/tags/1password/</link>
+    <description>Recent content in 1Password on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 29 Jun 2022 21:00:01 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/1password/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Auditing 1Password activity</title>
+      <link>https://codeinthehole.com/tips/auditing-1password-activity/</link>
+      <pubDate>Wed, 29 Jun 2022 21:00:01 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/auditing-1password-activity/</guid>
+      <description>As a 1Password admin, there are common audit questions you need to answer around who created various resources. The web dashboard is excellent but some questions are still fiddly to answer. Questions like:
+Who created this group? Who created this vault? Who created this item? Who has access to this item? This post is a note-to-self on how to find these answers1.
+Who created this group? If the group hasn&amp;rsquo;t had much activity, you can see the creator in the activity timeline section of the group detail page in the web dashboard.</description>
+    </item>
+    
+  </channel>
+</rss>
