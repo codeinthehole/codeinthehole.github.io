@@ -86,22 +86,21 @@ all developers use it.</p>
 </span></span></code></pre></div><p>Then everyone benefits from running the same set of tests before committing and
 updates are picked up automatically.</p>
 <h3 id="stash-unstaged-changes-before-running-tests">Stash unstaged changes before running tests</h3>
-<p>Ensure that code that isn&rsquo;t part of the prospective commit isn&rsquo;t tested within
-your pre-commit script. This is missed by many sample pre-commit scripts but is
-easily achieved with <code>git stash</code>:</p>
+<p>Ensure that unstaged code isn&rsquo;t tested within your pre-commit script. This is
+missed by many sample pre-commit scripts but is easily achieved with
+<code>git stash</code>:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># pre-commit.sh</span>
 </span></span><span style="display:flex;"><span>STASH_NAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;pre-commit-</span><span style="color:#66d9ef">$(</span>date +%s<span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>git stash save -q --keep-index $STASH_NAME
+</span></span><span style="display:flex;"><span>git stash save --quiet --keep-index --include-untracked $STASH_NAME
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># Test prospective commit</span>
 </span></span><span style="display:flex;"><span>...
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>STASHES<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>git stash list<span style="color:#66d9ef">)</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $STASHES <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;</span>$STASH_NAME<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
-</span></span><span style="display:flex;"><span>  git stash pop -q
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> $STASHES <span style="color:#f92672">==</span> *<span style="color:#e6db74">&#34;</span>$STASH_NAME<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>  git stash pop --quiet
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
-</span></span></code></pre></div><p>The <code>-q</code> flags specify quiet mode.</p>
-<h3 id="run-your-test-suite-before-each-commit">Run your test suite before each commit</h3>
+</span></span></code></pre></div><h3 id="run-your-test-suite-before-each-commit">Run your test suite before each commit</h3>
 <p>Obviously.</p>
 <p>It&rsquo;s best to have a script (say <code>run_tests.sh</code>) that encapsulates the standard
 arguments to your test runner so your pre-commit script doesn&rsquo;t fall out of
