@@ -6,7 +6,18 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 30 Oct 2022 15:31:23 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 11 Nov 2022 22:07:17 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenAI Git poetry</title>
+      <link>https://codeinthehole.com/tidbits/openai-git-poetry/</link>
+      <pubDate>Fri, 11 Nov 2022 22:07:17 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tidbits/openai-git-poetry/</guid>
+      <description>OpenAI provides a REST API where you can generate prompt completions. Here&amp;rsquo;s a minimal example where a JSON payload is piped into httpie:
+$ export OPENAI_API_KEY=&amp;#34;...&amp;#34; # fill in your API key here $ echo &amp;#39;{&amp;#34;model&amp;#34;: &amp;#34;text-davinci-002&amp;#34;, &amp;#34;prompt&amp;#34;: &amp;#34;Write a poem about cheese&amp;#34;}&amp;#39; \ | http https://api.openai.com/v1/completions Authorization:&amp;#34;Bearer $OPENAI_API_KEY&amp;#34; \ | jq -r &amp;#39;.choices[0].text There&amp;#39;s nothing quite like cheese It&amp;#39;s rich, creamy, Quite.
+We can extend this by dynamically building the prompt string.</description>
+    </item>
+    
     <item>
       <title>&#34;It was the system. We can&#39;t change it.&#34;</title>
       <link>https://codeinthehole.com/tidbits/the-bone-clocks/</link>

@@ -2,22 +2,31 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://codeinthehole.com/</loc>
+    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/git/</loc>
+    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/openai/</loc>
+    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tidbits/openai-git-poetry/</loc>
+    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/</loc>
+    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tidbits/</loc>
+    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+  </url><url>
     <loc>https://codeinthehole.com/tidbits/the-bone-clocks/</loc>
     <lastmod>2022-10-30T15:31:23+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tags/climate-change/</loc>
     <lastmod>2022-10-30T15:31:23+00:00</lastmod>
   </url><url>
-    <loc>https://codeinthehole.com/</loc>
-    <lastmod>2022-10-30T15:31:23+00:00</lastmod>
-  </url><url>
     <loc>https://codeinthehole.com/tags/post-apocalypse/</loc>
-    <lastmod>2022-10-30T15:31:23+00:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/tags/</loc>
-    <lastmod>2022-10-30T15:31:23+00:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/tidbits/</loc>
     <lastmod>2022-10-30T15:31:23+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tags/1password/</loc>
@@ -91,9 +100,6 @@
   </url><url>
     <loc>https://codeinthehole.com/tags/teams/</loc>
     <lastmod>2020-04-24T10:04:16+00:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/tags/git/</loc>
-    <lastmod>2020-03-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</loc>
     <lastmod>2020-03-05T00:00:00+00:00</lastmod>
