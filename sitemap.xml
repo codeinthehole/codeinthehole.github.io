@@ -3,18 +3,24 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://codeinthehole.com/</loc>
-    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+    <lastmod>2022-11-12T17:51:38+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tags/git/</loc>
-    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
+    <lastmod>2022-11-12T17:51:38+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/projects/food-scraper/</loc>
+    <lastmod>2022-11-12T17:51:38+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/projects/</loc>
+    <lastmod>2022-11-12T17:51:38+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/</loc>
+    <lastmod>2022-11-12T17:51:38+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tags/openai/</loc>
     <lastmod>2022-11-11T22:07:17+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tidbits/openai-git-poetry/</loc>
-    <lastmod>2022-11-11T22:07:17+00:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/tags/</loc>
     <lastmod>2022-11-11T22:07:17+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tidbits/</loc>
@@ -283,9 +289,6 @@
   </url><url>
     <loc>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</loc>
     <lastmod>2014-06-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/projects/</loc>
-    <lastmod>2014-05-01T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/projects/the-road-to-oscar-10/</loc>
     <lastmod>2014-05-01T00:00:00+00:00</lastmod>

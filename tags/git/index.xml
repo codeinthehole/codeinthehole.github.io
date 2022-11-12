@@ -6,7 +6,19 @@
     <description>Recent content in git on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 11 Nov 2022 22:07:17 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Nov 2022 17:51:38 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>New project: Food price scraper</title>
+      <link>https://codeinthehole.com/projects/food-scraper/</link>
+      <pubDate>Sat, 12 Nov 2022 17:51:38 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/projects/food-scraper/</guid>
+      <description>I&amp;rsquo;ve created a deeply middle-class Git scraper project which tracks the prices of a basket of goods sold by the British online supermarket, Ocado.
+For example, Lurpak butter:
+I&amp;rsquo;ve been looked for an excuse to use Git scraping for ages, and this idea came up as my wife and I were commiserating over how much food prices are increasing at the moment.
+The project is the codeinthehole/food-scraper repo — see, in particular, the product overview file.</description>
+    </item>
+    
     <item>
       <title>OpenAI Git poetry</title>
       <link>https://codeinthehole.com/tidbits/openai-git-poetry/</link>
