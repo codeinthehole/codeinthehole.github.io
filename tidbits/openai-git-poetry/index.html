@@ -102,8 +102,8 @@ payload, we get:</p>
 </span></span><span style="display:flex;"><span>        git log -20 --format<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;%s%b&#34;</span> --no-merges
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    <span style="color:#e6db74">&#39;{model: &#34;text-davinci-002&#34;, temperature: 1, max_tokens: 512, prompt: $prompt}&#39;</span> <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    | http https://api.openai.com/v1/completions Authorization:<span style="color:#e6db74">&#34;Bearer </span>$OPENAI_API_KEY<span style="color:#e6db74">&#34;</span>
-</span></span><span style="display:flex;"><span>    | jq -r <span style="color:#e6db74">&#39;.choices[0].text&#39;</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    | http https://api.openai.com/v1/completions Authorization:<span style="color:#e6db74">&#34;Bearer </span>$OPENAI_API_KEY<span style="color:#e6db74">&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    | jq -r <span style="color:#e6db74">&#39;.choices[0].text&#39;</span>
 </span></span></code></pre></div><p>The quality of results varies quite a bit but they are good fun: things like:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>There was once a
 </span></span><span style="display:flex;"><span>young man, quite new to coding
