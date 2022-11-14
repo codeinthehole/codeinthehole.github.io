@@ -14,7 +14,7 @@
       
       <guid>https://codeinthehole.com/tidbits/openai-git-poetry/</guid>
       <description>OpenAI provides a REST API where you can generate prompt completions. Here&amp;rsquo;s a minimal example where a JSON payload is piped into httpie:
-$ export OPENAI_API_KEY=&amp;#34;...&amp;#34; # fill in your API key here $ echo &amp;#39;{&amp;#34;model&amp;#34;: &amp;#34;text-davinci-002&amp;#34;, &amp;#34;prompt&amp;#34;: &amp;#34;Write a poem about cheese&amp;#34;}&amp;#39; \ | http https://api.openai.com/v1/completions Authorization:&amp;#34;Bearer $OPENAI_API_KEY&amp;#34; \ | jq -r &amp;#39;.choices[0].text There&amp;#39;s nothing quite like cheese It&amp;#39;s rich, creamy, Quite.
+$ export OPENAI_API_KEY=&amp;#34;...&amp;#34; # fill in your API key here $ echo &amp;#39;{&amp;#34;model&amp;#34;: &amp;#34;text-davinci-002&amp;#34;, &amp;#34;prompt&amp;#34;: &amp;#34;Write a poem about cheese&amp;#34;}&amp;#39; \ | http https://api.openai.com/v1/completions Authorization:&amp;#34;Bearer $OPENAI_API_KEY&amp;#34; \ | jq -r &amp;#39;.choices[0].text There&amp;#39;s nothing quite like cheese It&amp;#39;s rich, creamy, and delicious. Quite.
 We can extend this by dynamically building the prompt string.</description>
     </item>
     
