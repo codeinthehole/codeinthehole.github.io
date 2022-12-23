@@ -1,0 +1,190 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+        
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Creating pull requests with GPT3 and random artwork — David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using OpenAI and some simple scripting to generate artful pull requests">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="https://til.codeinthehole.com">TIL</a> | 
+            <span class="desktop_only"><a href="/now/">now</a> |</span>
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Creating pull requests with GPT3 and random artwork</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Thursday, 22 December 2022</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Thursday, 22 December 2022</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <!-- INTRODUCTION -->
+<p>A friend of mine has been retweeting great paintings from Twitter accounts like
+<a href="https://twitter.com/HenryRothwell"><code>@HenryRothwell</code></a>, which I&rsquo;ve greatly enjoyed. E.g.</p>
+<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Good morning - I hope you slept like a caddis-fly larvae-stuffed miller&#39;s thumb. I&#39;m starting with &#39;Winter Landscape&#39;, Valerius de Saedeleer, oil on canvas, 1930s. <a href="https://t.co/hk6RUFh794">pic.twitter.com/hk6RUFh794</a></p>&mdash; Henry Rothwell (@HenryRothwell) <a href="https://twitter.com/HenryRothwell/status/1604358648800616448?ref_src=twsrc%5Etfw">December 18, 2022</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p>In a similar vein, I&rsquo;ve started embedding painting images in the description of
+every pull request I open. E.g.</p>
+<p><img src="/images/screenshots/pull-request-with-painting.png" alt="image"></p>
+<!-- CONTENT -->
+<p>I create pull requests with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git createpr
+</span></span></code></pre></div><p>where <code>createpr</code> is an alias to <a href="https://hub.github.com/"><code>hub pull-request</code></a> with pre-populated
+options:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-dosini" data-lang="dosini"><span style="display:flex;"><span><span style="color:#75715e"># ~/.gitconfig</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">createpr</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">!hub pull-request --draft --browse --edit
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    --message=\&#34;$(pull-request-title)\&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    --message=\&#34;$(pull-request-summary)\&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    --message=\&#34;$(random-picture)\&#34;</span>
+</span></span></code></pre></div><p>The pull request body is built by joining the <code>--message</code> options separated by a
+blank line. Each message component has its own script:</p>
+<ul>
+<li>
+<p><code>pull-request-title</code> is a <a href="https://gist.github.com/codeinthehole/d6a496b5a11e7500b7dd0c20f3e5b48c">Bash script</a> that uses the OpenAI
+API to summarise the commit messages into a pull request title. I haven&rsquo;t
+quite found the right prompt text to work here — that&rsquo;s a work-in-progress.</p>
+</li>
+<li>
+<p><code>pull-request-summary</code> is a simple <a href="https://gist.github.com/codeinthehole/3fc29fc6f1d9e0d9224e97762ff3537a">Python script</a> that combines
+all the commit messages and removes the hard line wrapping<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. The output
+will generally need some editing before it&rsquo;s suitable (hence the <code>--edit</code>
+option in the alias) but it&rsquo;s a good starting point.</p>
+</li>
+<li>
+<p><code>random-picture</code> is a <a href="https://github.com/codeinthehole/random-picture">Python script</a> that plucks a
+randomly selected image from a set of Twitter accounts and prints the
+appropriate markdown.</p>
+</li>
+</ul>
+<p>This works nicely — the painting images even unfurl elegantly in Slack.</p>
+<p><img src="/images/screenshots/slack-unfurl.png" alt="image"></p>
+<!-- Footnotes -->
+<!-- Links -->
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Commit messages are hard-wrapped at 72 characters but pull request
+descriptions shouldn&rsquo;t be hard wrapped.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">——————</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/projects/pull-requests-with-gpt3-and-random-artwork.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Creating%20pull%20requests%20with%20GPT3%20and%20random%20artwork%22&body=Article:%20Creating%20pull%20requests%20with%20GPT3%20and%20random%20artwork%0AURL:%20https%3a%2f%2fcodeinthehole.com%2fprojects%2fpull-requests-with-gpt3-and-random-artwork%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/projects/pull-requests-with-gpt3-and-random-artwork.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/github">Github</a>, <a href="/tags/openai">OpenAI</a>
+                <br/>
+            
+            
+                Filed in: <a href="/projects/">projects</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/projects/food-scraper/">New project: Food price scraper</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2022 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/projects\/food-scraper\/"); })
+    
+
+    
+</script>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+
