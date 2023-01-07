@@ -1,0 +1,165 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-3494213-5', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+        
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>Tips for using Github Copilot in Vim — David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Two recommendations for using Copilot effectively.">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="https://til.codeinthehole.com">TIL</a> | 
+            <span class="desktop_only"><a href="/now/">now</a> |</span>
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">Tips for using Github Copilot in Vim</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Friday, 6 January 2023</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Friday, 6 January 2023</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <!-- INTRODUCTION -->
+<p>Based on a few weeks of using <a href="https://github.com/github/copilot.vim"><code>vim-copilot</code></a>, I recommend the
+following:</p>
+<!-- CONTENT -->
+<ol>
+<li>
+<p>Enable Copilot for the <code>gitcommit</code>, <code>markdown</code> and <code>yaml</code> filetypes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">copilot_filetypes</span> = {<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;gitcommit&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>,<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;markdown&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>,<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;yaml&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ }<span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>By default, <a href="https://github.com/github/copilot.vim/blob/324ec9eb69e20971b58340d0096c3caac7bc2089/autoload/copilot.vim#L123-L132">these and few others are disabled</a>
+but I&rsquo;ve found them to be useful. It&rsquo;s often amusing to see Copilot&rsquo;s
+attempts to complete your commit messages.</p>
+</li>
+<li>
+<p>Disable Copilot for large files as it can be slow and impair the editing
+experience:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span> <span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">BufReadPre</span> *<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">f</span>=<span style="color:#a6e22e">getfsize</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#34;&lt;afile&gt;&#34;</span>))<span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ | <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span> &gt; <span style="color:#ae81ff">100000</span> || <span style="color:#a6e22e">f</span> == <span style="color:#ae81ff">-2</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ | <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">copilot_enabled</span> = <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">false</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ | <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
+</span></span></span></code></pre></div><p>This <a href="https://learnvimscriptthehardway.stevelosh.com/chapters/12.html">autocommand</a> disables Copilot for files larger than 100KB. See
+my <a href="https://til.codeinthehole.com/posts/how-to-automatically-disable-github-copilot-in-vim-when-editing-large-files/">related TIL post</a> for more details on this.</p>
+</li>
+</ol>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">——————</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/vim-and-github-copilot.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22Tips%20for%20using%20Github%20Copilot%20in%20Vim%22&body=Article:%20Tips%20for%20using%20Github%20Copilot%20in%20Vim%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fvim-and-github-copilot%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/vim-and-github-copilot.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/vim">Vim</a>, <a href="/tags/github-copilot">Github Copilot</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/projects/pull-requests-with-gpt3-and-random-artwork/">Creating pull requests with GPT3 and random artwork</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2023 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/projects\/pull-requests-with-gpt3-and-random-artwork\/"); })
+    
+
+    
+</script>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+

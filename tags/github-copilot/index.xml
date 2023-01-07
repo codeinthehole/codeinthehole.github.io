@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Github Copilot on David Winterbottom</title>
+    <link>https://codeinthehole.com/tags/github-copilot/</link>
+    <description>Recent content in Github Copilot on David Winterbottom</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 06 Jan 2023 12:07:03 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/github-copilot/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Tips for using Github Copilot in Vim</title>
+      <link>https://codeinthehole.com/tips/vim-and-github-copilot/</link>
+      <pubDate>Fri, 06 Jan 2023 12:07:03 +0000</pubDate>
+      
+      <guid>https://codeinthehole.com/tips/vim-and-github-copilot/</guid>
+      <description>Based on a few weeks of using vim-copilot, I recommend the following:
+Enable Copilot for the gitcommit, markdown and yaml filetypes:
+let g:copilot_filetypes = { \ &amp;#39;gitcommit&amp;#39;: v:true, \ &amp;#39;markdown&amp;#39;: v:true, \ &amp;#39;yaml&amp;#39;: v:true \ } By default, these and few others are disabled but I&amp;rsquo;ve found them to be useful. It&amp;rsquo;s often amusing to see Copilot&amp;rsquo;s attempts to complete your commit messages.
+Disable Copilot for large files as it can be slow and impair the editing experience:</description>
+    </item>
+    
+  </channel>
+</rss>

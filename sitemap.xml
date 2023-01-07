@@ -2,10 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://codeinthehole.com/projects/pull-requests-with-gpt3-and-random-artwork/</loc>
-    <lastmod>2022-12-22T21:42:35+00:00</lastmod>
-  </url><url>
     <loc>https://codeinthehole.com/</loc>
+    <lastmod>2023-01-06T12:07:03+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/github-copilot/</loc>
+    <lastmod>2023-01-06T12:07:03+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/</loc>
+    <lastmod>2023-01-06T12:07:03+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tips/</loc>
+    <lastmod>2023-01-06T12:07:03+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tips/vim-and-github-copilot/</loc>
+    <lastmod>2023-01-06T12:07:03+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/tags/vim/</loc>
+    <lastmod>2023-01-06T12:07:03+00:00</lastmod>
+  </url><url>
+    <loc>https://codeinthehole.com/projects/pull-requests-with-gpt3-and-random-artwork/</loc>
     <lastmod>2022-12-22T21:42:35+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tags/github/</loc>
@@ -15,9 +30,6 @@
     <lastmod>2022-12-22T21:42:35+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/projects/</loc>
-    <lastmod>2022-12-22T21:42:35+00:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/tags/</loc>
     <lastmod>2022-12-22T21:42:35+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tags/git/</loc>
@@ -47,9 +59,6 @@
     <loc>https://codeinthehole.com/tips/auditing-1password-activity/</loc>
     <lastmod>2022-06-29T21:00:01+00:00</lastmod>
   </url><url>
-    <loc>https://codeinthehole.com/tips/</loc>
-    <lastmod>2022-06-29T21:00:01+00:00</lastmod>
-  </url><url>
     <loc>https://codeinthehole.com/tags/django/</loc>
     <lastmod>2022-06-08T09:45:59+01:00</lastmod>
   </url><url>
@@ -70,9 +79,6 @@
   </url><url>
     <loc>https://codeinthehole.com/tags/writing/</loc>
     <lastmod>2021-10-14T16:29:42+01:00</lastmod>
-  </url><url>
-    <loc>https://codeinthehole.com/tags/vim/</loc>
-    <lastmod>2021-05-03T09:27:17+01:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tips/vim-lists/</loc>
     <lastmod>2021-05-03T09:27:17+01:00</lastmod>
