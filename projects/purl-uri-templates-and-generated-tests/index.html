@@ -191,7 +191,7 @@ for creating parameterised or generated tests.</p>
 we can rewrite the above example as:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pytest
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@pytest</span><span style="color:#f92672">.</span>mark<span style="color:#f92672">.</span>parametrize((<span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74">&#34;expected&#34;</span>), data)
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@pytest.mark.parametrize</span>((<span style="color:#e6db74">&#34;template&#34;</span>, <span style="color:#e6db74">&#34;fields&#34;</span>, <span style="color:#e6db74">&#34;expected&#34;</span>), data)
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_expand</span>(template, fields, expected):
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> expand(template, fields) <span style="color:#f92672">==</span>  expected
 </span></span></code></pre></div><p>with verbose output:</p>

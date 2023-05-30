@@ -514,7 +514,8 @@ Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
       
       <guid>https://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
       <description>Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your commit message template to:
-# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
+# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood — a good practice.
+See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
     </item>
     
     <item>
@@ -1308,7 +1309,7 @@ One of the key performance recommendations from Steve Souders&amp;rsquo; excelle
       <pubDate>Tue, 03 Feb 2009 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/the-most-important-command-line-tip-incremental-history-searching-with-inputrc/</guid>
-      <description>Getting www.commandlinefu.com off the ground has renewed my interest in Bash, UNIX and all things command-line. Powerful one-liners are things of beauty and are worth collecting; however what I consider to be the most influential command-line tip I know covers four:
+      <description>Getting &amp;lt;www.commandlinefu.com&amp;gt; off the ground has renewed my interest in Bash, UNIX and all things command-line. Powerful one-liners are things of beauty and are worth collecting; however what I consider to be the most influential command-line tip I know covers four:
 &amp;#34;\e[A&amp;#34;: history-search-backward &amp;#34;\e[B&amp;#34;: history-search-forward &amp;#34;\e[C&amp;#34;: forward-char &amp;#34;\e[D&amp;#34;: backward-char These lines need to be placed in your ~/.inputrc file, the start-up script for the Readline utility used by Bash (as well as several other applications) and others).</description>
     </item>
     

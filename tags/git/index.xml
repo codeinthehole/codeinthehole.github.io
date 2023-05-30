@@ -72,7 +72,8 @@ git pulls where pulls is aliased in ~/.</description>
       
       <guid>https://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
       <description>Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your commit message template to:
-# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood - a good practice. See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
+# If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood — a good practice.
+See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
     </item>
     
     <item>

@@ -138,7 +138,7 @@ Prototype Javascript library (version &gt; 1.5):</p>
 </span></span><span style="display:flex;"><span>      .<span style="color:#a6e22e">each</span>(
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">key</span>) {
 </span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">this</span>.<span style="color:#a6e22e">clear</span>(<span style="color:#a6e22e">key</span>);
-</span></span><span style="display:flex;"><span>        }.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>)
+</span></span><span style="display:flex;"><span>        }.<span style="color:#a6e22e">bind</span>(<span style="color:#66d9ef">this</span>),
 </span></span><span style="display:flex;"><span>      );
 </span></span><span style="display:flex;"><span>  },
 </span></span><span style="display:flex;"><span>});
@@ -221,7 +221,7 @@ the JSUnit test runner.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertFalse</span>(<span style="color:#e6db74">&#34;Check cookie has been cleared for myKey&#34;</span>, <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myKey</span>));
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertFalse</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Check cookie has been cleared for myNewKey&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myNewValue</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">myCookies</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">myNewValue</span>),
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testArrayInJsonCookies</span>() {
@@ -232,12 +232,12 @@ the JSUnit test runner.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testReturn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">testKey</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertTrue</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Check length of array is the same&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>,
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertEquals</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Checking arrays are the same&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testValue</span>).<span style="color:#a6e22e">toJSON</span>(),
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>(),
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testObjectInJsonCookies</span>() {
@@ -248,12 +248,12 @@ the JSUnit test runner.</p>
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">testReturn</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">jar</span>.<span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">testKey</span>);
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertTrue</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Check length of array is the same&#34;</span>,
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">testValue</span>.<span style="color:#a6e22e">length</span> <span style="color:#f92672">==</span> <span style="color:#a6e22e">testReturn</span>.<span style="color:#a6e22e">length</span>,
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>  <span style="color:#a6e22e">assertEquals</span>(
 </span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;Checking objects are the same&#34;</span>,
 </span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testValue</span>).<span style="color:#a6e22e">toJSON</span>(),
-</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">$A</span>(<span style="color:#a6e22e">testReturn</span>).<span style="color:#a6e22e">toJSON</span>(),
 </span></span><span style="display:flex;"><span>  );
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>One minor shortcoming of the present version of JSUnit is that it is difficult
