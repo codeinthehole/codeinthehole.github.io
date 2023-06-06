@@ -6,7 +6,25 @@
     <description>Recent content in Tags on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 06 Jan 2023 12:07:03 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 18 May 2023 15:27:57 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Markdown</title>
+      <link>https://codeinthehole.com/tags/markdown/</link>
+      <pubDate>Thu, 18 May 2023 15:27:57 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/markdown/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Vim</title>
+      <link>https://codeinthehole.com/tags/vim/</link>
+      <pubDate>Thu, 18 May 2023 15:27:57 +0100</pubDate>
+      
+      <guid>https://codeinthehole.com/tags/vim/</guid>
+      <description>I&amp;rsquo;ve been using Vim since 2002 and have arranged to have my ~/.vimrc read out as a reading at my funeral.</description>
+    </item>
+    
     <item>
       <title>Github Copilot</title>
       <link>https://codeinthehole.com/tags/github-copilot/</link>
@@ -14,15 +32,6 @@
       
       <guid>https://codeinthehole.com/tags/github-copilot/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Vim</title>
-      <link>https://codeinthehole.com/tags/vim/</link>
-      <pubDate>Fri, 06 Jan 2023 12:07:03 +0000</pubDate>
-      
-      <guid>https://codeinthehole.com/tags/vim/</guid>
-      <description>I&amp;rsquo;ve been using Vim since 2002 and have arranged to have my ~/.vimrc read out as a reading at my funeral.</description>
     </item>
     
     <item>
