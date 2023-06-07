@@ -6,11 +6,11 @@
     <description>Recent content on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 18 May 2023 15:27:57 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Writing Markdown in Vim</title>
       <link>https://codeinthehole.com/tips/writing-markdown-in-vim/</link>
-      <pubDate>Thu, 18 May 2023 15:27:57 +0100</pubDate>
+      <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/writing-markdown-in-vim/</guid>
       <description>I write a lot of Markdown in Vim and have spent considerable energy configuring it to my liking. This post details how I configure Vim1 for writing markdown.
