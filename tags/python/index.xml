@@ -99,7 +99,7 @@ URI templates in purl The newly released purl 0.8 (a URL library of mine) suppor
       <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
       
       <guid>https://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</guid>
-      <description>At Tangent we handle environment-specific configuration of Django projects using the method outlined by David Cramer. This involves distinguishing between core settings (which we keep in core/default.py) and environment specific settings (eg core/stage.py, core/test.py). The standard settings.py module imports all defaults and then uses a enviromental shell variable to determine which environment settings module to import.
+      <description>At Tangent we handle environment-specific configuration of Django projects using the method outlined by David Cramer. This involves distinguishing between core settings (which we keep in core/default.py) and environment specific settings (eg core/stage.py, core/test.py). The standard settings.py module imports all defaults and then uses a environmental shell variable to determine which environment settings module to import.
 A problem One tricky issue with this arrangement is logging to file. Ideally, we want to define a single LOGGING dict in the default settings but have file logging use an environment-specific folder.</description>
     </item>
     

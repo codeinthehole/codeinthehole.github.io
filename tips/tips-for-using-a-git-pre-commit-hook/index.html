@@ -133,7 +133,7 @@ forbidden strings are found.</p>
 </span></span><span style="display:flex;"><span>FORBIDDEN<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;console.log&#39;</span>
 </span></span><span style="display:flex;"><span>git diff --cached --name-only | <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    grep -E $FILES_PATTERN | <span style="color:#ae81ff">\
-</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    GREP_COLOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n $FORBIDDEN <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#39;COMMIT REJECTED Found &#34;$FORBIDDEN&#34; references. Please remove them before commiting&#39;</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span>
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>    GREP_COLOR<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;4;5;37;41&#39;</span> xargs grep --color --with-filename -n $FORBIDDEN <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#39;COMMIT REJECTED Found &#34;$FORBIDDEN&#34; references. Please remove them before committing&#39;</span> <span style="color:#f92672">&amp;&amp;</span> exit <span style="color:#ae81ff">1</span>
 </span></span></code></pre></div><p>It&rsquo;s straightforward to extend this code block to search for other terms.</p>
 
         </div>
