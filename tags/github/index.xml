@@ -6,40 +6,35 @@
     <description>Recent content in Github on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Dec 2022 21:42:35 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 22 Dec 2022 21:42:35 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/github/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Creating pull requests with GPT3 and random artwork</title>
       <link>https://codeinthehole.com/projects/pull-requests-with-gpt3-and-random-artwork/</link>
       <pubDate>Thu, 22 Dec 2022 21:42:35 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/projects/pull-requests-with-gpt3-and-random-artwork/</guid>
       <description>A friend of mine has been retweeting great paintings from Twitter accounts like @HenryRothwell, which I&amp;rsquo;ve greatly enjoyed. E.g.
 Good morning - I hope you slept like a caddis-fly larvae-stuffed miller&amp;#39;s thumb. I&amp;#39;m starting with &amp;#39;Winter Landscape&amp;#39;, Valerius de Saedeleer, oil on canvas, 1930s. pic.twitter.com/hk6RUFh794
 &amp;mdash; Henry Rothwell (@HenryRothwell) December 18, 2022 In a similar vein, I&amp;rsquo;ve started embedding painting images in the description of every pull request I open.</description>
     </item>
-    
     <item>
       <title>Easy Github URLs from Vim</title>
       <link>https://codeinthehole.com/tips/easy-github-urls-from-vim/</link>
       <pubDate>Tue, 23 Jun 2020 15:49:58 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/easy-github-urls-from-vim/</guid>
       <description>URLs are great aren&amp;rsquo;t they?
 You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
 Anyway, a super-useful Vim mapping I use is:
 vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
-    
     <item>
       <title>Advanced pull-request crafting</title>
       <link>https://codeinthehole.com/tips/advanced-pull-request-crafting/</link>
       <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
 Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
 Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
     </item>
-    
   </channel>
 </rss>

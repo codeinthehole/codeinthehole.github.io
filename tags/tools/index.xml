@@ -6,12 +6,12 @@
     <description>Recent content in tools on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 26 Feb 2020 10:04:16 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 26 Feb 2020 10:04:16 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Software development tips – part 1</title>
       <link>https://codeinthehole.com/tips/software-development-tips-part1/</link>
       <pubDate>Wed, 26 Feb 2020 10:04:16 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
 Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
@@ -19,6 +19,5 @@ If a 500 Internal Server Error HTTP response can be induced from your web app th
 On tools:
 Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
-    
   </channel>
 </rss>

@@ -82,15 +82,15 @@ it to my liking. This post details how I configure Vim<sup id="fnref:1"><a href=
 <h2 id="file-type-settings">File-type settings</h2>
 <p>In <code>~/.vim/after/ftplugin/markdown.vim</code> (or equivalent), set some buffer-local
 settings:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Use Vim&#39;s spell checker</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">spell</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; No line numbers</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">nonumber</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Configure <code>K</code> to look up the word under the cursor in a dictionary:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Use custom wrapper around MacOS dictionary as keyword look-up</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">keywordprg</span>=<span style="color:#a6e22e">open</span>-<span style="color:#a6e22e">dict</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>where <code>open-dict</code> is a Bash script of form:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Use Vim&#39;s spell checker</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">spell</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; No line numbers</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">nonumber</span>
+</span></span></code></pre></div><p>Configure <code>K</code> to look up the word under the cursor in a dictionary:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Use custom wrapper around MacOS dictionary as keyword look-up</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">keywordprg</span>=<span style="color:#a6e22e">open</span>-<span style="color:#a6e22e">dict</span>
+</span></span></code></pre></div><p>where <code>open-dict</code> is a Bash script of form:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env bash
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>set -e
@@ -103,21 +103,21 @@ settings:</p>
 </span></span></code></pre></div><p>A wrapper script is required as <code>open &quot;dict://&quot;</code> can&rsquo;t be set directly as
 <code>keywordprg</code> since Vim adds a space after the command.</p>
 <p>Side-step a gotcha with Hugo Markdown files:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Hugo Markdown files can have &#39;Vim: &#39; in their file metadata, which Vim</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">&#34; treats as a modeline and spits out an error. Hence, we disable</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">&#34; `modelines` for Markdown files.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">nomodeline</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><h2 id="plugins">Plugins</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Hugo Markdown files can have &#39;Vim: &#39; in their file metadata, which Vim</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; treats as a modeline and spits out an error. Hence, we disable</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; `modelines` for Markdown files.</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">setlocal</span> <span style="color:#a6e22e">nomodeline</span>
+</span></span></code></pre></div><h2 id="plugins">Plugins</h2>
 <h3 id="vim-markdown">Vim-Markdown</h3>
 <p>Install the <a href="https://github.com/sheerun/vim-polyglot"><code>sheerun/vim-polyglot</code></a> language pack but disable its
 Markdown support in <code>~/.vimrc</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">polyglot_disabled</span> = [<span style="color:#e6db74">&#39;markdown&#39;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;sheerun/vim-polyglot&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Polyglot bundles the excellent <a href="https://github.com/preservim/vim-markdown"><code>preservim/vim-markdown</code></a> plugin,
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">polyglot_disabled</span> = [<span style="color:#e6db74">&#39;markdown&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;sheerun/vim-polyglot&#39;</span>
+</span></span></code></pre></div><p>Polyglot bundles the excellent <a href="https://github.com/preservim/vim-markdown"><code>preservim/vim-markdown</code></a> plugin,
 but install it directly so the latest version is used:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;godlygeek/tabular&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;preservim/vim-markdown&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>As well as indent and syntax support, this provides:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;godlygeek/tabular&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;preservim/vim-markdown&#39;</span>
+</span></span></code></pre></div><p>As well as indent and syntax support, this provides:</p>
 <ul>
 <li>Folding</li>
 <li>Highlighting of fenced code blocks</li>
@@ -131,50 +131,50 @@ but install it directly so the latest version is used:</p>
 the <a href="https://github.com/preservim/vim-markdown#commands">README</a> for more details).</li>
 </ul>
 <p>Configure the plugin with these global settings:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Enable folding.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_folding_disabled</span> = <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Fold heading in with the contents.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_folding_style_pythonic</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Don&#39;t use the shipped key bindings.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_no_default_key_mappings</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Autoshrink TOCs.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_toc_autofit</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Indentation for new lists. We don&#39;t insert bullets as it doesn&#39;t play</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">&#34; nicely with `gq` formatting. It relies on a hack of treating bullets</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">&#34; as comment characters.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">&#34; See https://github.com/plasticboy/vim-markdown/issues/232</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_new_list_item_indent</span> = <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_auto_insert_bullets</span> = <span style="color:#ae81ff">0</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Filetype names and aliases for fenced code blocks.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_fenced_languages</span> = [<span style="color:#e6db74">&#39;php&#39;</span>, <span style="color:#e6db74">&#39;py=python&#39;</span>, <span style="color:#e6db74">&#39;js=javascript&#39;</span>, <span style="color:#e6db74">&#39;bash=sh&#39;</span>, <span style="color:#e6db74">&#39;viml=vim&#39;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Highlight front matter (useful for Hugo posts).</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_toml_frontmatter</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_json_frontmatter</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_frontmatter</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Format strike-through text (wrapped in `~~`).</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_strikethrough</span> = <span style="color:#ae81ff">1</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><h3 id="github-copilot">Github Copilot</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#75715e">&#34; Enable folding.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_folding_disabled</span> = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Fold heading in with the contents.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_folding_style_pythonic</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Don&#39;t use the shipped key bindings.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_no_default_key_mappings</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Autoshrink TOCs.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_toc_autofit</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Indentation for new lists. We don&#39;t insert bullets as it doesn&#39;t play</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; nicely with `gq` formatting. It relies on a hack of treating bullets</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; as comment characters.</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; See https://github.com/plasticboy/vim-markdown/issues/232</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_new_list_item_indent</span> = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_auto_insert_bullets</span> = <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Filetype names and aliases for fenced code blocks.</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_fenced_languages</span> = [<span style="color:#e6db74">&#39;php&#39;</span>, <span style="color:#e6db74">&#39;py=python&#39;</span>, <span style="color:#e6db74">&#39;js=javascript&#39;</span>, <span style="color:#e6db74">&#39;bash=sh&#39;</span>, <span style="color:#e6db74">&#39;viml=vim&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Highlight front matter (useful for Hugo posts).</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_toml_frontmatter</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_json_frontmatter</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_frontmatter</span> = <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">&#34; Format strike-through text (wrapped in `~~`).</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">vim_markdown_strikethrough</span> = <span style="color:#ae81ff">1</span>
+</span></span></code></pre></div><h3 id="github-copilot">Github Copilot</h3>
 <p>Install <a href="https://github.com/github/copilot.vim"><code>github/copilot.vim</code></a> and enable it for Markdown buffers:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;github/copilot.vim&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">copilot_filetypes</span> = {<span style="color:#e6db74">&#39;markdown&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>}<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Having Copilot trying to second guess your sentences is generally more amusing
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;github/copilot.vim&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">copilot_filetypes</span> = {<span style="color:#e6db74">&#39;markdown&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>}
+</span></span></code></pre></div><p>Having Copilot trying to second guess your sentences is generally more amusing
 than useful but it can be helpful for mundane tasks like adding link URLs and
 similar.</p>
 <h3 id="ale">Ale</h3>
 <p>Install <a href="https://github.com/dense-analysis/ale"><code>dense-analysis/ale</code></a> in <code>~/.vimrc</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;dense-analysis/ale&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>and configure the default linters and fixers for Markdown in
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">Plug</span> <span style="color:#e6db74">&#39;dense-analysis/ale&#39;</span>
+</span></span></code></pre></div><p>and configure the default linters and fixers for Markdown in
 <code>~/.vim/after/ftplugin/markdown.vim</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">ale_linters</span> = [<span style="color:#e6db74">&#39;markdownlint&#39;</span>, <span style="color:#e6db74">&#39;vale&#39;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">ale_fixers</span> = [<span style="color:#e6db74">&#39;prettier&#39;</span>]<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>More detail on these tools below.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">ale_linters</span> = [<span style="color:#e6db74">&#39;markdownlint&#39;</span>, <span style="color:#e6db74">&#39;vale&#39;</span>]
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">ale_fixers</span> = [<span style="color:#e6db74">&#39;prettier&#39;</span>]
+</span></span></code></pre></div><p>More detail on these tools below.</p>
 <p>Note that <code>:ALEInfo</code> is useful for listing the available linters for the current
 file type and for debugging if these tools are working correctly.</p>
 <h2 id="tools">Tools</h2>

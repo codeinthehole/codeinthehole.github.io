@@ -6,18 +6,17 @@
     <description>Recent content in geodjango on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Jul 2013 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/geodjango/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Jul 2013 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/geodjango/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Dumping and restoring a PostGIS database</title>
       <link>https://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</link>
       <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</guid>
       <description>I wasted at least twenty minutes getting this to work. These are my notes.
 Problem You are using a PostGIS database and want to take a backup copy from production and restore it in a different environment. One complication is that each environment connects to its database with its own user.
 This is a common scenario if you are using GeoDjango.
 Solution Suppose your production database is called &amp;ldquo;myproject_prod&amp;rdquo; which you connect to with user &amp;ldquo;myproject_prod_role&amp;rdquo; and you want to replace your existing stage database &amp;ldquo;myproject_stage&amp;rdquo; that you connect to with user &amp;ldquo;myproject_stage_role&amp;rdquo;.</description>
     </item>
-    
   </channel>
 </rss>

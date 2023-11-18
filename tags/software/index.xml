@@ -6,18 +6,17 @@
     <description>Recent content in software on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 24 Dec 2018 11:51:36 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Dec 2018 11:51:36 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/software/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Easy to change</title>
       <link>https://codeinthehole.com/tips/easy-to-change/</link>
       <pubDate>Mon, 24 Dec 2018 11:51:36 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/easy-to-change/</guid>
       <description>I care about writing maintainable software1: code that is a pleasure to work with in the long-term; where new requirements can be accommodated smoothly and swiftly &amp;ndash; above all, software that is easy to change.
 Memorise that phrase.
 I feel we lose sight of this overarching guiding principle and harm our codebases by dogmatically pursuing well-intentioned but proximate goals.
 The main thing the future maintainer of your code (i.e. you) cares about is whether the code is easy to change2.</description>
     </item>
-    
   </channel>
 </rss>

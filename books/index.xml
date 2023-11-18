@@ -6,15 +6,14 @@
     <description>Recent content in Books on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Dec 2008 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/books/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Dec 2008 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/books/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>High Performance Web Sites by Steve Souders</title>
       <link>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</link>
       <pubDate>Sat, 06 Dec 2008 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/books/high-performance-web-sites-by-steve-souders/</guid>
       <description>High Performance Web Sites (HPWS) is essentially a book-length exposition of the YSlow extension to Firebug augmented with case studies of popular US websites. YSlow itself links to some explanation paragraphs regarding the various guidelines that are used to grade the performance of a website. However, even for those familiar with this documentation, HPWS is still an excellent resource on how the performance of a web app can be tuned.</description>
     </item>
-    
   </channel>
 </rss>

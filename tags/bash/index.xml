@@ -6,12 +6,12 @@
     <description>Recent content in bash on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Sep 2017 22:44:03 +0100</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/bash/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Bash error reporting</title>
       <link>https://codeinthehole.com/tips/bash-error-reporting/</link>
       <pubDate>Sat, 30 Sep 2017 22:44:03 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/bash-error-reporting/</guid>
       <description>Two tips:
 Fail fast You probably already know that you can force Bash scripts to exit immediately if there&amp;rsquo;s an error (that is, if any command exits with a non-zero exit code) using:
@@ -19,29 +19,24 @@ Fail fast You probably already know that you can force Bash scripts to exit imme
 set -eu -o pipefail so that the script:
 exits on an error (-e, equivalent to -o errexit); exits on an undefined variable (-u, equivalent to -o nounset); exits on an error in piped-together commands (-o pipefail)1.</description>
     </item>
-    
     <item>
       <title>Reorganising a Consul key-value store</title>
       <link>https://codeinthehole.com/tips/migrate-consul-key-value-store/</link>
       <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
       <description>If your Consul key-value store is structured as:
 / A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
 / WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:
 #!/bin/bash set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
-    
     <item>
       <title>Following log files with tail -f</title>
       <link>https://codeinthehole.com/tips/following-log-files-with-tail-f/</link>
       <pubDate>Wed, 22 Oct 2008 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/following-log-files-with-tail-f/</guid>
       <description>UNIX is a majestic onion of discovery. Every day a new layer of understanding can be peeled away to give some new pungent goodness. Today&amp;rsquo;s was the &amp;lsquo;follow&amp;rsquo; option of the tail command.
 It&amp;rsquo;s commonplace to use tail for viewing the recent entries to a log file:
 tail /var/log/apache2/error.log Much more useful is set the &amp;lsquo;follow&amp;rsquo; option so that, rather than echoing to STDOUT and returning control to the prompt - tail continues to watch the file in question and echos additional lines to the terminal.</description>
     </item>
-    
   </channel>
 </rss>

@@ -6,35 +6,31 @@
     <description>Recent content in git on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 12 Nov 2022 17:51:38 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 12 Nov 2022 17:51:38 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>New project: Food price scraper</title>
       <link>https://codeinthehole.com/projects/food-scraper/</link>
       <pubDate>Sat, 12 Nov 2022 17:51:38 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/projects/food-scraper/</guid>
       <description>I&amp;rsquo;ve created a deeply middle-class Git scraper project which tracks the prices of a basket of goods sold by the British online supermarket, Ocado.
 For example, Lurpak butter:
 I&amp;rsquo;ve been looked for an excuse to use Git scraping for ages, and this idea came up as my wife and I were commiserating over how much food prices are increasing at the moment.
 The project is the codeinthehole/food-scraper repo — see, in particular, the product overview file.</description>
     </item>
-    
     <item>
       <title>OpenAI Git poetry</title>
       <link>https://codeinthehole.com/tidbits/openai-git-poetry/</link>
       <pubDate>Fri, 11 Nov 2022 22:07:17 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tidbits/openai-git-poetry/</guid>
       <description>OpenAI provides a REST API where you can generate prompt completions. Here&amp;rsquo;s a minimal example where a JSON payload is piped into httpie:
 $ export OPENAI_API_KEY=&amp;#34;...&amp;#34; # fill in your API key here $ echo &amp;#39;{&amp;#34;model&amp;#34;: &amp;#34;text-davinci-002&amp;#34;, &amp;#34;prompt&amp;#34;: &amp;#34;Write a poem about cheese&amp;#34;}&amp;#39; \ | http https://api.openai.com/v1/completions Authorization:&amp;#34;Bearer $OPENAI_API_KEY&amp;#34; \ | jq -r &amp;#39;.choices[0].text There&amp;#39;s nothing quite like cheese It&amp;#39;s rich, creamy, and delicious. Quite.
 We can extend this by dynamically building the prompt string.</description>
     </item>
-    
     <item>
       <title>Resolving conflicts during a Git rebase</title>
       <link>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</guid>
       <description>Resolving conflicts from a Git rebase can be tricky. But don&amp;rsquo;t worry &amp;ndash; here&amp;rsquo;s a comprehensive guide to how to resolve them.
 There&amp;rsquo;s three phases:
@@ -42,117 +38,96 @@ Which commit of mine is conflicting? What changes were made in the target branch
 Let&amp;rsquo;s walk through the process.
 A conflict happens On your working branch, you run:</description>
     </item>
-    
     <item>
       <title>Advanced pull-request crafting</title>
       <link>https://codeinthehole.com/tips/advanced-pull-request-crafting/</link>
       <pubDate>Sun, 03 Jun 2018 12:30:05 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/advanced-pull-request-crafting/</guid>
       <description>I spend most of my day reviewing pull requests in Github. These are my working notes on what makes a good PR.
 Purpose? It should be clear to the reviewer what change is being made and, crucially, why. So ensure your title and description convey the purpose of the PR. Consider including:
 Screenshots &amp;mdash; such as snaps or gifs of a new UI, or graphs of the devastating performance improvement your PR delivers.</description>
     </item>
-    
     <item>
       <title>Git tips for working with pull requests</title>
       <link>https://codeinthehole.com/tips/open-github-pull-request-command/</link>
       <pubDate>Tue, 06 Jun 2017 21:30:36 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/open-github-pull-request-command/</guid>
       <description>I spend at least 50% of each day reviewing, amended (and occasionally merging) pull requests, adding both commits and comments. As such I often want to quickly jump from a terminal window to the pull request detail page to check previous comments or add new.
 Even with the excellent hub git wrapper, there&amp;rsquo;s no easy way to do this. I can jump to the pull request list page with:
 git pulls where pulls is aliased in ~/.</description>
     </item>
-    
     <item>
       <title>A useful template for commit messages</title>
       <link>https://codeinthehole.com/tips/a-useful-template-for-commit-messages/</link>
       <pubDate>Fri, 02 Oct 2015 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/a-useful-template-for-commit-messages/</guid>
       <description>Here&amp;rsquo;s a useful heuristic for writing better commit messages. Set your commit message template to:
 # If applied, this commit will... # Why is this change needed? Prior to this change, # How does it address the issue? This change # Provide links to any relevant tickets, articles or other resources and you&amp;rsquo;ll be guided into writing concise commit subjects in the imperative mood — a good practice.
 See rule 5 of Chris Beam&amp;rsquo;s &amp;ldquo;How to write a commit message&amp;rdquo; for the inspiration of this tip and more reasoning on the use of the imperative mood.</description>
     </item>
-    
     <item>
       <title>Linking to Github</title>
       <link>https://codeinthehole.com/tips/linking-to-github/</link>
       <pubDate>Thu, 17 Jul 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/linking-to-github/</guid>
       <description>It was rightly pointed out yesterday that it&amp;rsquo;s dangerous to link to lines or blocks of code on Github without explicitly specifying the commit hash in the URL. On this theme, consider this git command:
 $ git browse -u -- commit/$(git rev-parse HEAD) https://github.com/tangentlabs/django-oscar/commit/17851d4b66922f8d7e203e2b469040690c84a0db This emits the Github URL to the HEAD commit on the current branch, specifying the commit hash in the URL. Note that the browse subcommand is provided by the excellent hub library.</description>
     </item>
-    
     <item>
       <title>Command-line tips for effective release announcements</title>
       <link>https://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</link>
       <pubDate>Thu, 16 Jan 2014 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/command-line-tips-for-effective-release-announcements/</guid>
       <description>We finally released Oscar 0.6 last week. The process brought home the importance of writing your release notes as you go rather than at the end. It&amp;rsquo;s a real pain to extract the key changes from 1200 commits spread over the last 8 months. Lesson learnt.
 This article is largely a note-to-self in case I have to repeat the process. However, if you do find yourself in a similar position, here are a few command-line tricks for analysing your git history.</description>
     </item>
-    
     <item>
       <title>Enhancing your Git commit editor</title>
       <link>https://codeinthehole.com/tips/enhancing-your-git-commit-editor/</link>
       <pubDate>Thu, 08 Aug 2013 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/enhancing-your-git-commit-editor/</guid>
       <description>Confession: I am a pedant, especially around commit messages.
 I often find myself writing very similar commit messages (like &amp;ldquo;Bump version to 0.4.3&amp;rdquo;) and want to ensure I use the same wording each time. Thanks to @LuRsT, I learnt how to employ Git&amp;rsquo;s prepare-commit-msg hook to display the last 5 commit messages when I&amp;rsquo;m editing a commit message.
 Use the following .git/hooks/prepare-commit-msg hook:
 #!/bin/sh NUM_COMMITS=5 FORMAT=&amp;#34;# %h %s [%an]&amp;#34; COMMITS=&amp;#34;$(git log --pretty=&amp;#34;${FORMAT}&amp;#34; -${NUM_COMMITS})&amp;#34; HEADER=&amp;#34;# # Last ${NUM_COMMITS} commits # ----------------------&amp;#34; recent_commits() { echo &amp;#34;${HEADER}&amp;#34; echo &amp;#34;${COMMITS}&amp;#34; } COMMIT_FILE=$1 SOURCE=$2 SHA=$3 case &amp;#34;$SOURCE&amp;#34; in merge|squash|message) ;; &amp;#34;&amp;#34;|commit|template) if [ -z &amp;#34;$SHA&amp;#34; ]; then recent_commits &amp;gt;&amp;gt; $COMMIT_FILE fi ;; *) echo &amp;#34;Unexpected type &amp;#39;$SOURCE&amp;#39; in prepare-commit-msg hook&amp;#34; &amp;gt;&amp;amp;2 exit 1 esac then your default commit template looks like this:</description>
     </item>
-    
     <item>
       <title>Converting Github issues into pull requests</title>
       <link>https://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</link>
       <pubDate>Mon, 04 Mar 2013 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/converting-github-issues-into-pull-requests/</guid>
       <description>Using the Hub library, it&amp;rsquo;s possible to convert Github issues into pull requests. This gives rise to a useful Github workflow which this article describes.
 This is nothing new; it&amp;rsquo;s been written about before. However, this is something I do all the time whilst developing Oscar and I&amp;rsquo;m fed up with explaining it. This article is a reference I can point people at.
 Workflow Discuss Discuss an idea for a new feature on the project mailing list.</description>
     </item>
-    
     <item>
       <title>Effective pull requests and other good practices for teams using github</title>
       <link>https://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</link>
       <pubDate>Sat, 20 Oct 2012 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/pull-requests-and-other-good-practices-for-teams-using-github/</guid>
       <description>I work at an agency where we pay $200 a month to Github for their platinum plan. This article is a summary of an internal talk I gave on making the most of our subscription.
 There&amp;rsquo;s nothing original here: it&amp;rsquo;s just a collection of tips that I&amp;rsquo;ve harvested over the last few years. I&amp;rsquo;m publishing this article mainly so I have something to refer future employees to.
 Use pull requests Pull requests are an excellent tool for fostering code review.</description>
     </item>
-    
     <item>
       <title>Tips for using a git pre-commit hook</title>
       <link>https://codeinthehole.com/tips/tips-for-using-a-git-pre-commit-hook/</link>
       <pubDate>Mon, 05 Mar 2012 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/tips-for-using-a-git-pre-commit-hook/</guid>
       <description>Here&amp;rsquo;s a few tips for using a Git pre-commit hook.
 Keep your hook script in source control Commit your hook script (say pre-commit.sh) at the root of your project and include the installation instructions in your README/documentation to encourage all developers use it.
 Installation is nothing more than:
 ln -s ../../pre-commit.sh .git/hooks/pre-commit Then everyone benefits from running the same set of tests before committing and updates are picked up automatically.</description>
     </item>
-    
     <item>
       <title>A Fabric function for git tagging</title>
       <link>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
       <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
       <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
 Set-up Assume there is a test environment where:
 the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.
 Fabric function The following function can be used as part of Fabric build script.</description>
     </item>
-    
   </channel>
 </rss>

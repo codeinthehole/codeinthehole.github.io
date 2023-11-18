@@ -174,16 +174,16 @@ each list described in this post.</p>
 cursor. This makes it trivial to answer the question &ldquo;where else is this
 function used?&rdquo;</p>
 <p>I use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">gw</span> :<span style="color:#a6e22e">grep</span> &lt;<span style="color:#a6e22e">cword</span>&gt; . &lt;<span style="color:#a6e22e">cr</span>&gt;<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>although this does clobber a built-in formatting operator.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">gw</span> :<span style="color:#a6e22e">grep</span> &lt;<span style="color:#a6e22e">cword</span>&gt; . &lt;<span style="color:#a6e22e">cr</span>&gt;
+</span></span></code></pre></div><p>although this does clobber a built-in formatting operator.</p>
 <h3 id="tip-custom-grepprg-programs">Tip: Custom <code>grepprg</code> programs</h3>
 <p>Use <a href="https://github.com/BurntSushi/ripgrep"><code>ripgrep</code></a> as your default search
 program:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">executable</span>(<span style="color:#e6db74">&#39;rg&#39;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">grepprg</span>=<span style="color:#a6e22e">rg</span>\ --<span style="color:#a6e22e">vimgrep</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">set</span> <span style="color:#a6e22e">grepformat</span>=%<span style="color:#a6e22e">f</span>:%<span style="color:#a6e22e">l</span>:%<span style="color:#a6e22e">c</span>:%<span style="color:#a6e22e">m</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Keep your <code>ripgrep</code> configuration in a global <code>~/.ripgreprc</code> file so <code>:grep</code>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> <span style="color:#a6e22e">executable</span>(<span style="color:#e6db74">&#39;rg&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">set</span> <span style="color:#a6e22e">grepprg</span>=<span style="color:#a6e22e">rg</span>\ --<span style="color:#a6e22e">vimgrep</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">set</span> <span style="color:#a6e22e">grepformat</span>=%<span style="color:#a6e22e">f</span>:%<span style="color:#a6e22e">l</span>:%<span style="color:#a6e22e">c</span>:%<span style="color:#a6e22e">m</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endif</span>
+</span></span></code></pre></div><p>Keep your <code>ripgrep</code> configuration in a global <code>~/.ripgreprc</code> file so <code>:grep</code>
 behaves the same as <code>rg</code> at the command-line. Recommended settings:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># ~/.ripgreprc</span>
 </span></span><span style="display:flex;"><span><span style="color:#a6e22e">--smart-case</span>
@@ -195,43 +195,43 @@ behaves the same as <code>rg</code> at the command-line. Recommended settings:</
 can be used — most static analysis tools are viable candidates.</p>
 <p>For instance, I occasionally use it for
 <a href="https://pypi.org/project/bandit/">Bandit</a> security analysis via:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">makeprg</span>=<span style="color:#a6e22e">bandit</span>\ -<span style="color:#a6e22e">r</span>\ -<span style="color:#a6e22e">f</span>\ <span style="color:#a6e22e">custom</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>or to work though all Python linting errors in a new project:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">makeprg</span>=<span style="color:#a6e22e">flake8</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><h3 id="tip-operating-on-the-error-list">Tip: Operating on the error list</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#a6e22e">makeprg</span>=<span style="color:#a6e22e">bandit</span>\ -<span style="color:#a6e22e">r</span>\ -<span style="color:#a6e22e">f</span>\ <span style="color:#a6e22e">custom</span>
+</span></span></code></pre></div><p>or to work though all Python linting errors in a new project:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#a6e22e">makeprg</span>=<span style="color:#a6e22e">flake8</span>
+</span></span></code></pre></div><h3 id="tip-operating-on-the-error-list">Tip: Operating on the error list</h3>
 <p>A powerful editing technique is to apply an operation or macro to each location
 or file in the quickfix list. This is done with <code>:cdo</code> or <code>:cfdo</code> respectively.
 Here are some examples where we populate the quickfix list using <code>:grep</code> (using
 <code>ripgrep</code> options) then perform a batch edit using <code>:cdo</code> or <code>:cfdo</code>.</p>
 <p>Replace &ldquo;foo&rdquo; with &ldquo;bar&rdquo; in all Python files containing the string &ldquo;baz&rdquo;:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">baz</span> -<span style="color:#a6e22e">t</span> <span style="color:#a6e22e">py</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">cfdo</span> %<span style="color:#a6e22e">s</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">bar</span>/<span style="color:#a6e22e">g</span> | <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Delete lines containing &ldquo;foo&rdquo; from all files called <code>urls.py</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">foo</span> -<span style="color:#a6e22e">g</span> <span style="color:#a6e22e">urls</span>.<span style="color:#a6e22e">py</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">cfdo</span> <span style="color:#a6e22e">g</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">d</span> | <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>Run macro <code>q</code> on all lines containing &ldquo;foo&rdquo;:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">foo</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>:<span style="color:#a6e22e">cdo</span> <span style="color:#a6e22e">normal</span> @<span style="color:#a6e22e">q</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>I sometimes write a custom function to run on each quickfix location. This is a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">baz</span> -<span style="color:#a6e22e">t</span> <span style="color:#a6e22e">py</span>
+</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">cfdo</span> %<span style="color:#a6e22e">s</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">bar</span>/<span style="color:#a6e22e">g</span> | <span style="color:#a6e22e">update</span>
+</span></span></code></pre></div><p>Delete lines containing &ldquo;foo&rdquo; from all files called <code>urls.py</code>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">foo</span> -<span style="color:#a6e22e">g</span> <span style="color:#a6e22e">urls</span>.<span style="color:#a6e22e">py</span>
+</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">cfdo</span> <span style="color:#a6e22e">g</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">d</span> | <span style="color:#a6e22e">update</span>
+</span></span></code></pre></div><p>Run macro <code>q</code> on all lines containing &ldquo;foo&rdquo;:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">grep</span> <span style="color:#a6e22e">foo</span>
+</span></span><span style="display:flex;"><span>:<span style="color:#a6e22e">cdo</span> <span style="color:#a6e22e">normal</span> @<span style="color:#a6e22e">q</span>
+</span></span></code></pre></div><p>I sometimes write a custom function to run on each quickfix location. This is a
 useful way of performing complex batch changes that are too complex for a single
 Ex command or macro:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">FixQuickfixEntry</span>()<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">    &#34; Example the line of the error to determine what fix is required.</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">line</span> = <span style="color:#a6e22e">getline</span>(<span style="color:#e6db74">&#39;.&#39;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">line</span> =~ <span style="color:#e6db74">&#39;as e:$&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">        &#34; Handle scenario of unused exception variable</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">s</span><span style="color:#e6db74">/ as e:/</span>:/<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">elseif</span> <span style="color:#a6e22e">line</span> =~ <span style="color:#e6db74">&#39;^\s\+\w\+ = factory&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e">        &#34; Handle scenario of unused test factory variable</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">normal</span> <span style="color:#a6e22e">_</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">normal</span> <span style="color:#ae81ff">2</span>dw<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">else</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>        <span style="color:#a6e22e">echom</span> <span style="color:#e6db74">&#34;Unable to fix&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>then use:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">cdo</span> <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">FixQuickfixEntry</span>()<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>This is good technique for quickly performing sophisticated refactoring across a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">FixQuickfixEntry</span>()
+</span></span><span style="display:flex;"><span><span style="color:#75715e">    &#34; Example the line of the error to determine what fix is required.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">line</span> = <span style="color:#a6e22e">getline</span>(<span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">line</span> =~ <span style="color:#e6db74">&#39;as e:$&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">        &#34; Handle scenario of unused exception variable</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">s</span><span style="color:#e6db74">/ as e:/</span>:/
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">elseif</span> <span style="color:#a6e22e">line</span> =~ <span style="color:#e6db74">&#39;^\s\+\w\+ = factory&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">        &#34; Handle scenario of unused test factory variable</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">normal</span> <span style="color:#a6e22e">_</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">normal</span> <span style="color:#ae81ff">2</span>dw
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">echom</span> <span style="color:#e6db74">&#34;Unable to fix&#34;</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">endif</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endfunction</span>
+</span></span></code></pre></div><p>then use:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">cdo</span> <span style="color:#a6e22e">call</span> <span style="color:#a6e22e">FixQuickfixEntry</span>()
+</span></span></code></pre></div><p>This is good technique for quickly performing sophisticated refactoring across a
 whole codebase.</p>
 <h3 id="tip-populate-the-quickfix-list-in-a-subshell">Tip: Populate the quickfix list in a subshell</h3>
 <p>When running <code>:grep</code> or <code>:make</code>, Vim executes the program in Vim&rsquo;s parent shell.
@@ -243,21 +243,21 @@ that shows how to avoid this woes by using <code>:cgetexpr</code> (or <code>:cex
 the quickfix list in a subshell. There&rsquo;s a few variants you can use depending on
 whether you regularly search for multi-word queries. I do, so I use this
 version:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">Grep</span>(...)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">cmd</span> = <span style="color:#a6e22e">join</span>([&amp;<span style="color:#a6e22e">grepprg</span>] + [<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">a</span>:<span style="color:#ae81ff">000</span>, <span style="color:#e6db74">&#39; &#39;</span>)], <span style="color:#e6db74">&#39; &#39;</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">cmd</span>)<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">endfunction</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">command</span>! -<span style="color:#a6e22e">nargs</span>=+ -<span style="color:#a6e22e">complete</span>=<span style="color:#a6e22e">file_in_path</span> <span style="color:#a6e22e">Grep</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">Grep</span>(&lt;<span style="color:#a6e22e">f</span>-<span style="color:#a6e22e">args</span>&gt;)<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>To complement this, you can use a command-line abbreviation to automatically
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">function</span>! <span style="color:#a6e22e">Grep</span>(...)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">cmd</span> = <span style="color:#a6e22e">join</span>([&amp;<span style="color:#a6e22e">grepprg</span>] + [<span style="color:#a6e22e">join</span>(<span style="color:#a6e22e">a</span>:<span style="color:#ae81ff">000</span>, <span style="color:#e6db74">&#39; &#39;</span>)], <span style="color:#e6db74">&#39; &#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">return</span> <span style="color:#a6e22e">system</span>(<span style="color:#a6e22e">cmd</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">endfunction</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">command</span>! -<span style="color:#a6e22e">nargs</span>=+ -<span style="color:#a6e22e">complete</span>=<span style="color:#a6e22e">file_in_path</span> <span style="color:#a6e22e">Grep</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">Grep</span>(&lt;<span style="color:#a6e22e">f</span>-<span style="color:#a6e22e">args</span>&gt;)
+</span></span></code></pre></div><p>To complement this, you can use a command-line abbreviation to automatically
 switch <code>:grep</code> to <code>:Grep</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">cnoreabbrev</span> &lt;<span style="color:#a6e22e">expr</span>&gt; <span style="color:#a6e22e">grep</span> (<span style="color:#a6e22e">getcmdtype</span>() ==# <span style="color:#e6db74">&#39;:&#39;</span> &amp;&amp; <span style="color:#a6e22e">getcmdline</span>() ==# <span style="color:#e6db74">&#39;grep&#39;</span>) ? <span style="color:#e6db74">&#39;Grep&#39;</span> : <span style="color:#e6db74">&#39;grep&#39;</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>and an autocommand to open the quickfix window when there are results:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">quickfix</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">autocmd</span>!<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span> <span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">QuickFixCmdPost</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">cwindow</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">END</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>This is life changing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">cnoreabbrev</span> &lt;<span style="color:#a6e22e">expr</span>&gt; <span style="color:#a6e22e">grep</span> (<span style="color:#a6e22e">getcmdtype</span>() ==# <span style="color:#e6db74">&#39;:&#39;</span> &amp;&amp; <span style="color:#a6e22e">getcmdline</span>() ==# <span style="color:#e6db74">&#39;grep&#39;</span>) ? <span style="color:#e6db74">&#39;Grep&#39;</span> : <span style="color:#e6db74">&#39;grep&#39;</span>
+</span></span></code></pre></div><p>and an autocommand to open the quickfix window when there are results:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">quickfix</span>
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">autocmd</span>!
+</span></span><span style="display:flex;"><span> <span style="color:#66d9ef">autocmd</span> <span style="color:#a6e22e">QuickFixCmdPost</span> <span style="color:#a6e22e">cexpr</span> <span style="color:#a6e22e">cwindow</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">augroup</span> <span style="color:#a6e22e">END</span>
+</span></span></code></pre></div><p>This is life changing.</p>
 <!--
 Other quickfix tips
 
@@ -311,8 +311,8 @@ list.</p>
 <!-- Useful to for quick jumping but sometimes confusing — best to use change
 list when jumping back to previous edit locations.
 
-Relevant literature:
---------------------
+Relevant literature
+-------------------
 
 https://medium.com/breathe-publication/understanding-vims-jump-list-7e1bfc72cdf0
 https://kadekillary.work/post/vim-jumplist/ (dupe?)
@@ -472,12 +472,12 @@ this, Vim can
 </li>
 <li>
 <p>Within a Vim session, use the <code>:args</code> command:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> <span style="color:#a6e22e">file1</span> <span style="color:#a6e22e">file2</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>This approach is powerful as not only does wildcard expansion work:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> *.<span style="color:#a6e22e">c</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>but so does shelling out:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> `<span style="color:#a6e22e">fd</span> -<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">py</span>`<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p><a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a particularly good tool to use to
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> <span style="color:#a6e22e">file1</span> <span style="color:#a6e22e">file2</span>
+</span></span></code></pre></div><p>This approach is powerful as not only does wildcard expansion work:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> *.<span style="color:#a6e22e">c</span>
+</span></span></code></pre></div><p>but so does shelling out:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> `<span style="color:#a6e22e">fd</span> -<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">py</span>`
+</span></span></code></pre></div><p><a href="https://github.com/sharkdp/fd"><code>fd</code></a> is a particularly good tool to use to
 populate the argument list.</p>
 </li>
 </ol>
@@ -499,12 +499,12 @@ using <code>:argdo {cmd}</code>. An example workflow is:</p>
 <ol>
 <li>
 <p>Select all HTML files beneath current directory:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> `<span style="color:#a6e22e">fd</span> -<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">html</span>`<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">args</span> `<span style="color:#a6e22e">fd</span> -<span style="color:#a6e22e">e</span> <span style="color:#a6e22e">html</span>`
+</span></span></code></pre></div></li>
 <li>
 <p>Run a search-and-replace-then-save operation on each file:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">argdo</span> %<span style="color:#a6e22e">s</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">bar</span>/<span style="color:#a6e22e">g</span> | <span style="color:#a6e22e">update</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">argdo</span> %<span style="color:#a6e22e">s</span><span style="color:#e6db74">/foo/</span><span style="color:#a6e22e">bar</span>/<span style="color:#a6e22e">g</span> | <span style="color:#a6e22e">update</span>
+</span></span></code></pre></div></li>
 </ol>
 <p>More at:</p>
 <ul>
@@ -519,12 +519,12 @@ appears in a &ldquo;tags file&rdquo; generated by an external program like <code
 file is effectively an index mapping identifiers to locations in your codebase.</p>
 <!-- How Vim finds your tag files -->
 <p>Use the <code>tags</code> setting to tell Vim where to find tag files. A common value is:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">set</span> <span style="color:#a6e22e">tags</span>=./<span style="color:#a6e22e">tags</span>;,<span style="color:#a6e22e">tags</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>which tells Vim to look for tags file in the directory of the current file, in
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#66d9ef">set</span> <span style="color:#a6e22e">tags</span>=./<span style="color:#a6e22e">tags</span>;,<span style="color:#a6e22e">tags</span>
+</span></span></code></pre></div><p>which tells Vim to look for tags file in the directory of the current file, in
 the working directory and in every parent directory, recursively.</p>
 <p>You can check which tag files have been loaded with:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">tagfiles</span>()<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><!-- Using the tags file to explore code -->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span>:<span style="color:#a6e22e">echo</span> <span style="color:#a6e22e">tagfiles</span>()
+</span></span></code></pre></div><!-- Using the tags file to explore code -->
 <p>You can jump to a tag definition with:</p>
 <ul>
 <li><code>CTRL-]</code> &mdash; Look-up the keyword under the cursor. Useful for jumping to a
@@ -570,11 +570,11 @@ for your projects.</p>
 is true of Python), consider using <code>:tjump</code> (<code>g CTRL-]</code>) instead of <code>CTRL-]</code> as
 your default &ldquo;jump to tag&rdquo; command&quot;.</p>
 <p>I swap the meanings of <code>CTRL-]</code> and <code>g CTRL-]</code>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt; &lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#a6e22e">vnoremap</span> <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt; &lt;<span style="color:#a6e22e">c</span>-]&gt;<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><h3 id="tip-fzf-also-has-a-tag-searching-functionality">Tip: FZF also has a tag searching functionality</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-vim" data-lang="vim"><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">vnoremap</span> &lt;<span style="color:#a6e22e">c</span>-]&gt; <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">nnoremap</span> <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt; &lt;<span style="color:#a6e22e">c</span>-]&gt;
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">vnoremap</span> <span style="color:#a6e22e">g</span>&lt;<span style="color:#a6e22e">c</span>-]&gt; &lt;<span style="color:#a6e22e">c</span>-]&gt;
+</span></span></code></pre></div><h3 id="tip-fzf-also-has-a-tag-searching-functionality">Tip: FZF also has a tag searching functionality</h3>
 <p>The <a href="https://github.com/junegunn/fzf.vim">junegunn/fzf.vim</a> plugin provides two
 commands for quickly finding tags using the
 <a href="https://github.com/junegunn/fzf"><code>fzf</code></a> fuzzy file finder:</p>

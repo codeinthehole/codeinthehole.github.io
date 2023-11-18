@@ -6,12 +6,12 @@
     <description>Recent content in terraform on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Jul 2020 22:05:23 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 14 Jul 2020 22:05:23 +0100</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Conditional nested blocks in Terraform</title>
       <link>https://codeinthehole.com/tips/conditional-nested-blocks-in-terraform/</link>
       <pubDate>Tue, 14 Jul 2020 22:05:23 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/conditional-nested-blocks-in-terraform/</guid>
       <description>Here&amp;rsquo;s a useful technique for using Terraform&amp;rsquo;s dynamic blocks to create conditional nested blocks.
 Maintenance mode As an example, let&amp;rsquo;s create a &amp;ldquo;maintenance mode&amp;rdquo; for a service which allows a &amp;ldquo;under maintenance&amp;rdquo; holding page to be served when a Terraform variable is set.
@@ -19,18 +19,15 @@ This is useful if you need to stop all traffic to a RDS database server so it ca
 Define a boolean maintenance_mode variable:
 # variables.</description>
     </item>
-    
     <item>
       <title>Maintainable Terraform CIDR lists</title>
       <link>https://codeinthehole.com/tips/terraform-cidrs/</link>
       <pubDate>Wed, 08 Jul 2020 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/terraform-cidrs/</guid>
       <description>Problem Your Terraform config requires managing many CIDRs that control firewall ingress rules. You&amp;rsquo;ve been storing these in a CSV string:
 variable &amp;#34;client_cidrs&amp;#34; { default=&amp;#34;50.1.1.1/32,44.2.1.0/32&amp;#34;, } which is fed to a aws_security_group somewhere in your configuration.
 The CIDRs change frequently and maintaining this variable is difficult as it&amp;rsquo;s hard to track where each individual CIDR came from.
 Solution Use a HCL list variable which allows each entry to have an associated comment explaining what the CIDR corresponds to:</description>
     </item>
-    
   </channel>
 </rss>

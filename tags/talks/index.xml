@@ -6,17 +6,16 @@
     <description>Recent content in talks on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 03 Mar 2012 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/talks/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 03 Mar 2012 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/talks/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Confoo 2012 presentations</title>
       <link>https://codeinthehole.com/talks/confoo-2012-presentations/</link>
       <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
       <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
 Migrating from PHP to Python and Django Abstract:
 Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
-    
   </channel>
 </rss>

@@ -6,12 +6,12 @@
     <description>Recent content in words on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 07 Nov 2017 22:41:21 +0100</lastBuildDate><atom:link href="https://codeinthehole.com/tags/words/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 07 Nov 2017 22:41:21 +0100</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/words/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Little-known words relevant to software development</title>
       <link>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</link>
       <pubDate>Tue, 07 Nov 2017 22:41:21 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</guid>
       <description>A curated1 collection of words-of-the-day from @qikipedia:
 Word of the day: ARSLE - to move backwards.
@@ -19,6 +19,5 @@ Word of the day: ARSLE - to move backwards.
 &amp;mdash; Quite Interesting (@qikipedia) July 3, 2017 Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.
 &amp;mdash; Quite Interesting (@qikipedia) October 21, 2017 Word of the day : FANKLE (Scottish) - to tangle or entangle something.</description>
     </item>
-    
   </channel>
 </rss>

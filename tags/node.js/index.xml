@@ -6,16 +6,15 @@
     <description>Recent content in node.js on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 May 2011 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 22 May 2011 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/node.js/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Multi-scp: copying a file to all hosts in your SSH config</title>
       <link>https://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</link>
       <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</guid>
       <description>I am totally reliant on my bash aliases and readline configuration. When working on a new server, the first thing I do is copy over my local Bash (~/.bashrc) and Readline (~/.inputrc) configuration files.
 One mildly annoying issue is when you update a config file, it&amp;rsquo;s a pain to copy it onto all your remote hosts. To scratch this itch, I wrote a simple node.js executable for copying a file to all the defined hosts in your ~/.</description>
     </item>
-    
   </channel>
 </rss>

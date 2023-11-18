@@ -6,15 +6,14 @@
     <description>Recent content in maths on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 01 Feb 2005 00:00:00 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/maths/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 01 Feb 2005 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/maths/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Tutorial: the complex Ginzburg-Landau equation</title>
       <link>https://codeinthehole.com/projects/ginzburg-landau-tutorial/</link>
       <pubDate>Tue, 01 Feb 2005 00:00:00 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/projects/ginzburg-landau-tutorial/</guid>
       <description>I wrote a tutorial on the complex Ginzburg-Landau equation as a set of simple HTML pages.</description>
     </item>
-    
   </channel>
 </rss>

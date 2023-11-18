@@ -81,24 +81,24 @@ following:</p>
 <ol>
 <li>
 <p>Enable Copilot for the <code>gitcommit</code>, <code>markdown</code> and <code>yaml</code> filetypes:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">copilot_filetypes</span> = {<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;gitcommit&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>,<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;markdown&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>,<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ <span style="color:#e6db74">&#39;yaml&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>    \ }<span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>By default, <a href="https://github.com/github/copilot.vim/blob/324ec9eb69e20971b58340d0096c3caac7bc2089/autoload/copilot.vim#L123-L132">these and few others are disabled</a>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span><span style="color:#66d9ef">let</span> <span style="color:#a6e22e">g</span>:<span style="color:#a6e22e">copilot_filetypes</span> = {
+</span></span><span style="display:flex;"><span>    \ <span style="color:#e6db74">&#39;gitcommit&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>,
+</span></span><span style="display:flex;"><span>    \ <span style="color:#e6db74">&#39;markdown&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>,
+</span></span><span style="display:flex;"><span>    \ <span style="color:#e6db74">&#39;yaml&#39;</span>: <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">true</span>
+</span></span><span style="display:flex;"><span>    \ }
+</span></span></code></pre></div><p>By default, <a href="https://github.com/github/copilot.vim/blob/324ec9eb69e20971b58340d0096c3caac7bc2089/autoload/copilot.vim#L123-L132">these and few others are disabled</a>
 but I&rsquo;ve found them to be useful. It&rsquo;s often amusing to see Copilot&rsquo;s
 attempts to complete your commit messages.</p>
 </li>
 <li>
 <p>Disable Copilot for large files as it can be slow and impair the editing
 experience:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span> <span style="color:#a6e22e">autocmd</span> <span style="color:#a6e22e">BufReadPre</span> *<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">f</span>=<span style="color:#a6e22e">getfsize</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#34;&lt;afile&gt;&#34;</span>))<span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ | <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span> &gt; <span style="color:#ae81ff">100000</span> || <span style="color:#a6e22e">f</span> == <span style="color:#ae81ff">-2</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ | <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">copilot_enabled</span> = <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">false</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span><span style="display:flex;"><span><span style="color:#960050;background-color:#1e0010"></span>     \ | <span style="color:#66d9ef">endif</span><span style="color:#960050;background-color:#1e0010">
-</span></span></span></code></pre></div><p>This <a href="https://learnvimscriptthehardway.stevelosh.com/chapters/12.html">autocommand</a> disables Copilot for files larger than 100KB. See
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-viml" data-lang="viml"><span style="display:flex;"><span> <span style="color:#66d9ef">autocmd</span> <span style="color:#a6e22e">BufReadPre</span> *
+</span></span><span style="display:flex;"><span>     \ <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">f</span>=<span style="color:#a6e22e">getfsize</span>(<span style="color:#a6e22e">expand</span>(<span style="color:#e6db74">&#34;&lt;afile&gt;&#34;</span>))
+</span></span><span style="display:flex;"><span>     \ | <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">f</span> &gt; <span style="color:#ae81ff">100000</span> || <span style="color:#a6e22e">f</span> == <span style="color:#ae81ff">-2</span>
+</span></span><span style="display:flex;"><span>     \ | <span style="color:#66d9ef">let</span> <span style="color:#a6e22e">b</span>:<span style="color:#a6e22e">copilot_enabled</span> = <span style="color:#a6e22e">v</span>:<span style="color:#a6e22e">false</span>
+</span></span><span style="display:flex;"><span>     \ | <span style="color:#66d9ef">endif</span>
+</span></span></code></pre></div><p>This <a href="https://learnvimscriptthehardway.stevelosh.com/chapters/12.html">autocommand</a> disables Copilot for files larger than 100KB. See
 my <a href="https://til.codeinthehole.com/posts/how-to-automatically-disable-github-copilot-in-vim-when-editing-large-files/">related TIL post</a> for more details on this.</p>
 </li>
 </ol>

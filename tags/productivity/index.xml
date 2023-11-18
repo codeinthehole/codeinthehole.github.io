@@ -6,12 +6,12 @@
     <description>Recent content in productivity on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 24 Apr 2020 10:04:16 +0000</lastBuildDate><atom:link href="https://codeinthehole.com/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 Apr 2020 10:04:16 +0000</lastBuildDate>
+    <atom:link href="https://codeinthehole.com/tags/productivity/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Software development tips – part 2</title>
       <link>https://codeinthehole.com/tips/software-development-tips-part2/</link>
       <pubDate>Fri, 24 Apr 2020 10:04:16 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/software-development-tips-part2/</guid>
       <description>On code smells:
 If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
@@ -19,12 +19,10 @@ Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsqu
 On good things I always tell team members about:
 The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
     </item>
-    
     <item>
       <title>Software development tips – part 1</title>
       <link>https://codeinthehole.com/tips/software-development-tips-part1/</link>
       <pubDate>Wed, 26 Feb 2020 10:04:16 +0000</pubDate>
-      
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
       <description>On software development:
 Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
@@ -32,18 +30,15 @@ If a 500 Internal Server Error HTTP response can be induced from your web app th
 On tools:
 Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
-    
     <item>
       <title>Shortcuts of the old and minimalist</title>
       <link>https://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</link>
       <pubDate>Mon, 27 Nov 2017 12:27:45 +0100</pubDate>
-      
       <guid>https://codeinthehole.com/tips/shortcuts-of-the-old-and-minimalist/</guid>
       <description>As I get older and grumpier, I increasingly value clean, uncluttered working environments. I&amp;rsquo;m sure I&amp;rsquo;m not the only one, so here&amp;rsquo;s a few useful practices and shortcuts that help me avoid using the mouse and satisfy my need for productivity micro-optimisation.
 They are mainly for macOS users.
 Hide everything Adjust your system preferences to automatically hide the Dock and menu bar (there&amp;rsquo;s a checkbox in &amp;ldquo;General&amp;rdquo;).
 With these two changes, a maximised window is effectively full-screen.</description>
     </item>
-    
   </channel>
 </rss>
