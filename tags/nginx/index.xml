@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>nginx on David Winterbottom</title>
+    <title>Nginx on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/nginx/</link>
-    <description>Recent content in nginx on David Winterbottom</description>
+    <description>Recent content in Nginx on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 05 May 2012 00:00:00 +0000</lastBuildDate>
@@ -13,9 +13,7 @@
       <link>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</link>
       <pubDate>Sat, 05 May 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/django-nginx-wsgi-and-encoded-slashes/</guid>
-      <description>Problem You are serving a Django application using Nginx to proxy to an Apache server running mod_wsgi and you want to allow slashes in your URL keywords.
-For example, you may want to edit some attribute of the page at URL /; hence, you want to use a URL regex of the form:
-url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
+      <description>Problem You are serving a Django application using Nginx to proxy to an Apache server running mod_wsgi and you want to allow slashes in your URL keywords.&#xA;For example, you may want to edit some attribute of the page at URL /; hence, you want to use a URL regex of the form:&#xA;url(r&amp;#39;/edit/page/(?P&amp;lt;page_url&amp;gt;.*)/$&amp;#39;, ...) and use the URL /edit/page/%2F/ to edit this page, where the third path segment is URL-encoded.</description>
     </item>
   </channel>
 </rss>

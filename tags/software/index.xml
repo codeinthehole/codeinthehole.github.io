@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>software on David Winterbottom</title>
+    <title>Software on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/software/</link>
-    <description>Recent content in software on David Winterbottom</description>
+    <description>Recent content in Software on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 24 Dec 2018 11:51:36 +0000</lastBuildDate>
@@ -13,10 +13,7 @@
       <link>https://codeinthehole.com/tips/easy-to-change/</link>
       <pubDate>Mon, 24 Dec 2018 11:51:36 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/easy-to-change/</guid>
-      <description>I care about writing maintainable software1: code that is a pleasure to work with in the long-term; where new requirements can be accommodated smoothly and swiftly &amp;ndash; above all, software that is easy to change.
-Memorise that phrase.
-I feel we lose sight of this overarching guiding principle and harm our codebases by dogmatically pursuing well-intentioned but proximate goals.
-The main thing the future maintainer of your code (i.e. you) cares about is whether the code is easy to change2.</description>
+      <description>I care about writing maintainable software1: code that is a pleasure to work with in the long-term; where new requirements can be accommodated smoothly and swiftly &amp;ndash; above all, software that is easy to change.&#xA;Memorise that phrase.&#xA;I feel we lose sight of this overarching guiding principle and harm our codebases by dogmatically pursuing well-intentioned but proximate goals.&#xA;The main thing the future maintainer of your code (i.e. you) cares about is whether the code is easy to change2.</description>
     </item>
   </channel>
 </rss>

@@ -13,50 +13,42 @@
       <link>https://codeinthehole.com/tidbits/openai-git-poetry/</link>
       <pubDate>Fri, 11 Nov 2022 22:07:17 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/openai-git-poetry/</guid>
-      <description>OpenAI provides a REST API where you can generate prompt completions. Here&amp;rsquo;s a minimal example where a JSON payload is piped into httpie:
-$ export OPENAI_API_KEY=&amp;#34;...&amp;#34; # fill in your API key here $ echo &amp;#39;{&amp;#34;model&amp;#34;: &amp;#34;text-davinci-002&amp;#34;, &amp;#34;prompt&amp;#34;: &amp;#34;Write a poem about cheese&amp;#34;}&amp;#39; \ | http https://api.openai.com/v1/completions Authorization:&amp;#34;Bearer $OPENAI_API_KEY&amp;#34; \ | jq -r &amp;#39;.choices[0].text There&amp;#39;s nothing quite like cheese It&amp;#39;s rich, creamy, and delicious. Quite.
-We can extend this by dynamically building the prompt string.</description>
+      <description>OpenAI provides a REST API where you can generate prompt completions. Here&amp;rsquo;s a minimal example where a JSON payload is piped into httpie:&#xA;$ export OPENAI_API_KEY=&amp;#34;...&amp;#34; # fill in your API key here $ echo &amp;#39;{&amp;#34;model&amp;#34;: &amp;#34;text-davinci-002&amp;#34;, &amp;#34;prompt&amp;#34;: &amp;#34;Write a poem about cheese&amp;#34;}&amp;#39; \ | http https://api.openai.com/v1/completions Authorization:&amp;#34;Bearer $OPENAI_API_KEY&amp;#34; \ | jq -r &amp;#39;.choices[0].text There&amp;#39;s nothing quite like cheese It&amp;#39;s rich, creamy, and delicious. Quite.&#xA;We can extend this by dynamically building the prompt string.</description>
     </item>
     <item>
       <title>&#34;It was the system. We can&#39;t change it.&#34;</title>
       <link>https://codeinthehole.com/tidbits/the-bone-clocks/</link>
       <pubDate>Sun, 30 Oct 2022 15:31:23 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/the-bone-clocks/</guid>
-      <description>From the final novella of David Mitchell&amp;rsquo;s The Bone Clocks, set in Ireland in 2043:
-&amp;lsquo;Number one is to survive&amp;rsquo;, answers Hood, watching the men on the roof. &amp;lsquo;They&amp;rsquo;re all dead, like my parents. They had a better life than I did, mind. So did you. Your power stations, your cars, your creature comforts. Well, you lived too long. The bill&amp;rsquo;s due. Today,&amp;rsquo; up on the roof the bold is cut on the first panel, &amp;lsquo;you start to pay.</description>
+      <description>From the final novella of David Mitchell&amp;rsquo;s The Bone Clocks, set in Ireland in 2043:&#xA;&amp;lsquo;Number one is to survive&amp;rsquo;, answers Hood, watching the men on the roof. &amp;lsquo;They&amp;rsquo;re all dead, like my parents. They had a better life than I did, mind. So did you. Your power stations, your cars, your creature comforts. Well, you lived too long. The bill&amp;rsquo;s due. Today,&amp;rsquo; up on the roof the bold is cut on the first panel, &amp;lsquo;you start to pay.</description>
     </item>
     <item>
       <title>Mathematics and engineering</title>
       <link>https://codeinthehole.com/tidbits/mathematics-and-engineering/</link>
       <pubDate>Fri, 14 Dec 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/mathematics-and-engineering/</guid>
-      <description>Structure and Interpretation of Computer Programs is full of interesting footnotes. Here&amp;rsquo;s a good one about the Fermat test for prime numbers:
-Numbers that fool the Fermat test are called Carmichael numbers, and little is known about them other than that they are extremely rare. There 255 Carmichael below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821 and 6601. In testing primality of very large numbers chosen at random, the chance of stumbling upon a value that fools the Fermat test is less than the chance that cosmic radiation will cause the computer to make an error in carrying out a correct algorithm.</description>
+      <description>Structure and Interpretation of Computer Programs is full of interesting footnotes. Here&amp;rsquo;s a good one about the Fermat test for prime numbers:&#xA;Numbers that fool the Fermat test are called Carmichael numbers, and little is known about them other than that they are extremely rare. There 255 Carmichael below 100,000,000. The smallest few are 561, 1105, 1729, 2465, 2821 and 6601. In testing primality of very large numbers chosen at random, the chance of stumbling upon a value that fools the Fermat test is less than the chance that cosmic radiation will cause the computer to make an error in carrying out a correct algorithm.</description>
     </item>
     <item>
       <title>The British way of dealing with foreign APIs.</title>
       <link>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</link>
       <pubDate>Fri, 04 Feb 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
-      <description>A bad joke told in Python:
-def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper()) </description>
+      <description>A bad joke told in Python:&#xA;def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper()) </description>
     </item>
     <item>
       <title>A pseudo-code job advert and its discontents</title>
       <link>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</link>
       <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
-      <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:
-&amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
+      <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:&#xA;&amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
     </item>
     <item>
       <title>Ingenious use of an anonymous function</title>
       <link>https://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</link>
       <pubDate>Wed, 15 Apr 2009 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</guid>
-      <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:
-Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.
-Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
+      <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:&#xA;Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.&#xA;Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
     </item>
   </channel>
 </rss>

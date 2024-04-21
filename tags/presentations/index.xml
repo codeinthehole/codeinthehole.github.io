@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>presentations on David Winterbottom</title>
+    <title>Presentations on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/presentations/</link>
-    <description>Recent content in presentations on David Winterbottom</description>
+    <description>Recent content in Presentations on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 12 Mar 2011 00:00:00 +0000</lastBuildDate>
@@ -13,8 +13,7 @@
       <link>https://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</link>
       <pubDate>Sat, 12 Mar 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/talks/commandlinefu-presentation-at-confoo-2011/</guid>
-      <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.
-The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
+      <description>The presentation I gave at Confoo 2011 is now available online, there is feedback on joind.in.&#xA;The slides are written in Eric Meyer&amp;rsquo;s S5, which is a XHTML, CSS and Javascript based slide show format. I enjoyed using this as it was easy to port my styles across from the website CSS file, it also means the presentation is viewable as a normal webpage (no flash required). However, the downside is that it is not easy to submit the slides to Slideshare which is the common thing to do.</description>
     </item>
   </channel>
 </rss>

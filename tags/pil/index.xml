@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>pil on David Winterbottom</title>
+    <title>Pil on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/pil/</link>
-    <description>Recent content in pil on David Winterbottom</description>
+    <description>Recent content in Pil on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 18 Apr 2013 00:00:00 +0000</lastBuildDate>
@@ -13,10 +13,7 @@
       <link>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</link>
       <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
-      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
-Solution With pip already installed, install the required development packages:
-sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
-sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).&#xA;Solution With pip already installed, install the required development packages:&#xA;sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:&#xA;sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
   </channel>
 </rss>

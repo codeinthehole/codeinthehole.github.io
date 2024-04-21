@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>python on David Winterbottom</title>
+    <title>Python on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/python/</link>
-    <description>Recent content in python on David Winterbottom</description>
+    <description>Recent content in Python on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 08 Jun 2022 09:45:59 +0100</lastBuildDate>
@@ -20,29 +20,21 @@
       <link>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</link>
       <pubDate>Sun, 19 Jul 2020 00:00:00 +0100</pubDate>
       <guid>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</guid>
-      <description>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for Python development. I imagine it will all be out-of-date by the time I set-up my next laptop but it&amp;rsquo;s possible it might be useful to someone in the meantime.
-Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing them from the App Store or downloading .dmg files and dragging them into /Applications.</description>
+      <description>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for Python development. I imagine it will all be out-of-date by the time I set-up my next laptop but it&amp;rsquo;s possible it might be useful to someone in the meantime.&#xA;Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing them from the App Store or downloading .dmg files and dragging them into /Applications.</description>
     </item>
     <item>
       <title>Vim text-objects for Python development</title>
       <link>https://codeinthehole.com/tips/vim-text-objects/</link>
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
-From core Vim:
-w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.&#xA;For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.&#xA;From core Vim:&#xA;w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
     </item>
     <item>
       <title>A mnemonic for mock decorators</title>
       <link>https://codeinthehole.com/tips/a-mnemonic-for-mocks/</link>
       <pubDate>Sat, 26 Aug 2017 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/a-mnemonic-for-mocks/</guid>
-      <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&amp;rsquo;s not always clear what order arguments are being injected.
-For instance, which of these is right? This:
-@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?
-@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
+      <description>Using both @mock.patch decorators and py.test fixtures can be confusing as it&amp;rsquo;s not always clear what order arguments are being injected.&#xA;For instance, which of these is right? This:&#xA;@mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?&#xA;@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(collaborator_1, collaborator_2, some_pytest_fixture): pass Or this?&#xA;@mock.patch.object(module, &amp;#39;collaborator_2&amp;#39;) @mock.patch.object(module, &amp;#39;collaborator_1&amp;#39;) def test_something_in_module(some_pytest_fixture, collaborator_1, collaborator_2): pass I&amp;rsquo;ve wasted considerable time using PDB to work out what is being injected where.</description>
     </item>
     <item>
       <title>Podcast.__init__ on Oscar</title>
@@ -56,271 +48,203 @@ For instance, which of these is right? This:
       <link>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</link>
       <pubDate>Fri, 24 Oct 2014 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/bootstrapped-virtualenvs/</guid>
-      <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:
-#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
+      <description>The excellent virtualenvwrapper supports a postmkvirtualenv script to bootstrap your virtual environments. Here&amp;rsquo;s a useful implementation:&#xA;#!/usr/bin/env bash # Grab project name from virtualenv name NAME=$(basename $VIRTUAL_ENV) # Set terminal title on postactivate echo &amp;#34;title $NAME&amp;#34; &amp;gt; $VIRTUAL_ENV/bin/postactivate # Change directory to root of project on postactivate. We assume the # mkvirtualenv is being run from the root of the project. This line # will need to edited later if not.</description>
     </item>
     <item>
       <title>How to install PostGIS and GeoDjango on Ubuntu</title>
       <link>https://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</link>
       <pubDate>Fri, 04 Oct 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-install-postgis-and-geodjango-on-ubuntu/</guid>
-      <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:
-Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:
-export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; export LANG=&amp;#34;en_US.UTF-8&amp;#34; export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:
-sudo apt-get update sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings. Verify this with:</description>
+      <description>Despite its extensive documentation, getting GeoDjango installed and configured can be a pain. Here are my notes for future reference:&#xA;Installation on Ubuntu 12.04 First, ensure your system locale is UTF8 as PostgreSQL uses it to determine its default encoding during installation:&#xA;export LANGUAGE=&amp;#34;en_US.UTF-8&amp;#34; export LANG=&amp;#34;en_US.UTF-8&amp;#34; export LC_ALL=&amp;#34;en_US.UTF-8&amp;#34; Now install dependencies:&#xA;sudo apt-get update sudo apt-get install postgresql-server-dev-9.1 postgresql-9.1-postgis PostgreSQL should now be installed and running with UTF8 encodings. Verify this with:</description>
     </item>
     <item>
       <title>purl, URI templates and generated tests</title>
       <link>https://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</link>
       <pubDate>Tue, 09 Jul 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/purl-uri-templates-and-generated-tests/</guid>
-      <description>TLDR: Parameterised tests are a useful testing technique. Both Nose and py.test support them.
-URI templates in purl The newly released purl 0.8 (a URL library of mine) supports URI templates as per RFC 6570. These allow new URL instances to be created by passing bindings to a template instance.
-&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39; Alternatively, you can expand template strings directly:</description>
+      <description>TLDR: Parameterised tests are a useful testing technique. Both Nose and py.test support them.&#xA;URI templates in purl The newly released purl 0.8 (a URL library of mine) supports URI templates as per RFC 6570. These allow new URL instances to be created by passing bindings to a template instance.&#xA;&amp;gt;&amp;gt;&amp;gt; import purl &amp;gt;&amp;gt;&amp;gt; tpl = purl.Template(&amp;#39;http://www.google.com{path}&amp;#39;) &amp;gt;&amp;gt;&amp;gt; tpl.expand({&amp;#39;path&amp;#39;: [&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;c&amp;#39;]}).as_string() &amp;#39;http://www.google.com/a/b/c&amp;#39; Alternatively, you can expand template strings directly:</description>
     </item>
     <item>
       <title>A deferred logging file handler for Django</title>
       <link>https://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</link>
       <pubDate>Wed, 12 Jun 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/a-deferred-logging-file-handler-for-django/</guid>
-      <description>At Tangent we handle environment-specific configuration of Django projects using the method outlined by David Cramer. This involves distinguishing between core settings (which we keep in core/default.py) and environment specific settings (eg core/stage.py, core/test.py). The standard settings.py module imports all defaults and then uses a environmental shell variable to determine which environment settings module to import.
-A problem One tricky issue with this arrangement is logging to file. Ideally, we want to define a single LOGGING dict in the default settings but have file logging use an environment-specific folder.</description>
+      <description>At Tangent we handle environment-specific configuration of Django projects using the method outlined by David Cramer. This involves distinguishing between core settings (which we keep in core/default.py) and environment specific settings (eg core/stage.py, core/test.py). The standard settings.py module imports all defaults and then uses a environmental shell variable to determine which environment settings module to import.&#xA;A problem One tricky issue with this arrangement is logging to file. Ideally, we want to define a single LOGGING dict in the default settings but have file logging use an environment-specific folder.</description>
     </item>
     <item>
       <title>Conditional logic in Django forms</title>
       <link>https://codeinthehole.com/tips/conditional-logic-in-django-forms/</link>
       <pubDate>Sat, 01 Jun 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/conditional-logic-in-django-forms/</guid>
-      <description>The problem It&amp;rsquo;s common for UX professionals to design forms like the following:
-where radio buttons are employed to split the form into sections, each of which can have its own fields which are only mandatory if the parent radio button is checked. Thus the validation logic is conditional on the submitted form data.
-Such requirements are slightly tricky to capture in Django as they tread slightly outside the normal path of form validation.</description>
+      <description>The problem It&amp;rsquo;s common for UX professionals to design forms like the following:&#xA;where radio buttons are employed to split the form into sections, each of which can have its own fields which are only mandatory if the parent radio button is checked. Thus the validation logic is conditional on the submitted form data.&#xA;Such requirements are slightly tricky to capture in Django as they tread slightly outside the normal path of form validation.</description>
     </item>
     <item>
       <title>PyPI README badges</title>
       <link>https://codeinthehole.com/tips/pypi-readme-badges/</link>
       <pubDate>Fri, 03 May 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/pypi-readme-badges/</guid>
-      <description>Thanks to @kuramanga, it&amp;rsquo;s now possible to add shiny PyPi badges to your Python project READMEs that indicate the latest released version on PyPI and the total number of downloads.
-This screenshot is taken from django-oscar&amp;rsquo;s README.
-Embed these badges in your own repo as Restructured text:
-.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:
-[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
+      <description>Thanks to @kuramanga, it&amp;rsquo;s now possible to add shiny PyPi badges to your Python project READMEs that indicate the latest released version on PyPI and the total number of downloads.&#xA;This screenshot is taken from django-oscar&amp;rsquo;s README.&#xA;Embed these badges in your own repo as Restructured text:&#xA;.. image:: https://pypip.in/v/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Latest PyPI version .. image:: https://pypip.in/d/$REPO/badge.png :target: https://crate.io/packages/$REPO/ :alt: Number of PyPI downloads or Markdown:&#xA;[![PyPi version](https://pypip.in/v/$REPO/badge.png)](https://crate.io/packages/$REPO/) [!</description>
     </item>
     <item>
       <title>Disable database access when writing unit tests in Django</title>
       <link>https://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</link>
       <pubDate>Mon, 22 Apr 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/disable-database-access-when-writing-unit-tests-in-django/</guid>
-      <description>Consider this curio:
-import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;#34;Using the database is not permitted&amp;#34;))) This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.
-Use by wrapping a TestCase subclass:
-from django.test import TestCase @no_database() class UnitTestCase(TestCase): ... or method:</description>
+      <description>Consider this curio:&#xA;import mock from django.utils.functional import curry no_database = curry( mock.patch, &amp;#39;django.db.backends.util.CursorWrapper&amp;#39;, Mock(side_effect=RuntimeError(&amp;#34;Using the database is not permitted&amp;#34;))) This snippet creates a decorator that can wrap a test case or method and raises an exception if the database is accessed. This can be useful if you&amp;rsquo;re a puritan about true unit tests.&#xA;Use by wrapping a TestCase subclass:&#xA;from django.test import TestCase @no_database() class UnitTestCase(TestCase): ... or method:</description>
     </item>
     <item>
       <title>How to install PIL on 64-bit Ubuntu 12.04</title>
       <link>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</link>
       <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
-      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
-Solution With pip already installed, install the required development packages:
-sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
-sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).&#xA;Solution With pip already installed, install the required development packages:&#xA;sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:&#xA;sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     <item>
       <title>Cacheback - asynchronous cache refreshing for Django</title>
       <link>https://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</link>
       <pubDate>Sun, 02 Sep 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/cacheback-asynchronous-cache-refreshing-for-django/</guid>
-      <description>Inspired by Jacob Kaplan-Moss&amp;rsquo;s excellent talk &amp;ldquo;Django doesn&amp;rsquo;t scale&amp;rdquo; at this year&amp;rsquo;s OSCon, I&amp;rsquo;ve put together a Django package for re-populating caches asynchronously.
-It provides a simple API for wrapping expensive read operations that caches results and uses Celery to repopulate items when they become stale. It can be used as a decorator for simple cases but provides an extensible class for more fine-grained control. It also provides helper classes for working with querysets.</description>
+      <description>Inspired by Jacob Kaplan-Moss&amp;rsquo;s excellent talk &amp;ldquo;Django doesn&amp;rsquo;t scale&amp;rdquo; at this year&amp;rsquo;s OSCon, I&amp;rsquo;ve put together a Django package for re-populating caches asynchronously.&#xA;It provides a simple API for wrapping expensive read operations that caches results and uses Celery to repopulate items when they become stale. It can be used as a decorator for simple cases but provides an extensible class for more fine-grained control. It also provides helper classes for working with querysets.</description>
     </item>
     <item>
       <title>Use models for uploads</title>
       <link>https://codeinthehole.com/tips/use-models-for-uploads/</link>
       <pubDate>Thu, 19 Jul 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/use-models-for-uploads/</guid>
-      <description>All Django developers will deal with file uploads at some point. I contend that it&amp;rsquo;s a good practice to use models to capture the upload metadata and to track processing status. This article explains how and why.
-An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:
-9781231231999,0 9781231231999,4 9781231231999,2 .</description>
+      <description>All Django developers will deal with file uploads at some point. I contend that it&amp;rsquo;s a good practice to use models to capture the upload metadata and to track processing status. This article explains how and why.&#xA;An e-commerce example Suppose your e-commerce application allows admins to upload CSV files to update product stock levels (a common requirement). A typical file may comprise a SKU and a stock level:&#xA;9781231231999,0 9781231231999,4 9781231231999,2 .</description>
     </item>
     <item>
       <title>A data migration for every Django project</title>
       <link>https://codeinthehole.com/tips/a-data-migration-for-every-django-project/</link>
       <pubDate>Sat, 16 Jun 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/a-data-migration-for-every-django-project/</guid>
-      <description>How to use a South data migration to avoid accidentally sending emails from example.com.
-Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:
-from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
+      <description>How to use a South data migration to avoid accidentally sending emails from example.com.&#xA;Problem Consider the following snippet from Django&amp;rsquo;s docs1 for sending a confirmation email:&#xA;from django.contrib.sites.models import Site from django.core.mail import send_mail def register_for_newsletter(request): current_site = Site.objects.get_current() send_mail( &amp;#39;Thanks for subscribing to %s alerts&amp;#39; % current_site.name, &amp;#39;Thanks for your subscription. We appreciate it.\n\n-The %s team.&amp;#39; % current_site.name, &amp;#39;editor@%s&amp;#39; % current_site.domain, [user.email] ) Here the domain for the email sender is taken from the &amp;lsquo;current site&amp;rsquo; instance, which is controlled by Django&amp;rsquo;s &amp;lsquo;Sites&amp;rsquo; framework and accessible by a custom method on the manager of the Site model.</description>
     </item>
     <item>
       <title>purl - immutable URL objects for Python</title>
       <link>https://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</link>
       <pubDate>Thu, 19 Apr 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/purl-immutable-url-objects-for-python/</guid>
-      <description>Working with URLs in Python feels clunky when it should be pleasant. In urlparse and urllib, the standard library has all the functionality you need, but the code you have to write is often cumbersome and unclear.
-For instance, here&amp;rsquo;s a typical test method that makes an assertion about a query parameter:
-import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0]) Not terrible, but could be more concise.</description>
+      <description>Working with URLs in Python feels clunky when it should be pleasant. In urlparse and urllib, the standard library has all the functionality you need, but the code you have to write is often cumbersome and unclear.&#xA;For instance, here&amp;rsquo;s a typical test method that makes an assertion about a query parameter:&#xA;import urlparse def test_url_has_correct_query_parameter(self): url = get_url_from_somewhere() parse_result = urlparse.parseurl(url) query_params = urlparse.parse_qs(parse_result.query) self.assertEqual(&amp;#39;testing&amp;#39;, query_params[&amp;#39;q&amp;#39;][0]) Not terrible, but could be more concise.</description>
     </item>
     <item>
       <title>Embedding HTML in Django messages</title>
       <link>https://codeinthehole.com/tips/embedding-html-in-django-messages/</link>
       <pubDate>Thu, 12 Apr 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/embedding-html-in-django-messages/</guid>
-      <description>Problem You want to embed HTML within a message using Django&amp;rsquo;s messages framework.
-This is a reasonably common requirement - for instance, it&amp;rsquo;s common to want to include a link within the message, perhaps pointing the user towards a sign-in or registration page.
-This problem exists as of Django 1.4 but may be solved within the framework in later versions.
-Solution Use the extra_tags keyword argument to pass a flag indicating that the message is safe for rendering without escaping.</description>
+      <description>Problem You want to embed HTML within a message using Django&amp;rsquo;s messages framework.&#xA;This is a reasonably common requirement - for instance, it&amp;rsquo;s common to want to include a link within the message, perhaps pointing the user towards a sign-in or registration page.&#xA;This problem exists as of Django 1.4 but may be solved within the framework in later versions.&#xA;Solution Use the extra_tags keyword argument to pass a flag indicating that the message is safe for rendering without escaping.</description>
     </item>
     <item>
       <title>csvfilter - a Python command-line tool for manipulating CSV data</title>
       <link>https://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</link>
       <pubDate>Sun, 01 Apr 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/csvfilter-a-python-command-line-tool-for-manipulating-csv-data/</guid>
-      <description>Problem You want a unix-like tool for manipulating CSV data from the command-line.
-The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.
-Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.
-Install with:
-pip install csvfilter Sample usage:
-# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.csv # Pluck all columns except 4 cat in.</description>
+      <description>Problem You want a unix-like tool for manipulating CSV data from the command-line.&#xA;The standard tools cut and awk aren&amp;rsquo;t always suitable as they don&amp;rsquo;t handle quoting and escaping which are common in CSVs.&#xA;Solution Use the CSV manipulation function csvfilter, a simple Python library I&amp;rsquo;ve put together.&#xA;Install with:&#xA;pip install csvfilter Sample usage:&#xA;# Pluck columns 2, 5 and 6 cat in.csv | csvfilter -f 2,5,6 &amp;gt; out.csv # Pluck all columns except 4 cat in.</description>
     </item>
     <item>
       <title>How to reload Django&#39;s URL config</title>
       <link>https://codeinthehole.com/tips/how-to-reload-djangos-url-config/</link>
       <pubDate>Wed, 21 Mar 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-reload-djangos-url-config/</guid>
-      <description>Problem For some reason, you need to reload your Django URL config.
-Normally, the root URL config will be imported and stored in memory when your server process starts up. Occasionally though, you may want to reload it. This can be the case if your URL configuration changes depending on certain parameters.
-Solution You can reload the URL config using the following snippet:
-import sys from django.conf import settings def reload_urlconf(urlconf=None): if urlconf is None: urlconf = settings.</description>
+      <description>Problem For some reason, you need to reload your Django URL config.&#xA;Normally, the root URL config will be imported and stored in memory when your server process starts up. Occasionally though, you may want to reload it. This can be the case if your URL configuration changes depending on certain parameters.&#xA;Solution You can reload the URL config using the following snippet:&#xA;import sys from django.conf import settings def reload_urlconf(urlconf=None): if urlconf is None: urlconf = settings.</description>
     </item>
     <item>
       <title>Validating international postcodes in Django</title>
       <link>https://codeinthehole.com/tips/validating-international-postcodes-in-django/</link>
       <pubDate>Tue, 13 Mar 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/validating-international-postcodes-in-django/</guid>
-      <description>Problem You want to validate a post/zip-code when you only know the country at runtime.
-Solution Use this snippet to dynamically fetch a validation method from Django&amp;rsquo;s suite of &amp;ldquo;localflavor&amp;rdquo; form fields using the ISO 3166-1 two character country code.
-def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39; instead of GB - this changes in 1.4 if country_code == &amp;#39;GB&amp;#39;: country_code = &amp;#39;UK&amp;#39; module_path = &amp;#39;django.contrib.localflavor.%s&amp;#39; % country_code.lower() try: module = __import__(module_path, fromlist=[&amp;#39;forms&amp;#39;]) except ImportError: # No forms module for this country return lambda x: x fieldname_variants = [&amp;#39;%sPostcodeField&amp;#39;, &amp;#39;%sPostCodeField&amp;#39;, &amp;#39;%sPostalCodeField&amp;#39;, &amp;#39;%sZipCodeField&amp;#39;,] for variant in fieldname_variants: fieldname = variant % country_code.</description>
+      <description>Problem You want to validate a post/zip-code when you only know the country at runtime.&#xA;Solution Use this snippet to dynamically fetch a validation method from Django&amp;rsquo;s suite of &amp;ldquo;localflavor&amp;rdquo; form fields using the ISO 3166-1 two character country code.&#xA;def get_postcode_validator(country_code): # Django 1.3 uses &amp;#39;UK&amp;#39; instead of GB - this changes in 1.4 if country_code == &amp;#39;GB&amp;#39;: country_code = &amp;#39;UK&amp;#39; module_path = &amp;#39;django.contrib.localflavor.%s&amp;#39; % country_code.lower() try: module = __import__(module_path, fromlist=[&amp;#39;forms&amp;#39;]) except ImportError: # No forms module for this country return lambda x: x fieldname_variants = [&amp;#39;%sPostcodeField&amp;#39;, &amp;#39;%sPostCodeField&amp;#39;, &amp;#39;%sPostalCodeField&amp;#39;, &amp;#39;%sZipCodeField&amp;#39;,] for variant in fieldname_variants: fieldname = variant % country_code.</description>
     </item>
     <item>
       <title>How to sync PyCon videos to your iPhone</title>
       <link>https://codeinthehole.com/tips/how-to-sync-pycon-videos-to-your-iphone/</link>
       <pubDate>Sun, 11 Mar 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-sync-pycon-videos-to-your-iphone/</guid>
-      <description>Problem You want to all the PyCon videos on your iPhone for offline viewing.
-Solution Use the following Python script to fetch pycon videos from YouTube and convert them to M4V format so they can be imported to iTunes.
-This gist is stale now - the code for downloading videos has been expanding into a [Github repository](https://github.com/codeinthehole/pyvideo2quicktime). To run the script:
-Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script Run this script using:</description>
+      <description>Problem You want to all the PyCon videos on your iPhone for offline viewing.&#xA;Solution Use the following Python script to fetch pycon videos from YouTube and convert them to M4V format so they can be imported to iTunes.&#xA;This gist is stale now - the code for downloading videos has been expanding into a [Github repository](https://github.com/codeinthehole/pyvideo2quicktime). To run the script:&#xA;Ensure you have requests and BeautifulSoup installed in your Python environment; Ensure you have ffmpeg available on your path; Download youtube-dl to the same directory as this script Run this script using:</description>
     </item>
     <item>
       <title>Confoo 2012 presentations</title>
       <link>https://codeinthehole.com/talks/confoo-2012-presentations/</link>
       <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
-      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
-Migrating from PHP to Python and Django Abstract:
-Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.&#xA;Migrating from PHP to Python and Django Abstract:&#xA;Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
     <item>
       <title>Prefer data migrations to initial data</title>
       <link>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</link>
       <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
-      <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.
-Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:
-This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
+      <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.&#xA;Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:&#xA;This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
     </item>
     <item>
       <title>A Fabric function for git tagging</title>
       <link>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
       <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
-      <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
-Set-up Assume there is a test environment where:
-the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.
-Fabric function The following function can be used as part of Fabric build script.</description>
+      <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.&#xA;Set-up Assume there is a test environment where:&#xA;the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.&#xA;Fabric function The following function can be used as part of Fabric build script.</description>
     </item>
     <item>
       <title>Auto-setting terminal titles for python virtual environments</title>
       <link>https://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</link>
       <pubDate>Mon, 23 Jan 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/auto-setting-terminal-titles-for-python-virtual-environments/</guid>
-      <description>Problem You&amp;rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&amp;rsquo;s difficult to remember which tab is for which project. This is making you unhappy.
-Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment. Add something similar to the following to your postactivate script:</description>
+      <description>Problem You&amp;rsquo;re a python hacker using virtualenv and virtualenvwrapper on a range of projects. After a few hours in the office and much context switching, your terminal emulator is bursting with open tabs with the unhelpful title &amp;lsquo;bash&amp;rsquo; and it&amp;rsquo;s difficult to remember which tab is for which project. This is making you unhappy.&#xA;Solution Use your postactivate1 script to set the terminal title when you activate a virtual environment. Add something similar to the following to your postactivate script:</description>
     </item>
     <item>
       <title>Introducing unittest-xml: testing XML in Python</title>
       <link>https://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</link>
       <pubDate>Fri, 13 Jan 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/introducing-unittest-xml-testing-xml-in-python/</guid>
-      <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.
-Sample Usage Enable the additional assert methods using a mixin:
-import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ... Now suppose that the expected XML from some SUT1 is:</description>
+      <description>For some reason, I keep finding myself writing unit tests that need to make assertions about an XML document. To keep things DRY, I&amp;rsquo;ve packaged up my custom assertion methods as a PyPi module: unittest-xml. There&amp;rsquo;s a small chance it may be useful to others.&#xA;Sample Usage Enable the additional assert methods using a mixin:&#xA;import unittest from xmltest import XMLAssertions class SampleTestCase(unittest.TestCase, XMLAssertions): ... Now suppose that the expected XML from some SUT1 is:</description>
     </item>
     <item>
       <title>How to set-up MySQL for Python on Ubuntu</title>
       <link>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</link>
       <pubDate>Thu, 05 Jan 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
-      <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
-Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
-apt-get install python-pip pip install -U pip Next, install the required development packages:
-apt-get install python-dev libmysqlclient-dev then
-pip install MySQL-python should complete successfully.
-Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
+      <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.&#xA;Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:&#xA;apt-get install python-pip pip install -U pip Next, install the required development packages:&#xA;apt-get install python-dev libmysqlclient-dev then&#xA;pip install MySQL-python should complete successfully.&#xA;Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
     </item>
     <item>
       <title>Using pip and requirements.txt to install from the HEAD of a Github branch</title>
       <link>https://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</link>
       <pubDate>Sat, 20 Aug 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/using-pip-and-requirementstxt-to-install-from-the-head-of-a-github-branch/</guid>
-      <description>Problem The python package installer pip can be used to install directly from Github, like so:
-pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:
-$ pip freeze | grep oscar -e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg=django_oscar-dev Hence running pip install -r requirements.</description>
+      <description>Problem The python package installer pip can be used to install directly from Github, like so:&#xA;pip install git+git://github.com/tangentlabs/django-oscar.git#egg=django-oscar This will install from the HEAD of the master branch. However, when you use pip freeze to export your dependencies (usually to a requirements.txt file), pip will fix the reference to a specific commit by including its ID within the URL:&#xA;$ pip freeze | grep oscar -e git://github.com/tangentlabs/django-oscar.git@d636b803d98cd1d3edd01821d4fb2a01ce215ee4#egg=django_oscar-dev Hence running pip install -r requirements.</description>
     </item>
     <item>
       <title>Console logging to STDOUT in Django</title>
       <link>https://codeinthehole.com/tips/console-logging-to-stdout-in-django/</link>
       <pubDate>Tue, 16 Aug 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/console-logging-to-stdout-in-django/</guid>
-      <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.
-Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:
-import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.7+, the keyword argument to the constructor of logging.</description>
+      <description>Problem By default in Python (and Django), the documented console handler emits to STDERR, but you want it to use STDOUT instead. This is often desired for management commands that run as cronjobs.&#xA;Solution For Python 2.6, use the following LOGGING config in your settings to specify a different output stream:&#xA;import sys LOGGING = { &amp;#39;handlers&amp;#39;: { &amp;#39;console&amp;#39;:{ &amp;#39;level&amp;#39;:&amp;#39;INFO&amp;#39;, &amp;#39;class&amp;#39;:&amp;#39;logging.StreamHandler&amp;#39;, &amp;#39;strm&amp;#39;: sys.stdout }, ... } } For Python 2.7+, the keyword argument to the constructor of logging.</description>
     </item>
     <item>
       <title>Running django cronjobs within a virtualenv</title>
       <link>https://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</link>
       <pubDate>Thu, 11 Aug 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/running-django-cronjobs-within-a-virtualenv/</guid>
-      <description>If you use virtual environments on your django servers, then getting manage.py commands to run from cron is a little tricky. You need to activate the virtualenv before running the command and so you might think that the following would work:
-*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
+      <description>If you use virtual environments on your django servers, then getting manage.py commands to run from cron is a little tricky. You need to activate the virtualenv before running the command and so you might think that the following would work:&#xA;*/10 * * * * root source /var/www/mysite/virtualenvs/dev/bin/activate &amp;amp;&amp;amp; /var/www/mysite/build/dev/manage.py some_custom_command &amp;gt; /dev/null It doesn&amp;rsquo;t, although it&amp;rsquo;s tricky to spot why as /var/log/syslog doesn&amp;rsquo;t give much away (Debian-specific of course).</description>
     </item>
     <item>
       <title>Coloured output while doing TDD with Django and Fabric</title>
       <link>https://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</link>
       <pubDate>Wed, 20 Apr 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/coloured-output-while-doing-tdd-with-django-and-fabric/</guid>
-      <description>I&amp;rsquo;m a big fan of using PHPUnit with console colours turned on (using the --colors option). Eg:
-It helps gets into the natural &amp;ldquo;red, green, refactor&amp;rdquo; rhythm.
-I&amp;rsquo;m currently totally immersed in Django, and greatly miss the lack of colour support within the &amp;ldquo;test&amp;rdquo; management command. A simple workaround for this is to use Fabric with a few modified color commands. Your fabric file should include the following:
-from fabric.colors import _wrap_with green_bg = _wrap_with(&amp;#39;42&amp;#39;) red_bg = _wrap_with(&amp;#39;41&amp;#39;) # Set the list of apps to test env.</description>
+      <description>I&amp;rsquo;m a big fan of using PHPUnit with console colours turned on (using the --colors option). Eg:&#xA;It helps gets into the natural &amp;ldquo;red, green, refactor&amp;rdquo; rhythm.&#xA;I&amp;rsquo;m currently totally immersed in Django, and greatly miss the lack of colour support within the &amp;ldquo;test&amp;rdquo; management command. A simple workaround for this is to use Fabric with a few modified color commands. Your fabric file should include the following:&#xA;from fabric.colors import _wrap_with green_bg = _wrap_with(&amp;#39;42&amp;#39;) red_bg = _wrap_with(&amp;#39;41&amp;#39;) # Set the list of apps to test env.</description>
     </item>
     <item>
       <title>The British way of dealing with foreign APIs.</title>
       <link>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</link>
       <pubDate>Fri, 04 Feb 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/the-british-way-of-dealing-with-foreign-apis/</guid>
-      <description>A bad joke told in Python:
-def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper()) </description>
+      <description>A bad joke told in Python:&#xA;def call_foreign_api(str): try: foreign_api(str) except NotUnderstoodError: foreign_api(str.upper()) </description>
     </item>
     <item>
       <title>Ingenious use of an anonymous function</title>
       <link>https://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</link>
       <pubDate>Wed, 15 Apr 2009 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/ingenious-use-of-an-anonymous-function/</guid>
-      <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:
-Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.
-Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
+      <description>Just stumbled across a gem of a question whilst idly browsing Stack Overflow:&#xA;Design a function f, such that: f(f(n)) == -n where n is a 32-bit signed integer; you can&amp;rsquo;t use complex numbers arithmetic.&#xA;Interesting in its own right, what makes this particularly intriguing is that the question doesn&amp;rsquo;t specify a language to use - indeed, the choice of language has a major say in the range of solutions available.</description>
     </item>
   </channel>
 </rss>

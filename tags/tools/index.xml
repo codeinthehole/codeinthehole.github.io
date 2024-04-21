@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tools on David Winterbottom</title>
+    <title>Tools on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/tools/</link>
-    <description>Recent content in tools on David Winterbottom</description>
+    <description>Recent content in Tools on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 26 Feb 2020 10:04:16 +0000</lastBuildDate>
@@ -13,11 +13,7 @@
       <link>https://codeinthehole.com/tips/software-development-tips-part1/</link>
       <pubDate>Wed, 26 Feb 2020 10:04:16 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
-      <description>On software development:
-Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
-If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
-On tools:
-Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+      <description>On software development:&#xA;Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.&#xA;If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.&#xA;On tools:&#xA;Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
   </channel>
 </rss>

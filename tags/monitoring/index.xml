@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>monitoring on David Winterbottom</title>
+    <title>Monitoring on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/monitoring/</link>
-    <description>Recent content in monitoring on David Winterbottom</description>
+    <description>Recent content in Monitoring on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 22 Oct 2014 00:00:00 +0000</lastBuildDate>
@@ -13,17 +13,14 @@
       <link>https://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</link>
       <pubDate>Wed, 22 Oct 2014 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/integrating-django-application-metrics-into-zabbix/</guid>
-      <description>At Tangent, we use Zabbix for monitoring and alerting. This is a note-to-self on how to configure application monitoring.
-Management command You need a script that prints out a value to STDOUT. A simple management command suffices:
-from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def add_arguments(self, parser): parser.add_argument(&amp;#39;args&amp;#39;, nargs=&amp;#39;*&amp;#39;) def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch__%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;#34;No method found with name &amp;#39;%s&amp;#39;&amp;#34; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
+      <description>At Tangent, we use Zabbix for monitoring and alerting. This is a note-to-self on how to configure application monitoring.&#xA;Management command You need a script that prints out a value to STDOUT. A simple management command suffices:&#xA;from django.core.management.base import BaseCommand, CommandError class Command(BaseCommand): def add_arguments(self, parser): parser.add_argument(&amp;#39;args&amp;#39;, nargs=&amp;#39;*&amp;#39;) def handle(self, *args, **options): if not args: print self.usage() return method_name = &amp;#39;fetch__%s&amp;#39; % args[0] if not hasattr(self, method_name): raise CommandError(&amp;#34;No method found with name &amp;#39;%s&amp;#39;&amp;#34; % method_name) print getattr(self, method_name)(*args[1:]) def usage(self): fetchers = [m for m in dir(self) if m.</description>
     </item>
     <item>
       <title>Monitoring MySQL with Ganglia and gmetric</title>
       <link>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
       <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
-      <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.
-In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
+      <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.&#xA;In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
     </item>
   </channel>
 </rss>

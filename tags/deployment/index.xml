@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>deployment on David Winterbottom</title>
+    <title>Deployment on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/deployment/</link>
-    <description>Recent content in deployment on David Winterbottom</description>
+    <description>Recent content in Deployment on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 25 Feb 2012 00:00:00 +0000</lastBuildDate>
@@ -13,28 +13,21 @@
       <link>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</link>
       <pubDate>Sat, 25 Feb 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/prefer-data-migrations-to-initial-data/</guid>
-      <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.
-Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:
-This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
+      <description>Django provides several mechanisms for loading initial data for models, such as leveraging JSON fixtures or files of raw SQL - James Bennett offers a good overview.&#xA;Each documented method involves initialising data as part of the syncdb event, either by loading a fixture file or by hooking into the syncdb signal. However, there is a serious pitfall with these techniques, as described in the Django docs:&#xA;This is extremely convenient, but be careful: remember that the data will be refreshed every time you run syncdb.</description>
     </item>
     <item>
       <title>A Fabric function for git tagging</title>
       <link>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</link>
       <pubDate>Thu, 09 Feb 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/a-fabric-function-for-git-tagging/</guid>
-      <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.
-Set-up Assume there is a test environment where:
-the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.
-Fabric function The following function can be used as part of Fabric build script.</description>
+      <description>Listed below is a Fabric function for determining the appropriate git reference to deploy during a deployment. It works well with projects run using the git-flow development model.&#xA;Set-up Assume there is a test environment where:&#xA;the QA team to assess release candidates developers to run integration tests developers can deploy &amp;lsquo;debug&amp;rsquo; builds from a specific (untagged) commit There will also be stage and production environments.&#xA;Fabric function The following function can be used as part of Fabric build script.</description>
     </item>
     <item>
       <title>Deploying cron jobs using Phing</title>
       <link>https://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</link>
       <pubDate>Sun, 31 May 2009 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/deploying-cron-jobs-using-phing/</guid>
-      <description>Deploying applications that depend on cron-jobs can be a pain. However, Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;
-Consider an application folder structure as follows:
-/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ... All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
+      <description>Deploying applications that depend on cron-jobs can be a pain. However, Phing can be used to make such deployments easy - here&amp;rsquo;s how&amp;hellip;&#xA;Consider an application folder structure as follows:&#xA;/builds /development /test /stage /src /cron.d appname-__BUILD__-order-processing /scripts /order-processing handle-ready-to-ship-orders.php handle-cancellations.php ... /public /classes ... All development work takes place within the /src folder while the /builds/* folders are used as targets in deployment. This system allows multiple builds to happily co-exist on the same server and the whole application infrastructure to be moved between servers easily as the structure in source control mirrors that of the server.</description>
     </item>
     <item>
       <title>Phing task to update Twitter status</title>

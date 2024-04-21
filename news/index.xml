@@ -41,9 +41,7 @@
       <link>https://codeinthehole.com/news/hugo/</link>
       <pubDate>Thu, 16 Mar 2017 10:30:02 +0000</pubDate>
       <guid>https://codeinthehole.com/news/hugo/</guid>
-      <description>I&amp;rsquo;ve migrated this site to Hugo so I can host it on Github pages1.
-Hugo is a fast and well thought-out static site generator, written in Golang. It&amp;rsquo;s easy to learn and has some neat features2 - the trickiest part is understanding the difference between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.
-The Vim plugin vim-markdown provides good support for authoring Hugo posts since it supports syntax-highlighting for:</description>
+      <description>I&amp;rsquo;ve migrated this site to Hugo so I can host it on Github pages1.&#xA;Hugo is a fast and well thought-out static site generator, written in Golang. It&amp;rsquo;s easy to learn and has some neat features2 - the trickiest part is understanding the difference between various ways pages are organised: &amp;ldquo;sections&amp;rdquo;, &amp;ldquo;types&amp;rdquo;, &amp;ldquo;taxonomies&amp;rdquo; etc.&#xA;The Vim plugin vim-markdown provides good support for authoring Hugo posts since it supports syntax-highlighting for:</description>
     </item>
     <item>
       <title>Django, ELB health checks and continuous delivery</title>
@@ -64,9 +62,7 @@ The Vim plugin vim-markdown provides good support for authoring Hugo posts since
       <link>https://codeinthehole.com/news/octopus-energy/</link>
       <pubDate>Mon, 23 Nov 2015 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/news/octopus-energy/</guid>
-      <description>Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first day at Octopus Energy.
-I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology, especially automation and cloud computing, Octopus Energy is going to radically change how people consume and pay for energy in the UK. We&amp;rsquo;re going to be both cheaper and massively better at customer service than the much-maligned incumbents.
-Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
+      <description>Last Wednesday was my last day at Yoyo Wallet. Thursday marked my first day at Octopus Energy.&#xA;I&amp;rsquo;m deeply excited about Octopus. Through innovative use of technology, especially automation and cloud computing, Octopus Energy is going to radically change how people consume and pay for energy in the UK. We&amp;rsquo;re going to be both cheaper and massively better at customer service than the much-maligned incumbents.&#xA;Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
     </item>
     <item>
       <title>commandlinefu.com is in new hands</title>
@@ -80,8 +76,7 @@ Right now, we&amp;rsquo;re looking to build a superb tech team.</description>
       <link>https://codeinthehole.com/news/rewriting-codeintheholecom/</link>
       <pubDate>Fri, 06 Jan 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/news/rewriting-codeintheholecom/</guid>
-      <description>I rewrote this blog recently with the following aims:
-to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets. I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
+      <description>I rewrote this blog recently with the following aims:&#xA;to make it as easy as possible to create a new article, using reStructuredText (RST); to clean up and simplify the design, focussing on the readability of articles that include code snippets. I knew that there were various static blogs out there, with many supporting RST, but I still fancied the challenge of crafting something specific to my needs. There&amp;rsquo;s nothing wrong with wheel re-invention if you want to learn about wheels.</description>
     </item>
   </channel>
 </rss>

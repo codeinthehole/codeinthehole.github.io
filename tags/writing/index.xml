@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>writing on David Winterbottom</title>
+    <title>Writing on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/writing/</link>
-    <description>Recent content in writing on David Winterbottom</description>
+    <description>Recent content in Writing on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 14 Oct 2021 16:29:42 +0100</lastBuildDate>
@@ -13,21 +13,14 @@
       <link>https://codeinthehole.com/tips/explaining/</link>
       <pubDate>Thu, 14 Oct 2021 16:29:42 +0100</pubDate>
       <guid>https://codeinthehole.com/tips/explaining/</guid>
-      <description>Someone has asked a question (in Slack or Github) and you&amp;rsquo;re about to write an explanation. But before you start typing, ask yourself this:
-Is this the best place to answer this question?
-Because the place where the question is asked is generally not the best place to write a detailed answer.
-&amp;ldquo;Why did you do it that way?&amp;rdquo; Imagine you&amp;rsquo;ve requested a review on a Github pull request and one of the reviewers has questioned why something is done the way it is.</description>
+      <description>Someone has asked a question (in Slack or Github) and you&amp;rsquo;re about to write an explanation. But before you start typing, ask yourself this:&#xA;Is this the best place to answer this question?&#xA;Because the place where the question is asked is generally not the best place to write a detailed answer.&#xA;&amp;ldquo;Why did you do it that way?&amp;rdquo; Imagine you&amp;rsquo;ve requested a review on a Github pull request and one of the reviewers has questioned why something is done the way it is.</description>
     </item>
     <item>
       <title>Software development tips – part 2</title>
       <link>https://codeinthehole.com/tips/software-development-tips-part2/</link>
       <pubDate>Fri, 24 Apr 2020 10:04:16 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/software-development-tips-part2/</guid>
-      <description>On code smells:
-If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.
-Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.
-On good things I always tell team members about:
-The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
+      <description>On code smells:&#xA;If your codebase is tightly coupled to data in your database (ie the codebase has a data value hard-coded), it is a sign you should extract that data from your database into a code-layer model.&#xA;Never use numbered variable names (eg account1 = ...) &amp;ndash; there&amp;rsquo;s always a better way.&#xA;On good things I always tell team members about:&#xA;The writing and conference talks by James Mickens are great - start with &amp;ldquo;Computers are a sadness, I am the cure&amp;rdquo; from Monitorama 2014.</description>
     </item>
   </channel>
 </rss>

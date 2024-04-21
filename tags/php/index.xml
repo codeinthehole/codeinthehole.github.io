@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>php on David Winterbottom</title>
+    <title>Php on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/php/</link>
-    <description>Recent content in php on David Winterbottom</description>
+    <description>Recent content in Php on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 13 Mar 2011 00:00:00 +0000</lastBuildDate>
@@ -13,25 +13,21 @@
       <link>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</link>
       <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
-      <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:
-The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
+      <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:&#xA;The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
     </item>
     <item>
       <title>Return false with prudence</title>
       <link>https://codeinthehole.com/tips/return-false-with-prudence/</link>
       <pubDate>Thu, 28 Jan 2010 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/return-false-with-prudence/</guid>
-      <description>From &amp;ldquo;Javascript: the good parts&amp;rdquo;:
-It is rarely possible for standards committees to remove imperfections from a language because doing so would cause the breakdage of all of the bad programs that depend on those bad parts. They are usually powerless to do anything except heap more features on top of the existing pile of imperfections.
-Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excellent points on writing in a language with more than its fair of share of shortcomings.</description>
+      <description>From &amp;ldquo;Javascript: the good parts&amp;rdquo;:&#xA;It is rarely possible for standards committees to remove imperfections from a language because doing so would cause the breakdage of all of the bad programs that depend on those bad parts. They are usually powerless to do anything except heap more features on top of the existing pile of imperfections.&#xA;Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excellent points on writing in a language with more than its fair of share of shortcomings.</description>
     </item>
     <item>
       <title>A pseudo-code job advert and its discontents</title>
       <link>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</link>
       <pubDate>Thu, 09 Jul 2009 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tidbits/a-pseudo-code-job-advert-and-its-discontents/</guid>
-      <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:
-&amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
+      <description>Based on the success of a highly tongue-in-cheek ad for a project manager, we recently experimented with a similar approach for finding developers: a job ad written in PHP. Now I appreciate this is deeply lame, but the results of the campaign were quite surprising - more of which in a minute. First, hold your nose and parse the following:&#xA;&amp;lt;?php class TangentLabs extends HoxtonWebCompany implements InnovativeWebsites, WorldBeatingApplications, IngeniousECommerce { const vacancyForBrilliantDevelopers = true; public $benefits = array( &amp;#39;Smartest web agency in London&amp;#39;, &amp;#39;Working on inventive web apps, using cutting-edge technology&amp;#39;, &amp;#39;Super-friendly work environment, working within genuinely brilliant dev team&amp;#39;, ); public $drawbacks = null; public $sampleProjects = array( &amp;#39;http://www.</description>
     </item>
     <item>
       <title>Phing task to update Twitter status</title>
@@ -45,8 +41,7 @@ Douglas Crockford&amp;rsquo;s terse yet lucid javascript primer makes some excel
       <link>https://codeinthehole.com/tips/creating-large-xml-files-with-php/</link>
       <pubDate>Fri, 31 Oct 2008 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/creating-large-xml-files-with-php/</guid>
-      <description>When creating large XML files with PHP, there are some important considerations to bear in mind with regards to scalability. There are several libraries available for writing XML files of small to intermediate size (such as DOMDocument), but when dealing with very large files (eg. &amp;gt; 500Mb, or several million elements), these libraries are no longer useful as the size of the file then can create is memory-bound.
-For example, DOMDocument stores the XML tree in memory while it is being built - you then flush it out to file after all elements have been created:</description>
+      <description>When creating large XML files with PHP, there are some important considerations to bear in mind with regards to scalability. There are several libraries available for writing XML files of small to intermediate size (such as DOMDocument), but when dealing with very large files (eg. &amp;gt; 500Mb, or several million elements), these libraries are no longer useful as the size of the file then can create is memory-bound.&#xA;For example, DOMDocument stores the XML tree in memory while it is being built - you then flush it out to file after all elements have been created:</description>
     </item>
   </channel>
 </rss>

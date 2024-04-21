@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>geodjango on David Winterbottom</title>
+    <title>Geodjango on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/geodjango/</link>
-    <description>Recent content in geodjango on David Winterbottom</description>
+    <description>Recent content in Geodjango on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 28 Jul 2013 00:00:00 +0000</lastBuildDate>
@@ -13,10 +13,7 @@
       <link>https://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</link>
       <pubDate>Sun, 28 Jul 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/dumping-and-restoring-a-postgis-database/</guid>
-      <description>I wasted at least twenty minutes getting this to work. These are my notes.
-Problem You are using a PostGIS database and want to take a backup copy from production and restore it in a different environment. One complication is that each environment connects to its database with its own user.
-This is a common scenario if you are using GeoDjango.
-Solution Suppose your production database is called &amp;ldquo;myproject_prod&amp;rdquo; which you connect to with user &amp;ldquo;myproject_prod_role&amp;rdquo; and you want to replace your existing stage database &amp;ldquo;myproject_stage&amp;rdquo; that you connect to with user &amp;ldquo;myproject_stage_role&amp;rdquo;.</description>
+      <description>I wasted at least twenty minutes getting this to work. These are my notes.&#xA;Problem You are using a PostGIS database and want to take a backup copy from production and restore it in a different environment. One complication is that each environment connects to its database with its own user.&#xA;This is a common scenario if you are using GeoDjango.&#xA;Solution Suppose your production database is called &amp;ldquo;myproject_prod&amp;rdquo; which you connect to with user &amp;ldquo;myproject_prod_role&amp;rdquo; and you want to replace your existing stage database &amp;ldquo;myproject_stage&amp;rdquo; that you connect to with user &amp;ldquo;myproject_stage_role&amp;rdquo;.</description>
     </item>
   </channel>
 </rss>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>words on David Winterbottom</title>
+    <title>Words on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/words/</link>
-    <description>Recent content in words on David Winterbottom</description>
+    <description>Recent content in Words on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 07 Nov 2017 22:41:21 +0100</lastBuildDate>
@@ -13,11 +13,7 @@
       <link>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</link>
       <pubDate>Tue, 07 Nov 2017 22:41:21 +0100</pubDate>
       <guid>https://codeinthehole.com/lists/little-known-words-relevant-to-software-development/</guid>
-      <description>A curated1 collection of words-of-the-day from @qikipedia:
-Word of the day: ARSLE - to move backwards.
-&amp;mdash; Quite Interesting (@qikipedia) May 14, 2017 Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better
-&amp;mdash; Quite Interesting (@qikipedia) July 3, 2017 Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.
-&amp;mdash; Quite Interesting (@qikipedia) October 21, 2017 Word of the day : FANKLE (Scottish) - to tangle or entangle something.</description>
+      <description>A curated1 collection of words-of-the-day from @qikipedia:&#xA;Word of the day: ARSLE - to move backwards.&#xA;&amp;mdash; Quite Interesting (@qikipedia) May 14, 2017 Word of the day: VERSCHLIMMBESSERN - (German) - to make something worse while attempting to make it better&#xA;&amp;mdash; Quite Interesting (@qikipedia) July 3, 2017 Word of the day: PAREIDOLIA - the imagined perception of a pattern or image where it doesn&amp;#39;t exist.&#xA;&amp;mdash; Quite Interesting (@qikipedia) October 21, 2017 Word of the day : FANKLE (Scottish) - to tangle or entangle something.</description>
     </item>
   </channel>
 </rss>

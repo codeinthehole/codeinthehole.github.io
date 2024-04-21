@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ubuntu on David Winterbottom</title>
+    <title>Ubuntu on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/ubuntu/</link>
-    <description>Recent content in ubuntu on David Winterbottom</description>
+    <description>Recent content in Ubuntu on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 06 Mar 2019 15:49:53 +0000</lastBuildDate>
@@ -13,52 +13,35 @@
       <link>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</link>
       <pubDate>Wed, 06 Mar 2019 15:49:53 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/avoiding-package-lockout-in-ubuntu-1804/</guid>
-      <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).
-This happens as Ubuntu VMs typically start several package-management programs unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.
-You&amp;rsquo;ll see an error like this:
-E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</description>
+      <description>When provisioning a virtual machine running Ubuntu 16.04 or later, a common problem if being unable to install packages since another process is holding a lock (eg on /var/lib/dpkg/lock-frontend).&#xA;This happens as Ubuntu VMs typically start several package-management programs unattended-upgrades and its associated apt.daily service &amp;mdash; on boot, and these will block your provisioning scripts.&#xA;You&amp;rsquo;ll see an error like this:&#xA;E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?</description>
     </item>
     <item>
       <title>Installing the latest RabbitMQ on Ubuntu 18.04</title>
       <link>https://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</link>
       <pubDate>Thu, 21 Feb 2019 12:51:47 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/install-latest-rabbitmq-on-ubuntu-1804/</guid>
-      <description>I wasted a morning trying to install RabbitMQ v3.7.12 (the latest version as of Feb 2019) on an Ubuntu 18.04 machine using Puppet. This as tricky as:
-Only RabbitMQ version 3.6.10 is available from the default repositories; Getting Puppet to install packages from custom locations can be painful. Solution Use these Puppet modules in your Puppetfile:
-mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39; mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39; mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34; and something like this in your manifest code:</description>
+      <description>I wasted a morning trying to install RabbitMQ v3.7.12 (the latest version as of Feb 2019) on an Ubuntu 18.04 machine using Puppet. This as tricky as:&#xA;Only RabbitMQ version 3.6.10 is available from the default repositories; Getting Puppet to install packages from custom locations can be painful. Solution Use these Puppet modules in your Puppetfile:&#xA;mod &amp;#39;computology-packagecloud&amp;#39;, &amp;#39;0.3.2&amp;#39; mod &amp;#39;garethr-erlang&amp;#39;, &amp;#39;0.3.0&amp;#39; mod &amp;#39;puppet-rabbitmq&amp;#39;, &amp;#34;9.0.0&amp;#34; and something like this in your manifest code:</description>
     </item>
     <item>
       <title>How to install PIL on 64-bit Ubuntu 12.04</title>
       <link>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</link>
       <pubDate>Thu, 18 Apr 2013 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-install-pil-on-64-bit-ubuntu-1204/</guid>
-      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).
-Solution With pip already installed, install the required development packages:
-sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:
-sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
+      <description>Problem You want to install PIL on 64-bit Ubuntu 12.04 (Precise Pangolin).&#xA;Solution With pip already installed, install the required development packages:&#xA;sudo apt-get install python-dev libjpeg-dev libfreetype6-dev zlib1g-dev and symlink the three image libraries into /usr/lib:&#xA;sudo ln -s /usr/lib/`uname -i`-linux-gnu/libfreetype.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libjpeg.so /usr/lib/ sudo ln -s /usr/lib/`uname -i`-linux-gnu/libz.so /usr/lib/ PIL should now install with support for JPEGs, PNGs and FreeType, as indicated by the compilation output:</description>
     </item>
     <item>
       <title>How to chroot a user in Ubuntu 12.04</title>
       <link>https://codeinthehole.com/tips/how-to-chroot-a-user-in-ubuntu-1204/</link>
       <pubDate>Tue, 16 Oct 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-chroot-a-user-in-ubuntu-1204/</guid>
-      <description>External parties often need to upload data to your application. Sadly, most ask for a FTP server. Push back against this and suggest they use sFTP.
-This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.
-This is mainly for my own reference.
-User set-up Create user with a dummy shell:
-adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
+      <description>External parties often need to upload data to your application. Sadly, most ask for a FTP server. Push back against this and suggest they use sFTP.&#xA;This article explains how to set-up a chroot-ed user in Ubuntu 12.04 so that an external party can upload data to your application securely.&#xA;This is mainly for my own reference.&#xA;User set-up Create user with a dummy shell:&#xA;adduser --shell=/bin/false barry and alter the ownership and permissions of their home folder:</description>
     </item>
     <item>
       <title>How to set-up MySQL for Python on Ubuntu</title>
       <link>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</link>
       <pubDate>Thu, 05 Jan 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/how-to-set-up-mysql-for-python-on-ubuntu/</guid>
-      <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.
-Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:
-apt-get install python-pip pip install -U pip Next, install the required development packages:
-apt-get install python-dev libmysqlclient-dev then
-pip install MySQL-python should complete successfully.
-Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
+      <description>This is just for my own reference as I always forget the dependencies for setting up MySQL on a new machine.&#xA;Installation Starting with a vanilla Lucid install1, install pip and upgrade to the latest version:&#xA;apt-get install python-pip pip install -U pip Next, install the required development packages:&#xA;apt-get install python-dev libmysqlclient-dev then&#xA;pip install MySQL-python should complete successfully.&#xA;Symptoms of missing headers Without libmysqlclient-dev, you&amp;rsquo;ll see something like this:</description>
     </item>
   </channel>
 </rss>

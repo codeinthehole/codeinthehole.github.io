@@ -416,10 +416,10 @@
     <loc>https://codeinthehole.com/talks/confoo-2012-presentations/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://codeinthehole.com/tags/talks/</loc>
+    <loc>https://codeinthehole.com/talks/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://codeinthehole.com/talks/</loc>
+    <loc>https://codeinthehole.com/tags/talks/</loc>
     <lastmod>2012-03-03T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://codeinthehole.com/tips/testing-https-handling-in-django/</loc>

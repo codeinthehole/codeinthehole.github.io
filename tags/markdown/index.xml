@@ -13,10 +13,7 @@
       <link>https://codeinthehole.com/tips/writing-markdown-in-vim/</link>
       <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/writing-markdown-in-vim/</guid>
-      <description>I write a lot of Markdown in Vim and have spent considerable energy configuring it to my liking. This post details how I configure Vim1 for writing markdown.
-It is merely a reference that I can refer others to.
-File-type settings In ~/.vim/after/ftplugin/markdown.vim (or equivalent), set some buffer-local settings:
-&amp;#34; Use Vim&amp;#39;s spell checker setlocal spell &amp;#34; No line numbers setlocal nonumber Configure K to look up the word under the cursor in a dictionary:</description>
+      <description>I write a lot of Markdown in Vim and have spent considerable energy configuring it to my liking. This post details how I configure Vim1 for writing markdown.&#xA;It is merely a reference that I can refer others to.&#xA;File-type settings In ~/.vim/after/ftplugin/markdown.vim (or equivalent), set some buffer-local settings:&#xA;&amp;#34; Use Vim&amp;#39;s spell checker setlocal spell &amp;#34; No line numbers setlocal nonumber Configure K to look up the word under the cursor in a dictionary:</description>
     </item>
   </channel>
 </rss>

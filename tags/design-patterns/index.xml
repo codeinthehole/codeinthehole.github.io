@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>design patterns on David Winterbottom</title>
+    <title>Design Patterns on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/design-patterns/</link>
-    <description>Recent content in design patterns on David Winterbottom</description>
+    <description>Recent content in Design Patterns on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 13 Mar 2011 00:00:00 +0000</lastBuildDate>
@@ -13,8 +13,7 @@
       <link>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</link>
       <pubDate>Sun, 13 Mar 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/domain-model-mapper-a-php-data-mapper-implementation/</guid>
-      <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:
-The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
+      <description>At various PHP conferences and meetups over the last few weeks, I&amp;rsquo;ve seen attention drawn to the Data Mapper design pattern. This is an elegant pattern that splits the responsibilities of business logic and persistence. In the words of pattern supremo Martin Fowler:&#xA;The Data Mapper is a layer of software that separates the in-memory objects from the database. Its responsibility is to transfer data between the two and also to isolate them from each other.</description>
     </item>
   </channel>
 </rss>

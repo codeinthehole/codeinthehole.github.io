@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>node.js on David Winterbottom</title>
+    <title>Node.js on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/node.js/</link>
-    <description>Recent content in node.js on David Winterbottom</description>
+    <description>Recent content in Node.js on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 May 2011 00:00:00 +0000</lastBuildDate>
@@ -13,8 +13,7 @@
       <link>https://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</link>
       <pubDate>Sun, 22 May 2011 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/projects/multi-scp-copying-a-file-to-all-hosts-in-your-ssh-config/</guid>
-      <description>I am totally reliant on my bash aliases and readline configuration. When working on a new server, the first thing I do is copy over my local Bash (~/.bashrc) and Readline (~/.inputrc) configuration files.
-One mildly annoying issue is when you update a config file, it&amp;rsquo;s a pain to copy it onto all your remote hosts. To scratch this itch, I wrote a simple node.js executable for copying a file to all the defined hosts in your ~/.</description>
+      <description>I am totally reliant on my bash aliases and readline configuration. When working on a new server, the first thing I do is copy over my local Bash (~/.bashrc) and Readline (~/.inputrc) configuration files.&#xA;One mildly annoying issue is when you update a config file, it&amp;rsquo;s a pain to copy it onto all your remote hosts. To scratch this itch, I wrote a simple node.js executable for copying a file to all the defined hosts in your ~/.</description>
     </item>
   </channel>
 </rss>

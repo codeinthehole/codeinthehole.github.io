@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>gsuite on David Winterbottom</title>
+    <title>Gsuite on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/gsuite/</link>
-    <description>Recent content in gsuite on David Winterbottom</description>
+    <description>Recent content in Gsuite on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 27 Oct 2018 12:53:24 +0100</lastBuildDate>
@@ -13,9 +13,7 @@
       <link>https://codeinthehole.com/tips/listing-google-groups/</link>
       <pubDate>Sat, 27 Oct 2018 12:53:24 +0100</pubDate>
       <guid>https://codeinthehole.com/tips/listing-google-groups/</guid>
-      <description>Oddly, you can&amp;rsquo;t pull a report of all groups from G-Suite like you can for users. The only option is to use the API. Here&amp;rsquo;s how.
-Follow steps 1 and 2 from the quickstart guide but instead of the sample Python script, use this:
-from httplib2 import Http from googleapiclient.discovery import build from oauth2client import file, client, tools def main(): _print_all_groups() def _print_all_groups(): for group in _all_groups(): print(group[&amp;#39;email&amp;#39;]) def _all_groups(): &amp;#34;&amp;#34;&amp;#34; Return a list of all group dicts.</description>
+      <description>Oddly, you can&amp;rsquo;t pull a report of all groups from G-Suite like you can for users. The only option is to use the API. Here&amp;rsquo;s how.&#xA;Follow steps 1 and 2 from the quickstart guide but instead of the sample Python script, use this:&#xA;from httplib2 import Http from googleapiclient.discovery import build from oauth2client import file, client, tools def main(): _print_all_groups() def _print_all_groups(): for group in _all_groups(): print(group[&amp;#39;email&amp;#39;]) def _all_groups(): &amp;#34;&amp;#34;&amp;#34; Return a list of all group dicts.</description>
     </item>
   </channel>
 </rss>

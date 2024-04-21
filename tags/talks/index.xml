@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>talks on David Winterbottom</title>
+    <title>Talks on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/talks/</link>
-    <description>Recent content in talks on David Winterbottom</description>
+    <description>Recent content in Talks on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 03 Mar 2012 00:00:00 +0000</lastBuildDate>
@@ -13,9 +13,7 @@
       <link>https://codeinthehole.com/talks/confoo-2012-presentations/</link>
       <pubDate>Sat, 03 Mar 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/talks/confoo-2012-presentations/</guid>
-      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.
-Migrating from PHP to Python and Django Abstract:
-Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
+      <description>I gave two presentations at Confoo 2012 - below are the abstracts and slides.&#xA;Migrating from PHP to Python and Django Abstract:&#xA;Many programmers cut their teeth with PHP before getting interested in Python. However, while the languages seem similar at first, there are many new concepts to grasp and a rich ecosystem of tools to master. This isn&amp;rsquo;t easy, but with the right advice, a strong PHP developer can become an excellent Python developer very quickly.</description>
     </item>
   </channel>
 </rss>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>consul on David Winterbottom</title>
+    <title>Consul on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/consul/</link>
-    <description>Recent content in consul on David Winterbottom</description>
+    <description>Recent content in Consul on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 27 Mar 2017 15:25:05 +0100</lastBuildDate>
@@ -13,10 +13,7 @@
       <link>https://codeinthehole.com/tips/migrate-consul-key-value-store/</link>
       <pubDate>Mon, 27 Mar 2017 15:25:05 +0100</pubDate>
       <guid>https://codeinthehole.com/tips/migrate-consul-key-value-store/</guid>
-      <description>If your Consul key-value store is structured as:
-/ A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):
-/ WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:
-#!/bin/bash set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
+      <description>If your Consul key-value store is structured as:&#xA;/ A/ X = 1 Z = 2 Y = 3 C D but you now realise you should have namespaced everything within WEBSERVER/ (or something like that):&#xA;/ WEBSERVER/ A/ X = 1 Z = 2 Y = 3 C D then this Bash script will help you migrate:&#xA;#!/bin/bash set -e # Exit on error # Emit &amp;#34;key value&amp;#34; lines for all keys in Consul&amp;#39;s KV store keys_and_values() { # Recursively fetch all values from Consul but exclude: # (a) those that end in / (as these are folders) # (b) those that start with WEBSERVER/ (as that&amp;#39;s where we are migrating # to).</description>
     </item>
   </channel>
 </rss>

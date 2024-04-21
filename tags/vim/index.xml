@@ -13,109 +13,77 @@
       <link>https://codeinthehole.com/tips/writing-markdown-in-vim/</link>
       <pubDate>Tue, 06 Jun 2023 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/writing-markdown-in-vim/</guid>
-      <description>I write a lot of Markdown in Vim and have spent considerable energy configuring it to my liking. This post details how I configure Vim1 for writing markdown.
-It is merely a reference that I can refer others to.
-File-type settings In ~/.vim/after/ftplugin/markdown.vim (or equivalent), set some buffer-local settings:
-&amp;#34; Use Vim&amp;#39;s spell checker setlocal spell &amp;#34; No line numbers setlocal nonumber Configure K to look up the word under the cursor in a dictionary:</description>
+      <description>I write a lot of Markdown in Vim and have spent considerable energy configuring it to my liking. This post details how I configure Vim1 for writing markdown.&#xA;It is merely a reference that I can refer others to.&#xA;File-type settings In ~/.vim/after/ftplugin/markdown.vim (or equivalent), set some buffer-local settings:&#xA;&amp;#34; Use Vim&amp;#39;s spell checker setlocal spell &amp;#34; No line numbers setlocal nonumber Configure K to look up the word under the cursor in a dictionary:</description>
     </item>
     <item>
       <title>Tips for using Github Copilot in Vim</title>
       <link>https://codeinthehole.com/tips/vim-and-github-copilot/</link>
       <pubDate>Fri, 06 Jan 2023 12:07:03 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/vim-and-github-copilot/</guid>
-      <description>Based on a few weeks of using vim-copilot, I recommend the following:
-Enable Copilot for the gitcommit, markdown and yaml filetypes:
-let g:copilot_filetypes = { \ &amp;#39;gitcommit&amp;#39;: v:true, \ &amp;#39;markdown&amp;#39;: v:true, \ &amp;#39;yaml&amp;#39;: v:true \ } By default, these and few others are disabled but I&amp;rsquo;ve found them to be useful. It&amp;rsquo;s often amusing to see Copilot&amp;rsquo;s attempts to complete your commit messages.
-Disable Copilot for large files as it can be slow and impair the editing experience:</description>
+      <description>Based on a few weeks of using vim-copilot, I recommend the following:&#xA;Enable Copilot for the gitcommit, markdown and yaml filetypes:&#xA;let g:copilot_filetypes = { \ &amp;#39;gitcommit&amp;#39;: v:true, \ &amp;#39;markdown&amp;#39;: v:true, \ &amp;#39;yaml&amp;#39;: v:true \ } By default, these and few others are disabled but I&amp;rsquo;ve found them to be useful. It&amp;rsquo;s often amusing to see Copilot&amp;rsquo;s attempts to complete your commit messages.&#xA;Disable Copilot for large files as it can be slow and impair the editing experience:</description>
     </item>
     <item>
       <title>Vim&#39;s useful lists</title>
       <link>https://codeinthehole.com/tips/vim-lists/</link>
       <pubDate>Mon, 03 May 2021 09:27:17 +0100</pubDate>
       <guid>https://codeinthehole.com/tips/vim-lists/</guid>
-      <description>A good understanding of Vim&amp;rsquo;s various lists is a massive productivity boost — it&amp;rsquo;s taken me many years of Vim use to truly appreciate this.
-This post summarises some of Vim&amp;rsquo;s lists, detailing their purpose and how to make the most of them.
-Contents:
-Quickfix list Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell Location list Jump list Tip: Use jump commands to navigate Change list Tip: Jump to the previous location where insert mode was used Buffer list Tip: Select buffers with FZF Argument list Tag match list Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality Include file list and definition lists Summary I need to jump somewhere I need to apply the same transformation in lots of places Quickfix list A global list of locations populated via one of these commands:</description>
+      <description>A good understanding of Vim&amp;rsquo;s various lists is a massive productivity boost — it&amp;rsquo;s taken me many years of Vim use to truly appreciate this.&#xA;This post summarises some of Vim&amp;rsquo;s lists, detailing their purpose and how to make the most of them.&#xA;Contents:&#xA;Quickfix list Tip: Use mappings for faster browsing Tip: Define a mapping to :grep for the word under the cursor Tip: Custom grepprg programs Tip: Custom makeprg programs Tip: Operating on the error list Tip: Populate the quickfix list in a subshell Location list Jump list Tip: Use jump commands to navigate Change list Tip: Jump to the previous location where insert mode was used Buffer list Tip: Select buffers with FZF Argument list Tag match list Tip: Use Universal Ctags Tip: Use :tjump as your default &amp;ldquo;jump to tag&amp;rdquo; command Tip: FZF also has a tag searching functionality Include file list and definition lists Summary I need to jump somewhere I need to apply the same transformation in lots of places Quickfix list A global list of locations populated via one of these commands:</description>
     </item>
     <item>
       <title>A Vim mapping for opening virtualenv files</title>
       <link>https://codeinthehole.com/tips/a-vim-mapping-for-opening-virtualenv-files/</link>
       <pubDate>Mon, 16 Nov 2020 15:45:30 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/a-vim-mapping-for-opening-virtualenv-files/</guid>
-      <description>Here&amp;rsquo;s a useful command-mode mapping for Python development:
-&amp;#34; ~/.vim/ftplugin/python.vim function! VirtualEnvSitePackagesFolder() &amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34; endfunction cnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt; In command-mode, %v will expand to the path of your virtualenv&amp;rsquo;s site-packages folder in, which makes it easy to quickly open a third-party module.</description>
+      <description>Here&amp;rsquo;s a useful command-mode mapping for Python development:&#xA;&amp;#34; ~/.vim/ftplugin/python.vim function! VirtualEnvSitePackagesFolder() &amp;#34; Try a few candidate Pythons to see which this virtualenv uses. for python in [&amp;#34;python3.7&amp;#34;, &amp;#34;python3.8&amp;#34;, &amp;#34;python3.9&amp;#34;] let candidate = $VIRTUAL_ENV . &amp;#34;/lib/&amp;#34; . python if isdirectory(candidate) return candidate . &amp;#34;/site-packages/&amp;#34; endif endfor return &amp;#34;&amp;#34; endfunction cnoremap %v &amp;lt;C-R&amp;gt;=VirtualEnvSitePackagesFolder()&amp;lt;cr&amp;gt; In command-mode, %v will expand to the path of your virtualenv&amp;rsquo;s site-packages folder in, which makes it easy to quickly open a third-party module.</description>
     </item>
     <item>
       <title>Easy Github URLs from Vim</title>
       <link>https://codeinthehole.com/tips/easy-github-urls-from-vim/</link>
       <pubDate>Tue, 23 Jun 2020 15:49:58 +0100</pubDate>
       <guid>https://codeinthehole.com/tips/easy-github-urls-from-vim/</guid>
-      <description>URLs are great aren&amp;rsquo;t they?
-You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).
-Anyway, a super-useful Vim mapping I use is:
-vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
+      <description>URLs are great aren&amp;rsquo;t they?&#xA;You include them in your Slack messages and your co-workers can see exactly what you&amp;rsquo;re talking about in a single click. I wish people would use them more (and design apps that support them properly).&#xA;Anyway, a super-useful Vim mapping I use is:&#xA;vnoremap &amp;lt;leader&amp;gt;gb :GBrowse! master:%&amp;lt;cr&amp;gt; which, after visually selecting a block of code, grabs its Github URL from the HEAD of master and copies it to the clipboard.</description>
     </item>
     <item>
       <title>Software development tips – part 1</title>
       <link>https://codeinthehole.com/tips/software-development-tips-part1/</link>
       <pubDate>Wed, 26 Feb 2020 10:04:16 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/software-development-tips-part1/</guid>
-      <description>On software development:
-Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.
-If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.
-On tools:
-Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
+      <description>On software development:&#xA;Everything you create that has a name lives in a namespace. Remember this. Ensure the names you pick are unique and unambiguous within their namespace.&#xA;If a 500 Internal Server Error HTTP response can be induced from your web app through a carefully crafted request, it needs fixing. Don&amp;rsquo;t assume anything about the incoming request.&#xA;On tools:&#xA;Using Alfred with a well-stocked cupboard of Chrome bookmarks is a massive productivity win.</description>
     </item>
     <item>
       <title>Vim text-objects for Python development</title>
       <link>https://codeinthehole.com/tips/vim-text-objects/</link>
       <pubDate>Thu, 13 Jun 2019 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/vim-text-objects/</guid>
-      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.
-For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.
-From core Vim:
-w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
+      <description>Text objects, as in the iw from ciw (&amp;ldquo;change inner word&amp;rdquo;), form an important part of your Vim mentalese1. This post details those that I find most useful for Python and Django development.&#xA;For brevity, the leading a (mnemonic: &amp;ldquo;a&amp;quot;n) or i (mnemonic: &amp;ldquo;inner&amp;rdquo;), that you combine with the following commands to form the full text-object, are omitted.&#xA;From core Vim:&#xA;w → a word W → a WORD t → a HTML/XML tag s → a sentence p → a paragraph From the (highly recommended) wellle/targets.</description>
     </item>
     <item>
       <title>Debugging Vim by example</title>
       <link>https://codeinthehole.com/tips/debugging-vim-by-example/</link>
       <pubDate>Thu, 28 Mar 2019 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/debugging-vim-by-example/</guid>
-      <description>There&amp;rsquo;s only so far you can get by cargo-culting other people&amp;rsquo;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&amp;rsquo;s slow or misbehaving. Learn how to scratch things that itch.
-This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.</description>
+      <description>There&amp;rsquo;s only so far you can get by cargo-culting other people&amp;rsquo;s ~/.vim folders. An important next step is understanding how to debug Vim; knowing what to do when it&amp;rsquo;s slow or misbehaving. Learn how to scratch things that itch.&#xA;This post illustrates a range of debugging and profiling approaches for Vim by walking through real issues I&amp;rsquo;ve recently investigated, diagnosed and resolved. There&amp;rsquo;s very little to copy into your ~/.</description>
     </item>
     <item>
       <title>Using black and isort with Vim</title>
       <link>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</link>
       <pubDate>Fri, 08 Mar 2019 09:22:04 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/using-black-and-isort-with-vim/</guid>
-      <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.
-&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that) let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;] let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:
-let b:ale_fix_on_save = 0 let filepath = expand(&amp;#39;%:p:h&amp;#39;) if match(filepath, &amp;#39;some-project-name&amp;#39;) !</description>
+      <description>FYI, the easiest way to get Vim to automatically run black and isort over a Python buffer when saving is to use Ale&amp;rsquo;s fixer functionality.&#xA;&amp;#34; In ~/.vim/after/ftplugin/python.vim (or somewhere like that) let b:ale_fixers = [&amp;#39;black&amp;#39;, &amp;#39;isort&amp;#39;] let b:ale_fix_on_save = 1 If you&amp;rsquo;re only using black/isort in a subset of your projects, you can enable the b:ale_fix_on_save setting conditionally:&#xA;let b:ale_fix_on_save = 0 let filepath = expand(&amp;#39;%:p:h&amp;#39;) if match(filepath, &amp;#39;some-project-name&amp;#39;) !</description>
     </item>
     <item>
       <title>Using the silver searcher with Vim</title>
       <link>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</link>
       <pubDate>Tue, 17 Jun 2014 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/using-the-silver-searcher-with-vim/</guid>
-      <description>If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.
-It&amp;rsquo;s easily installed - on OSX, run:
-brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:
-if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif :grep searches are now lightning-fast and respectful of your ~/.</description>
+      <description>If you&amp;rsquo;re not doing this already, then you should use the Silver Searcher within Vim for rapid, convenient file searching. In a nutshell, ag offers similar functionality to ack but with much better performance.&#xA;It&amp;rsquo;s easily installed - on OSX, run:&#xA;brew install the_silver_searcher Urge Vim to use it for :grep commands by adding the following to ~/.vimrc:&#xA;if executable(&amp;#39;ag&amp;#39;) &amp;#34; Note we extract the column as well as the file and line number set grepprg=ag\ --nogroup\ --nocolor\ --column set grepformat=%f:%l:%c%m endif :grep searches are now lightning-fast and respectful of your ~/.</description>
     </item>
     <item>
       <title>Vim macros for adding i18n support to Django templates</title>
       <link>https://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</link>
       <pubDate>Fri, 06 Jul 2012 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/vim-macros-for-adding-i18n-support-to-django-templates/</guid>
-      <description>Problem You want to add i18n support to an existing project. One part of this is modifying all templates to use the {% trans &amp;quot;...&amp;quot; %} block around all hard-coded strings.
-When you have a lot of templates, this gets pretty tedious.
-Solution Use Vim macros!
-Macro 1 - Convert tag text To convert
-&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to
-&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro
-vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hp which breaks down as:</description>
+      <description>Problem You want to add i18n support to an existing project. One part of this is modifying all templates to use the {% trans &amp;quot;...&amp;quot; %} block around all hard-coded strings.&#xA;When you have a lot of templates, this gets pretty tedious.&#xA;Solution Use Vim macros!&#xA;Macro 1 - Convert tag text To convert&#xA;&amp;lt;h1&amp;gt;Welcome to my site&amp;lt;/h1&amp;gt; to&#xA;&amp;lt;h1&amp;gt;{% trans &amp;#34;Welcome to my site&amp;#34; %}&amp;lt;/h1&amp;gt; use the macro&#xA;vitc{% trans &amp;#34;&amp;#34; %}&amp;lt;ESC&amp;gt;4hp which breaks down as:</description>
     </item>
   </channel>
 </rss>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ganglia on David Winterbottom</title>
+    <title>Ganglia on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/ganglia/</link>
-    <description>Recent content in ganglia on David Winterbottom</description>
+    <description>Recent content in Ganglia on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 14 Dec 2008 00:00:00 +0000</lastBuildDate>
@@ -13,8 +13,7 @@
       <link>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</link>
       <pubDate>Sun, 14 Dec 2008 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/tips/monitoring-mysql-with-ganglia-and-gmetric/</guid>
-      <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.
-In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
+      <description>Following some server monitoring advice from the excellent &amp;lsquo;Building Scalable Web Sites&amp;rsquo; by Cal Henderson, I&amp;rsquo;ve recently been experimenting with Ganglia on a cluster of servers at Tangent Labs. It has proved to be deeply impressive and has given us a great tool for keeping an eye on how our servers are performing, as well as providing an invaluable diagnostic tool should things go wrong.&#xA;In essence, Ganglia is a distributed monitoring application that allows statistics on a cluster of servers to be aggregated in a single place.</description>
     </item>
   </channel>
 </rss>

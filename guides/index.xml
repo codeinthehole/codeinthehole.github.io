@@ -13,27 +13,21 @@
       <link>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</link>
       <pubDate>Sun, 19 Jul 2020 00:00:00 +0100</pubDate>
       <guid>https://codeinthehole.com/guides/settings-up-a-2020-macbook-for-python-development/</guid>
-      <description>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for Python development. I imagine it will all be out-of-date by the time I set-up my next laptop but it&amp;rsquo;s possible it might be useful to someone in the meantime.
-Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing them from the App Store or downloading .dmg files and dragging them into /Applications.</description>
+      <description>This is a note-to-self on setting up a 2020 13-inch MacBook Pro, largely for Python development. I imagine it will all be out-of-date by the time I set-up my next laptop but it&amp;rsquo;s possible it might be useful to someone in the meantime.&#xA;Applications I don&amp;rsquo;t tend to use Homebrew Cask and suffer the indignity of either installing them from the App Store or downloading .dmg files and dragging them into /Applications.</description>
     </item>
     <item>
       <title>Resolving conflicts during a Git rebase</title>
       <link>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</link>
       <pubDate>Thu, 05 Mar 2020 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/guides/resolving-conflicts-during-a-git-rebase/</guid>
-      <description>Resolving conflicts from a Git rebase can be tricky. But don&amp;rsquo;t worry &amp;ndash; here&amp;rsquo;s a comprehensive guide to how to resolve them.
-There&amp;rsquo;s three phases:
-Which commit of mine is conflicting? What changes were made in the target branch that conflict with my commit? Resolve conflicts safely These are accurate as of Git v2.23 and are for resolving conflicts using the command line.
-Let&amp;rsquo;s walk through the process.
-A conflict happens On your working branch, you run:</description>
+      <description>Resolving conflicts from a Git rebase can be tricky. But don&amp;rsquo;t worry &amp;ndash; here&amp;rsquo;s a comprehensive guide to how to resolve them.&#xA;There&amp;rsquo;s three phases:&#xA;Which commit of mine is conflicting? What changes were made in the target branch that conflict with my commit? Resolve conflicts safely These are accurate as of Git v2.23 and are for resolving conflicts using the command line.&#xA;Let&amp;rsquo;s walk through the process.&#xA;A conflict happens On your working branch, you run:</description>
     </item>
     <item>
       <title>Writing a Thesis in LaTeX</title>
       <link>https://codeinthehole.com/guides/writing-a-thesis-in-latex/</link>
       <pubDate>Thu, 10 Nov 2005 00:00:00 +0000</pubDate>
       <guid>https://codeinthehole.com/guides/writing-a-thesis-in-latex/</guid>
-      <description>Overview This article is a guide to constructing a decent parent file for a thesis or dissertation compiled in Latex. The specific details implemented here, and included in the example files, are those set out by the guidelines for submission to the University of Nottingham, but can be easily amended to suit any sensible requirements.
-Considerable attention has been paid to presenting the final document as a PDF file, which keeps the file size manageable (compared to postscript) and allows groovy add-ons such as hyperlinks and back-referencing.</description>
+      <description>Overview This article is a guide to constructing a decent parent file for a thesis or dissertation compiled in Latex. The specific details implemented here, and included in the example files, are those set out by the guidelines for submission to the University of Nottingham, but can be easily amended to suit any sensible requirements.&#xA;Considerable attention has been paid to presenting the final document as a PDF file, which keeps the file size manageable (compared to postscript) and allows groovy add-ons such as hyperlinks and back-referencing.</description>
     </item>
   </channel>
 </rss>

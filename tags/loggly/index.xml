@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>loggly on David Winterbottom</title>
+    <title>Loggly on David Winterbottom</title>
     <link>https://codeinthehole.com/tags/loggly/</link>
-    <description>Recent content in loggly on David Winterbottom</description>
+    <description>Recent content in Loggly on David Winterbottom</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 16 May 2017 21:52:21 +0100</lastBuildDate>
@@ -13,9 +13,7 @@
       <link>https://codeinthehole.com/tips/json-to-google-sheets/</link>
       <pubDate>Tue, 16 May 2017 21:52:21 +0100</pubDate>
       <guid>https://codeinthehole.com/tips/json-to-google-sheets/</guid>
-      <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.
-Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:
-$ cat loggly_events.json | \ jq -r &amp;#39;.events[].event.json | select(.params | has(&amp;#34;payment_day&amp;#34;)) | [.</description>
+      <description>Like many people, I use Google Sheets to quickly create and share tabular data. As well as creating spreadsheets by pasting results generated in psql, I often create reports from JSON files using JQ. This post is a note-to-self on how to do this.&#xA;Here&amp;rsquo;s a command to create a tab-separated report from a JSON events file exported from Loggly:&#xA;$ cat loggly_events.json | \ jq -r &amp;#39;.events[].event.json | select(.params | has(&amp;#34;payment_day&amp;#34;)) | [.</description>
     </item>
   </channel>
 </rss>
