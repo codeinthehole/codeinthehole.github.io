@@ -135,7 +135,7 @@ iterations is reached.</li>
 </span></span><span style="display:flex;"><span>    code_file<span style="color:#f92672">=</span>$2
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a temporary file to hold the test output.</span>
-</span></span><span style="display:flex;"><span>    test_code_file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>mktemp<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    test_output_file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>mktemp<span style="color:#66d9ef">)</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Print the tests file.</span>
 </span></span><span style="display:flex;"><span>    printf <span style="color:#e6db74">&#34;Making these tests (in %s) pass\n\n&#34;</span> <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
@@ -149,7 +149,7 @@ iterations is reached.</li>
 </span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Loop until tests pass or we reach the maximum number of attempts.</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i in <span style="color:#66d9ef">$(</span>seq <span style="color:#ae81ff">2</span> $ATTEMPTS<span style="color:#66d9ef">)</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Print output file.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Print generated code file for review.</span>
 </span></span><span style="display:flex;"><span>        bat <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Pause - otherwise everything flies past too quickly. It&#39;s useful</span>
@@ -158,18 +158,18 @@ iterations is reached.</li>
 </span></span><span style="display:flex;"><span>        read -n <span style="color:#ae81ff">1</span> -s -r -p <span style="color:#e6db74">&#34;Press any key to run tests...&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Run tests and capture output.</span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> pytest <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$test_code_file<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> pytest <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$test_output_file<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Tests passed - we&#39;re done.</span>
 </span></span><span style="display:flex;"><span>            echo <span style="color:#e6db74">&#34;✅ &#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
 </span></span><span style="display:flex;"><span>            exit <span style="color:#ae81ff">0</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
 </span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Tests failed - print test output...</span>
 </span></span><span style="display:flex;"><span>            printf <span style="color:#e6db74">&#34;❌\n\n&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>            bat <span style="color:#e6db74">&#34;</span>$test_code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            bat <span style="color:#e6db74">&#34;</span>$test_output_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>            <span style="color:#75715e"># ...and create a new version of the application file.</span>
 </span></span><span style="display:flex;"><span>            printf <span style="color:#e6db74">&#34;\nGenerating v%s of %s\n\n&#34;</span> <span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
-</span></span><span style="display:flex;"><span>            files-to-prompt <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> conventions.txt <span style="color:#e6db74">&#34;</span>$test_code_file<span style="color:#e6db74">&#34;</span> | <span style="color:#ae81ff">\
+</span></span><span style="display:flex;"><span>            files-to-prompt <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> conventions.txt <span style="color:#e6db74">&#34;</span>$test_output_file<span style="color:#e6db74">&#34;</span> | <span style="color:#ae81ff">\
 </span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                llm prompt --continue --system <span style="color:#e6db74">&#34;</span>$RETRY_PROMPT<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span>
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fi</span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">done</span>
