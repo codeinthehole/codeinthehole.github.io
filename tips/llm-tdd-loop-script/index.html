@@ -1,0 +1,292 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js ie6 oldie" lang="en"><![endif]-->
+<!--[if IE 7]><html class="no-js ie7 oldie" lang="en"><![endif]-->
+<!--[if IE 8]><html class="no-js ie8 oldie" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--><html class="no-js" lang="en"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+
+        
+  
+    
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-5TB73Q80KQ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-5TB73Q80KQ');
+        }
+      </script>
+    
+  
+
+
+
+        
+        <link rel="stylesheet" href="https://codeinthehole.com/css/main.min.css">
+
+        
+        <link rel="alternate" href="/index.xml" type="application/rss+xml" title="David Winterbottom">
+
+        
+        <link href='https://fonts.googleapis.com/css?family=Signika+Negative:600' rel='stylesheet' type='text/css' />
+
+        
+        
+        <title>An LLM TDD loop — David Winterbottom</title>
+
+        <meta name="author" content="David Winterbottom">
+        <meta name="description" content="Using `llm` and `files-to-prompt` to run a TDD loop.">
+
+    </head>
+
+    <body>
+
+        <article class="hentry" id="container">
+
+<header>
+    <div id="article_nav">
+        <h5>
+            <a href="/">home</a> | 
+            <a href="/writing/">writing</a> | 
+            <a href="https://til.codeinthehole.com">TIL</a> | 
+            <span class="desktop_only"><a href="/now/">now</a> |</span>
+            <a href="/about/">about</a>
+        </h5>
+    </div>
+</header>
+
+
+
+<div id="main" role="main">
+
+    <div id="content" class="article">
+
+        <h1 id="article_title" class="entry-title">An LLM TDD loop</h1>
+
+        <div class="byline desktop_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a>
+            on <time class="published" datetime="">Sunday, 6 October 2024</time>
+        </div>
+        <div class="byline mobile_only">
+            by <a href="/about/" class="author vcard">David Winterbottom</a><br/>
+            <span class="article_date">on <time class="published" datetime="">Sunday, 6 October 2024</time></span>
+        </div>
+
+        <div id="article_content" class="entry-content">
+            <!-- INTRODUCTION -->
+<p>This post details a Bash script that runs a TDD loop where an LLM is
+iteratively used to write Python application code to make a fixed set of tests pass.</p>
+<p>Similar things have been done before<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>; this script merely
+demonstrates that such things can be done simply by stitching together
+open-source LLM tools.</p>
+<h3 id="tooling">Tooling</h3>
+<p>The script uses two commands from <a href="https://github.com/simonw">Simon Willison</a>:</p>
+<ul>
+<li><a href="https://github/llm"><code>llm</code></a> — a command line interface for interacting with Large Language Models
+(LLMs).</li>
+<li><a href="https://github/files-"><code>files-to-prompt</code></a> — a command to prepare files for input to <code>llm</code>.</li>
+</ul>
+<p>as well as <a href="https://github/files-"><code>bat</code></a> for syntax highlighting and <a href="https://github/files-"><code>pytest</code></a> for running tests.</p>
+<!-- CONTENT -->
+<h2 id="the-script">The script</h2>
+<p>Run the TDD loop by invoking <code>tdd.sh</code> with a test file and the filename
+where the corresponding application code will be written.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>./tdd.sh tests.py application.py
+</span></span></code></pre></div><p>The algorithm is:</p>
+<ol>
+<li>Feed the contents of <code>tests.py</code> to <code>llm</code> to create an initial version of <code>application.py</code>.</li>
+<li>Run the tests in <code>tests.py</code> with <code>pytest</code> and collect the output into a temporary file.</li>
+<li>✅ If tests pass, we&rsquo;re done.</li>
+<li>❌ If tests fail, pass the test output back to <code>llm</code> and request a new version of
+<code>application.py</code> that addresses the failing tests.</li>
+<li>Repeat steps 2-4 until either the tests pass or a maximum number of
+iterations is reached.</li>
+</ol>
+<p>The code for <code>tdd.sh</code> is<sup id="fnref:2"><a href="#fn:2" class="footnote-ref" role="doc-noteref">2</a></sup>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/usr/bin/env bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># A Bash script to run a TDD loop for building a Python module to</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># pass tests.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>set -euo pipefail
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># How many times to loop.</span>
+</span></span><span style="display:flex;"><span>ATTEMPTS<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The system prompt to use when creating the initial version.</span>
+</span></span><span style="display:flex;"><span>INITIAL_PROMPT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">Write a Python module that will make these tests pass
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">and conforms to the passed conventions&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># The system prompt to use when creating subsequent versions.</span>
+</span></span><span style="display:flex;"><span>RETRY_PROMPT<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Tests are failing with this output. Try again.&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">function</span> main <span style="color:#f92672">{</span>
+</span></span><span style="display:flex;"><span>    tests_file<span style="color:#f92672">=</span>$1
+</span></span><span style="display:flex;"><span>    code_file<span style="color:#f92672">=</span>$2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create a temporary file to hold the test output.</span>
+</span></span><span style="display:flex;"><span>    test_code_file<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>mktemp<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Print the tests file.</span>
+</span></span><span style="display:flex;"><span>    printf <span style="color:#e6db74">&#34;Making these tests (in %s) pass\n\n&#34;</span> <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    bat <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Create initial version of application file.</span>
+</span></span><span style="display:flex;"><span>    printf <span style="color:#e6db74">&#34;\nGenerating initial version of %s\n\n&#34;</span> <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    files-to-prompt <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> conventions.txt | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>        llm prompt --system <span style="color:#e6db74">&#34;</span>$INITIAL_PROMPT<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Loop until tests pass or we reach the maximum number of attempts.</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> i in <span style="color:#66d9ef">$(</span>seq <span style="color:#ae81ff">2</span> $ATTEMPTS<span style="color:#66d9ef">)</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">do</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Print output file.</span>
+</span></span><span style="display:flex;"><span>        bat <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Pause - otherwise everything flies past too quickly. It&#39;s useful</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># to eyeball the LLM-generated code before you execute it.</span>
+</span></span><span style="display:flex;"><span>        echo &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>        read -n <span style="color:#ae81ff">1</span> -s -r -p <span style="color:#e6db74">&#34;Press any key to run tests...&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e"># Run tests and capture output.</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> pytest <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$test_code_file<span style="color:#e6db74">&#34;</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Tests passed - we&#39;re done.</span>
+</span></span><span style="display:flex;"><span>            echo <span style="color:#e6db74">&#34;✅ &#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            exit <span style="color:#ae81ff">0</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># Tests failed - print test output...</span>
+</span></span><span style="display:flex;"><span>            printf <span style="color:#e6db74">&#34;❌\n\n&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            bat <span style="color:#e6db74">&#34;</span>$test_code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e"># ...and create a new version of the application file.</span>
+</span></span><span style="display:flex;"><span>            printf <span style="color:#e6db74">&#34;\nGenerating v%s of %s\n\n&#34;</span> <span style="color:#e6db74">&#34;</span>$i<span style="color:#e6db74">&#34;</span> <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>            files-to-prompt <span style="color:#e6db74">&#34;</span>$tests_file<span style="color:#e6db74">&#34;</span> conventions.txt <span style="color:#e6db74">&#34;</span>$test_code_file<span style="color:#e6db74">&#34;</span> | <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>                llm prompt --continue --system <span style="color:#e6db74">&#34;</span>$RETRY_PROMPT<span style="color:#e6db74">&#34;</span> &gt; <span style="color:#e6db74">&#34;</span>$code_file<span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">fi</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">done</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># If we get here, then no version passed the tests.</span>
+</span></span><span style="display:flex;"><span>    echo <span style="color:#e6db74">&#34;Failed to make the tests pass after </span>$ATTEMPTS<span style="color:#e6db74"> attempts&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>main <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+</span></span></code></pre></div><p>Note the use of a <code>conventions.txt</code> file to convince the LLM to return valid
+Python output (not wrapped in a Markdown explanation). It has contents:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>Only return executable Python code
+</span></span><span style="display:flex;"><span>Do not return Markdown output
+</span></span><span style="display:flex;"><span>Do not wrap code in triple backticks
+</span></span><span style="display:flex;"><span>Do not return YAML
+</span></span></code></pre></div><h2 id="example-usage">Example usage</h2>
+<p>In the these examples, <code>llm</code> is configured to use the GPT-4o model.</p>
+<h3 id="easy">Easy</h3>
+<p>Here&rsquo;s the script output for a straightforward set of tests that are satisfied
+by a <code>sum</code> function:</p>
+<p><img src="/images/screenshots/test_add.png" alt="Simple adding function"></p>
+<p>As you might expect, the LLM model is able to generate code that passes the test
+at the first attempt.</p>
+<h3 id="impossible">&ldquo;Impossible&rdquo;</h3>
+<p>At the other end of the spectrum, here&rsquo;s the output when passing a seemingly
+contradictory set of tests:</p>
+<p><img src="/images/screenshots/test_impossible_add.png" alt="Unholy adding function"></p>
+<p>As you can see, the LLM makes the tests pass on the third attempt, converging a
+ridiculous solution. Still, it&rsquo;s quite impressive in its own right.</p>
+<h2 id="final-thoughts">Final thoughts</h2>
+<p>This is just a fun proof-of-concept; I&rsquo;m not going to start developing
+production code like this any time soon. But it is interesting and poses
+questions about what software development might look like in the future.</p>
+<!-- markdownlint-disable MD007 -->
+<!-- markdownlint-enable MD007 -->
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Related posts:</p>
+<ul>
+<li>
+<p><a href="https://medium.com/@benjamin22-314/automating-test-driven-development-with-llms-c05e7a3cdfe1">Automating test driven development with LLMs</a>
+— A long Medium post that does a more complete version of this.
+Using an LLM to write the tests then write the passing code.</p>
+</li>
+<li>
+<p><a href="https://arxiv.org/pdf/2312.04687">LLM4TDD: Best Practices for Test Driven Development Using Large Language Models</a>
+— A ArXiv paper exploring this technique of a human writing
+the tests and an LLM writing the application code.</p>
+</li>
+</ul>
+&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></li>
+<li id="fn:2">
+<p>Also available in <a href="https://gist.github.com/codeinthehole/d12af317a76b43423b111fd6d508c4fc">this Gist</a>&#160;<a href="#fnref:2" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+        </div>
+
+        <div id="article_meta">
+            <span class="hr">——————</span>
+            <p>
+            Something wrong? 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/edit/master/content/tips/llm-tdd-loop-script.md">Suggest an improvement</a>
+            or 
+            <a href="https://github.com/codeinthehole/codeinthehole.hugo/issues/new?title=Comment%20on%20%22An%20LLM%20TDD%20loop%22&body=Article:%20An%20LLM%20TDD%20loop%0AURL:%20https%3a%2f%2fcodeinthehole.com%2ftips%2fllm-tdd-loop-script%2f">add a comment</a>
+            (see <a href="https://github.com/codeinthehole/codeinthehole.hugo/commits/master/content/tips/llm-tdd-loop-script.md">article history</a>)<br/>
+
+            
+                Tagged with:
+                
+                 <a href="/tags/openai">OpenAI</a>, <a href="/tags/tdd">TDD</a>, <a href="/tags/testing">testing</a>, <a href="/tags/python">Python</a>, <a href="/tags/bash">Bash</a>
+                <br/>
+            
+            
+                Filed in: <a href="/tips/">tips</a>
+            
+            </p>
+
+            <p>
+            
+                Previous: <a href="/tips/writing-markdown-in-vim/">Writing Markdown in Vim</a><br/>
+            
+            
+            </p>
+
+            <p>
+            Copyright &copy; 2005-2024 <a href="/about/">David Winterbottom</a><br/>
+            Content licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>.
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+<script>
+    
+        Mousetrap.bind("left", function() { window.location.replace("\/tips\/writing-markdown-in-vim\/"); })
+    
+
+    
+</script>
+
+        </article>
+    </body>
+
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.2.0/anchor.js"></script>
+    <script type="text/javascript">
+        if (document.querySelectorAll('#article_content').length) {
+            anchors.add('h2,h3,h4');
+        }
+    </script>
+
+</html>
+

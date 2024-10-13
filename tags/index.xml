@@ -6,8 +6,43 @@
     <description>Recent content in Tags on David Winterbottom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2024 14:48:50 +0100</lastBuildDate>
     <atom:link href="https://codeinthehole.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Bash</title>
+      <link>https://codeinthehole.com/tags/bash/</link>
+      <pubDate>Sun, 06 Oct 2024 14:48:50 +0100</pubDate>
+      <guid>https://codeinthehole.com/tags/bash/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>OpenAI</title>
+      <link>https://codeinthehole.com/tags/openai/</link>
+      <pubDate>Sun, 06 Oct 2024 14:48:50 +0100</pubDate>
+      <guid>https://codeinthehole.com/tags/openai/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Python</title>
+      <link>https://codeinthehole.com/tags/python/</link>
+      <pubDate>Sun, 06 Oct 2024 14:48:50 +0100</pubDate>
+      <guid>https://codeinthehole.com/tags/python/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>TDD</title>
+      <link>https://codeinthehole.com/tags/tdd/</link>
+      <pubDate>Sun, 06 Oct 2024 14:48:50 +0100</pubDate>
+      <guid>https://codeinthehole.com/tags/tdd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Testing</title>
+      <link>https://codeinthehole.com/tags/testing/</link>
+      <pubDate>Sun, 06 Oct 2024 14:48:50 +0100</pubDate>
+      <guid>https://codeinthehole.com/tags/testing/</guid>
+      <description></description>
+    </item>
     <item>
       <title>Markdown</title>
       <link>https://codeinthehole.com/tags/markdown/</link>
@@ -34,13 +69,6 @@
       <link>https://codeinthehole.com/tags/github/</link>
       <pubDate>Thu, 22 Dec 2022 21:42:35 +0000</pubDate>
       <guid>https://codeinthehole.com/tags/github/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>OpenAI</title>
-      <link>https://codeinthehole.com/tags/openai/</link>
-      <pubDate>Thu, 22 Dec 2022 21:42:35 +0000</pubDate>
-      <guid>https://codeinthehole.com/tags/openai/</guid>
       <description></description>
     </item>
     <item>
@@ -76,20 +104,6 @@
       <link>https://codeinthehole.com/tags/django/</link>
       <pubDate>Wed, 08 Jun 2022 09:45:59 +0100</pubDate>
       <guid>https://codeinthehole.com/tags/django/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Python</title>
-      <link>https://codeinthehole.com/tags/python/</link>
-      <pubDate>Wed, 08 Jun 2022 09:45:59 +0100</pubDate>
-      <guid>https://codeinthehole.com/tags/python/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Testing</title>
-      <link>https://codeinthehole.com/tags/testing/</link>
-      <pubDate>Wed, 08 Jun 2022 09:45:59 +0100</pubDate>
-      <guid>https://codeinthehole.com/tags/testing/</guid>
       <description></description>
     </item>
     <item>
@@ -195,13 +209,6 @@
       <link>https://codeinthehole.com/tags/words/</link>
       <pubDate>Tue, 07 Nov 2017 22:41:21 +0100</pubDate>
       <guid>https://codeinthehole.com/tags/words/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Bash</title>
-      <link>https://codeinthehole.com/tags/bash/</link>
-      <pubDate>Sat, 30 Sep 2017 22:44:03 +0100</pubDate>
-      <guid>https://codeinthehole.com/tags/bash/</guid>
       <description></description>
     </item>
     <item>

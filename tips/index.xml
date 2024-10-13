@@ -6,8 +6,15 @@
     <description>Recent content in Tips on David Winterbottom</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 06 Oct 2024 14:48:50 +0100</lastBuildDate>
     <atom:link href="https://codeinthehole.com/tips/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An LLM TDD loop</title>
+      <link>https://codeinthehole.com/tips/llm-tdd-loop-script/</link>
+      <pubDate>Sun, 06 Oct 2024 14:48:50 +0100</pubDate>
+      <guid>https://codeinthehole.com/tips/llm-tdd-loop-script/</guid>
+      <description>This post details a Bash script that runs a TDD loop where an LLM is iteratively used to write Python application code to make a fixed set of tests pass.&#xA;Similar things have been done before1; this script merely demonstrates that such things can be done simply by stitching together open-source LLM tools.&#xA;Tooling The script uses two commands from Simon Willison:&#xA;llm — a command line interface for interacting with Large Language Models (LLMs).</description>
+    </item>
     <item>
       <title>Writing Markdown in Vim</title>
       <link>https://codeinthehole.com/tips/writing-markdown-in-vim/</link>
